@@ -17,6 +17,8 @@ cache:
 
 before_script:
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
+  - cp .env.example .env
+  - php artisan key:generate
 
 script:
   - vendor/bin/phpunit --coverage-clover=coverage.clover

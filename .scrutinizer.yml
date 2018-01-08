@@ -15,8 +15,7 @@ checks:
         fix_doc_comments: true
 
 filter:
-     paths: [src/*]
-     excluded_paths: ["tests/*", "update/*"]
+     paths: [app/*]
 
 coding_style:
      php: {  }

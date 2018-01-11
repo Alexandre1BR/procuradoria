@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateTableAcoes extends Migration
 {
@@ -18,8 +18,8 @@ class CreateTableAcoes extends Migration
 
             $table->string('nome');
             $table->string('abreviacao');
-			
-			$table->timestamps();
+
+            $table->timestamps();
         });
     }
 

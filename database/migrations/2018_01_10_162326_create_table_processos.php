@@ -37,7 +37,7 @@ class CreateTableProcessos extends Migration
             $table->integer('tribunal_id')->unsigned();
             $table->string('vara');
             $table->string('tipo_meio');
-≤
+
             $table->timestamps();
         });
     }

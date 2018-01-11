@@ -25,7 +25,7 @@ class Processo extends FormRequest
     {
         return [
             'numero_judicial' => 'required|size:8',
-            'numero_alerj' => 'required|size:7',
+            'numero_alerj'    => 'required|size:7',
         ];
     }
 }

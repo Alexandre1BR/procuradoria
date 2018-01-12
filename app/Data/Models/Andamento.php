@@ -17,6 +17,5 @@ class Andamento extends Model
         'data_prazo',
         'data_entrega',
 
-
     ];
 }

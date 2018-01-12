@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\Models\Andamento;
 use App\Data\Repositories\Andamentos as AndamentosRepository;
 use App\Http\Requests\Andamento as AndamentoRequest;
 
-class Processos extends Controller
+class Andamentos extends Controller
 {
     public function create()
     {
@@ -15,7 +16,7 @@ class Processos extends Controller
     public function store(AndamentoRequest $request, AndamentosRepository $repository)
     {
         $repository->createFromRequest($request);
-
         return $this->create();
     }
+
 }

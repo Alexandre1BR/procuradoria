@@ -4,7 +4,7 @@ namespace App\Data\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Processo extends Model
+class Andamento extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,12 +12,11 @@ class Processo extends Model
      * @var array
      */
     protected $fillable = [
-        'numero_judicial',
-        'numero_alerj',
-    ];
+        'tipo_prazo_id',
+        'processo_id',
+        'data_prazo',
+        'data_entrega',
 
-    public function andamentos()
-    {
-        $this->hasMany(Andamento::class);
-    }
+
+    ];
 }

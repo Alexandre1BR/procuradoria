@@ -4,20 +4,17 @@ namespace App\Data\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Processo extends Model
+class Tribunal extends Model
 {
+    protected $table = 'tribunais';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'numero_judicial',
-        'numero_alerj',
+        'nome',
+        'url_api',
     ];
-
-    public function andamentos()
-    {
-        $this->hasMany(Andamento::class);
-    }
 }

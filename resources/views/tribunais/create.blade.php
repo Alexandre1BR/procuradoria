@@ -31,6 +31,10 @@
                     <input name="nome" class="form-control" id="exampleInputEmail1" aria-describedby="numero_judicialHelp" placeholder="nome">
                     <small id="numero_judicialHelp" class="form-text text-muted">We'll never share your nome with anyone else.</small>
                 </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Número Alerj</label>
+                    <input name="numero_alerj" class="form-control" id="exampleInputPassword1" placeholder="Número Alerj">
+                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

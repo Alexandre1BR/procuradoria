@@ -11,9 +11,9 @@
                 </div>
             @endif
 
-            <a href="{{ route('andamentos.create') }}">Procuradoria</a>
+            <a href="{{ route('tipos_juizes.create') }}">Procuradoria</a>
 
-            <form action="{{ route('andamentos.store') }}" method="POST">
+            <form action="{{ route('tipos_juizes.store') }}" method="POST">
                 {{ csrf_field() }}
 
                 @if ($errors->any())
@@ -26,17 +26,18 @@
                     </div>
                 @endif
 
-                <div class="form-group">
-                    <label for="Processo"></label>
-                    <input name="processo_id" class="form-control" id="exampleInputEmail1" aria-describedby="numero_judicialHelp" placeholder="Processo">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="nome">Nome</label>
+                        <input name="nome" class="form-control" id="nome" placeholder="Nome">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Número Alerj</label>
-                    <input name="numero_alerj" class="form-control" id="exampleInputPassword1" placeholder="Número Alerj">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-
         </div>
     </div>
 @endsection

@@ -16,17 +16,3 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::group(['prefix' => '/processos'], function () {
-    Route::get('/', 'Processos@create')->name('processos.create');
-
-    Route::post('/', 'Processos@store')->name('processos.store');
-});
-
-Route::group(['prefix' => '/tribunais'], function () {
-    Route::get('/', 'Tribunais@create')->name('tribunais.create');
-
-    Route::post('/', 'Tribunais@store')->name('tribunais.store');
-});

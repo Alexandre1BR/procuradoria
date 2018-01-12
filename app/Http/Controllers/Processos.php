@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Models\Processo;
+use App\Data\Repositories\Processos as ProcessosRepository;
 use App\Http\Requests\Processo as ProcessoRequest;
 
 class Processos extends Controller
@@ -12,8 +12,10 @@ class Processos extends Controller
         return view('processos.create');
     }
 
-    public function store(ProcessoRequest $request)
+    public function store(ProcessoRequest $request, ProcessosRepository $repository)
     {
-        Processo::create($request->all());
+        $repository->createFromRequest($request);
+
+        return $this->create();
     }
 }

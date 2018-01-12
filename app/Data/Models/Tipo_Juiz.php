@@ -11,7 +11,6 @@ class Tipo_Juiz extends Model
      *
      * @var array
      */
-
     protected $table = 'tipos_juizes';
 
     protected $fillable = [

@@ -11,7 +11,6 @@ class Acao extends Model
      *
      * @var array
      */
-
     protected $table = 'acoes';
 
     protected $fillable = [

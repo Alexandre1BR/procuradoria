@@ -25,8 +25,8 @@ class Andamento extends FormRequest
     {
         return [
             'tipo_prazo_id' => 'required',
-            'processo_id' => 'required',
-            'data_prazo' => 'required',
+            'processo_id'   => 'required',
+            'data_prazo'    => 'required',
             'data_entrega',
         ];
     }

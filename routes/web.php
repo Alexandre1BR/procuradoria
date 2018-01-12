@@ -30,5 +30,3 @@ Route::group(['prefix' => '/tribunais'], function () {
 
     Route::post('/', 'Tribunais@store')->name('tribunais.store');
 });
-
-

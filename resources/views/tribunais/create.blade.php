@@ -11,7 +11,7 @@
                 </div>
             @endif
 
-            <a href="{{ route('tribunais.create') }}">Procuradoria</a>
+            <a href="{{ route('home') }}">Procuradoria</a>
 
             <form action="{{ route('tribunais.store') }}" method="POST">
                 {{ csrf_field() }}
@@ -28,15 +28,13 @@
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nome</label>
-                    <input name="nome" class="form-control" id="exampleInputEmail1" aria-describedby="numero_judicialHelp" placeholder="nome">
-                    <small id="numero_judicialHelp" class="form-text text-muted">We'll never share your nome with anyone else.</small>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Número Alerj</label>
-                    <input name="numero_alerj" class="form-control" id="exampleInputPassword1" placeholder="Número Alerj">
-                </div>
+                    <input name="nome" class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="nome">
+                    <small id="nomeHelp" class="form-text text-muted">We'll never share your nome with anyone else.</small>
+               </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
+
+
 @endsection

@@ -4,6 +4,11 @@ namespace App\Data\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Data\Models\Acao.
+ *
+ * @mixin \Eloquent
+ */
 class Acao extends Model
 {
     /**

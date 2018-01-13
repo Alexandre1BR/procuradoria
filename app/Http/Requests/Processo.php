@@ -24,8 +24,8 @@ class Processo extends FormRequest
     public function rules()
     {
         return [
-            'numero_judicial' => 'required|min:8',
-            'numero_alerj'    => 'required|size:7',
+            //'numero_judicial' => 'required|min:8',
+            //'numero_alerj'    => 'required|size:7',
         ];
     }
 }

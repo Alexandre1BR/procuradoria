@@ -4,14 +4,19 @@ namespace App\Data\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TipoPrazo extends Model
+/**
+ * App\Data\Models\Tipo_Entrada.
+ *
+ * @mixin \Eloquent
+ */
+class Tipo_Entrada extends Model
 {
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $table = 'tipos_prazos';
+    protected $table = 'tipos_entradas';
 
     protected $fillable = [
         'nome',

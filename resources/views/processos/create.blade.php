@@ -16,6 +16,12 @@
             <form action="{{ route('processos.store') }}" method="POST">
                 {{ csrf_field() }}
 
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
+
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -26,19 +32,19 @@
                     </div>
                 @endif
 
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label for="numero_judicial">Número Judicial</label>
-                            <input name="numero_judicial" class="form-control" id="numero_judicial" placeholder="Número Judicial">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="numero_alerj">Número Alerj</label>
-                            <input name="numero_alerj" class="form-control" id="numero_alerj" placeholder="Número Alerj">
-                        </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="numero_judicial">Número Judicial</label>
+                        <input name="numero_judicial" class="form-control" id="numero_judicial" placeholder="Número Judicial">
                     </div>
+                    <div class="form-group col-md-6">
+                        <label for="numero_alerj">Número Alerj</label>
+                        <input name="numero_alerj" class="form-control" id="numero_alerj" placeholder="Número Alerj">
+                    </div>
+                </div>
 
                 <div class="row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="tribunal_id">Tribunal</label>
                         <select name="tribunal_id" class="form-control" id="tribunal_id">
                             <option value="0" selected>Selecione um Tribunal</option>
@@ -46,72 +52,137 @@
                             <option value="2">Origem - bunda lele</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="vara">Origem</label>
+                    <div class="form-group col-md-6">
+                        <label for="vara">Vara</label>
                         <input name="vara" class="form-control" id="vara" placeholder="Digite a Vara">
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="dataDistribuicao">Data Distribuição</label>
-                        <input type="date" class="form-control" id="dataDistribuicao">
+                        <label for="data_distribuicao">Data Distribuição</label>
+                        <input name="data_distribuicao" type="date" class="form-control" id="data_distribuicao">
                     </div>
-                    <div class="form-group col-md-2">
-                        <label for="acaoId">Ação Id</label>
-                        <input type="text" class="form-control" id="acaoId" placeholder="Informe o Ação Id">
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="relatorId">Relator Id</label>
-                        <input type="text" class="form-control" id="relatorId" placeholder="Informe o Relator Id">
+
+                    <div class="form-group col-md-4">
+                        <label for="procurador_id">Ação</label>
+                        <select name="acao_id" class="form-control" id="procurador_id">
+                            <option value="0" selected>Selecione uma Ação</option>
+                            <option value="1">Origem - sei la qual</option>
+                            <option value="2">Origem - bunda lele</option>
+                        </select>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="apensosObs">Apensos Obs</label>
-                        <input type="text" class="form-control" id="apensosObs" placeholder="Informe os Apensos (obs)">
+                        <label for="relator_id">Relator</label>
+                        <select name="relator_id" class="form-control" id="relator_id">
+                            <option value="0" selected>Selecione uma Ação</option>
+                            <option value="1">Origem - sei la qual</option>
+                            <option value="2">Origem - bunda lele</option>
+                        </select>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <label for="juizId">Juiz Id</label>
-                        <input type="text" class="form-control" id="juizId" placeholder="Informe o Juiz Id">
-                    </div>
+
+                <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="Autor">Autor</label>
-                        <input type="text" class="form-control" id="Autor" placeholder="Informe o Autor">
+                        <label for="juiz_id">Juiz</label>
+                        <select name="juiz_id" class="form-control" id="relator_id">
+                            <option value="0" selected>Selecione uma Ação</option>
+                            <option value="1">Origem - sei la qual</option>
+                            <option value="2">Origem - bunda lele</option>
+                        </select>
                     </div>
+
                     <div class="form-group col-md-4">
-                        <label for="Reu">Réu</label>
-                        <input type="text" class="form-control" id="Reu" placeholder="Informe o Réu">
+                        <label for="autor">Autor</label>
+                        <input name="autor" type="text" class="form-control" id="autor" placeholder="Informe o Autor">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="reu">Réu</label>
+                        <input name="reu" type="text" class="form-control" id="reu" placeholder="Informe o Réu">
                     </div>
                 </div>
-            <div class="form-group col-md-4">
-                <button type="submit" class="btn btn-primary">Enviar</button>
-            </div>
 
-        </div>
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label for="procurador_id">Procurador</label>
+                        <select name="procurador_id" class="form-control" id="procurador_id">
+                            <option value="0" selected>Selecione uma Ação</option>
+                            <option value="1">Origem - sei la qual</option>
+                            <option value="2">Origem - bunda lele</option>
+                        </select>
+                    </div>
 
+                    <div class="form-group col-md-3">
+                        <label for="estagiario_id">Estagiario</label>
+                        <select name="estagiario_id" class="form-control" id="estagiario_id">
+                            <option value="0" selected>Selecione uma Ação</option>
+                            <option value="1">Origem - sei la qual</option>
+                            <option value="2">Origem - bunda lele</option>
+                        </select>
+                    </div>
 
-        </form>
+                    <div class="form-group col-md-3">
+                        <label for="assessor_id">Assessor</label>
+                        <select name="assessor_id" class="form-control" id="assessor_id">
+                            <option value="0" selected>Selecione uma Ação</option>
+                            <option value="1">Origem - sei la qual</option>
+                            <option value="2">Origem - bunda lele</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="tipo_meio">Meio</label>
+                        <select name="tipo_meio" class="form-control" id="tipo_meio">
+                            <option value="0" selected>Selecione uma Ação</option>
+                            <option value="1">Origem - sei la qual</option>
+                            <option value="2">Origem - bunda lele</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="objeto">Objeto</label>
+                        <textarea name="objeto" class="form-control" id="objeto" placeholder="Informe o Objeto"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="merito">Mérito</label>
+                        <textarea name="merito" class="form-control" id="merito" placeholder="Informe o Mérito"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="liminar">Liminar</label>
+                        <textarea name="liminar" class="form-control" id="liminar" placeholder="Informe o Liminar"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="apensos_obs">Apensos</label>
+                        <textarea name="apensos_obs" class="form-control" id="apensos_obs" placeholder="Informe os Apensos"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="recurso">Recurso</label>
+                        <textarea name="recurso" class="form-control" id="recurso" placeholder="Informe o Recurso"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+
 @endsection
-
-{{--
-
-
-data_distribuicao
-acao_id
-relator_d
-apensos (obs)
-juiz_id
-autor
-reu
-objeto (memo)
-merito (memo)
-liminar
-recurso (vamos cadastrar outros processos?)
-procurador_id
-estagiario_id
-assessor_id
-tipo_meio
---}}

@@ -6,8 +6,15 @@ use App\Data\Models\Tribunal;
 
 class Tribunais
 {
+    /**
+     * @param $request
+     *
+     * @return void
+     */
     public function createFromRequest($request)
     {
-        return Tribunal::create($request->all());
+        Tribunal::create($request->all());
+
+        $request->session()->flash('status', 'Dado salvo com sucesso!');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableTiposJuizes extends Migration
+class CreateTableTiposEntradas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTableTiposJuizes extends Migration
      */
     public function up()
     {
-        Schema::create('tipos_juizes', function (Blueprint $table) {
+        Schema::create('tipos_entradas', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('nome');
@@ -21,24 +21,17 @@ class CreateTableTiposJuizes extends Migration
             $table->timestamps();
         });
 
-        DB::table('tipos_juizes')->insert(
+        DB::table('tipos_entradas')->insert(
             [
                 'id'   => '1',
-                'nome' => 'Ministro',
+                'nome' => 'Manual',
             ]
         );
 
-        DB::table('tipos_juizes')->insert(
+        DB::table('tipos_entradas')->insert(
             [
                 'id'   => '2',
-                'nome' => 'Desembargador',
-            ]
-        );
-
-        DB::table('tipos_juizes')->insert(
-            [
-                'id'   => '3',
-                'nome' => 'Juiz',
+                'nome' => 'Automatico',
             ]
         );
     }
@@ -50,6 +43,6 @@ class CreateTableTiposJuizes extends Migration
      */
     public function down()
     {
-        Schema::drop('tipos_juizes');
+        Schema::drop('tipos_entradas');
     }
 }

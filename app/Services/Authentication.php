@@ -3,9 +3,7 @@
 namespace App\Services;
 
 use App\Data\Repositories\Users;
-use GuzzleHttp\Client as Guzzle;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\RequestOptions;
+use App\Services\Traits\RemoteRequest;
 
 class Authentication
 {
@@ -20,16 +18,18 @@ class Authentication
      */
     protected $guzzle;
 
+    protected $remoteRequest;
+
     /**
      * @var Users
      */
     private $usersRepository;
 
-    public function __construct(Users $usersRepository)
+    public function __construct(Users $usersRepository, RemoteRequest $remoteRequest)
     {
-        $this->instantiateGuzzle();
-
         $this->usersRepository = $usersRepository;
+
+        $this->remoteRequest = $remoteRequest;
     }
 
     public function attempt($credentials, $remember)
@@ -38,7 +38,7 @@ class Authentication
 
         return $this->loginUser(
             $credentials,
-            $this->remotePostJson(static::LOGIN_URL, $credentials),
+            $this->remoteRequest->post(static::LOGIN_URL, $credentials),
             $remember
         );
     }
@@ -71,32 +71,5 @@ class Authentication
         }
 
         return $success;
-    }
-
-    protected function remotePostJson($url, $credentials)
-    {
-        try {
-            $response = $this->guzzle->request(
-                'POST',
-                $url,
-                [
-                    'verify' => false,
-
-                    'debug' => false,
-
-                    RequestOptions::JSON => $credentials,
-
-                    'allow_redirects' => true,
-                ]
-            );
-        } catch (ClientException $exception) {
-            $response = $exception->getResponse();
-        }
-
-        if (is_null($array = json_decode((string) $response->getBody(), true))) {
-            abort('Invalid response');
-        }
-
-        return $array;
     }
 }

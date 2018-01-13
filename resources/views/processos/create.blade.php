@@ -11,7 +11,7 @@
                 </div>
             @endif
 
-            <a href="{{ route('processos.create') }}">Procuradoria</a>
+            <a href="{{ route('home') }}">Procuradoria</a>
 
             <form action="{{ route('processos.store') }}" method="POST">
                 {{ csrf_field() }}

@@ -27,13 +27,30 @@
                 @endif
 
                 <div class="form-group">
-                    <label for="Processo"></label>
-                    <input name="processo_id" class="form-control" id="exampleInputEmail1" aria-describedby="numero_judicialHelp" placeholder="Processo">
+                    <label for="Processo">Processo</label>
+                    <select name="processo_id" class="form-control" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo">
+                        <option>111</option>
+                    </select>
                 </div>
+
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Número Alerj</label>
-                    <input name="numero_alerj" class="form-control" id="exampleInputPassword1" placeholder="Número Alerj">
+                    <label for="Processo">Tipo Prazo</label>
+                    <select name="tipo_prazo_id" class="form-control" id="tipo_prazo_id" aria-describedby="numero_judicialHelp" placeholder="tipo_prazo_id">
+                        <option value="111">111</option>
+                    </select>
                 </div>
+
+                <div class="form-group">
+                    <label for="data_prazo">Data Prazo</label>
+                    <input  type="date" name="data_prazo" class="form-control" id="data_prazo" placeholder="Data Prazo" >
+                </div>
+
+                <div class="form-group">
+                    <label for="data_entrega">Data Entrega</label>
+                    <input  type="date" name="data_entrega" class="form-control" id="data_entrega" placeholder="Data Entrega" >
+                </div>
+
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
 

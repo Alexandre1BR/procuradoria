@@ -29,17 +29,39 @@
                 <div class="form-group">
                     <label for="Processo">Processo</label>
                     <select name="processo_id" class="form-control" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo">
-                        <option>111</option>
+                            <option selected="true">Selecione</option>
+                        @foreach ($processos as $key => $processo)
+                            <option value="{{ $key }}" >{{ $processo }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipo_andamento_id">Tipo de Andamento</label>
+                    <select name="tipo_andamento_id" class="form-control" id="tipo_andamento_id" aria-describedby="numero_judicialHelp" placeholder="Processo">
+                        @foreach ($tipoAndamentos as $key => $andamento)
+                            <option value="{{ $key }}" >{{ $andamento }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="Processo">Tipo de Entrada</label>
+                    <select name="tipo_entrada_id" class="form-control" id="tipo_entrada_id" aria-describedby="numero_judicialHelp" placeholder="Processo">
+                        @foreach ($tipoEntradas as $key => $processo)
+                            <option value="{{ $key }}" >{{ $processo }}</option>
+                        @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="Processo">Tipo Prazo</label>
                     <select name="tipo_prazo_id" class="form-control" id="tipo_prazo_id" aria-describedby="numero_judicialHelp" placeholder="tipo_prazo_id">
-                        <option value="111">111</option>
+                        @foreach ($tipoPrazos as $key => $prazo)
+                            <option value="{{ $key }}" >{{ $prazo }}</option>
+                        @endforeach
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label for="data_prazo">Data Prazo</label>
                     <input  type="date" name="data_prazo" class="form-control" id="data_prazo" placeholder="Data Prazo" >
@@ -49,7 +71,10 @@
                     <label for="data_entrega">Data Entrega</label>
                     <input  type="date" name="data_entrega" class="form-control" id="data_entrega" placeholder="Data Entrega" >
                 </div>
-
+                <div class="form-group">
+                    <label for="data_prazo">Observação</label>
+                    <textarea  type="date" name="observacoes" class="form-control" id="observacoes" placeholder="" ></textarea>
+                </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

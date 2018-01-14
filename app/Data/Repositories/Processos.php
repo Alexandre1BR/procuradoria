@@ -2,7 +2,10 @@
 
 namespace App\Data\Repositories;
 
+use App\Data\Models\Processo;
 use Illuminate\Http\Request;
+
+
 
 class Processos
 {
@@ -13,7 +16,7 @@ class Processos
      */
     public function createFromRequest(Request $request)
     {
-        Tribunal::create($request->all());
+        Processo::create($request->all());
 
         $request->session()->flash('status', 'Dado salvo com sucesso!');
     }

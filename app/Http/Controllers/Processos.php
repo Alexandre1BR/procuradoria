@@ -15,22 +15,16 @@ class Processos extends Controller
 {
     public function create()
     {
-        $juizes = ModelJuiz::pluck('nome', 'id');
-        $juizes = $juizes->sort();
-
-        $tribunais = ModelTribunal::pluck('nome', 'id');
-        $tribunais = $tribunais->sort();
-
-        $usuarios = ModelUser::pluck('name', 'id');
-        $usuarios = $usuarios->sort();
-
-        $meios = ModelMeio::pluck('nome', 'id');
-        $meios = $meios->sort();
-
-        $acoes = ModelAcao::pluck('nome', 'id');
-        $acoes = $acoes->sort();
-
-        return view('processos.create', compact('juizes', 'tribunais', 'usuarios', 'meios', 'acoes'));
+        return view(
+            'processos.create',
+            [
+                'juizes'    => ModelJuiz::orderBy('nome')->pluck('nome', 'id'),
+                'tribunais' => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
+                'usuarios'  => ModelUser::orderBy('name')->pluck('name', 'id'),
+                'meios'     => ModelMeio::orderBy('nome')->pluck('nome', 'id'),
+                'acoes'     => ModelAcao::orderBy('nome')->pluck('nome', 'id'),
+            ]
+        );
     }
 
     public function store(ProcessoRequest $request, ProcessosRepository $repository)

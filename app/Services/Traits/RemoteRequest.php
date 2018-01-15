@@ -2,9 +2,9 @@
 
 namespace App\Services\Traits;
 
-use GuzzleHttp\RequestOptions;
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\RequestOptions;
 
 class RemoteRequest
 {
@@ -31,11 +31,10 @@ class RemoteRequest
 
                     RequestOptions::JSON => $data,
 
-                    'allow_redirects' => true
+                    'allow_redirects' => true,
                 ]
             );
-        }
-        catch (ClientException $exception) {
+        } catch (ClientException $exception) {
             $response = $exception->getResponse();
         }
 

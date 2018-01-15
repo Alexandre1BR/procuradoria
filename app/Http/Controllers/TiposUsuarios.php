@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: afdsilva
  * Date: 12/01/2018
- * Time: 10:16
+ * Time: 10:16.
  */
 
 namespace App\Http\Controllers;

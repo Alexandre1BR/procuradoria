@@ -5,7 +5,7 @@ namespace App\Data\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Data\Models\Processo
+ * App\Data\Models\Processo.
  *
  * @mixin \Eloquent
  */

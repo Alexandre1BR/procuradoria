@@ -5,7 +5,7 @@ namespace App\Data\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Data\Models\TipoPrazo
+ * App\Data\Models\TipoPrazo.
  *
  * @mixin \Eloquent
  */
@@ -16,7 +16,7 @@ class TipoPrazo extends Model
      *
      * @var array
      */
-    protected $table = "tipos_prazos";
+    protected $table = 'tipos_prazos';
 
     protected $fillable = [
         'nome',

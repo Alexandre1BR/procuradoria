@@ -5,7 +5,7 @@ namespace App\Data\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Data\Models\TipoUsuario
+ * App\Data\Models\TipoUsuario.
  *
  * @mixin \Eloquent
  */
@@ -16,7 +16,7 @@ class TipoUsuario extends Model
      *
      * @var array
      */
-    protected $table = "tipos_usuarios";
+    protected $table = 'tipos_usuarios';
 
     protected $fillable = [
         'nome',

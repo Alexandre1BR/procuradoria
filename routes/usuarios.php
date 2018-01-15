@@ -5,4 +5,3 @@ Route::group(['prefix' => '/tipos_prazos'], function () {
 
     Route::post('/', 'TiposPrazos@store')->name('tipos_prazos.store');
 });
-

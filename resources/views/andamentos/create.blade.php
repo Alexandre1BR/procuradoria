@@ -39,6 +39,7 @@
                 <div class="form-group">
                     <label for="tipo_andamento_id">Tipo de Andamento</label>
                     <select name="tipo_andamento_id" class="form-control" id="tipo_andamento_id" aria-describedby="numero_judicialHelp" placeholder="Processo">
+                        <option selected="true">Selecione</option>
                         @foreach ($tipoAndamentos as $key => $andamento)
                             <option value="{{ $key }}" >{{ $andamento }}</option>
                         @endforeach
@@ -48,6 +49,7 @@
                 <div class="form-group">
                     <label for="Processo">Tipo de Entrada</label>
                     <select name="tipo_entrada_id" class="form-control" id="tipo_entrada_id" aria-describedby="numero_judicialHelp" placeholder="Processo">
+                        <option selected="true">Selecione</option>
                         @foreach ($tipoEntradas as $key => $processo)
                             <option value="{{ $key }}" >{{ $processo }}</option>
                         @endforeach

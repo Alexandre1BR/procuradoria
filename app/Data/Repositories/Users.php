@@ -20,6 +20,8 @@ class Users
 
             $user->name = $credentials['username'];
 
+            $user->username = $credentials['username'];
+
             $user->email = $email;
 
             $user->password = Hash::make($email);

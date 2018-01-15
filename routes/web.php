@@ -6,7 +6,7 @@ Route::get('/', function () {
     return view('welcome'); //www.procuradoria.test
 });
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'app.users']], function () {
     require __DIR__.'/home.php';
 
     require __DIR__.'/processos.php';

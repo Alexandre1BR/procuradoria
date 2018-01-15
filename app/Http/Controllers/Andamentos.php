@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Models\Processo as ModelProcesso;
+use App\Data\Models\Andamento;
+
 use App\Data\Models\TipoAndamento as ModelTipoAndamento;
 use App\Data\Models\TipoEntrada as ModelTipoEntrada;
 use App\Data\Models\TipoPrazo as  ModelTipoPrazo;
@@ -29,5 +30,12 @@ class Andamentos extends Controller
         $repository->createFromRequest($request);
 
         return $this->create();
+    }
+
+    public function detail(AndamentoRequest $request)
+    {
+        dd($andamento = Andamento::find($request->id));
+
+        return view('andamentos.detail', compact('andamento'));
     }
 }

@@ -19,7 +19,7 @@ $factory->define(App\Data\Models\Juiz::class, function (Faker $faker) {
             'lotacao_id' => function () {
                 return factory(\App\Data\Models\Tribunal::class)->create()->id;
             },
-            'tipo_juiz_id' => $faker->randomElement(\App\Data\Models\Tipo_Juiz::pluck('id')->toArray()),
+            'tipo_juiz_id' => 1,//$faker->randomElement(\App\Data\Models\Tipo_Juiz::pluck('id')->toArray()),
     ];
 });
 

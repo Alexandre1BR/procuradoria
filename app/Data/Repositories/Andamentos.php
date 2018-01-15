@@ -9,7 +9,7 @@ class Andamentos
     public function createFromRequest($request)
     {
 
-        dump(Andamento::create($request->all()));
+        Andamento::create($request->all());
 
 
         $request->session()->flash('status', 'Dado salvo com sucesso!');

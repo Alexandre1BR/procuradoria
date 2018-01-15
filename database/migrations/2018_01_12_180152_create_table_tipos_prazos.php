@@ -20,6 +20,14 @@ class CreateTableTiposPrazos extends Migration
 
             $table->timestamps();
         });
+
+        DB::table('tipos_prazos')->insert(
+            [
+                'id'   => '1',
+                'nome' => 'Audiência',
+            ]
+        );
+
     }
 
     /**

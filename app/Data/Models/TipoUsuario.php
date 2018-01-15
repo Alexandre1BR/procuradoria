@@ -4,20 +4,21 @@ namespace App\Data\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Processo extends Model
+/**
+ * App\Data\Models\TipoUsuario.
+ *
+ * @mixin \Eloquent
+ */
+class TipoUsuario extends Model
 {
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'numero_judicial',
-        'numero_alerj',
-    ];
+    protected $table = 'tipos_usuarios';
 
-    public function andamentos()
-    {
-        $this->hasMany(Andamento::class);
-    }
+    protected $fillable = [
+        'nome',
+    ];
 }

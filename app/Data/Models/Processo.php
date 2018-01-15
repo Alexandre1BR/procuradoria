@@ -20,4 +20,9 @@ class Processo extends Model
         'numero_judicial',
         'numero_alerj',
     ];
+
+    public function andamentos()
+    {
+        $this->hasMany(Andamento::class);
+    }
 }

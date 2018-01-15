@@ -52,46 +52,46 @@
                     </div>
                 </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="dataDistribuicao">Data Distribuição</label>
-                            <input type="date" class="form-control" id="dataDistribuicao">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="acaoId">Ação Id</label>
-                            <input type="text" class="form-control" id="acaoId" placeholder="Informe o Ação Id">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="relatorId">Relator Id</label>
-                            <input type="text" class="form-control" id="relatorId" placeholder="Informe o Relator Id">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="apensosObs">Apensos Obs</label>
-                            <input type="text" class="form-control" id="apensosObs" placeholder="Informe os Apensos (obs)">
-                        </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="dataDistribuicao">Data Distribuição</label>
+                        <input type="date" class="form-control" id="dataDistribuicao">
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-2">
-                            <label for="juizId">Juiz Id</label>
-                            <input type="text" class="form-control" id="juizId" placeholder="Informe o Juiz Id">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="Autor">Autor</label>
-                            <input type="text" class="form-control" id="Autor" placeholder="Informe o Autor">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="Reu">Réu</label>
-                            <input type="text" class="form-control" id="Reu" placeholder="Informe o Réu">
-                        </div>
+                    <div class="form-group col-md-2">
+                        <label for="acaoId">Ação Id</label>
+                        <input type="text" class="form-control" id="acaoId" placeholder="Informe o Ação Id">
                     </div>
-                <div class="form-group col-md-4">
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <div class="form-group col-md-2">
+                        <label for="relatorId">Relator Id</label>
+                        <input type="text" class="form-control" id="relatorId" placeholder="Informe o Relator Id">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="apensosObs">Apensos Obs</label>
+                        <input type="text" class="form-control" id="apensosObs" placeholder="Informe os Apensos (obs)">
+                    </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="juizId">Juiz Id</label>
+                        <input type="text" class="form-control" id="juizId" placeholder="Informe o Juiz Id">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="Autor">Autor</label>
+                        <input type="text" class="form-control" id="Autor" placeholder="Informe o Autor">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="Reu">Réu</label>
+                        <input type="text" class="form-control" id="Reu" placeholder="Informe o Réu">
+                    </div>
+                </div>
+            <div class="form-group col-md-4">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
 
         </div>
 
 
-            </form>
+        </form>
         </div>
     </div>
 @endsection

@@ -16,17 +16,6 @@ class Andamentos extends Controller
     public function create()
     {
 
-        /*
-         * $tiposjuizes = ModelTipo_Juiz::pluck('nome', 'id');
-        $tiposjuizes = $tiposjuizes->sort();
-
-        //dd($tiposjuizes);
-
-        $tribunais = ModelTribunal::pluck('nome', 'id');
-        $tribunais = $tribunais->sort();
-        //dd($items);
-         */
-
         $processos = ModelProcesso::pluck('numero_judicial','id');
 
         $tipoPrazos = ModelTipoPrazo::pluck('nome','id');
@@ -34,7 +23,6 @@ class Andamentos extends Controller
         $tipoAndamentos = ModelTipoAndamento::pluck('nome','id');
 
         $tipoEntradas = ModelTipoEntrada::pluck('nome','id');
-        //dd($tipoPrazos);
 
         return view('andamentos.create', compact('processos', 'tipoAndamentos','tipoEntradas', 'tipoPrazos'));
     }

@@ -7,45 +7,49 @@
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  */
 
-
 namespace App\Data\Models{
-/**
- * App\Data\Models\Acao
- *
- */
-	class Acao extends \Eloquent {}
+    /**
+     * App\Data\Models\Acao.
+     */
+    class Acao extends \Eloquent
+    {
+    }
 }
 
 namespace App\Data\Models{
-/**
- * App\Data\Models\Juiz
- *
- */
-	class Juiz extends \Eloquent {}
+    /**
+     * App\Data\Models\Juiz.
+     */
+    class Juiz extends \Eloquent
+    {
+    }
 }
 
 namespace App\Data\Models{
-/**
- * App\Data\Models\Processo
- *
- */
-	class Processo extends \Eloquent {}
+    /**
+     * App\Data\Models\Processo.
+     */
+    class Processo extends \Eloquent
+    {
+    }
 }
 
 namespace App\Data\Models{
-/**
- * App\Data\Models\Tipo_Juiz
- *
- */
-	class Tipo_Juiz extends \Eloquent {}
+    /**
+     * App\Data\Models\Tipo_Juiz.
+     */
+    class Tipo_Juiz extends \Eloquent
+    {
+    }
 }
 
 namespace App\Data\Models{
-/**
- * App\Data\Models\User
- *
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- */
-	class User extends \Eloquent {}
+    /**
+     * App\Data\Models\User.
+     *
+     * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+     */
+    class User extends \Eloquent
+    {
+    }
 }
-

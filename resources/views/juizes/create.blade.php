@@ -42,10 +42,11 @@
                     <div class="form-group col-md-4">
                         <label for="tipo_juiz_id">Tipo Juíz</label>
                         <select name="tipo_juiz_id" class="form-control" id="tipo_juiz_id">
-                            <option value="0" selected>Selecione uma Tipo Juíz</option>
-                            <option value="1">Tipo Juíz - sei la qual</option>
-                            <option value="2">Tipo Juíz - bunda lele</option>
+                            @foreach ($items as $item)
+                                <option value="{{ $item }}" selected>{{ $item }}</option>
+                            @endforeach
                         </select>
+
                     </div>
                 </div>
                 <div class="row">

@@ -38,7 +38,7 @@
     @forelse ($processos as $processo)
         <tr>
             <td><a href="{{ action('Processos@detail', 'id=').$processo['id']}}">Detalhe Processo</a></td>
-            <td>{{ $processo->numero_judicial }}</td>
+            <td>{{ $processo->numero_judicial }}</td>  
             <td>{{ $processo->numero_alerj }}</td>
             <td>{{ $processo->tribunal->nome }}</td>
             <td>{{ $processo->vara }}</td>

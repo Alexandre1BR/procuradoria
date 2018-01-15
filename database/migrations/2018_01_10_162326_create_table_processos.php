@@ -18,8 +18,8 @@ class CreateTableProcessos extends Migration
 
             $table->string('numero_judicial');
             $table->string('numero_alerj');
-            $table->integer('origem_id')->unsigned();
-            $table->string('origem_complemento');
+            $table->integer('tribunal_id')->unsigned();
+            $table->string('vara');
             $table->timestamp('data_distribuicao');
             $table->integer('acao_id')->unsigned();
             $table->integer('relator_id')->unsigned();
@@ -34,8 +34,6 @@ class CreateTableProcessos extends Migration
             $table->integer('procurador_id')->unsigned();
             $table->integer('estagiario_id')->unsigned();
             $table->integer('assessor_id')->unsigned();
-            $table->integer('tribunal_id')->unsigned();
-            $table->string('vara');
             $table->string('tipo_meio');
 
             $table->timestamps();

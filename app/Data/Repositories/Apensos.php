@@ -2,13 +2,13 @@
 
 namespace App\Data\Repositories;
 
-use App\Data\Models\Processo;
+use App\Data\Models\Apenso;
 use Illuminate\Http\Request;
 
-class Processos
+class Apensos
 {
     public function createFromRequest(Request $request)
     {
-        return Processo::create($request->all());
+        return Apenso::create($request->all());
     }
 }

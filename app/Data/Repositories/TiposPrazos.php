@@ -2,13 +2,13 @@
 
 namespace App\Data\Repositories;
 
-use App\Data\Models\Processo;
+use App\Data\Models\TipoPrazo;
 use Illuminate\Http\Request;
 
-class Processos
+class TiposPrazos
 {
     public function createFromRequest(Request $request)
     {
-        return Processo::create($request->all());
+        return TipoPrazo::create($request->all());
     }
 }

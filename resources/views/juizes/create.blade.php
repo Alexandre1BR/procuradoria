@@ -34,16 +34,16 @@
                     <div class="form-group col-md-4">
                         <label for="lotacao_id">Lotação</label>
                         <select name="lotacao_id" class="form-control" id="lotacao_id">
-                            <option value="0" selected>Selecione uma Lotação</option>
-                            <option value="1">Lotação - sei la qual</option>
-                            <option value="2">Lotação - bunda lele</option>
+                            @foreach ($tribunais as $key => $tribunal)
+                                <option value="{{ $key }}" selected>{{ $tribunal }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="tipo_juiz_id">Tipo Juíz</label>
                         <select name="tipo_juiz_id" class="form-control" id="tipo_juiz_id">
-                            @foreach ($items as $item)
-                                <option value="{{ $item }}" selected>{{ $item }}</option>
+                            @foreach ($tiposjuizes as $key => $tipojuiz)
+                                <option value="{{ $key }}" selected>{{ $tipojuiz }}</option>
                             @endforeach
                         </select>
 

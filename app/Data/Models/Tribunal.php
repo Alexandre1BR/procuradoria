@@ -5,7 +5,7 @@ namespace App\Data\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Data\Models\Tribunal
+ * App\Data\Models\Tribunal.
  *
  * @mixin \Eloquent
  */

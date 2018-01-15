@@ -61,6 +61,7 @@ class Authentication
      * @param $credentials
      * @param $response
      * @param $remember
+     *
      * @return mixed
      */
     private function loginUser($credentials, $response, $remember)
@@ -85,11 +86,10 @@ class Authentication
 
                     RequestOptions::JSON => $credentials,
 
-                    'allow_redirects' => true
+                    'allow_redirects' => true,
                 ]
             );
-        }
-        catch (ClientException $exception) {
+        } catch (ClientException $exception) {
             $response = $exception->getResponse();
         }
 

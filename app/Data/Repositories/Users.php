@@ -3,8 +3,8 @@
 namespace App\Data\Repositories;
 
 use App\Data\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class Users
 {

@@ -5,7 +5,7 @@ namespace App\Data\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Data\Models\Tipo_Juiz
+ * App\Data\Models\Tipo_Juiz.
  *
  * @mixin \Eloquent
  */

@@ -61,6 +61,7 @@ class Authentication
      * @param $credentials
      * @param $response
      * @param $remember
+     *
      * @return mixed
      */
     private function loginUser($credentials, $response, $remember)

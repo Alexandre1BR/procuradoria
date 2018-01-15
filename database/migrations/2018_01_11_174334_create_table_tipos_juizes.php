@@ -21,7 +21,7 @@ class CreateTableTiposJuizes extends Migration
             $table->timestamps();
         });
 
-      /*  DB::table('tipos_juizes')->insert(
+        DB::table('tipos_juizes')->insert(
             [
                 'id'   => '1',
                 'nome' => 'Ministro',
@@ -40,7 +40,7 @@ class CreateTableTiposJuizes extends Migration
                 'id'   => '3',
                 'nome' => 'Juiz',
             ]
-        );*/
+        );
     }
 
     /**

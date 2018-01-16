@@ -4,11 +4,6 @@ namespace App\Data\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * App\Data\Models\Andamento.
- *
- * @mixin \Eloquent
- */
 class Andamento extends Model
 {
     /**

@@ -18,7 +18,5 @@ $factory->define(App\Data\Models\Tribunal::class, function (Faker $faker) {
 
             'nome' => $faker->name,
             'url_api' => $faker->name(),
-//            'created_at' => $faker->date('Y-m-d h:m:i'),
-//            'updated_at' => $faker->date('Y-m-d h:m:i'),
     ];
 });

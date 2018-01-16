@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($exception instanceof \ErrorException) {
+        if (!app()->environment('local') && $exception instanceof \ErrorException) {
             return view('errors.500');
         }
 

@@ -13,12 +13,9 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Data\Models\Tribunal::class, function (Faker $faker) {
+$factory->define(App\Data\Models\Acao::class, function (Faker $faker) {
     return [
-
             'nome' => $faker->name,
-            'url_api' => $faker->name(),
-//            'created_at' => $faker->date('Y-m-d h:m:i'),
-//            'updated_at' => $faker->date('Y-m-d h:m:i'),
+            'abreviacao' => $faker->name(),
     ];
 });

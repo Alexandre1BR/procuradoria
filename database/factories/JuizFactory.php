@@ -13,12 +13,20 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Data\Models\Tribunal::class, function (Faker $faker) {
+$factory->define(App\Data\Models\Juiz::class, function (Faker $faker) {
     return [
-
             'nome' => $faker->name,
-            'url_api' => $faker->name(),
-//            'created_at' => $faker->date('Y-m-d h:m:i'),
-//            'updated_at' => $faker->date('Y-m-d h:m:i'),
+            'lotacao_id' => function () {
+                return factory(\App\Data\Models\Tribunal::class)->create()->id;
+            },
+            'tipo_juiz_id' => function () {
+                return factory(\App\Data\Models\Tipo_Juiz::class)->create()->id;
+            },
+    ];
+});
+
+$factory->define(App\Data\Models\Tipo_Juiz::class, function (Faker $faker) {
+    return [
+            'nome' => $faker->name,
     ];
 });

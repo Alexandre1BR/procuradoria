@@ -4,11 +4,6 @@ namespace App\Data\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * App\Data\Models\TipoPrazo.
- *
- * @mixin \Eloquent
- */
 class TipoPrazo extends Model
 {
     /**

@@ -23,10 +23,10 @@ class CreateTableTiposAndamentos extends Migration
 
         //Ficamos de resolver quais os possíveis tipos de andamento
         DB::table('tipos_andamentos')->insert(
-            array(
-                'id' => '1',
-                'nome' => 'Prazo'
-            )
+            [
+                'id'   => '1',
+                'nome' => 'Prazo',
+            ]
         );
     }
 

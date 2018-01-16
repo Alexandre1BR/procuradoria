@@ -22,24 +22,24 @@ class CreateTableTiposJuizes extends Migration
         });
 
         DB::table('tipos_juizes')->insert(
-            array(
-                'id' => '1',
-                'nome' => 'Ministro'
-            )
+            [
+                'id'   => '1',
+                'nome' => 'Ministro',
+            ]
         );
 
         DB::table('tipos_juizes')->insert(
-            array(
-                'id' => '2',
-                'nome' => 'Desembargador'
-            )
+            [
+                'id'   => '2',
+                'nome' => 'Desembargador',
+            ]
         );
 
         DB::table('tipos_juizes')->insert(
-            array(
-                'id' => '3',
-                'nome' => 'Juiz'
-            )
+            [
+                'id'   => '3',
+                'nome' => 'Juiz',
+            ]
         );
     }
 

@@ -16,7 +16,6 @@ use Faker\Generator as Faker;
 $factory->define(App\Data\Models\Processo::class, function (Faker $faker) {
     return [
 
-
             'numero_judicial' => $faker->randomNumber(),
             'numero_alerj' => $faker->randomNumber(),
             'tribunal_id' => function () {
@@ -49,6 +48,6 @@ $factory->define(App\Data\Models\Processo::class, function (Faker $faker) {
             'assessor_id' => function () {
                 return factory(\App\Data\Models\User::class)->create()->id;
             },
-             'tipo_meio' => $faker->name,
+            'tipo_meio' => $faker->name,
     ];
 });

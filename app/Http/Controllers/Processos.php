@@ -16,8 +16,9 @@ class Processos extends Controller
     }
 
     /**
-     * @param ProcessoRequest $request
+     * @param ProcessoRequest     $request
      * @param ProcessosRepository $repository
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function store(ProcessoRequest $request, ProcessosRepository $repository)

@@ -16,7 +16,6 @@ class CreateTableAndamentos extends Migration
         Schema::create('andamentos', function (Blueprint $table) {
             $table->increments('id');
 
-
             $table->integer('processo_id')->unsigned();
             $table->integer('tipo_andamento_id')->unsigned();
             $table->integer('tipo_entrada_id')->unsigned();

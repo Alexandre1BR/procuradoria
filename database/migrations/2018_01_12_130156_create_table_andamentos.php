@@ -16,10 +16,14 @@ class CreateTableAndamentos extends Migration
         Schema::create('andamentos', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('tipo_prazo_id')->unsigned();
+
             $table->integer('processo_id')->unsigned();
-            $table->timestamp('data_prazo');
+            $table->integer('tipo_andamento_id')->unsigned();
+            $table->integer('tipo_entrada_id')->unsigned();
+            $table->integer('tipo_prazo_id')->unsigned()->nullable();
+            $table->timestamp('data_prazo')->nullable();
             $table->timestamp('data_entrega')->nullable();
+            $table->text('observacoes')->nullable();
 
             $table->timestamps();
         });

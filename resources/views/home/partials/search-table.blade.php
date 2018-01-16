@@ -48,7 +48,7 @@
             <td>{{ is_null($processo->relator) ? : $processo->relator->nome }}</td>
             <td>{{ $processo->apensos_obs }}</td>
             <td>{{ is_null($processo->juiz) ? : $processo->juiz->nome }}</td>
-            <td>{{ is_null($processo->juiz) ? : $processo->juiz->tipoJuiz->nome }}</td>
+            {{--<td>{{ is_null($processo->juiz) ? : $processo->juiz->tipoJuiz->nome }}</td>--}}
             <td>{{ $processo->autor }}</td>
             <td>{{ $processo->reu }}</td>
             <td>{{ $processo->objeto }}</td>
@@ -58,7 +58,8 @@
             <td>{{ is_null($processo->procurador) ? : $processo->procurador->name }}</td>
             <td>{{ is_null($processo->estagiario) ? : $processo->estagiario->name }}</td>
             <td>{{ is_null($processo->assessor) ? : $processo->assessor->name }}</td>
-            <td>{{ $processo->tipoMeio->nome }}</td>
+            <td>{{ is_null($processo->tipoMeio) ? : $processo->tipoMeio->name }}</td>
+            {{--<td>{{ $processo->tipoMeio->nome }}</td>--}}
         </tr>
     @empty
         <p>Nenhum processo encontrado</p>

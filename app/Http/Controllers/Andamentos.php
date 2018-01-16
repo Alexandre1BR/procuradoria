@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Data\Models\Andamento;
 
+use App\Data\Models\Processo as ModelProcesso;
+
 use App\Data\Models\TipoAndamento as ModelTipoAndamento;
 use App\Data\Models\TipoEntrada as ModelTipoEntrada;
 use App\Data\Models\TipoPrazo as  ModelTipoPrazo;
 use App\Data\Repositories\Andamentos as AndamentosRepository;
 use App\Http\Requests\Andamento as AndamentoRequest;
+use Illuminate\Http\Request;
 
 class Andamentos extends Controller
 {
@@ -32,10 +35,20 @@ class Andamentos extends Controller
         return $this->create();
     }
 
-    public function detail(AndamentoRequest $request)
+    public function detail(Request $request)
     {
-        dd($andamento = Andamento::find($request->id));
+        $andamento = Andamento::find($request->id);
 
-        return view('andamentos.detail', compact('andamento'));
+
+        $processos = ModelProcesso::pluck('numero_judicial', 'id');
+
+        $tipoPrazos = ModelTipoPrazo::pluck('nome', 'id');
+
+        $tipoAndamentos = ModelTipoAndamento::pluck('nome', 'id');
+        //dd($tipoAndamentos);
+
+        $tipoEntradas = ModelTipoEntrada::pluck('nome', 'id');
+
+        return view('andamentos.detail', compact('andamento', 'processos', 'tipoAndamentos', 'tipoEntradas', 'tipoPrazos'));
     }
 }

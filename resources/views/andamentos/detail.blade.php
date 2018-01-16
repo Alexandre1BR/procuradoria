@@ -4,118 +4,74 @@
     <div class="panel panel-default">
         <div class="panel-heading">Dashboard</div>
 
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label for="numero_judicial">Número Judicial</label>
-                {{$processo->numero_judicial}}
-            </div>
-            <div class="form-group col-md-6">
-                <label for="numero_alerj">Número Alerj</label>
-                {{$processo->numero_alerj}}
-            </div>
+        <div class="form-group">
+            <label for="Processo">Processo</label>
+            <select name="processo_id" class="form-control" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo">
+                @foreach ($processos as $key => $processo)
+                    @if($key == $andamento->processo->id)
+                        <option selected="true" value="{{ $key }}" >{{ $processo }}></option>
+                    @else
+                        <option value="{{ $key }}" >{{ $processo }}></option>
+                    @endif
+                @endforeach
+            </select>
         </div>
 
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label for="tribunal_id">Tribunal</label>
-                {{$processo->tribunal->nome}}
-            </div>
-            <div class="form-group col-md-6">
-                <label for="vara">Vara</label>
-                {{$processo->vara}}
-            </div>
+        <div class="form-group">
+            ppppppp                {{dd($andamento->$tipoAndamentos) }}
+            <label for="tipo_andamento_id">Tipo de Andamento</label>
+            <select name="tipo_andamento_id" class="form-control" id="tipo_andamento_id" aria-describedby="numero_judicialHelp" placeholder="Processo">
+
+                @foreach ($tipoAndamentos as $key => $tipoAndamento)
+                    @if($key == $andamento->$tipoAndamentos->id)
+                        <option selected="true" value="{{ $key }}" >{{ $tipoAndamento }}</option>
+                    @else
+                        <option value="{{ $key }}" >{{ $tipoAndamento }}></option>
+                    @endif
+                @endforeach
+            </select>
         </div>
 
-        <div class="row">
-            <div class="form-group col-md-4">
-                <label for="data_distribuicao">Data Distribuição</label>
-                {{$processo->data_distribuicao}}
-            </div>
-
-            <div class="form-group col-md-4">
-                <label for="acao_id">Ação</label>
-                {{$processo->acao->nome}}
-            </div>
-            <div class="form-group col-md-4">
-                <label for="relator_id">Relator</label>
-                {{$processo->relator->name}}
-            </div>
+        <div class="form-group">
+            <label for="Processo">Tipo de Entrada</label>
+            <select name="tipo_entrada_id" class="form-control" id="tipo_entrada_id" aria-describedby="numero_judicialHelp" placeholder="Processo">
+                <option selected="true" value="">Selecione</option>
+                @foreach ($tipoEntradas as $key => $tipoEntrada)
+                    @if($key == $andamento->tipoEntrada->id)
+                        <option selected="true" value="{{ $key }}" >{{ $tipoEntrada }}</option>
+                    @else
+                        <option value="{{ $key }}" >{{ $tipoEntrada }}></option>
+                    @endif
+                @endforeach
+            </select>
         </div>
 
-        <div class="row">
-            <div class="form-group col-md-4">
-                <label for="juiz_id">Juiz</label>
-                {{$processo->juiz->name}}
-            </div>
-
-            <div class="form-group col-md-4">
-                <label for="autor">Autor</label>
-                {{$processo->autor}}
-            </div>
-
-            <div class="form-group col-md-4">
-                <label for="reu">Réu</label>
-                {{$processo->reu}}
-            </div>
+        <div class="form-group">
+            <label for="Processo">Tipo Prazo</label>
+            <select name="tipo_prazo_id" class="form-control" id="tipo_prazo_id" aria-describedby="numero_judicialHelp" placeholder="tipo_prazo_id">
+                <option selected="true" value="">Selecione</option>
+                @foreach ($tipoPrazos as $key => $prazo)
+                    @if($key == $andamento->$tipoPrazos->id)
+                        <option selected="true" value="{{ $key }}" >{{ $prazo }}</option>
+                    @else
+                        <option value="{{ $key }}" >{{ $prazo }}></option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="data_prazo">Data Prazo</label>
+            <input  type="date"  name="data_prazo" value="{{$andamento->data_prazo}}" class="form-control" id="data_prazo" placeholder="Data Prazo" >
         </div>
 
-        <div class="row">
-            <div class="form-group col-md-3">
-                <label for="procurador_id">Procurador</label>
-                {{$processo->procurador->name}}
-            </div>
-
-            <div class="form-group col-md-3">
-                <label for="estagiario_id">Estagiario</label>
-                {{$processo->estagiario->name}}
-            </div>
-
-            <div class="form-group col-md-3">
-                <label for="assessor_id">Assessor</label>
-                {{$processo->assessor->name}}
-            </div>
-
-            <div class="form-group col-md-3">
-                <label for="tipo_meio">Meio</label>
-                {{$processo->tipo_meio}}
-            </div>
+        <div class="form-group">
+            <label for="data_entrega">Data Entrega</label>
+            <input  type="date" name="data_entrega" value="{{$andamento->data_entrega}}" class="form-control" id="data_entrega" placeholder="Data Entrega" >
         </div>
-
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label for="objeto">Objeto</label>
-                {{$processo->objeto}}
-            </div>
+        <div class="form-group">
+            <label for="data_prazo">Observação</label>
+            <textarea  type="date" name="observacoes" class="form-control" id="observacoes" placeholder="" value="{{$andamento->observacao}}"></textarea>
         </div>
-
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label for="merito">Mérito</label>
-                {{$processo->merito}}
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label for="liminar">Liminar</label>
-                {{$processo->liminar}}
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label for="apensos_obs">Apensos</label>
-                {{$processo->apensos_obs}}
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label for="recurso">Recurso</label>
-                {{$processo->recurso}}
-            </div>
-        </div>
-
     </div>
 
 @endsection

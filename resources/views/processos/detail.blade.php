@@ -34,7 +34,8 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="numero_judicial">Número Judicial</label>
-                        <input value="{{$processo->numero_judicial}}" name="numero_judicial" class="form-control" readonly="true" id="numero_judicial" placeholder="Número Judicial">
+                        <input value="{{$processo->numero_judicial}}" name="numero_judicial" class="form-control" readonly="true" id="numero_judicial"
+                               placeholder="Número Judicial">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="numero_alerj">Número Alerj</label>
@@ -45,7 +46,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="tribunal_id">Tribunal</label>
-                            <select name="tribunal_id" class="js-example-basic-single form-control" disabled="disabled" id="tribunal_id">
+                        <select name="tribunal_id" class="js-example-basic-single form-control" disabled="disabled" id="tribunal_id">
                             @foreach ($tribunais as $key => $tribunal)
                                 @if($processo->tribunal->id == $key)
                                     <option value="{{ $key }}" selected="selected">{{ $tribunal }}</option>
@@ -83,7 +84,7 @@
                     <div class="form-group col-md-4">
                         <label for="relator_id">Relator</label>
                         <select name="relator_id" class="js-example-basic-single form-control" disabled="disabled" id="relator_id">
-                            @foreach ($acoes as $key => $relator)
+                            @foreach ($juizes as $key => $relator)
                                 @if($processo->relator->id == $key)
                                     <option value="{{ $key }}" selected="selected">{{ $relator }}</option>
                                 @else
@@ -98,7 +99,7 @@
                     <div class="form-group col-md-4">
                         <label for="juiz_id">Juiz</label>
                         <select name="juiz_id" class="js-example-basic-single form-control" disabled="disabled" id="juiz_id">
-                            @foreach ($acoes as $key => $juiz)
+                            @foreach ($juizes as $key => $juiz)
                                 @if($processo->juiz->id == $key)
                                     <option value="{{ $key }}" selected="selected">{{ $juiz }}</option>
                                 @else
@@ -115,7 +116,7 @@
 
                     <div class="form-group col-md-4">
                         <label for="reu">Réu</label>
-                        <input value="{{$processo->reu}}"  name="reu" type="text" class="form-control" readonly="true" id="reu" placeholder="Informe o Réu">
+                        <input value="{{$processo->reu}}" name="reu" type="text" class="form-control" readonly="true" id="reu" placeholder="Informe o Réu">
                     </div>
                 </div>
 

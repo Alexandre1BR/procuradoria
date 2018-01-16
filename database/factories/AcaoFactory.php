@@ -15,7 +15,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Data\Models\Acao::class, function (Faker $faker) {
     return [
-            'nome' => $faker->name,
+            'nome'       => $faker->name,
             'abreviacao' => $faker->name(),
     ];
 });

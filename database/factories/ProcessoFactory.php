@@ -17,28 +17,28 @@ $factory->define(App\Data\Models\Processo::class, function (Faker $faker) {
     return [
 
             'numero_judicial' => $faker->randomNumber(),
-            'numero_alerj' => $faker->randomNumber(),
-            'tribunal_id' => function () {
+            'numero_alerj'    => $faker->randomNumber(),
+            'tribunal_id'     => function () {
                 return factory(\App\Data\Models\Tribunal::class)->create()->id;
             },
-            'vara' => $faker->name, //'origem_complemento' => $faker->name,
+            'vara'              => $faker->name, //'origem_complemento' => $faker->name,
             'data_distribuicao' => $faker->date('Y-m-d h:m:i'),
-            'acao_id' => function () {
+            'acao_id'           => function () {
                 return factory(\App\Data\Models\Acao::class)->create()->id;
             },
             'relator_id' => function () {
                 return factory(\App\Data\Models\Juiz::class)->create()->id;
             },
             'apensos_obs' => $faker->name,
-            'juiz_id' => function () {
+            'juiz_id'     => function () {
                 return factory(\App\Data\Models\Juiz::class)->create()->id;
             },
-            'autor' => $faker->name,
-            'reu' => $faker->name,
-            'objeto' => $faker->name,
-            'merito' => $faker->name,
-            'liminar' => $faker->name,
-            'recurso' => $faker->name,
+            'autor'         => $faker->name,
+            'reu'           => $faker->name,
+            'objeto'        => $faker->name,
+            'merito'        => $faker->name,
+            'liminar'       => $faker->name,
+            'recurso'       => $faker->name,
             'procurador_id' => function () {
                 return factory(\App\Data\Models\User::class)->create()->id;
             },

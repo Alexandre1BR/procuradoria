@@ -8,6 +8,7 @@ class Tribunais
 {
     /**
      * @param $request
+     *
      * @return void
      */
     public function createFromRequest($request)

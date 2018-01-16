@@ -16,8 +16,9 @@ class Tribunais extends Controller
     }
 
     /**
-     * @param TribunalRequest $request
+     * @param TribunalRequest     $request
      * @param TribunaisRepository $repository
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function store(TribunalRequest $request, TribunaisRepository $repository)

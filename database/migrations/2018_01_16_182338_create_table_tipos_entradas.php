@@ -22,17 +22,17 @@ class CreateTableTiposEntradas extends Migration
         });
 
         DB::table('tipos_entradas')->insert(
-            array(
-                'id' => '1',
-                'nome' => 'Manual'
-            )
+            [
+                'id'   => '1',
+                'nome' => 'Manual',
+            ]
         );
 
         DB::table('tipos_entradas')->insert(
-            array(
-                'id' => '2',
-                'nome' => 'Automatico'
-            )
+            [
+                'id'   => '2',
+                'nome' => 'Automatico',
+            ]
         );
     }
 

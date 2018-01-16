@@ -17,7 +17,7 @@ class Processo extends BaseModel
         'data_distribuicao',
         'acao_id',
         'relator_id',
-        'apensos_id',
+        'apensos_obs',
         'juiz_id',
         'autor',
         'reu',

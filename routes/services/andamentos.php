@@ -7,7 +7,7 @@ Route::group(['prefix' => '/andamentos'], function () {
 
     Route::post('/', 'Andamentos@store')->name('andamentos.store');
 
-    Route::get('/search', 'Andamentos@search')->name('andamentos.search');
+    Route::get('/search', 'Andamentos@index')->name('andamentos.index');
 
     Route::get('/detail', 'Andamentos@detail')->name('andamentos.detail');
 });

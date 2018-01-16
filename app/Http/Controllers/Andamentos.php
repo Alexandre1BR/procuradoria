@@ -32,7 +32,8 @@ class Andamentos extends Controller
     {
         $repository->createFromRequest($request);
 
-        return $this->create();
+        //return $this->index($repository,$request);
+        return redirect()->route('andamentos.index');
     }
 
     public function detail(Request $request)
@@ -50,5 +51,13 @@ class Andamentos extends Controller
         $tipoEntradas = ModelTipoEntrada::pluck('nome', 'id');
 
         return view('andamentos.detail', compact('andamento', 'processos', 'tipoAndamentos', 'tipoEntradas', 'tipoPrazos'));
+    }
+
+    public function index(AndamentosRepository $andamentos, Request $request)
+    {
+
+        return view('andamentos.index')
+            ->with('pesquisa', $request->get('pesquisa'))
+            ->with('andamentos', $andamentos->search($request));
     }
 }

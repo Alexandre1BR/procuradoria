@@ -22,17 +22,17 @@ class CreateTableMeios extends Migration
         });
 
         DB::table('meios')->insert(
-            array(
-                'id' => '1',
-                'nome' => 'Físico'
-            )
+            [
+                'id'   => '1',
+                'nome' => 'Físico',
+            ]
         );
 
         DB::table('meios')->insert(
-            array(
-                'id' => '2',
-                'nome' => 'Eletrônico'
-            )
+            [
+                'id'   => '2',
+                'nome' => 'Eletrônico',
+            ]
         );
     }
 

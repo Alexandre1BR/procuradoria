@@ -18,7 +18,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -49,7 +49,7 @@
             </div>
         </nav>
 
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     @if (isset($errors) && $errors->any())
@@ -64,9 +64,11 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-xs-12">
-                    @yield('content')
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        @yield('content')
+                    </div>
                 </div>
             </div>
         </div>

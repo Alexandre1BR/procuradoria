@@ -26,7 +26,7 @@
 
     @forelse ($andamentos as $andamento)
         <tr>
-            <td><a href="{{ action('Andamentos@detail', 'id=').$andamento['id']}}">Detalhes</a></td>
+            <td><a href="{{ route('andamentos.show',['id' => $andamento->id])}}">Detalhes</a></td>
             <td>{{ $andamento->processo->numero_judicial }}</td>
             <td>{{ $andamento->tipoAndamento->nome }}</td>
             <td>{{ $andamento->tipoEntrada->nome }}</td>

@@ -16,7 +16,7 @@
                                     <div class="form-group pull-right">
                                         <div class="input-group">
                                             <input type="text" class="form-control" id="exampleInputName2" placeholder="Pesquisar">
-                                            <div class="input-group-addon"><i class="fa fa-loupe"></i></div>
+                                            <div class="input-group-addon"><i class="fa fa-search"></i></div>
                                         </div>
                                     </div>
                                 </form>

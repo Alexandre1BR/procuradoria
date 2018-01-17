@@ -18,8 +18,9 @@ class Home extends Controller
     /**
      * Show the application dashboard.
      *
-     * @param Processos $processos
+     * @param Processos       $processos
      * @param ProcessoRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function index(Processos $processos, ProcessoRequest $request)

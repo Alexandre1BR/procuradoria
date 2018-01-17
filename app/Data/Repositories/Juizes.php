@@ -23,8 +23,6 @@ class Juizes
     public function search(Request $request)
     {
         return $this->searchFromRequest($request->get('pesquisa'));
-    }
-10
     /**
      * @param null|string $search
      *

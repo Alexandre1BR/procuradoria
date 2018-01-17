@@ -5,8 +5,6 @@ namespace App\Data\Repositories;
 use App\Data\Models\Processo;
 use Illuminate\Http\Request;
 
-
-
 class Processos
 {
     /**

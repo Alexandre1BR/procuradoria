@@ -1,5 +1,5 @@
-@extends('layouts.centered')
+@extends('layouts.app')
 
-@section('contents')
-    Ocorreu um erro grave, os administradores do sistema foram avisados
+@section('content')
+    <h1 class="text-center">Ocorreu um erro grave, os administradores do sistema foram avisados</h1>
 @stop

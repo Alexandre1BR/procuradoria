@@ -52,7 +52,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    @if ($errors->any())
+                    @if (isset($errors) && $errors->any())
                         <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)

@@ -17,15 +17,7 @@ class Andamentos extends Controller
 {
     public function create()
     {
-        $processos = ModelProcesso::pluck('numero_judicial', 'id');
-
-        $tipoPrazos = ModelTipoPrazo::pluck('nome', 'id');
-
-        $tipoAndamentos = ModelTipoAndamento::pluck('nome', 'id');
-
-        $tipoEntradas = ModelTipoEntrada::pluck('nome', 'id');
-
-        return view('andamentos.create', compact('processos', 'tipoAndamentos', 'tipoEntradas', 'tipoPrazos'));
+        return view('andamentos.create', $this->getAndamentosData());
     }
 
     public function store(AndamentoRequest $request, AndamentosRepository $repository)
@@ -59,5 +51,15 @@ class Andamentos extends Controller
         return view('andamentos.index')
             ->with('pesquisa', $request->get('pesquisa'))
             ->with('andamentos', $andamentos->search($request));
+    }
+
+    public function getAndamentosData(): array
+    {
+        return [
+            'processos'      => ModelProcesso::orderBy('numero_judicial')->pluck('numero_judicial', 'id'),
+            'tipoPrazos'     => ModelTipoPrazo::orderBy('nome')->pluck('nome', 'id'),
+            'tipoAndamentos' => ModelTipoAndamento::orderBy('nome')->pluck('nome', 'id'),
+            'tipoEntradas'   => ModelTipoEntrada::orderBy('nome')->pluck('nome', 'id'),
+        ];
     }
 }

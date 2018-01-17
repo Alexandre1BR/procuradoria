@@ -7,9 +7,9 @@
     <ul class="dropdown-menu">
         <li><a href="{{ route('home.index') }}">Processos</a></li>
         <li><a href="{{ route('andamentos.index') }}">Andamentos</a></li>
-        <li><a href="{{ route('tribunais.create') }}">Tribunais</a></li>
-        <li><a href="{{ route('juizes.create') }}">Juizes</a></li>
-        <li><a href="{{ route('acoes.create') }}">Acoes</a></li>
+        <li><a href="{{ route('tribunais.index') }}">Tribunais</a></li>
+        <li><a href="{{ route('juizes.index') }}">Juizes</a></li>
+        <li><a href="{{ route('acoes.index') }}">Acoes</a></li>
     </ul>
 </li>
 @guest

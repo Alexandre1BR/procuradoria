@@ -41,10 +41,10 @@
         <tr>
             <td><a href="{{ action('Processos@detail', 'id=').$processo['id']}}">Detalhe Processo</a></td>
             <td>{{ $processo->numero_alerj }}</td>
-            <td>{{ $processo->tribunal->nome }}</td>
+            <td>{{ is_null($processo->tribunal) ? : $processo->tribunal->nome }}</td>
             <td>{{ $processo->vara }}</td>
             <td>{{ $processo->data_distribuicao }}</td>
-            <td>{{ $processo->acao->nome }}</td>
+            <td>{{ is_null($processo->acao) ? : $processo->acao->nome }}</td>
             <td>{{ is_null($processo->relator) ? : $processo->relator->nome }}</td>
             <td>{{ $processo->apensos_obs }}</td>
             <td>{{ is_null($processo->juiz) ? : $processo->juiz->nome }}</td>

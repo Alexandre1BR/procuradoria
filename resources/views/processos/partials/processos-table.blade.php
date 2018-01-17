@@ -32,6 +32,7 @@
             <td>
                 <a href="{{ route('processos.show', ['id' => $processo->id]) }}">{{ $processo->numero_judicial }}</a>
             </td>
+            <td>{{ $processo->numero_judicial }}</td>
             <td>{{ $processo->numero_alerj }}</td>
             <td>{{ $processo->tribunal->nome }}</td>
             <td>{{ $processo->data_distribuicao }}</td>

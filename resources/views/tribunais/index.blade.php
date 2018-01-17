@@ -5,11 +5,17 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-3">
-                    Tribunais
+                    <h3>Tribunais</h3>
                 </div>
 
                 <div class="col-md-9">
-                    @include('tribunais.partials.search-form')
+                    @include(
+                        'layouts.partials.search-form',
+                        [
+                            'routeSearch' => 'tribunais.index',
+                            'routeCreate' => 'tribunais.create',
+                        ]
+                    )
                 </div>
             </div>
         </div>
@@ -21,7 +27,7 @@
                 </div>
             @endif
 
-            @include('tribunais.partials.search-table')
+            @include('tribunais.partials.table')
         </div>
     </div>
 @endsection

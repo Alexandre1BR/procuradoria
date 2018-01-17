@@ -13,7 +13,6 @@
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th>&nbsp;</th>
         <th>Número Judicial</th>
         <th>Número ALERJ</th>
         <th>Tribunal</th>
@@ -22,8 +21,8 @@
         <th>Autor</th>
         <th>Objeto</th>
         <th>Procurador</th>
-        <th>Estagiário</th>
         <th>Assessor</th>
+        <th>Estagiário</th>
     </tr>
     </thead>
 
@@ -32,7 +31,6 @@
             <td>
                 <a href="{{ route('processos.show', ['id' => $processo->id]) }}">{{ $processo->numero_judicial }}</a>
             </td>
-            <td>{{ $processo->numero_judicial }}</td>
             <td>{{ $processo->numero_alerj }}</td>
             <td>{{ $processo->tribunal->nome }}</td>
             <td>{{ $processo->data_distribuicao }}</td>
@@ -40,10 +38,8 @@
             <td>{{ $processo->autor }}</td>
             <td>{{ $processo->objeto }}</td>
             <td>{{ is_null($processo->procurador) ? : $processo->procurador->name }}</td>
-            <td>{{ is_null($processo->estagiario) ? : $processo->estagiario->name }}</td>
             <td>{{ is_null($processo->assessor) ? : $processo->assessor->name }}</td>
-            <td>{{ is_null($processo->tipoMeio) ? : $processo->tipoMeio->name }}</td>
-            <td>{{ $processo->tipoMeio->nome }}</td>
+            <td>{{ is_null($processo->estagiario) ? : $processo->estagiario->name }}</td>
         </tr>
     @empty
         <p>Nenhum processo encontrado</p>

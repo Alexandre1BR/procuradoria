@@ -10,6 +10,6 @@ class BaseModel extends Model
     use RevisionableTrait;
 
     protected $revisionEnabled = true;
-    
+
     protected $revisionCreationsEnabled = true;
 }

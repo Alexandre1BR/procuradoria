@@ -2,9 +2,7 @@
 
 namespace App\Data\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Acao extends Model
+class Acao extends BaseModel
 {
     /**
      * The attributes that are mass assignable.

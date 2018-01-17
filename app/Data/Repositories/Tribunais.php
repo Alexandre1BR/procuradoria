@@ -13,10 +13,21 @@ class Tribunais
      *
      * @return void
      */
-    public function createFromRequest($request)
+    public function createFromRequest(Request $request)
     {
-        Tribunal::create($request->all());
+//        Tribunal::create($request->all());
+//
+        $id = $request->input('id');
+        if (is_numeric($id)) {
+            $tribunal = Tribunal::find($id);
+            dump($tribunal->nome);
+            $tribunal->nome = $request->nome;
+            $tribunal->save();
+        } else {
+            Tribunal::create($request->all());
+        }
 
+//
         $request->session()->flash('status', 'Dado salvo com sucesso!');
     }
 

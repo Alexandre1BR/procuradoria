@@ -24,6 +24,7 @@ class Juizes
     {
         return $this->searchFromRequest($request->get('pesquisa'));
     }
+
     /**
      * @param null|string $search
      *

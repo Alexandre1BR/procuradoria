@@ -2,7 +2,10 @@
 
 namespace App\Data\Models;
 
-class Processo extends BaseModel
+use App\Data\Presenters\Processo as ProcessoPresenter;
+use McCool\LaravelAutoPresenter\HasPresenter;
+
+class Processo extends BaseModel implements HasPresenter
 {
     /**
      * The attributes that are mass assignable.
@@ -74,5 +77,10 @@ class Processo extends BaseModel
     public function tipoMeio()
     {
         return $this->belongsTo(Meio::class);
+    }
+
+    public function getPresenterClass()
+    {
+        return ProcessoPresenter::class;
     }
 }

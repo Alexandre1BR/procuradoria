@@ -27,7 +27,6 @@ class CreateTableTiposPrazos extends Migration
                 'nome' => 'Audiência',
             ]
         );
-
     }
 
     /**

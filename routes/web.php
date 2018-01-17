@@ -11,3 +11,7 @@ require __DIR__.'/services/tribunais.php';
 require __DIR__.'/services/acoes.php';
 
 require __DIR__.'/services/andamentos.php';
+
+require __DIR__.'/services/andamentos.php';
+
+require __DIR__.'/services/prazos.php';

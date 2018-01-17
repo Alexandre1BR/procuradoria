@@ -6,8 +6,8 @@ Route::group(['prefix' => '/juizes'], function () {
     Route::post('/', 'Juizes@store')->name('juizes.store');
 });
 
-Route::group(['prefix' => '/tipos_juizes'], function () {
-    Route::get('/', 'Tipos_Juizes@create')->name('tipos_juizes.create');
+Route::group(['prefix' => '/tiposjuizes'], function () {
+    Route::get('/', 'TiposJuizes@create')->name('tipos_juizes.create');
 
-    Route::post('/', 'Tipos_Juizes@store')->name('tipos_juizes.store');
+    Route::post('/', 'TiposJuizes@store')->name('tipos_juizes.store');
 });

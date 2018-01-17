@@ -24,7 +24,7 @@
                             </div>
                         @endif
 
-                        @include('home.partials.search-table')
+                        @include('processos.partials.processos-table')
                     </div>
                 </div>
             </div>

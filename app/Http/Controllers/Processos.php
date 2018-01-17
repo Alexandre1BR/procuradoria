@@ -20,11 +20,8 @@ class Processos extends Controller
         $juizes = ModelJuiz::pluck('nome', 'id');
         $juizes = $juizes->sort();
 
-        //dd($tiposjuizes);
-
         $tribunais = ModelTribunal::pluck('nome', 'id');
         $tribunais = $tribunais->sort();
-        //dd($items);
 
         $usuarios = ModelUser::pluck('name', 'id');
         $usuarios = $usuarios->sort();

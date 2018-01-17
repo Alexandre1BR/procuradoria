@@ -5,8 +5,8 @@ namespace App\Data\Repositories;
 use App\Data\Models\Processo;
 use Illuminate\Http\Request;
 
-class Processos {
-
+class Processos
+{
     /**
      * @param Request $request
      *
@@ -19,7 +19,8 @@ class Processos {
         $request->session()->flash('status', 'Dado salvo com sucesso!');
     }
 
-    public function searchFromRequest(Request $request) {
+    public function searchFromRequest(Request $request)
+    {
         $columns_text = [
                 'numero_judicial',
                 'numero_alerj',
@@ -49,26 +50,22 @@ class Processos {
 
         $vPesquisa = $request->pesquisa;
 
-        foreach ($columns_text as $column)
-        {
-            $query->orWhere($column, 'like', '%' . $vPesquisa . '%');
+        foreach ($columns_text as $column) {
+            $query->orWhere($column, 'like', '%'.$vPesquisa.'%');
         }
 
-        foreach ($columns_int as $column)
-        {
-            if (is_numeric($vPesquisa))
-            {
+        foreach ($columns_int as $column) {
+            if (is_numeric($vPesquisa)) {
                 $query->orWhere($column, '=', $vPesquisa);
             }
         }
 
-        foreach ($columns_date as $column)
-        {
-            if (date_create_from_format('d/m/Y', $vPesquisa))
-            {
+        foreach ($columns_date as $column) {
+            if (date_create_from_format('d/m/Y', $vPesquisa)) {
                 $query->orWhere($column, '=', $vPesquisa);
             }
         }
+
         return $query->get();
     }
 }

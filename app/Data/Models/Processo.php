@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Processo extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *
@@ -38,5 +37,4 @@ class Processo extends Model
     {
         $this->hasMany(Andamento::class);
     }
-
 }

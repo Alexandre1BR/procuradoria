@@ -2,10 +2,6 @@
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('home.index');
-});
-
 require __DIR__.'/services/home.php';
 
 require __DIR__.'/services/processos.php';

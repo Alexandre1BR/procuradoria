@@ -11,7 +11,7 @@
                 </div>
             @endif
 
-            <a href="{{ route('home') }}">Procuradoria</a>
+            <a href="{{ route('home.index') }}">Procuradoria</a>
 
             <form action="{{ route('tribunais.store') }}" method="POST">
                 {{ csrf_field() }}

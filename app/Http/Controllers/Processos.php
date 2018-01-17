@@ -41,25 +41,4 @@ class Processos extends Controller
 
         return $this->create();
     }
-
-    public function search()
-    {
-        $processos = null;
-        dump($processos);
-
-        return view('processos.search', compact('processos'));
-    }
-
-    public function resultSearch(ProcessoRequest $request, ProcessosRepository $repository)
-    {
-        $processos = $repository->searchFromRequest($request);
-        dump($processos);
-        dump(count($processos) == 0);
-        dump($processos != null);
-        if ($processos != null && count($processos) == 0) {
-            $request->session()->flash('warning', 'Processo não encontrado!');
-        }
-
-        return view('processos.search', compact('processos'));
-    }
 }

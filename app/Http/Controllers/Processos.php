@@ -12,7 +12,6 @@ use App\Http\Requests\Processo as ProcessoRequest;
 
 class Processos extends Controller
 {
-
     public function create()
     {
         $juizes = ModelJuiz::pluck('nome', 'id');
@@ -38,7 +37,7 @@ class Processos extends Controller
 
     public function store(ProcessoRequest $request, ProcessosRepository $repository)
     {
-       $repository->createFromRequest($request);
+        $repository->createFromRequest($request);
 
         return $this->create();
     }
@@ -47,6 +46,7 @@ class Processos extends Controller
     {
         $processos = null;
         dump($processos);
+
         return view('processos.search', compact('processos'));
     }
 
@@ -56,9 +56,10 @@ class Processos extends Controller
         dump($processos);
         dump(count($processos) == 0);
         dump($processos != null);
-        If($processos != null && count($processos) == 0){
+        if ($processos != null && count($processos) == 0) {
             $request->session()->flash('warning', 'Processo não encontrado!');
         }
+
         return view('processos.search', compact('processos'));
     }
 }

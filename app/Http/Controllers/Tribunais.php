@@ -27,4 +27,5 @@ class Tribunais extends Controller
 
         return $this->create();
     }
+
 }

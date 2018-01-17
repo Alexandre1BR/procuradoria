@@ -3,23 +3,15 @@
 Auth::routes();
 
 Route::get('/', function () {
-    return view('welcome'); //www.procuradoria.test
+    return view('welcome');
 });
 
-Route::group(['middleware' => ['auth', 'app.users']], function () {
-    require __DIR__.'/home.php';
+require __DIR__.'/home.php';
 
-    require __DIR__.'/processos.php';
+require __DIR__.'/processos.php';
 
-    require __DIR__.'/tribunais.php';
+require __DIR__.'/tribunais.php';
 
-    require __DIR__.'/acoes.php';
+require __DIR__.'/acoes.php';
 
-    require __DIR__.'/juizes.php';
-
-    require __DIR__.'/juizes.php';
-
-    require __DIR__.'/usuarios.php';
-
-    require __DIR__.'/prazos.php';
-});
+require __DIR__.'/andamentos.php';

@@ -2,7 +2,7 @@
 
 namespace App\Data\Models;
 
-class Tipo_Andamento extends BaseModel
+class TipoAndamento extends BaseModel
 {
     /**
      * The attributes that are mass assignable.

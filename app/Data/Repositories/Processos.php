@@ -12,7 +12,8 @@ class Processos {
      *
      * @return void
      */
-    public function createFromRequest(Request $request) {
+    public function createFromRequest(Request $request)
+    {
         Processo::create($request->all());
 
         $request->session()->flash('status', 'Dado salvo com sucesso!');

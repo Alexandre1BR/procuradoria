@@ -62,7 +62,7 @@
             <label for="data_prazo">Data Prazo</label>
 
 
-            <input  value="{{$andamento->data_prazo}}"  type="date"  name="data_prazo" class="form-control" id="data_prazo" placeholder="Data Prazo" disabled="disabled">
+            <input  value="{{$andamento->data_prazo}}"  type="date"  name="data_prazo" class="form-control" id="data_prazo" placeholder="Data Prazo" readonly="readonly" >
         </div>
 
         <div class="form-group">

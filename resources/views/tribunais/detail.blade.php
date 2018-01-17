@@ -30,7 +30,7 @@
                     <label for="exampleInputEmail1">Nome</label>
                     <input name="nome" value="{{$tribunal->nome}}" readonly="readonly" class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="nome" >
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="Editar" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>

@@ -12,9 +12,7 @@ use App\Http\Requests\Processo as ProcessoRequest;
 
 class Processos extends Controller
 {
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+
     public function create()
     {
         $juizes = ModelJuiz::pluck('nome', 'id');
@@ -38,16 +36,29 @@ class Processos extends Controller
         return view('processos.create', compact('juizes', 'tribunais', 'usuarios', 'meios', 'acoes'));
     }
 
-    /**
-     * @param ProcessoRequest     $request
-     * @param ProcessosRepository $repository
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function store(ProcessoRequest $request, ProcessosRepository $repository)
     {
-        $repository->createFromRequest($request);
+       $repository->createFromRequest($request);
 
         return $this->create();
+    }
+
+    public function search()
+    {
+        $processos = null;
+        dump($processos);
+        return view('processos.search', compact('processos'));
+    }
+
+    public function resultSearch(ProcessoRequest $request, ProcessosRepository $repository)
+    {
+        $processos = $repository->searchFromRequest($request);
+        dump($processos);
+        dump(count($processos) == 0);
+        dump($processos != null);
+        If($processos != null && count($processos) == 0){
+            $request->session()->flash('warning', 'Processo não encontrado!');
+        }
+        return view('processos.search', compact('processos'));
     }
 }

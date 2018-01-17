@@ -2,10 +2,10 @@
 
 namespace App\Data\Repositories;
 
-use App\Data\Models\Tipo_Entrada as TipoEntrada;
+use App\Data\Models\TipoEntrada as TipoEntrada;
 use Illuminate\Http\Request;
 
-class Tipos_Entradas
+class TiposEntradas
 {
     public function createFromRequest(Request $request)
     {

@@ -1,7 +1,7 @@
 <?php
 
-Route::group(['prefix' => '/tipos_usuarios'], function () {
-    Route::get('/', 'TiposUsuarios@create')->name('tipos_usuarios.create');
+Route::group(['prefix' => '/tipos_prazos'], function () {
+    Route::get('/', 'TiposPrazos@create')->name('tipos_prazos.create');
 
-    Route::post('/', 'TiposUsuarios@store')->name('tipos_usuarios.store');
+    Route::post('/', 'TiposPrazos@store')->name('tipos_prazos.store');
 });

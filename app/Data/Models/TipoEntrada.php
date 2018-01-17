@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @mixin \Eloquent
  */
-class Tipo_Entrada extends Model
+class TipoEntrada extends Model
 {
     /**
      * The attributes that are mass assignable.

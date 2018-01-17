@@ -2,13 +2,13 @@
 
 namespace App\Data\Repositories;
 
-use App\Data\Models\Tipo_Juiz as TipoJuiz;
+use App\Data\Models\TipoAndamento as TipoAndamento;
 use Illuminate\Http\Request;
 
-class Tipos_Juizes
+class TiposAndamentos
 {
     public function createFromRequest(Request $request)
     {
-        return TipoJuiz::create($request->all());
+        return TipoAndamento::create($request->all());
     }
 }

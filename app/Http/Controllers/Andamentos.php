@@ -26,16 +26,16 @@ class Andamentos extends Controller
         return redirect()->route('andamentos.index');
     }
 
-    /*public function show($id)
+    public function show($id)
     {
         $andamento = Andamento::find($id);
 
         return view('andamentos.show')
             ->with('andamento', $andamento)
-            ->with($this->getProcessosData());
-    }*/
+            ->with($this->getAndamentosData());
+    }
 
-    public function show(Request $request)
+    public function detail(Request $request)
     {
         $andamento = Andamento::find($request->id);
 

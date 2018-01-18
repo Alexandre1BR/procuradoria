@@ -22,12 +22,12 @@ class Base
     public function createFromRequest(Request $request)
     {
         is_null($id = $request->input('id'))
-                ? $tribunal = new $this->model()
-                : $tribunal = $this->model::find($id);
+                ? $model = new $this->model()
+                : $model = $this->model::find($id);
 
-        $tribunal->fill($request->all());
-
-        $tribunal->save();
+        $model->fill($request->all());
+        //dd($model);
+        $model->save();
 
         $request->session()->flash('status', 'Dado salvo com sucesso!');
     }

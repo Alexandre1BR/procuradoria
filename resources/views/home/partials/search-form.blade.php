@@ -3,6 +3,8 @@
 
     <div class="form-group pull-right">
         <div class="input-group">
+            <li><a href="{{ route('processos.create') }}">Processos</a></li>
+
             <input type="text" class="form-control" name="pesquisa" placeholder="Pesquisar" value="{{ $pesquisa }}">
             <div class="input-group-addon"><i class="fa fa-search"></i></div>
 

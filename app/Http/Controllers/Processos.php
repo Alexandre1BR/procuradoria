@@ -12,20 +12,24 @@ use App\Data\Repositories\Processos as ProcessosRepository;
 use App\Http\Requests\Processo as ProcessoRequest;
 
 class Processos extends Controller {
-    public function create() {
+
+    public function create()
+    {
         return view(
                 'processos.create',
                 $this->getProcessosData()
         );
     }
 
-    public function store(ProcessoRequest $request, ProcessosRepository $repository) {
+    public function store(ProcessoRequest $request, ProcessosRepository $repository)
+    {
         $repository->createFromRequest($request);
 
         return $this->create();
     }
 
-    public function detail(ProcessoRequest $request) {
+    public function detail(ProcessoRequest $request)
+    {
         $processo = Processo::find($request->id);
 
         return view('processos.detail')->with(array_merge(['processo'=>$processo], $this->getProcessosData()));
@@ -34,8 +38,10 @@ class Processos extends Controller {
     /**
      * @return array
      */
-    public function getProcessosData(): array {
-        return [
+    public function getProcessosData(): array
+    {
+        return
+                [
                 'juizes' => ModelJuiz::orderBy('nome')->pluck('nome', 'id'),
                 'tribunais' => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
                 'usuarios' => ModelUser::orderBy('name')->pluck('name', 'id'),

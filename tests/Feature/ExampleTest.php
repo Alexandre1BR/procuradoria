@@ -6,15 +6,17 @@ use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testBasicTest()
+    public function testRedirectToLoginResponse()
     {
-        $response = $this->get('/');
+        $this->get('/')->assertRedirect('/login');
+    }
+
+    public function testLoginResponse()
+    {
+        $response = $this->get('/login');
 
         $response->assertStatus(200);
+
+        $response->assertSee('Login Alerj');
     }
 }

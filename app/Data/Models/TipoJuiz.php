@@ -2,9 +2,7 @@
 
 namespace App\Data\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Tipo_Juiz extends Model
+class TipoJuiz extends BaseModel
 {
     /**
      * The attributes that are mass assignable.

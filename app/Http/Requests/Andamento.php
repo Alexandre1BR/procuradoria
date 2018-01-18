@@ -24,10 +24,12 @@ class Andamento extends FormRequest
     public function rules()
     {
         return [
-            'tipo_prazo_id' => 'required',
-            'processo_id'   => 'required',
-            'data_prazo'    => 'required',
-            'data_entrega',
+            'tipo_prazo_id'         => 'required',
+            'processo_id'           => 'required',
+            'data_prazo'            => 'required',
+            'data_entrega'          => 'required',
+            'tipo_andamento_id'     => 'required',
+            'tipo_andamento_id'     => 'required',
         ];
     }
 }

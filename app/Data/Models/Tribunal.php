@@ -2,9 +2,7 @@
 
 namespace App\Data\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Tribunal extends Model
+class Tribunal extends BaseModel
 {
     protected $table = 'tribunais';
 

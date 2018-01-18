@@ -4,10 +4,12 @@ namespace App\Data\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use RevisionableTrait;
 
     /**
      * The attributes that are mass assignable.

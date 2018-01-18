@@ -2,9 +2,7 @@
 
 namespace App\Data\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Juiz extends Model
+class Juiz extends BaseModel
 {
     /**
      * The attributes that are mass assignable.

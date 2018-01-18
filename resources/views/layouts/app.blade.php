@@ -41,41 +41,27 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        <li><a href="{{ route('processos.create') }}">Processos</a></li>
-                        <li><a href="{{ route('andamentos.create') }}">Andamentos</a></li>
-                        <li><a href="{{ route('tribunais.create') }}">Tribunais</a></li>
-
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
+                        @include('home.partials.menu')
                     </ul>
                 </div>
             </div>
         </nav>
 
         <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-xs-12">
                     @yield('content')

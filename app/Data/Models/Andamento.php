@@ -2,9 +2,7 @@
 
 namespace App\Data\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Andamento extends Model
+class Andamento extends BaseModel
 {
     /**
      * The attributes that are mass assignable.
@@ -12,10 +10,12 @@ class Andamento extends Model
      * @var array
      */
     protected $fillable = [
-        'tipo_prazo_id',
         'processo_id',
+        'tipo_andamento_id',
+        'tipo_entrada_id',
+        'tipo_prazo_id',
         'data_prazo',
         'data_entrega',
-
+        'observacoes',
     ];
 }

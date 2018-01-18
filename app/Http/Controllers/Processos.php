@@ -18,11 +18,11 @@ class Processos extends Controller
         return view(
             'processos.create',
             [
-                'juizes' => ModelJuiz::orderBy('nome')->pluck('nome', 'id'),
+                'juizes'    => ModelJuiz::orderBy('nome')->pluck('nome', 'id'),
                 'tribunais' => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
-                'usuarios' => ModelUser::orderBy('name')->pluck('name', 'id'),
-                'meios' => ModelMeio::orderBy('nome')->pluck('nome', 'id'),
-                'acoes' => ModelAcao::orderBy('nome')->pluck('nome', 'id'),
+                'usuarios'  => ModelUser::orderBy('name')->pluck('name', 'id'),
+                'meios'     => ModelMeio::orderBy('nome')->pluck('nome', 'id'),
+                'acoes'     => ModelAcao::orderBy('nome')->pluck('nome', 'id'),
             ]
         );
     }

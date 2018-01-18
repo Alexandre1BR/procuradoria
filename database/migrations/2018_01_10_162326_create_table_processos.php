@@ -34,7 +34,7 @@ class CreateTableProcessos extends Migration
             $table->integer('procurador_id')->unsigned();
             $table->integer('estagiario_id')->unsigned();
             $table->integer('assessor_id')->unsigned();
-            $table->string('tipo_meio');
+            $table->integer('tipo_meio_id')->unsigned();
 
             $table->timestamps();
         });

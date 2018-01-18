@@ -22,6 +22,7 @@
         <th>Relator</th>
         <th>Apensos</th>
         <th>Juiz</th>
+        <th>Tipo Juiz</th>
         <th>Autor</th>
         <th>Reu</th>
         <th>Objeto</th>
@@ -38,15 +39,15 @@
     @forelse ($processos as $processo)
         <tr>
             <td><a href="{{ action('Processos@detail', 'id=').$processo['id']}}">Detalhe Processo</a></td>
-            <td>{{ $processo->numero_judicial }}</td>
             <td>{{ $processo->numero_alerj }}</td>
             <td>{{ $processo->tribunal->nome }}</td>
             <td>{{ $processo->vara }}</td>
             <td>{{ $processo->data_distribuicao }}</td>
             <td>{{ $processo->acao->nome }}</td>
-            <td>{{ is_null($processo->relator) ? : $processo->relator->name }}</td>
+            <td>{{ is_null($processo->relator) ? : $processo->relator->nome }}</td>
             <td>{{ $processo->apensos_obs }}</td>
-            <td>{{ is_null($processo->juiz) ? : $processo->juiz->name }}</td>
+            <td>{{ is_null($processo->juiz) ? : $processo->juiz->nome }}</td>
+            <td>{{ is_null($processo->juiz) ? : $processo->juiz->tipoJuiz->nome }}</td>
             <td>{{ $processo->autor }}</td>
             <td>{{ $processo->reu }}</td>
             <td>{{ $processo->objeto }}</td>
@@ -56,7 +57,7 @@
             <td>{{ is_null($processo->procurador) ? : $processo->procurador->name }}</td>
             <td>{{ is_null($processo->estagiario) ? : $processo->estagiario->name }}</td>
             <td>{{ is_null($processo->assessor) ? : $processo->assessor->name }}</td>
-            <td>{{ $processo->tipo_meio }}</td>
+            <td>{{ $processo->tipoMeio->nome }}</td>
         </tr>
     @empty
         <p>Nenhum processo encontrado</p>

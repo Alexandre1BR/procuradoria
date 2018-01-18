@@ -16,4 +16,14 @@ class Juiz extends BaseModel
         'lotacao_id',
         'tipo_juiz_id',
     ];
+
+    public function tipoJuiz()
+    {
+        return $this->belongsTo(TipoJuiz::class);
+    }
+
+    public function tribunal()
+    {
+        return $this->belongsTo(Tribunal::class);
+    }
 }

@@ -47,7 +47,7 @@
             <td>{{ is_null($processo->relator) ? : $processo->relator->nome }}</td>
             <td>{{ $processo->apensos_obs }}</td>
             <td>{{ is_null($processo->juiz) ? : $processo->juiz->nome }}</td>
-            <td>{{ is_null($processo->juiz) ? : $processo->juiz->tipo_juiz->nome }}</td>
+            <td>{{ is_null($processo->juiz) ? : $processo->juiz->tipojuiz->nome }}</td>
             <td>{{ $processo->autor }}</td>
             <td>{{ $processo->reu }}</td>
             <td>{{ $processo->objeto }}</td>

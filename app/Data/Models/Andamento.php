@@ -21,21 +21,21 @@ class Andamento extends BaseModel
 
     public function processo()
     {
-        return $this->belongsTo(Processo::class);
+        return $this->belongsTo(Processo::class,'processo_id','id');
     }
 
-    public function tipo_andamento()
+    public function tipoandamento()
     {
-        return $this->belongsTo(TipoAndamento::class);
+        return $this->belongsTo(TipoAndamento::class, 'tipo_andamento_id','id');
     }
 
-    public function tipo_entrada()
+    public function tipoentrada()
     {
-        return $this->belongsTo(TipoEntrada::class);
+        return $this->belongsTo(TipoEntrada::class, 'tipo_entrada_id','id');
     }
 
-    public function tipo_prazo()
+    public function tipoprazo()
     {
-        return $this->belongsTo(TipoPrazo::class);
+        return $this->belongsTo(TipoPrazo::class,'tipo_prazo_id','id');
     }
 }

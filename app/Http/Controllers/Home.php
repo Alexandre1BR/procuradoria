@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Repositories\Processos;
+use App\Data\Repositories\Processos as ProcessosRepositorio;
 use App\Http\Requests\Processo as ProcessoRequest;
 
 class Home extends Controller
@@ -18,12 +18,12 @@ class Home extends Controller
     /**
      * Show the application dashboard.
      *
-     * @param Processos       $processos
+     * @param ProcessosRepositorio $processos
      * @param ProcessoRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Processos $processos, ProcessoRequest $request)
+    public function index(ProcessosRepositorio $processos, ProcessoRequest $request)
     {
         return view('home.index')
                 ->with('pesquisa', $request->get('pesquisa'))

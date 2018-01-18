@@ -21,5 +21,3 @@ Artisan::command('main {search}', function ($search) {
     dump($search);
     dump((new \App\Data\Repositories\Processos())->searchFromRequest($search));
 })->describe('Display an inspiring quote');
-
-

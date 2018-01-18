@@ -8,6 +8,8 @@
         <li><a href="{{ route('processos.create') }}">Processos</a></li>
         <li><a href="{{ route('andamentos.create') }}">Andamentos</a></li>
         <li><a href="{{ route('tribunais.create') }}">Tribunais</a></li>
+        <li><a href="{{ route('juizes.create') }}">Juizes</a></li>
+        <li><a href="{{ route('acoes.create') }}">Acoes</a></li>
     </ul>
 </li>
 

@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <label for="Processo">Processo</label>
                     <select name="processo_id" class="form-control" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo">
-                            <option selected="true" value="">Selecione</option>
+                        <option selected="true" value="">Selecione</option>
                         @foreach ($processos as $key => $processo)
                             <option value="{{ $key }}" >{{ $processo }}</option>
                         @endforeach

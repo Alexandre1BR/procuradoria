@@ -29,8 +29,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nome</label>
                     <input name="nome" class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="nome">
-                    <small id="nomeHelp" class="form-text text-muted">We'll never share your nome with anyone else.</small>
-               </div>
+                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

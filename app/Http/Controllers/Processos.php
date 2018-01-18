@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\Models\Processo;
 use App\Data\Models\Acao as ModelAcao;
 use App\Data\Models\Juiz as ModelJuiz;
 use App\Data\Models\Meio as ModelMeio;
-use App\Data\Models\Processo;
-use App\Data\Models\Tribunal as ModelTribunal;
 use App\Data\Models\User as ModelUser;
-use App\Data\Repositories\Processos as ProcessosRepository;
+use App\Data\Models\Tribunal as ModelTribunal;
 use App\Http\Requests\Processo as ProcessoRequest;
+use App\Data\Repositories\Processos as ProcessosRepository;
 
 class Processos extends Controller
 {

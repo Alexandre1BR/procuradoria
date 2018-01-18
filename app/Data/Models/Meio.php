@@ -2,9 +2,7 @@
 
 namespace App\Data\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Meio extends Model
+class Meio extends BaseModel
 {
     /**
      * The attributes that are mass assignable.

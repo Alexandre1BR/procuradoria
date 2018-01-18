@@ -2,14 +2,7 @@
 
 namespace App\Data\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-/**
- * App\Data\Models\Tipo_Andamento.
- *
- * @mixin \Eloquent
- */
-class TipoAndamento extends Model
+class TipoAndamento extends BaseModel
 {
     /**
      * The attributes that are mass assignable.

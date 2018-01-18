@@ -2,9 +2,7 @@
 
 namespace App\Data\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Andamento extends Model
+class Andamento extends BaseModel
 {
     /**
      * The attributes that are mass assignable.

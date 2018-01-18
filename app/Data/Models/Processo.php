@@ -2,9 +2,7 @@
 
 namespace App\Data\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Processo extends Model
+class Processo extends BaseModel
 {
     /**
      * The attributes that are mass assignable.

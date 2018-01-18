@@ -2,9 +2,7 @@
 
 namespace App\Data\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class TipoPrazo extends Model
+class TipoPrazo extends BaseModel
 {
     /**
      * The attributes that are mass assignable.

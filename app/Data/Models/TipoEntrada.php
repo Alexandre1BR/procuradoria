@@ -2,14 +2,7 @@
 
 namespace App\Data\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-/**
- * App\Data\Models\Tipo_Entrada.
- *
- * @mixin \Eloquent
- */
-class TipoEntrada extends Model
+class TipoEntrada extends BaseModel
 {
     /**
      * The attributes that are mass assignable.

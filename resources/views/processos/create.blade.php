@@ -44,8 +44,8 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="tribunal_id">Tribunal</label>
-                        <select name="tribunal_id" class="form-control" id="tribunal_id">
-                            <option selected="true" value="">Selecione</option>
+                        <select name="tribunal_id" class="js-example-basic-single form-control" id="tribunal_id">
+                            <option selected="selected" value="">Selecione</option>
                             @foreach ($tribunais as $key => $tribunal)
                                 <option value="{{ $key }}">{{ $tribunal }}</option>
                             @endforeach
@@ -65,8 +65,8 @@
 
                     <div class="form-group col-md-4">
                         <label for="procurador_id">Ação</label>
-                        <select name="acao_id" class="form-control" id="procurador_id">
-                            <option selected="true" value="">Selecione</option>
+                        <select name="acao_id" class="js-example-basic-single form-control" id="acao_id">
+                            <option selected="selected" value="">Selecione</option>
                             @foreach ($acoes as $key => $acao)
                                 <option value="{{ $key }}">{{ $acao }}</option>
                             @endforeach
@@ -74,8 +74,8 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="relator_id">Relator</label>
-                        <select name="relator_id" class="form-control" id="relator_id">
-                            <option selected="true" value="">Selecione</option>
+                        <select name="relator_id" class="js-example-basic-single form-control" id="relator_id">
+                            <option selected="selected" value="">Selecione</option>
                             @foreach ($juizes as $key => $juiz)
                                 <option value="{{ $key }}">{{ $juiz }}</option>
                             @endforeach
@@ -86,8 +86,8 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="juiz_id">Juiz</label>
-                        <select name="juiz_id" class="form-control" id="relator_id">
-                            <option selected="true" value="">Selecione</option>
+                        <select name="juiz_id" class="js-example-basic-single form-control" id="juiz_id">
+                            <option selected="selected" value="">Selecione</option>
                             @foreach ($juizes as $key => $juiz)
                                 <option value="{{ $key }}">{{ $juiz }}</option>
                             @endforeach
@@ -108,8 +108,8 @@
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label for="procurador_id">Procurador</label>
-                        <select name="procurador_id" class="form-control" id="procurador_id">
-                            <option selected="true" value="">Selecione</option>
+                        <select name="procurador_id" class="js-example-basic-single form-control" id="procurador_id">
+                            <option selected="selected" value="">Selecione</option>
                             @foreach ($usuarios as $key => $usuario)
                                 <option value="{{ $key }}">{{ $usuario }}</option>
                             @endforeach
@@ -118,8 +118,8 @@
 
                     <div class="form-group col-md-3">
                         <label for="estagiario_id">Estagiario</label>
-                        <select name="estagiario_id" class="form-control" id="estagiario_id">
-                            <option selected="true" value="">Selecione</option>
+                        <select name="estagiario_id" class="js-example-basic-single form-control" id="estagiario_id">
+                            <option selected="selected" value="">Selecione</option>
                             @foreach ($usuarios as $key => $usuario)
                                 <option value="{{ $key }}">{{ $usuario }}</option>
                             @endforeach
@@ -128,8 +128,8 @@
 
                     <div class="form-group col-md-3">
                         <label for="assessor_id">Assessor</label>
-                        <select name="assessor_id" class="form-control" id="assessor_id">
-                            <option selected="true" value="">Selecione</option>
+                        <select name="assessor_id" class="js-example-basic-single form-control" id="assessor_id">
+                            <option selected="selected" value="">Selecione</option>
                             @foreach ($usuarios as $key => $usuario)
                                 <option value="{{ $key }}">{{ $usuario }}</option>
                             @endforeach
@@ -138,8 +138,8 @@
 
                     <div class="form-group col-md-3">
                         <label for="tipo_meio">Meio</label>
-                        <select name="tipo_meio" class="form-control" id="tipo_meio">
-                            <option selected="true" value="">Selecione</option>
+                        <select name="tipo_meio" class="js-example-basic-single form-control" id="tipo_meio">
+                            <option selected="selected" value="">Selecione</option>
                             @foreach ($meios as $key => $meio)
                                 <option value="{{ $key }}">{{ $meio }}</option>
                             @endforeach

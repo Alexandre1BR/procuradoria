@@ -45,25 +45,29 @@ class Processo extends BaseModel
     {
         return $this->belongsTo(Acao::class);
     }
+
     public function relator()
     {
         return $this->belongsTo(User::class);
     }
+
     public function juiz()
     {
         return $this->belongsTo(User::class);
     }
+
     public function procurador()
     {
         return $this->belongsTo(User::class);
     }
+
     public function estagiario()
     {
         return $this->belongsTo(User::class);
     }
+
     public function assessor()
     {
         return $this->belongsTo(User::class);
     }
-
 }

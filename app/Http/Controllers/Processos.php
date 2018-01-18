@@ -10,12 +10,11 @@ use App\Data\Models\Tribunal as ModelTribunal;
 use App\Data\Models\User as ModelUser;
 use App\Data\Repositories\Processos as ProcessosRepository;
 use App\Http\Requests\Processo as ProcessoRequest;
-use App\Data\Models\Processo as ProcessoModel;
 
-use Illuminate\Support\Facades\Input;
-
-class Processos extends Controller {
-    public function create() {
+class Processos extends Controller
+{
+    public function create()
+    {
         $juizes = ModelJuiz::pluck('nome', 'id');
         $juizes = $juizes->sort();
 
@@ -34,7 +33,8 @@ class Processos extends Controller {
         return view('processos.create', compact('juizes', 'tribunais', 'usuarios', 'meios', 'acoes'));
     }
 
-    public function store(ProcessoRequest $request, ProcessosRepository $repository) {
+    public function store(ProcessoRequest $request, ProcessosRepository $repository)
+    {
         $repository->createFromRequest($request);
 
         return $this->create();
@@ -43,6 +43,7 @@ class Processos extends Controller {
     public function detail(ProcessoRequest $request)
     {
         $processo = Processo::find($request->id);
-        return view('processos.detail',compact('processo'));
+
+        return view('processos.detail', compact('processo'));
     }
 }

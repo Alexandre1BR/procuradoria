@@ -1,4 +1,4 @@
-<form action="{{ route('home.index.index') }}">
+<form action="{{ route('home.index') }}">
     {{ csrf_field() }}
 
     <div class="form-group pull-right">

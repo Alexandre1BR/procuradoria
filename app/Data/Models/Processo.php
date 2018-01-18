@@ -33,6 +33,37 @@ class Processo extends BaseModel
 
     public function andamentos()
     {
-        $this->hasMany(Andamento::class);
+        return  $this->hasMany(Andamento::class);
     }
+
+    public function tribunal()
+    {
+        return $this->belongsTo(Tribunal::class);
+    }
+
+    public function acao()
+    {
+        return $this->belongsTo(Acao::class);
+    }
+    public function relator()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function juiz()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function procurador()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function estagiario()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function assessor()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

@@ -34,7 +34,7 @@
                     <div class="form-group col-md-4">
                         <label for="lotacao_id">Lotação</label>
                         <select name="lotacao_id" class="form-control" id="lotacao_id">
-                            <option selected="true" value="">Selecione</option>
+                            <option selected="selected" value="">Selecione</option>
                             @foreach ($tribunais as $key => $tribunal)
                                 <option value="{{ $key }}">{{ $tribunal }}</option>
                             @endforeach
@@ -43,7 +43,7 @@
                     <div class="form-group col-md-4">
                         <label for="tipo_juiz_id">Tipo Juíz</label>
                         <select name="tipo_juiz_id" class="form-control" id="tipo_juiz_id">
-                            <option selected="true" value="">Selecione</option>
+                            <option selected="selected" value="">Selecione</option>
                             @foreach ($tiposjuizes as $key => $tipojuiz)
                                 <option value="{{ $key }}">{{ $tipojuiz }}</option>
                             @endforeach

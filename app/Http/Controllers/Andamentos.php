@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Data\Models\Processo as ModelProcesso;
-use App\Data\Models\Tipo_Andamento as ModelTipoAndamento;
-use App\Data\Models\Tipo_Entrada as ModelTipoEntrada;
+use App\Data\Models\TipoAndamento as ModelTipoAndamento;
+use App\Data\Models\TipoEntrada as ModelTipoEntrada;
 use App\Data\Models\TipoPrazo as  ModelTipoPrazo;
 use App\Data\Repositories\Andamentos as AndamentosRepository;
 use App\Http\Requests\Andamento as AndamentoRequest;

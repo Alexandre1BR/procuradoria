@@ -11,7 +11,8 @@ use App\Data\Models\User as ModelUser;
 use App\Data\Repositories\Processos as ProcessosRepository;
 use App\Http\Requests\Processo as ProcessoRequest;
 
-class Processos extends Controller {
+class Processos extends Controller
+{
 
     public function create()
     {
@@ -40,13 +41,12 @@ class Processos extends Controller {
      */
     public function getProcessosData(): array
     {
-        return
-                [
-                'juizes' => ModelJuiz::orderBy('nome')->pluck('nome', 'id'),
+        return [
+                'juizes'    => ModelJuiz::orderBy('nome')->pluck('nome', 'id'),
                 'tribunais' => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
-                'usuarios' => ModelUser::orderBy('name')->pluck('name', 'id'),
-                'meios' => ModelMeio::orderBy('nome')->pluck('nome', 'id'),
-                'acoes' => ModelAcao::orderBy('nome')->pluck('nome', 'id'),
+                'usuarios'  => ModelUser::orderBy('name')->pluck('name', 'id'),
+                'meios'     => ModelMeio::orderBy('nome')->pluck('nome', 'id'),
+                'acoes'     => ModelAcao::orderBy('nome')->pluck('nome', 'id'),
         ];
     }
 }

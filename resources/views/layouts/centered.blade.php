@@ -83,5 +83,7 @@
                 </div>
             </div>
         </div>
+
+        @include('layouts.partials.google-analytics')
     </body>
 </html>

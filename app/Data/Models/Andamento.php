@@ -18,4 +18,24 @@ class Andamento extends BaseModel
         'data_entrega',
         'observacoes',
     ];
+
+    public function processo()
+    {
+        return $this->belongsTo(Processo::class);
+    }
+
+    public function tipo_andamento()
+    {
+        return $this->belongsTo(TipoAndamento::class);
+    }
+
+    public function tipo_entrada()
+    {
+        return $this->belongsTo(TipoEntrada::class);
+    }
+
+    public function tipo_prazo()
+    {
+        return $this->belongsTo(TipoPrazo::class);
+    }
 }

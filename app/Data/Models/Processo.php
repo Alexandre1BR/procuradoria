@@ -28,10 +28,10 @@ class Processo extends BaseModel
         'procurador_id',
         'estagiario_id',
         'assessor_id',
-        'tipo_meio',
+        'tipo_meio_id',
     ];
 
-    public function andamentos()
+    public function andamento()
     {
         return  $this->hasMany(Andamento::class);
     }
@@ -48,12 +48,12 @@ class Processo extends BaseModel
 
     public function relator()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Juiz::class);
     }
 
     public function juiz()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Juiz::class);
     }
 
     public function procurador()
@@ -69,5 +69,10 @@ class Processo extends BaseModel
     public function assessor()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tipo_meio()
+    {
+        return $this->belongsTo(Meio::class);
     }
 }

@@ -17,7 +17,7 @@ class Juiz extends BaseModel
         'tipo_juiz_id',
     ];
 
-    public function tipojuiz()
+    public function tipoJuiz()
     {
         return $this->belongsTo(TipoJuiz::class, 'tipo_juiz_id','id');
     }

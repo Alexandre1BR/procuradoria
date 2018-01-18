@@ -68,7 +68,7 @@ class Processo extends BaseModel
 
     public function assessor()
     {
-        return $this->belongsTo(User::class, 'acessor_id', 'id');
+        return $this->belongsTo(User::class, 'assessor_id', 'id');
     }
 
     public function tipo_meio()

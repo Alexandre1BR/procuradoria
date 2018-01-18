@@ -5,13 +5,10 @@ namespace App\Http\Controllers;
 use App\Data\Models\Tribunal;
 use App\Data\Repositories\Tribunais as TribunaisRepository;
 use App\Http\Requests\Tribunal as TribunalRequest;
-
-use App\Data\Models\Tribunal as ModelTribunal;
 use Illuminate\Http\Request;
 
 class Tribunais extends Controller
 {
-
     public function index(TribunaisRepository $tribunais, Request $request)
     {
         return view('tribunais.index')

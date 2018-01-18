@@ -13,7 +13,6 @@ use App\Http\Requests\Processo as ProcessoRequest;
 
 class Processos extends Controller
 {
-
     public function create()
     {
         return view(

@@ -19,7 +19,7 @@ class Home extends Controller
      * Show the application dashboard.
      *
      * @param ProcessosRepositorio $processos
-     * @param ProcessoRequest $request
+     * @param ProcessoRequest      $request
      *
      * @return \Illuminate\Http\Response
      */

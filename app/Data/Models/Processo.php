@@ -38,41 +38,41 @@ class Processo extends BaseModel
 
     public function tribunal()
     {
-        return $this->belongsTo(Tribunal::class, 'tribunal_id','id');
+        return $this->belongsTo(Tribunal::class);
     }
 
     public function acao()
     {
-        return $this->belongsTo(Acao::class,'acao_id','id');
+        return $this->belongsTo(Acao::class);
     }
 
     public function relator()
     {
-        return $this->belongsTo(Juiz::class, 'relator_id', 'id');
+        return $this->belongsTo(Juiz::class);
     }
 
     public function juiz()
     {
-        return $this->belongsTo(Juiz::class, 'juiz_id', 'id');
+        return $this->belongsTo(Juiz::class);
     }
 
     public function procurador()
     {
-        return $this->belongsTo(User::class, 'procurador_id', 'id');
+        return $this->belongsTo(User::class);
     }
 
     public function estagiario()
     {
-        return $this->belongsTo(User::class, 'estagiario_id', 'id');
+        return $this->belongsTo(User::class);
     }
 
     public function assessor()
     {
-        return $this->belongsTo(User::class, 'assessor_id', 'id');
+        return $this->belongsTo(User::class);
     }
 
     public function tipoMeio()
     {
-        return $this->belongsTo(Meio::class, 'tipo_meio_id','id');
+        return $this->belongsTo(Meio::class);
     }
 }

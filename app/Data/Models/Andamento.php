@@ -10,10 +10,12 @@ class Andamento extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'tipo_prazo_id',
         'processo_id',
+        'tipo_andamento_id',
+        'tipo_entrada_id',
+        'tipo_prazo_id',
         'data_prazo',
         'data_entrega',
-
+        'observacoes',
     ];
 }

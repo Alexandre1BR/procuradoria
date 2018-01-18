@@ -64,7 +64,7 @@
                     </div>
 
                     <div class="form-group col-md-4">
-                        <label for="procurador_id">Ação</label>
+                        <label for="acao_id">Ação</label>
                         <select name="acao_id" class="js-example-basic-single form-control" id="acao_id">
                             <option selected="selected" value="">Selecione</option>
                             @foreach ($acoes as $key => $acao)
@@ -76,8 +76,8 @@
                         <label for="relator_id">Relator</label>
                         <select name="relator_id" class="js-example-basic-single form-control" id="relator_id">
                             <option selected="selected" value="">Selecione</option>
-                            @foreach ($juizes as $key => $juiz)
-                                <option value="{{ $key }}">{{ $juiz }}</option>
+                            @foreach ($juizes as $key => $relator)
+                                <option value="{{ $key }}">{{ $relator }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -110,8 +110,8 @@
                         <label for="procurador_id">Procurador</label>
                         <select name="procurador_id" class="js-example-basic-single form-control" id="procurador_id">
                             <option selected="selected" value="">Selecione</option>
-                            @foreach ($usuarios as $key => $usuario)
-                                <option value="{{ $key }}">{{ $usuario }}</option>
+                            @foreach ($usuarios as $key => $procurador)
+                                <option value="{{ $key }}">{{ $procurador }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -120,8 +120,8 @@
                         <label for="estagiario_id">Estagiario</label>
                         <select name="estagiario_id" class="js-example-basic-single form-control" id="estagiario_id">
                             <option selected="selected" value="">Selecione</option>
-                            @foreach ($usuarios as $key => $usuario)
-                                <option value="{{ $key }}">{{ $usuario }}</option>
+                            @foreach ($usuarios as $key => $estagiario)
+                                <option value="{{ $key }}">{{ $estagiario }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -130,8 +130,8 @@
                         <label for="assessor_id">Assessor</label>
                         <select name="assessor_id" class="js-example-basic-single form-control" id="assessor_id">
                             <option selected="selected" value="">Selecione</option>
-                            @foreach ($usuarios as $key => $usuario)
-                                <option value="{{ $key }}">{{ $usuario }}</option>
+                            @foreach ($usuarios as $key => $assessor)
+                                <option value="{{ $key }}">{{ $assessor }}</option>
                             @endforeach
                         </select>
                     </div>

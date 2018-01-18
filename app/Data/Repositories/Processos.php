@@ -63,7 +63,7 @@ class Processos
             'merito'            => 'string',
             'liminar'           => 'string',
             'recurso'           => 'string',
-            'tipo_meio'         => 'string',
+            //'tipo_meio'         => 'string',
             'data_distribuicao' => 'date',
         ]);
 

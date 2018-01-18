@@ -71,7 +71,7 @@ class Processo extends BaseModel
         return $this->belongsTo(User::class, 'assessor_id', 'id');
     }
 
-    public function tipo_meio()
+    public function tipomeio()
     {
         return $this->belongsTo(Meio::class, 'tipo_meio_id','id');
     }

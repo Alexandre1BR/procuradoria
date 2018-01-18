@@ -57,7 +57,7 @@
             <td>{{ is_null($processo->procurador) ? : $processo->procurador->name }}</td>
             <td>{{ is_null($processo->estagiario) ? : $processo->estagiario->name }}</td>
             <td>{{ is_null($processo->assessor) ? : $processo->assessor->name }}</td>
-            <td>{{ $processo->tipo_meio->nome }}</td>
+            <td>{{ $processo->tipomeio->nome }}</td>
         </tr>
     @empty
         <p>Nenhum processo encontrado</p>

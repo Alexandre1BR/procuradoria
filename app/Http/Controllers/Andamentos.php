@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\Models\Andamento;
+
 use App\Data\Models\Processo as ModelProcesso;
+
 use App\Data\Models\TipoAndamento as ModelTipoAndamento;
 use App\Data\Models\TipoEntrada as ModelTipoEntrada;
 use App\Data\Models\TipoPrazo as  ModelTipoPrazo;
 use App\Data\Repositories\Andamentos as AndamentosRepository;
 use App\Http\Requests\Andamento as AndamentoRequest;
+use Illuminate\Http\Request;
 
 class Andamentos extends Controller
 {
@@ -20,7 +24,33 @@ class Andamentos extends Controller
     {
         $repository->createFromRequest($request);
 
-        return $this->create();
+        //return $this->index($repository,$request);
+        return redirect()->route('andamentos.index');
+    }
+
+    public function detail(Request $request)
+    {
+        $andamento = Andamento::find($request->id);
+
+
+        $processos = ModelProcesso::pluck('numero_judicial', 'id');
+
+        $tipoPrazos = ModelTipoPrazo::pluck('nome', 'id');
+
+        $tipoAndamentos = ModelTipoAndamento::pluck('nome', 'id');
+        //dd($tipoAndamentos);
+
+        $tipoEntradas = ModelTipoEntrada::pluck('nome', 'id');
+
+        return view('andamentos.detail', compact('andamento', 'processos', 'tipoAndamentos', 'tipoEntradas', 'tipoPrazos'));
+    }
+
+    public function index(AndamentosRepository $andamentos, Request $request)
+    {
+
+        return view('andamentos.index')
+            ->with('pesquisa', $request->get('pesquisa'))
+            ->with('andamentos', $andamentos->search($request));
     }
 
     public function getAndamentosData(): array

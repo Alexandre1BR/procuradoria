@@ -15,13 +15,17 @@
     <tr>
         <th>&nbsp;</th>
         <th>Nome</th>
+        <th>Tipo Juíz</th>
+        <th>Tribunal</th>
     </tr>
     </thead>
 
-    @forelse ($tribunais as $tribunal)
+    @forelse ($juizes as $juiz)
         <tr>
-            <td><a href="{{ action('Tribunais@detail', 'id=').$tribunal['id']}}">Detalhe Tribunal</a></td>
-            <td>{{ is_null($tribunal->nome) ? : $tribunal->nome }}</td>
+            <td><a href="{{ action('Juizes@detail', 'id=').$juiz['id']}}">Detalhe Juiz</a></td>
+            <td>{{ is_null($juiz->nome) ? : $juiz->nome }}</td>
+            <td>{{ is_null($juiz->tipojuiz->nome) ? : $juiz->tipojuiz->nome }}</td>
+            <td>{{ is_null($juiz->lotacao->nome) ? : $juiz->lotacao->nome }}</td>
         </tr>
     @empty
         <p>Nenhum tribunal encontrado</p>

@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Data\Models\Juiz;
 use App\Data\Models\TipoJuiz as ModelTipoJuiz;
 use App\Data\Models\Tribunal as ModelTribunal;
+use App\Data\Repositories\Juizes as JuizesRepository;
 use App\Http\Requests\Juiz as JuizRequest;
 use Illuminate\Http\Request;
-use App\Data\Repositories\Juizes as JuizesRepository;
 
 class Juizes extends Controller
 {
@@ -27,7 +27,7 @@ class Juizes extends Controller
     {
         return [
             'tiposjuizes' => ModelTipoJuiz::orderBy('nome')->pluck('nome', 'id'),
-            'tribunais' => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
+            'tribunais'   => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
         ];
     }
 

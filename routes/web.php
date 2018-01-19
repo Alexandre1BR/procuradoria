@@ -2,7 +2,7 @@
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth','app.users']], function() {
+Route::group(['middleware' => ['auth', 'app.users']], function () {
     require __DIR__.'/services/home.php';
 
     require __DIR__.'/services/processos.php';

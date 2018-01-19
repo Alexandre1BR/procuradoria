@@ -18,6 +18,10 @@ return [
         'passwords' => 'users',
     ],
 
+    'authentication' => env('APP_AUTHENTICATION'),
+
+    'authorization' => env('APP_AUTHORIZATION'),
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards

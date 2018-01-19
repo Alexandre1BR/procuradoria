@@ -2,7 +2,9 @@
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth','app.users']], function() {
+$middlewares = array_merge(['auth'], [config('APP_AUTHORIZE', true) ? 'app.users' : null]);
+
+Route::group(['middleware' => $middlewares], function() {
     require __DIR__.'/services/home.php';
 
     require __DIR__.'/services/processos.php';

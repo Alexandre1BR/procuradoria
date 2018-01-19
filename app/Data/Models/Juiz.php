@@ -22,7 +22,7 @@ class Juiz extends BaseModel
         return $this->belongsTo(TipoJuiz::class);
     }
 
-    public function tribunal()
+    public function lotacao()
     {
         return $this->belongsTo(Tribunal::class);
     }

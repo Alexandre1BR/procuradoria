@@ -16,14 +16,8 @@ class Processos extends Controller
     public function create()
     {
         return view(
-            'processos.create',
-            [
-                'juizes'    => ModelJuiz::orderBy('nome')->pluck('nome', 'id'),
-                'tribunais' => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
-                'usuarios'  => ModelUser::orderBy('name')->pluck('name', 'id'),
-                'meios'     => ModelMeio::orderBy('nome')->pluck('nome', 'id'),
-                'acoes'     => ModelAcao::orderBy('nome')->pluck('nome', 'id'),
-            ]
+                'processos.create',
+                $this->getProcessosData()
         );
     }
 
@@ -38,6 +32,20 @@ class Processos extends Controller
     {
         $processo = Processo::find($request->id);
 
-        return view('processos.detail', compact('processo'));
+        return view('processos.detail')->with(array_merge(['processo'=>$processo], $this->getProcessosData()));
+    }
+
+    /**
+     * @return array
+     */
+    public function getProcessosData(): array
+    {
+        return [
+                'juizes'    => ModelJuiz::orderBy('nome')->pluck('nome', 'id'),
+                'tribunais' => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
+                'usuarios'  => ModelUser::orderBy('name')->pluck('name', 'id'),
+                'meios'     => ModelMeio::orderBy('nome')->pluck('nome', 'id'),
+                'acoes'     => ModelAcao::orderBy('nome')->pluck('nome', 'id'),
+        ];
     }
 }

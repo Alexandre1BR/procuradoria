@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <label for="Processo">Processo</label>
                     <select name="processo_id" class="form-control" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo">
-                        <option selected="true" value="">Selecione</option>
+                        <option selected="selected" value="">Selecione</option>
                         @foreach ($processos as $key => $processo)
                             <option value="{{ $key }}" >{{ $processo }}</option>
                         @endforeach
@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label for="tipo_andamento_id">Tipo de Andamento</label>
                     <select name="tipo_andamento_id" class="form-control" id="tipo_andamento_id" aria-describedby="numero_judicialHelp" placeholder="Processo">
-                        <option selected="true" value="">Selecione</option>
+                        <option selected="selected" value="">Selecione</option>
                         @foreach ($tipoAndamentos as $key => $andamento)
                             <option value="{{ $key }}" >{{ $andamento }}</option>
                         @endforeach
@@ -49,7 +49,7 @@
                 <div class="form-group">
                     <label for="Processo">Tipo de Entrada</label>
                     <select name="tipo_entrada_id" class="form-control" id="tipo_entrada_id" aria-describedby="numero_judicialHelp" placeholder="Processo">
-                        <option selected="true" value="">Selecione</option>
+                        <option selected="selected" value="">Selecione</option>
                         @foreach ($tipoEntradas as $key => $processo)
                             <option value="{{ $key }}" >{{ $processo }}</option>
                         @endforeach
@@ -59,7 +59,7 @@
                 <div class="form-group">
                     <label for="Processo">Tipo Prazo</label>
                     <select name="tipo_prazo_id" class="form-control" id="tipo_prazo_id" aria-describedby="numero_judicialHelp" placeholder="tipo_prazo_id">
-                        <option selected="true" value="">Selecione</option>
+                        <option selected="selected" value="">Selecione</option>
                         @foreach ($tipoPrazos as $key => $prazo)
                             <option value="{{ $key }}" >{{ $prazo }}</option>
                         @endforeach

@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\Models\Tribunal;
 use App\Data\Repositories\Tribunais as TribunaisRepository;
 use App\Http\Requests\Tribunal as TribunalRequest;
+use Illuminate\Http\Request;
 
 class Tribunais extends Controller
 {
+    public function index(TribunaisRepository $tribunais, Request $request)
+    {
+        return view('tribunais.index')
+                ->with('pesquisa', $request->get('pesquisa'))
+                ->with('tribunais', $tribunais->search($request));
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -26,5 +35,12 @@ class Tribunais extends Controller
         $repository->createFromRequest($request);
 
         return $this->create();
+    }
+
+    public function detail(TribunalRequest $request)
+    {
+        $tribunal = Tribunal::find($request->id);
+
+        return view('tribunais.detail')->with(['tribunal'=>$tribunal]);
     }
 }

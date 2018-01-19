@@ -79,7 +79,7 @@
 
         <div class="form-group">
             <label for="data_entrega">Data Entrega</label>
-            <input  value="{{Carbon\Carbon::parse($andamento->data_prazo)->format('Y-m-d')}}" type="date" name="data_entrega" class="form-control" id="data_entrega" placeholder="Data Entrega" disabled="disabled">
+            <input  value="{{$andamento->data_entrega}}" type="date" name="data_entrega" class="form-control" id="data_entrega" placeholder="Data Entrega" disabled="disabled">
         </div>
         <div class="form-group">
             <label for="observacoes">Observação</label>
@@ -89,6 +89,7 @@
         <div class="form-group">
             <button type="submit" class="btn btn-success pull-right" disabled="true">Gravar</button>
         </div>
+    </div>
     </div>
 
 @endsection

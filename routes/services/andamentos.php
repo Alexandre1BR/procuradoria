@@ -11,5 +11,5 @@ Route::group(['prefix' => '/andamentos'], function () {
 
 //    Route::get('/{id}', 'Processos@show')->name('processos.show');
 
-    Route::get('/show', 'Andamentos@detail')->name('andamentos.show');
+    Route::get('/show', 'Andamentos@detail')->name('andamentos.detail');
 });

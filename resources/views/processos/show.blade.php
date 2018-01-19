@@ -98,8 +98,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="data_distribuicao">Data Distribuição</label>
-                            {{--<input value="{{$processo->data_distribuicao}}" type="date" name="data_distribuicao" class="form-control" id="data_distribuicao" readonly="readonly" />--}}
-                            <input value="{{Carbon\Carbon::parse($processo->data_distribuicao)->format('Y-m-d')}}" type="date" name="data_distribuicao" class="form-control" id="data_distribuicao" readonly="readonly" />
+                            <input value="{{$processo->data_distribuicao}}" type="date" name="data_distribuicao" class="form-control" id="data_distribuicao" readonly="readonly" />
+                            {{--<input value="{{Carbon\Carbon::parse($processo->data_distribuicao)->format('Y-m-d')}}" type="date" name="data_distribuicao" class="form-control" id="data_distribuicao" readonly="readonly" />--}}
                         </div>
                     </div>
 
@@ -215,7 +215,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="tipo_meio">Meio</label>
-                            <select name="tipo_meio" class="js-example-basic-single form-control" disabled="disabled" id="tipo_meio">
+                            <select name="tipo_meio_id" class="js-example-basic-single form-control" disabled="disabled" id="tipo_meio">
                                 @foreach ($meios as $key => $meio)
                                     @if($processo->tipoMeio->id == $key)
                                         <option value="{{ $key }}" selected="selected">{{ $meio }}</option>
@@ -281,6 +281,35 @@
                     </div>
                 </div>
             </form>
+            <br />
+                Andamentos
+            <div class="row">
+                <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+
+                    <tr>
+                        <th>Tipo de Andamento</th>
+                        <th>Tipo de Entrada</th>
+                        <th>Tipo de Prazo</th>
+                        <th>Data Prazo</th>
+                        <th>Observação</th>
+                    </tr>
+                    </thead>
+                    @forelse ($andamentos as $andamento)
+                        <tr>
+                            <td><a href="{{ route('andamentos.show',['id' => $andamento->id]) }}">{{ $andamento->processo->numero_judicial }}</a></td>
+                            <td>{{ $andamento->tipoAndamento->nome }}</td>
+                            <td>{{ $andamento->tipoEntrada->nome }}</td>
+                            <td>{{ $andamento->tipoPrazo->nome }}</td>
+                            <td>{{ $andamento->data_prazo }}</td>
+                            <td>{{ $andamento->observacoes }}</td>
+                        </tr>
+                    @empty
+                        <p>Nenhum processo encontrado</p>
+                    @endforelse
+                </table>
+            </div>
+
         </div>
     </div>
 @endsection

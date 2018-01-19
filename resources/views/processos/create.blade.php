@@ -137,8 +137,8 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                        <label for="tipo_meio">Meio</label>
-                        <select name="tipo_meio" class="js-example-basic-single form-control" id="tipo_meio">
+                        <label for="tipo_meio_id">Meio</label>
+                        <select name="tipo_meio_id" class="js-example-basic-single form-control" id="tipo_meio">
                             <option selected="selected" value="">Selecione</option>
                             @foreach ($meios as $key => $meio)
                                 <option value="{{ $key }}">{{ $meio }}</option>

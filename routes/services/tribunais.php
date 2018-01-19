@@ -8,6 +8,4 @@ Route::group(['prefix' => '/tribunais'], function () {
     Route::post('/', 'Tribunais@store')->name('tribunais.store');
 
     Route::get('/detail', 'Tribunais@detail')->name('tribunais.detail');
-
-
 });

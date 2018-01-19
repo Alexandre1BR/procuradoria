@@ -3,9 +3,8 @@
 namespace App\Data\Repositories;
 
 use App\Data\Models\Andamento;
-use App\Http\Requests\Andamento as AndamentoRequest;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class Andamentos
 {
@@ -20,7 +19,6 @@ class Andamentos
     {
         return $this->searchFromRequest($request->get('pesquisa'));
     }
-
 
     /**
      * @param null|string $search
@@ -48,9 +46,9 @@ class Andamentos
 //            'liminar'           => 'string',
 //            'recurso'           => 'string',
             //'tipo_meio'         => 'string',
-              'data_prazo' => 'date',
+              'data_prazo'   => 'date',
               'data_entrega' => 'date',
-              'observacoes' => 'date',
+              'observacoes'  => 'date',
         ]);
 
         $query = Andamento::query();
@@ -82,5 +80,4 @@ class Andamentos
 
         return true;
     }
-
 }

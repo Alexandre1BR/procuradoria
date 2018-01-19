@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Data\Models\Andamento;
-
 use App\Data\Models\Processo as ModelProcesso;
-
 use App\Data\Models\TipoAndamento as ModelTipoAndamento;
 use App\Data\Models\TipoEntrada as ModelTipoEntrada;
 use App\Data\Models\TipoPrazo as  ModelTipoPrazo;
@@ -32,7 +30,6 @@ class Andamentos extends Controller
     {
         $andamento = Andamento::find($request->id);
 
-
         $processos = ModelProcesso::pluck('numero_judicial', 'id');
 
         $tipoPrazos = ModelTipoPrazo::pluck('nome', 'id');
@@ -47,7 +44,6 @@ class Andamentos extends Controller
 
     public function index(AndamentosRepository $andamentos, Request $request)
     {
-
         return view('andamentos.index')
             ->with('pesquisa', $request->get('pesquisa'))
             ->with('andamentos', $andamentos->search($request));

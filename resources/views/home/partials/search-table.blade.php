@@ -13,6 +13,7 @@
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
     <tr>
+        <th>&nbsp;</th>
         <th>Número Judicial</th>
         <th>Número ALERJ</th>
         <th>Tribunal</th>
@@ -38,7 +39,8 @@
 
     @forelse ($processos as $processo)
         <tr>
-            <td><a href="{{ action('Processos@detail', 'id=').$processo['id']}}">Detalhe Processo</a></td>
+            <td><a href="{{ action('Processos@detail', 'id=').$processo['id']}}">Detalhe</a></td>
+            <td>{{ $processo->numero_judicial }}</td>
             <td>{{ $processo->numero_alerj }}</td>
             <td>{{ $processo->tribunal->nome }}</td>
             <td>{{ $processo->vara }}</td>

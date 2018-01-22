@@ -9,7 +9,13 @@
                 </div>
 
                 <div class="col-md-9">
-                    @include('layouts.partials.search-form', ['routeName' => 'andamentos.index'])
+                    @include(
+                        'layouts.partials.search-form',
+                        [
+                            'routeSearch' => 'andamentos.index',
+                            'routeCreate' => 'andamentos.create',
+                        ]
+                    )
                 </div>
             </div>
         </div>

@@ -13,7 +13,6 @@
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th>&nbsp;</th>
         <th>Nome</th>
         <th>Tipo Juíz</th>
         <th>Tribunal</th>
@@ -22,8 +21,7 @@
 
     @forelse ($juizes as $juiz)
         <tr>
-            <td><a href="{{ action('Juizes@detail', 'id=').$juiz['id']}}">Detalhe Juiz</a></td>
-            <td>{{ is_null($juiz->nome) ? : $juiz->nome }}</td>
+            <td><a href="{{ action('Juizes@detail', 'id=').$juiz['id']}}">{{ is_null($juiz->nome) ? : $juiz->nome }}</a></td>
             <td>{{ is_null($juiz->tipojuiz->nome) ? : $juiz->tipojuiz->nome }}</td>
             <td>{{ is_null($juiz->lotacao->nome) ? : $juiz->lotacao->nome }}</td>
         </tr>

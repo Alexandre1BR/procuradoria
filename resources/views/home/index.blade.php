@@ -21,7 +21,7 @@
                 </div>
             @endif
 
-            @include('processos.partials.processos-table')
+            @include('processos.partials.table')
         </div>
     </div>
 @endsection

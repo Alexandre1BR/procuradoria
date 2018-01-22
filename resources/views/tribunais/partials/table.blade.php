@@ -13,15 +13,13 @@
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th>&nbsp;</th>
         <th>Nome</th>
     </tr>
     </thead>
 
     @forelse ($tribunais as $tribunal)
         <tr>
-            <td><a href="{{ action('Tribunais@detail', 'id=').$tribunal['id']}}">Detalhe Tribunal</a></td>
-            <td>{{ is_null($tribunal->nome) ? : $tribunal->nome }}</td>
+            <td><a href="{{ action('Tribunais@detail', 'id=').$tribunal['id']}}">{{ is_null($tribunal->nome) ? : $tribunal->nome }}</a></td>
         </tr>
     @empty
         <p>Nenhum tribunal encontrado</p>

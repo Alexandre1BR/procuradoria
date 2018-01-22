@@ -2,6 +2,7 @@
 
 namespace App\Data\Repositories;
 
+<<<<<<< HEAD
 use App\Http\Requests\Tribunal as TribunalRequest;
 use App\Data\Models\Tribunal as TribunalModel;
 use Composer\Package\PackageInterface;
@@ -11,6 +12,36 @@ use Illuminate\Support\Facades\DB;
 class Tribunais extends Base {
 
     protected $model = TribunalModel::class;
+=======
+use App\Data\Models\Tribunal;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class Tribunais
+{
+    /**
+     * @param $request
+     *
+     * @return void
+     */
+    public function createFromRequest(Request $request)
+    {
+//        Tribunal::create($request->all());
+//
+        $id = $request->input('id');
+        if (is_numeric($id)) {
+            $tribunal = Tribunal::find($id);
+            dump($tribunal->nome);
+            $tribunal->nome = $request->nome;
+            $tribunal->save();
+        } else {
+            Tribunal::create($request->all());
+        }
+
+//
+        $request->session()->flash('status', 'Dado salvo com sucesso!');
+    }
+>>>>>>> upstream/master
 
     public function search(Request $request) {
         return $this->searchFromRequest($request->get('pesquisa'));

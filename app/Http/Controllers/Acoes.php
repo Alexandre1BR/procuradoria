@@ -16,4 +16,11 @@ class Acoes extends Controller
     {
         Acao::create($request->all());
     }
+
+    public function index(AcoesRepo $andamentos, Request $request)
+    {
+        return view('acoes.index')
+            ->with('pesquisa', $request->get('pesquisa'))
+            ->with('andamentos', $andamentos->search($request));
+    }
 }

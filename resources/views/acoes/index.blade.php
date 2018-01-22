@@ -8,11 +8,11 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-3">
-                                Processos
+                                Andamentos
                             </div>
 
                             <div class="col-md-9">
-                                @include('home.partials.search-form')
+                                @include('andamentos.partials.search-form')
                             </div>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                             </div>
                         @endif
 
-                        @include('processos.partials.processos-table')
+                        @include('andamentos.partials.search-table')
                     </div>
                 </div>
             </div>

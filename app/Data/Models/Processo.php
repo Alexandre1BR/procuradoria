@@ -7,6 +7,10 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 
 class Processo extends BaseModel implements HasPresenter
 {
+    protected $dates = [
+        'data_distribuicao',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -33,6 +37,11 @@ class Processo extends BaseModel implements HasPresenter
         'assessor_id',
         'tipo_meio_id',
     ];
+
+    public function getDataSemHoraAttribute()
+    {
+        return $this->data_distribuicao->format('d/m/Y');
+    }
 
     public function andamento()
     {

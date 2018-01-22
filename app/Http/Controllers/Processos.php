@@ -16,8 +16,8 @@ class Processos extends Controller
     public function create()
     {
         return view(
-                'processos.create',
-                $this->getProcessosData()
+            'processos.create',
+            $this->getProcessosData()
         );
     }
 
@@ -28,24 +28,26 @@ class Processos extends Controller
         return redirect()->route('home.index');
     }
 
-    public function detail(ProcessoRequest $request)
+    public function show($id)
     {
-        $processo = Processo::find($request->id);
+        $processo = Processo::find($id);
 
-        return view('processos.detail')->with(array_merge(['processo'=>$processo], $this->getProcessosData()));
+        return view('processos.show')
+            ->with('processo', $processo)
+            ->with($this->getProcessosData());
     }
 
     /**
      * @return array
      */
-    public function getProcessosData(): array
+    public function getProcessosData()
     {
         return [
-                'juizes'    => ModelJuiz::orderBy('nome')->pluck('nome', 'id'),
-                'tribunais' => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
-                'usuarios'  => ModelUser::orderBy('name')->pluck('name', 'id'),
-                'meios'     => ModelMeio::orderBy('nome')->pluck('nome', 'id'),
-                'acoes'     => ModelAcao::orderBy('nome')->pluck('nome', 'id'),
+            'juizes'    => ModelJuiz::orderBy('nome')->pluck('nome', 'id'),
+            'tribunais' => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
+            'usuarios'  => ModelUser::orderBy('name')->pluck('name', 'id'),
+            'meios'     => ModelMeio::orderBy('nome')->pluck('nome', 'id'),
+            'acoes'     => ModelAcao::orderBy('nome')->pluck('nome', 'id'),
         ];
     }
 }

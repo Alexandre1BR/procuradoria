@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: afdsilva
  * Date: 19/01/2018
- * Time: 16:28
+ * Time: 16:28.
  */
 
 namespace App\Data\Presenters;
@@ -19,5 +19,4 @@ class Processo extends BasePresenter
 
         return Carbon::createFromFormat('Y-m-d H:i:s', $data_distribuicao)->format('d/m/Y');
     }
-
 }

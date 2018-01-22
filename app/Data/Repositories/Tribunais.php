@@ -2,7 +2,6 @@
 
 namespace App\Data\Repositories;
 
-use App\Http\Requests\Tribunal as TribunalRequest;
 use App\Data\Models\Tribunal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,14 +18,12 @@ class Tribunais
 //        Tribunal::create($request->all());
 //
         $id = $request->input('id');
-        if (is_numeric($id))
-        {
+        if (is_numeric($id)) {
             $tribunal = Tribunal::find($id);
             dump($tribunal->nome);
             $tribunal->nome = $request->nome;
             $tribunal->save();
-        } else
-        {
+        } else {
             Tribunal::create($request->all());
         }
 

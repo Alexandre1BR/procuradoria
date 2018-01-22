@@ -9,6 +9,8 @@
 namespace App\Data\Repositories;
 
 
+use Illuminate\Http\Request;
+
 class Base {
 
     protected $model;

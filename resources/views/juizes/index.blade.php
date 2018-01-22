@@ -5,11 +5,17 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-3">
-                    Juizes
+                    <h3>Juizes</h3>
                 </div>
 
                 <div class="col-md-9">
-                    @include('juizes.partials.search-form')
+                    @include(
+                        'layouts.partials.search-form',
+                        [
+                            'routeSearch' => 'juizes.index',
+                            'routeCreate' => 'juizes.create',
+                        ]
+                    )
                 </div>
             </div>
         </div>
@@ -21,7 +27,7 @@
                 </div>
             @endif
 
-            @include('juizes.partials.search-table')
+            @include('juizes.partials.table')
         </div>
     </div>
 @endsection

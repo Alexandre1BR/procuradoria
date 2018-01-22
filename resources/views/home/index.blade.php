@@ -5,11 +5,17 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-3">
-                    Processos
+                    <h3>Processos</h3>
                 </div>
 
                 <div class="col-md-9">
-                    @include('home.partials.search-form')
+                    @include(
+                        'layouts.partials.search-form',
+                        [
+                            'routeSearch' => 'home.index',
+                            'routeCreate' => 'processos.create',
+                        ]
+                    )
                 </div>
             </div>
         </div>
@@ -21,7 +27,7 @@
                 </div>
             @endif
 
-            @include('processos.partials.processos-table')
+            @include('processos.partials.table')
         </div>
     </div>
 @endsection

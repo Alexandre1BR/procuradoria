@@ -1,18 +1,11 @@
-<form action="{{ route('home.index') }}">
+<form action="{{ route('home.index') }}" id="searchForm">
     {{ csrf_field() }}
 
     <div class="form-group pull-right">
         <div class="input-group">
-            <li><a href="{{ route('processos.create') }}">Processos</a></li>
-
             <input type="text" class="form-control" name="pesquisa" placeholder="Pesquisar" value="{{ $pesquisa }}">
-            <div class="input-group-addon"><i class="fa fa-search"></i></div>
 
-            <div class="form-group col-md-4">
-                <div class="row">
-                    <button type="submit" class="btn btn-primary">Pesquisar</button>
-                </div>
-            </div>
+            <div class="input-group-addon" onClick="javascript:document.getElementById('searchForm').submit();"><i class="fa fa-search"></i></div>
         </div>
     </div>
 </form>

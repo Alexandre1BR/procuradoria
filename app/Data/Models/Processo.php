@@ -8,7 +8,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 class Processo extends BaseModel implements HasPresenter
 {
     protected $dates = [
-        'data_distribuicao'
+        'data_distribuicao',
     ];
 
     /**

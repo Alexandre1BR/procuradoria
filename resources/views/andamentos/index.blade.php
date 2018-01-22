@@ -5,11 +5,11 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-3">
-                    Andamentos
+                    <h3>Andamentos</h3>
                 </div>
 
                 <div class="col-md-9">
-                    @include('andamentos.partials.search-form')
+                    @include('layouts.partials.search-form', ['routeName' => 'andamentos.index'])
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 </div>
             @endif
 
-            @include('andamentos.partials.search-table')
+            @include('andamentos.partials.table')
         </div>
     </div>
 @endsection

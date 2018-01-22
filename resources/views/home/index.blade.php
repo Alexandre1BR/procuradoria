@@ -5,11 +5,11 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-3">
-                    Processos
+                    <h3>Processos</h3>
                 </div>
 
                 <div class="col-md-9">
-                    @include('home.partials.search-form')
+                    @include('layouts.partials.search-form', ['routeName' => 'home.index'])
                 </div>
             </div>
         </div>

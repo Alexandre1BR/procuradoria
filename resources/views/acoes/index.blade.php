@@ -5,11 +5,11 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-3">
-                    Andamentos
+                    Ações
                 </div>
 
                 <div class="col-md-9">
-                    @include('andamentos.partials.search-form')
+                    @include('acoes.partials.search-form')
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 </div>
             @endif
 
-            @include('andamentos.partials.search-table')
+            @include('acoes.partials.search-table')
         </div>
     </div>
 @endsection

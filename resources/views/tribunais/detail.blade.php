@@ -12,9 +12,17 @@
             @endif
 
             <a href="{{ route('home.index') }}">Procuradoria</a>
+            <script>
+                function f_editar() {
+                    $('form *').removeAttr('readonly').removeAttr('disabled');
+                }
+
+            </script>
+            <a href="#" onclick="f_editar()"> editar </a>
 
             <form action="{{ route('tribunais.store') }}" method="POST">
                 {{ csrf_field() }}
+                <input name="id" type="text" value="{{$tribunal->id}}"/>
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -28,7 +36,7 @@
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nome</label>
-                    <input name="nome" value="{{$tribunal->nome}}" readonly="readonly" class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="nome" >
+                    <input name="nome" value="{{$tribunal->nome}}" readonly="readonly" class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="nome">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

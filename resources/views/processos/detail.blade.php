@@ -12,8 +12,16 @@
                 </div>
             @endif
 
+            <script>
+                function f_editar(){
+                    $('form *').removeAttr('readonly').removeAttr('disabled');
+                }
+
+            </script>
+            <a href="#" onclick="f_editar()"> editar </a>
             <form action="{{ route('processos.store') }}" method="POST">
                 {{ csrf_field() }}
+                <input name="id" type="text" value="{{$processo->id}}">
 
                 @if(session()->has('message'))
                     <div class="alert alert-success">
@@ -34,7 +42,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="numero_judicial">Número Judicial</label>
-                        <input value="{{$processo->numero_judicial}}" name="numero_judicial" class="form-control" readonly="true" id="numero_judicial"
+                        <input value="{{$processo->numero_judicial}}" name="numero_judicial" class="form-control" readonly="true"  id="numero_judicial"
                                placeholder="Número Judicial">
                     </div>
                     <div class="form-group col-md-6">
@@ -58,14 +66,14 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="vara">Vara</label>
-                        <input value="{{$processo->vara}}" name="vara" class="form-control" readonly="true" id="vara" placeholder="Digite a Vara">
+                        <input value="{{$processo->vara}}" name="vara" class="form-control" readonly="readonly" id="vara" placeholder="Digite a Vara">
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="data_distribuicao">Data Distribuição</label>
-                        <input value="{{$processo->data_distribuicao}}" name="data_distribuicao" type="date" class="form-control" readonly="true" id="data_distribuicao">
+                        <input value="{{$processo->data_distribuicao}}" type="date" name="data_distribuicao" class="form-control" id="data_distribuicao" readonly="readonly" />
                     </div>
 
                     <div class="form-group col-md-4">

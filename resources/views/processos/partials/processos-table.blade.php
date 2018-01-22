@@ -13,6 +13,7 @@
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
     <tr>
+        <th>&nbsp;</th>
         <th>Número Judicial</th>
         <th>Número ALERJ</th>
         <th>Tribunal</th>
@@ -29,7 +30,7 @@
     @forelse ($processos as $processo)
         <tr>
             <td>
-                <a href="{{ route('processos.show', ['id' => $processo['id']]) }}">{{ $processo->numero_judicial }}</a>
+                <a href="{{ route('processos.show', ['id' => $processo->id]) }}">{{ $processo->numero_judicial }}</a>
             </td>
             <td>{{ $processo->numero_alerj }}</td>
             <td>{{ $processo->tribunal->nome }}</td>
@@ -40,6 +41,8 @@
             <td>{{ is_null($processo->procurador) ? : $processo->procurador->name }}</td>
             <td>{{ is_null($processo->estagiario) ? : $processo->estagiario->name }}</td>
             <td>{{ is_null($processo->assessor) ? : $processo->assessor->name }}</td>
+            <td>{{ is_null($processo->tipoMeio) ? : $processo->tipoMeio->name }}</td>
+            <td>{{ $processo->tipoMeio->nome }}</td>
         </tr>
     @empty
         <p>Nenhum processo encontrado</p>

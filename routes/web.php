@@ -2,7 +2,7 @@
 
 Auth::routes();
 
-Route::group(['middleware' => makeAppRootRouteMiddlewares()], function() {
+Route::group(['middleware' => makeAppRootRouteMiddlewares()], function () {
     require __DIR__.'/services/home.php';
 
     require __DIR__.'/services/processos.php';

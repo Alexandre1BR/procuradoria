@@ -25,7 +25,7 @@ class Processos extends Controller
     {
         $repository->createFromRequest($request);
 
-        return $this->create();
+        return redirect()->route('home.index');
     }
 
     public function show($id)

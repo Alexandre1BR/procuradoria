@@ -184,7 +184,7 @@
 
                 <div class="form-group col-md-4">
                     <div class="row">
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </form>

@@ -26,6 +26,6 @@
             <td>{{ is_null($juiz->tipojuiz->nome) ? : $juiz->tipojuiz->nome }}</td>
         </tr>
     @empty
-        <p>Nenhum tribunal encontrado</p>
+        <p>Nenhum juíz encontrado</p>
     @endforelse
 </table>

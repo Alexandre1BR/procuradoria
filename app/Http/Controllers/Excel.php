@@ -43,7 +43,7 @@ class Excel extends Controller
                             app(Tribunais::class)
                                     ->firstOrCreate(['nome' => trim($tribunal) ?: "N/C"]);
                     $acao =
-                            app(Acao)
+                            app(Acao);
 
                     $insert[] =
                             [

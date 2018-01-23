@@ -166,7 +166,6 @@ return [
         Laravel\Scout\ScoutServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
-
         /*
          * Package Service Providers...
          */
@@ -230,7 +229,6 @@ return [
         'View'          => Illuminate\Support\Facades\View::class,
         'AutoPresenter' => McCool\LaravelAutoPresenter\Facades\AutoPresenter::class,
         'Excel'         => Maatwebsite\Excel\Facades\Excel::class,
-
 
     ],
 

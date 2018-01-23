@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: afdsilva
  * Date: 23/01/2018
- * Time: 11:11
+ * Time: 11:11.
  */
 
 namespace App\Http\Controllers;
@@ -27,6 +27,7 @@ class Excel extends Controller
         if (Input::hasFile('import_file')) {
             $data = Cache::remember('importExcel', 30, function () {
                 $path = Input::file('import_file')->getRealPath();
+
                 return \Maatwebsite\Excel\Facades\Excel::load($path, function ($reader) {
                 })->get();
             });
@@ -40,7 +41,7 @@ class Excel extends Controller
 
                     $tribunal =
                             app(Tribunais::class)
-                                    ->firstOrCreate(['nome' => trim($tribunal) ?: "N/C"]);
+                                    ->firstOrCreate(['nome' => trim($tribunal) ?: 'N/C']);
                     $acao =
                             app(\App\Data\Repositories\Acoes::class)
                                 ->firstOrCreate(['abreviacao' => trim($value[$key]->acao)]);
@@ -75,17 +76,20 @@ class Excel extends Controller
                 }
             }
         }
+
         return back();
     }
 
     /**
      * @param $value
      * @param $key
+     *
      * @return array
      */
     public function split($value, $key): array
     {
         $split = explode('-', $value[$key]->origem);
+
         return [$split[0], isset($split[1]) ? $split[1] : null];
     }
 }

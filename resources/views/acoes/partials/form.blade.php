@@ -1,5 +1,5 @@
 <form action="{{ route('andamentos.index') }}">
-
+    
     <div class="form-group pull-right">
         <div class="input-group">
             <li><a href="{{ route('andamentos.create') }}">Andamentos - Create</a></li>

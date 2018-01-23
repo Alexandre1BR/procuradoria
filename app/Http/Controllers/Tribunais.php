@@ -35,7 +35,7 @@ class Tribunais extends Controller
         $repository->createFromRequest($request);
 
 //        return $this->create();
-          return redirect()->route('tribunais.index');
+        return redirect()->route('tribunais.index');
     }
 
     public function detail(TribunalRequest $request)

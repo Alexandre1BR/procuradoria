@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class Andamentos extends Base
 {
-
     protected $model = Andamento::class;
 
     public function search(Request $request)

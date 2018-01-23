@@ -3,16 +3,15 @@
  * Created by PhpStorm.
  * User: afdsilva
  * Date: 22/01/2018
- * Time: 12:31
+ * Time: 12:31.
  */
 
 namespace App\Data\Repositories;
 
-
 use Illuminate\Http\Request;
 
-class Base {
-
+class Base
+{
     protected $model;
 
     /**
@@ -20,8 +19,8 @@ class Base {
      *
      * @return void
      */
-    public function createFromRequest(Request $request) {
-
+    public function createFromRequest(Request $request)
+    {
         is_null($id = $request->input('id'))
                 ? $tribunal = new $this->model()
                 : $tribunal = $this->model::find($id);
@@ -32,5 +31,4 @@ class Base {
 
         $request->session()->flash('status', 'Dado salvo com sucesso!');
     }
-
 }

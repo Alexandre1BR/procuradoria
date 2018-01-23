@@ -3,7 +3,6 @@
 namespace App\Data\Repositories;
 
 use App\Data\Models\Acao;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -35,7 +34,7 @@ class Acoes
             });
 
         $columns = collect([
-              'nome'   => 'string',
+              'nome'       => 'string',
               'abreviacao' => 'string',
         ]);
 
@@ -57,5 +56,4 @@ class Acoes
 
         return $query->get();
     }
-
 }

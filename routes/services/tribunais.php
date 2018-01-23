@@ -8,6 +8,6 @@ Route::group(['prefix' => '/tribunais'], function () {
     Route::get('/create', 'Tribunais@create')->name('tribunais.create');
     Route::post('/', 'Tribunais@store')->name('tribunais.store');
 
-    //Detail
-    Route::get('/detail', 'Tribunais@detail')->name('tribunais.detail');
+    //show
+    Route::get('/show', 'Tribunais@detail')->name('tribunais.show');
 });

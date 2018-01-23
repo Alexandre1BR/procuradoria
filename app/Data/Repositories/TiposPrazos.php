@@ -3,12 +3,8 @@
 namespace App\Data\Repositories;
 
 use App\Data\Models\TipoPrazo;
-use Illuminate\Http\Request;
 
-class TiposPrazos
+class TiposPrazos extends Base
 {
-    public function createFromRequest(Request $request)
-    {
-        return TipoPrazo::create($request->all());
-    }
+    protected $model = TipoPrazo::class;
 }

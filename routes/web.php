@@ -18,6 +18,8 @@ Route::group(['middleware' => makeAppRootRouteMiddlewares()], function () {
     require __DIR__.'/services/prazos.php';
 
     require __DIR__.'/services/juizes.php';
+
+    require __DIR__.'/services/excel.php';
 });
 
 /**

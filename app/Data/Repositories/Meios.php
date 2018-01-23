@@ -3,12 +3,8 @@
 namespace App\Data\Repositories;
 
 use App\Data\Models\Meio as Meio;
-use Illuminate\Http\Request;
 
-class Meios
+class Meios extends Base
 {
-    public function createFromRequest(Request $request)
-    {
-        return Meio::create($request->all());
-    }
+    protected $model = Meio::class;
 }

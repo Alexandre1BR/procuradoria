@@ -3,12 +3,8 @@
 namespace App\Data\Repositories;
 
 use App\Data\Models\TipoAndamento as TipoAndamento;
-use Illuminate\Http\Request;
 
-class TiposAndamentos
+class TiposAndamentos extends Base
 {
-    public function createFromRequest(Request $request)
-    {
-        return TipoAndamento::create($request->all());
-    }
+    protected $model = TipoAndamento::class;
 }

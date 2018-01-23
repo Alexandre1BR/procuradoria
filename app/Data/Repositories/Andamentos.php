@@ -6,14 +6,9 @@ use App\Data\Models\Andamento;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class Andamentos
+class Andamentos extends Base
 {
-    public function createFromRequest($request)
-    {
-        Andamento::create($request->all());
-
-        $request->session()->flash('status', 'Dado salvo com sucesso!');
-    }
+    protected $model = Andamento::class;
 
     public function search(Request $request)
     {

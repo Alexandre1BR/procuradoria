@@ -39,7 +39,7 @@ class Andamentos extends Controller
 
         $tipoEntradas = ModelTipoEntrada::pluck('nome', 'id');
 
-        return view('andamentos.detail', compact('andamento', 'processos', 'tipoAndamentos', 'tipoEntradas', 'tipoPrazos'));
+        return view('andamentos.show', compact('andamento', 'processos', 'tipoAndamentos', 'tipoEntradas', 'tipoPrazos'));
     }
 
     public function index(AndamentosRepository $andamentos, Request $request)

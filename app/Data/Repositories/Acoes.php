@@ -6,14 +6,9 @@ use App\Data\Models\Acao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class Acoes
+class Acoes extends Base
 {
-    public function createFromRequest($request)
-    {
-        Acao::create($request->all());
-
-        $request->session()->flash('status', 'Dado salvo com sucesso!');
-    }
+    protected $model = Acao::class;
 
     public function search(Request $request)
     {

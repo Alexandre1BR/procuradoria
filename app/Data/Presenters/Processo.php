@@ -17,6 +17,6 @@ class Processo extends BasePresenter
     {
         $data_distribuicao = $this->wrappedObject->data_distribuicao;
 
-        return Carbon::createFromFormat('Y-m-d H:i:s', $data_distribuicao)->format('d/m/Y');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $data_distribuicao)->format('Y-m-d');
     }
 }

@@ -2,7 +2,7 @@
 
 function main()
 {
-    echo "php-cs-fixer pre commit hook START"
+    echo "---- START - php-cs-fixer pre commit hook"
 
     environmentInit
 
@@ -10,7 +10,7 @@ function main()
 
     runPHPCSFixer
 
-    echo "php-cs-fixer pre commit hook FINISH"
+    echo "---- END - php-cs-fixer pre commit hook"
 }
 
 function environmentInit()

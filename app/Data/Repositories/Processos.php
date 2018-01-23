@@ -5,7 +5,6 @@ namespace App\Data\Repositories;
 use App\Data\Models\Processo;
 use App\Http\Requests\Processo as ProcessoRequest;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class Processos extends Base

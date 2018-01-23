@@ -3,7 +3,6 @@
 namespace App\Data\Repositories;
 
 use App\Data\Models\Tribunal;
-
 use App\Data\Models\Tribunal as TribunalModel;
 use Composer\Package\PackageInterface;
 use Illuminate\Http\Request;

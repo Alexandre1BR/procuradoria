@@ -31,6 +31,7 @@ class Base
         $model->fill($request->all());
         //dd($model);
         $model->save();
+
         return $model;
     }
 

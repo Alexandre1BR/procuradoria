@@ -12,7 +12,6 @@ use App\Data\Repositories\Tribunais;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Input;
 
-
 class Excel extends Controller
 {
     public function importExport()
@@ -25,25 +24,26 @@ class Excel extends Controller
      */
     public function importExcel()
     {
-
-        if(Input::hasFile('import_file')){
-            $data = Cache::remember('importExcel', 10, function (){
+        if (Input::hasFile('import_file')) {
+            $data = Cache::remember('importExcel', 30, function () {
                 $path = Input::file('import_file')->getRealPath();
-                return \Maatwebsite\Excel\Facades\Excel::load($path, function($reader) {})->get();
+                return \Maatwebsite\Excel\Facades\Excel::load($path, function ($reader) {
+                })->get();
             });
 
-            if(!empty($data) && $data->count()) {
-
+            if (!empty($data) && $data->count()) {
                 foreach ($data as $key => $value) {
 //                    dd($value[$key]);
 //                    dump($value[$key]->origem, $key);
-                    list($tribunal, $vara) = explode('-', $value[$key]->origem);
+
+                    list($tribunal, $vara) = $this->split($value, $key);
 
                     $tribunal =
                             app(Tribunais::class)
                                     ->firstOrCreate(['nome' => trim($tribunal) ?: "N/C"]);
                     $acao =
-                            app(Acao);
+                            app(\App\Data\Repositories\Acoes::class)
+                                ->firstOrCreate(['abreviacao' => trim($value[$key]->acao)]);
 
                     $insert[] =
                             [
@@ -52,7 +52,7 @@ class Excel extends Controller
                                 'apensos_obs'       => $value[$key]->apensos,
                                 'origem_id'         => $tribunal->id,
                                 'vara'              => trim($vara),
-                                'acao_id'           => $value[$key]->acao,
+                                'acao_id'           => $acao->id,
                                 'relator_id',
 
                                 'juiz_id',
@@ -69,12 +69,23 @@ class Excel extends Controller
                             ];
                     dd($insert);
                 }
-                if(!empty($insert)){
+                if (!empty($insert)) {
                     DB::table('items')->insert($insert);
                     dd('Insert Record successfully.');
                 }
             }
         }
         return back();
+    }
+
+    /**
+     * @param $value
+     * @param $key
+     * @return array
+     */
+    public function split($value, $key): array
+    {
+        $split = explode('-', $value[$key]->origem);
+        return [$split[0], isset($split[1]) ? $split[1] : null];
     }
 }

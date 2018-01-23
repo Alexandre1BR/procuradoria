@@ -9,6 +9,7 @@
 namespace App\Data\Repositories;
 
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class Base {
@@ -18,19 +19,30 @@ class Base {
     /**
      * @param $request
      *
-     * @return void
+     * @return object
      */
-    public function createFromRequest(Request $request) {
-
-        is_null($id = $request->input('id'))
-                ? $tribunal = new $this->model()
-                : $tribunal = $this->model::find($id);
-
-        $tribunal->fill($request->all());
-
-        $tribunal->save();
+    public function createFromRequest(Request $request)
+    {
+        $model = $this->create($request->all());
 
         $request->session()->flash('status', 'Dado salvo com sucesso!');
+
+        return $model;
     }
 
+    public function create($data) {
+        $model = is_null($id = $data['id'])
+                ? new $this->model()
+                : $this->model::find($id);
+
+        $model->fill($data);
+
+        $model->save();
+
+        return $model;
+    }
+
+    public function firstOrCreate(array $search, array $attributes = []) {
+        return $this->model::firstOrCreate($search, $attributes);
+    }
 }

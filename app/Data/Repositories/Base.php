@@ -32,7 +32,8 @@ class Base
         return $model;
     }
 
-    public function create($data) {
+    public function create($data)
+    {
         $model = is_null($id = $data['id'])
                 ? new $this->model()
                 : $this->model::find($id);
@@ -44,7 +45,8 @@ class Base
         return $model;
     }
 
-    public function firstOrCreate(array $search, array $attributes = []) {
+    public function firstOrCreate(array $search, array $attributes = [])
+    {
         return $this->model::firstOrCreate($search, $attributes);
     }
 }

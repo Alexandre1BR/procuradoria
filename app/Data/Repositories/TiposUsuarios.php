@@ -7,5 +7,4 @@ use App\Data\Models\TipoUsuario;
 class TiposUsuarios extends Base
 {
     protected $model = TipoUsuario::class;
-
 }

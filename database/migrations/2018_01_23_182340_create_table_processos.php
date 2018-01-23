@@ -14,7 +14,6 @@ class CreateTableProcessos extends Migration
     public function up()
     {
         Schema::table('processos', function (Blueprint $table) {
-
             $table->text('numero_alerj')->change();
 
             $table->integer('tribunal_id')->nullable()->unsigned()->change();
@@ -33,7 +32,6 @@ class CreateTableProcessos extends Migration
             $table->integer('procurador_id')->nullable()->unsigned()->change();
             $table->integer('estagiario_id')->nullable()->unsigned()->change();
             $table->integer('assessor_id')->nullable()->unsigned()->change();
-
         });
     }
 

@@ -3,33 +3,14 @@
 namespace App\Data\Repositories;
 
 use App\Data\Models\Tribunal;
+use App\Data\Models\Tribunal as TribunalModel;
+use Composer\Package\PackageInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class Tribunais
+class Tribunais extends Base
 {
-    /**
-     * @param $request
-     *
-     * @return void
-     */
-    public function createFromRequest(Request $request)
-    {
-//        Tribunal::create($request->all());
-//
-        $id = $request->input('id');
-        if (is_numeric($id)) {
-            $tribunal = Tribunal::find($id);
-            dump($tribunal->nome);
-            $tribunal->nome = $request->nome;
-            $tribunal->save();
-        } else {
-            Tribunal::create($request->all());
-        }
-
-//
-        $request->session()->flash('status', 'Dado salvo com sucesso!');
-    }
+    protected $model = TribunalModel::class;
 
     public function search(Request $request)
     {
@@ -70,5 +51,42 @@ class Tribunais
 //        \DB::listen(function($query) { dump($query->sql); dump($query->bindings); });
 
         return $query->get();
+    }
+
+    public function hasPackage(PackageInterface $package)
+    {
+        // TODO: Implement hasPackage() method.
+    }
+
+    public function findPackage($name, $constraint)
+    {
+        // TODO: Implement findPackage() method.
+    }
+
+    public function findPackages($name, $constraint = null)
+    {
+        // TODO: Implement findPackages() method.
+    }
+
+    public function getPackages()
+    {
+        // TODO: Implement getPackages() method.
+    }
+
+    /**
+     * Count elements of an object.
+     *
+     * @link http://php.net/manual/en/countable.count.php
+     *
+     * @return int The custom count as an integer.
+     *             </p>
+     *             <p>
+     *             The return value is cast to an integer.
+     *
+     * @since 5.1.0
+     */
+    public function count()
+    {
+        // TODO: Implement count() method.
     }
 }

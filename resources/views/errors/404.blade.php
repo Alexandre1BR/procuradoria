@@ -1,5 +1,5 @@
-@extends('layouts.centered')
+@extends('layouts.app')
 
-@section('contents')
-    ERRO 404 - Página não encontrada
+@section('content')
+    <h1 class="text-center">ERRO 404 - Página não encontrada</h1>
 @stop

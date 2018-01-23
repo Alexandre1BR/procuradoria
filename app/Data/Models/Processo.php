@@ -2,8 +2,15 @@
 
 namespace App\Data\Models;
 
-class Processo extends BaseModel
+use App\Data\Presenters\Processo as ProcessoPresenter;
+use McCool\LaravelAutoPresenter\HasPresenter;
+
+class Processo extends BaseModel implements HasPresenter
 {
+    protected $dates = [
+        'data_distribuicao',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -28,11 +35,61 @@ class Processo extends BaseModel
         'procurador_id',
         'estagiario_id',
         'assessor_id',
-        'tipo_meio',
+        'tipo_meio_id',
     ];
 
-    public function andamentos()
+    public function getDataSemHoraAttribute()
     {
-        $this->hasMany(Andamento::class);
+        return $this->data_distribuicao->format('d/m/Y');
+    }
+
+    public function andamento()
+    {
+        return  $this->hasMany(Andamento::class);
+    }
+
+    public function tribunal()
+    {
+        return $this->belongsTo(Tribunal::class);
+    }
+
+    public function acao()
+    {
+        return $this->belongsTo(Acao::class);
+    }
+
+    public function relator()
+    {
+        return $this->belongsTo(Juiz::class);
+    }
+
+    public function juiz()
+    {
+        return $this->belongsTo(Juiz::class);
+    }
+
+    public function procurador()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function estagiario()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function assessor()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function tipoMeio()
+    {
+        return $this->belongsTo(Meio::class);
+    }
+
+    public function getPresenterClass()
+    {
+        return ProcessoPresenter::class;
     }
 }

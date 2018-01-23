@@ -1,5 +1,5 @@
-@extends('layouts.centered')
+@extends('layouts.app')
 
-@section('contents')
-    Você não está autorizado a usar este sistema
+@section('content')
+    <h1 class="text-center">Você não está autorizado a usar este sistema</h1>
 @stop

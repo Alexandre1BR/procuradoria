@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * @var Authentication
@@ -88,7 +88,8 @@ class LoginController extends Controller
     protected function attemptLogin(Request $request)
     {
         return $this->authentication->attempt(
-            $this->credentials($request), $request->filled('remember')
+            $this->credentials($request),
+            $request->filled('remember')
         );
     }
 }

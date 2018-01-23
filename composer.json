@@ -11,6 +11,7 @@
         "laravel/framework": "5.5.*",
         "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
+        "mccool/laravel-auto-presenter": "^6.2",
         "venturecraft/revisionable": "^1.28"
     },
     "require-dev": {

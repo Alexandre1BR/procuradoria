@@ -12,11 +12,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -47,10 +49,10 @@
             </div>
         </nav>
 
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    @if ($errors->any())
+                    @if (isset($errors) && $errors->any())
                         <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
@@ -62,9 +64,11 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-xs-12">
-                    @yield('content')
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        @yield('content')
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,5 +76,13 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+
+    @include('layouts.partials.google-analytics')
 </body>
 </html>

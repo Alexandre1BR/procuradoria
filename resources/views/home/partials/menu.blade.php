@@ -5,12 +5,13 @@
     </a>
 
     <ul class="dropdown-menu">
-        <li><a href="{{ route('processos.create') }}">Processos</a></li>
-        <li><a href="{{ route('andamentos.create') }}">Andamentos</a></li>
-        <li><a href="{{ route('tribunais.create') }}">Tribunais</a></li>
+        <li><a href="{{ route('home.index') }}">Processos</a></li>
+        <li><a href="{{ route('andamentos.index') }}">Andamentos</a></li>
+        <li><a href="{{ route('tribunais.index') }}">Tribunais</a></li>
+        <li><a href="{{ route('juizes.index') }}">Juizes</a></li>
+        <li><a href="{{ route('acoes.index') }}">Acoes</a></li>
     </ul>
 </li>
-
 @guest
     <li><a href="{{ route('login') }}">Login</a></li>
     {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
@@ -23,9 +24,9 @@
             <ul class="dropdown-menu">
                 <li>
                     <a href="{{ route('logout') }}"
-                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                        Logout
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                    >
+                       Sair
                     </a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

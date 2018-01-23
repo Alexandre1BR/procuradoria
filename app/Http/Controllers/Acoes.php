@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Data\Models\Acao;
-use App\Http\Requests\Acao as AcaoRequest;
 use App\Data\Repositories\Acoes as AcoesRepository;
+use App\Http\Requests\Acao as AcaoRequest;
 use Illuminate\Http\Request;
 
 class Acoes extends Controller

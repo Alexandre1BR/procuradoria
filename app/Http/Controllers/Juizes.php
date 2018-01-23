@@ -26,18 +26,16 @@ class Juizes extends Controller
     public function getJuizesData(): array
     {
         return [
-            'tiposjuizes' => ModelTipoJuiz::orderBy('nome')->pluck('nome', 'id'),
+            'tiposJuizes' => ModelTipoJuiz::orderBy('nome')->pluck('nome', 'id'),
             'tribunais'   => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
         ];
     }
 
     public function detail(JuizRequest $request)
     {
-        //dd($request);
-
         $juiz = Juiz::find($request->id);
 
-        return view('juizes.detail')->with(['juiz'=>$juiz]);
+        return view('juizes.show')->with(['juiz'=>$juiz])->with($this->getJuizesData());
     }
 
     public function index(JuizesRepository $juizes, Request $request)

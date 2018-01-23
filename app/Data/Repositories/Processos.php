@@ -8,19 +8,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class Processos
+class Processos extends Base
 {
-    /**
-     * @param Request $request
-     *
-     * @return void
-     */
-    public function createFromRequest(Request $request)
-    {
-        Processo::create($request->all());
-
-        $request->session()->flash('status', 'Dado salvo com sucesso!');
-    }
+    protected $model = Processo::class;
 
     private function isDate($item)
     {
@@ -83,6 +73,6 @@ class Processos
 
 //        \DB::listen(function($query) { dump($query->sql); dump($query->bindings); });
 
-        return $query->get();
+        return $query->orderBy("updated_at","desc")->get();
     }
 }

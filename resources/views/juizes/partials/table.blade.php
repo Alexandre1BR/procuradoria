@@ -14,16 +14,16 @@
     <thead>
     <tr>
         <th>Nome</th>
-        <th>Tipo Juíz</th>
         <th>Tribunal</th>
+        <th>Tipo Juiz</th>
     </tr>
     </thead>
 
     @forelse ($juizes as $juiz)
         <tr>
             <td><a href="{{ action('Juizes@detail', 'id=').$juiz['id']}}">{{ is_null($juiz->nome) ? : $juiz->nome }}</a></td>
-            <td>{{ is_null($juiz->tipojuiz->nome) ? : $juiz->tipojuiz->nome }}</td>
             <td>{{ is_null($juiz->lotacao->nome) ? : $juiz->lotacao->nome }}</td>
+            <td>{{ is_null($juiz->tipojuiz->nome) ? : $juiz->tipojuiz->nome }}</td>
         </tr>
     @empty
         <p>Nenhum tribunal encontrado</p>

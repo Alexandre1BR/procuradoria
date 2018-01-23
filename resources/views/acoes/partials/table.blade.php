@@ -13,27 +13,19 @@
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th>Processo</th>
-        <th>Tipo de Andamento</th>
-        <th>Tipo de Entrada</th>
-        <th>Tipo de Prazo</th>
-        <th>Data Prazo</th>
-        <th>Data de Entrega</th>
-        <th>Observação</th>
+        <th> </th>
+        <th>Nome</th>
+        <th>Abrevição</th>
     </tr>
     </thead>
 
-    @forelse ($andamentos as $andamento)
+    @forelse ($acoes as $acao)
         <tr>
-            <td><a href="{{ action('Andamentos@detail', 'id=').$andamento['id']}}">{{ $andamento->processo->numero_judicial }}</a></td>
-            <td>{{ $andamento->tipoAndamento->nome }}</td>
-            <td>{{ $andamento->tipoEntrada->nome }}</td>
-            <td>{{ $andamento->tipoPrazo->nome }}</td>
-            <td>{{ $andamento->data_prazo }}</td>
-            <td>{{ $andamento->data_entrega }}</td>
-            <td>{{ $andamento->observacoes }}</td>
+            <td><a href="{{ action('Acoes@detail', 'id=').$acao['id']}}">Detalhes</a></td>
+            <td>{{ $acao->nome }}</td>
+            <td>{{ $acao->abreviacao }}</td>
         </tr>
     @empty
-        <p>Nenhum processo encontrado</p>
+        <p>Nenhuma ação encontrada</p>
     @endforelse
 </table>

@@ -2,13 +2,14 @@
 
 namespace App\Data\Repositories;
 
-use App\Data\Models\Andamento;
+use App\Data\Models\Andamento as AndamentoModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class Andamentos extends Base
 {
-    protected $model = Andamento::class;
+
+    protected $model = AndamentoModel::class;
 
     public function search(Request $request)
     {
@@ -43,10 +44,10 @@ class Andamentos extends Base
             //'tipo_meio'         => 'string',
               'data_prazo'   => 'date',
               'data_entrega' => 'date',
-              'observacoes'  => 'date',
+              'observacoes'  => 'string',
         ]);
 
-        $query = Andamento::query();
+        $query = AndamentoModel::query();
 
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {

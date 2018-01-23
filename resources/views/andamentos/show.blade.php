@@ -4,8 +4,21 @@
     <div class="panel panel-default">
         <div class="panel-heading">Dashboard</div>
 
+        <script>
+            function f_editar(){
+
+                $('form *').removeAttr('readonly').removeAttr('disabled');
+            }
+        </script>
+
         <div class="form-group">
-            <label for="Processo">Processo</label>
+            <label for="Processo">Andamentos</label>
+            <div class="col-md-9">
+                <a href="#" class="btn btn-primary pull-right" onclick="f_editar()">editar</a>
+            </div>
+            <form action="{{ route('andamentos.store') }}" method="POST">
+                {{ csrf_field() }}
+                <input name="id" type="hidden" value="{{$andamento->id}}">
             <select name="processo_id" class="form-control" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo" disabled="disabled">
                 @foreach ($processos as $key => $processo)
                     @if($key == $andamento->processo->id)
@@ -15,7 +28,7 @@
                     @endif
                 @endforeach
             </select>
-        </div>
+
 
         <div class="form-group">
             <label for="tipo_andamento_id">Tipo de Andamento</label>
@@ -60,18 +73,21 @@
         </div>
         <div class="form-group">
             <label for="data_prazo">Data Prazo</label>
-
-
-            <input  value="{{$andamento->data_prazo}}"  type="date"  name="data_prazo" class="form-control" id="data_prazo" placeholder="Data Prazo" readonly="readonly" >
+            {{--<input  value="{{$andamento->data_prazo}}"  type="date"  name="data_prazo" class="form-control" id="data_prazo" placeholder="Data Prazo" disabled="disabled" >--}}
+            <input  value="{{Carbon\Carbon::parse($andamento->data_prazo)->format('Y-m-d')}}"  type="date"  name="data_prazo" class="form-control" id="data_prazo" placeholder="Data Prazo" disabled="disabled" >
         </div>
 
         <div class="form-group">
             <label for="data_entrega">Data Entrega</label>
-            <input  value="{{$andamento->data_entrega}}" name="data_entrega" class="form-control" id="data_entrega" placeholder="Data Entrega" disabled="disabled">
+            <input  value="{{Carbon\Carbon::parse($andamento->data_prazo)->format('Y-m-d')}}" type="date" name="data_entrega" class="form-control" id="data_entrega" placeholder="Data Entrega" disabled="disabled">
         </div>
         <div class="form-group">
             <label for="observacoes">Observação</label>
-            <textarea   name="observacoes" class="form-control" id="observacoes" placeholder="" disabled="disabled">{{$andamento->observacao}}</textarea>
+            <textarea   name="observacoes" class="form-control" id="observacoes" placeholder="" disabled="disabled">{{$andamento->observacoes}}</textarea>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success pull-right" disabled="true">Gravar</button>
         </div>
     </div>
 

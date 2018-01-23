@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+function main()
+{
+    echo "---- START - php-cs-fixer pre commit hook"
+
+    environmentInit
+
+    checkPHPCSFixer
+
+    runPHPCSFixer
+
+    echo "---- END - php-cs-fixer pre commit hook"
+}
+
+function environmentInit()
+{
+    ## Get the root application dir (.git dir)
+    ROOT=$(git rev-parse --show-toplevel)
+
+    ## Use a PHP CS Fixer installed as global
+    PHP_CS_FIXER="$HOME/.composer/vendor/bin/php-cs-fixer"
+
+    echo "Working dir: $ROOT"
+    echo "PHP CS Fixer: $PHP_CS_FIXER"
+}
+
+function checkPHPCSFixer()
+{
+    if [ ! -x $PHP_CS_FIXER ]; then
+        echo "php-cs-fixer is not installed"
+        echo
+        echo "Commit ABORTED."
+        echo
+
+        exit 1
+    fi
+}
+
+function runPHPCSFixer()
+{
+    git status --porcelain | grep -e '^[AM]\(.*\).php$' | cut -c 3- | while read line; do
+        ## Execute PHP CS Fixer
+        ${PHP_CS_FIXER} fix --config=${ROOT}/.php_cs.dist --verbose "$line";
+
+        ## Stage the fixed file
+        git add "$line";
+    done
+}
+
+main $@

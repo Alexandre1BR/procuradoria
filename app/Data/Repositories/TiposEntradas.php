@@ -2,13 +2,9 @@
 
 namespace App\Data\Repositories;
 
-use App\Data\Models\TipoEntrada as TipoEntrada;
-use Illuminate\Http\Request;
+use App\Data\Models\TipoEntrada;
 
-class TiposEntradas
+class TiposEntradas extends Base
 {
-    public function createFromRequest(Request $request)
-    {
-        return TipoEntrada::create($request->all());
-    }
+    protected $model = TipoEntrada::class;
 }

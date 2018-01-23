@@ -17,18 +17,38 @@ class Base
     /**
      * @param $request
      *
-     * @return void
+     * @return object
      */
     public function createFromRequest(Request $request)
     {
+        $model = $this->create($request->all());
+
+        $request->session()->flash('status', 'Dado salvo com sucesso!');
+
         is_null($id = $request->input('id'))
                 ? $model = new $this->model()
                 : $model = $this->model::find($id);
-
         $model->fill($request->all());
         //dd($model);
         $model->save();
+        return $model;
+    }
 
-        $request->session()->flash('status', 'Dado salvo com sucesso!');
+    public function create($data)
+    {
+        $model = is_null($id = $data['id'])
+                ? new $this->model()
+                : $this->model::find($id);
+
+        $model->fill($data);
+
+        $model->save();
+
+        return $model;
+    }
+
+    public function firstOrCreate(array $search, array $attributes = [])
+    {
+        return $this->model::firstOrCreate($search, $attributes);
     }
 }

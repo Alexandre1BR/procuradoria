@@ -2,13 +2,6 @@
 
 namespace App\Data\Repositories;
 
-use App\Data\Models\Apenso;
-use Illuminate\Http\Request;
-
-class Apensos
+class Apensos extends Base
 {
-    public function createFromRequest(Request $request)
-    {
-        return Apenso::create($request->all());
-    }
 }

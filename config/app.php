@@ -164,6 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -227,6 +228,7 @@ return [
         'Validator'     => Illuminate\Support\Facades\Validator::class,
         'View'          => Illuminate\Support\Facades\View::class,
         'AutoPresenter' => McCool\LaravelAutoPresenter\Facades\AutoPresenter::class,
+        'Excel'         => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

@@ -6,19 +6,9 @@ use App\Data\Models\Juiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class Juizes
+class Juizes extends Base
 {
-    /**
-     * @param $request
-     *
-     * @return void
-     */
-    public function createFromRequest($request)
-    {
-        Juiz::create($request->all());
-
-        $request->session()->flash('status', 'Dado salvo com sucesso!');
-    }
+    protected $model = Juiz::class;
 
     public function search(Request $request)
     {
@@ -58,6 +48,6 @@ class Juizes
 
 //        \DB::listen(function($query) { dump($query->sql); dump($query->bindings); });
 
-        return $query->get();
+        return $query->orderBy('updated_at', 'desc')->get();
     }
 }

@@ -42,6 +42,6 @@ class Tribunais extends Controller
     {
         $tribunal = Tribunal::find($request->id);
 
-        return view('tribunais.detail')->with(['tribunal'=>$tribunal]);
+        return view('tribunais.show')->with(['tribunal'=>$tribunal]);
     }
 }

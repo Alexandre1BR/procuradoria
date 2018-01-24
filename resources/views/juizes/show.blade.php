@@ -41,6 +41,7 @@
                 @endif
 
                 <div class="row">
+                    <input name="id" type='hidden' value="{{$juiz->id}}" id="id" >
                     <div class="form-group col-md-4">
                         <label for="nome">Nome</label>
                         <input value="{{$juiz->nome}}" name="nome" class="form-control" id="nome" placeholder="Nome" readonly="readonly">

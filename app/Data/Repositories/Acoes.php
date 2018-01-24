@@ -49,6 +49,6 @@ class Acoes extends Base
 
 //        \DB::listen(function($query) { dump($query->sql); dump($query->bindings); });
 
-        return $query->get();
+        return $query->orderBy('updated_at', 'desc')->get();
     }
 }

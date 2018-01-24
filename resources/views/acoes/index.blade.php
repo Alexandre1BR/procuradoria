@@ -5,11 +5,17 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-3">
-                    Ações
+                    <h3>Ações</h3>
                 </div>
 
                 <div class="col-md-9">
-                    @include('acoes.partials.search-form')
+                    @include(
+                        'layouts.partials.search-form',
+                        [
+                            'routeSearch' => 'acoes.index',
+                            'routeCreate' => 'acoes.create',
+                        ]
+                    )
                 </div>
             </div>
         </div>
@@ -21,7 +27,7 @@
                 </div>
             @endif
 
-            @include('acoes.partials.search-table')
+            @include('acoes.partials.table')
         </div>
     </div>
 @endsection

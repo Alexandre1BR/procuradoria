@@ -32,6 +32,6 @@ class Acoes extends Controller
     {
         $acao = Acao::find($request->id);
 
-        return view('acoes.detail')->with(['acao'=>$acao]);
+        return view('acoes.show')->with(['acao'=>$acao]);
     }
 }

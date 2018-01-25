@@ -74,4 +74,8 @@ class Processos extends Base
 
         return $query->orderBy('updated_at', 'desc')->get();
     }
+
+    public function createApenso()
+    {
+    }
 }

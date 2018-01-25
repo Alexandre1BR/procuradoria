@@ -11,7 +11,10 @@ use App\Data\Models\Processo;
 use App\Data\Models\Tribunal as ModelTribunal;
 use App\Data\Models\User as ModelUser;
 use App\Data\Repositories\Processos as ProcessosRepository;
+use App\Data\Repositories\Apensos as ApensosRepository;
+
 use App\Http\Requests\Processo as ProcessoRequest;
+use App\Http\Requests\Apenso as ApensoRequest;
 
 class Processos extends Controller
 {
@@ -41,6 +44,18 @@ class Processos extends Controller
                 ->with($this->getSuccessMessage());
     }
 
+    public function apensar(ApensoRequest $request, ApensosRepository $repository)
+    {
+        $repository->createFromRequest($request);
+        //dd($request->processo_id);
+        return view('processos.form')
+        ->with('processo', Processo::find($request->processo_id))
+        ->with('formDisabled', true)
+        ->with($this->getProcessosData($request->processo_id))
+        ->with($this->getSuccessMessage())
+            ;
+    }
+
     public function show($id)
     {
         return view('processos.form')
@@ -65,6 +80,7 @@ class Processos extends Controller
             'andamentos' => ModelAndamento::where('processo_id', $id)->get(),
             'apensos'    => ModelApenso::Where('processo_id', $id)->get(),
             'apensado'   => ModelApenso::Where('apensado_id', $id), //->orderBy('data_prazo')->pluck('data_prazo', 'id')
+            'processos'  => Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id')
         ];
     }
 }

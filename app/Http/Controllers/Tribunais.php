@@ -34,14 +34,18 @@ class Tribunais extends Controller
     {
         $repository->createFromRequest($request);
 
-//        return $this->create();
-        return redirect()->route('tribunais.index');
+        return redirect()
+            ->route('tribunais.index')
+            ->with($this->getSuccessMessage());
     }
 
-    public function detail(TribunalRequest $request)
+    public function show(TribunalRequest $request)
     {
         $tribunal = Tribunal::find($request->id);
 
-        return view('tribunais.show')->with(['tribunal'=>$tribunal]);
+        return view('tribunais.show')
+            ->with('tribunal', $tribunal)
+            ->with('formDisabled', true)
+        ;
     }
 }

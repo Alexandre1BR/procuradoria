@@ -2,7 +2,11 @@
 
 @section('content')
     <div class="panel panel-default">
-        <div class="panel-heading">Tribunais - Create</div>
+        <div class="panel-heading">
+            <h4>
+                Tribunais - Novo
+            </h4>
+        </div>
 
         <div class="panel-body">
             @if (session('status'))
@@ -10,8 +14,6 @@
                     {{ session('status') }}
                 </div>
             @endif
-
-            <a href="{{ route('tribunais.index') }}">Tribunais - Index</a>
 
             <form action="{{ route('tribunais.store') }}" method="POST">
                 {{ csrf_field() }}
@@ -28,9 +30,10 @@
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nome</label>
-                    <input name="nome" class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="nome">
+                    <input name="nome" class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="Nome do tribunal">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+                @include('partials.save-button')
             </form>
         </div>
     </div>

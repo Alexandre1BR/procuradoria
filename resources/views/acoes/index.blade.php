@@ -5,7 +5,7 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-3">
-                    <h3>Ações</h3>
+                    <h4>Ações</h4>
                 </div>
 
                 <div class="col-md-9">

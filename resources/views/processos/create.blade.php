@@ -2,7 +2,13 @@
 
 @section('content')
     <div class="panel panel-default">
-        <div class="panel-heading">Processos</div>
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-3">
+                    Processo - Novo
+                </div>
+            </div>
+        </div>
 
         <div class="panel-body">
             @if (session('status'))
@@ -184,11 +190,10 @@
 
                 <div class="form-group col-md-4">
                     <div class="row">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-success">Gravar</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
 @endsection

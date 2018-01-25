@@ -19,7 +19,7 @@
 
     @forelse ($tribunais as $tribunal)
         <tr>
-            <td><a href="{{ action('Tribunais@detail', 'id=').$tribunal['id']}}">{{ is_null($tribunal->nome) ? : $tribunal->nome }}</a></td>
+            <td><a href="{{ route('tribunais.show', ['id' => $tribunal['id']]) }}">{{ is_null($tribunal->nome) ? : $tribunal->nome }}</a></td>
         </tr>
     @empty
         <p>Nenhum tribunal encontrado</p>

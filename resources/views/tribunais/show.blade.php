@@ -2,7 +2,17 @@
 
 @section('content')
     <div class="panel panel-default">
-        <div class="panel-heading">Dashboard</div>
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-3">
+                    <h4>Tribunais</h4>
+                </div>
+
+                <div class="col-md-9">
+                    <a href="#" class="btn btn-primary pull-right" onclick="f_editar()">editar</a>
+                </div>
+            </div>
+        </div>
 
         <div class="panel-body">
             @if (session('status'))
@@ -11,18 +21,16 @@
                 </div>
             @endif
 
-            <a href="{{ route('home.index') }}">Procuradoria</a>
             <script>
                 function f_editar() {
                     $('form *').removeAttr('readonly').removeAttr('disabled');
                 }
-
             </script>
-            <a href="#" onclick="f_editar()"> editar </a>
 
             <form action="{{ route('tribunais.store') }}" method="POST">
                 {{ csrf_field() }}
-                <input name="id" type="text" value="{{$tribunal->id}}"/>
+
+                <input name="id" type="hidden" value="{{$tribunal->id}}"/>
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -36,9 +44,10 @@
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nome</label>
-                    <input name="nome" value="{{$tribunal->nome}}" readonly="readonly" class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="nome">
+                    <input name="nome" value="{{$tribunal->nome}}" @include('partials.readonly') class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="nome">
                 </div>
-                <button type="Editar" class="btn btn-primary">Submit</button>
+
+                @include('partials.save-button')
             </form>
         </div>
     </div>

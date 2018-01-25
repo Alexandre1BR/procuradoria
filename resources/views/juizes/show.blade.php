@@ -44,11 +44,11 @@
                     <input name="id" type='hidden' value="{{$juiz->id}}" id="id" >
                     <div class="form-group col-md-4">
                         <label for="nome">Nome</label>
-                        <input value="{{$juiz->nome}}" name="nome" class="form-control" id="nome" placeholder="Nome" readonly="readonly">
+                        <input value="{{$juiz->nome}}" name="nome" class="form-control" id="nome" placeholder="Nome" @include('partials.readonly')>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="lotacao_id">Lotação</label>
-                        <select name="lotacao_id" class="js-example-basic-single form-control" disabled="disabled" id="lotacao_id">
+                        <select name="lotacao_id" class="js-example-basic-single form-control" @include('partials.disabled') id="lotacao_id">
                             @foreach ($tribunais as $key => $tribunal)
                                 @if($juiz->lotacao->id == $key)
                                     <option value="{{ $key }}" selected="selected">{{ $tribunal }}</option>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="tipo_juiz_id">Tipo Juiz</label>
-                        <select name="tipo_juiz_id" class="js-example-basic-single form-control" disabled="disabled" id="tipo_juiz_id">
+                        <select name="tipo_juiz_id" class="js-example-basic-single form-control" @include('partials.disabled') id="tipo_juiz_id">
                             @foreach ($tiposJuizes as $key => $tipojuiz)
                                 @if($juiz->tipoJuiz->id == $key)
                                     <option value="{{ $key }}" selected="selected">{{ $tipojuiz }}</option>

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: afdsilva
- * Date: 22/01/2018
- * Time: 12:31.
- */
 
 namespace App\Data\Repositories;
 
@@ -21,16 +15,12 @@ class Base
      */
     public function createFromRequest(Request $request)
     {
-        //$model = $this->create($request->all());
-
         is_null($id = $request->input('id'))
                 ? $model = new $this->model()
                 : $model = $this->model::find($id);
         $model->fill($request->all());
 
         $model->save();
-
-        $request->session()->flash('status', 'Dado salvo com sucesso!');
 
         return $model;
     }
@@ -53,5 +43,10 @@ class Base
     public function firstOrCreate(array $search, array $attributes = [])
     {
         return $this->model::firstOrCreate($search, $attributes);
+    }
+
+    public function new()
+    {
+        return new $this->model();
     }
 }

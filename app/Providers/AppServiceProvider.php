@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\Authorization;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,7 +16,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerGates();
+        $this->bootGates();
+
+        $this->bootComposers();
+    }
+
+    /**
+     *
+     */
+    private function bootComposers()
+    {
+        View::composer('*', function ($view) {
+            $view->with(array_merge([
+                'formDisabled' => false
+            ], $view->getData()));
+        });
     }
 
     /**
@@ -28,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
-    private function registerGates()
+    private function bootGates()
     {
         Gate::define('use-app', function ($user) {
             // If the user has any permissions in the system, it is allowed to use it.

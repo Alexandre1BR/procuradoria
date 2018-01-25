@@ -7,7 +7,7 @@ Route::group(['prefix' => '/juizes'], function () {
 
     Route::get('/', 'Juizes@index')->name('juizes.index');
 
-    Route::get('/{id}', 'Juizes@detail')->name('juizes.show');
+    Route::get('/{id}', 'Juizes@show')->name('juizes.show');
 
     Route::get('/', 'Juizes@index')->name('juizes.index');
 });

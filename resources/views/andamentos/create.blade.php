@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="panel panel-default">
-        <div class="panel-heading">Dashboard</div>
+        <div class="panel-heading">Andamentos</div>
 
         <div class="panel-body">
             @if (session('status'))
@@ -94,9 +94,8 @@
                     <textarea  type="date" name="observacoes" class="form-control" id="observacoes" placeholder="" ></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                @include('partials.save-button')
             </form>
-
         </div>
     </div>
 @endsection

@@ -19,7 +19,7 @@ class Processos extends Controller
     {
         return view(
             'processos.create',
-            $this->getProcessosData(null)
+            $this->getProcessosData()
         );
     }
 
@@ -27,23 +27,26 @@ class Processos extends Controller
     {
         $repository->createFromRequest($request);
 
-        return redirect()->route('home.index');
+        return redirect()
+                ->route('home.index')
+                ->with($this->getSuccessMessage());
     }
 
     public function show($id)
     {
         $processo = Processo::find($id);
 
-
         return view('processos.show')
             ->with('processo', $processo)
+            ->with('formDisabled', true)
             ->with($this->getProcessosData($id));
     }
 
     /**
+     * @param null $id
      * @return array
      */
-    public function getProcessosData($id)
+    public function getProcessosData($id = null)
     {
         return [
             'juizes'    => ModelJuiz::orderBy('nome')->pluck('nome', 'id'),

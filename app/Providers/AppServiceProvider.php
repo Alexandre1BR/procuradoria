@@ -21,14 +21,11 @@ class AppServiceProvider extends ServiceProvider
         $this->bootComposers();
     }
 
-    /**
-     *
-     */
     private function bootComposers()
     {
         View::composer('*', function ($view) {
             $view->with(array_merge([
-                'formDisabled' => false
+                'formDisabled' => false,
             ], $view->getData()));
         });
     }

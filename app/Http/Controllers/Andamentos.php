@@ -21,6 +21,7 @@ class Andamentos extends Controller
     public function create_post(Request $request)
     {
         $processo_id_post = ($request->processo_id);
+
         return view('andamentos.create', $this->getAndamentosData(), compact('processo_id_post'));
     }
 

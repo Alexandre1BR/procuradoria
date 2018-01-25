@@ -56,7 +56,6 @@ class Tribunais extends Controller
 
         return view('tribunais.form')
             ->with('tribunal', $tribunal)
-            ->with('formDisabled', true)
-        ;
+            ->with('formDisabled', true);
     }
 }

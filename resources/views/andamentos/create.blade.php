@@ -28,12 +28,27 @@
 
                 <div class="form-group">
                     <label for="Processo">Processo</label>
-                    <select name="processo_id" class="form-control" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo">
-                        <option selected="selected" value="">Selecione</option>
-                        @foreach ($processos as $key => $processo)
-                            <option value="{{ $key }}" >{{ $processo }}</option>
-                        @endforeach
-                    </select>
+                    @if(!isset($processo_id_post))
+                        <select name="processo_id" class="form-control" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo">
+                            <option selected="selected" value="">Selecione</option>
+                            @foreach ($processos as $key => $processo)
+                                <option value="{{ $key }}" >{{ $processo }}</option>
+                            @endforeach
+                        </select>
+                    @else
+                        <select name="processo_id" class="form-control" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo" disabled="disabled">
+                            @foreach ($processos as $key => $processo)
+                                @if($processo_id_post == $key)
+                                    <option value="{{ $key }}" selected>{{ $processo }}</option>
+                                    <input type="hidden" name="processo_id" value="{{$key}}" />
+                                @endif
+                            @endforeach
+
+                        </select>
+                    @endif
+
+
+
                 </div>
 
                 <div class="form-group">

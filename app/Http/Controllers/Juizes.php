@@ -31,9 +31,9 @@ class Juizes extends Controller
         ];
     }
 
-    public function detail(JuizRequest $request)
+    public function detail($id)
     {
-        $juiz = Juiz::find($request->id);
+        $juiz = Juiz::find($id);
 
         return view('juizes.show')->with(['juiz'=>$juiz])->with($this->getJuizesData());
     }

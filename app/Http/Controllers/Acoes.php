@@ -28,10 +28,10 @@ class Acoes extends Controller
             ->with('acoes', $acoes->search($request));
     }
 
-    public function detail(AcaoRequest $request)
+    public function detail($id)
     {
-        $acao = Acao::find($request->id);
+        $acao = Acao::find($id);
 
-        return view('acoes.show')->with(['acao'=>$acao]);
+        return view('acoes.show')->with(['acao' => $acao]);
     }
 }

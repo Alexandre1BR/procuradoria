@@ -9,9 +9,20 @@ use Illuminate\Http\Request;
 
 class Acoes extends Controller
 {
+    /**
+     * @var AcoesRepository
+     */
+    private $repository;
+
+    public function __construct(AcoesRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function create()
     {
-        return view('acoes.create');
+        return view('acoes.form')
+            ->with(['acao' => $this->repository->new()]);
     }
 
     public function store(AcaoRequest $request, AcoesRepository $repository)
@@ -28,10 +39,10 @@ class Acoes extends Controller
             ->with('acoes', $acoes->search($request));
     }
 
-    public function detail(AcaoRequest $request)
+    public function show($id)
     {
-        $acao = Acao::find($request->id);
-
-        return view('acoes.detail')->with(['acao'=>$acao]);
+        return view('acoes.form')
+            ->with('formDisabled', true)
+            ->with(['acao' => Acao::find($id)]);
     }
 }

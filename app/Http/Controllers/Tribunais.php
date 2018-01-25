@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 
 class Tribunais extends Controller
 {
+    /**
+     * @var TribunaisRepository
+     */
+    private $repository;
+
+    public function __construct(TribunaisRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function index(TribunaisRepository $tribunais, Request $request)
     {
         return view('tribunais.index')
@@ -21,7 +31,8 @@ class Tribunais extends Controller
      */
     public function create()
     {
-        return view('tribunais.create');
+        return view('tribunais.form')
+            ->with(['tribunal' => $this->repository->new()]);
     }
 
     /**
@@ -34,14 +45,17 @@ class Tribunais extends Controller
     {
         $repository->createFromRequest($request);
 
-//        return $this->create();
-        return redirect()->route('tribunais.index');
+        return redirect()
+            ->route('tribunais.index')
+            ->with($this->getSuccessMessage());
     }
 
-    public function detail(TribunalRequest $request)
+    public function show(TribunalRequest $request)
     {
         $tribunal = Tribunal::find($request->id);
 
-        return view('tribunais.show')->with(['tribunal'=>$tribunal]);
+        return view('tribunais.form')
+            ->with('tribunal', $tribunal)
+            ->with('formDisabled', true);
     }
 }

@@ -13,16 +13,16 @@
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th> </th>
         <th>Nome</th>
-        <th>Abrevição</th>
+        <th>Abreviação</th>
     </tr>
     </thead>
 
     @forelse ($acoes as $acao)
         <tr>
-            <td><a href="{{ action('Acoes@detail', 'id=').$acao['id']}}">Detalhes</a></td>
-            <td>{{ $acao->nome }}</td>
+            <td>
+                <a href="{{ route('acoes.show', ['id' => $acao->id]) }}">{{ $acao->nome }}</a>
+            </td>
             <td>{{ $acao->abreviacao }}</td>
         </tr>
     @empty

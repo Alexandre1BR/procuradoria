@@ -22,9 +22,6 @@ Route::group(['middleware' => makeAppRootRouteMiddlewares()], function () {
     require __DIR__.'/services/excel.php';
 });
 
-/**
- * @return array
- */
 function makeAppRootRouteMiddlewares()
 {
     return collect([

@@ -13,7 +13,6 @@
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th></th>
         <th>Processo</th>
         <th>Tipo de Andamento</th>
         <th>Tipo de Entrada</th>
@@ -26,8 +25,7 @@
 
     @forelse ($andamentos as $andamento)
         <tr>
-            <td><a href="{{ route('andamentos.show',['id' => $andamento->id])}}">Detalhes</a></td>
-            <td>{{ $andamento->processo->numero_judicial }}</td>
+            <td><a href="{{ route('andamentos.show',['id' => $andamento->id]) }}">{{ $andamento->processo->numero_judicial }}</a></td>
             <td>{{ $andamento->tipoAndamento->nome }}</td>
             <td>{{ $andamento->tipoEntrada->nome }}</td>
             <td>{{ $andamento->tipoPrazo->nome }}</td>

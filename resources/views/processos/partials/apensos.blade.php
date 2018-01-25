@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-3">
                 <h4>
-                    <label onclick="createApenso()" >Apensos</label> <input type="button" value="Criar Apenso" onclick="createApenso()">
+                    Apensos <input type="button" value="Criar Apenso" onclick="createApenso()">
                 </h4>
             </div>
         </div>

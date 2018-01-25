@@ -11,9 +11,20 @@ use Illuminate\Http\Request;
 
 class Juizes extends Controller
 {
+    /**
+     * @var JuizesRepository
+     */
+    private $repository;
+
+    public function __construct(JuizesRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function create()
     {
-        return view('juizes.create', $this->getJuizesData());
+        return view('juizes.create', $this->getJuizesData())
+            ->with(['juiz' => $this->repository->new()]);
     }
 
     public function store(JuizRequest $request, JuizesRepository $repository)
@@ -31,11 +42,12 @@ class Juizes extends Controller
         ];
     }
 
-    public function detail($id)
+    public function show($id)
     {
-        $juiz = Juiz::find($id);
-
-        return view('juizes.show')->with(['juiz'=>$juiz])->with($this->getJuizesData());
+        return view('juizes.show')
+            ->with('tribunal', Juiz::find($id))
+            ->with('formDisabled', true)
+            ->with($this->getJuizesData());
     }
 
     public function index(JuizesRepository $juizes, Request $request)

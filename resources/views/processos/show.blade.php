@@ -282,7 +282,13 @@
                 </div>
             </form>
             <br />
-                Andamentos <a href="{{route('andamentos.create')}}">Novo Andamento</a>
+                <form action="{{ route('andamentos.create_post') }}" method="POST">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="processo_id" value = {{$processo->id}}>
+                    Andamentos
+                    <input type="submit" value="Novo Andamento">
+                </form>
+
             <div class="row">
                 <div class="col-md-12">
                     <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">

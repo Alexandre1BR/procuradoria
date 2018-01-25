@@ -10,11 +10,10 @@ use App\Data\Models\Meio as ModelMeio;
 use App\Data\Models\Processo;
 use App\Data\Models\Tribunal as ModelTribunal;
 use App\Data\Models\User as ModelUser;
-use App\Data\Repositories\Processos as ProcessosRepository;
 use App\Data\Repositories\Apensos as ApensosRepository;
-
-use App\Http\Requests\Processo as ProcessoRequest;
+use App\Data\Repositories\Processos as ProcessosRepository;
 use App\Http\Requests\Apenso as ApensoRequest;
+use App\Http\Requests\Processo as ProcessoRequest;
 
 class Processos extends Controller
 {
@@ -51,8 +50,7 @@ class Processos extends Controller
         ->with('processo', Processo::find($request->processo_id))
         ->with('formDisabled', true)
         ->with($this->getProcessosData($request->processo_id))
-        ->with($this->getSuccessMessage())
-            ;
+        ->with($this->getSuccessMessage());
     }
 
     public function show($id)
@@ -79,7 +77,7 @@ class Processos extends Controller
             'andamentos' => ModelAndamento::where('processo_id', $id)->get(),
             'apensos'    => ModelApenso::orWhere('processo_id', $id, 'apensado_id', $id)->get(),
 
-            'processos'  => Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id')
+            'processos'  => Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id'),
         ];
     }
 }

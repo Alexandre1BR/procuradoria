@@ -3,20 +3,30 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4>
-                Tribunais - Novo
-            </h4>
+            <div class="row">
+                <div class="col-md-3">
+                    <h4>
+                        <a href="{{ route('tribunais.index') }}">Tribunais</a>
+
+                        @if(is_null($tribunal->id))
+                            > NOVO
+                        @else
+                            > {{ $tribunal->nome }}
+                        @endif
+                    </h4>
+                </div>
+
+                @include('partials.edit-button', ['model' => $tribunal])
+            </div>
         </div>
 
         <div class="panel-body">
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
+            @include('partials.alerts')
 
             <form action="{{ route('tribunais.store') }}" method="POST">
                 {{ csrf_field() }}
+
+                <input name="id" type="hidden" value="{{$tribunal->id}}"/>
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -30,7 +40,7 @@
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nome</label>
-                    <input name="nome" class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="Nome do tribunal">
+                    <input name="nome" value="{{$tribunal->nome}}" @include('partials.readonly') class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="nome">
                 </div>
 
                 @include('partials.save-button')

@@ -6,28 +6,22 @@
             <div class="row">
                 <div class="col-md-3">
                     <h4>
-                        Processo {{ $processo->numero_judicial ?: $processo->numero_alerj }}
+                        <a href="{{ route('home.index') }}">Processos</a>
+
+                        @if(is_null($processo->id))
+                            > NOVO
+                        @else
+                            > {{ $processo->numero_judicial ?: $processo->numero_alerj }}
+                        @endif
                     </h4>
                 </div>
 
-                <div class="col-md-9">
-                    <a href="#" class="btn btn-primary pull-right" onclick="f_editar()">editar</a>
-                </div>
+                @include('partials.edit-button', ['model' => $processo])
             </div>
         </div>
 
         <div class="panel-body">
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
-
-            <script>
-                function f_editar(){
-                    $('form *').removeAttr('readonly').removeAttr('disabled');
-                }
-            </script>
+            @include('partials.alerts')
 
             <form action="{{ route('processos.store') }}" method="POST">
                 {{ csrf_field() }}
@@ -275,70 +269,12 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success pull-right" @include('partials.disabled')>Gravar</button>
-                        </div>
-                    </div>
-                </div>
+                @include('partials.save-button')
             </form>
-            <br />
-                <form action="{{ route('andamentos.create_post') }}" method="POST">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="processo_id" value = {{$processo->id}}>
-                    Andamentos
-                    <input type="submit" value="Novo Andamento">
-                </form>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                        <thead>
-
-                        <tr>
-                            <th>Tipo de Andamento</th>
-                            <th>Tipo de Entrada</th>
-                            <th>Tipo de Prazo</th>
-                            <th>Data Prazo</th>
-                            <th>Observação</th>
-                        </tr>
-                        </thead>
-                        @forelse ($andamentos as $andamento)
-                            <tr>
-
-                                <td><a href="{{ route('andamentos.show',['id' => $andamento->id]) }}">{{ $andamento->tipoAndamento->nome }}</a></td>
-                                <td>{{ $andamento->tipoEntrada->nome }}</td>
-                                <td>{{ $andamento->tipoPrazo->nome }}</td>
-                                <td>{{ $andamento->data_prazo }}</td>
-                                <td>{{ $andamento->observacoes }}</td>
-                            </tr>
-                        @empty
-                            <p>Nenhum Andamento encontrado</p>
-                        @endforelse
-                    </table>
-                </div>
-            </div>
-                Apensos
-                <div class="row">
-                    <div class="col-md-12">
-                        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                            <thead>
-
-                            <tr>
-                                <th>Processo</th>
-                            </tr>
-                            </thead>
-                            @forelse($apensos as $apenso)
-                                <tr>
-                                    <td>{{$apenso->processo_id}}</td>
-                                </tr>
-                            @empty
-                                <p>Nenhum Apenso encontrado</p>
-                            @endforelse
-                        </table>
-                    </div>
-
         </div>
     </div>
+
+    @include('processos.partials.andamentos')
+
+    @include('processos.partials.apensos')
 @endsection

@@ -23,7 +23,7 @@ class Juizes extends Controller
 
     public function create()
     {
-        return view('juizes.create', $this->getJuizesData())
+        return view('juizes.form', $this->getJuizesData())
             ->with(['juiz' => $this->repository->new()]);
     }
 

@@ -15,12 +15,21 @@ use App\Http\Requests\Processo as ProcessoRequest;
 
 class Processos extends Controller
 {
+    /**
+     * @var ProcessosRepository
+     */
+    private $repository;
+
+    public function __construct(ProcessosRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function create()
     {
-        return view(
-            'processos.create',
-            $this->getProcessosData()
-        );
+        return view('processos.form', $this->getProcessosData())
+            ->with(['processo' => $this->repository->new()])
+        ;
     }
 
     public function store(ProcessoRequest $request, ProcessosRepository $repository)
@@ -34,10 +43,8 @@ class Processos extends Controller
 
     public function show($id)
     {
-        $processo = Processo::find($id);
-
-        return view('processos.show')
-            ->with('processo', $processo)
+        return view('processos.form')
+            ->with('processo', Processo::find($id))
             ->with('formDisabled', true)
             ->with($this->getProcessosData($id));
     }

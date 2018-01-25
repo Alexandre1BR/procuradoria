@@ -28,8 +28,7 @@ class Processos extends Controller
     public function create()
     {
         return view('processos.form', $this->getProcessosData())
-            ->with(['processo' => $this->repository->new()])
-        ;
+            ->with(['processo' => $this->repository->new()]);
     }
 
     public function store(ProcessoRequest $request, ProcessosRepository $repository)

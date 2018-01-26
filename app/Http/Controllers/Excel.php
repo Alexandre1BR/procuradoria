@@ -36,7 +36,6 @@ class Excel extends Controller
         if (Input::hasFile('import_file')) {
             $data = Cache::remember('importExcel', 30, function () {
                 $path = Input::file('import_file')->getRealPath();
-
                 return \Maatwebsite\Excel\Facades\Excel::load($path, function ($reader) {
                 })->get();
             });
@@ -48,38 +47,23 @@ class Excel extends Controller
                     if (!is_null($value->origem)) {
                         list($tribunal, $vara) = $this->split($value);
                     }
-                    $tribunal =
-                            app(Tribunais::class)
-                                    ->firstOrCreate(['nome' => trim($tribunal) ?: 'N/C']);
+                    $tribunal =app(Tribunais::class)->firstOrCreate(['nome' => trim($tribunal) ?: 'N/C']);
                     // Nome e Abreviação receberam os mesmos dados , já que ora esta abreviado e ora esta 'nomeado'
-                    $acao =
-                            app(Acoes::class)
+                    $acao = app(Acoes::class)
                                     ->firstOrCreate([
                                             'nome' => trim($value->acao) ?: 'N/C',
                                             'abreviacao' => trim($value->acao) ?: 'N/C',
                                     ]);
 
                     //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
-                    $tipo_relator = strtolower(trim($value->relator));
+                    $tipo_relator = $this->ajustaTipoRelator($value->relator);
+                    $tipo_relator = app(TiposJuizes::class)->firstOrCreate(['nome' => $tipo_relator]);
 
-                    if (starts_with($tipo_relator, 'mi')) {
-                        $tipo_relator = "Ministro";
-                    } elseif (starts_with($tipo_relator, 'de')) {
-                        $tipo_relator = 'Desembargador';
-                    } elseif (starts_with($tipo_relator, 'ju')) {
-                        $tipo_relator = 'Juiz';
-                    } else {
-                        $tipo_relator = 'N/C';
-                    }
+                    $nome_relator = $this->ajustaNomeRelator($value->relator);
 
-                    $tipo_relator =
-                            app(TiposJuizes::class)
-                                    ->firstOrCreate(['nome' => $tipo_relator]);
-
-                    $relator_juiz =
-                            app(Juizes::class)
+                    $relator_juiz = app(Juizes::class)
                                     ->firstOrCreate([
-                                            'nome' => trim($value->relator),
+                                            'nome' => $nome_relator,
                                             'lotacao_id' => $tribunal->id,
                                             'tipo_juiz_id' => $tipo_relator->id
                                     ]);
@@ -93,19 +77,10 @@ class Excel extends Controller
 //                            app(Users::class)
 //                                    ->firstOrCreate(['name' => trim($value->assessor), 'username' => 'N/C', 'email' => 'N/C', 'password' => 'N/C']);//TODO => 'N/C'
 
-                    $tipo_meio = strtolower(trim($value->relator));
+                    $tipo_meio = $this->ajustaTipoMeio($value->tipo);
 
-                    if (starts_with($tipo_meio, 'F')) {
-                        $tipo_meio = "Físico";
-                    } elseif (starts_with($tipo_meio, 'E')) {
-                        $tipo_meio = 'Eletrônico';
-                    } else {
-                        $tipo_meio = 'N/C';
-                    }
-
-                    $tipo_meio =
-                            app(Meios::class)
-                                    ->firstOrCreate(['nome' => trim($tipo_meio)]);//TODO => 'N/C'
+                    $tipo_meio = app(Meios::class)
+                                    ->firstOrCreate(['nome' => $tipo_meio]);//TODO => 'N/C'
                     $insert[] =
                             [
                                     'numero_judicial' => $value->no_judicial,
@@ -115,7 +90,7 @@ class Excel extends Controller
                                     'vara' => trim($vara),
                                     'acao_id' => $acao->id,
                                     'relator_id' => $relator_juiz->id,
-                                //'tipo_juiz_id' => $tipo_relator->id, //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
+                                    //'tipo_juiz_id' => $tipo_relator->id, //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
                                     'autor' => $value->autor,
                                     'reu' => $value->reu,
                                     'objeto' => $value->objeto,
@@ -125,7 +100,7 @@ class Excel extends Controller
 //                                'procurador_id'     => $procurador,
 //                                'estagiario_id'     => $estagiario,
 //                                'assessor_id'       => $assessor,
-                            'tipo_meio_id' => $tipo_meio->id,
+                                    'tipo_meio_id' => $tipo_meio->id,
                     ];
                 }
                 if (!empty($insert)) {
@@ -134,7 +109,6 @@ class Excel extends Controller
                 }
             }
         }
-
         return back();
     }
 
@@ -149,5 +123,67 @@ class Excel extends Controller
         $tribunal = isset($split[0]) ? trim($split[0]) : null;
         $vara = isset($split[1]) ? trim($split[1]) : null;
         return [$tribunal, $vara];
+    }
+
+    private function ajustaNomeRelator($relator)
+    {
+        if (!is_null($relator)) {
+            $relator = strtoupper(trim($relator));
+            $relator = preg_replace("/MINISTRO/", "", $relator, 1);
+            $relator = preg_replace("/MIN /", "", $relator, 1);
+            $relator = preg_replace("/DES /", "", $relator, 1);
+            $relator = preg_replace("/MIN./", "", $relator, 1);
+            $relator = preg_replace("/DES./", "", $relator, 1);
+            $relator = preg_replace("/JUIZ/", "", $relator, 1);
+            $relator = preg_replace("/JUIZA/", "", $relator, 1);
+            $relator = preg_replace("/JUÍZA/", "", $relator, 1);
+            $relator = preg_replace("/JUíZA/", "", $relator, 1);
+            $relator = preg_replace("/DRA/", "", $relator, 1);
+            $relator = preg_replace("/RELATOR/", "", $relator, 1);
+            $relator = str_ireplace(".", "", $relator);
+            $relator = str_ireplace(":", "", $relator);
+            $relator = str_ireplace("-", "", $relator);
+            $relator = str_ireplace("_", "", $relator);
+            $relator = str_ireplace("__", "", $relator);
+            $relator = str_ireplace("____", "", $relator);
+            $relator = str_ireplace("-", "", $relator);
+            $relator = str_ireplace("-", "", $relator);
+
+            $relator = trim($relator);
+            if (is_null($relator)) {
+                $relator = "N/C";
+            }
+        } else {
+            $relator = "N/C";
+        }
+        return $relator;
+    }
+
+    private function ajustaTipoRelator($relator)
+    {
+        $tipo_relator = strtolower(trim($relator));
+        if (starts_with($tipo_relator, 'mi')) {
+            $tipo_relator = "Ministro";
+        } elseif (starts_with($tipo_relator, 'de')) {
+            $tipo_relator = 'Desembargador';
+        } elseif (starts_with($tipo_relator, 'ju')) {
+            $tipo_relator = 'Juiz';
+        } else {
+            $tipo_relator = 'N/C';
+        }
+        return $tipo_relator;
+    }
+
+    private function ajustaTipoMeio($tipo_meio)
+    {
+        $tipo_meio = strtolower(trim($tipo_meio));
+        if (starts_with(trim($tipo_meio), 'f')) {
+            $tipo_meio = "Físico";
+        } elseif (starts_with(trim($tipo_meio), 'e')) {
+            $tipo_meio = "Eletrônico";
+        } else {
+            $tipo_meio = 'N/C';
+        }
+        return $tipo_meio;
     }
 }

@@ -43,7 +43,6 @@ class Juizes extends Base
                         $query->orWhere($column, '=', $item);
                     }
                 }
-
                 $query->orWhereHas('tipoJuiz', function ($query) use ($item) {
                     $query->whereRaw("lower(nome) like '%{$item}%'");
                 });

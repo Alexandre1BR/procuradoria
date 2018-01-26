@@ -19,13 +19,11 @@ class Juiz extends BaseModel
 
     public function tipoJuiz()
     {
-        Juiz::with('tipoJuiz');
         return $this->belongsTo(TipoJuiz::class);
     }
 
     public function lotacao()
     {
-        Juiz::with('lotacao');
         return $this->belongsTo(Tribunal::class);
     }
 }

@@ -43,24 +43,50 @@
                     <th>Processo</th>
                 </tr>
             </thead>
-            @forelse($apensos as $apenso)
+            @foreach($apensos as $key => $apenso)
+                {{--Apensados--}}
+                @if($processo->id == $apenso->apensado->id)
+                    <tr>
+                        {{--<td>{{$apenso->processo->id}}</td>--}}
+                        <td><a href="{{ route('processos.show', ['id' => $apenso->processo->id]) }}">{{$apenso->processo->numero_judicial }}</a></td>
+                    </tr>
+                @endif
+                @if($processo->id == $apenso->processo->id)
+                    <tr>
+                        {{--<td>{{$apenso->apensado->id}}</td>--}}
+                        <td><a href="{{ route('processos.show', ['id' => $apenso->apensado->id]) }}">{{$apenso->apensado->numero_judicial }}</a></td>
+                    </tr>
+                @endif
 
-                    @foreach($processos as $key=>$processoApensado)
-                        @if($key ==$apenso->apensado_id)
-                        <tr>
-                            <td>{{$apenso->processo_id}}</td>
-                            <td><a href="{{ route('processos.show', ['id' => $apenso->apensado_id]) }}">{{$processoApensado }}</a></td>
-                        </tr>
-                        @else($key == $apenso->processo_id)
+            @endforeach
+
+            {{--@forelse($apensos as $apenso)--}}
+                {{--@foreach($processos as $key=>$processoApensado)--}}
+                {{--@endforeach--}}
+
+                {{--<tr>--}}
+                    {{--<td>{{$apenso->processo->id}}</td>--}}
+                    {{--<td><a href="{{ route('processos.show', ['id' => $apenso->processo->id]) }}">{{$apenso->processo->numero_judicial }}</a></td>--}}
+                {{--</tr>--}}
+
+                    {{--@foreach($processos as $key=>$processoApensado)--}}
+                        {{--@if($key == $apenso -> apensado_id)--}}
                         {{--<tr>--}}
-                            {{--<td><a href="{{ route('processos.show', ['id' => $apenso->processo_id]) }}">{{$processoApensado }}</a></td>--}}
+                            {{--<td>{{$apenso->processo_id}}</td>--}}
+                            {{--<td><a href="{{ route('processos.show', ['id' => $apenso->apensado_id]) }}">{{$processoApensado }}</a></td>--}}
                         {{--</tr>--}}
-                        @endif
-                    @endforeach
+                        {{--@endif--}}
+                        {{--@if($key == $apenso -> processo_id)--}}
+                        {{--<tr>--}}
+                            {{--<td>{{$apenso->apensado_id}}</td>--}}
+                            {{--<td><a href="{{ route('processos.show', ['id' => $apenso->apensado_id]) }}">{{$processoApensado }}</a></td>--}}
+                        {{--</tr>--}}
+                        {{--@endif--}}
+                    {{--@endforeach--}}
 
-            @empty
-                <p>Nenhum Apenso encontrado</p>
-            @endforelse
+            {{--@empty--}}
+                {{--<p>Nenhum Apenso encontrado</p>--}}
+            {{--@endforelse--}}
         </table>
     </div>
 </div>

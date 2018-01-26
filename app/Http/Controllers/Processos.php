@@ -75,9 +75,8 @@ class Processos extends Controller
             'meios'      => ModelMeio::orderBy('nome')->pluck('nome', 'id'),
             'acoes'      => ModelAcao::orderBy('nome')->pluck('nome', 'id'),
             'andamentos' => ModelAndamento::where('processo_id', $id)->get(),
-            'apensos'    => dd(ModelApenso::Where('processo_id', $id)->orWhere('apensado_id', $id)->toSql()),
-
-            'processos'  => Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id'),
+            'apensos'    => ModelApenso::Where('processo_id', $id)->orWhere('apensado_id', $id)->get(),
+            'processos'  => Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id')
         ];
     }
 }

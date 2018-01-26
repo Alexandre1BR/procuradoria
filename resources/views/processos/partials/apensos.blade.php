@@ -44,13 +44,20 @@
                 </tr>
             </thead>
             @forelse($apensos as $apenso)
-                <tr>
+
                     @foreach($processos as $key=>$processoApensado)
                         @if($key ==$apenso->apensado_id)
+                        <tr>
+                            <td>{{$apenso->processo_id}}</td>
                             <td><a href="{{ route('processos.show', ['id' => $apenso->apensado_id]) }}">{{$processoApensado }}</a></td>
+                        </tr>
+                        @else($key == $apenso->processo_id)
+                        {{--<tr>--}}
+                            {{--<td><a href="{{ route('processos.show', ['id' => $apenso->processo_id]) }}">{{$processoApensado }}</a></td>--}}
+                        {{--</tr>--}}
                         @endif
                     @endforeach
-                </tr>
+
             @empty
                 <p>Nenhum Apenso encontrado</p>
             @endforelse

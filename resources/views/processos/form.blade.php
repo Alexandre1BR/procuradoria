@@ -21,21 +21,7 @@
         </div>
 
         <div class="panel-body">
-<<<<<<< HEAD:resources/views/processos/show.blade.php
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
-
-            <script>
-                function f_editar() {
-                    $('form *').removeAttr('readonly').removeAttr('disabled');
-                }
-            </script>
-=======
             @include('partials.alerts')
->>>>>>> upstream/master:resources/views/processos/form.blade.php
 
             <form action="{{ route('processos.store') }}" method="POST">
                 {{ csrf_field() }}
@@ -109,10 +95,6 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="data_distribuicao">Data Distribuição</label>
-<<<<<<< HEAD:resources/views/processos/show.blade.php
-                            <input value="{{$processo->data_distribuicao}}" type="date" name="data_distribuicao" class="form-control"
-                                   id="data_distribuicao" @include('partials.readonly') />
-=======
                             <input
                                 value="{{ ! is_null($processo->id) ? $processo->data_distribuicao : '' }}"
                                 type="date"
@@ -120,7 +102,6 @@
                                 class="form-control"
                                 id="data_distribuicao" @include('partials.readonly')
                             />
->>>>>>> upstream/master:resources/views/processos/form.blade.php
                             {{--<input value="{{Carbon\Carbon::parse($processo->data_distribuicao)->format('Y-m-d')}}" type="date" name="data_distribuicao" class="form-control" id="data_distribuicao" @include('partials.readonly') />--}}
                         </div>
                     </div>
@@ -164,11 +145,7 @@
                             <select name="juiz_id" class="js-example-basic-single form-control" @include('partials.disabled') id="juiz_id">
                                 <option value="" selected="selected">Selecione...</option>
                                 @foreach ($juizes as $key => $juiz)
-<<<<<<< HEAD:resources/views/processos/show.blade.php
-                                    @if(!is_null($processo->juiz) && $processo->juiz->id == $key)
-=======
                                     @if(! is_null($processo->id) && $processo->juiz->id == $key)
->>>>>>> upstream/master:resources/views/processos/form.blade.php
                                         <option value="{{ $key }}" selected="selected">{{ $juiz }}</option>
                                     @else
                                         <option value="{{ $key }}">{{ $juiz }}</option>
@@ -200,13 +177,8 @@
                             <label for="procurador_id">Procurador</label>
                             <select name="procurador_id" class="js-example-basic-single form-control" @include('partials.disabled') id="procurador_id">
                                 @foreach ($usuarios as $key => $procurador)
-<<<<<<< HEAD:resources/views/processos/show.blade.php
-                                    @if(is_null($processo->procurador))
-                                        <option value="" selected="selected">---</option>
-=======
                                     @if(! is_null($processo->id) && $processo->procurador->id == $key)
                                         <option value="{{ $key }}" selected="selected">{{ $procurador }}</option>
->>>>>>> upstream/master:resources/views/processos/form.blade.php
                                     @else
                                         @if($processo->procurador->id == $key)
                                             <option value="{{ $key }}" selected="selected">{{ $procurador }}</option>
@@ -224,13 +196,8 @@
                             <label for="estagiario_id">Estagiario</label>
                             <select name="estagiario_id" class="js-example-basic-single form-control" @include('partials.disabled') id="estagiario_id">
                                 @foreach ($usuarios as $key => $estagiario)
-<<<<<<< HEAD:resources/views/processos/show.blade.php
-                                    @if(is_null($processo->estagiario))
-                                        <option value="" selected="selected">---</option>
-=======
                                     @if(! is_null($processo->id) && $processo->estagiario->id == $key)
                                         <option value="{{ $key }}" selected="selected">{{ $estagiario }}</option>
->>>>>>> upstream/master:resources/views/processos/form.blade.php
                                     @else
                                         @if($processo->estagiario->id == $key)
                                             <option value="{{ $key }}" selected="selected">{{ $estagiario }}</option>
@@ -248,13 +215,8 @@
                             <label for="assessor_id">Assessor</label>
                             <select name="assessor_id" class="js-example-basic-single form-control" @include('partials.disabled') id="assessor_id">
                                 @foreach ($usuarios as $key => $assessor)
-<<<<<<< HEAD:resources/views/processos/show.blade.php
-                                    @if(is_null($processo->assessor))
-                                        <option value="" selected="selected">---</option>
-=======
                                     @if(! is_null($processo->id) && $processo->assessor->id == $key)
                                         <option value="{{ $key }}" selected="selected">{{ $assessor }}</option>
->>>>>>> upstream/master:resources/views/processos/form.blade.php
                                     @else
                                         @if($processo->assessor->id == $key)
                                             <option value="{{ $key }}" selected="selected">{{ $assessor }}</option>
@@ -333,71 +295,11 @@
 
                 @include('partials.save-button')
             </form>
-<<<<<<< HEAD:resources/views/processos/show.blade.php
-            <br/>
-            <form action="{{ route('andamentos.create_post') }}" method="POST">
-                {{ csrf_field() }}
-                <input type="hidden" name="processo_id" value= {{$processo->id}}>
-                Andamentos
-                <input type="submit" value="Novo Andamento">
-            </form>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                        <thead>
-
-                        <tr>
-                            <th>Tipo de Andamento</th>
-                            <th>Tipo de Entrada</th>
-                            <th>Tipo de Prazo</th>
-                            <th>Data Prazo</th>
-                            <th>Observação</th>
-                        </tr>
-                        </thead>
-                        @forelse ($andamentos as $andamento)
-                            <tr>
-
-                                <td><a href="{{ route('andamentos.show',['id' => $andamento->id]) }}">{{ $andamento->tipoAndamento->nome }}</a></td>
-                                <td>{{ $andamento->tipoEntrada->nome }}</td>
-                                <td>{{ $andamento->tipoPrazo->nome }}</td>
-                                <td>{{ $andamento->data_prazo }}</td>
-                                <td>{{ $andamento->observacoes }}</td>
-                            </tr>
-                        @empty
-                            <p>Nenhum Andamento encontrado</p>
-                        @endforelse
-                    </table>
-                </div>
-            </div>
-            Apensos
-            <div class="row">
-                <div class="col-md-12">
-                    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                        <thead>
-
-                        <tr>
-                            <th>Processo</th>
-                        </tr>
-                        </thead>
-                        @forelse($apensos as $apenso)
-                            <tr>
-                                <td>{{$apenso->processo_id}}</td>
-                            </tr>
-                        @empty
-                            <p>Nenhum Apenso encontrado</p>
-                        @endforelse
-                    </table>
-                </div>
-
-            </div>
-        </div>
-=======
         </div>
     </div>
 
     @include('processos.partials.andamentos')
 
     @include('processos.partials.apensos')
->>>>>>> upstream/master:resources/views/processos/form.blade.php
+
 @endsection

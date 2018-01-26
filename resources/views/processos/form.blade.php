@@ -61,7 +61,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="numero_alerj">Número Alerj</label>
-                            <input value="{{$processo->numero_alerj}}" name="numero_alerj" class="form-control" @include('partials.readonly') id="numero_alerj" placeholder="Número Alerj">
+                            <input value="{{$processo->numero_alerj}}" name="numero_alerj" class="form-control" @include('partials.readonly') id="numero_alerj"
+                                   placeholder="Número Alerj">
                         </div>
                     </div>
                 </div>
@@ -72,7 +73,7 @@
                             <label for="tribunal_id">Tribunal</label>
                             <select name="tribunal_id" class="js-example-basic-single form-control" @include('partials.disabled') id="tribunal_id">
                                 @foreach ($tribunais as $key => $tribunal)
-                                    @if($processo->tribunal->id == $key)
+                                    @if(! is_null($processo->id) && $processo->tribunal->id === $key)
                                         <option value="{{ $key }}" selected="selected">{{ $tribunal }}</option>
                                     @else
                                         <option value="{{ $key }}">{{ $tribunal }}</option>
@@ -94,7 +95,13 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="data_distribuicao">Data Distribuição</label>
-                            <input value="{{$processo->data_distribuicao}}" type="date" name="data_distribuicao" class="form-control" id="data_distribuicao" @include('partials.readonly') />
+                            <input
+                                value="{{ ! is_null($processo->id) ? $processo->data_distribuicao : '' }}"
+                                type="date"
+                                name="data_distribuicao"
+                                class="form-control"
+                                id="data_distribuicao" @include('partials.readonly')
+                            />
                             {{--<input value="{{Carbon\Carbon::parse($processo->data_distribuicao)->format('Y-m-d')}}" type="date" name="data_distribuicao" class="form-control" id="data_distribuicao" @include('partials.readonly') />--}}
                         </div>
                     </div>
@@ -105,7 +112,7 @@
                             <select name="acao_id" class="js-example-basic-single form-control" @include('partials.disabled') id="acao_id">
                                 @foreach ($acoes as $key => $acao)
                                     <option value="{{ $key }}">{{ $acao }}</option>
-                                    @if($processo->acao->id == $key)
+                                    @if(! is_null($processo->id) && $processo->acao->id == $key)
                                         <option value="{{ $key }}" selected="selected">{{ $acao }}</option>
                                     @else
                                         <option value="{{ $key }}">{{ $acao }}</option>
@@ -120,7 +127,7 @@
                             <label for="relator_id">Relator</label>
                             <select name="relator_id" class="js-example-basic-single form-control" @include('partials.disabled') id="relator_id">
                                 @foreach ($juizes as $key => $relator)
-                                    @if($processo->relator->id == $key)
+                                    @if(! is_null($processo->id) && $processo->relator->id == $key)
                                         <option value="{{ $key }}" selected="selected">{{ $relator }}</option>
                                     @else
                                         <option value="{{ $key }}">{{ $relator }}</option>
@@ -136,8 +143,9 @@
                         <div class="form-group">
                             <label for="juiz_id">Juiz</label>
                             <select name="juiz_id" class="js-example-basic-single form-control" @include('partials.disabled') id="juiz_id">
+                                <option value="" selected="selected">Selecione...</option>
                                 @foreach ($juizes as $key => $juiz)
-                                    @if($processo->juiz->id == $key)
+                                    @if(! is_null($processo->id) && $processo->juiz->id == $key)
                                         <option value="{{ $key }}" selected="selected">{{ $juiz }}</option>
                                     @else
                                         <option value="{{ $key }}">{{ $juiz }}</option>
@@ -150,7 +158,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="autor">Autor</label>
-                            <input value="{{$processo->autor}}" name="autor" type="text" class="form-control" @include('partials.readonly') id="autor" placeholder="Informe o Autor">
+                            <input value="{{$processo->autor}}" name="autor" type="text" class="form-control" @include('partials.readonly') id="autor"
+                                   placeholder="Informe o Autor">
                         </div>
                     </div>
 
@@ -168,10 +177,14 @@
                             <label for="procurador_id">Procurador</label>
                             <select name="procurador_id" class="js-example-basic-single form-control" @include('partials.disabled') id="procurador_id">
                                 @foreach ($usuarios as $key => $procurador)
-                                    @if($processo->procurador->id == $key)
+                                    @if(! is_null($processo->id) && $processo->procurador->id == $key)
                                         <option value="{{ $key }}" selected="selected">{{ $procurador }}</option>
                                     @else
-                                        <option value="{{ $key }}">{{ $procurador }}</option>
+                                        @if($processo->procurador->id == $key)
+                                            <option value="{{ $key }}" selected="selected">{{ $procurador }}</option>
+                                        @else
+                                            <option value="{{ $key }}">{{ $procurador }}</option>
+                                        @endif
                                     @endif
                                 @endforeach
                             </select>
@@ -183,10 +196,14 @@
                             <label for="estagiario_id">Estagiario</label>
                             <select name="estagiario_id" class="js-example-basic-single form-control" @include('partials.disabled') id="estagiario_id">
                                 @foreach ($usuarios as $key => $estagiario)
-                                    @if($processo->estagiario->id == $key)
+                                    @if(! is_null($processo->id) && $processo->estagiario->id == $key)
                                         <option value="{{ $key }}" selected="selected">{{ $estagiario }}</option>
                                     @else
-                                        <option value="{{ $key }}">{{ $estagiario }}</option>
+                                        @if($processo->estagiario->id == $key)
+                                            <option value="{{ $key }}" selected="selected">{{ $estagiario }}</option>
+                                        @else
+                                            <option value="{{ $key }}">{{ $estagiario }}</option>
+                                        @endif
                                     @endif
                                 @endforeach
                             </select>
@@ -198,10 +215,14 @@
                             <label for="assessor_id">Assessor</label>
                             <select name="assessor_id" class="js-example-basic-single form-control" @include('partials.disabled') id="assessor_id">
                                 @foreach ($usuarios as $key => $assessor)
-                                    @if($processo->assessor->id == $key)
+                                    @if(! is_null($processo->id) && $processo->assessor->id == $key)
                                         <option value="{{ $key }}" selected="selected">{{ $assessor }}</option>
                                     @else
-                                        <option value="{{ $key }}">{{ $assessor }}</option>
+                                        @if($processo->assessor->id == $key)
+                                            <option value="{{ $key }}" selected="selected">{{ $assessor }}</option>
+                                        @else
+                                            <option value="{{ $key }}">{{ $assessor }}</option>
+                                        @endif
                                     @endif
                                 @endforeach
                             </select>
@@ -213,7 +234,7 @@
                             <label for="tipo_meio">Meio</label>
                             <select name="tipo_meio_id" class="js-example-basic-single form-control" @include('partials.disabled') id="tipo_meio">
                                 @foreach ($meios as $key => $meio)
-                                    @if($processo->tipoMeio->id == $key)
+                                    @if(! is_null($processo->id) && $processo->tipoMeio->id == $key)
                                         <option value="{{ $key }}" selected="selected">{{ $meio }}</option>
                                     @else
                                         <option value="{{ $key }}">{{ $meio }}</option>
@@ -246,7 +267,8 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="liminar">Liminar</label>
-                            <textarea name="liminar" class="form-control" @include('partials.readonly') id="liminar" placeholder="Informe o Liminar">{{$processo->liminar}}</textarea>
+                            <textarea name="liminar" class="form-control" @include('partials.readonly') id="liminar"
+                                      placeholder="Informe o Liminar">{{$processo->liminar}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -255,7 +277,8 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="apensos_obs">Apensos</label>
-                            <textarea name="apensos_obs" class="form-control" @include('partials.readonly') id="apensos_obs" placeholder="Informe os Apensos">{{$processo->apensos_obs}}</textarea>
+                            <textarea name="apensos_obs" class="form-control" @include('partials.readonly') id="apensos_obs"
+                                      placeholder="Informe os Apensos">{{$processo->apensos_obs}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -264,7 +287,8 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="recurso">Recurso</label>
-                            <textarea name="recurso" class="form-control" @include('partials.readonly') id="recurso" placeholder="Informe o Recurso">{{$processo->recurso}}</textarea>
+                            <textarea name="recurso" class="form-control" @include('partials.readonly') id="recurso"
+                                      placeholder="Informe o Recurso">{{$processo->recurso}}</textarea>
                         </div>
                     </div>
                 </div>

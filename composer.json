@@ -11,9 +11,10 @@
         "laravel/framework": "5.5.*",
         "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
+        "maatwebsite/excel": "~2.1.0",
         "mccool/laravel-auto-presenter": "^6.2",
-        "venturecraft/revisionable": "^1.28",
-		"maatwebsite/excel": "~2.1.0"
+        "pragmarx/version": "^0.2.4",
+        "venturecraft/revisionable": "^1.28"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

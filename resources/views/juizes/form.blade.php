@@ -5,27 +5,23 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-3">
-                    Processos
+                    <h4>
+                        <a href="{{ route('juizes.index') }}">Juizes</a>
+
+                        @if(is_null($juiz->id))
+                            > NOVO
+                        @else
+                            > {{ $juiz->nome }}
+                        @endif
+                    </h4>
                 </div>
 
-                <div class="col-md-9">
-                    <a href="#" class="btn btn-primary pull-right" onclick="f_editar()">editar</a>
-                </div>
+                @include('partials.edit-button', ['model' => $juiz])
             </div>
         </div>
 
         <div class="panel-body">
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
-
-            <script>
-                function f_editar(){
-                    $('form *').removeAttr('readonly').removeAttr('disabled');
-                }
-            </script>
+            @include('partials.alerts')
 
             <form action="{{ route('juizes.store') }}" method="POST">
                 {{ csrf_field() }}
@@ -72,11 +68,8 @@
 
                     </div>
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <button type="submit" class="btn btn-primary">Enviar</button>
-                    </div>
-                </div>
+
+                @include('partials.save-button')
             </form>
         </div>
     </div>

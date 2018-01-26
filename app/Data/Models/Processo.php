@@ -50,6 +50,7 @@ class Processo extends BaseModel implements HasPresenter
 
     public function tribunal()
     {
+        Processo::with('tribunal');
         return $this->belongsTo(Tribunal::class);
     }
 
@@ -65,6 +66,7 @@ class Processo extends BaseModel implements HasPresenter
 
     public function juiz()
     {
+        Processo::with('juiz');
         return $this->belongsTo(Juiz::class);
     }
 

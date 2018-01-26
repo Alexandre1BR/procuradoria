@@ -50,36 +50,43 @@ class Processo extends BaseModel implements HasPresenter
 
     public function tribunal()
     {
+        Processo::with('tribunal');
         return $this->belongsTo(Tribunal::class);
     }
 
     public function acao()
     {
+        Processo::with('acao');
         return $this->belongsTo(Acao::class);
     }
 
     public function relator()
     {
+        Processo::with('relator');
         return $this->belongsTo(Juiz::class);
     }
 
     public function juiz()
     {
+        Processo::with('juiz');
         return $this->belongsTo(Juiz::class);
     }
 
     public function procurador()
     {
+        Processo::with('procurador');
         return $this->belongsTo(User::class);
     }
 
     public function estagiario()
     {
+        Processo::with('estagiario');
         return $this->belongsTo(User::class);
     }
 
     public function assessor()
     {
+        Processo::with('assessor');
         return $this->belongsTo(User::class);
     }
 

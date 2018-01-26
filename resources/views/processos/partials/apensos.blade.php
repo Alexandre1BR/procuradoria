@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-6">
                 <h4>
-                    <a href="{{ route('home.index') }}">Andamentos</a>
+                    <a href="{{ route('home.index') }}">Apensos</a>
                 </h4>
             </div>
 
@@ -43,14 +43,20 @@
                     <th>Processo</th>
                 </tr>
             </thead>
-            @forelse($apensos as $apenso)
-                <tr>
-                    @foreach($processos as $key=>$processoApensado)
-                        @if($key ==$apenso->apensado_id)
-                            <td><a href="{{ route('processos.show', ['id' => $apenso->apensado_id]) }}">{{$processoApensado }}</a></td>
-                        @endif
-                    @endforeach
-                </tr>
+            @forelse($apensos as $key => $apenso)
+                {{--Apensados--}}
+                @if($processo->id == $apenso->apensado->id)
+                    <tr>
+                        {{--<td>{{$apenso->processo->id}}</td>--}}
+                        <td><a href="{{ route('processos.show', ['id' => $apenso->processo->id]) }}">{{$apenso->processo->numero_judicial }}</a></td>
+                    </tr>
+                @endif
+                @if($processo->id == $apenso->processo->id)
+                    <tr>
+                        {{--<td>{{$apenso->apensado->id}}</td>--}}
+                        <td><a href="{{ route('processos.show', ['id' => $apenso->apensado->id]) }}">{{$apenso->apensado->numero_judicial }}</a></td>
+                    </tr>
+                @endif
             @empty
                 <p>Nenhum Apenso encontrado</p>
             @endforelse

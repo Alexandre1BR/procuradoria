@@ -52,6 +52,7 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover",
+            "git fetch --tags",
             "@php artisan version:absorb"
         ]
     },

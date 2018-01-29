@@ -77,6 +77,8 @@ class Processos extends Controller
             'andamentos' => ModelAndamento::where('processo_id', $id)->get(),
             'apensos'    => ModelApenso::Where('processo_id', $id)->orWhere('apensado_id', $id)->get(),
             'processos'  => Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id')
+
+
         ];
     }
 }

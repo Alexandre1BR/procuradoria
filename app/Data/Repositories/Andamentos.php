@@ -10,6 +10,21 @@ class Andamentos extends Base
 {
     protected $model = AndamentoModel::class;
 
+    protected function makeFeedTitle($andamento)
+    {
+        return "\n".
+            'PRAZO - '.$this->cleanString($andamento->tipoPrazo->nome)."\n".
+            'judicial: '.$this->cleanString($andamento->processo->numero_judicial)."\n".
+            'alerj: '.$this->cleanString($andamento->processo->numero_alerj)."\n".
+            'autor: '.$this->cleanString($andamento->processo->autor)."\n".
+            'réu: '.$this->cleanString($andamento->processo->reu)."\n";
+    }
+
+    protected function makeFeedDescription($andamento)
+    {
+        return 'njud:'.$andamento->processo->numero_judicial.'<br>nalerj: '.$andamento->processo->numero_alerj;
+    }
+
     public function search(Request $request)
     {
         return $this->searchFromRequest($request->get('pesquisa'));
@@ -65,7 +80,7 @@ class Andamentos extends Base
         return $query->get();
     }
 
-    private function isDate($item)
+    protected function isDate($item)
     {
         try {
             Carbon::createFromFormat('d/m/Y', $item);
@@ -74,5 +89,19 @@ class Andamentos extends Base
         }
 
         return true;
+    }
+
+    public function feedForFullcalendar()
+    {
+        return $this->all()->map(function ($andamento) {
+            return [
+                'id'          => $andamento->id,
+                'title'       => $this->makeFeedTitle($andamento),
+                'start'       => $andamento->data_prazo->toIso8601String(),
+                'end'         => $andamento->data_prazo->addHour()->toIso8601String(),
+                'description' => $this->makeFeedDescription($andamento),
+                'url'         => route('processos.show', ['id' => $andamento->processo->id]),
+            ];
+        });
     }
 }

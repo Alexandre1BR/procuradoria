@@ -20,3 +20,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 const app = new Vue({
     el: '#app'
 });
+
+jQuery(document).ready(function() {
+    jQuery('#calendar').fullCalendar({
+        // put your options and callbacks here
+    })
+});

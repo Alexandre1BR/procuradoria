@@ -14,4 +14,14 @@ class Apenso extends BaseModel
         'processo_id',
         'apensado_id',
     ];
+
+    public function apensado()
+    {
+        return $this->belongsTo(Processo::class);
+    }
+
+    public function processo()
+    {
+        return $this->belongsTo(Processo::class);
+    }
 }

@@ -4,13 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AllowNullableProcessos extends Migration {
+class AllowNullableProcessos extends Migration
+{
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
+    public function up()
+    {
         Schema::table('processos', function (Blueprint $table) {
             $table->text('numero_judicial')->nullable()->change();
             $table->text('numero_alerj')->nullable()->change();
@@ -43,7 +45,8 @@ class AllowNullableProcessos extends Migration {
      *
      * @return void
      */
-    public function down() {
+    public function down()
+    {
         Schema::table('processos', function (Blueprint $table) {
             $table->text('numero_judicial')->change();
             $table->string('numero_alerj')->change();
@@ -69,6 +72,5 @@ class AllowNullableProcessos extends Migration {
             $table->integer('estagiario_id')->unsigned()->change();
             $table->integer('assessor_id')->unsigned()->change();
         });
-
     }
 }

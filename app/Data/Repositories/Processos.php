@@ -57,7 +57,6 @@ class Processos extends Base
         ]);
 
         $query = Processo::query();
-
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
                 if ($type === 'string') {
@@ -67,6 +66,30 @@ class Processos extends Base
                         $query->orWhere($column, '=', $item);
                     }
                 }
+                $query->orWhereHas('tribunal', function ($query) use ($item) {
+                    $query->whereRaw("lower(nome) like '%{$item}%'");
+                });
+                $query->orWhereHas('juiz', function ($query) use ($item) {
+                    $query->whereRaw("lower(nome) like '%{$item}%'");
+                });
+                $query->orWhereHas('relator', function ($query) use ($item) {
+                    $query->whereRaw("lower(nome) like '%{$item}%'");
+                });
+                $query->orWhereHas('procurador', function ($query) use ($item) {
+                    $query->whereRaw("lower(name) like '%{$item}%'");
+                });
+                $query->orWhereHas('estagiario', function ($query) use ($item) {
+                    $query->whereRaw("lower(name) like '%{$item}%'");
+                });
+                $query->orWhereHas('assessor', function ($query) use ($item) {
+                    $query->whereRaw("lower(name) like '%{$item}%'");
+                });
+                $query->orWhereHas('acao', function ($query) use ($item) {
+                    $query->whereRaw("lower(nome) like '%{$item}%'");
+                });
+            });
+            $query->orWhereHas('tribunal', function ($query) use ($item) {
+                $query->whereRaw("lower(nome) like '%{$item}%'");
             });
         });
 

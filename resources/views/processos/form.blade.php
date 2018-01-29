@@ -301,5 +301,4 @@
     @include('processos.partials.andamentos')
 
     @include('processos.partials.apensos')
-
 @endsection

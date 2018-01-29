@@ -23,6 +23,8 @@ const app = new Vue({
 
 jQuery(document).ready(function() {
     jQuery('#calendar').fullCalendar({
-        // put your options and callbacks here
+        eventSources: [
+            '/agenda/feed',
+        ]
     })
 });

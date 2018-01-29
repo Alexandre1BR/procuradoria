@@ -19,6 +19,16 @@ class Andamento extends BaseModel
         'observacoes',
     ];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'data_prazo',
+        'data_entrega',
+    ];
+
     public function processo()
     {
         return $this->belongsTo(Processo::class);

@@ -54,4 +54,9 @@ class Base
     {
         return $this->model::all();
     }
+
+    public function cleanString($string)
+    {
+        return str_replace(["\n"], [""], $string);
+    }
 }

@@ -145,12 +145,13 @@
                             <select name="juiz_id" class="js-example-basic-single form-control" @include('partials.disabled') id="juiz_id">
                                 <option value="" selected="selected">Selecione...</option>
                                 @foreach ($juizes as $key => $juiz)
-                                    @if(! is_null($processo->id) && $processo->juiz->id == $key)
+                                    @if(! is_null($processo->juiz) && $processo->juiz->id == $key)
                                         <option value="{{ $key }}" selected="selected">{{ $juiz }}</option>
                                     @else
                                         <option value="{{ $key }}">{{ $juiz }}</option>
                                     @endif
                                 @endforeach
+
                             </select>
                         </div>
                     </div>
@@ -177,14 +178,13 @@
                             <label for="procurador_id">Procurador</label>
                             <select name="procurador_id" class="js-example-basic-single form-control" @include('partials.disabled') id="procurador_id">
                                 @foreach ($usuarios as $key => $procurador)
-                                    @if(! is_null($processo->id) && $processo->procurador->id == $key)
+                                    @if(!is_null($processo->procurador) && $processo->procurador->id == $key)
                                         <option value="{{ $key }}" selected="selected">{{ $procurador }}</option>
-                                    @else
-                                        @if($processo->procurador->id == $key)
-                                            <option value="{{ $key }}" selected="selected">{{ $procurador }}</option>
+                                    {{--@else--}}
+                                        {{--@if($processo->procurador->id == $key)--}}
+                                            {{--<option value="{{ $key }}" selected="selected">{{ $procurador }}</option>--}}
                                         @else
                                             <option value="{{ $key }}">{{ $procurador }}</option>
-                                        @endif
                                     @endif
                                 @endforeach
                             </select>
@@ -196,15 +196,15 @@
                             <label for="estagiario_id">Estagiario</label>
                             <select name="estagiario_id" class="js-example-basic-single form-control" @include('partials.disabled') id="estagiario_id">
                                 @foreach ($usuarios as $key => $estagiario)
-                                    @if(! is_null($processo->id) && $processo->estagiario->id == $key)
+                                    @if(! is_null($processo->estagiario) && $processo->estagiario->id == $key)
                                         <option value="{{ $key }}" selected="selected">{{ $estagiario }}</option>
                                     @else
-                                        @if($processo->estagiario->id == $key)
-                                            <option value="{{ $key }}" selected="selected">{{ $estagiario }}</option>
-                                        @else
+                                        {{--@if($processo->estagiario->id == $key)--}}
+                                            {{--<option value="{{ $key }}" selected="selected">{{ $estagiario }}</option>--}}
+                                        {{--@else--}}
                                             <option value="{{ $key }}">{{ $estagiario }}</option>
                                         @endif
-                                    @endif
+                                    {{--@endif--}}
                                 @endforeach
                             </select>
                         </div>
@@ -215,15 +215,15 @@
                             <label for="assessor_id">Assessor</label>
                             <select name="assessor_id" class="js-example-basic-single form-control" @include('partials.disabled') id="assessor_id">
                                 @foreach ($usuarios as $key => $assessor)
-                                    @if(! is_null($processo->id) && $processo->assessor->id == $key)
+                                    @if(! is_null($processo->$assessor) && $processo->assessor->id == $key)
                                         <option value="{{ $key }}" selected="selected">{{ $assessor }}</option>
                                     @else
-                                        @if($processo->assessor->id == $key)
-                                            <option value="{{ $key }}" selected="selected">{{ $assessor }}</option>
-                                        @else
+                                        {{--@if($processo->assessor->id == $key)--}}
+                                            {{--<option value="{{ $key }}" selected="selected">{{ $assessor }}</option>--}}
+                                        {{--@else--}}
                                             <option value="{{ $key }}">{{ $assessor }}</option>
                                         @endif
-                                    @endif
+                                    {{--@endif--}}
                                 @endforeach
                             </select>
                         </div>

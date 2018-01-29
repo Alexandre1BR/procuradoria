@@ -15,7 +15,7 @@ class Andamentos extends Base
         return "\n".
             "PRAZO - ".$this->cleanString($andamento->tipoPrazo->nome)."\n".
             'judicial: '.$this->cleanString($andamento->processo->numero_judicial)."\n".
-            'alerj: '.$this->cleanString($andamento->processo->numero_judicial)."\n".
+            'alerj: '.$this->cleanString($andamento->processo->numero_alerj)."\n".
             'autor: '.$this->cleanString($andamento->processo->autor)."\n".
             'réu: '.$this->cleanString($andamento->processo->reu)."\n"
         ;

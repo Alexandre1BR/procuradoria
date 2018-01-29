@@ -57,6 +57,6 @@ class Base
 
     public function cleanString($string)
     {
-        return str_replace(["\n"], [""], $string);
+        return str_replace(["\n"], [''], $string);
     }
 }

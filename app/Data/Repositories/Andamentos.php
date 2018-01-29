@@ -13,12 +13,11 @@ class Andamentos extends Base
     protected function makeFeedTitle($andamento)
     {
         return "\n".
-            "PRAZO - ".$this->cleanString($andamento->tipoPrazo->nome)."\n".
+            'PRAZO - '.$this->cleanString($andamento->tipoPrazo->nome)."\n".
             'judicial: '.$this->cleanString($andamento->processo->numero_judicial)."\n".
             'alerj: '.$this->cleanString($andamento->processo->numero_judicial)."\n".
             'autor: '.$this->cleanString($andamento->processo->autor)."\n".
-            'réu: '.$this->cleanString($andamento->processo->reu)."\n"
-        ;
+            'réu: '.$this->cleanString($andamento->processo->reu)."\n";
     }
 
     protected function makeFeedDescription($andamento)
@@ -101,7 +100,7 @@ class Andamentos extends Base
                 'start'       => $andamento->data_prazo->toIso8601String(),
                 'end'         => $andamento->data_prazo->addHour()->toIso8601String(),
                 'description' => $this->makeFeedDescription($andamento),
-                'url' => route('processos.show', ['id' => $andamento->processo->id]),
+                'url'         => route('processos.show', ['id' => $andamento->processo->id]),
             ];
         });
     }

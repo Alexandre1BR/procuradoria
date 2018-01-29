@@ -13,7 +13,7 @@
                         'layouts.partials.search-form',
                         [
                             'routeSearch' => 'acoes.index',
-                            'routeCreate' => 'acoes.create',
+                            'routeCreate' => 'andamentos.create',
                         ]
                     )
                 </div>

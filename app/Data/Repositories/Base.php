@@ -49,4 +49,14 @@ class Base
     {
         return new $this->model();
     }
+
+    public function all()
+    {
+        return $this->model::all();
+    }
+
+    public function cleanString($string)
+    {
+        return str_replace(["\n"], [''], $string);
+    }
 }

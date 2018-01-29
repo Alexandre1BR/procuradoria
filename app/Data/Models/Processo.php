@@ -65,7 +65,8 @@ class Processo extends BaseModel implements HasPresenter
 
     public function juiz()
     {
-        Processo::with('juiz');
+        self::with('juiz');
+
         return $this->belongsTo(Juiz::class);
     }
 

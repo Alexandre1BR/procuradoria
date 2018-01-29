@@ -9,5 +9,5 @@ Route::group(['prefix' => '/tribunais'], function () {
     Route::post('/', 'Tribunais@store')->name('tribunais.store');
 
     //show
-    Route::get('/show', 'Tribunais@show')->name('tribunais.show');
+    Route::get('/{id}', 'Tribunais@show')->name('tribunais.show');
 });

@@ -132,24 +132,24 @@ class Excel extends Controller
         if (!is_null($relator)) {
             dump($relator);
             $relator = strtoupper(trim($relator));
-            $relator = preg_replace("/MINISTRO/", "", $relator, 1);
-            $relator = preg_replace("/MIN /", "", $relator, 1);
-            $relator = preg_replace("/DES /", "", $relator, 1);
-            $relator = preg_replace("/MIN./", "", $relator, 1);
-            $relator = preg_replace("/DES./", "", $relator, 1);
-            $relator = preg_replace("/JUIZ/", "", $relator, 1);
-            $relator = preg_replace("/JUIZA/", "", $relator, 1);
-            $relator = preg_replace("/JUÍZA/", "", $relator, 1);
-            $relator = preg_replace("/JUíZA/", "", $relator, 1);
-            $relator = preg_replace("/DRA/", "", $relator, 1);
-            $relator = preg_replace("/RELATOR/", "", $relator, 1);
-            $relator = str_ireplace(".", "", $relator);
-            $relator = str_ireplace(":", "", $relator);
-            $relator = str_ireplace("-", "", $relator);
-            $relator = str_ireplace("_", "", $relator);
-            $relator = str_ireplace("__", "", $relator);
-            $relator = str_ireplace("____", "", $relator);
-            $relator = str_ireplace("  ", " ", $relator);
+            $relator = preg_replace('/MINISTRO/', '', $relator, 1);
+            $relator = preg_replace('/MIN /', '', $relator, 1);
+            $relator = preg_replace('/DES /', '', $relator, 1);
+            $relator = preg_replace('/MIN./', '', $relator, 1);
+            $relator = preg_replace('/DES./', '', $relator, 1);
+            $relator = preg_replace('/JUIZ/', '', $relator, 1);
+            $relator = preg_replace('/JUIZA/', '', $relator, 1);
+            $relator = preg_replace('/JUÍZA/', '', $relator, 1);
+            $relator = preg_replace('/JUíZA/', '', $relator, 1);
+            $relator = preg_replace('/DRA/', '', $relator, 1);
+            $relator = preg_replace('/RELATOR/', '', $relator, 1);
+            $relator = str_ireplace('.', '', $relator);
+            $relator = str_ireplace(':', '', $relator);
+            $relator = str_ireplace('-', '', $relator);
+            $relator = str_ireplace('_', '', $relator);
+            $relator = str_ireplace('__', '', $relator);
+            $relator = str_ireplace('____', '', $relator);
+            $relator = str_ireplace('  ', ' ', $relator);
             $relator = $this->removerCaracter($relator);
             $relator = strtoupper(trim($relator));
             dump($relator);
@@ -205,8 +205,8 @@ class Excel extends Controller
 //        $string = preg_replace("/Çç/", "c", $string);
         //$string = strtr($string, "áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ", "aaaaeeiooouucAAAAEEIOOOUUC");
         $string = str_replace(
-            ['à','á','â','ã','ä', 'ç', 'è','é','ê','ë', 'ì','í','î','ï', 'ñ', 'ò','ó','ô','õ','ö', 'ù','ú','û','ü', 'ý','ÿ', 'À','Á','Â','Ã','Ä', 'Ç', 'È','É','Ê','Ë', 'Ì','Í','Î','Ï', 'Ñ', 'Ò','Ó','Ô','Õ','Ö', 'Ù','Ú','Û','Ü', 'Ý'],
-            ['a','a','a','a','a', 'c', 'e','e','e','e', 'i','i','i','i', 'n', 'o','o','o','o','o', 'u','u','u','u', 'y','y', 'A','A','A','A','A', 'C', 'E','E','E','E', 'I','I','I','I', 'N', 'O','O','O','O','O', 'U','U','U','U', 'Y'],
+            ['à', 'á', 'â', 'ã', 'ä', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', 'À', 'Á', 'Â', 'Ã', 'Ä', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ù', 'Ú', 'Û', 'Ü', 'Ý'],
+            ['a', 'a', 'a', 'a', 'a', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'A', 'A', 'A', 'A', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'N', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y'],
             $string
     );
         //$string = preg_replace("/[][><}{)(:;,!?*%~^`@]/", "", $string);

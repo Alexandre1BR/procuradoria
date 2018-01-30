@@ -6,7 +6,11 @@
                 class="btn btn-success pull-right"
                 @include('partials.disabled')
             >
-                Gravar
+                @if ($isFilter)
+                    Filtrar
+                @else
+                    Gravar
+                @endif
             </button>
         </div>
     </div>

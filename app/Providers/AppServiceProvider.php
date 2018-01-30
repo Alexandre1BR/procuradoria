@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $view->with(array_merge([
                 'formDisabled' => false,
+                'isFilter'     => false,
             ], $view->getData()));
         });
     }

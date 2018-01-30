@@ -20,24 +20,28 @@
                     </tr>
                     </thead>
 
-                    @forelse ($processos as $processo)
-                        <tr>
-                            <td>
-                                <a href="{{ route('processos.show', ['id' => $processo->id]) }}">{{ $processo->numero_judicial }}</a>
-                            </td>
-                            <td>{{ $processo->numero_alerj }}</td>
-                            <td>{{ $processo->tribunal->nome }}</td>
-                            <td>{{ $processo->data_distribuicao }}</td>
-                            <td>{{ $processo->acao->nome }}</td>
-                            <td>{{ $processo->autor }}</td>
-                            <td>{{ $processo->objeto }}</td>
-                            <td>{{ is_null($processo->procurador) ? : $processo->procurador->name }}</td>
-                            <td>{{ is_null($processo->assessor) ? : $processo->assessor->name }}</td>
-                            <td>{{ is_null($processo->estagiario) ? : $processo->estagiario->name }}</td>
-                        </tr>
-                    @empty
-                        <p>Nenhum processo encontrado</p>
-                    @endforelse
+                    @if(isset($processos))
+                        @forelse ($processos as $processo)
+                            <tr>
+                                <td>
+                                    <a href="{{ route('processos.show', ['id' => $processo->id]) }}">{{ $processo->numero_judicial }}</a>
+                                </td>
+                                <td>{{ $processo->numero_alerj }}</td>
+                                <td>{{ $processo->tribunal->nome }}</td>
+                                <td>{{ $processo->data_distribuicao }}</td>
+                                <td>{{ $processo->acao->nome }}</td>
+                                <td>{{ $processo->autor }}</td>
+                                <td>{{ $processo->objeto }}</td>
+                                <td>{{ is_null($processo->procurador) ? : $processo->procurador->name }}</td>
+                                <td>{{ is_null($processo->assessor) ? : $processo->assessor->name }}</td>
+                                <td>{{ is_null($processo->estagiario) ? : $processo->estagiario->name }}</td>
+                            </tr>
+                        @empty
+                            <p>Nenhum processo encontrado</p>
+                        @endforelse
+                        @else
+                            <p>Nenhum processo encontrado</p>
+                    @endif
                 </table>
             </div>
         </div>

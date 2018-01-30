@@ -59,7 +59,7 @@ class Excel extends Controller
                     $tipo_relator = $this->ajustaTipoRelator($value->relator);
                     $tipo_relator = app(TiposJuizes::class)->firstOrCreate(['nome' => $tipo_relator]);
 
-                    $nome_relator = $this->ajustaNomeRelator($value->relator);
+                    $nome_relator = $this->ajustaNomeRelator($value->no_alerj);
 
                     $relator_juiz = app(Juizes::class)
                                     ->firstOrCreate([
@@ -83,30 +83,30 @@ class Excel extends Controller
                                     ->firstOrCreate(['nome' => $tipo_meio]); //TODO => 'N/C'
                     $insert[] =
                             [
-                                    'numero_judicial' => $value->no_judicial,
-                                    'numero_alerj'    => $value->no_alerj,
-                                    'apensos_obs'     => $value->apensos,
-                                    'tribunal_id'     => $tribunal->id, //Origem
-                                    'vara'            => trim($vara),
-                                    'acao_id'         => $acao->id,
-                                    'relator_id'      => $relator_juiz->id,
-                                    //'tipo_juiz_id' => $tipo_relator->id, //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
-                                    'autor'   => $value->autor,
-                                    'reu'     => $value->reu,
-                                    'objeto'  => $value->objeto,
-                                    'merito'  => $value->merito,
-                                    'liminar' => $value->liminar,
-                                    'recurso' => $value->recurso,
-//                                'procurador_id'     => $procurador,
-//                                'estagiario_id'     => $estagiario,
-//                                'assessor_id'       => $assessor,
-                                    'tipo_meio_id' => $tipo_meio->id,
-//                                    'created_at'  => now(),
-//                                    'updated_at'  => now(),
+                                    'numero_judicial' => str_ireplace("\n", '', trim($value->no_judicial)),
+                                    'numero_alerj'    => str_ireplace("\n", '', trim($value->no_alerj)),
+                                    'apensos_obs'     => str_ireplace("\n", '', trim($value->apensos)),
+                                    'tribunal_id'     => str_ireplace("\n", '', trim($tribunal->id)), //Origem
+                                    'vara'            => str_ireplace("\n", '', trim($vara)),
+                                    'acao_id'         => str_ireplace("\n", '', trim($acao->id)),
+                                    'relator_id'      => str_ireplace("\n", '', trim($relator_juiz->id)),
+//'                                 tipo_juiz_id'  =>str_ireplace("\n", "", trim($tipo_relator->id)), //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
+                                    'autor'           => str_ireplace("\n", '', trim($value->autor)),
+                                    'reu'             => str_ireplace("\n", '', trim($value->reu)),
+                                    'objeto'          => str_ireplace("\n", '', trim($value->objeto)),
+                                    'merito'          => str_ireplace("\n", '', trim($value->merito)),
+                                    'liminar'         => str_ireplace("\n", '', trim($value->liminar)),
+                                    'recurso'         => str_ireplace("\n", '', trim($value->recurso)),
+//                                  'procurador_id'     => $procurador,
+//                                  'estagiario_id'     => $estagiario,
+//                                  'assessor_id'       => $assessor,
+                                    'tipo_meio_id'   => str_ireplace("\n", '', trim($tipo_meio->id)),
+//                                  'created_at'  => now(),
+//                                  'updated_at'  => now(),
                     ];
                 }
                 if (!empty($insert)) {
-                    Processo::create($insert);
+                    //Processo::create($insert);
                     dd('Excel Importado com Sucesso.');
                 }
             }
@@ -167,8 +167,8 @@ class Excel extends Controller
     private function ajustaNomeRelator($relator)
     {
         if (!is_null($relator)) {
-            dump($relator);
             $relator = strtoupper(trim($relator));
+
             $relator = preg_replace('/MINISTRO/', '', $relator, 1);
             $relator = preg_replace('/MIN /', '', $relator, 1);
             $relator = preg_replace('/DES /', '', $relator, 1);
@@ -180,6 +180,7 @@ class Excel extends Controller
             $relator = preg_replace('/JUíZA/', '', $relator, 1);
             $relator = preg_replace('/DRA/', '', $relator, 1);
             $relator = preg_replace('/RELATOR/', '', $relator, 1);
+
             $relator = str_ireplace('.', '', $relator);
             $relator = str_ireplace(':', '', $relator);
             $relator = str_ireplace('-', '', $relator);
@@ -187,11 +188,11 @@ class Excel extends Controller
             $relator = str_ireplace('__', '', $relator);
             $relator = str_ireplace('____', '', $relator);
             $relator = str_ireplace('  ', ' ', $relator);
-            $relator = $this->removerCaracter($relator);
-            $relator = strtoupper(trim($relator));
-            dump($relator);
+            $relator = str_ireplace("\n", '', $relator);
 
-            $relator = trim($relator);
+            $relator = $this->removerAcentuacao($relator);
+            $relator = strtoupper(trim($relator));
+
             if (is_null($relator)) {
                 $relator = 'N/C';
             }
@@ -232,23 +233,14 @@ class Excel extends Controller
         return $tipo_meio;
     }
 
-    private function removerCaracter($string)
+    private function removerAcentuacao($string)
     {
-//        $string = preg_replace("/[ÁÀÂÃÄáàâãä]/", "a", $string);
-//        $string = preg_replace("/[ÉÈÊéèê]/", "e", $string);
-//        $string = preg_replace("/[ÍÌíì]/", "i", $string);
-//        $string = preg_replace("/[ÓÒÔÕÖóòôõö]/", "o", $string);
-//        $string = preg_replace("/[ÚÙÜúùü]/", "u", $string);
-//        $string = preg_replace("/Çç/", "c", $string);
-        //$string = strtr($string, "áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ", "aaaaeeiooouucAAAAEEIOOOUUC");
         $string = str_replace(
             ['à', 'á', 'â', 'ã', 'ä', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', 'À', 'Á', 'Â', 'Ã', 'Ä', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ù', 'Ú', 'Û', 'Ü', 'Ý'],
             ['a', 'a', 'a', 'a', 'a', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'A', 'A', 'A', 'A', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'N', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y'],
             $string
     );
-        //$string = preg_replace("/[][><}{)(:;,!?*%~^`@]/", "", $string);
-        //$string = preg_replace("/ /", "_", $string);
-        //$string = strtolower($string);
+
         return $string;
     }
 }

@@ -9,6 +9,8 @@
 namespace App\Http\Controllers;
 
 use App\Data\Models\Processo;
+use App\Data\Models\User as ModelUser;
+use App\Data\Models\TipoUsuario as ModelTipoUsuario;
 use App\Data\Repositories\Acoes;
 use App\Data\Repositories\Juizes;
 use App\Data\Repositories\Meios;
@@ -113,11 +115,46 @@ class Excel extends Controller
         return back();
     }
 
-    /**
-     * @param $value
-     *
-     * @return array
-     */
+    public function importUsers()
+    {
+        if (Input::hasFile('import_file')) {
+            $data = Cache::remember('importUsers', 5, function () {
+                $path = Input::file('import_file')->getRealPath();
+
+                return \Maatwebsite\Excel\Facades\Excel::load($path, function ($reader) {
+                })->get();
+            });
+
+            if (!empty($data) && $data->count()) {
+                foreach ($data as $key => $value) {
+                    list($name, $username, $user_type) = explode(';', $value['nameusernameuser_type']);
+                    $user_type = $this->ajustaTipoUsuario($user_type)->id;
+                    if (!empty($name)) {
+                        ModelUser::create(
+                            [
+                                'name' => $name,
+                                'password' => '-',
+                                'username' => $username,
+                                'email' => $username . '@alerj.rj.gov.br',
+                                'user_type_id' => $user_type,
+                            ]
+                        );
+                    }
+                    //dump($name);
+                }
+                dd('Insert Record successfully.');
+
+            }
+        }
+        return back();
+    }
+
+    private function ajustaTipoUsuario($tipo_user)
+    {
+        $tipo_user = strtolower(trim($tipo_user));
+        return ModelTipoUsuario::whereRaw("lower(nome) like '%{$tipo_user}%'")->get()->first();
+    }
+
     public function split($value): array
     {
         $split = explode('-', $value->origem);

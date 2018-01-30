@@ -44,8 +44,11 @@ class Juizes extends Controller
 
     public function show($id)
     {
+        $juiz = Juiz::find($id);
+//        dd(Juiz::find($id));
         return view('juizes.form')
-            ->with('juiz', Juiz::find($id))
+            ->with('juiz', $juiz)
+            ->with('processos', $juiz->processos)
             ->with('formDisabled', true)
             ->with($this->getJuizesData());
     }

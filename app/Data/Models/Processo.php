@@ -43,7 +43,7 @@ class Processo extends BaseModel implements HasPresenter
         return $this->data_distribuicao->format('d/m/Y');
     }
 
-    public function andamento()
+    public function andamentos()
     {
         return  $this->hasMany(Andamento::class);
     }

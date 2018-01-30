@@ -32,6 +32,7 @@ class Processos extends Base
         'recurso'           => 'string',
         //'tipo_meio'         => 'string',
         'data_distribuicao' => 'date',
+        'observacao'    => 'string',
     ];
 
     private function isDate($item)
@@ -154,7 +155,7 @@ class Processos extends Base
             'meios'      => Meio::orderBy('nome')->pluck('nome', 'id'),
             'acoes'      => Acao::orderBy('nome')->pluck('nome', 'id'),
             'andamentos' => Andamento::where('processo_id', $id)->get(),
-            'apensos'    => Apenso::Where('processo_id', $id)->orWhere('apensado_id', $id)->get(),
+            'apensos'    => Apenso::where('processo_id', $id)->orWhere('apensado_id', $id)->get(),
             'processos'  => Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id'),
         ];
     }

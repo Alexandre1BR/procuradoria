@@ -277,5 +277,16 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="observacao">Observação</label>
+                <textarea name="observacao" class="form-control" @include('partials.readonly') id="observacao"
+                          placeholder="Caso deseje, entre com uma observação">{{$processo->observacao}}</textarea>
+            </div>
+        </div>
+    </div>
+
+
     @include('partials.save-button')
 </form>

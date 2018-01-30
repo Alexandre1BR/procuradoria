@@ -32,7 +32,7 @@ class Processos extends Base
         'recurso'           => 'string',
         //'tipo_meio'         => 'string',
         'data_distribuicao' => 'date',
-        'observacao'    => 'string',
+        'observacao'        => 'string',
     ];
 
     private function isDate($item)

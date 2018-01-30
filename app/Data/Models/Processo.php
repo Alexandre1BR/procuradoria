@@ -59,7 +59,7 @@ class Processo extends BaseModel implements HasPresenter
         'estagiario_id'     => 'id',
         'assessor_id'       => 'id',
         'tipo_meio_id'      => 'id',
-        'observacao'    => 'string',
+        'observacao'        => 'string',
     ];
 
     public function getDataSemHoraAttribute()

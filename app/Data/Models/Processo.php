@@ -38,6 +38,29 @@ class Processo extends BaseModel implements HasPresenter
         'tipo_meio_id',
     ];
 
+    protected $dataTypes = [
+        'numero_judicial' => 'id',
+        'numero_alerj' => 'id',
+        'tribunal_id' => 'id',
+        'vara' => 'string',
+        'data_distribuicao' => 'date',
+        'acao_id' => 'id',
+        'juiz_id' => 'id',
+        'relator_id' => 'id',
+        'apensos_obs' => 'string',
+        'autor' => 'string',
+        'reu' => 'string',
+        'objeto' => 'string',
+        'merito' => 'string',
+        'liminar' => 'string',
+        'recurso' => 'string',
+        'procurador_id' => 'id',
+        'estagiario_id' => 'id',
+        'assessor_id' => 'id',
+        'tipo_meio_id' => 'id',
+    ];
+
+
     public function getDataSemHoraAttribute()
     {
         return $this->data_distribuicao->format('d/m/Y');

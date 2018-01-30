@@ -12,4 +12,13 @@ class BaseModel extends Model
     protected $revisionEnabled = true;
 
     protected $revisionCreationsEnabled = true;
+
+    protected $dataTypes = [];
+
+    public static function getDataTypeOf($column)
+    {
+        $model = new static();
+
+        return collect($model->dataTypes)->get($column);
+    }
 }

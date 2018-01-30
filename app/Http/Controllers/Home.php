@@ -2,31 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Repositories\Processos as ProcessosRepositorio;
+use App\Data\Models\Processo;
 use App\Http\Requests\Processo as ProcessoRequest;
+use App\Data\Repositories\Processos as ProcessosRepository;
 
 class Home extends Controller
 {
+    protected $repository;
+
     /**
      * Create a new controller instance.
+     * @param ProcessosRepository $repository
      */
-    public function __construct()
+    public function __construct(ProcessosRepository $repository)
     {
-        $this->middleware('auth');
+        $this->repository = $repository;
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @param ProcessosRepositorio $processos
-     * @param ProcessoRequest      $request
-     *
-     * @return \Illuminate\Http\Response
+     * @param ProcessoRequest $request
+     * @param $data
+     * @return mixed
      */
-    public function index(ProcessosRepositorio $processos, ProcessoRequest $request)
+    private function buildView(ProcessoRequest $request, $data)
     {
         return view('home.index')
-                ->with('pesquisa', $request->get('pesquisa'))
-                ->with('processos', $processos->search($request));
+            ->with('pesquisa', $request->get('pesquisa'))
+            ->with($this->repository->getProcessosData())
+            ->with('processo', new Processo())
+            ->with('processos', $data)
+        ;
+    }
+
+    /**
+     * @param ProcessoRequest      $request
+     * @return \Illuminate\Http\Response
+     */
+    public function index(ProcessoRequest $request)
+    {
+        return $this->buildView($request, $this->repository->search($request));
+    }
+
+    /**
+     * @param ProcessoRequest      $request
+     * @return \Illuminate\Http\Response
+     */
+    public function filter(ProcessoRequest $request)
+    {
+        return $this->buildView($request, $this->repository->filter($request));
     }
 }

@@ -9,8 +9,8 @@
 namespace App\Http\Controllers;
 
 use App\Data\Models\Processo;
-use App\Data\Models\User as ModelUser;
 use App\Data\Models\TipoUsuario as ModelTipoUsuario;
+use App\Data\Models\User as ModelUser;
 use App\Data\Repositories\Acoes;
 use App\Data\Repositories\Juizes;
 use App\Data\Repositories\Meios;
@@ -132,10 +132,10 @@ class Excel extends Controller
                     if (!empty($name)) {
                         ModelUser::create(
                             [
-                                'name' => $name,
-                                'password' => '-',
-                                'username' => $username,
-                                'email' => $username . '@alerj.rj.gov.br',
+                                'name'         => $name,
+                                'password'     => '-',
+                                'username'     => $username,
+                                'email'        => $username.'@alerj.rj.gov.br',
                                 'user_type_id' => $user_type,
                             ]
                         );
@@ -143,15 +143,16 @@ class Excel extends Controller
                     //dump($name);
                 }
                 dd('Insert Record successfully.');
-
             }
         }
+
         return back();
     }
 
     private function ajustaTipoUsuario($tipo_user)
     {
         $tipo_user = strtolower(trim($tipo_user));
+
         return ModelTipoUsuario::whereRaw("lower(nome) like '%{$tipo_user}%'")->get()->first();
     }
 

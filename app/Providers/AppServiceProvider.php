@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Data\Models\Processo;
 use App\Services\Authorization;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
@@ -27,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $view->with(array_merge([
                 'formDisabled' => false,
-                'isFilter' => false,
+                'isFilter'     => false,
             ], $view->getData()));
         });
     }

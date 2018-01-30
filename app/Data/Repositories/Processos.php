@@ -2,7 +2,6 @@
 
 namespace App\Data\Repositories;
 
-use Carbon\Carbon;
 use App\Data\Models\Acao;
 use App\Data\Models\Andamento;
 use App\Data\Models\Apenso;
@@ -11,8 +10,9 @@ use App\Data\Models\Meio;
 use App\Data\Models\Processo;
 use App\Data\Models\Tribunal;
 use App\Data\Models\User;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Processo as ProcessoRequest;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Processos extends Base
 {

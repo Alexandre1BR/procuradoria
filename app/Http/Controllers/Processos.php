@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Data\Models\Processo;
-use App\Http\Requests\Apenso as ApensoRequest;
-use App\Http\Requests\Processo as ProcessoRequest;
 use App\Data\Repositories\Apensos as ApensosRepository;
 use App\Data\Repositories\Processos as ProcessosRepository;
+use App\Http\Requests\Apenso as ApensoRequest;
+use App\Http\Requests\Processo as ProcessoRequest;
 
 class Processos extends Controller
 {

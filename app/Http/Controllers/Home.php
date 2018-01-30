@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Data\Models\Processo;
-use App\Http\Requests\Processo as ProcessoRequest;
 use App\Data\Repositories\Processos as ProcessosRepository;
+use App\Http\Requests\Processo as ProcessoRequest;
 
 class Home extends Controller
 {
@@ -12,6 +12,7 @@ class Home extends Controller
 
     /**
      * Create a new controller instance.
+     *
      * @param ProcessosRepository $repository
      */
     public function __construct(ProcessosRepository $repository)
@@ -22,6 +23,7 @@ class Home extends Controller
     /**
      * @param ProcessoRequest $request
      * @param $data
+     *
      * @return mixed
      */
     private function buildView(ProcessoRequest $request, $data)
@@ -30,12 +32,12 @@ class Home extends Controller
             ->with('pesquisa', $request->get('pesquisa'))
             ->with($this->repository->getProcessosData())
             ->with('processo', new Processo())
-            ->with('processos', $data)
-        ;
+            ->with('processos', $data);
     }
 
     /**
-     * @param ProcessoRequest      $request
+     * @param ProcessoRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function index(ProcessoRequest $request)
@@ -44,7 +46,8 @@ class Home extends Controller
     }
 
     /**
-     * @param ProcessoRequest      $request
+     * @param ProcessoRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function filter(ProcessoRequest $request)

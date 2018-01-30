@@ -13,6 +13,12 @@ class Tribunal extends BaseModel
      */
     protected $fillable = [
         'nome',
+        'abreviacao',
         'url_api',
     ];
+
+    public function processos()
+    {
+        return $this->hasMany(Processo::class);
+    }
 }

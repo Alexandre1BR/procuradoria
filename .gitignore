@@ -15,7 +15,3 @@ composer.phar
 _ide_helper.php
 .phpstorm.meta.php
 .php_cs.cache
-git-tools/hooks/pre-commit
-git-tools/hooks/_backup_pre-commit
-git-tools/hooks/pre-commit
-git-tools/hooks/pre-commit

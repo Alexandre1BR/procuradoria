@@ -81,24 +81,24 @@ class Excel extends Controller
                                     ->firstOrCreate(['nome' => $tipo_meio]); //TODO => 'N/C'
                     $insert[] =
                             [
-                                    'numero_judicial' => str_ireplace("\n", "", trim($value->no_judicial)),
-                                    'numero_alerj'    => str_ireplace("\n", "", trim($value->no_alerj)),
-                                    'apensos_obs'     => str_ireplace("\n", "", trim($value->apensos)),
-                                    'tribunal_id'     => str_ireplace("\n", "", trim($tribunal->id)), //Origem
-                                    'vara'            => str_ireplace("\n", "", trim($vara)),
-                                    'acao_id'         => str_ireplace("\n", "", trim($acao->id)),
-                                    'relator_id'      => str_ireplace("\n", "", trim($relator_juiz->id)),
+                                    'numero_judicial' => str_ireplace("\n", '', trim($value->no_judicial)),
+                                    'numero_alerj'    => str_ireplace("\n", '', trim($value->no_alerj)),
+                                    'apensos_obs'     => str_ireplace("\n", '', trim($value->apensos)),
+                                    'tribunal_id'     => str_ireplace("\n", '', trim($tribunal->id)), //Origem
+                                    'vara'            => str_ireplace("\n", '', trim($vara)),
+                                    'acao_id'         => str_ireplace("\n", '', trim($acao->id)),
+                                    'relator_id'      => str_ireplace("\n", '', trim($relator_juiz->id)),
 //'                                 tipo_juiz_id'  =>str_ireplace("\n", "", trim($tipo_relator->id)), //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
-                                    'autor'           => str_ireplace("\n", "", trim($value->autor)),
-                                    'reu'             => str_ireplace("\n", "", trim($value->reu)),
-                                    'objeto'          => str_ireplace("\n", "", trim($value->objeto)),
-                                    'merito'          => str_ireplace("\n", "", trim($value->merito)),
-                                    'liminar'         => str_ireplace("\n", "", trim($value->liminar)),
-                                    'recurso'         => str_ireplace("\n", "", trim($value->recurso)),
+                                    'autor'           => str_ireplace("\n", '', trim($value->autor)),
+                                    'reu'             => str_ireplace("\n", '', trim($value->reu)),
+                                    'objeto'          => str_ireplace("\n", '', trim($value->objeto)),
+                                    'merito'          => str_ireplace("\n", '', trim($value->merito)),
+                                    'liminar'         => str_ireplace("\n", '', trim($value->liminar)),
+                                    'recurso'         => str_ireplace("\n", '', trim($value->recurso)),
 //                                  'procurador_id'     => $procurador,
 //                                  'estagiario_id'     => $estagiario,
 //                                  'assessor_id'       => $assessor,
-                                    'tipo_meio_id'   => str_ireplace("\n", "", trim($tipo_meio->id)),
+                                    'tipo_meio_id'   => str_ireplace("\n", '', trim($tipo_meio->id)),
 //                                  'created_at'  => now(),
 //                                  'updated_at'  => now(),
                     ];
@@ -130,29 +130,28 @@ class Excel extends Controller
     private function ajustaNomeRelator($relator)
     {
         if (!is_null($relator)) {
-
             $relator = strtoupper(trim($relator));
 
-            $relator = preg_replace("/MINISTRO/", "", $relator, 1);
-            $relator = preg_replace("/MIN /", "", $relator, 1);
-            $relator = preg_replace("/DES /", "", $relator, 1);
-            $relator = preg_replace("/MIN./", "", $relator, 1);
-            $relator = preg_replace("/DES./", "", $relator, 1);
-            $relator = preg_replace("/JUIZ/", "", $relator, 1);
-            $relator = preg_replace("/JUIZA/", "", $relator, 1);
-            $relator = preg_replace("/JUÍZA/", "", $relator, 1);
-            $relator = preg_replace("/JUíZA/", "", $relator, 1);
-            $relator = preg_replace("/DRA/", "", $relator, 1);
-            $relator = preg_replace("/RELATOR/", "", $relator, 1);
+            $relator = preg_replace('/MINISTRO/', '', $relator, 1);
+            $relator = preg_replace('/MIN /', '', $relator, 1);
+            $relator = preg_replace('/DES /', '', $relator, 1);
+            $relator = preg_replace('/MIN./', '', $relator, 1);
+            $relator = preg_replace('/DES./', '', $relator, 1);
+            $relator = preg_replace('/JUIZ/', '', $relator, 1);
+            $relator = preg_replace('/JUIZA/', '', $relator, 1);
+            $relator = preg_replace('/JUÍZA/', '', $relator, 1);
+            $relator = preg_replace('/JUíZA/', '', $relator, 1);
+            $relator = preg_replace('/DRA/', '', $relator, 1);
+            $relator = preg_replace('/RELATOR/', '', $relator, 1);
 
-            $relator = str_ireplace(".", "", $relator);
-            $relator = str_ireplace(":", "", $relator);
-            $relator = str_ireplace("-", "", $relator);
-            $relator = str_ireplace("_", "", $relator);
-            $relator = str_ireplace("__", "", $relator);
-            $relator = str_ireplace("____", "", $relator);
-            $relator = str_ireplace("  ", " ", $relator);
-            $relator = str_ireplace("\n", "", $relator);
+            $relator = str_ireplace('.', '', $relator);
+            $relator = str_ireplace(':', '', $relator);
+            $relator = str_ireplace('-', '', $relator);
+            $relator = str_ireplace('_', '', $relator);
+            $relator = str_ireplace('__', '', $relator);
+            $relator = str_ireplace('____', '', $relator);
+            $relator = str_ireplace('  ', ' ', $relator);
+            $relator = str_ireplace("\n", '', $relator);
 
             $relator = $this->removerAcentuacao($relator);
             $relator = strtoupper(trim($relator));
@@ -204,6 +203,7 @@ class Excel extends Controller
             ['a', 'a', 'a', 'a', 'a', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'A', 'A', 'A', 'A', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'N', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y'],
             $string
     );
+
         return $string;
     }
 }

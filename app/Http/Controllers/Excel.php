@@ -57,7 +57,7 @@ class Excel extends Controller
                     $tipo_relator = $this->ajustaTipoRelator($value->relator);
                     $tipo_relator = app(TiposJuizes::class)->firstOrCreate(['nome' => $tipo_relator]);
 
-                    $nome_relator = $this->ajustaNomeRelator($value->relator);
+                    $nome_relator = $this->ajustaNomeRelator($value->no_alerj);
 
                     $relator_juiz = app(Juizes::class)
                                     ->firstOrCreate([
@@ -81,30 +81,30 @@ class Excel extends Controller
                                     ->firstOrCreate(['nome' => $tipo_meio]); //TODO => 'N/C'
                     $insert[] =
                             [
-                                    'numero_judicial' => $value->no_judicial,
-                                    'numero_alerj'    => $value->no_alerj,
-                                    'apensos_obs'     => $value->apensos,
-                                    'tribunal_id'     => $tribunal->id, //Origem
-                                    'vara'            => trim($vara),
-                                    'acao_id'         => $acao->id,
-                                    'relator_id'      => $relator_juiz->id,
-                                    //'tipo_juiz_id' => $tipo_relator->id, //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
-                                    'autor'   => $value->autor,
-                                    'reu'     => $value->reu,
-                                    'objeto'  => $value->objeto,
-                                    'merito'  => $value->merito,
-                                    'liminar' => $value->liminar,
-                                    'recurso' => $value->recurso,
-//                                'procurador_id'     => $procurador,
-//                                'estagiario_id'     => $estagiario,
-//                                'assessor_id'       => $assessor,
-                                    'tipo_meio_id' => $tipo_meio->id,
-//                                    'created_at'  => now(),
-//                                    'updated_at'  => now(),
+                                    'numero_judicial' => str_ireplace("\n", "", trim($value->no_judicial)),
+                                    'numero_alerj'    => str_ireplace("\n", "", trim($value->no_alerj)),
+                                    'apensos_obs'     => str_ireplace("\n", "", trim($value->apensos)),
+                                    'tribunal_id'     => str_ireplace("\n", "", trim($tribunal->id)), //Origem
+                                    'vara'            => str_ireplace("\n", "", trim($vara)),
+                                    'acao_id'         => str_ireplace("\n", "", trim($acao->id)),
+                                    'relator_id'      => str_ireplace("\n", "", trim($relator_juiz->id)),
+//'                                 tipo_juiz_id'  =>str_ireplace("\n", "", trim($tipo_relator->id)), //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
+                                    'autor'           => str_ireplace("\n", "", trim($value->autor)),
+                                    'reu'             => str_ireplace("\n", "", trim($value->reu)),
+                                    'objeto'          => str_ireplace("\n", "", trim($value->objeto)),
+                                    'merito'          => str_ireplace("\n", "", trim($value->merito)),
+                                    'liminar'         => str_ireplace("\n", "", trim($value->liminar)),
+                                    'recurso'         => str_ireplace("\n", "", trim($value->recurso)),
+//                                  'procurador_id'     => $procurador,
+//                                  'estagiario_id'     => $estagiario,
+//                                  'assessor_id'       => $assessor,
+                                    'tipo_meio_id'   => str_ireplace("\n", "", trim($tipo_meio->id)),
+//                                  'created_at'  => now(),
+//                                  'updated_at'  => now(),
                     ];
                 }
                 if (!empty($insert)) {
-                    Processo::create($insert);
+                    //Processo::create($insert);
                     dd('Excel Importado com Sucesso.');
                 }
             }
@@ -150,10 +150,10 @@ class Excel extends Controller
             $relator = str_ireplace("__", "", $relator);
             $relator = str_ireplace("____", "", $relator);
             $relator = str_ireplace("  ", " ", $relator);
+            $relator = str_ireplace("\n", "", $relator);
             $relator = $this->removerCaracter($relator);
             $relator = strtoupper(trim($relator));
             dump($relator);
-
             $relator = trim($relator);
             if (is_null($relator)) {
                 $relator = 'N/C';

@@ -99,11 +99,13 @@ class Excel extends Controller
 //                                'estagiario_id'     => $estagiario,
 //                                'assessor_id'       => $assessor,
                                     'tipo_meio_id' => $tipo_meio->id,
+//                                    'created_at'  => now(),
+//                                    'updated_at'  => now(),
                     ];
                 }
                 if (!empty($insert)) {
-                    //Processo::insert($insert);
-                    dd('Insert Record successfully.');
+                    Processo::create($insert);
+                    dd('Excel Importado com Sucesso.');
                 }
             }
         }

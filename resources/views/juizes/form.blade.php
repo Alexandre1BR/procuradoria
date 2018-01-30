@@ -73,4 +73,7 @@
             </form>
         </div>
     </div>
+
+    @include('partials.processos')
+
 @endsection

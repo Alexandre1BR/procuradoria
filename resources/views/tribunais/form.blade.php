@@ -39,12 +39,17 @@
                 @endif
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Nome</label>
+                    <label for="nome">Nome</label>
                     <input name="nome" value="{{$tribunal->nome}}" @include('partials.readonly') class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="nome">
+                    <label for="abreviacao">Abreviação</label>
+                    <input name="nome" value="{{$tribunal->abreviacao}}" @include('partials.readonly') class="form-control" id="abreviacao" aria-describedby="abreviacaoHelp" placeholder="abreviacao">
                 </div>
 
                 @include('partials.save-button')
             </form>
         </div>
     </div>
+
+    @include('partials.processos')
+
 @endsection

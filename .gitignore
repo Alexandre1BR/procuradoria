@@ -12,6 +12,3 @@ yarn-error.log
 .env
 /tests/coverage
 composer.phar
-_ide_helper.php
-.phpstorm.meta.php
-.php_cs.cache

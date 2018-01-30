@@ -99,11 +99,13 @@ class Excel extends Controller
 //                                'estagiario_id'     => $estagiario,
 //                                'assessor_id'       => $assessor,
                                     'tipo_meio_id' => $tipo_meio->id,
+//                                    'created_at'  => now(),
+//                                    'updated_at'  => now(),
                     ];
                 }
                 if (!empty($insert)) {
-                    Processo::insert($insert);
-                    dd('Insert Record successfully.');
+                    Processo::create($insert);
+                    dd('Excel Importado com Sucesso.');
                 }
             }
         }
@@ -128,6 +130,7 @@ class Excel extends Controller
     private function ajustaNomeRelator($relator)
     {
         if (!is_null($relator)) {
+            dump($relator);
             $relator = strtoupper(trim($relator));
             $relator = preg_replace('/MINISTRO/', '', $relator, 1);
             $relator = preg_replace('/MIN /', '', $relator, 1);
@@ -146,8 +149,10 @@ class Excel extends Controller
             $relator = str_ireplace('_', '', $relator);
             $relator = str_ireplace('__', '', $relator);
             $relator = str_ireplace('____', '', $relator);
-            $relator = str_ireplace('-', '', $relator);
-            $relator = str_ireplace('-', '', $relator);
+            $relator = str_ireplace('  ', ' ', $relator);
+            $relator = $this->removerCaracter($relator);
+            $relator = strtoupper(trim($relator));
+            dump($relator);
 
             $relator = trim($relator);
             if (is_null($relator)) {
@@ -188,5 +193,25 @@ class Excel extends Controller
         }
 
         return $tipo_meio;
+    }
+
+    private function removerCaracter($string)
+    {
+//        $string = preg_replace("/[ÁÀÂÃÄáàâãä]/", "a", $string);
+//        $string = preg_replace("/[ÉÈÊéèê]/", "e", $string);
+//        $string = preg_replace("/[ÍÌíì]/", "i", $string);
+//        $string = preg_replace("/[ÓÒÔÕÖóòôõö]/", "o", $string);
+//        $string = preg_replace("/[ÚÙÜúùü]/", "u", $string);
+//        $string = preg_replace("/Çç/", "c", $string);
+        //$string = strtr($string, "áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ", "aaaaeeiooouucAAAAEEIOOOUUC");
+        $string = str_replace(
+            ['à', 'á', 'â', 'ã', 'ä', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', 'À', 'Á', 'Â', 'Ã', 'Ä', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ù', 'Ú', 'Û', 'Ü', 'Ý'],
+            ['a', 'a', 'a', 'a', 'a', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'A', 'A', 'A', 'A', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'N', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y'],
+            $string
+    );
+        //$string = preg_replace("/[][><}{)(:;,!?*%~^`@]/", "", $string);
+        //$string = preg_replace("/ /", "_", $string);
+        //$string = strtolower($string);
+        return $string;
     }
 }

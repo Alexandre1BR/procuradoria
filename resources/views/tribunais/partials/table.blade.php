@@ -14,12 +14,14 @@
     <thead>
     <tr>
         <th>Nome</th>
+        <th>Abreviação</th>
     </tr>
     </thead>
 
     @forelse ($tribunais as $tribunal)
         <tr>
             <td><a href="{{ route('tribunais.show', ['id' => $tribunal['id']]) }}">{{ is_null($tribunal->nome) ? : $tribunal->nome }}</a></td>
+            <td>{{ is_null($tribunal->abreviacao) ? : $tribunal->abreviacao }}</td>
         </tr>
     @empty
         <p>Nenhum tribunal encontrado</p>

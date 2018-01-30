@@ -26,4 +26,9 @@ class Juiz extends BaseModel
     {
         return $this->belongsTo(Tribunal::class);
     }
+
+    public function processos()
+    {
+        return $this->hasMany(Processo::class)->orWhere('relator_id', '=', $this->id);
+    }
 }

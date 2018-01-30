@@ -29,7 +29,9 @@ class Juiz extends BaseModel
 
     public function processos_mode_java()
     {
-        app(Processo::class)->orWhere('juiz_id', $this->id)->orWhere(function($query_){$query_->orWhere('relator_id', $this->id);})->get();
+        app(Processo::class)->orWhere('juiz_id', $this->id)->orWhere(function ($query_) {
+            $query_->orWhere('relator_id', $this->id);
+        })->get();
 
         return $query;
     }

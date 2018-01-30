@@ -35,7 +35,6 @@
                         </ul>
                     </div>
                 @endif
-
                 <div class="row">
                     <input name="id" type='hidden' value="{{$juiz->id}}" id="id" >
                     <div class="form-group col-md-4">

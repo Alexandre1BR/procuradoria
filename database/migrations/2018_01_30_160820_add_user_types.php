@@ -4,7 +4,7 @@ use App\Data\Models\TipoUsuario as TipoUsuarioModel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 
-class InsertUsers extends Migration
+class AddUserTypes extends Migration
 {
     public function up()
     {

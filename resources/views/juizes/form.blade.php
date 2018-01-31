@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="lotacao_id">Lotação</label>
-                        <select name="lotacao_id" class="js-example-basic-single form-control" @include('partials.disabled') id="lotacao_id">
+                        <select name="lotacao_id" class="select2 form-control" @include('partials.disabled') id="lotacao_id">
                             @foreach ($tribunais as $key => $tribunal)
                                 @if(!is_null($juiz->lotacao) && $juiz->lotacao->id == $key)
                                     <option value="{{ $key }}" selected="selected">{{ $tribunal }}</option>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="tipo_juiz_id">Tipo Juiz</label>
-                        <select name="tipo_juiz_id" class="js-example-basic-single form-control" @include('partials.disabled') id="tipo_juiz_id">
+                        <select name="tipo_juiz_id" class="select2 form-control" @include('partials.disabled') id="tipo_juiz_id">
                             @foreach ($tiposJuizes as $key => $tipojuiz)
                                 @if(!is_null($juiz->tipoJuiz) && $juiz->tipoJuiz->id == $key)
                                     <option value="{{ $key }}" selected="selected">{{ $tipojuiz }}</option>
@@ -74,5 +74,4 @@
     </div>
 
     @include('partials.processos')
-
 @endsection

@@ -23,7 +23,7 @@ class Authentication
     /**
      * @var Users
      */
-    private $usersRepository;
+    protected $usersRepository;
 
     public function __construct(Users $usersRepository, RemoteRequest $remoteRequest)
     {
@@ -38,7 +38,7 @@ class Authentication
 
         return $this->loginUser(
             $credentials,
-            $this->remoteRequest->post(static::LOGIN_URL, $credentials),
+            $this->loginRequest($credentials),
             $remember
         );
     }
@@ -59,17 +59,54 @@ class Authentication
 
     /**
      * @param $credentials
+     * @return mixed
+     */
+    protected function loginRequest($credentials)
+    {
+        if (config('auth.authentication.mock')) {
+            return $this->mockedAuthentication($credentials);
+        }
+
+        return $this->remoteRequest->post(static::LOGIN_URL, $credentials);
+    }
+
+    /**
+     * @param $credentials
      * @param $response
      * @param $remember
      *
      * @return mixed
      */
-    private function loginUser($credentials, $response, $remember)
+    protected function loginUser($credentials, $response, $remember)
     {
         if ($success = $response['success']) {
             $this->usersRepository->loginUser($credentials, $remember);
         }
 
         return $success;
+    }
+
+    protected function mockedAuthentication($credentials)
+    {
+        return [
+            'success' => true,
+            'code' => 200,
+            'message' => null,
+            'data' => [
+                'name' => [
+                    $credentials['username']
+                ],
+                'email' => [
+                    $credentials['username'].'@alerj.rj.gov.br'
+                ],
+                'memberof' => [
+                    "CN=ProjEsp,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br",
+                    "CN=SDGI,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br",
+                ],
+                'description' => [
+                    'matricula: N/C'
+                ],
+            ],
+        ];
     }
 }

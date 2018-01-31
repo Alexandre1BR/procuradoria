@@ -22,6 +22,10 @@ class Authorization
 
     public function getUserPermissions($username)
     {
+        if (config('auth.authorization.mock')) {
+            return $this->mockedPermissions($username);
+        }
+
         return collect($this->remoteRequest->post(
             static::PERMISSIONS_URL,
             [
@@ -29,5 +33,15 @@ class Authorization
                 'system'   => static::SYSTEM_NAME,
             ]
         ));
+    }
+
+    public function getUserProfiles($username)
+    {
+        return collect(['Estagiario']);
+    }
+
+    private function mockedPermissions($username)
+    {
+        return collect(['Editar']);
     }
 }

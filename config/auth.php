@@ -18,9 +18,15 @@ return [
         'passwords' => 'users',
     ],
 
-    'authentication' => env('APP_AUTHENTICATION'),
+    'authentication' => [
+        'mock' => env('APP_AUTHENTICATION_MOCKED'),
+        'enabled' => env('APP_AUTHENTICATION_ENABLED', env('APP_AUTHENTICATION')),
+    ],
 
-    'authorization' => env('APP_AUTHORIZATION'),
+    'authorization' => [
+        'mock' => env('APP_AUTHORIZATION_MOCKED'),
+        'enabled' => env('APP_AUTHORIZATION_ENABLED', env('APP_AUTHORIZATION')),
+    ],
 
     /*
     |--------------------------------------------------------------------------

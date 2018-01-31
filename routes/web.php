@@ -27,8 +27,8 @@ Route::group(['middleware' => makeAppRootRouteMiddlewares()], function () {
 function makeAppRootRouteMiddlewares()
 {
     return collect([
-        config('auth.authentication', true) ? 'auth' : null,
-        config('auth.authorization', true) ? 'app.users' : null,
+        config('auth.authentication.enabled', true) ? 'auth' : null,
+        config('auth.authorization.enabled', true) ? 'app.users' : null,
     ])->reject(function ($value) {
         return empty($value);
     })->toArray();

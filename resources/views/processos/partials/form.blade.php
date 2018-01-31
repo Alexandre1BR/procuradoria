@@ -286,7 +286,31 @@
             </div>
         </div>
     </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="data_arquivamento">Data do Arquivamento</label>
+                <input
+                        value="{{ ! is_null($processo->id) ? $processo->data_arquivamento : '' }}"
+                        type="date"
+                        name="data_arquivamento"
+                        class="form-control"
+                        id="data_arquivamento" @include('partials.readonly')
+                />
+                {{--<input value="{{Carbon\Carbon::parse($processo->data_arquivamento)->format('Y-m-d')}}" type="date" name="data_arquivamento" class="form-control" id="data_arquivamento" @include('partials.readonly') />--}}
+            </div>
+        </div>
 
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="observacao_arquivamento">Observação do Arquivamento</label>
+                <textarea name="observacao_arquivamento" class="form-control" @include('partials.readonly') id="observacao_arquivamento"
+                          placeholder="Caso deseje, entre com uma observação sobre o arquivamento">{{$processo->observacao_arquivamento}}</textarea>
+            </div>
+        </div>
+
+    </div>
 
     @include('partials.save-button')
 </form>

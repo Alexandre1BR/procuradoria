@@ -13,9 +13,19 @@ use Illuminate\Http\Request;
 
 class Andamentos extends Controller
 {
-    public function create()
+    /**
+     * @var AndamentoRequest
+     */
+    private $repository;
+    public function __construct(AndamentosRepository $repository)
     {
-        return view('andamentos.create', $this->getAndamentosData());
+        $this->repository = $repository;
+    }
+    public function create($processo_id = null)
+    {
+        return view('andamentos.form', $this->getAndamentosData())
+            ->with('processo_id', $processo_id)
+            ->with(['andamento' => $this->repository->new()]);
     }
 
     public function create_post(Request $request)
@@ -30,6 +40,8 @@ class Andamentos extends Controller
         $repository->createFromRequest($request);
 
         //return $this->index($repository,$request);
+
+        //    return redirect('form')->withInput();
         return redirect()->route('andamentos.index');
     }
 
@@ -37,8 +49,9 @@ class Andamentos extends Controller
     {
         $andamento = Andamento::find($id);
 
-        return view('andamentos.show')
+        return view('andamentos.form')
             ->with('andamento', $andamento)
+            ->with('formDisabled', true)
             ->with($this->getAndamentosData());
     }
 
@@ -55,7 +68,7 @@ class Andamentos extends Controller
 
         $tipoEntradas = ModelTipoEntrada::pluck('nome', 'id');
 
-        return view('andamentos.show', compact('andamento', 'processos', 'tipoAndamentos', 'tipoEntradas', 'tipoPrazos'));
+        return view('andamentos.form', compact('andamento', 'processos', 'tipoAndamentos', 'tipoEntradas', 'tipoPrazos'));
     }
 
     public function index(AndamentosRepository $andamentos, Request $request)

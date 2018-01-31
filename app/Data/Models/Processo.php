@@ -39,7 +39,7 @@ class Processo extends BaseModel implements HasPresenter
         'tipo_meio_id',
         'observacao',
         'data_arquivamento',
-        'observacao_arquivamento'
+        'observacao_arquivamento',
     ];
 
     protected $dataTypes = [
@@ -128,7 +128,6 @@ class Processo extends BaseModel implements HasPresenter
     {
         parent::boot();
 
-        static::addGlobalScope(new ProcessoScope);
+        static::addGlobalScope(new ProcessoScope());
     }
-
 }

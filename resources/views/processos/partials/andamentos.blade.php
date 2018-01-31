@@ -9,7 +9,7 @@
             </div>
 
             <div class="col-md-9">
-                <a href="{{ route('andamentos.create') }}" class="btn btn-primary pull-right" onclick="f_editar()">
+                <a href="{{ route('andamentos.create',['processo_id'=>$processo->id]) }}" class="btn btn-primary pull-right" onclick="f_editar()">
                     <i class="fa fa-plus"></i>
                     novo andamento
                 </a>

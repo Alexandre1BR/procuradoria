@@ -3,6 +3,7 @@
 namespace App\Data\Models;
 
 use App\Data\Presenters\Processo as ProcessoPresenter;
+use App\Data\Scope\Processo as ProcessoScope;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 class Processo extends BaseModel implements HasPresenter
@@ -37,29 +38,33 @@ class Processo extends BaseModel implements HasPresenter
         'assessor_id',
         'tipo_meio_id',
         'observacao',
+        'data_arquivamento',
+        'observacao_arquivamento'
     ];
 
     protected $dataTypes = [
-        'numero_judicial'   => 'id',
-        'numero_alerj'      => 'id',
-        'tribunal_id'       => 'id',
-        'vara'              => 'string',
-        'data_distribuicao' => 'date',
-        'acao_id'           => 'id',
-        'juiz_id'           => 'id',
-        'relator_id'        => 'id',
-        'apensos_obs'       => 'string',
-        'autor'             => 'string',
-        'reu'               => 'string',
-        'objeto'            => 'string',
-        'merito'            => 'string',
-        'liminar'           => 'string',
-        'recurso'           => 'string',
-        'procurador_id'     => 'id',
-        'estagiario_id'     => 'id',
-        'assessor_id'       => 'id',
-        'tipo_meio_id'      => 'id',
-        'observacao'        => 'string',
+        'numero_judicial'               => 'id',
+        'numero_alerj'                  => 'id',
+        'tribunal_id'                   => 'id',
+        'vara'                          => 'string',
+        'data_distribuicao'             => 'date',
+        'acao_id'                       => 'id',
+        'juiz_id'                       => 'id',
+        'relator_id'                    => 'id',
+        'apensos_obs'                   => 'string',
+        'autor'                         => 'string',
+        'reu'                           => 'string',
+        'objeto'                        => 'string',
+        'merito'                        => 'string',
+        'liminar'                       => 'string',
+        'recurso'                       => 'string',
+        'procurador_id'                 => 'id',
+        'estagiario_id'                 => 'id',
+        'assessor_id'                   => 'id',
+        'tipo_meio_id'                  => 'id',
+        'observacao'                    => 'string',
+        'data_arquivamento'             => 'date',
+        'observacao_arquivamento'       => 'string',
     ];
 
     public function getDataSemHoraAttribute()
@@ -118,4 +123,12 @@ class Processo extends BaseModel implements HasPresenter
     {
         return ProcessoPresenter::class;
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new ProcessoScope);
+    }
+
 }

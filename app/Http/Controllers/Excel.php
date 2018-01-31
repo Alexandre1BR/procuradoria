@@ -47,7 +47,12 @@ class Excel extends Controller
                     if (!is_null($value->origem)) {
                         list($tribunal, $vara) = $this->split($value);
                     }
-                    $tribunal = app(Tribunais::class)->firstOrCreate(['nome' => trim($tribunal) ?: 'N/C']);
+                    $tribunal = app(Tribunais::class)
+                        ->firstOrCreate(
+                            [
+                                'nome' => trim($tribunal) ?: 'N/C',
+                                'abreviacao' => trim($tribunal) ?: 'N/C',
+                            ]);
                     // Nome e Abreviação receberam os mesmos dados , já que ora esta abreviado e ora esta 'nomeado'
                     $acao = app(Acoes::class)
                                     ->firstOrCreate([
@@ -69,7 +74,7 @@ class Excel extends Controller
                                     ]);
 //                    $procurador =
 //                            app(Users::class)
-//                                    ->firstOrCreate(['name' => trim($value->procurador), 'username' => 'N/C - ', 'email' => 'N/C', 'password' => 'N/C']); //TODO => 'N/C'
+//                                    ->firstOrCreate(['name' => trim($value->procurador)]); //TODO => 'N/C'
 //                    $estagiario =
 //                            app(Users::class)
 //                                    ->firstOrCreate(['name' => trim($value->estagiario), 'username' => 'N/C', 'email' => 'N/C', 'password' => 'N/C']);//TODO => 'N/C'
@@ -106,7 +111,7 @@ class Excel extends Controller
                     ];
                 }
                 if (!empty($insert)) {
-                    //Processo::create($insert);
+                    Processo::insert($insert);
                     dd('Excel Importado com Sucesso.');
                 }
             }
@@ -147,6 +152,14 @@ class Excel extends Controller
         }
 
         return back();
+    }
+
+    private function buscaUsuario($user)
+    {
+        //Does not work with duplicate users
+        $user = strtolower(trim($user));
+
+        return ModelUser::whereRaw("lower(name) like '%{$user}%'")->get()->first();
     }
 
     private function ajustaTipoUsuario($tipo_user)

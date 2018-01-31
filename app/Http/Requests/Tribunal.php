@@ -24,8 +24,8 @@ class Tribunal extends FormRequest
     public function rules()
     {
         return [
-           'nome' => 'required|between:2,30',
-           'abreviacao' =>'required' ,
+           'nome'       => 'required|between:2,30',
+           'abreviacao' => 'required',
         ];
     }
 }

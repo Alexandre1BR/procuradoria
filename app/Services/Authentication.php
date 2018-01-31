@@ -59,6 +59,7 @@ class Authentication
 
     /**
      * @param $credentials
+     *
      * @return mixed
      */
     protected function loginRequest($credentials)
@@ -90,21 +91,21 @@ class Authentication
     {
         return [
             'success' => true,
-            'code' => 200,
+            'code'    => 200,
             'message' => null,
-            'data' => [
+            'data'    => [
                 'name' => [
-                    $credentials['username']
+                    $credentials['username'],
                 ],
                 'email' => [
-                    $credentials['username'].'@alerj.rj.gov.br'
+                    $credentials['username'].'@alerj.rj.gov.br',
                 ],
                 'memberof' => [
-                    "CN=ProjEsp,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br",
-                    "CN=SDGI,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br",
+                    'CN=ProjEsp,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br',
+                    'CN=SDGI,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br',
                 ],
                 'description' => [
-                    'matricula: N/C'
+                    'matricula: N/C',
                 ],
             ],
         ];

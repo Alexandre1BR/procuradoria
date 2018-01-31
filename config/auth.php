@@ -19,12 +19,12 @@ return [
     ],
 
     'authentication' => [
-        'mock' => env('APP_AUTHENTICATION_MOCKED'),
+        'mock'    => env('APP_AUTHENTICATION_MOCKED'),
         'enabled' => env('APP_AUTHENTICATION_ENABLED', env('APP_AUTHENTICATION')),
     ],
 
     'authorization' => [
-        'mock' => env('APP_AUTHORIZATION_MOCKED'),
+        'mock'    => env('APP_AUTHORIZATION_MOCKED'),
         'enabled' => env('APP_AUTHORIZATION_ENABLED', env('APP_AUTHORIZATION')),
     ],
 

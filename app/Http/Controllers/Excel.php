@@ -76,14 +76,14 @@ class Excel extends Controller
                                             'tipo_juiz_id' => $tipo_relator->id,
                                     ]);
 
-                    if(!is_null($value->procurador)){
-                        if(!is_null($this->buscaUsuario($value->procurador, 1))){
+                    if (!is_null($value->procurador)) {
+                        if (!is_null($this->buscaUsuario($value->procurador, 1))) {
                             $procurador = $this->buscaUsuario($value->procurador, 1)->id;
-                        }else{
+                        } else {
                             $procurador = null;
-                            $obs = $obs . 'Procurador: ' . $value->procurador . ', ';
+                            $obs = $obs.'Procurador: '.$value->procurador.', ';
                         }
-                    }else{
+                    } else {
                         $procurador = null;
                     }
 //                    $procurador = !is_null($value->procurador)
@@ -92,25 +92,25 @@ class Excel extends Controller
 //                            :   $obs = $obs . 'Procurador: ' . $value->procurador . '\n'
 //                        : null;
 
-                    if(!is_null($value->estagiario)){
-                        if(!is_null($this->buscaUsuario($value->estagiario, 2))){
+                    if (!is_null($value->estagiario)) {
+                        if (!is_null($this->buscaUsuario($value->estagiario, 2))) {
                             $estagiario = $this->buscaUsuario($value->estagiario, 2)->id;
-                        }else{
+                        } else {
                             $estagiario = null;
-                            $obs = $obs . 'Estagiário: ' . $value->estagiario . ', ';
+                            $obs = $obs.'Estagiário: '.$value->estagiario.', ';
                         }
-                    }else{
+                    } else {
                         $estagiario = null;
                     }
 
-                    if(!is_null($value->assessor)){
-                        if(!is_null($this->buscaUsuario($value->assessor, 3))){
+                    if (!is_null($value->assessor)) {
+                        if (!is_null($this->buscaUsuario($value->assessor, 3))) {
                             $assessor = $this->buscaUsuario($value->assessor, 3)->id;
-                        }else{
+                        } else {
                             $assessor = null;
-                            $obs = $obs . 'Assessor: ' . $value->assessor . ', ';
+                            $obs = $obs.'Assessor: '.$value->assessor.', ';
                         }
-                    }else{
+                    } else {
                         $assessor = null;
                     }
 
@@ -137,10 +137,10 @@ class Excel extends Controller
                                     'procurador_id'   => $procurador,
                                     'estagiario_id'   => $estagiario,
                                     'assessor_id'     => $assessor,
-                                    'tipo_meio_id'   => str_ireplace("\n", '', trim($tipo_meio->id)),
-                                    'created_at'  => now(),
-                                    'updated_at'  => now(),
-                                    'observacao'    => $obs,
+                                    'tipo_meio_id'    => str_ireplace("\n", '', trim($tipo_meio->id)),
+                                    'created_at'      => now(),
+                                    'updated_at'      => now(),
+                                    'observacao'      => $obs,
                     ];
                 }
                 if (!empty($insert)) {
@@ -191,21 +191,18 @@ class Excel extends Controller
     {
         //Does not work with duplicate users
         $search = collect(explode(' ', $user))->map(function ($item) {
-                return $this->removerAcentuacao(strtolower($item));
+            return $this->removerAcentuacao(strtolower($item));
         });
 
-        foreach ($search as $word)
-        {
-            if($word == 'dr')
-            {
+        foreach ($search as $word) {
+            if ($word == 'dr') {
                 continue;
             }
 
             $q = ModelUser::whereRaw("lower(name) like '%{$word}%'")->whereRaw("user_type_id = {$type}")->get()->first();
             //DB::listen(function($q) { dump($q->sql); dump($q->bindings); });
 
-            if (!is_null($q))
-            {
+            if (!is_null($q)) {
                 //dump($q->name . ' -> ' . $word);
                 return $q;
             }

@@ -25,7 +25,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="numero_judicial">Número Judicial</label>
-                <input value="{{$processo->numero_judicial}}"
+                <input value="{{is_null(old('numero_judicial')) ? $processo->numero_judicial : old('numero_judicial')}}"
                        name="numero_judicial"
                        class="form-control"
                        @include('partials.readonly')
@@ -38,7 +38,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="numero_alerj">Número Alerj</label>
-                <input value="{{$processo->numero_alerj}}" name="numero_alerj" class="form-control" @include('partials.readonly') id="numero_alerj"
+                <input value="{{is_null(old('numero_alerj')) ? $processo->numero_alerj : old('numero_alerj')}}" name="numero_alerj" class="form-control" @include('partials.readonly') id="numero_alerj"
                        placeholder="Número Alerj">
             </div>
         </div>
@@ -48,23 +48,27 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="tribunal_id">Tribunal</label>
+
                 <select name="tribunal_id" class="js-example-basic-single form-control" @include('partials.disabled') id="tribunal_id">
                     <option value="">SELECIONE</option>
                     @foreach ($tribunais as $key => $tribunal)
-                        @if(! is_null($processo->id) && $processo->tribunal->id === $key)
+                        @if(((!is_null($processo->id)) && $processo->tribunal->id === $key)
+                        ||(!is_null(old('tribunal_id'))) && old('tribunal_id') == $key))
                             <option value="{{ $key }}" selected="selected">{{ $tribunal }}</option>
                         @else
                             <option value="{{ $key }}">{{ $tribunal }}</option>
                         @endif
+
                     @endforeach
                 </select>
+
             </div>
         </div>
 
         <div class="col-md-6">
             <div class="form-group">
                 <label for="vara">Vara</label>
-                <input value="{{$processo->vara}}" name="vara" class="form-control" @include('partials.readonly') id="vara" placeholder="Digite a Vara">
+                <input value="{{is_null(old('vara'))? $processo->vara : old('vara') }}" name="vara" class="form-control" @include('partials.readonly') id="vara" placeholder="Digite a Vara">
             </div>
         </div>
     </div>
@@ -74,7 +78,7 @@
             <div class="form-group">
                 <label for="data_distribuicao">Data Distribuição</label>
                 <input
-                        value="{{ ! is_null($processo->id) ? $processo->data_distribuicao : '' }}"
+                        value="{{ is_null(old('data_distribuicao'))? (! is_null($processo->id) ? $processo->data_distribuicao : '' ) :  old('data_distribuicao')}}"
                         type="date"
                         name="data_distribuicao"
                         class="form-control"

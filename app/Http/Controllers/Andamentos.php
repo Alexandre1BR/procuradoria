@@ -17,10 +17,12 @@ class Andamentos extends Controller
      * @var AndamentoRequest
      */
     private $repository;
+
     public function __construct(AndamentosRepository $repository)
     {
         $this->repository = $repository;
     }
+
     public function create($processo_id = null)
     {
         return view('andamentos.form', $this->getAndamentosData())

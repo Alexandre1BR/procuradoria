@@ -50,7 +50,7 @@ class Excel extends Controller
                     $tribunal = app(Tribunais::class)
                         ->firstOrCreate(
                             [
-                                'nome' => trim($tribunal) ?: 'N/C',
+                                'nome'       => trim($tribunal) ?: 'N/C',
                                 'abreviacao' => trim($tribunal) ?: 'N/C',
                             ]);
                     // Nome e Abreviação receberam os mesmos dados , já que ora esta abreviado e ora esta 'nomeado'

@@ -18,6 +18,7 @@ use App\Data\Repositories\TiposJuizes;
 use App\Data\Repositories\Tribunais;
 use App\Data\Repositories\Users;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class Excel extends Controller
@@ -42,6 +43,8 @@ class Excel extends Controller
 
             if (!empty($data) && $data->count()) {
                 foreach ($data[0] as $key => $value) {
+                    $obs = '';
+
                     $tribunal = null;
                     $vara = null;
                     if (!is_null($value->origem)) {
@@ -72,15 +75,44 @@ class Excel extends Controller
                                             'lotacao_id'   => $tribunal->id,
                                             'tipo_juiz_id' => $tipo_relator->id,
                                     ]);
-//                    $procurador =
-//                            app(Users::class)
-//                                    ->firstOrCreate(['name' => trim($value->procurador)]); //TODO => 'N/C'
-//                    $estagiario =
-//                            app(Users::class)
-//                                    ->firstOrCreate(['name' => trim($value->estagiario), 'username' => 'N/C', 'email' => 'N/C', 'password' => 'N/C']);//TODO => 'N/C'
-//                    $assessor =
-//                            app(Users::class)
-//                                    ->firstOrCreate(['name' => trim($value->assessor), 'username' => 'N/C', 'email' => 'N/C', 'password' => 'N/C']);//TODO => 'N/C'
+
+                    if(!is_null($value->procurador)){
+                        if(!is_null($this->buscaUsuario($value->procurador, 1))){
+                            $procurador = $this->buscaUsuario($value->procurador, 1)->id;
+                        }else{
+                            $procurador = null;
+                            $obs = $obs . 'Procurador: ' . $value->procurador . ', ';
+                        }
+                    }else{
+                        $procurador = null;
+                    }
+//                    $procurador = !is_null($value->procurador)
+//                        ? !is_null($this->buscaUsuario($value->procurador))
+//                            ?   $this->buscaUsuario($value->procurador)->id
+//                            :   $obs = $obs . 'Procurador: ' . $value->procurador . '\n'
+//                        : null;
+
+                    if(!is_null($value->estagiario)){
+                        if(!is_null($this->buscaUsuario($value->estagiario, 2))){
+                            $estagiario = $this->buscaUsuario($value->estagiario, 2)->id;
+                        }else{
+                            $estagiario = null;
+                            $obs = $obs . 'Estagiário: ' . $value->estagiario . ', ';
+                        }
+                    }else{
+                        $estagiario = null;
+                    }
+
+                    if(!is_null($value->assessor)){
+                        if(!is_null($this->buscaUsuario($value->assessor, 3))){
+                            $assessor = $this->buscaUsuario($value->assessor, 3)->id;
+                        }else{
+                            $assessor = null;
+                            $obs = $obs . 'Assessor: ' . $value->assessor . ', ';
+                        }
+                    }else{
+                        $assessor = null;
+                    }
 
                     $tipo_meio = $this->ajustaTipoMeio($value->tipo);
 
@@ -102,12 +134,13 @@ class Excel extends Controller
                                     'merito'          => str_ireplace("\n", '', trim($value->merito)),
                                     'liminar'         => str_ireplace("\n", '', trim($value->liminar)),
                                     'recurso'         => str_ireplace("\n", '', trim($value->recurso)),
-//                                  'procurador_id'     => $procurador,
-//                                  'estagiario_id'     => $estagiario,
-//                                  'assessor_id'       => $assessor,
+                                    'procurador_id'   => $procurador,
+                                    'estagiario_id'   => $estagiario,
+                                    'assessor_id'     => $assessor,
                                     'tipo_meio_id'   => str_ireplace("\n", '', trim($tipo_meio->id)),
-//                                  'created_at'  => now(),
-//                                  'updated_at'  => now(),
+                                    'created_at'  => now(),
+                                    'updated_at'  => now(),
+                                    'observacao'    => $obs,
                     ];
                 }
                 if (!empty($insert)) {
@@ -137,7 +170,7 @@ class Excel extends Controller
                     if (!empty($name)) {
                         ModelUser::create(
                             [
-                                'name'         => $name,
+                                'name'         => $this->removerAcentuacao($name),
                                 'password'     => '-',
                                 'username'     => $username,
                                 'email'        => $username.'@alerj.rj.gov.br',
@@ -154,12 +187,29 @@ class Excel extends Controller
         return back();
     }
 
-    private function buscaUsuario($user)
+    private function buscaUsuario($user, $type)
     {
         //Does not work with duplicate users
-        $user = strtolower(trim($user));
+        $search = collect(explode(' ', $user))->map(function ($item) {
+                return $this->removerAcentuacao(strtolower($item));
+        });
 
-        return ModelUser::whereRaw("lower(name) like '%{$user}%'")->get()->first();
+        foreach ($search as $word)
+        {
+            if($word == 'dr')
+            {
+                continue;
+            }
+
+            $q = ModelUser::whereRaw("lower(name) like '%{$word}%'")->whereRaw("user_type_id = {$type}")->get()->first();
+            //DB::listen(function($q) { dump($q->sql); dump($q->bindings); });
+
+            if (!is_null($q))
+            {
+                //dump($q->name . ' -> ' . $word);
+                return $q;
+            }
+        }
     }
 
     private function ajustaTipoUsuario($tipo_user)

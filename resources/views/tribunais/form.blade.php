@@ -40,9 +40,9 @@
 
                 <div class="form-group">
                     <label for="nome">Nome</label>
-                    <input name="nome" value="{{$tribunal->nome}}" @include('partials.readonly') class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="nome">
+                    <input name="nome" value="{{is_null(old('nome')) ? $tribunal->nome : old('nome')}}" @include('partials.readonly') class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="nome">
                     <label for="abreviacao">Abreviação</label>
-                    <input name="nome" value="{{$tribunal->abreviacao}}" @include('partials.readonly') class="form-control" id="abreviacao" aria-describedby="abreviacaoHelp" placeholder="abreviacao">
+                    <input name="abreviacao" value="{{is_null(old('abreviacao')) ? $tribunal->abreviacao : old('abreviacao')}}" @include('partials.readonly') class="form-control" id="abreviacao" aria-describedby="abreviacaoHelp" placeholder="abreviacao">
                 </div>
 
                 @include('partials.save-button')

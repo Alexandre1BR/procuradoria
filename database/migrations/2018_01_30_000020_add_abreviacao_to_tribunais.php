@@ -35,7 +35,7 @@ class AddAbreviacaoToTribunais extends Migration
      */
     public function down()
     {
-        Schema::table('abreviacao', function (Blueprint $table) {
+        Schema::table('tribunais', function (Blueprint $table) {
             $table->dropColumn('abreviacao');
         });
     }

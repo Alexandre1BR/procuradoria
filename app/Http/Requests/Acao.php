@@ -24,8 +24,8 @@ class Acao extends FormRequest
     public function rules()
     {
         return [
-            //'nome'          => 'required',
-            //'abreviacao'    => 'required',
+            'nome'          => 'required',
+            'abreviacao'    => 'required',
         ];
     }
 }

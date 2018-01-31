@@ -41,12 +41,12 @@
                 <div class="row">
                     <div class="form-group col-md-6" @include('partials.disabled')>
                         <label for="nome">Nome</label>
-                        <input name="nome" value="{{$acao->nome}}" @include('partials.readonly') class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="nome" >
+                        <input name="nome" value="{{is_null(old('nome')) ? $acao->nome : old('nome')}}" @include('partials.readonly') class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="nome" >
                     </div>
 
                     <div class="form-group col-md-6" @include('partials.disabled')>
                         <label for="abreviacao">Abreviação</label>
-                        <input name="abreviacao" value="{{$acao->abreviacao}}" @include('partials.readonly') class="form-control" id="abreviacao" aria-describedby="nomeHelp" placeholder="abreviacao" >
+                        <input name="abreviacao" value="{{is_null(old('abreviacao')) ? $acao->abreviacao : old('abreviacao')}}" @include('partials.readonly') class="form-control" id="abreviacao" aria-describedby="nomeHelp" placeholder="abreviacao" >
                     </div>
                 </div>
 

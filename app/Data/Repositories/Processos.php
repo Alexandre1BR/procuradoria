@@ -6,6 +6,7 @@ use App\Data\Models\Acao;
 use App\Data\Models\Andamento;
 use App\Data\Models\Apenso;
 use App\Data\Models\Juiz;
+use App\Data\Models\Lei;
 use App\Data\Models\Meio;
 use App\Data\Models\Processo;
 use App\Data\Models\Tribunal;
@@ -157,6 +158,7 @@ class Processos extends Base
             'andamentos' => Andamento::where('processo_id', $id)->get(),
             'apensos'    => Apenso::where('processo_id', $id)->orWhere('apensado_id', $id)->get(),
             'processos'  => Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id'),
+            'leis'       => Lei::where('processo_id', $id)->get(),
         ];
     }
 }

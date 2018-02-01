@@ -30,4 +30,6 @@
     @include('processos.partials.andamentos')
 
     @include('processos.partials.apensos')
+
+    @include('processos.partials.leis')
 @endsection

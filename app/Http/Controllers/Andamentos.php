@@ -38,8 +38,7 @@ class Andamentos extends Controller
 
         //    return redirect('form')->withInput();
         return redirect()->route('andamentos.index')
-            ->with($this->getSuccessMessage())
-            ;
+            ->with($this->getSuccessMessage());
     }
 
     public function show($id)

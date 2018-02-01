@@ -44,7 +44,9 @@ class Andamentos extends Controller
         //return $this->index($repository,$request);
 
         //    return redirect('form')->withInput();
-        return redirect()->route('andamentos.index');
+        return redirect()->route('andamentos.index')
+//            ->with($this->getSuccessMessage())
+            ;
     }
 
     public function show($id)

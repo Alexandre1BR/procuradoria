@@ -37,6 +37,7 @@ class Import
 
     /**
      * @param $file
+     * @param Command $command
      * @return \Illuminate\Http\RedirectResponse
      */
     public function importProcesses($file)

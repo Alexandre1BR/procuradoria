@@ -8,6 +8,4 @@ Route::group(['prefix' => '/leis'], function () {
     Route::get('/', 'Leis@index')->name('leis.index');
 
     Route::get('/{id}', 'Leis@show')->name('leis.show');
-
 });
-

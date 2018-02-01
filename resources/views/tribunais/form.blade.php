@@ -28,16 +28,6 @@
 
                 <input name="id" type="hidden" value="{{$tribunal->id}}"/>
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
                 <div class="form-group">
                     <label for="nome">Nome</label>
                     <input name="nome" value="{{is_null(old('nome')) ? $tribunal->nome : old('nome')}}" @include('partials.readonly') class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="nome">

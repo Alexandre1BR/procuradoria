@@ -24,15 +24,6 @@
             <form action="{{ route('andamentos.store') }}" method="POST">
                 {{ csrf_field() }}
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="nome">Processo</label>

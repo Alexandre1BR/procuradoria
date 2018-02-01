@@ -28,16 +28,6 @@
 
                 <input name="id" type='hidden' value="{{$acao->id}}" id="id" >
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
                 <div class="row">
                     <div class="form-group col-md-6" @include('partials.disabled')>
                         <label for="nome">Nome</label>

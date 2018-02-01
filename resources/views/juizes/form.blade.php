@@ -26,15 +26,6 @@
             <form action="{{ route('juizes.store') }}" method="POST">
                 {{ csrf_field() }}
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 <div class="row">
                     <input name="id" type='hidden' value="{{$juiz->id}}" id="id" >
                     <div class="form-group col-md-4">

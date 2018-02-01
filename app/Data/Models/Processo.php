@@ -2,11 +2,10 @@
 
 namespace App\Data\Models;
 
-use App\Data\Presenters\Processo as ProcessoPresenter;
+use App\Data\Presenters\ProcessoPresenter;
 use App\Data\Scope\Processo as ProcessoScope;
-use McCool\LaravelAutoPresenter\HasPresenter;
 
-class Processo extends BaseModel implements HasPresenter
+class Processo extends BaseModel
 {
     protected $dates = [
         'data_distribuicao',

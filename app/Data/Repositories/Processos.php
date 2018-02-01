@@ -76,10 +76,10 @@ class Processos extends Base
                 $query->where($column, '=', $search);
                 break;
             case 'string':
-                $query->where($column, 'like', "%{$search}%");
+                $query->where(DB::raw("lower({$column})"), 'like', "%{$search}%");
                 break;
             case 'date':
-                $query->where($column, 'like', "%{$search}%");
+                $query->where($column, '=', $search);
                 break;
         }
     }

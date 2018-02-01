@@ -24,8 +24,27 @@ class Processo extends FormRequest
     public function rules()
     {
         return [
-            //'numero_judicial' => 'required|min:8',
-            //'numero_alerj'    => 'required|size:7',
+//            'numero_judicial' => 'required',
+//            'numero_alerj'    => 'size:7',
+//            'tribunal_id' => 'required',
+//            'vara' => 'required', //'origem_complemento',
+//            'data_distribuicao',
+//            'acao_id' => 'required',
+//            'relator_id' => 'required',
+//            'autor' => 'required',
+//            'reu' => 'required',
+//            'procurador_id' => 'required',
+//            'estagiario_id' => 'required',
+//            'tipo_meio_id' => 'required',
         ];
+    }
+
+    public function withValidator($validator)
+    {
+        if ($validator->fails()) {
+            return redirect()->route('andamentos.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
     }
 }

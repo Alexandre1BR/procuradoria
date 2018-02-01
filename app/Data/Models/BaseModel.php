@@ -4,8 +4,8 @@ namespace App\Data\Models;
 
 use App\Data\Presenters\BasePresenter;
 use Illuminate\Database\Eloquent\Model;
-use Venturecraft\Revisionable\RevisionableTrait;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 abstract class BaseModel extends Model implements HasPresenter
 {
@@ -24,10 +24,10 @@ abstract class BaseModel extends Model implements HasPresenter
         return collect($model->dataTypes)->get($column);
     }
 
-    public function getPresenterClass(){
+    public function getPresenterClass()
+    {
         //return static::class;
         //return parent::class;
         return BasePresenter::class;
     }
-
 }

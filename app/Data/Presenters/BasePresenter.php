@@ -8,10 +8,8 @@
 
 namespace App\Data\Presenters;
 
-use Carbon\Carbon;
 use McCool\LaravelAutoPresenter\BasePresenter as McCoolBasePresenter;
 
 class BasePresenter extends McCoolBasePresenter
 {
-
 }

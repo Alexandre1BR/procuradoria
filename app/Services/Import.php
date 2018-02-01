@@ -27,13 +27,14 @@ class Import
     /**
      * @param $file
      * @param Command $command
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function importExcel($file, $command)
     {
         $file = realpath($file);
 
-        if (! file_exists($file)) {
+        if (!file_exists($file)) {
             $command->error("File does not exists $file");
 
             return;

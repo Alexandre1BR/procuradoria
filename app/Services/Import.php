@@ -82,7 +82,7 @@ class Import
                 $tipo_relator = $this->ajustaTipoRelator($value->relator);
                 $tipo_relator = app(TiposJuizes::class)->firstOrCreate(['nome' => $tipo_relator]);
 
-                $nome_relator = $this->ajustaNomeRelator($value->no_alerj);
+                $nome_relator = $this->ajustaNomeRelator($value->relator);
 
                 $relator_juiz = app(Juizes::class)
                     ->firstOrCreate([

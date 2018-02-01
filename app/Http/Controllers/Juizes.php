@@ -33,7 +33,6 @@ class Juizes extends Controller
 
         return redirect()->route('juizes.index')
             ->with($this->getSuccessMessage());
-        ;
     }
 
     public function getJuizesData(): array

@@ -11,7 +11,7 @@ namespace App\Data\Presenters;
 use Carbon\Carbon;
 use McCool\LaravelAutoPresenter\BasePresenter;
 
-class Processo extends BasePresenter
+class ProcessoPresenter extends BasePresenter
 {
     public function data_distribuicao()
     {

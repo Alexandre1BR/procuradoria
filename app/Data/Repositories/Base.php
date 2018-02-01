@@ -4,7 +4,7 @@ namespace App\Data\Repositories;
 
 use Illuminate\Http\Request;
 
-class Base
+abstract class Base
 {
     protected $model;
 

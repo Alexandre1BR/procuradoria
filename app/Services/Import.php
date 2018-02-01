@@ -209,15 +209,13 @@ class Import
     {
         //Does not work with duplicate users
         $search = collect(explode(' ', $user))->map(function ($item) {
-            return $this->removerAcentuacao(strtolower($item));
+            return $this->removerAcentuacao(mb_strtolower($item));
         });
 
         foreach ($search as $word) {
             if ($word == 'dr') {
                 continue;
             }
-
-            dump($word, $this->removerAcentuacao($word));
 
             $q = ModelUser::whereRaw("lower(name) like '%".$this->removerAcentuacao($word)."%'")->whereRaw("user_type_id = {$type}")->get()->first();
             //DB::listen(function($q) { dump($q->sql); dump($q->bindings); });
@@ -231,7 +229,7 @@ class Import
 
     private function ajustaTipoUsuario($tipo_user)
     {
-        $tipo_user = strtolower(trim($tipo_user));
+        $tipo_user = mb_strtolower(trim($tipo_user));
 
         return ModelTipoUsuario::whereRaw("lower(nome) like '%{$tipo_user}%'")->get()->first();
     }
@@ -286,7 +284,7 @@ class Import
 
     private function ajustaTipoRelator($relator)
     {
-        $tipo_relator = strtolower(trim($relator));
+        $tipo_relator = mb_strtolower(trim($relator));
         if (starts_with($tipo_relator, 'mi')) {
             $tipo_relator = 'Ministro';
         } elseif (starts_with($tipo_relator, 'de')) {
@@ -302,7 +300,7 @@ class Import
 
     private function ajustaTipoMeio($tipo_meio)
     {
-        $tipo_meio = strtolower(trim($tipo_meio));
+        $tipo_meio = mb_strtolower(trim($tipo_meio));
         if (starts_with(trim($tipo_meio), 'f')) {
             $tipo_meio = 'Físico';
         } elseif (starts_with(trim($tipo_meio), 'e')) {
@@ -316,13 +314,19 @@ class Import
 
     private function removerAcentuacao($str, $utf8 = true)
     {
-        $str = iconv('UTF-8', 'ASCII//TRANSLIT', (string) $str);
+        try {
+            iconv('UTF-8', 'ISO-8859-1//TRANSLIT', (string) $str);
+        } catch (\Exception $e) {
+            $this->command->error("Char error: $str");
 
-        $str = iconv('UTF-8', 'ASCII//IGNORE', (string) $str);
+            $str = iconv('UTF-8', 'ASCII//IGNORE', (string) $str);
+
+            $this->command->error("Char error fixed: $str");
+        }
 
         if (is_null($utf8)) {
             if (!function_exists('mb_detect_encoding')) {
-                $utf8 = (strtolower(mb_detect_encoding($str)) == 'utf-8');
+                $utf8 = (mb_strtolower(mb_detect_encoding($str)) == 'utf-8');
             } else {
                 $length = strlen($str);
                 $utf8 = true;

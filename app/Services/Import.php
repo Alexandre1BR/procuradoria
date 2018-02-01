@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: afdsilva
- * Date: 23/01/2018
- * Time: 11:11.
- */
 
-namespace App\Http\Controllers;
+namespace App\Services;
 
 use App\Data\Models\Processo;
 use App\Data\Models\TipoUsuario as ModelTipoUsuario;
@@ -17,11 +11,13 @@ use App\Data\Repositories\Meios;
 use App\Data\Repositories\TiposJuizes;
 use App\Data\Repositories\Tribunais;
 use App\Data\Repositories\Users;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Maatwebsite\Excel\Facades\Excel;
 
-class Excel extends Controller
+class Import
 {
     public function importExport()
     {
@@ -29,124 +25,134 @@ class Excel extends Controller
     }
 
     /**
+     * @param $file
+     * @param Command $command
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function importExcel()
+    public function importExcel($file, $command)
     {
-        if (Input::hasFile('import_file')) {
-            $data = Cache::remember('importExcel', 30, function () {
-                $path = Input::file('import_file')->getRealPath();
+        $file = realpath($file);
 
-                return \Maatwebsite\Excel\Facades\Excel::load($path, function ($reader) {
-                })->get();
-            });
+        if (! file_exists($file)) {
+            $command->error("File does not exists $file");
 
-            if (!empty($data) && $data->count()) {
-                foreach ($data[0] as $key => $value) {
-                    $obs = '';
+            return;
+        }
 
-                    $tribunal = null;
-                    $vara = null;
-                    if (!is_null($value->origem)) {
-                        list($tribunal, $vara) = $this->split($value);
-                    }
-                    $tribunal = app(Tribunais::class)
-                        ->firstOrCreate(
-                            [
-                                'nome'       => trim($tribunal) ?: 'N/C',
-                                'abreviacao' => trim($tribunal) ?: 'N/C',
-                            ]);
-                    // Nome e Abreviação receberam os mesmos dados , já que ora esta abreviado e ora esta 'nomeado'
-                    $acao = app(Acoes::class)
-                                    ->firstOrCreate([
-                                            'nome'       => trim($value->acao) ?: 'N/C',
-                                            'abreviacao' => trim($value->acao) ?: 'N/C',
+        $command->info("Importing $file");
+
+        $data = Cache::remember('importExcel', 30, function () use ($file) {
+            return Excel::load($file, function ($reader) {
+            })->get();
+        });
+
+        if (!empty($data) && $data->count()) {
+            foreach ($data[0] as $key => $value) {
+                $obs = '';
+
+                $tribunal = null;
+                $vara = null;
+                if (!is_null($value->origem)) {
+                    list($tribunal, $vara) = $this->split($value);
+                }
+                $tribunal = app(Tribunais::class)
+                    ->firstOrCreate(
+                        [
+                            'nome'       => trim($tribunal) ?: 'N/C',
+                            'abreviacao' => trim($tribunal) ?: 'N/C',
+                        ]);
+                // Nome e Abreviação receberam os mesmos dados , já que ora esta abreviado e ora esta 'nomeado'
+                $acao = app(Acoes::class)
+                    ->firstOrCreate([
+                                        'nome'       => trim($value->acao) ?: 'N/C',
+                                        'abreviacao' => trim($value->acao) ?: 'N/C',
                                     ]);
 
-                    //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
-                    $tipo_relator = $this->ajustaTipoRelator($value->relator);
-                    $tipo_relator = app(TiposJuizes::class)->firstOrCreate(['nome' => $tipo_relator]);
+                //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
+                $tipo_relator = $this->ajustaTipoRelator($value->relator);
+                $tipo_relator = app(TiposJuizes::class)->firstOrCreate(['nome' => $tipo_relator]);
 
-                    $nome_relator = $this->ajustaNomeRelator($value->no_alerj);
+                $nome_relator = $this->ajustaNomeRelator($value->no_alerj);
 
-                    $relator_juiz = app(Juizes::class)
-                                    ->firstOrCreate([
-                                            'nome'         => $nome_relator,
-                                            'lotacao_id'   => $tribunal->id,
-                                            'tipo_juiz_id' => $tipo_relator->id,
+                $relator_juiz = app(Juizes::class)
+                    ->firstOrCreate([
+                                        'nome'         => $nome_relator,
+                                        'lotacao_id'   => $tribunal->id,
+                                        'tipo_juiz_id' => $tipo_relator->id,
                                     ]);
 
-                    if (!is_null($value->procurador)) {
-                        if (!is_null($this->buscaUsuario($value->procurador, 1))) {
-                            $procurador = $this->buscaUsuario($value->procurador, 1)->id;
-                        } else {
-                            $procurador = null;
-                            $obs = $obs.'Procurador: '.$value->procurador.', ';
-                        }
+                if (!is_null($value->procurador)) {
+                    if (!is_null($this->buscaUsuario($value->procurador, 1))) {
+                        $procurador = $this->buscaUsuario($value->procurador, 1)->id;
                     } else {
                         $procurador = null;
+                        $obs = $obs.'Procurador: '.$value->procurador.', ';
                     }
+                } else {
+                    $procurador = null;
+                }
 //                    $procurador = !is_null($value->procurador)
 //                        ? !is_null($this->buscaUsuario($value->procurador))
 //                            ?   $this->buscaUsuario($value->procurador)->id
 //                            :   $obs = $obs . 'Procurador: ' . $value->procurador . '\n'
 //                        : null;
 
-                    if (!is_null($value->estagiario)) {
-                        if (!is_null($this->buscaUsuario($value->estagiario, 2))) {
-                            $estagiario = $this->buscaUsuario($value->estagiario, 2)->id;
-                        } else {
-                            $estagiario = null;
-                            $obs = $obs.'Estagiário: '.$value->estagiario.', ';
-                        }
+                if (!is_null($value->estagiario)) {
+                    if (!is_null($this->buscaUsuario($value->estagiario, 2))) {
+                        $estagiario = $this->buscaUsuario($value->estagiario, 2)->id;
                     } else {
                         $estagiario = null;
+                        $obs = $obs.'Estagiário: '.$value->estagiario.', ';
                     }
+                } else {
+                    $estagiario = null;
+                }
 
-                    if (!is_null($value->assessor)) {
-                        if (!is_null($this->buscaUsuario($value->assessor, 3))) {
-                            $assessor = $this->buscaUsuario($value->assessor, 3)->id;
-                        } else {
-                            $assessor = null;
-                            $obs = $obs.'Assessor: '.$value->assessor.', ';
-                        }
+                if (!is_null($value->assessor)) {
+                    if (!is_null($this->buscaUsuario($value->assessor, 3))) {
+                        $assessor = $this->buscaUsuario($value->assessor, 3)->id;
                     } else {
                         $assessor = null;
+                        $obs = $obs.'Assessor: '.$value->assessor.', ';
                     }
+                } else {
+                    $assessor = null;
+                }
 
-                    $tipo_meio = $this->ajustaTipoMeio($value->tipo);
+                $command->line("{$value->no_judicial} - $value->no_alerj");
 
-                    $tipo_meio = app(Meios::class)
-                                    ->firstOrCreate(['nome' => $tipo_meio]); //TODO => 'N/C'
-                    $insert[] =
-                            [
-                                    'numero_judicial' => str_ireplace("\n", '', trim($value->no_judicial)),
-                                    'numero_alerj'    => str_ireplace("\n", '', trim($value->no_alerj)),
-                                    'apensos_obs'     => str_ireplace("\n", '', trim($value->apensos)),
-                                    'tribunal_id'     => str_ireplace("\n", '', trim($tribunal->id)), //Origem
-                                    'vara'            => str_ireplace("\n", '', trim($vara)),
-                                    'acao_id'         => str_ireplace("\n", '', trim($acao->id)),
-                                    'relator_id'      => str_ireplace("\n", '', trim($relator_juiz->id)),
-//'                                 tipo_juiz_id'  =>str_ireplace("\n", "", trim($tipo_relator->id)), //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
-                                    'autor'           => str_ireplace("\n", '', trim($value->autor)),
-                                    'reu'             => str_ireplace("\n", '', trim($value->reu)),
-                                    'objeto'          => str_ireplace("\n", '', trim($value->objeto)),
-                                    'merito'          => str_ireplace("\n", '', trim($value->merito)),
-                                    'liminar'         => str_ireplace("\n", '', trim($value->liminar)),
-                                    'recurso'         => str_ireplace("\n", '', trim($value->recurso)),
-                                    'procurador_id'   => $procurador,
-                                    'estagiario_id'   => $estagiario,
-                                    'assessor_id'     => $assessor,
-                                    'tipo_meio_id'    => str_ireplace("\n", '', trim($tipo_meio->id)),
-                                    'created_at'      => now(),
-                                    'updated_at'      => now(),
-                                    'observacao'      => $obs,
+                $tipo_meio = $this->ajustaTipoMeio($value->tipo);
+
+                $tipo_meio = app(Meios::class)
+                    ->firstOrCreate(['nome' => $tipo_meio]); //TODO => 'N/C'
+                $insert[] =
+                    [
+                        'numero_judicial' => str_ireplace("\n", '', trim($value->no_judicial)),
+                        'numero_alerj'    => str_ireplace("\n", '', trim($value->no_alerj)),
+                        'apensos_obs'     => str_ireplace("\n", '', trim($value->apensos)),
+                        'tribunal_id'     => str_ireplace("\n", '', trim($tribunal->id)), //Origem
+                        'vara'            => str_ireplace("\n", '', trim($vara)),
+                        'acao_id'         => str_ireplace("\n", '', trim($acao->id)),
+                        'relator_id'      => str_ireplace("\n", '', trim($relator_juiz->id)),
+                        //'                                 tipo_juiz_id'  =>str_ireplace("\n", "", trim($tipo_relator->id)), //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
+                        'autor'           => str_ireplace("\n", '', trim($value->autor)),
+                        'reu'             => str_ireplace("\n", '', trim($value->reu)),
+                        'objeto'          => str_ireplace("\n", '', trim($value->objeto)),
+                        'merito'          => str_ireplace("\n", '', trim($value->merito)),
+                        'liminar'         => str_ireplace("\n", '', trim($value->liminar)),
+                        'recurso'         => str_ireplace("\n", '', trim($value->recurso)),
+                        'procurador_id'   => $procurador,
+                        'estagiario_id'   => $estagiario,
+                        'assessor_id'     => $assessor,
+                        'tipo_meio_id'    => str_ireplace("\n", '', trim($tipo_meio->id)),
+                        'created_at'      => now(),
+                        'updated_at'      => now(),
+                        'observacao'      => $obs,
                     ];
-                }
-                if (!empty($insert)) {
-                    Processo::insert($insert);
-                    dd('Excel Importado com Sucesso.');
-                }
+            }
+            if (!empty($insert)) {
+                Processo::insert($insert);
+                dd('Excel Importado com Sucesso.');
             }
         }
 
@@ -159,7 +165,7 @@ class Excel extends Controller
             $data = Cache::remember('importUsers', 5, function () {
                 $path = Input::file('import_file')->getRealPath();
 
-                return \Maatwebsite\Excel\Facades\Excel::load($path, function ($reader) {
+                return Excel::load($path, function ($reader) {
                 })->get();
             });
 
@@ -300,7 +306,7 @@ class Excel extends Controller
             ['à', 'á', 'â', 'ã', 'ä', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', 'À', 'Á', 'Â', 'Ã', 'Ä', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ù', 'Ú', 'Û', 'Ü', 'Ý'],
             ['a', 'a', 'a', 'a', 'a', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'A', 'A', 'A', 'A', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'N', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y'],
             $string
-    );
+        );
 
         return $string;
     }

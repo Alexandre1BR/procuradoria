@@ -2,6 +2,8 @@
 
 namespace App\Data\Models;
 
+use App\Data\Presenters\AndamentoPresenter;
+
 class Andamento extends BaseModel
 {
     /**
@@ -47,5 +49,10 @@ class Andamento extends BaseModel
     public function tipoPrazo()
     {
         return $this->belongsTo(TipoPrazo::class);
+    }
+
+    public function getPresenterClass()
+    {
+        return AndamentoPresenter::class;
     }
 }

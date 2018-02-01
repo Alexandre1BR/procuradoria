@@ -31,7 +31,8 @@ class Juizes extends Controller
     {
         $repository->createFromRequest($request);
 
-        return redirect()->route('juizes.index');
+        return redirect()->route('juizes.index')
+            ->with($this->getSuccessMessage());
     }
 
     public function getJuizesData(): array

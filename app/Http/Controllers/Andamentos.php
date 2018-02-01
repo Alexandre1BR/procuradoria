@@ -30,13 +30,6 @@ class Andamentos extends Controller
             ->with(['andamento' => $this->repository->new()]);
     }
 
-    public function create_post(Request $request)
-    {
-        $processo_id_post = ($request->processo_id);
-
-        return view('andamentos.create', $this->getAndamentosData(), compact('processo_id_post'));
-    }
-
     public function store(AndamentoRequest $request, AndamentosRepository $repository)
     {
         $repository->createFromRequest($request);
@@ -44,7 +37,8 @@ class Andamentos extends Controller
         //return $this->index($repository,$request);
 
         //    return redirect('form')->withInput();
-        return redirect()->route('andamentos.index');
+        return redirect()->route('andamentos.index')
+            ->with($this->getSuccessMessage());
     }
 
     public function show($id)

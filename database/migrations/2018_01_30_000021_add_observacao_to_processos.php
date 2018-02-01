@@ -16,12 +16,6 @@ class AddObservacaoToProcessos extends Migration
         Schema::table('processos', function (Blueprint $table) {
             $table->string('observacao')->nullable();
         });
-
-        \App\Data\Models\Processo::all()->each(function ($table) {
-            $table->observacao = null;
-
-            $table->save();
-        });
     }
 
     /**

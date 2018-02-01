@@ -17,13 +17,6 @@ class AddArquivamentoToProcessos extends Migration
             $table->date('data_arquivamento')->nullable();
             $table->string('observacao_arquivamento')->nullable();
         });
-
-        \App\Data\Models\Processo::all()->each(function ($table) {
-            $table->data_arquivamento = null;
-            $table->observacao_arquivamento = null;
-
-            $table->save();
-        });
     }
 
     /**

@@ -23,6 +23,7 @@
 
             <form action="{{ route('andamentos.store') }}" method="POST">
                 {{ csrf_field() }}
+                <input type="hidden" name="id" id="id" value="{{$andamento->id}}">
                 {{--{{dump($andamento->id)}}--}}
                 <div class="row">
                     <div class="form-group col-md-4">

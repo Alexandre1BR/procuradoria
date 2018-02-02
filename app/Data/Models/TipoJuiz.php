@@ -14,4 +14,11 @@ class TipoJuiz extends BaseModel
     protected $fillable = [
         'nome',
     ];
+
+    public function getAbreviacaoAttribute() {
+        if(strlen($this->nome) > 4){
+            return substr($this->nome, 0,3).".";
+        }
+        return $this->nome;
+    }
 }

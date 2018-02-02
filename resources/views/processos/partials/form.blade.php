@@ -93,12 +93,12 @@
                 <label for="juiz_id">Juiz</label>
                 <select name="juiz_id" class="form-control select2" @include('partials.disabled') id="juiz_id">
                     <option value="">SELECIONE</option>
-                    @foreach ($juizes as $key => $relator)
-                        @if((!is_null($processo->relator)) && $processo->relator->id == $key
-                        || (!is_null(old('relator_id'))) && old('relator_id') == $key))
-                            <option value="{{ $key }}" selected="selected">{{ $relator }}</option>
+                    @foreach ($juizes as $key => $juiz)
+                        @if((!is_null($processo->juiz)) && $processo->juiz->id == $juiz->id
+                        || (!is_null(old('juiz_id'))) && old('juiz_id') == $juiz->id))
+                        <option value="{{ $juiz->id }}" selected="selected">{{ $juiz->nome . " (". $juiz->tipoJuiz->abreviacao .") - ". $juiz->lotacao->abreviacao }}</option>
                         @else
-                            <option value="{{ $key }}">{{ $relator }}</option>
+                            <option value="{{ $juiz->id }}">{{ $juiz->nome . " (". $juiz->tipoJuiz->abreviacao .") - ". $juiz->lotacao->abreviacao }}</option>
                         @endif
                     @endforeach
                 </select>
@@ -118,12 +118,12 @@
                 <label for="relator_id">Relator</label>
                 <select name="relator_id" class="form-control select2" @include('partials.disabled') id="relator_id">
                     <option value="">SELECIONE</option>
-                    @foreach ($juizes as $key => $juiz)
-                        @if((!is_null($processo->juiz)) && $processo->juiz->id == $key
-                        || (!is_null(old('juiz_id'))) && old('juiz_id') == $key))
-                            <option value="{{ $key }}" selected="selected">{{ $juiz }}</option>
+                    @foreach ($juizes as $key => $relator)
+                        @if((!is_null($processo->relator)) && $processo->relator->id == $relator->id
+                        || (!is_null(old('relator_id'))) && old('relator_id') == $relator->id))
+                        <option value="{{ $relator->id }}" selected="selected">{{ $relator->nome . " (". $relator->tipoJuiz->abreviacao .") - ". $relator->lotacao->abreviacao }}</option>
                         @else
-                            <option value="{{ $key }}">{{ $juiz }}</option>
+                            <option value="{{ $relator->id }}">{{ $relator->nome . " (". $relator->tipoJuiz->abreviacao .") - ". $relator->lotacao->abreviacao }}</option>
                         @endif
                     @endforeach
                 </select>

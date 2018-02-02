@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Data\Models\Processo as ProcessoModel;
 use App\Data\Repositories\Apensos as ApensosRepository;
 use App\Data\Repositories\Processos as ProcessosRepository;
+use App\Data\Scope\Processo as ProcessoScope;
 use App\Http\Requests\Apenso as ApensoRequest;
 use App\Http\Requests\Processo as ProcessoRequest;
-use \App\Data\Scope\Processo as ProcessoScope;
 
 class Processos extends Controller
 {
@@ -54,7 +54,5 @@ class Processos extends Controller
             ->with('processo', ProcessoModel::withoutGlobalScope(ProcessoScope::class)->find($id))
             ->with('formDisabled', true)
             ->with($this->repository->getProcessosData($id));
-
-
     }
 }

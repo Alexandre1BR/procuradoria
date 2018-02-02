@@ -13,6 +13,7 @@ use App\Data\Models\Tribunal;
 use App\Data\Models\User;
 use App\Http\Requests\Processo as ProcessoRequest;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class Processos extends Base
@@ -47,7 +48,7 @@ class Processos extends Base
         return true;
     }
 
-    public function search(ProcessoRequest $request)
+    public function search(Request $request)
     {
         return $this->searchFromRequest($request->get('pesquisa'));
     }

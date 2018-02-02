@@ -33,7 +33,7 @@ class Processo extends FormRequest
             'acao_id' => 'required',
 //            'relator_id' => 'required',
             'autor' => 'required',
-            'reu' => 'required',
+            'reu'   => 'required',
 //            'procurador_id' => 'required',
 //           'estagiario_id'  => 'required',
 //            'tipo_meio_id'  => 'required',

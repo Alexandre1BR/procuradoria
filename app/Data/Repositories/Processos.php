@@ -9,6 +9,7 @@ use App\Data\Models\Juiz;
 use App\Data\Models\Lei;
 use App\Data\Models\Meio;
 use App\Data\Models\Processo;
+use App\Data\Models\Tag;
 use App\Data\Models\Tribunal;
 use App\Data\Models\User;
 use Carbon\Carbon;
@@ -101,6 +102,7 @@ class Processos extends Base
         $columns = collect($this->dataTypes);
 
         $query = Processo::query();
+
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
                 if ($type === 'string') {
@@ -159,6 +161,7 @@ class Processos extends Base
             'apensos'    => Apenso::where('processo_id', $id)->orWhere('apensado_id', $id)->get(),
             'processos'  => Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id'),
             'leis'       => Lei::where('processo_id', $id)->get(),
+            'tags'       => Tag::all(),
         ];
     }
 }

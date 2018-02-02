@@ -27481,7 +27481,7 @@ window.Vue = __webpack_require__(157);
 Vue.component('example-component', __webpack_require__(160));
 
 var app = new Vue({
-    el: '#app'
+    el: '#vue-app'
 });
 
 jQuery(document).ready(function () {

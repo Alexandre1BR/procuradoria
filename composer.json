@@ -14,6 +14,7 @@
         "maatwebsite/excel": "~2.1.0",
         "mccool/laravel-auto-presenter": "^6.2",
         "pragmarx/version": "^0.2.4",
+        "spatie/laravel-tags": "^2.0",
         "venturecraft/revisionable": "^1.28"
     },
     "require-dev": {

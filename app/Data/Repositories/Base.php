@@ -18,9 +18,12 @@ abstract class Base
         is_null($id = $request->input('id'))
                 ? $model = new $this->model()
                 : $model = $this->model::find($id);
+
         $model->fill($request->all());
 
         $model->save();
+
+        $this->saveTags($request, $model);
 
         return $model;
     }
@@ -36,6 +39,8 @@ abstract class Base
         $model->fill($data);
 
         $model->save();
+
+        $model->saveTags(collect($data), $model);
 
         return $model;
     }
@@ -58,5 +63,16 @@ abstract class Base
     public function cleanString($string)
     {
         return str_replace(["\n"], [''], $string);
+    }
+
+    /**
+     * @param Request $request
+     * @param $model
+     */
+    private function saveTags(Request $request, $model)
+    {
+        if ($request->has('tags')) {
+            $model->syncTags($request->get('tags'));
+        }
     }
 }

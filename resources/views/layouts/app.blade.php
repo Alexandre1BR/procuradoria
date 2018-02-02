@@ -17,6 +17,9 @@
 </head>
 
 <body>
+    <div id="vue-app">
+    </div>
+
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container-fluid">
@@ -93,6 +96,8 @@
             $('.select2').select2({
                 theme: "bootstrap",
                 width: '100%',
+                formatSelectionCssClass: function (data, container) { return "tag-color"; },
+                tags: true,
             });
         });
     </script>

@@ -66,6 +66,8 @@ class Processo extends BaseModel
         'observacao_arquivamento'       => 'string',
     ];
 
+    protected $with = ['tags'];
+
     public function getDataSemHoraAttribute()
     {
         return $this->data_distribuicao->format('d/m/Y');

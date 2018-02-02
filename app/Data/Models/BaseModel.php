@@ -2,6 +2,7 @@
 
 namespace App\Data\Models;
 
+use Spatie\Tags\HasTags;
 use App\Data\Presenters\BasePresenter;
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
@@ -9,7 +10,7 @@ use Venturecraft\Revisionable\RevisionableTrait;
 
 abstract class BaseModel extends Model implements HasPresenter
 {
-    use RevisionableTrait;
+    use RevisionableTrait, HasTags;
 
     protected $revisionEnabled = true;
 

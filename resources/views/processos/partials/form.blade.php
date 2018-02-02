@@ -249,9 +249,7 @@
                 </textarea>
             </div>
         </div>
-    </div>
 
-    <div class="row">
         <div class="col-md-12">
             <div class="form-group">
                 <label for="observacao">Observação</label>
@@ -260,9 +258,11 @@
                 </textarea>
             </div>
         </div>
-    </div>
-    <hr/>
-    <div class="row">
+
+        <div class="col-md-12">
+            <hr/>
+        </div>
+
         <div class="col-md-4">
             <div class="form-group">
                 <label for="data_arquivamento">Data do Arquivamento</label>
@@ -285,6 +285,26 @@
             </div>
         </div>
 
+        <div class="col-md-12">
+            <hr/>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="tags">Tags</label>
+                <select name="tags[]" class="form-control select2" multiple="multiple" id="tags" @include('partials.disabled')>
+                    @foreach ($tags as $tag)
+                        <option {{ isset($processo) && $processo->tags->contains('name', $tag->name) ? 'selected="selected"' : '' }}>{{ $tag->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr/>
+        </div>
     </div>
 
     @include('partials.save-button')

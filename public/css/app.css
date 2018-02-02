@@ -1263,6 +1263,20 @@ be a descendant of the grid when it is being dragged.
   background-color: #eee; }
 @charset "UTF-8";
 
+.tag-color {
+  background-color: red;
+}
+
+.custom .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  color: red;
+  float: right;
+}
+
+.select2-selection__choice {
+  background-color: red !important;
+  color: white !important;
+}
+
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.

@@ -2,10 +2,10 @@
 
 namespace App\Data\Models;
 
-use Spatie\Tags\HasTags;
 use App\Data\Presenters\BasePresenter;
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use Spatie\Tags\HasTags;
 use Venturecraft\Revisionable\RevisionableTrait;
 
 abstract class BaseModel extends Model implements HasPresenter

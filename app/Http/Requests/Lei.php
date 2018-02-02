@@ -24,8 +24,11 @@ class Lei extends FormRequest
     public function rules()
     {
         return [
-            //'nome'          => 'required',
-            //'abreviacao'    => 'required',
+            'numero_lei' => 'required',
+            'autor'      => 'required',
+            'assunto'    => 'required',
+            'link',
+            'processo_id' => 'required',
         ];
     }
 }

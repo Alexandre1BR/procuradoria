@@ -4,7 +4,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-xs-10">
                     <h4>
                         <a href="{{ route('leis.index') }}">Leis</a>
 
@@ -16,7 +16,9 @@
                     </h4>
                 </div>
 
-                @include('partials.edit-button', ['model' => $lei])
+                <div class="col-xs-1">
+                    @include('partials.edit-button', ['model' => $lei])
+                </div>
             </div>
         </div>
 
@@ -26,15 +28,6 @@
             <form action="{{ route('leis.store') }}" method="POST">
                 {{ csrf_field() }}
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 <div class="row">
                     <input name="id" type='hidden' value="{{$lei->id}}" id="id" >
                     <input name="processo_id" type='hidden' value="{{$processo_id}}" id="processo_id" >

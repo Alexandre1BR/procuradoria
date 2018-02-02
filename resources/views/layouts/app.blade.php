@@ -92,14 +92,13 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('.select2').select2({
-                theme: "bootstrap",
-                width: '100%',
-                formatSelectionCssClass: function (data, container) { return "tag-color"; },
-                tags: true,
-            });
-        });
+//        $(document).ready(function() {
+//            $('.select2').select2({
+//                theme: "bootstrap",
+//                formatSelectionCssClass: function (data, container) { return "tag-color"; },
+//                tags: true,
+//            });
+//        });
     </script>
 
     @include('layouts.partials.google-analytics')

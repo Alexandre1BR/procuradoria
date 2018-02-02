@@ -12,7 +12,7 @@
     @endif
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="numero_judicial">Número Judicial</label>
                 <input value="{{is_null(old('numero_judicial')) ? $processo->numero_judicial : old('numero_judicial')}}"
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="numero_alerj">Número Alerj</label>
                 <input value="{{is_null(old('numero_alerj')) ? $processo->numero_alerj : old('numero_alerj')}}" name="numero_alerj" class="form-control" @include('partials.readonly') id="numero_alerj"
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="tribunal_id">Tribunal</label>
                 <select name="tribunal_id" class="form-control select2" id="tribunal_id" @include('partials.disabled')>
@@ -49,14 +49,14 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="vara">Vara</label>
                 <input value="{{is_null(old('vara'))? $processo->vara : old('vara') }}" name="vara" class="form-control" @include('partials.readonly') id="vara" placeholder="Digite a Vara">
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="data_distribuicao">Data Distribuição</label>
                 <input
@@ -70,7 +70,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="acao_id">Ação</label>
                 <select name="acao_id" class="form-control select2" @include('partials.disabled') id="acao_id">
@@ -88,7 +88,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="juiz_id">Juiz</label>
                 <select name="juiz_id" class="form-control select2" @include('partials.disabled') id="juiz_id">
@@ -105,7 +105,15 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+                <label for="autor">Autor</label>
+                <input value="{{is_null(old('autor')) ? $processo->autor : old('autor')}}" name="autor" type="text" class="form-control" @include('partials.readonly') id="autor"
+                       placeholder="Informe o Autor">
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="relator_id">Relator</label>
                 <select name="relator_id" class="form-control select2" @include('partials.disabled') id="relator_id">
@@ -122,22 +130,14 @@
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="autor">Autor</label>
-                <input value="{{is_null(old('autor')) ? $processo->autor : old('autor')}}" name="autor" type="text" class="form-control" @include('partials.readonly') id="autor"
-                       placeholder="Informe o Autor">
-            </div>
-        </div>
-
-        <div class="col-md-6">
+        <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="reu">Réu</label>
                 <input value="{{is_null(old('reu')) ? $processo->reu : old('reu')}}" name="reu" type="text" class="form-control" @include('partials.readonly') id="reu" placeholder="Informe o Réu">
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="procurador_id">Procurador</label>
                 <select name="procurador_id" class="form-control select2" @include('partials.disabled') id="procurador_id">
@@ -154,7 +154,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="estagiario_id">Estagiario</label>
                 <select name="estagiario_id" class="form-control select2" @include('partials.disabled') id="estagiario_id">
@@ -172,7 +172,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="assessor_id">Assessor</label>
                 <select name="assessor_id" class="form-control select2" @include('partials.disabled') id="assessor_id">
@@ -189,7 +189,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="tipo_meio">Meio</label>
                 <select name="tipo_meio_id" class="form-control select2" @include('partials.disabled') id="tipo_meio">
@@ -262,7 +262,7 @@
             <div class="form-group">
                 <label for="data_arquivamento">Data do Arquivamento</label>
                 <input
-                        value="{{ ! is_null($processo->id) ? $processo->data_arquivamento : '' }}"
+                        value="{{ is_null(old('data_arquivamento')) ? ! is_null($processo->id) ? $processo->data_arquivamento : '' : old('data_arquivamento')}}"
                         type="date"
                         name="data_arquivamento"
                         class="form-control"
@@ -276,7 +276,7 @@
             <div class="form-group">
                 <label for="observacao_arquivamento">Observação do Arquivamento</label>
                 <textarea name="observacao_arquivamento" class="form-control" @include('partials.readonly') id="observacao_arquivamento"
-                          placeholder="Caso deseje, entre com uma observação sobre o arquivamento">{{$processo->observacao_arquivamento}}</textarea>
+                          placeholder="Caso deseje, entre com uma observação sobre o arquivamento">{{is_null(old('observacao_arquivamento'))? $processo->observacao_arquivamento : old('observacao_arquivamento')}}</textarea>
             </div>
         </div>
 

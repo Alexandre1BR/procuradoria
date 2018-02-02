@@ -23,7 +23,6 @@
         </div>
 
         <div class="panel-body">
-            @include('partials.alerts')
 
             <form action="{{ route('tribunais.store') }}" method="POST">
                 {{ csrf_field() }}

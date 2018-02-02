@@ -28,15 +28,6 @@
             <form action="{{ route('leis.store') }}" method="POST">
                 {{ csrf_field() }}
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 <div class="row">
                     <input name="id" type='hidden' value="{{$lei->id}}" id="id" >
                     <input name="processo_id" type='hidden' value="{{$processo_id}}" id="processo_id" >

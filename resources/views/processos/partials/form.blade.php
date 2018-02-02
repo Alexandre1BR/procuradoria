@@ -228,7 +228,7 @@
             <div class="form-group">
                 <label for="liminar">Liminar</label>
                 <textarea name="liminar" class="form-control" @include('partials.readonly') id="liminar"
-                          placeholder="Informe o Liminar">{{is_null(old('liminar'))? $processo->liminar : old('liminar')}} </textarea>
+                          placeholder="Informe o Liminar">{{is_null(old('liminar'))? $processo->liminar : old('liminar')}}</textarea>
             </div>
         </div>
 
@@ -236,8 +236,7 @@
             <div class="form-group">
                 <label for="apensos_obs">Apensos</label>
                 <textarea name="apensos_obs" class="form-control" @include('partials.readonly') id="apensos_obs"
-                          placeholder="Informe os Apensos">{{is_null(old('apensos_obs'))? $processo->apensos_obs : old('apensos_obs')}}
-                </textarea>
+                          placeholder="Informe os Apensos">{{is_null(old('apensos_obs'))? $processo->apensos_obs : old('apensos_obs')}}</textarea>
             </div>
         </div>
 
@@ -245,8 +244,7 @@
             <div class="form-group">
                 <label for="recurso">Recurso</label>
                 <textarea name="recurso" class="form-control" @include('partials.readonly') id="recurso"
-                          placeholder="Informe o Recurso">{{is_null(old('recurso'))? $processo->recurso : old('recurso')}}
-                </textarea>
+                          placeholder="Informe o Recurso">{{is_null(old('recurso'))? $processo->recurso : old('recurso')}}</textarea>
             </div>
         </div>
 
@@ -254,8 +252,7 @@
             <div class="form-group">
                 <label for="observacao">Observação</label>
                 <textarea name="observacao" class="form-control" @include('partials.readonly') id="observacao"
-                          placeholder="Caso deseje, entre com uma observação">{{is_null(old('observacao'))? $processo->observacao : old('observacao')}}
-                </textarea>
+                          placeholder="Caso deseje, entre com uma observação">{{is_null(old('observacao'))? $processo->observacao : old('observacao')}}</textarea>
             </div>
         </div>
 
@@ -267,7 +264,7 @@
             <div class="form-group">
                 <label for="data_arquivamento">Data do Arquivamento</label>
                 <input
-                        value="{{ ! is_null($processo->id) ? $processo->data_arquivamento : '' }}"
+                        value="{{ is_null(old('data_arquivamento')) ? ! is_null($processo->id) ? $processo->data_arquivamento : '' : old('data_arquivamento')}}"
                         type="date"
                         name="data_arquivamento"
                         class="form-control"
@@ -281,7 +278,7 @@
             <div class="form-group">
                 <label for="observacao_arquivamento">Observação do Arquivamento</label>
                 <textarea name="observacao_arquivamento" class="form-control" @include('partials.readonly') id="observacao_arquivamento"
-                          placeholder="Caso deseje, entre com uma observação sobre o arquivamento">{{$processo->observacao_arquivamento}}</textarea>
+                          placeholder="Caso deseje, entre com uma observação sobre o arquivamento">{{is_null(old('observacao_arquivamento'))? $processo->observacao_arquivamento : old('observacao_arquivamento')}}</textarea>
             </div>
         </div>
 

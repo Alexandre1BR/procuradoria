@@ -152,7 +152,7 @@ class Processos extends Base
     public function getProcessosData($id = null)
     {
         return [
-            'juizes'     => Juiz::orderBy('nome')->get(),//->pluck('nome', 'id'),
+            'juizes'     => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
             'tribunais'  => Tribunal::orderBy('nome')->pluck('nome', 'id'),
             'usuarios'   => User::orderBy('name')->pluck('name', 'id'),
             'meios'      => Meio::orderBy('nome')->pluck('nome', 'id'),

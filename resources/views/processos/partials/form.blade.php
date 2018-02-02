@@ -210,8 +210,7 @@
             <div class="form-group">
                 <label for="objeto">Objeto</label>
                 <textarea name="objeto" class="form-control" @include('partials.readonly')
-                        id="objeto" placeholder="Informe o Objeto">{{is_null(old('objeto'))? $processo->objeto : old('objeto')}}
-                </textarea>
+                        id="objeto" placeholder="Informe o Objeto">{{is_null(old('objeto'))? $processo->objeto : old('objeto')}}</textarea>
             </div>
         </div>
 
@@ -219,8 +218,7 @@
             <div class="form-group">
                 <label for="merito">Mérito</label>
                 <textarea name="merito" class="form-control" @include('partials.readonly')
-                        id="merito" placeholder="Informe o Mérito">{{is_null(old('merito'))? $processo->merito : old('merito')}}
-                </textarea>
+                        id="merito" placeholder="Informe o Mérito">{{is_null(old('merito'))? $processo->merito : old('merito')}}</textarea>
             </div>
         </div>
 

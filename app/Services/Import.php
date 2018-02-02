@@ -131,6 +131,26 @@ class Import
 
                 $this->command->line("{$value->no_judicial} - $value->no_alerj");
 
+//                if(is_null($value->no_judicial)){
+//                    $value->no_judicial = 'N/C';
+//                }
+//
+//                if(is_null($value->no_alerj)){
+//                    $value->no_alerj = 'N/C';
+//                }
+//
+//                if(is_null($value->vara)){
+//                    $value->vara = 'N/C';
+//                }
+//
+//                if(is_null($value->autor)){
+//                    $value->autor = 'N/C';
+//                }
+//
+//                if(is_null($value->reu)){
+//                    $value->reu = 'N/C';
+//                }
+
                 $tipo_meio = $this->ajustaTipoMeio($value->tipo);
 
                 $tipo_meio = app(Meios::class)
@@ -157,7 +177,7 @@ class Import
                         'tipo_meio_id'    => str_ireplace("\n", '', trim($tipo_meio->id)),
                         'created_at'      => now(),
                         'updated_at'      => now(),
-                        'observacao'      => $obs,
+                        'observacao'      => str_ireplace("\n", '', trim($obs)),
                     ];
             }
             if (!empty($insert)) {

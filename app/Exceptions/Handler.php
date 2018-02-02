@@ -26,6 +26,19 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
+    private function handlerError($exception)
+    {
+        if (!app()->environment('local') && $this->isPHPException($exception)) {
+            return view('errors.500');
+        }
+    }
+
+    private function isPHPException($exception)
+    {
+        return $exception instanceof \ErrorException ||
+            $exception instanceof \Exception;
+    }
+
     /**
      * Report or log an exception.
      *
@@ -50,8 +63,8 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if (!app()->environment('local') && $exception instanceof \ErrorException) {
-            return view('errors.500');
+        if ($result = $this->handlerError($exception)) {
+            return $result;
         }
 
         return parent::render($request, $exception);

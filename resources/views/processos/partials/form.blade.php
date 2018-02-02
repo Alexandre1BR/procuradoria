@@ -209,8 +209,8 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="objeto">Objeto</label>
-                <textarea name="objeto" class="form-control" @include('partials.readonly') id="objeto" placeholder="Informe o Objeto">
-                    {{is_null(old('objeto'))? $processo->objeto : old('objeto')}}
+                <textarea name="objeto" class="form-control" @include('partials.readonly')
+                        id="objeto" placeholder="Informe o Objeto">{{is_null(old('objeto'))? $processo->objeto : old('objeto')}}
                 </textarea>
             </div>
         </div>
@@ -218,8 +218,8 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="merito">Mérito</label>
-                <textarea name="merito" class="form-control" @include('partials.readonly') id="merito" placeholder="Informe o Mérito">
-                    {{is_null(old('merito'))? $processo->merito : old('merito')}}
+                <textarea name="merito" class="form-control" @include('partials.readonly')
+                        id="merito" placeholder="Informe o Mérito">{{is_null(old('merito'))? $processo->merito : old('merito')}}
                 </textarea>
             </div>
         </div>
@@ -228,9 +228,7 @@
             <div class="form-group">
                 <label for="liminar">Liminar</label>
                 <textarea name="liminar" class="form-control" @include('partials.readonly') id="liminar"
-                          placeholder="Informe o Liminar">
-                    {{is_null(old('liminar'))? $processo->liminar : old('liminar')}}
-                </textarea>
+                          placeholder="Informe o Liminar">{{is_null(old('liminar'))? $processo->liminar : old('liminar')}} </textarea>
             </div>
         </div>
 
@@ -238,8 +236,7 @@
             <div class="form-group">
                 <label for="apensos_obs">Apensos</label>
                 <textarea name="apensos_obs" class="form-control" @include('partials.readonly') id="apensos_obs"
-                          placeholder="Informe os Apensos">
-                   {{is_null(old('apensos_obs'))? $processo->apensos_obs : old('apensos_obs')}}
+                          placeholder="Informe os Apensos">{{is_null(old('apensos_obs'))? $processo->apensos_obs : old('apensos_obs')}}
                 </textarea>
             </div>
         </div>
@@ -248,8 +245,7 @@
             <div class="form-group">
                 <label for="recurso">Recurso</label>
                 <textarea name="recurso" class="form-control" @include('partials.readonly') id="recurso"
-                          placeholder="Informe o Recurso">
-                {{is_null(old('recurso'))? $processo->recurso : old('recurso')}}
+                          placeholder="Informe o Recurso">{{is_null(old('recurso'))? $processo->recurso : old('recurso')}}
                 </textarea>
             </div>
         </div>
@@ -260,8 +256,8 @@
             <div class="form-group">
                 <label for="observacao">Observação</label>
                 <textarea name="observacao" class="form-control" @include('partials.readonly') id="observacao"
-                          placeholder="Caso deseje, entre com uma observação">
-                    {{is_null(old('observacao'))? $processo->observacao : old('observacao')}}</textarea>
+                          placeholder="Caso deseje, entre com uma observação">{{is_null(old('observacao'))? $processo->observacao : old('observacao')}}
+                </textarea>
             </div>
         </div>
     </div>

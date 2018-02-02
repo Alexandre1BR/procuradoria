@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Models\Processo;
+use App\Data\Models\Processo as ProcessoModel;
 use App\Data\Repositories\Apensos as ApensosRepository;
 use App\Data\Repositories\Processos as ProcessosRepository;
 use App\Http\Requests\Apenso as ApensoRequest;
 use App\Http\Requests\Processo as ProcessoRequest;
+use \App\Data\Scope\Processo as ProcessoScope;
 
 class Processos extends Controller
 {
@@ -41,7 +42,7 @@ class Processos extends Controller
         $repository->createFromRequest($request);
         //dd($request->processo_id);
         return view('processos.form')
-        ->with('processo', Processo::find($request->processo_id))
+        ->with('processo', ProcessoModel::find($request->processo_id))
         ->with('formDisabled', true)
         ->with($this->getProcessosData($request->processo_id))
         ->with($this->getSuccessMessage());
@@ -50,8 +51,10 @@ class Processos extends Controller
     public function show($id)
     {
         return view('processos.form')
-            ->with('processo', Processo::find($id))
+            ->with('processo', ProcessoModel::withoutGlobalScope(ProcessoScope::class)->find($id))
             ->with('formDisabled', true)
             ->with($this->repository->getProcessosData($id));
+
+
     }
 }

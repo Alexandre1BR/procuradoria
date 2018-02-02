@@ -11,7 +11,6 @@ use App\Data\Models\Meio;
 use App\Data\Models\Processo;
 use App\Data\Models\Tribunal;
 use App\Data\Models\User;
-use App\Http\Requests\Processo as ProcessoRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

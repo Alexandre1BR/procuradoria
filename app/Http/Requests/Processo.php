@@ -23,7 +23,6 @@ class Processo extends FormRequest
      */
     public function rules()
     {
-
         return [
 
 //            'numero_judicial' => 'required',
@@ -36,8 +35,8 @@ class Processo extends FormRequest
 //            'autor' => 'required',
 //            'reu' => 'required',
             'procurador_id' => 'required',
-           'estagiario_id' => 'required',
-            'tipo_meio_id' => 'required',
+           'estagiario_id'  => 'required',
+            'tipo_meio_id'  => 'required',
         ];
     }
 

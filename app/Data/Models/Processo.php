@@ -2,9 +2,9 @@
 
 namespace App\Data\Models;
 
-use Spatie\Tags\HasTags;
 use App\Data\Presenters\ProcessoPresenter;
 use App\Data\Scope\Processo as ProcessoScope;
+use Spatie\Tags\HasTags;
 
 class Processo extends BaseModel
 {

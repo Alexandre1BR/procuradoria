@@ -8,7 +8,7 @@
                     <h4>
                         <a href="{{ route('home.index') }}">Processos</a>
 
-                        @if(is_null($processo->id))
+                        @if(!isset($processo) || is_null($processo->id))
                             > NOVO
                         @else
                             > {{ $processo->numero_judicial ?: $processo->numero_alerj }}

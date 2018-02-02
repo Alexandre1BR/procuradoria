@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-md-10">
                             <select name="apensado_id" class="select2 form-control" disabled="disabled" id="apensado_id">
-                                <option value="">Selecione</option>
+                                <option value="">SELECIONE O PROCESSO</option>
                                 @foreach($processos as $key=>$processoApensado)
                                     <option value="{{ $key }}">{{ $processoApensado }}</option>
                                 @endforeach

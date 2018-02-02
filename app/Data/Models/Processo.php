@@ -2,11 +2,14 @@
 
 namespace App\Data\Models;
 
+use Spatie\Tags\HasTags;
 use App\Data\Presenters\ProcessoPresenter;
 use App\Data\Scope\Processo as ProcessoScope;
 
 class Processo extends BaseModel
 {
+    use HasTags;
+
     protected $dates = [
         'data_distribuicao',
     ];

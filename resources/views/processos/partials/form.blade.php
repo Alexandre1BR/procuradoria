@@ -2,7 +2,7 @@
     {{ csrf_field() }}
 
     @if (isset($processo))
-        <input name="id" type="hidden" value="{{$processo->id}}">
+        <input name="id" type="hidden" value="{{ $processo->id }}">
     @endif
 
     @if(session()->has('message'))

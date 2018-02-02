@@ -15,10 +15,12 @@ class TipoJuiz extends BaseModel
         'nome',
     ];
 
-    public function getAbreviacaoAttribute() {
-        if(strlen($this->nome) > 4){
-            return substr($this->nome, 0,3).".";
+    public function getAbreviacaoAttribute()
+    {
+        if (strlen($this->nome) > 4) {
+            return substr($this->nome, 0, 3).'.';
         }
+
         return $this->nome;
     }
 }

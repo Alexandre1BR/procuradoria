@@ -89,6 +89,11 @@ class Import
 
                 // Trim everything
                 $values[$key] = trim($values[$key]);
+
+                // Remove some odd stuff
+                if (starts_with($values[$key], ': ')) {
+                    $values[$key] = substr($values[$key], 2);
+                }
             }
         }
 
@@ -159,15 +164,15 @@ class Import
                 $tribunal = $this->tribunaisRepository
                     ->firstOrCreate(
                         [
-                            'nome'       => $tribunal ?: 'N/C',
-                            'abreviacao' => $tribunal ?: 'N/C',
+                            'nome'       => $this->upper($tribunal ?: 'N/C'),
+                            'abreviacao' => $this->upper($tribunal ?: 'N/C'),
                         ]
                     );
                 // Nome e Abreviação receberam os mesmos dados , já que ora esta abreviado e ora esta 'nomeado'
                 $acao = $this->acoesRepository
                     ->firstOrCreate([
-                                        'nome'       => $value->acao ?: 'N/C',
-                                        'abreviacao' => $value->acao ?: 'N/C',
+                                        'nome'       => $this->upper($value->acao ?: 'N/C'),
+                                        'abreviacao' => $this->upper($value->acao ?: 'N/C'),
                                     ]);
 
                 //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
@@ -178,7 +183,7 @@ class Import
 
                 $relator_juiz = $this->juizesRepository
                     ->firstOrCreate([
-                        'nome'         => $nome_relator ?: 'N/C',
+                        'nome'         => $this->upper($nome_relator ?: 'N/C'),
                         'lotacao_id'   => $tribunal->id,
                         'tipo_juiz_id' => $tipo_relator->id,
                     ]);
@@ -581,5 +586,10 @@ class Import
         );
 
         return $str;
+    }
+
+    private function upper($string)
+    {
+        return mb_strtoupper($string);
     }
 }

@@ -147,6 +147,7 @@ return [
         'title'                 => 'título',
         'username'              => 'usuário',
         'year'                  => 'ano',
+        'tipo_prazo_id'         => 'Tipo Prazo'
     ],
 
 ];

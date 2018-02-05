@@ -17,9 +17,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
-const app = new Vue({
-    el: '#vue-app'
-});
+require('./apps/processos.js');
 
 jQuery(document).ready(function() {
     jQuery('#calendar').fullCalendar({

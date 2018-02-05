@@ -50,6 +50,8 @@ class Processos extends Base
 
     public function search(Request $request)
     {
+        info($request);
+
         return $this->searchFromRequest($request->get('pesquisa'));
     }
 
@@ -177,6 +179,8 @@ class Processos extends Base
             $processo['assessor_nome'] = is_null($processo->assessor) ? 'N/C' : $processo->assessor->name;
 
             $processo['estagiario_nome'] = is_null($processo->estagiario) ? 'N/C' : $processo->estagiario->name;
+
+            $processo['show_url'] = route('processos.show', ['id' => $processo->id]);
 
             return $processo;
         })->toArray();

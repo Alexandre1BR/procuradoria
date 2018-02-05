@@ -23,16 +23,14 @@ class Home extends Controller
 
     /**
      * @param ProcessoRequest|Request $request
-     * @param $data
      * @return mixed
      */
-    private function buildView(Request $request, $data)
+    private function buildView(Request $request)
     {
         return view('home.index')
             ->with('pesquisa', $request->get('pesquisa'))
             ->with($this->processosRepository->getProcessosData())
-            ->with('processo', new Processo())
-            ->with('processos', $data);
+            ->with('processo', new Processo());
     }
 
     /**
@@ -41,11 +39,9 @@ class Home extends Controller
      */
     public function index(Request $request)
     {
-        $results = $this->processosRepository->search($request);
-
         return $request->expectsJson()
-            ? $results
-            : $this->buildView($request, $results);
+            ? $this->processosRepository->search($request)
+            : $this->buildView($request);
     }
 
     /**
@@ -54,6 +50,10 @@ class Home extends Controller
      */
     public function filter(Request $request)
     {
-        return $this->buildView($request, $this->processosRepository->filter($request));
+        return $request->expectsJson()
+            ? $this->processosRepository->search($request)
+            : $this->buildView($request);
+
+//        return $this->buildView($request, $this->processosRepository->filter($request));
     }
 }

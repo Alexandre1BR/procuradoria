@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="panel panel-default">
+    <div class="panel panel-default" id="vue-processos">
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-3">
@@ -11,7 +11,6 @@
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-2 pull-right">
-                            <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                                 <i class="fa fa-filter"></i> Filtro avançado
                             </button>
@@ -19,10 +18,10 @@
 
                         <div class="col-md-10">
                             @include(
-                                'layouts.partials.search-form',
+                                'layouts.partials.search-form-vue',
                                 [
                                     'routeSearch' => 'home.index',
-                                    'routeCreate' => 'processos.create',
+                                    'routeCreate' => 'processos.create'
                                 ]
                             )
                         </div>

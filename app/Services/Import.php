@@ -6,6 +6,7 @@ use App\Data\Models\Processo;
 use App\Data\Models\TipoUsuario as ModelTipoUsuario;
 use App\Data\Models\User as ModelUser;
 use App\Data\Repositories\Acoes;
+use App\Data\Repositories\Processos;
 use App\Data\Repositories\Juizes;
 use App\Data\Repositories\Meios;
 use App\Data\Repositories\TiposJuizes;
@@ -20,6 +21,83 @@ class Import
 {
     protected $command;
 
+    /**
+     * @var Tribunais
+     */
+    private $tribunaisRepository;
+
+    /**
+     * @var Acoes
+     */
+    private $acoesRepository;
+
+    /**
+     * @var TiposJuizes
+     */
+    private $tiposJuizesRepository;
+
+    /**
+     * @var Juizes
+     */
+    private $juizesRepository;
+
+    /**
+     * @var Meios
+     */
+    private $meiosRepository;
+
+    /**
+     * @var Users
+     */
+    private $usersRepository;
+
+    /**
+     * @var Processos
+     */
+    private $processosRepository;
+
+    public function __construct(
+        Tribunais $tribunaisRepository,
+                                Acoes $acoesRepository,
+                                Processos $processosRepository,
+                                TiposJuizes $tiposJuizesRepository,
+                                Juizes $juizesRepository,
+                                Meios $meiosRepository,
+                                Users $usersRepository
+    ) {
+        $this->tribunaisRepository = $tribunaisRepository;
+
+        $this->acoesRepository = $acoesRepository;
+
+        $this->juizesRepository = $juizesRepository;
+
+        $this->meiosRepository = $meiosRepository;
+
+        $this->tiposJuizesRepository = $tiposJuizesRepository;
+
+        $this->usersRepository = $usersRepository;
+
+        $this->processosRepository = $processosRepository;
+    }
+
+    private function cleanAndNormalize($value)
+    {
+        return $value;
+    }
+
+    private function deleteAllRows()
+    {
+        $this->usersRepository->new()->truncate();
+
+        $this->processosRepository->new()->truncate();
+
+        $this->tribunaisRepository->new()->truncate();
+
+        $this->acoesRepository->new()->truncate();
+
+        $this->juizesRepository->new()->truncate();
+    }
+
     public function importExport()
     {
         return view('excel.importExport');
@@ -28,6 +106,8 @@ class Import
     public function execute($usersFile, $processesFile, $command)
     {
         $this->command = $command;
+
+        $this->deleteAllRows();
 
         $this->importUsers(realpath($usersFile));
 
@@ -57,6 +137,8 @@ class Import
 
         if (!empty($data) && $data->count()) {
             foreach ($data[0] as $key => $value) {
+                $value = $this->cleanAndNormalize($value);
+
                 $obs = '';
 
                 $tribunal = null;
@@ -64,7 +146,7 @@ class Import
                 if (!is_null($value->origem)) {
                     list($tribunal, $vara) = $this->split($value);
                 }
-                $tribunal = app(Tribunais::class)
+                $tribunal = $this->tribunaisRepository
                     ->firstOrCreate(
                         [
                             'nome'       => trim($tribunal) ?: 'N/C',
@@ -72,7 +154,7 @@ class Import
                         ]
                     );
                 // Nome e Abreviação receberam os mesmos dados , já que ora esta abreviado e ora esta 'nomeado'
-                $acao = app(Acoes::class)
+                $acao = $this->acoesRepository
                     ->firstOrCreate([
                                         'nome'       => trim($value->acao) ?: 'N/C',
                                         'abreviacao' => trim($value->acao) ?: 'N/C',
@@ -80,16 +162,16 @@ class Import
 
                 //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
                 $tipo_relator = $this->ajustaTipoRelator($value->relator);
-                $tipo_relator = app(TiposJuizes::class)->firstOrCreate(['nome' => $tipo_relator]);
+                $tipo_relator = $this->tiposJuizesRepository->firstOrCreate(['nome' => $tipo_relator]);
 
                 $nome_relator = $this->ajustaNomeRelator($value->relator);
 
-                $relator_juiz = app(Juizes::class)
+                $relator_juiz = $this->juizesRepository
                     ->firstOrCreate([
-                                        'nome'         => $nome_relator,
-                                        'lotacao_id'   => $tribunal->id,
-                                        'tipo_juiz_id' => $tipo_relator->id,
-                                    ]);
+                        'nome'         => trim($nome_relator) ?: 'N/C',
+                        'lotacao_id'   => $tribunal->id,
+                        'tipo_juiz_id' => $tipo_relator->id,
+                    ]);
 
                 if (!is_null($value->procurador)) {
                     if (!is_null($this->buscaUsuario($value->procurador, 1))) {
@@ -153,7 +235,7 @@ class Import
 
                 $tipo_meio = $this->ajustaTipoMeio($value->tipo);
 
-                $tipo_meio = app(Meios::class)
+                $tipo_meio = $this->meiosRepository
                     ->firstOrCreate(['nome' => $tipo_meio]); //TODO => 'N/C'
                 $insert[] =
                     [

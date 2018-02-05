@@ -149,7 +149,8 @@ return [
         'year'                  => 'ano',
         'tipo_prazo_id'         => 'Tipo Prazo',
         'processo_id'           => 'Processo',
-        'tipo_andamento_id'     => 'Tipo Andamento'
+        'tipo_andamento_id'     => 'Tipo Andamento',
+        'apensado_id'           => 'Processo'
     ],
 
 ];

@@ -151,6 +151,12 @@ class Processos extends Base
      */
     public function getProcessosData($id = null)
     {
+        $processos  = Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id');
+        $apensos    = Apenso::where('processo_id', $id)->orWhere('apensado_id', $id)->get();
+        foreach ($apensos as $key  => $apenso) {
+            $processos->forget($apenso->apensado_id);
+            $processos->forget($apenso->processo_id);
+        }
         return [
             'juizes'     => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
             'tribunais'  => Tribunal::orderBy('nome')->pluck('nome', 'id'),
@@ -158,8 +164,8 @@ class Processos extends Base
             'meios'      => Meio::orderBy('nome')->pluck('nome', 'id'),
             'acoes'      => Acao::orderBy('nome')->pluck('nome', 'id'),
             'andamentos' => Andamento::where('processo_id', $id)->get(),
-            'apensos'    => Apenso::where('processo_id', $id)->orWhere('apensado_id', $id)->get(),
-            'processos'  => Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id'),
+            'apensos'    => $apensos,
+            'processos'  => $processos,
             'leis'       => Lei::where('processo_id', $id)->get(),
             'tags'       => Tag::all(),
         ];

@@ -151,28 +151,28 @@ return [
         'abreviacao'              => 'Abreviação'                ,
 
         'processo_id'             => 'Processo'                  ,
-        'tipo_andamento_id'       => 'Tipo de Andamento'         ,
-        'tipo_entrada_id'          => 'Tipo de Entrada'           ,
-        'tipo_prazo_id'            => 'Tipo Prazo'                ,
-        'data_prazo'               => 'Data Prazo'                ,
-        'data_entrega'             => 'Data Entrega'              ,
+        'tipo_andamento_id'       => 'Tipo de andamento'         ,
+        'tipo_entrada_id'          => 'Tipo de entrada'           ,
+        'tipo_prazo_id'            => 'Tipo prazo'                ,
+        'data_prazo'               => 'Data prazo'                ,
+        'data_entrega'             => 'Data entrega'              ,
         'observacoes'              => 'Observação'                ,
 
         'apensado_id'              => 'Apensado'                  ,
 
         'lotacao_id'               => 'Lotação'                   ,
-        'tipo_juiz_id'             => 'Tipo Juiz'                 ,
+        'tipo_juiz_id'             => 'Tipo juiz'                 ,
 
-        'numero_lei'               => 'Número Lei'                ,
+        'numero_lei'               => 'Número lei'                ,
         'autor'                    => 'Autor'                     ,
         'assunto'                  => 'Assunto'                   ,
         'link'                     => 'Link'                      ,
 
-        'numero_judicial'          => 'Número Judicial'           ,
+        'numero_judicial'          => 'Número judicial'           ,
         'numero_alerj'             => 'Número Alerj'              ,
         'tribunal_id'              => 'Tribunal'                  ,
         'vara'                     => 'Vara'                      ,
-        'data_distribuicao'        => 'Data Distribuição'         ,
+        'data_distribuicao'        => 'Data distribuição'         ,
         'acao_id'                  => 'Ação'                      ,
         'juiz_id'                  => 'Juiz'                      ,
         'relator_id'               => 'Relator'                   ,
@@ -187,8 +187,8 @@ return [
         'assessor_id'              => 'Assessor'                  ,
         'tipo_meio_id'             => 'Meio'                      ,
         'observacao'               => 'Observação'                ,
-        'data_arquivamento'        => 'Data do Arquivamento'      ,
-        'observacao_arquivamento'  => 'Observação do Arquivamento',
+        'data_arquivamento'        => 'Data do arquivamento'      ,
+        'observacao_arquivamento'  => 'Observação do arquivamento',
 
         'url_api'                 => 'URL'                       ,
 

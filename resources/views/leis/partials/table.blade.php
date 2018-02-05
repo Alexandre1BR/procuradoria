@@ -1,7 +1,7 @@
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th>Número Lei</th>
+        <th>Número lei</th>
         <th>Autor</th>
         <th>Assunto</th>
         <th>Link</th>
@@ -16,6 +16,6 @@
             <td>{{ $lei->link }}</td>
         </tr>
     @empty
-        <p>Nenhuma Lei encontrada</p>
+        <p>Nenhuma lei encontrada</p>
     @endforelse
 </table>

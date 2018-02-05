@@ -24,10 +24,10 @@
                     <thead>
 
                         <tr>
-                            <th>Tipo de Andamento</th>
-                            <th>Tipo de Entrada</th>
-                            <th>Tipo de Prazo</th>
-                            <th>Data Prazo</th>
+                            <th>Tipo de andamento</th>
+                            <th>Tipo de entrada</th>
+                            <th>Tipo de prazo</th>
+                            <th>Data prazo</th>
                             <th>Observação</th>
                         </tr>
                     </thead>
@@ -41,7 +41,7 @@
                             <td>{{ $andamento->observacoes }}</td>
                         </tr>
                     @empty
-                        <p>Nenhum Andamento encontrado</p>
+                        <p>Nenhum andamento encontrado</p>
                     @endforelse
                 </table>
             </div>

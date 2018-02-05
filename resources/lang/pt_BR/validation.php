@@ -147,6 +147,53 @@ return [
         'title'                 => 'título',
         'username'              => 'usuário',
         'year'                  => 'ano',
+        'nome'                    => 'Nome'                      ,
+        'abreviacao'              => 'Abreviação'                ,
+
+        'processo_id'             => 'Processo'                  ,
+        'tipo_andamento_id'       => 'Tipo de andamento'         ,
+        'tipo_entrada_id'          => 'Tipo de entrada'           ,
+        'tipo_prazo_id'            => 'Tipo prazo'                ,
+        'data_prazo'               => 'Data prazo'                ,
+        'data_entrega'             => 'Data entrega'              ,
+        'observacoes'              => 'Observação'                ,
+
+        'apensado_id'              => 'Apensado'                  ,
+
+        'lotacao_id'               => 'Lotação'                   ,
+        'tipo_juiz_id'             => 'Tipo juiz'                 ,
+
+        'numero_lei'               => 'Número lei'                ,
+        'autor'                    => 'Autor'                     ,
+        'assunto'                  => 'Assunto'                   ,
+        'link'                     => 'Link'                      ,
+
+        'numero_judicial'          => 'Número judicial'           ,
+        'numero_alerj'             => 'Número Alerj'              ,
+        'tribunal_id'              => 'Tribunal'                  ,
+        'vara'                     => 'Vara'                      ,
+        'data_distribuicao'        => 'Data distribuição'         ,
+        'acao_id'                  => 'Ação'                      ,
+        'juiz_id'                  => 'Juiz'                      ,
+        'relator_id'               => 'Relator'                   ,
+        'apensos_obs'              => 'Apensos'                   ,
+        'reu'                      => 'Réu'                       ,
+        'objeto'                   => 'Objeto'                    ,
+        'merito'                   => 'Mérito'                    ,
+        'liminar'                  => 'Liminar'                   ,
+        'recurso'                  => 'Recurso'                   ,
+        'procurador_id'            => 'Procurador'                ,
+        'estagiario_id'            => 'Estagiario'                ,
+        'assessor_id'              => 'Assessor'                  ,
+        'tipo_meio_id'             => 'Meio'                      ,
+        'observacao'               => 'Observação'                ,
+        'data_arquivamento'        => 'Data do arquivamento'      ,
+        'observacao_arquivamento'  => 'Observação do arquivamento',
+
+        'url_api'                 => 'URL'                       ,
+
+        'email'                    => 'Email'                     ,
+        'user_type_id'             => 'Tipo de usuário'           ,
     ],
 
 ];

@@ -58,7 +58,7 @@
                     </tr>
                 @endif
             @empty
-                <p>Nenhum Apenso encontrado</p>
+                <p>Nenhum apenso encontrado</p>
             @endforelse
         </table>
     </div>

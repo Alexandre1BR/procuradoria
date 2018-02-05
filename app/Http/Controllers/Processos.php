@@ -44,7 +44,7 @@ class Processos extends Controller
         return view('processos.form')
         ->with('processo', ProcessoModel::find($request->processo_id))
         ->with('formDisabled', true)
-        ->with($this->getProcessosData($request->processo_id))
+        ->with($this->repository->getProcessosData($request->processo_id))
         ->with($this->getSuccessMessage());
     }
 

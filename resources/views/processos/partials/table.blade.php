@@ -13,7 +13,7 @@
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th>Número Judicial</th>
+        <th>Número judicial</th>
         <th>Número ALERJ</th>
         <th>Tribunal</th>
         <th class="hidden-xs">Distribuído em</th>

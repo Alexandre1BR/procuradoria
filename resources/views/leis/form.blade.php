@@ -32,7 +32,7 @@
                     <input name="id" type='hidden' value="{{$lei->id}}" id="id" >
                     <input name="processo_id" type='hidden' value="{{$processo_id}}" id="processo_id" >
                     <div class="form-group col-md-4">
-                        <label for="numero_lei">Número Lei</label>
+                        <label for="numero_lei">Número lei</label>
                         <input value="{{$lei->numero_lei}}" name="numero_lei" class="form-control" id="numero_lei" placeholder="Número Lei" @include('partials.readonly')>
                     </div>
                 </div>

@@ -49,7 +49,7 @@
                         </select>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="tipo_juiz_id">Tipo Juiz</label>
+                        <label for="tipo_juiz_id">Tipo juiz</label>
                         <select name="tipo_juiz_id" class="select2 form-control" @include('partials.disabled') id="tipo_juiz_id">
                             <option value="">SELECIONE</option>
                             @foreach ($tiposJuizes as $key => $tipojuiz)

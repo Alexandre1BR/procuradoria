@@ -23,6 +23,8 @@ class Home extends Controller
 
     /**
      * @param ProcessoRequest|Request $request
+     * @param $data
+     *
      * @return mixed
      */
     private function buildView(Request $request)
@@ -35,6 +37,7 @@ class Home extends Controller
 
     /**
      * @param Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -46,6 +49,7 @@ class Home extends Controller
 
     /**
      * @param Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function filter(Request $request)

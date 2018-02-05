@@ -9,50 +9,51 @@ use Illuminate\Http\Request;
 
 class Home extends Controller
 {
-    protected $repository;
+    protected $processosRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param ProcessosRepository $repository
+     * @param ProcessosRepository $processosRepository
      */
-    public function __construct(ProcessosRepository $repository)
+    public function __construct(ProcessosRepository $processosRepository)
     {
-        $this->repository = $repository;
+        $this->processosRepository = $processosRepository;
     }
 
     /**
-     * @param ProcessoRequest $request
+     * @param ProcessoRequest|Request $request
      * @param $data
-     *
      * @return mixed
      */
     private function buildView(Request $request, $data)
     {
         return view('home.index')
             ->with('pesquisa', $request->get('pesquisa'))
-            ->with($this->repository->getProcessosData())
+            ->with($this->processosRepository->getProcessosData())
             ->with('processo', new Processo())
             ->with('processos', $data);
     }
 
     /**
-     * @param ProcessoRequest $request
-     *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        return $this->buildView($request, $this->repository->search($request));
+        $results = $this->processosRepository->search($request);
+
+        return $request->expectsJson()
+            ? $results
+            : $this->buildView($request, $results);
     }
 
     /**
-     * @param ProcessoRequest $request
-     *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function filter(Request $request)
     {
-        return $this->buildView($request, $this->repository->filter($request));
+        return $this->buildView($request, $this->processosRepository->filter($request));
     }
 }

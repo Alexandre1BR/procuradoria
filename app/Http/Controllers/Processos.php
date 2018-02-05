@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Models\Processo as ProcessoModel;
-use App\Data\Repositories\Apensos as ApensosRepository;
-use App\Data\Repositories\Processos as ProcessosRepository;
 use App\Data\Scope\Processo as ProcessoScope;
+use App\Data\Models\Processo as ProcessoModel;
 use App\Http\Requests\Apenso as ApensoRequest;
 use App\Http\Requests\Processo as ProcessoRequest;
+use App\Data\Repositories\Apensos as ApensosRepository;
+use App\Data\Repositories\Processos as ProcessosRepository;
 
 class Processos extends Controller
 {

@@ -11,7 +11,7 @@
                 </div>
             @endif
 
-            <a href="{{ route('tipos_usuarios.create') }}">Procuradoria → Tipos de Usuários</a>
+            <a href="{{ route('tipos_usuarios.create') }}">Procuradoria → Tipos de usuários</a>
 
             <form action="{{ route('tipos_usuarios.store') }}" method="POST">
                 {{ csrf_field() }}

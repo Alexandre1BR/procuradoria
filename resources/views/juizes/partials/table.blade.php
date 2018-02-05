@@ -15,7 +15,7 @@
     <tr>
         <th>Nome</th>
         <th>Tribunal</th>
-        <th>Tipo Juiz</th>
+        <th>Tipo juiz</th>
     </tr>
     </thead>
 
@@ -26,6 +26,6 @@
             <td>{{ is_null($juiz->tipojuiz->nome) ? : $juiz->tipojuiz->nome }}</td>
         </tr>
     @empty
-        <p>Nenhum juíz encontrado</p>
+        <p>Nenhum juiz encontrado</p>
     @endforelse
 </table>

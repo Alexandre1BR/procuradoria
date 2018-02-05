@@ -7,7 +7,7 @@
                     <thead>
 
                     <tr>
-                        <th>Número Judicial</th>
+                        <th>Número judicial</th>
                         <th>Número ALERJ</th>
                         <th>Tribunal</th>
                         <th class=".hidden-xs">Distribuído em</th>

@@ -35,7 +35,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <img class="logo" src="/images/procuradoria.svg">
+                        {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
 

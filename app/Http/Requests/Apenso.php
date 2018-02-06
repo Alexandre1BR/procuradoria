@@ -27,7 +27,7 @@ class Apenso extends FormRequest
             //'nome'          => 'required',
             //'abreviacao'    => 'required',
             'processo_id' => 'required|unique:apensos,apensado_id',
-            'apensado_id' => 'required'
+            'apensado_id' => 'required',
         ];
     }
 }

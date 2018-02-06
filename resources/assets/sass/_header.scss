@@ -1,0 +1,35 @@
+// Login-Home
+
+.navbar {
+  .navbar-header{
+    .navbar-toggle {
+      border: 0px solid transparent;
+
+      .icon-bar {
+        background-color: white;
+        height: 4px;
+        width: 28px;
+      }
+
+      .icon-bar:nth-child(3) {
+        width: 16px;
+      }
+      .icon-bar:last-child {
+        width: 22px;
+      }
+    }
+
+    .navbar-brand {
+      padding: 7px 15px;
+
+      .logo {
+        width: 180px;
+      }
+    }
+
+
+  }
+
+
+
+}

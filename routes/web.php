@@ -19,8 +19,6 @@ Route::group(['middleware' => makeAppRootRouteMiddlewares()], function () {
 
     require __DIR__.'/services/juizes.php';
 
-    require __DIR__.'/services/excel.php';
-
     require __DIR__.'/services/agenda.php';
 
     require __DIR__.'/services/leis.php';

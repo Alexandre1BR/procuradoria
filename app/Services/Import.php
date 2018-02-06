@@ -277,6 +277,28 @@ class Import
                         'observacao'      => str_ireplace("\n", '', $obs),
                     ];
             }
+            $colunas =
+                [
+                    'numero_judicial' => 'numero_judicial',
+                    'numero_alerj'    => 'numero_alerj',
+                    'apensos_obs'     => 'apensos_obs',
+                    'vara'            => 'vara',
+                    'autor'           => 'autor',
+                    'reu'             => 'reu',
+                    'objeto'          => 'objeto',
+                    'merito'          => 'merito',
+                    'liminar'         => 'liminar',
+                    'recurso'         => 'recurso',
+                    'observacao'      => 'observacao',
+                ];
+
+            foreach ($insert as $k1 => $vinsert) {
+                foreach ($colunas as $k2 => $v) {
+                    if ($vinsert[$v] == '') {
+                        $insert[$k1][$v] = 'N/C';
+                    }
+                }
+            }
             if (!empty($insert)) {
                 Processo::insert($insert);
 

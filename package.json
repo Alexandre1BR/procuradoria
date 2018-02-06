@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "axios": "^0.17",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "bootstrap-sass": "^3.3.7",
     "cross-env": "^5.1",
     "font-awesome": "^4.7.0",
@@ -19,7 +20,9 @@
     "laravel-mix": "^1.0",
     "lodash": "^4.17.4",
     "select2-bootstrap-theme": "0.1.0-beta.10",
-    "vue": "^2.5.7"
+    "vue": "^2.5.7",
+    "webpack-livereload-plugin": "^1.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+  }
 }

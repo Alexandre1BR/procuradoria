@@ -35,7 +35,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        <img class="logo" src="/images/procuradoria.svg">
                     </a>
                 </div>
 
@@ -96,6 +96,7 @@
             $('.select2').select2({
                 theme: "bootstrap",
                 tags: true,
+                width: "100%",
             });
         });
     </script>

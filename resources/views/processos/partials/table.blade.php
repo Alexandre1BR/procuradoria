@@ -10,6 +10,12 @@
     </div>
 @endif
 
+<div v-if="refreshing">
+    <div class="text-right">
+        <p class="text-danger">carregando...</p>
+    </div>
+</div>
+
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
@@ -26,22 +32,26 @@
         </tr>
     </thead>
 
-    @forelse ($processos as $processo)
-        <tr>
+    <tbody>
+        <tr v-if="tables.processos" v-for="processo in tables.processos">
             <td>
-                <a href="{{ route('processos.show', ['id' => $processo['id']]) }}">{{ $processo['numero_judicial'] }}</a>
+                <a :href="processo.show_url">@{{ processo.numero_judicial }}</a>
             </td>
-            <td>{{ $processo['numero_alerj'] }}</td>
-            <td>{{ $processo['tribunal_nome'] }}</td>
-            <td class="hidden-xs">{{ $processo['data_distribuicao'] }}</td>
-            <td>{{ $processo['acao_nome'] }}</td>
-            <td class="hidden-xs">{{ $processo['autor'] }}</td>
-            <td class="hidden-xs">{{ $processo['objeto'] }}</td>
-            <td class="hidden-xs">{{ $processo['procurador_nome'] }}</td>
-            <td class="hidden-xs">{{ $processo['assessor_nome'] }}</td>
-            <td class="hidden-xs">{{ $processo['estagiario_nome'] }}</td>
+            <td>@{{ processo.numero_alerj }}</td>
+            <td>@{{ processo.tribunal_nome }}</td>
+            <td class="hidden-xs">@{{ processo.data_distribuicao }}</td>
+            <td>@{{ processo.acao_nome }}</td>
+            <td class="hidden-xs">@{{ processo.autor }}</td>
+            <td class="hidden-xs">@{{ processo.objeto }}</td>
+            <td class="hidden-xs">@{{ processo.procurador_nome }}</td>
+            <td class="hidden-xs">@{{ processo.assessor_nome }}</td>
+            <td class="hidden-xs">@{{ processo.estagiario_nome }}</td>
         </tr>
-    @empty
-        <p>Nenhum processo encontrado</p>
-    @endforelse
+
+        <tr v-if="!tables.processos" v-for="processo in tables.processos">
+            <td colspan="10" class="text-center">
+                <h3>Nenhum processo encontrado</h3>
+            </td>
+        </tr>
+    </tbody>
 </table>

@@ -9,6 +9,8 @@ if (jQuery("#" + appName).length > 0) {
             pesquisa: '',
             refreshing: false,
             typeTimeout: null,
+            advancedFilter: false,
+            modalMode: 'filter',
         },
 
         methods: {
@@ -40,7 +42,14 @@ if (jQuery("#" + appName).length > 0) {
                 this.timeout = setTimeout(function () {
                     me.refresh();
                 }, 500);
-            }
+            },
+
+            clearSearch() {
+                this.pesquisa = '';
+
+                this.refresh();
+            },
+
         },
         
         mounted() {

@@ -74468,7 +74468,9 @@ if (jQuery("#" + appName).length > 0) {
             processos: [],
             pesquisa: '',
             refreshing: false,
-            typeTimeout: null
+            typeTimeout: null,
+            advancedFilter: false,
+            modalMode: 'filter'
         },
 
         methods: {
@@ -74497,6 +74499,11 @@ if (jQuery("#" + appName).length > 0) {
                 this.timeout = setTimeout(function () {
                     me.refresh();
                 }, 500);
+            },
+            clearSearch: function clearSearch() {
+                this.pesquisa = '';
+
+                this.refresh();
             }
         },
 

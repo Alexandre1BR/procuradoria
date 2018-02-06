@@ -35,7 +35,7 @@
     <tbody>
         <tr v-if="processos" v-for="processo in processos">
             <td>
-                <a :href="processo">@{{ processo.numero_judicial }}</a>
+                <a :href="processo.show_url">@{{ processo.numero_judicial }}</a>
             </td>
             <td>@{{ processo.numero_alerj }}</td>
             <td>@{{ processo.tribunal_nome }}</td>

@@ -50,22 +50,28 @@ class Processos extends Base
 
     public function search(Request $request)
     {
-        info($request);
-
-        return $this->searchFromRequest($request->get('pesquisa'));
+        return $this->searchString($request->get('search'));
     }
 
     public function filter($request)
     {
-        $query = Processo::query();
+        info($request->get('advancedFilter'));
 
-        collect($request->except('_token'))->each(function ($search, $column) use ($query) {
-            if (!empty($search)) {
-                $this->addQueryByType($search, $column, $query);
-            }
-        });
+        $query = $this->makeProcessoQuery();
 
-        return $query->get();
+        if (!empty($search = $request->get('search'))) {
+            $query = $this->searchString($search, $query);
+        }
+
+        if ($request->get('advancedFilter')) {
+            collect($request->get('filter'))->each(function ($search, $column) use ($query) {
+                if (!empty($search)) {
+                    $this->addQueryByType($search, $column, $query);
+                }
+            });
+        }
+
+        return $this->transform($query->get());
     }
 
     /**
@@ -93,7 +99,7 @@ class Processos extends Base
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function searchFromRequest($search = null)
+    public function searchString($search = null, $query = null)
     {
         $search = is_null($search)
             ? collect()
@@ -103,7 +109,7 @@ class Processos extends Base
 
         $columns = collect($this->dataTypes);
 
-        $query = Processo::query();
+        $query = $query ?: $this->makeProcessoQuery();
 
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
@@ -143,7 +149,7 @@ class Processos extends Base
 
 //        \DB::listen(function($query) { dump($query->sql); dump($query->bindings); });
 
-        return $this->transform($query->orderBy('updated_at', 'desc')->get());
+        return $query;
     }
 
     /**
@@ -180,9 +186,16 @@ class Processos extends Base
 
             $processo['estagiario_nome'] = is_null($processo->estagiario) ? 'N/C' : $processo->estagiario->name;
 
-            $processo['show_url'] = route('processos.show', ['id' => $processo->id]);
+            $processo['estagiario_nome'] = route('processos.show', ['id' => $processo['id']]);
 
             return $processo;
         })->toArray();
+    }
+
+    public function makeProcessoQuery()
+    {
+        return (new Processo())
+                ->with(['acao', 'tribunal', 'procurador', 'assessor', 'estagiario'])
+                ->orderBy('updated_at', 'desc');
     }
 }

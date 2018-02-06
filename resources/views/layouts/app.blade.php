@@ -96,6 +96,7 @@
             $('.select2').select2({
                 theme: "bootstrap",
                 tags: true,
+                width: "100%",
             });
         });
     </script>

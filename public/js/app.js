@@ -27462,23 +27462,38 @@ module.exports = __webpack_require__(165);
 /***/ (function(module, exports, __webpack_require__) {
 
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
 
 __webpack_require__(133);
 
 window.Vue = __webpack_require__(157);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-Vue.component('example-component', __webpack_require__(160));
+Vue.component('select2', {
+    props: ['options', 'value'],
+    template: '#select2-template',
+    mounted: function mounted() {
+        var vm = this;
+        $(this.$el)
+        // init select2
+        .select2({ data: this.options }).val(this.value).trigger('change')
+        // emit event on change.
+        .on('change', function () {
+            vm.$emit('input', this.value);
+        });
+    },
+    watch: {
+        value: function value(_value) {
+            // update value
+            $(this.$el).val(_value);
+        },
+        options: function options(_options) {
+            // update options
+            $(this.$el).empty().select2({ data: _options });
+        }
+    },
+    destroyed: function destroyed() {
+        $(this.$el).off().select2('destroy');
+    }
+});
 
 __webpack_require__(164);
 
@@ -74227,250 +74242,47 @@ exports.clearImmediate = clearImmediate;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(7)))
 
 /***/ }),
-/* 160 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(161)
-/* script */
-var __vue_script__ = __webpack_require__(162)
-/* template */
-var __vue_template__ = __webpack_require__(163)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/ExampleComponent.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7168fb6a", Component.options)
-  } else {
-    hotAPI.reload("data-v-7168fb6a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 161 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-/* 162 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    }
-});
-
-/***/ }),
-/* 163 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-          _c("div", { staticClass: "panel panel-default" }, [
-            _c("div", { staticClass: "panel-heading" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "panel-body" }, [
-              _vm._v(
-                "\n                    I'm an example component!\n                "
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7168fb6a", module.exports)
-  }
-}
-
-/***/ }),
+/* 160 */,
+/* 161 */,
+/* 162 */,
+/* 163 */,
 /* 164 */
 /***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var appName = 'vue-processos';
 
 if (jQuery("#" + appName).length > 0) {
+    var _form;
+
     var app = new Vue({
         el: '#' + appName,
 
         data: {
-            processos: [],
+            tables: {
+                processos: [],
+                acoes: []
+            },
+
             pesquisa: '',
+
             refreshing: false,
+
             typeTimeout: null,
+
             advancedFilter: false,
-            modalMode: 'filter'
+
+            modalMode: 'filter',
+
+            form: (_form = {
+                id: null,
+                numero_judicial: null,
+                numero_alerj: null,
+                tribunal_id: null,
+                vara: null,
+                data_distribuicao: null
+            }, _defineProperty(_form, 'data_distribuicao', null), _defineProperty(_form, 'acao_id', null), _defineProperty(_form, 'juiz_id', null), _defineProperty(_form, 'autor', null), _defineProperty(_form, 'relator_id', null), _defineProperty(_form, 'reu', null), _defineProperty(_form, 'procurador_id', null), _defineProperty(_form, 'estagiario_id', null), _defineProperty(_form, 'assessor_id', null), _defineProperty(_form, 'tipo_meio_id', null), _defineProperty(_form, 'objeto', null), _defineProperty(_form, 'merito', null), _defineProperty(_form, 'liminar', null), _defineProperty(_form, 'apensos_obs', null), _defineProperty(_form, 'recurso', null), _defineProperty(_form, 'observacao', null), _defineProperty(_form, 'data_arquivamento', null), _defineProperty(_form, 'data_arquivamento', null), _defineProperty(_form, 'observacao_arquivamento', null), _defineProperty(_form, 'tags', []), _form)
         },
 
         methods: {
@@ -74479,14 +74291,18 @@ if (jQuery("#" + appName).length > 0) {
 
                 me.refreshing = true;
 
-                axios.post('/', { pesquisa: this.pesquisa }).then(function (response) {
-                    me.processos = response.data;
+                axios.post('/', {
+                    search: this.pesquisa,
+                    advancedFilter: this.advancedFilter,
+                    filter: this.form
+                }).then(function (response) {
+                    me.tables.processos = response.data;
 
                     me.refreshing = false;
                 }).catch(function (error) {
                     console.log(error);
 
-                    me.processos = [];
+                    me.tables.processos = [];
 
                     me.refreshing = false;
                 });
@@ -74504,11 +74320,34 @@ if (jQuery("#" + appName).length > 0) {
                 this.pesquisa = '';
 
                 this.refresh();
+            },
+            filter: function filter() {
+                this.advancedFilter = true;
+
+                this.refresh();
+            },
+            turnAdvancedFilterOff: function turnAdvancedFilterOff() {
+                this.advancedFilter = false;
+
+                this.refresh();
+            },
+
+
+            refreshAcoes: function refreshAcoes() {
+                axios.post('/acoes').then(function (response) {
+                    me.tables.acoes = response.data;
+                }).catch(function (error) {
+                    console.log(error);
+
+                    me.tables.acoes = [];
+                });
             }
         },
 
         mounted: function mounted() {
             this.refresh();
+
+            this.refreshAcoes();
         }
     });
 }

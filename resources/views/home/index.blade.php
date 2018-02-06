@@ -5,18 +5,12 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-3">
-                    <h3>Processos</h3>
+                    <h3><span>@{{ tables.processos.length }}</span> Processo<span>@{{ tables.processos.length == 1 ? '' : 's' }}</span></h3>
                 </div>
 
                 <div class="col-md-9">
                     <div class="row">
-                        <div class="col-md-2 pull-right">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                                <i class="fa fa-filter"></i> Filtro avançado
-                            </button>
-                        </div>
-
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             @include(
                                 'layouts.partials.search-form-vue',
                                 [
@@ -24,6 +18,15 @@
                                     'routeCreate' => 'processos.create'
                                 ]
                             )
+                        </div>
+
+                        <div class="col-md-4 text-right">
+                            <button type="button" :class="'btn ' + (advancedFilter ? 'btn-danger' : 'btn-default')" data-toggle="modal" data-target="#myModal">
+                                <i class="fa fa-filter"></i> Filtro avançado
+                            </button>
+                            <button type="button" :class="'btn ' + (advancedFilter ? 'btn-danger' : 'btn-default')" @click="turnAdvancedFilterOff">
+                                <i class="fa fa-close"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -39,7 +42,7 @@
 
             @include('processos.partials.table')
         </div>
-    </div>
 
-    @include('home.partials.filter-modal', ['isFilter' => true])
+        @include('home.partials.filter-modal', ['isFilter' => true])
+    </div>
 @endsection

@@ -23,8 +23,6 @@ class Home extends Controller
 
     /**
      * @param ProcessoRequest|Request $request
-     * @param $data
-     *
      * @return mixed
      */
     private function buildView(Request $request)
@@ -55,9 +53,7 @@ class Home extends Controller
     public function filter(Request $request)
     {
         return $request->expectsJson()
-            ? $this->processosRepository->search($request)
+            ? $this->processosRepository->filter($request)
             : $this->buildView($request);
-
-//        return $this->buildView($request, $this->processosRepository->filter($request));
     }
 }

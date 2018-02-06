@@ -8,4 +8,6 @@ Route::group(['prefix' => '/acoes'], function () {
     Route::get('/{id}', 'Acoes@show')->name('acoes.show');
 
     Route::get('/', 'Acoes@index')->name('acoes.index');
+
+    Route::post('/', 'Acoes@index')->name('acoes.index.post');
 });

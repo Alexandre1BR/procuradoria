@@ -33,7 +33,7 @@
     </thead>
 
     <tbody>
-        <tr v-if="processos" v-for="processo in processos">
+        <tr v-if="tables.processos" v-for="processo in tables.processos">
             <td>
                 <a :href="processo.show_url">@{{ processo.numero_judicial }}</a>
             </td>
@@ -48,7 +48,7 @@
             <td class="hidden-xs">@{{ processo.estagiario_nome }}</td>
         </tr>
 
-        <tr v-if="!processos" v-for="processo in processos">
+        <tr v-if="!tables.processos" v-for="processo in tables.processos">
             <td colspan="10" class="text-center">
                 <h3>Nenhum processo encontrado</h3>
             </td>

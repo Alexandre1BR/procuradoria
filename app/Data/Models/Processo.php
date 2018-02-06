@@ -123,6 +123,11 @@ class Processo extends BaseModel
         return $this->belongsTo(Meio::class);
     }
 
+    public function apensos()
+    {
+        return $this->hasMany(Apenso::class);
+    }
+
     public function getPresenterClass()
     {
         return ProcessoPresenter::class;

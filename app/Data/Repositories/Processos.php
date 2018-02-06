@@ -159,8 +159,11 @@ class Processos extends Base
      */
     public function getProcessosData($id = null)
     {
-        $processos  = Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id');
         $apensos    = Apenso::where('processo_id', $id)->orWhere('apensado_id', $id)->get();
+        //dump($apensos->values());
+        $processos  = Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id');
+
+//        \DB::listen(function($query) { dump($query->sql); dump($query->bindings); });
         foreach ($apensos as $key  => $apenso) {
             $processos->forget($apenso->apensado_id);
             $processos->forget($apenso->processo_id);

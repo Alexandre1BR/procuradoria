@@ -280,16 +280,16 @@ class Import
             $colunas =
                 [
                     'numero_judicial' => 'numero_judicial',
-                    'numero_alerj'    => 'numero_alerj'   ,
-                    'apensos_obs'     => 'apensos_obs'    ,
-                    'vara'            => 'vara'           ,
-                    'autor'           => 'autor'          ,
-                    'reu'             => 'reu'            ,
-                    'objeto'          => 'objeto'         ,
-                    'merito'          => 'merito'         ,
-                    'liminar'         => 'liminar'        ,
-                    'recurso'         => 'recurso'        ,
-                    'observacao'      => 'observacao'     ,
+                    'numero_alerj'    => 'numero_alerj',
+                    'apensos_obs'     => 'apensos_obs',
+                    'vara'            => 'vara',
+                    'autor'           => 'autor',
+                    'reu'             => 'reu',
+                    'objeto'          => 'objeto',
+                    'merito'          => 'merito',
+                    'liminar'         => 'liminar',
+                    'recurso'         => 'recurso',
+                    'observacao'      => 'observacao',
                 ];
 
             foreach ($insert as $k1 => $vinsert) {

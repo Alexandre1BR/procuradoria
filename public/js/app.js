@@ -27454,7 +27454,7 @@ return zhTw;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(132);
-module.exports = __webpack_require__(164);
+module.exports = __webpack_require__(165);
 
 
 /***/ }),
@@ -27480,9 +27480,7 @@ window.Vue = __webpack_require__(157);
 
 Vue.component('example-component', __webpack_require__(160));
 
-var app = new Vue({
-    el: '#vue-app'
-});
+__webpack_require__(164);
 
 jQuery(document).ready(function () {
     jQuery('#calendar').fullCalendar({
@@ -74458,6 +74456,58 @@ if (false) {
 
 /***/ }),
 /* 164 */
+/***/ (function(module, exports) {
+
+var appName = 'vue-processos';
+
+if (jQuery("#" + appName).length > 0) {
+    var app = new Vue({
+        el: '#' + appName,
+
+        data: {
+            processos: [],
+            pesquisa: '',
+            refreshing: false,
+            typeTimeout: null
+        },
+
+        methods: {
+            refresh: function refresh() {
+                me = this;
+
+                me.refreshing = true;
+
+                axios.post('/', { pesquisa: this.pesquisa }).then(function (response) {
+                    me.processos = response.data;
+
+                    me.refreshing = false;
+                }).catch(function (error) {
+                    console.log(error);
+
+                    me.processos = [];
+
+                    me.refreshing = false;
+                });
+            },
+            typeKeyUp: function typeKeyUp() {
+                clearTimeout(this.timeout);
+
+                me = this;
+
+                this.timeout = setTimeout(function () {
+                    me.refresh();
+                }, 500);
+            }
+        },
+
+        mounted: function mounted() {
+            this.refresh();
+        }
+    });
+}
+
+/***/ }),
+/* 165 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

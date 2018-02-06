@@ -37,7 +37,7 @@ class Processos extends Base
         'observacao'        => 'string',
     ];
 
-    private function isDate($item)
+    protected function isDate($item)
     {
         try {
             Carbon::createFromFormat('d/m/Y', $item);
@@ -50,6 +50,8 @@ class Processos extends Base
 
     public function search(Request $request)
     {
+        info($request);
+
         return $this->searchFromRequest($request->get('pesquisa'));
     }
 
@@ -141,7 +143,7 @@ class Processos extends Base
 
 //        \DB::listen(function($query) { dump($query->sql); dump($query->bindings); });
 
-        return $query->orderBy('updated_at', 'desc')->get();
+        return $this->transform($query->orderBy('updated_at', 'desc')->get());
     }
 
     /**
@@ -163,5 +165,24 @@ class Processos extends Base
             'leis'       => Lei::where('processo_id', $id)->get(),
             'tags'       => Tag::all(),
         ];
+    }
+
+    protected function transform($processos)
+    {
+        return $processos->map(function ($processo) {
+            $processo['acao_nome'] = is_null($processo->acao) ? 'N/C' : $processo->acao->nome;
+
+            $processo['tribunal_nome'] = is_null($processo->tribunal) ? 'N/C' : $processo->tribunal->nome;
+
+            $processo['procurador_nome'] = is_null($processo->procurador) ? 'N/C' : $processo->procurador->name;
+
+            $processo['assessor_nome'] = is_null($processo->assessor) ? 'N/C' : $processo->assessor->name;
+
+            $processo['estagiario_nome'] = is_null($processo->estagiario) ? 'N/C' : $processo->estagiario->name;
+
+            $processo['show_url'] = route('processos.show', ['id' => $processo->id]);
+
+            return $processo;
+        })->toArray();
     }
 }

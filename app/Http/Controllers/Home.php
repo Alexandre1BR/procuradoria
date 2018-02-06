@@ -23,6 +23,7 @@ class Home extends Controller
 
     /**
      * @param ProcessoRequest|Request $request
+     *
      * @return mixed
      */
     private function buildView(Request $request)

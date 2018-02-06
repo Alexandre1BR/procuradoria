@@ -8,6 +8,7 @@ function startTimer()
 function endTimer()
 {
     Timer::$endtime = microtime(true);
+
     return Timer::$endtime - Timer::$starttime;
 }
 

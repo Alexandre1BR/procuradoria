@@ -158,7 +158,7 @@ return [
         'data_entrega'             => 'Data entrega',
         'observacoes'              => 'Observação',
 
-        'apensado_id'              => 'Apensado',
+        'apensado_id'              => 'Processo',
 
         'lotacao_id'               => 'Lotação',
         'tipo_juiz_id'             => 'Tipo juiz',

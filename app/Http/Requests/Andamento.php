@@ -26,18 +26,7 @@ class Andamento extends FormRequest
         return [
             'tipo_prazo_id'         => 'required',
             'processo_id'           => 'required',
-            'data_prazo'            => 'required',
-            'data_entrega'          => 'required',
             'tipo_andamento_id'     => 'required',
         ];
-    }
-
-    public function withValidator($validator)
-    {
-        if ($validator->fails()) {
-            return redirect()->route('andamentos.create')
-                ->withErrors($validator)
-                ->withInput();
-        }
     }
 }

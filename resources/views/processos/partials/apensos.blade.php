@@ -23,7 +23,7 @@
                         </div>
 
                         <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary btn-block">
+                            <button type="submit" class="btn btn-primary btn-block" disabled="disabled">
                                 <i class="fa fa-plus"></i>
                                 apensar
                             </button>

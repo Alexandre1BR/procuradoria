@@ -14,6 +14,8 @@ if (jQuery("#" + appName).length > 0) {
 
             refreshing: false,
 
+            filler: false,
+
             typeTimeout: null,
 
             advancedFilter: false,

@@ -9,50 +9,52 @@ use Illuminate\Http\Request;
 
 class Home extends Controller
 {
-    protected $repository;
+    protected $processosRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param ProcessosRepository $repository
+     * @param ProcessosRepository $processosRepository
      */
-    public function __construct(ProcessosRepository $repository)
+    public function __construct(ProcessosRepository $processosRepository)
     {
-        $this->repository = $repository;
+        $this->processosRepository = $processosRepository;
     }
 
     /**
-     * @param ProcessoRequest $request
-     * @param $data
+     * @param ProcessoRequest|Request $request
      *
      * @return mixed
      */
-    private function buildView(Request $request, $data)
+    private function buildView(Request $request)
     {
         return view('home.index')
             ->with('pesquisa', $request->get('pesquisa'))
-            ->with($this->repository->getProcessosData())
-            ->with('processo', new Processo())
-            ->with('processos', $data);
+            ->with($this->processosRepository->getProcessosData())
+            ->with('processo', new Processo());
     }
 
     /**
-     * @param ProcessoRequest $request
+     * @param Request $request
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        return $this->buildView($request, $this->repository->search($request));
+        return $request->expectsJson()
+            ? $this->processosRepository->search($request)
+            : $this->buildView($request);
     }
 
     /**
-     * @param ProcessoRequest $request
+     * @param Request $request
      *
      * @return \Illuminate\Http\Response
      */
     public function filter(Request $request)
     {
-        return $this->buildView($request, $this->repository->filter($request));
+        return $request->expectsJson()
+            ? $this->processosRepository->filter($request)
+            : $this->buildView($request);
     }
 }

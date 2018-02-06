@@ -34,9 +34,11 @@ class Acoes extends Controller
 
     public function index(AcoesRepository $acoes, Request $request)
     {
-        return view('acoes.index')
-            ->with('pesquisa', $request->get('pesquisa'))
-            ->with('acoes', $acoes->search($request));
+        return $request->expectsJson()
+            ? $acoes->search($request)
+            : view('acoes.index')
+                ->with('pesquisa', $request->get('pesquisa'))
+                ->with('acoes', $acoes->search($request));
     }
 
     public function show($id)

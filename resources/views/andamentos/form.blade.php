@@ -63,7 +63,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="tipo_andamento_id">Tipo de Andamento</label>
+                        <label for="tipo_andamento_id">Tipo de andamento</label>
                         <select name="tipo_andamento_id" class="form-control" id="tipo_andamento_id" aria-describedby="numero_judicialHelp" placeholder="Processo"  @include('partials.readonly')>
                             <option value="" >Selecione...</option>
 
@@ -82,7 +82,7 @@
 
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="Processo">Tipo de Entrada</label>
+                        <label for="Processo">Tipo de entrada</label>
                         <p><label name="tipo_entrada">Manual</label></p>
                         <input type="hidden" name="tipo_entrada_id" id="tipo_entrada_id" value="1" />
                     </div>
@@ -90,7 +90,7 @@
 
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="Processo">Tipo Prazo</label>
+                        <label for="Processo">Tipo prazo</label>
                         <select name="tipo_prazo_id" class="form-control" id="tipo_prazo_id" aria-describedby="numero_judicialHelp" placeholder="tipo_prazo_id" @include('partials.disabled')>
                             <option selected="true" value="">Selecione</option>
                             @foreach ($tipoPrazos as $key => $prazo)
@@ -106,7 +106,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="data_prazo">Data Prazo</label>
+                        <label for="data_prazo">Data prazo</label>
                         @if(!is_null(old('data_prazo')))
                             <input  value="{{old('data_prazo')}}"  type="date"  name="data_prazo" class="form-control" id="data_prazo" placeholder="Data Prazo" @include('partials.disabled') >
                         @else
@@ -117,7 +117,7 @@
 
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <label for="data_entrega">Data Entrega</label>
+                        <label for="data_entrega">Data entrega</label>
                         @if(!is_null(old('data_entrega')))
                             <input  value="{{old('data_entrega')}}" type="date" name="data_entrega" class="form-control" id="data_entrega" placeholder="Data Entrega" @include('partials.disabled')>
                         @else

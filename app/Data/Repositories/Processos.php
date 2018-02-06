@@ -37,7 +37,7 @@ class Processos extends Base
         'observacao'        => 'string',
     ];
 
-    private function isDate($item)
+    protected function isDate($item)
     {
         try {
             Carbon::createFromFormat('d/m/Y', $item);
@@ -50,20 +50,28 @@ class Processos extends Base
 
     public function search(Request $request)
     {
-        return $this->searchFromRequest($request->get('pesquisa'));
+        return $this->searchString($request->get('search'));
     }
 
     public function filter($request)
     {
-        $query = Processo::query();
+        info($request->get('advancedFilter'));
 
-        collect($request->except('_token'))->each(function ($search, $column) use ($query) {
-            if (!empty($search)) {
-                $this->addQueryByType($search, $column, $query);
-            }
-        });
+        $query = $this->makeProcessoQuery();
 
-        return $query->get();
+        if (!empty($search = $request->get('search'))) {
+            $query = $this->searchString($search, $query);
+        }
+
+        if ($request->get('advancedFilter')) {
+            collect($request->get('filter'))->each(function ($search, $column) use ($query) {
+                if (!empty($search)) {
+                    $this->addQueryByType($search, $column, $query);
+                }
+            });
+        }
+
+        return $this->transform($query->get());
     }
 
     /**
@@ -91,7 +99,7 @@ class Processos extends Base
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function searchFromRequest($search = null)
+    public function searchString($search = null, $query = null)
     {
         $search = is_null($search)
             ? collect()
@@ -101,7 +109,7 @@ class Processos extends Base
 
         $columns = collect($this->dataTypes);
 
-        $query = Processo::query();
+        $query = $query ?: $this->makeProcessoQuery();
 
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
@@ -141,7 +149,7 @@ class Processos extends Base
 
 //        \DB::listen(function($query) { dump($query->sql); dump($query->bindings); });
 
-        return $query->orderBy('updated_at', 'desc')->get();
+        return $query;
     }
 
     /**
@@ -152,7 +160,7 @@ class Processos extends Base
     public function getProcessosData($id = null)
     {
         return [
-            'juizes'     => Juiz::orderBy('nome')->get(),//->pluck('nome', 'id'),
+            'juizes'     => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
             'tribunais'  => Tribunal::orderBy('nome')->pluck('nome', 'id'),
             'usuarios'   => User::orderBy('name')->pluck('name', 'id'),
             'meios'      => Meio::orderBy('nome')->pluck('nome', 'id'),
@@ -163,5 +171,31 @@ class Processos extends Base
             'leis'       => Lei::where('processo_id', $id)->get(),
             'tags'       => Tag::all(),
         ];
+    }
+
+    protected function transform($processos)
+    {
+        return $processos->map(function ($processo) {
+            $processo['acao_nome'] = is_null($processo->acao) ? 'N/C' : $processo->acao->nome;
+
+            $processo['tribunal_nome'] = is_null($processo->tribunal) ? 'N/C' : $processo->tribunal->nome;
+
+            $processo['procurador_nome'] = is_null($processo->procurador) ? 'N/C' : $processo->procurador->name;
+
+            $processo['assessor_nome'] = is_null($processo->assessor) ? 'N/C' : $processo->assessor->name;
+
+            $processo['estagiario_nome'] = is_null($processo->estagiario) ? 'N/C' : $processo->estagiario->name;
+
+            $processo['estagiario_nome'] = route('processos.show', ['id' => $processo['id']]);
+
+            return $processo;
+        })->toArray();
+    }
+
+    public function makeProcessoQuery()
+    {
+        return (new Processo())
+                ->with(['acao', 'tribunal', 'procurador', 'assessor', 'estagiario'])
+                ->orderBy('updated_at', 'desc');
     }
 }

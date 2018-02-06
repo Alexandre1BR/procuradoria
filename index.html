@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="ORpUMgCu7DeSR00MMbYhvPzFulhsbWDKM9z4uwOy">
+
+    <title>Procuradoria</title>
+
+    <!-- Styles -->
+    <link href="https://procuradoria.test/css/app.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css" />
+</head>
+
+<body>
+    <div id="vue-app">
+    </div>
+
+    <div id="app">
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <!-- Branding Image -->
+                    <a class="navbar-brand" href="https://procuradoria.test">
+                        Procuradoria
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="nav navbar-nav">
+                        &nbsp;
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+<li><a href="https://procuradoria.test">Processos</a></li>
+
+<li><a href="https://procuradoria.test/agenda">Agenda</a></li>
+
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+        Cadastros <span class="caret"></span>
+    </a>
+
+    <ul class="dropdown-menu">
+        <li><a href="https://procuradoria.test">Processos</a></li>
+        <li><a href="https://procuradoria.test/andamentos">Andamentos</a></li>
+        <li><a href="https://procuradoria.test/tribunais">Tribunais</a></li>
+        <li><a href="https://procuradoria.test/juizes">Juizes</a></li>
+        <li><a href="https://procuradoria.test/acoes">Acoes</a></li>
+    </ul>
+</li>
+
+    <li><a href="https://procuradoria.test/login">Login</a></li>
+    
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                                    </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                            <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Login</div>
+
+                <div class="panel-body">
+                    <form class="form-horizontal" method="POST" action="https://procuradoria.test/login">
+                        <input type="hidden" name="_token" value="ORpUMgCu7DeSR00MMbYhvPzFulhsbWDKM9z4uwOy">
+
+                        <div class="form-group">
+                            <label for="email" class="col-md-4 control-label">Login Alerj</label>
+
+                            <div class="col-md-6">
+                                <input id="email" class="form-control" name="email" value="" required autofocus>
+
+                                                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="col-md-4 control-label">Password</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control" name="password" required>
+
+                                                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember" > Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Login
+                                </button>
+
+                                <a class="btn btn-link" href="https://procuradoria.test/password/reset">
+                                    Forgot Your Password?
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="text-center">
+                            versão 0.1.0 (build f0e8a1)                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://procuradoria.test/js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                theme: "bootstrap",
+                tags: true,
+                width: "100%",
+            });
+        });
+    </script>
+
+    </body>
+</html>

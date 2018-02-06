@@ -8,6 +8,7 @@ use App\Data\Models\User as ModelUser;
 use App\Data\Repositories\Acoes;
 use App\Data\Repositories\Juizes;
 use App\Data\Repositories\Meios;
+use App\Data\Repositories\Processos;
 use App\Data\Repositories\TiposJuizes;
 use App\Data\Repositories\Tribunais;
 use App\Data\Repositories\Users;
@@ -20,6 +21,98 @@ class Import
 {
     protected $command;
 
+    /**
+     * @var Tribunais
+     */
+    private $tribunaisRepository;
+
+    /**
+     * @var Acoes
+     */
+    private $acoesRepository;
+
+    /**
+     * @var TiposJuizes
+     */
+    private $tiposJuizesRepository;
+
+    /**
+     * @var Juizes
+     */
+    private $juizesRepository;
+
+    /**
+     * @var Meios
+     */
+    private $meiosRepository;
+
+    /**
+     * @var Users
+     */
+    private $usersRepository;
+
+    /**
+     * @var Processos
+     */
+    private $processosRepository;
+
+    public function __construct(
+        Tribunais $tribunaisRepository,
+                                Acoes $acoesRepository,
+                                Processos $processosRepository,
+                                TiposJuizes $tiposJuizesRepository,
+                                Juizes $juizesRepository,
+                                Meios $meiosRepository,
+                                Users $usersRepository
+    ) {
+        $this->tribunaisRepository = $tribunaisRepository;
+
+        $this->acoesRepository = $acoesRepository;
+
+        $this->juizesRepository = $juizesRepository;
+
+        $this->meiosRepository = $meiosRepository;
+
+        $this->tiposJuizesRepository = $tiposJuizesRepository;
+
+        $this->usersRepository = $usersRepository;
+
+        $this->processosRepository = $processosRepository;
+    }
+
+    private function cleanAndNormalize($values)
+    {
+        foreach ($values as $key => $value) {
+            if (is_string($values[$key])) {
+                // Remove double spaces
+                $values[$key] = preg_replace('!\s+!', ' ', $values[$key]);
+
+                // Trim everything
+                $values[$key] = trim($values[$key]);
+
+                // Remove some odd stuff
+                if (starts_with($values[$key], ': ')) {
+                    $values[$key] = substr($values[$key], 2);
+                }
+            }
+        }
+
+        return $values;
+    }
+
+    private function deleteAllRows()
+    {
+        $this->usersRepository->new()->truncate();
+
+        $this->processosRepository->new()->truncate();
+
+        $this->tribunaisRepository->new()->truncate();
+
+        $this->acoesRepository->new()->truncate();
+
+        $this->juizesRepository->new()->truncate();
+    }
+
     public function importExport()
     {
         return view('excel.importExport');
@@ -28,6 +121,8 @@ class Import
     public function execute($usersFile, $processesFile, $command)
     {
         $this->command = $command;
+
+        $this->deleteAllRows();
 
         $this->importUsers(realpath($usersFile));
 
@@ -57,6 +152,8 @@ class Import
 
         if (!empty($data) && $data->count()) {
             foreach ($data[0] as $key => $value) {
+                $value = $this->cleanAndNormalize($value);
+
                 $obs = '';
 
                 $tribunal = null;
@@ -64,32 +161,32 @@ class Import
                 if (!is_null($value->origem)) {
                     list($tribunal, $vara) = $this->split($value);
                 }
-                $tribunal = app(Tribunais::class)
+                $tribunal = $this->tribunaisRepository
                     ->firstOrCreate(
                         [
-                            'nome'       => trim($tribunal) ?: 'N/C',
-                            'abreviacao' => trim($tribunal) ?: 'N/C',
+                            'nome'       => $this->upper($tribunal ?: 'N/C'),
+                            'abreviacao' => $this->upper($tribunal ?: 'N/C'),
                         ]
                     );
                 // Nome e Abreviação receberam os mesmos dados , já que ora esta abreviado e ora esta 'nomeado'
-                $acao = app(Acoes::class)
+                $acao = $this->acoesRepository
                     ->firstOrCreate([
-                                        'nome'       => trim($value->acao) ?: 'N/C',
-                                        'abreviacao' => trim($value->acao) ?: 'N/C',
+                                        'nome'       => $this->upper($value->acao ?: 'N/C'),
+                                        'abreviacao' => $this->upper($value->acao ?: 'N/C'),
                                     ]);
 
                 //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
                 $tipo_relator = $this->ajustaTipoRelator($value->relator);
-                $tipo_relator = app(TiposJuizes::class)->firstOrCreate(['nome' => $tipo_relator]);
+                $tipo_relator = $this->tiposJuizesRepository->firstOrCreate(['nome' => $tipo_relator]);
 
                 $nome_relator = $this->ajustaNomeRelator($value->relator);
 
-                $relator_juiz = app(Juizes::class)
+                $relator_juiz = $this->juizesRepository
                     ->firstOrCreate([
-                                        'nome'         => $nome_relator,
-                                        'lotacao_id'   => $tribunal->id,
-                                        'tipo_juiz_id' => $tipo_relator->id,
-                                    ]);
+                        'nome'         => $this->upper($nome_relator ?: 'N/C'),
+                        'lotacao_id'   => $tribunal->id,
+                        'tipo_juiz_id' => $tipo_relator->id,
+                    ]);
 
                 if (!is_null($value->procurador)) {
                     if (!is_null($this->buscaUsuario($value->procurador, 1))) {
@@ -153,32 +250,54 @@ class Import
 
                 $tipo_meio = $this->ajustaTipoMeio($value->tipo);
 
-                $tipo_meio = app(Meios::class)
+                $tipo_meio = $this->meiosRepository
                     ->firstOrCreate(['nome' => $tipo_meio]); //TODO => 'N/C'
                 $insert[] =
                     [
-                        'numero_judicial' => str_ireplace("\n", '', trim($value->no_judicial)),
-                        'numero_alerj'    => str_ireplace("\n", '', trim($value->no_alerj)),
-                        'apensos_obs'     => str_ireplace("\n", '', trim($value->apensos)),
-                        'tribunal_id'     => str_ireplace("\n", '', trim($tribunal->id)), //Origem
-                        'vara'            => str_ireplace("\n", '', trim($vara)),
-                        'acao_id'         => str_ireplace("\n", '', trim($acao->id)),
-                        'relator_id'      => str_ireplace("\n", '', trim($relator_juiz->id)),
+                        'numero_judicial' => str_ireplace("\n", '', $value->no_judicial),
+                        'numero_alerj'    => str_ireplace("\n", '', $value->no_alerj),
+                        'apensos_obs'     => str_ireplace("\n", '', $value->apensos),
+                        'tribunal_id'     => str_ireplace("\n", '', $tribunal->id), //Origem
+                        'vara'            => str_ireplace("\n", '', $vara),
+                        'acao_id'         => str_ireplace("\n", '', $acao->id),
+                        'relator_id'      => str_ireplace("\n", '', $relator_juiz->id),
                         //'                                 tipo_juiz_id'  =>str_ireplace("\n", "", trim($tipo_relator->id)), //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
-                        'autor'           => str_ireplace("\n", '', trim($value->autor)),
-                        'reu'             => str_ireplace("\n", '', trim($value->reu)),
-                        'objeto'          => str_ireplace("\n", '', trim($value->objeto)),
-                        'merito'          => str_ireplace("\n", '', trim($value->merito)),
-                        'liminar'         => str_ireplace("\n", '', trim($value->liminar)),
-                        'recurso'         => str_ireplace("\n", '', trim($value->recurso)),
+                        'autor'           => str_ireplace("\n", '', $value->autor),
+                        'reu'             => str_ireplace("\n", '', $value->reu),
+                        'objeto'          => str_ireplace("\n", '', $value->objeto),
+                        'merito'          => str_ireplace("\n", '', $value->merito),
+                        'liminar'         => str_ireplace("\n", '', $value->liminar),
+                        'recurso'         => str_ireplace("\n", '', $value->recurso),
                         'procurador_id'   => $procurador,
                         'estagiario_id'   => $estagiario,
                         'assessor_id'     => $assessor,
-                        'tipo_meio_id'    => str_ireplace("\n", '', trim($tipo_meio->id)),
+                        'tipo_meio_id'    => str_ireplace("\n", '', $tipo_meio->id),
                         'created_at'      => now(),
                         'updated_at'      => now(),
-                        'observacao'      => str_ireplace("\n", '', trim($obs)),
+                        'observacao'      => str_ireplace("\n", '', $obs),
                     ];
+            }
+            $colunas =
+                [
+                    'numero_judicial' => 'numero_judicial',
+                    'numero_alerj'    => 'numero_alerj',
+                    'apensos_obs'     => 'apensos_obs',
+                    'vara'            => 'vara',
+                    'autor'           => 'autor',
+                    'reu'             => 'reu',
+                    'objeto'          => 'objeto',
+                    'merito'          => 'merito',
+                    'liminar'         => 'liminar',
+                    'recurso'         => 'recurso',
+                    'observacao'      => 'observacao',
+                ];
+
+            foreach ($insert as $k1 => $vinsert) {
+                foreach ($colunas as $k2 => $v) {
+                    if ($vinsert[$v] == '') {
+                        $insert[$k1][$v] = 'N/C';
+                    }
+                }
             }
             if (!empty($insert)) {
                 Processo::insert($insert);
@@ -266,7 +385,7 @@ class Import
     private function ajustaNomeRelator($relator)
     {
         if (!is_null($relator)) {
-            $relator = strtoupper(trim($relator));
+            $relator = strtoupper($relator);
 
             $relator = preg_replace('/MINISTRO/', '', $relator, 1);
             $relator = preg_replace('/MIN /', '', $relator, 1);
@@ -489,5 +608,10 @@ class Import
         );
 
         return $str;
+    }
+
+    private function upper($string)
+    {
+        return mb_strtoupper($string);
     }
 }

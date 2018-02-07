@@ -76,9 +76,7 @@
                 <select v-model="form.acao_id" class="form-control select2-disabled" @include('partials.disabled') id="acao_id">
                     <option value="">SELECIONE</option>
                     @foreach ($acoes as $key => $acao)
-                        <option value="{{ $key }}">{{ $acao }}</option>
-                        @if((!is_null($processo->acao)) && $processo->acao->id == $key
-                        || (!is_null(old('acao_id'))) && old('acao_id') == $key))
+                        @if((!is_null($processo->acao)) && $processo->acao->id == $key || (!is_null(old('acao_id'))) && old('acao_id') == $key))
                             <option value="{{ $key }}" selected="selected">{{ $acao }}</option>
                         @else
                             <option value="{{ $key }}">{{ $acao }}</option>
@@ -94,9 +92,8 @@
                 <select v-model="form.juiz_id" class="form-control select2-disabled" @include('partials.disabled') id="juiz_id">
                     <option value="">SELECIONE</option>
                     @foreach ($juizes as $key => $juiz)
-                        @if((!is_null($processo->juiz)) && $processo->juiz->id == $juiz->id
-                        || (!is_null(old('juiz_id'))) && old('juiz_id') == $juiz->id))
-                        <option value="{{ $juiz->id }}" selected="selected">{{ $juiz->nome . " (". $juiz->tipoJuiz->abreviacao .") - ". $juiz->lotacao->abreviacao }}</option>
+                        @if((!is_null($processo->juiz)) && $processo->juiz->id == $juiz->id || (!is_null(old('juiz_id'))) && old('juiz_id') == $juiz->id))
+                            <option value="{{ $juiz->id }}" selected="selected">{{ $juiz->nome . " (". $juiz->tipoJuiz->abreviacao .") - ". $juiz->lotacao->abreviacao }}</option>
                         @else
                             <option value="{{ $juiz->id }}">{{ $juiz->nome . " (". $juiz->tipoJuiz->abreviacao .") - ". $juiz->lotacao->abreviacao }}</option>
                         @endif
@@ -119,9 +116,8 @@
                 <select v-model="form.relator_id" class="form-control select2-disabled" @include('partials.disabled') id="relator_id">
                     <option value="">SELECIONE</option>
                     @foreach ($juizes as $key => $relator)
-                        @if((!is_null($processo->relator)) && $processo->relator->id == $relator->id
-                        || (!is_null(old('relator_id'))) && old('relator_id') == $relator->id))
-                        <option value="{{ $relator->id }}" selected="selected">{{ $relator->nome . " (". $relator->tipoJuiz->abreviacao .") - ". $relator->lotacao->abreviacao }}</option>
+                        @if((!is_null($processo->relator)) && $processo->relator->id == $relator->id || (!is_null(old('relator_id'))) && old('relator_id') == $relator->id))
+                            <option value="{{ $relator->id }}" selected="selected">{{ $relator->nome . " (". $relator->tipoJuiz->abreviacao .") - ". $relator->lotacao->abreviacao }}</option>
                         @else
                             <option value="{{ $relator->id }}">{{ $relator->nome . " (". $relator->tipoJuiz->abreviacao .") - ". $relator->lotacao->abreviacao }}</option>
                         @endif
@@ -143,8 +139,7 @@
                 <select v-model="form.procurador_id" class="form-control select2-disabled" @include('partials.disabled') id="procurador_id">
                     <option value="">SELECIONE</option>
                     @foreach ($usuarios as $key => $procurador)
-                        @if((!is_null($processo->procurador)) && $processo->procurador->id == $key
-                        || (!is_null(old('procurador_id'))) && old('procurador_id') == $key))
+                        @if((!is_null($processo->procurador)) && $processo->procurador->id == $key || (!is_null(old('procurador_id'))) && old('procurador_id') == $key))
                             <option value="{{ $key }}" selected="selected">{{ $procurador }}</option>
                         @else
                             <option value="{{ $key }}">{{ $procurador }}</option>
@@ -160,9 +155,7 @@
                 <select v-model="form.estagiario_id" class="form-control select2-disabled" @include('partials.disabled') id="estagiario_id">
                     <option value="">SELECIONE</option>
                     @foreach ($usuarios as $key => $estagiario)
-                        @if((!is_null($processo->estagiario)) && $processo->estagiario->id == $key
-                        || (!is_null(old('estagiario_id'))) && old('estagiario_id') == $key))
-
+                        @if((!is_null($processo->estagiario)) && $processo->estagiario->id == $key || (!is_null(old('estagiario_id'))) && old('estagiario_id') == $key))
                             <option value="{{ $key }}" selected="selected">{{ $estagiario }}</option>
                         @else
                             <option value="{{ $key }}">{{ $estagiario }}</option>
@@ -178,8 +171,7 @@
                 <select v-model="form.assessor_id" class="form-control select2-disabled" @include('partials.disabled') id="assessor_id">
                     <option value="">SELECIONE</option>
                     @foreach ($usuarios as $key => $assessor)
-                        @if((!is_null($processo->assessor)) && $processo->assessor->id == $key
-                        || (!is_null(old('assessor_id'))) && old('assessor_id') == $key))
+                        @if((!is_null($processo->assessor)) && $processo->assessor->id == $key || (!is_null(old('assessor_id'))) && old('assessor_id') == $key))
                             <option value="{{ $key }}" selected="selected">{{ $assessor }}</option>
                         @else
                             <option value="{{ $key }}">{{ $assessor }}</option>
@@ -195,8 +187,7 @@
                 <select v-model="form.tipo_meio_id" class="form-control select2-disabled" @include('partials.disabled') id="tipo_meio">
                     <option value="">SELECIONE</option>
                     @foreach ($meios as $key => $meio)
-                        @if((!is_null($processo->id)) && $processo->tipoMeio->id == $key
-                        || (!is_null(old('tipo_meio_id'))) && old('tipo_meio_id') == $key))
+                        @if((!is_null($processo->id)) && $processo->tipoMeio->id == $key || (!is_null(old('tipo_meio_id'))) && old('tipo_meio_id') == $key))
                             <option value="{{ $key }}" selected="selected">{{ $meio }}</option>
                         @else
                             <option value="{{ $key }}">{{ $meio }}</option>
@@ -303,4 +294,5 @@
     </div>
 
     @include('partials.save-button')
+
 </form>

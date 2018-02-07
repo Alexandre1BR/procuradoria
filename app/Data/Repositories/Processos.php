@@ -10,10 +10,14 @@ use App\Data\Models\Lei;
 use App\Data\Models\Meio;
 use App\Data\Models\Processo;
 use App\Data\Models\Tag;
+use App\Data\Models\TipoUsuario;
 use App\Data\Models\Tribunal;
-use App\Data\Models\User;
+use App\Data\Models\User as UserModel;
 use Carbon\Carbon;
+use function foo\func;
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class Processos extends Base
@@ -50,7 +54,18 @@ class Processos extends Base
 
     public function search(Request $request)
     {
-        return $this->searchString($request->get('search'));
+        info($request);
+
+
+//        $starttime = microtime(true);
+
+        $this->searchFromRequest($request->get('pesquisa'));
+
+//        $endtime = microtime(true);
+//        $timediff = $endtime - $starttime;
+//        dump($timediff, 'Teste');
+
+        return $this->searchFromRequest($request->get('pesquisa'));
     }
 
     public function filter($request)
@@ -120,36 +135,35 @@ class Processos extends Base
                         $query->orWhere($column, '=', $item);
                     }
                 }
-                $query->orWhereHas('tribunal', function ($query) use ($item) {
-                    $query->whereRaw("lower(nome) like '%{$item}%'");
-                });
-                $query->orWhereHas('juiz', function ($query) use ($item) {
-                    $query->whereRaw("lower(nome) like '%{$item}%'");
-                });
-                $query->orWhereHas('relator', function ($query) use ($item) {
-                    $query->whereRaw("lower(nome) like '%{$item}%'");
-                });
-                $query->orWhereHas('procurador', function ($query) use ($item) {
-                    $query->whereRaw("lower(name) like '%{$item}%'");
-                });
-                $query->orWhereHas('estagiario', function ($query) use ($item) {
-                    $query->whereRaw("lower(name) like '%{$item}%'");
-                });
-                $query->orWhereHas('assessor', function ($query) use ($item) {
-                    $query->whereRaw("lower(name) like '%{$item}%'");
-                });
-                $query->orWhereHas('acao', function ($query) use ($item) {
-                    $query->whereRaw("lower(nome) like '%{$item}%'");
-                });
             });
             $query->orWhereHas('tribunal', function ($query) use ($item) {
                 $query->whereRaw("lower(nome) like '%{$item}%'");
             });
+            $query->orWhereHas('juiz', function ($query) use ($item) {
+                $query->whereRaw("lower(nome) like '%{$item}%'");
+            });
+            $query->orWhereHas('relator', function ($query) use ($item) {
+                $query->whereRaw("lower(nome) like '%{$item}%'");
+            });
+            $query->orWhereHas('procurador', function ($query) use ($item) {
+                $query->whereRaw("lower(name) like '%{$item}%'");
+            });
+            $query->orWhereHas('estagiario', function ($query) use ($item) {
+                $query->whereRaw("lower(name) like '%{$item}%'");
+            });
+            $query->orWhereHas('assessor', function ($query) use ($item) {
+                $query->whereRaw("lower(name) like '%{$item}%'");
+            });
+            $query->orWhereHas('acao', function ($query) use ($item) {
+                $query->whereRaw("lower(nome) like '%{$item}%'");
+            });
+
         });
 
 //        \DB::listen(function($query) { dump($query->sql); dump($query->bindings); });
 
-        return $query;
+        $query->with(['acao', 'tribunal', 'procurador', 'assessor', 'estagiario']);
+        return $this->transform($query->orderBy('updated_at', 'desc')->get());
     }
 
     /**
@@ -159,20 +173,23 @@ class Processos extends Base
      */
     public function getProcessosData($id = null)
     {
-        $apensos = Apenso::where('processo_id', $id)->orWhere('apensado_id', $id)->get();
-        //dump($apensos->values());
-        $processos = Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id');
+        return Cache::remember('getProcessosData', 1, function () use ($id){
+            $apensos = Apenso::where('processo_id', $id)->orWhere('apensado_id', $id)->get();
+            $processos = Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id');
+            foreach ($apensos as $key  => $apenso) {
+                $processos->forget($apenso->apensado_id);
+                $processos->forget($apenso->processo_id);
+            }
 
-//        \DB::listen(function($query) { dump($query->sql); dump($query->bindings); });
-        foreach ($apensos as $key  => $apenso) {
-            $processos->forget($apenso->apensado_id);
-            $processos->forget($apenso->processo_id);
-        }
-
-        return [
+            $procid = TipoUsuario::where('nome','Procurador')->get()->first()->id;
+            $estagid = TipoUsuario::where('nome','Estagiario')->get()->first()->id;
+            $assessid = TipoUsuario::where('nome','Assessor')->get()->first()->id;
+            return [
             'juizes'     => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
             'tribunais'  => Tribunal::orderBy('nome')->pluck('nome', 'id'),
-            'usuarios'   => User::orderBy('name')->pluck('name', 'id'),
+            'procuradores'   => UserModel::whereRaw("user_type_id = '$procid'")->orderBy('name')->pluck('name', 'id'),
+            'assessores'   => UserModel::whereRaw("user_type_id = '$assessid'")->orderBy('name')->pluck('name', 'id'),
+            'estagiarios'   => UserModel::whereRaw("user_type_id = '$estagid'")->orderBy('name')->pluck('name', 'id'),
             'meios'      => Meio::orderBy('nome')->pluck('nome', 'id'),
             'acoes'      => Acao::orderBy('nome')->pluck('nome', 'id'),
             'andamentos' => Andamento::where('processo_id', $id)->get(),
@@ -180,7 +197,8 @@ class Processos extends Base
             'processos'  => $processos,
             'leis'       => Lei::where('processo_id', $id)->get(),
             'tags'       => Tag::all(),
-        ];
+            ];
+        });
     }
 
     protected function transform($processos)

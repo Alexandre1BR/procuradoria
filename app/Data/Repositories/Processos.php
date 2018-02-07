@@ -196,7 +196,7 @@ class Processos extends Base
 
             $processo['estagiario_nome'] = is_null($processo->estagiario) ? 'N/C' : $processo->estagiario->name;
 
-            $processo['estagiario_nome'] = route('processos.show', ['id' => $processo['id']]);
+            $processo['show_url'] = route('processos.show', ['id' => $processo['id']]);
 
             return $processo;
         })->toArray();

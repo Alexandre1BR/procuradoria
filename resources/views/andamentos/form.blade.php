@@ -32,7 +32,7 @@
                         <label for="nome">Processo</label>
 
                         @if(!isset($processo_id))
-                            <select name="processo_id" class="form-control" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo" @include('partials.readonly')>
+                            <select name="processo_id" class="form-control select2" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo" @include('partials.readonly')>
                                 @if(!is_null(old('processo_id')))
                                     <option value="">Selecione...</option>
                                 @else
@@ -49,7 +49,7 @@
                             </select>
                         @else
                             <input type="hidden" name="processo_id" id="processo_id" value="{{$processo_id}}">
-                            <select name="processo_id" class="form-control" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo" disabled="disabled">
+                            <select name="processo_id" class="form-control select2" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo" disabled="disabled">
                                 @foreach ($processos as $key => $processo)
                                     @if($processo_id == $key || (!is_null(old('processo_id')) && old('processo_id')==$key))
                                         <option value="{{ $key }}" selected>{{ $processo }}</option>
@@ -64,7 +64,7 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="tipo_andamento_id">Tipo de andamento</label>
-                        <select name="tipo_andamento_id" class="form-control" id="tipo_andamento_id" aria-describedby="numero_judicialHelp" placeholder="Processo"  @include('partials.readonly')>
+                        <select name="tipo_andamento_id" class="form-control select2" id="tipo_andamento_id" aria-describedby="numero_judicialHelp" placeholder="Processo"  @include('partials.readonly')>
                             <option value="" >Selecione...</option>
 
                             @foreach ($tipoAndamentos as $key => $tipoAndamento)
@@ -91,7 +91,7 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="Processo">Tipo prazo</label>
-                        <select name="tipo_prazo_id" class="form-control" id="tipo_prazo_id" aria-describedby="numero_judicialHelp" placeholder="tipo_prazo_id" @include('partials.disabled')>
+                        <select name="tipo_prazo_id" class="form-control select2" id="tipo_prazo_id" aria-describedby="numero_judicialHelp" placeholder="tipo_prazo_id" @include('partials.disabled')>
                             <option selected="true" value="">Selecione</option>
                             @foreach ($tipoPrazos as $key => $prazo)
                                 @if(!is_null($andamento->tipoPrazo) && $andamento->tipoPrazo->id == $key ||

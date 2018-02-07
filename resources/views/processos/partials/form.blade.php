@@ -142,7 +142,7 @@
                 <label for="procurador_id">Procurador</label>
                 <select name="procurador_id" class="form-control select2" @include('partials.disabled') id="procurador_id">
                     <option value="">SELECIONE</option>
-                    @foreach ($usuarios as $key => $procurador)
+                    @foreach ($procuradores as $key => $procurador)
                         @if((!is_null($processo->procurador)) && $processo->procurador->id == $key
                         || (!is_null(old('procurador_id'))) && old('procurador_id') == $key))
                             <option value="{{ $key }}" selected="selected">{{ $procurador }}</option>
@@ -159,7 +159,7 @@
                 <label for="estagiario_id">Estagiário</label>
                 <select name="estagiario_id" class="form-control select2" @include('partials.disabled') id="estagiario_id">
                     <option value="">SELECIONE</option>
-                    @foreach ($usuarios as $key => $estagiario)
+                    @foreach ($estagiarios as $key => $estagiario)
                         @if((!is_null($processo->estagiario)) && $processo->estagiario->id == $key
                         || (!is_null(old('estagiario_id'))) && old('estagiario_id') == $key))
 
@@ -177,7 +177,7 @@
                 <label for="assessor_id">Assessor</label>
                 <select name="assessor_id" class="form-control select2" @include('partials.disabled') id="assessor_id">
                     <option value="">SELECIONE</option>
-                    @foreach ($usuarios as $key => $assessor)
+                    @foreach ($assessores as $key => $assessor)
                         @if((!is_null($processo->assessor)) && $processo->assessor->id == $key
                         || (!is_null(old('assessor_id'))) && old('assessor_id') == $key))
                             <option value="{{ $key }}" selected="selected">{{ $assessor }}</option>

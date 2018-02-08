@@ -1779,6 +1779,11 @@ be a descendant of the grid when it is being dragged.
   color: white !important;
 }
 
+td {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -13180,5 +13185,11 @@ button.close {
   margin: 0;
   overflow: visible;
   clip: auto;
+}
+
+@media (max-width: 992px) {
+  .container-full-and-fluid {
+    padding: 0px !important;
+  }
 }
 

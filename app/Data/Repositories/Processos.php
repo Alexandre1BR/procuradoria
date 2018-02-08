@@ -67,6 +67,7 @@ class Processos extends Base
 
     /**
      * @param $request
+     *
      * @return mixed
      */
     public function filter($request)
@@ -210,6 +211,7 @@ class Processos extends Base
 
     /**
      * @param $request
+     *
      * @return mixed
      */
     protected function filterToJson($request)

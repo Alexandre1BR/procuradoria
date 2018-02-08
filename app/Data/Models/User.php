@@ -10,7 +10,6 @@ use Venturecraft\Revisionable\RevisionableTrait;
 class User extends Authenticatable
 {
     use Notifiable;
-
     use RevisionableTrait;
 
     /**

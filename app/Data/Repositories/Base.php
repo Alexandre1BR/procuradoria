@@ -57,7 +57,7 @@ abstract class Base
 
     public function all()
     {
-        return $this->model::all();
+        return $this->makeResultForSelect($this->model::all());
     }
 
     public function cleanString($string)
@@ -69,10 +69,21 @@ abstract class Base
      * @param Request $request
      * @param $model
      */
-    private function saveTags(Request $request, $model)
+    protected function saveTags(Request $request, $model)
     {
         if ($request->has('tags')) {
             $model->syncTags($request->get('tags'));
         }
+    }
+
+    protected function makeResultForSelect($result, $label = 'nome', $value = 'id')
+    {
+        return $result->map(function ($row) use ($value, $label) {
+            $row['text'] = empty($row->text) ? $row[$label] : $row->text;
+
+            $row['value'] = $row[$value];
+
+            return $row;
+        });
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Data\Models;
 
+use App\Data\Repositories\TiposUsuarios;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Venturecraft\Revisionable\RevisionableTrait;
@@ -9,6 +10,7 @@ use Venturecraft\Revisionable\RevisionableTrait;
 class User extends Authenticatable
 {
     use Notifiable;
+
     use RevisionableTrait;
 
     /**
@@ -32,5 +34,13 @@ class User extends Authenticatable
     public function userType()
     {
         return $this->belongsTo(TipoUsuario::class, 'user_type_id');
+    }
+
+    public function scopeType($query, $type)
+    {
+        return $query->where(
+            'user_type_id',
+            app(TiposUsuarios::class)->findByName($type)->id
+        );
     }
 }

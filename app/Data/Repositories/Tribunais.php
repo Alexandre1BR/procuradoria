@@ -48,7 +48,7 @@ class Tribunais extends Base
             });
         });
 
-        return $query->orderBy('nome')->get();
+        return $this->makeResultForSelect($query->orderBy('nome')->get());
     }
 
     public function hasPackage(PackageInterface $package)

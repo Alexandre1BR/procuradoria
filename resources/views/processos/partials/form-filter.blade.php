@@ -36,16 +36,7 @@
         <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="tribunal_id">Tribunal</label>
-                <select v-model="form.tribunal_id" class="form-control select2-disabled" id="tribunal_id" @include('partials.disabled')>
-                    <option value="">SELECIONE</option>
-                    @foreach ($tribunais as $key => $tribunal)
-                        @if(((!is_null($processo->id)) && $processo->tribunal->id === $key) || (!is_null(old('tribunal_id'))) && old('tribunal_id') == $key))
-                            <option value="{{ $key }}" selected="selected">{{ $tribunal }}</option>
-                        @else
-                            <option value="{{ $key }}">{{ $tribunal }}</option>
-                        @endif
-                    @endforeach
-                </select>
+                <select2 v-model="form.tribunal_id" :options="tables.tribunais"></select2>
             </div>
         </div>
 
@@ -60,11 +51,11 @@
             <div class="form-group">
                 <label for="data_distribuicao">Data distribuição</label>
                 <input
-                        value="{{ is_null(old('data_distribuicao'))? (! is_null($processo->id) ? $processo->data_distribuicao : '' ) :  old('data_distribuicao')}}"
-                        type="date"
-                        v-model="form.data_distribuicao"
-                        class="form-control"
-                        id="data_distribuicao" @include('partials.readonly')
+                    value="{{ is_null(old('data_distribuicao'))? (! is_null($processo->id) ? $processo->data_distribuicao : '' ) :  old('data_distribuicao')}}"
+                    type="date"
+                    v-model="form.data_distribuicao"
+                    class="form-control"
+                    id="data_distribuicao" @include('partials.readonly')
                 />
                 {{--<input value="{{Carbon\Carbon::parse($processo->data_distribuicao)->format('Y-m-d')}}" type="date" v-model="form.data_distribuicao" class="form-control" id="data_distribuicao" @include('partials.readonly') />--}}
             </div>
@@ -73,32 +64,14 @@
         <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="acao_id">Ação</label>
-                <select v-model="form.acao_id" class="form-control select2-disabled" @include('partials.disabled') id="acao_id">
-                    <option value="">SELECIONE</option>
-                    @foreach ($acoes as $key => $acao)
-                        @if((!is_null($processo->acao)) && $processo->acao->id == $key || (!is_null(old('acao_id'))) && old('acao_id') == $key))
-                            <option value="{{ $key }}" selected="selected">{{ $acao }}</option>
-                        @else
-                            <option value="{{ $key }}">{{ $acao }}</option>
-                        @endif
-                    @endforeach
-                </select>
+                <select2 v-model="form.acao_id" :options="tables.acoes"></select2>
             </div>
         </div>
 
         <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="juiz_id">Juiz</label>
-                <select v-model="form.juiz_id" class="form-control select2-disabled" @include('partials.disabled') id="juiz_id">
-                    <option value="">SELECIONE</option>
-                    @foreach ($juizes as $key => $juiz)
-                        @if((!is_null($processo->juiz)) && $processo->juiz->id == $juiz->id || (!is_null(old('juiz_id'))) && old('juiz_id') == $juiz->id))
-                            <option value="{{ $juiz->id }}" selected="selected">{{ $juiz->nome . " (". $juiz->tipoJuiz->abreviacao .") - ". $juiz->lotacao->abreviacao }}</option>
-                        @else
-                            <option value="{{ $juiz->id }}">{{ $juiz->nome . " (". $juiz->tipoJuiz->abreviacao .") - ". $juiz->lotacao->abreviacao }}</option>
-                        @endif
-                    @endforeach
-                </select>
+                <select2 v-model="form.juiz_id" :options="tables.juizes"></select2>
             </div>
         </div>
 
@@ -113,16 +86,7 @@
         <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="relator_id">Relator</label>
-                <select v-model="form.relator_id" class="form-control select2-disabled" @include('partials.disabled') id="relator_id">
-                    <option value="">SELECIONE</option>
-                    @foreach ($juizes as $key => $relator)
-                        @if((!is_null($processo->relator)) && $processo->relator->id == $relator->id || (!is_null(old('relator_id'))) && old('relator_id') == $relator->id))
-                            <option value="{{ $relator->id }}" selected="selected">{{ $relator->nome . " (". $relator->tipoJuiz->abreviacao .") - ". $relator->lotacao->abreviacao }}</option>
-                        @else
-                            <option value="{{ $relator->id }}">{{ $relator->nome . " (". $relator->tipoJuiz->abreviacao .") - ". $relator->lotacao->abreviacao }}</option>
-                        @endif
-                    @endforeach
-                </select>
+                <select2 v-model="form.relator_id" :options="tables.juizes"></select2>
             </div>
         </div>
 
@@ -136,64 +100,28 @@
         <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="procurador_id">Procurador</label>
-                <select v-model="form.procurador_id" class="form-control select2-disabled" @include('partials.disabled') id="procurador_id">
-                    <option value="">SELECIONE</option>
-                    @foreach ($procuradores as $key => $procurador)
-                        @if((!is_null($processo->procurador)) && $processo->procurador->id == $key || (!is_null(old('procurador_id'))) && old('procurador_id') == $key))
-                            <option value="{{ $key }}" selected="selected">{{ $procurador }}</option>
-                        @else
-                            <option value="{{ $key }}">{{ $procurador }}</option>
-                        @endif
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-md-6">
-            <div class="form-group">
-                <label for="estagiario_id">Estagiário</label>
-                <select v-model="form.estagiario_id" class="form-control select2-disabled" @include('partials.disabled') id="estagiario_id">
-                    <option value="">SELECIONE</option>
-                    @foreach ($estagiarios as $key => $estagiario)
-                        @if((!is_null($processo->estagiario)) && $processo->estagiario->id == $key || (!is_null(old('estagiario_id'))) && old('estagiario_id') == $key))
-                            <option value="{{ $key }}" selected="selected">{{ $estagiario }}</option>
-                        @else
-                            <option value="{{ $key }}">{{ $estagiario }}</option>
-                        @endif
-                    @endforeach
-                </select>
+                <select2 v-model="form.procurador_id" :options="tables.procuradores"></select2>
             </div>
         </div>
 
         <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="assessor_id">Assessor</label>
-                <select v-model="form.assessor_id" class="form-control select2-disabled" @include('partials.disabled') id="assessor_id">
-                    <option value="">SELECIONE</option>
-                    @foreach ($assessores as $key => $assessor)
-                        @if((!is_null($processo->assessor)) && $processo->assessor->id == $key || (!is_null(old('assessor_id'))) && old('assessor_id') == $key))
-                            <option value="{{ $key }}" selected="selected">{{ $assessor }}</option>
-                        @else
-                            <option value="{{ $key }}">{{ $assessor }}</option>
-                        @endif
-                    @endforeach
-                </select>
+                <select2 v-model="form.assessor_id" :options="tables.assessores"></select2>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+                <label for="estagiario_id">Estagiário</label>
+                <select2 v-model="form.estagiario_id" :options="tables.estagiarios"></select2>
             </div>
         </div>
 
         <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="tipo_meio">Meio</label>
-                <select v-model="form.tipo_meio_id" class="form-control select2-disabled" @include('partials.disabled') id="tipo_meio">
-                    <option value="">SELECIONE</option>
-                    @foreach ($meios as $key => $meio)
-                        @if((!is_null($processo->id)) && $processo->tipoMeio->id == $key || (!is_null(old('tipo_meio_id'))) && old('tipo_meio_id') == $key))
-                            <option value="{{ $key }}" selected="selected">{{ $meio }}</option>
-                        @else
-                            <option value="{{ $key }}">{{ $meio }}</option>
-                        @endif
-                    @endforeach
-                </select>
+                <select2 v-model="form.meio_id" :options="tables.meios"></select2>
             </div>
         </div>
 
@@ -278,11 +206,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="tags">Tags</label>
-                <select v-model="form.tags" class="form-control select2-disabled" multiple="multiple" id="tags" @include('partials.disabled')>
-                    @foreach ($tags as $tag)
-                        <option {{ isset($processo) && $processo->tags->contains('name', $tag->name) ? 'selected="selected"' : '' }}>{{ $tag->name }}</option>
-                    @endforeach
-                </select>
+                <select2 v-model="form.tags" :options="tables.tags" multiple></select2>
             </div>
         </div>
     </div>
@@ -294,5 +218,4 @@
     </div>
 
     @include('partials.save-button')
-
 </form>

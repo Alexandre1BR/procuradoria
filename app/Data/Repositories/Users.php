@@ -52,4 +52,9 @@ class Users extends Base
 
         Auth::login($user, $remember);
     }
+
+    public function getByType($type)
+    {
+        return $this->makeResultForSelect($this->model::type($type)->get(), 'name');
+    }
 }

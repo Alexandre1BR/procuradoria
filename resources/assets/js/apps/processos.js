@@ -7,7 +7,22 @@ if (jQuery("#" + appName).length > 0) {
         data: {
             tables: {
                 processos: [],
+
                 acoes: [],
+
+                tribunais: [],
+
+                juizes: [],
+
+                procuradores: [],
+
+                assessores: [],
+
+                estagiarios: [],
+
+                meios: [],
+
+                tags: [],
             },
 
             pesquisa: '',
@@ -58,10 +73,12 @@ if (jQuery("#" + appName).length > 0) {
 
                 me.refreshing = true
 
-                axios.post('/', {
-                    search: this.pesquisa,
-                    advancedFilter: this.advancedFilter,
-                    filter: this.form
+                axios.get('/', {
+                    params: {
+                        search: this.pesquisa,
+                            advancedFilter: this.advancedFilter,
+                        filter: this.form
+                    }
                 })
                 .then(function(response) {
                     me.tables.processos = response.data
@@ -105,15 +122,15 @@ if (jQuery("#" + appName).length > 0) {
                 this.refresh()
             },
 
-            refreshAcoes: function () {
-                axios.post('/acoes')
+            refreshTable: function (table) {
+                axios.get('/'+table)
                     .then(function(response) {
-                        me.tables.acoes = response.data
+                        me.tables[table] = response.data
                     })
                     .catch(function(error) {
                         console.log(error)
 
-                        me.tables.acoes = []
+                        me.tables[table] = []
                     })
             },
         },
@@ -121,7 +138,22 @@ if (jQuery("#" + appName).length > 0) {
         mounted() {
             this.refresh()
 
-            this.refreshAcoes()
+            this.refreshTable('acoes')
+
+            this.refreshTable('tribunais')
+
+            this.refreshTable('juizes')
+
+            this.refreshTable('procuradores')
+
+            this.refreshTable('assessores')
+
+            this.refreshTable('estagiarios')
+
+            this.refreshTable('meios')
+
+            this.refreshTable('tags')
         },
     })
 }
+

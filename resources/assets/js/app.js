@@ -1,64 +1,13 @@
+require('./bootstrap')
 
+Vue.component('select2', require('./components/Select2.vue'));
 
-require('./bootstrap');
+// import vSelect from 'vue-select'
+//
+// Vue.component('v-select', vSelect)
 
-window.Vue = require('vue');
+require('./components/select2.js')
 
-Vue.component('select2', {
-    props: ['options', 'value'],
-    template: '#select2-template',
-    mounted: function () {
-        var vm = this
-        $(this.$el)
-        // init select2
-            .select2({ data: this.options })
-            .val(this.value)
-            .trigger('change')
-            // emit event on change.
-            .on('change', function () {
-                vm.$emit('input', this.value)
-            })
-    },
-    watch: {
-        value: function (value) {
-            // update value
-            $(this.$el).val(value)
-        },
-        options: function (options) {
-            // update options
-            $(this.$el).empty().select2({ data: options })
-        }
-    },
-    destroyed: function () {
-        $(this.$el).off().select2('destroy')
-    }
-})
+require('./components/calendar.js')
 
-require('./apps/processos.js');
-
-jQuery(document).ready(function() {
-    jQuery('#calendar').fullCalendar({
-        locale: 'pt-br',
-
-        eventSources: [
-            '/agenda/feed',
-        ],
-
-        header: { center: 'month,agendaDay,agendaWeek,listYear' }, // buttons for switching between views
-
-        views: {
-            month: {
-                buttonText: 'mês'
-            },
-            agendaDay: {
-                buttonText: 'dia'
-            },
-            agendaWeek: {
-                buttonText: 'semana'
-            },
-            listYear: {
-                buttonText: 'ano'
-            },
-        }
-    })
-});
+require('./apps/processos.js')

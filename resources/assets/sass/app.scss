@@ -11,6 +11,10 @@
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
-@import "node_modules/font-awesome/scss/font-awesome.scss";
+@import "../../../node_modules/font-awesome/scss/font-awesome.scss";
 
 @import "../../../node_modules/fullcalendar/dist/fullcalendar.css";
+
+@import '../../../node_modules/select2/dist/css/select2.css';
+
+@import '../../../node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min.css';

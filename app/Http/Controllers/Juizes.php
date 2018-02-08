@@ -56,8 +56,10 @@ class Juizes extends Controller
 
     public function index(JuizesRepository $juizes, Request $request)
     {
-        return view('juizes.index')
-            ->with('pesquisa', $request->get('pesquisa'))
-            ->with('juizes', $juizes->search($request));
+        return $request->expectsJson()
+            ? $juizes->search($request)
+            : view('juizes.index')
+                ->with('pesquisa', $request->get('pesquisa'))
+                ->with('juizes', $juizes->search($request));
     }
 }

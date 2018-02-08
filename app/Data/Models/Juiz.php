@@ -31,4 +31,9 @@ class Juiz extends BaseModel
     {
         return $this->hasMany(Processo::class)->orWhere('relator_id', '=', $this->id);
     }
+
+    public function getTextAttribute()
+    {
+        return "{$this->nome} ({$this->tipoJuiz->abreviacao}) - {$this->lotacao->abreviacao}";
+    }
 }

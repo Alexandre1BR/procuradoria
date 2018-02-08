@@ -53,6 +53,6 @@ class Juizes extends Base
             });
         });
 
-        return $query->orderBy('nome')->get();
+        return $this->makeResultForSelect($query->orderBy('nome')->get());
     }
 }

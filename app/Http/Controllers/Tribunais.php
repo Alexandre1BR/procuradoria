@@ -21,7 +21,9 @@ class Tribunais extends Controller
 
     public function index(TribunaisRepository $tribunais, Request $request)
     {
-        return view('tribunais.index')
+        return $request->expectsJson()
+            ? $tribunais->search($request)
+            : view('tribunais.index')
                 ->with('pesquisa', $request->get('pesquisa'))
                 ->with('tribunais', $tribunais->search($request));
     }

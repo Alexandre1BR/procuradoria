@@ -65,10 +65,12 @@ class Processos extends Base
         return $this->searchFromRequest($request->get('pesquisa'));
     }
 
+    /**
+     * @param $request
+     * @return mixed
+     */
     public function filter($request)
     {
-        info($request->get('advancedFilter'));
-
         $query = $this->makeProcessoQuery();
 
         if (!empty($search = $request->get('search'))) {
@@ -76,7 +78,7 @@ class Processos extends Base
         }
 
         if ($request->get('advancedFilter')) {
-            collect($request->get('filter'))->each(function ($search, $column) use ($query) {
+            collect($this->filterToJson($request))->each(function ($search, $column) use ($query) {
                 if (!empty($search)) {
                     $this->addQueryByType($search, $column, $query);
                 }
@@ -126,31 +128,38 @@ class Processos extends Base
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
                 if ($type === 'string') {
-                    $query->orWhere(DB::raw("lower({$column})"), 'like', '%'.$item.'%');
+                    $query->orWhere($column, 'ilike', '%'.$item.'%');
                 } else {
                     if ($this->isDate($item)) {
                         $query->orWhere($column, '=', $item);
                     }
                 }
             });
+
             $query->orWhereHas('tribunal', function ($query) use ($item) {
                 $query->whereRaw("lower(nome) like '%{$item}%'");
             });
+
             $query->orWhereHas('juiz', function ($query) use ($item) {
                 $query->whereRaw("lower(nome) like '%{$item}%'");
             });
+
             $query->orWhereHas('relator', function ($query) use ($item) {
                 $query->whereRaw("lower(nome) like '%{$item}%'");
             });
+
             $query->orWhereHas('procurador', function ($query) use ($item) {
                 $query->whereRaw("lower(name) like '%{$item}%'");
             });
+
             $query->orWhereHas('estagiario', function ($query) use ($item) {
                 $query->whereRaw("lower(name) like '%{$item}%'");
             });
+
             $query->orWhereHas('assessor', function ($query) use ($item) {
                 $query->whereRaw("lower(name) like '%{$item}%'");
             });
+
             $query->orWhereHas('acao', function ($query) use ($item) {
                 $query->whereRaw("lower(nome) like '%{$item}%'");
             });
@@ -160,7 +169,7 @@ class Processos extends Base
 
         $query->with(['acao', 'tribunal', 'procurador', 'assessor', 'estagiario']);
 
-        return $this->transform($query->orderBy('updated_at', 'desc')->get());
+        return $query->orderBy('updated_at', 'desc');
     }
 
     /**
@@ -197,6 +206,21 @@ class Processos extends Base
             'tags'           => Tag::all(),
             ];
         });
+    }
+
+    /**
+     * @param $request
+     * @return mixed
+     */
+    protected function filterToJson($request)
+    {
+        if (is_array($filter = $request->get('filter'))) {
+            return $filter;
+        }
+
+        $result = json_decode($filter, true);
+
+        return is_array($result) ? $result : [];
     }
 
     protected function transform($processos)

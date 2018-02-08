@@ -2,18 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Models\Meio;
-use App\Http\Requests\Meio as MeioRequest;
+use App\Data\Repositories\Meios as MeiosRepository;
 
 class Meios extends Controller
 {
-    public function create()
+    public function index()
     {
-        return view('meios.create');
-    }
-
-    public function store(MeioRequest $request)
-    {
-        Meio::create($request->all());
+        return app(MeiosRepository::class)->all();
     }
 }

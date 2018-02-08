@@ -22,6 +22,12 @@ Route::group(['middleware' => makeAppRootRouteMiddlewares()], function () {
     require __DIR__.'/services/agenda.php';
 
     require __DIR__.'/services/leis.php';
+
+    require __DIR__.'/services/usuarios.php';
+
+    require __DIR__.'/services/meios.php';
+
+    require __DIR__.'/services/tags.php';
 });
 
 function makeAppRootRouteMiddlewares()

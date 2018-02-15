@@ -4,7 +4,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="row">
-                <div class="col-xs-10">
+                <div class="col-xs-8 col-md-10">
                     <h4>
                         <a href="{{ route('acoes.index') }}">Ações</a>
 
@@ -16,7 +16,7 @@
                     </h4>
                 </div>
 
-                <div class="col-xs-1">
+                <div class="col-xs-4 col-md-2">
                     @include('partials.edit-button', ['model' => $acao])
                 </div>
             </div>

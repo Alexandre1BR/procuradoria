@@ -21,6 +21,8 @@ class Andamento extends BaseModel
         'observacoes',
     ];
 
+    protected $with = ['tipoAndamento', 'tipoEntrada', 'tipoPrazo'];
+
     /**
      * The attributes that are mass assignable.
      *

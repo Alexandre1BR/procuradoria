@@ -11,6 +11,8 @@ class Juiz extends BaseModel
      */
     protected $table = 'juizes';
 
+    protected $with = ['lotacao', 'tipoJuiz'];
+
     protected $fillable = [
         'nome',
         'lotacao_id',

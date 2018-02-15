@@ -1,8 +1,10 @@
 <?php
 
+use App\Services\Routes;
+
 Auth::routes();
 
-Route::group(['middleware' => makeAppRootRouteMiddlewares()], function () {
+Route::group(['middleware' => app(Routes::class)->makeAppRootRouteMiddlewares()], function () {
     require __DIR__.'/services/home.php';
 
     require __DIR__.'/services/processos.php';
@@ -29,13 +31,3 @@ Route::group(['middleware' => makeAppRootRouteMiddlewares()], function () {
 
     require __DIR__.'/services/tags.php';
 });
-
-function makeAppRootRouteMiddlewares()
-{
-    return collect([
-        config('auth.authentication.enabled', true) ? 'auth' : null,
-        config('auth.authorization.enabled', true) ? 'app.users' : null,
-    ])->reject(function ($value) {
-        return empty($value);
-    })->toArray();
-}

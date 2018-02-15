@@ -12,6 +12,8 @@ class User extends Authenticatable
     use Notifiable;
     use RevisionableTrait;
 
+    protected $with = ['userType'];
+
     /**
      * The attributes that are mass assignable.
      *

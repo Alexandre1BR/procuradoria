@@ -122,7 +122,7 @@ if (jQuery("#" + appName).length > 0) {
                 this.refresh()
             },
 
-            refreshTable: function (table) {
+            refreshTable(table) {
                 axios.get('/'+table)
                     .then(function(response) {
                         me.tables[table] = response.data
@@ -132,6 +132,10 @@ if (jQuery("#" + appName).length > 0) {
 
                         me.tables[table] = []
                     })
+            },
+
+            openProcesso(id) {
+                window.location.href = '/processos/'+id;
             },
         },
 

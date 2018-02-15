@@ -20,7 +20,7 @@ class Processo extends BaseModel
         'procurador',
         'assessor',
         'estagiario',
-        'tags'
+        'tags',
     ];
 
     /**

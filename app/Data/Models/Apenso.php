@@ -15,6 +15,8 @@ class Apenso extends BaseModel
         'apensado_id',
     ];
 
+    protected $with = ['apensado', 'processo'];
+
     public function apensado()
     {
         return $this->belongsTo(Processo::class);

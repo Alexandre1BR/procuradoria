@@ -39,6 +39,7 @@
                 <select name="tribunal_id" class="form-control select2" id="tribunal_id" @include('partials.disabled')>
                     <option value="">SELECIONE</option>
                     @foreach ($tribunais as $key => $tribunal)
+
                         @if(((!is_null($processo->id)) && $processo->tribunal->id === $key) || (!is_null(old('tribunal_id'))) && old('tribunal_id') == $key))
                             <option value="{{ $key }}" selected="selected">{{ $tribunal }}</option>
                         @else

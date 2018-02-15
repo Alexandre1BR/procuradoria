@@ -18,6 +18,8 @@ class Lei extends BaseModel
         'processo_id',
     ];
 
+    protected $with = ['processo'];
+
     public function processo()
     {
         return $this->belongsTo(Processo::class);

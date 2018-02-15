@@ -14,6 +14,15 @@ class Processo extends BaseModel
         'data_distribuicao',
     ];
 
+    protected $with = [
+        'acao',
+        'tribunal',
+        'procurador',
+        'assessor',
+        'estagiario',
+        'tags'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -68,8 +77,6 @@ class Processo extends BaseModel
         'data_arquivamento'             => 'date',
         'observacao_arquivamento'       => 'string',
     ];
-
-    protected $with = ['tags'];
 
     public function getDataSemHoraAttribute()
     {

@@ -7,7 +7,6 @@ use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-
     use WithoutMiddleware;
 
     public function testRedirectToLoginResponse()

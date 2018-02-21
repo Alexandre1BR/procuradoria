@@ -12,7 +12,6 @@ use App\Data\Repositories\Processos;
 use App\Data\Repositories\TiposJuizes;
 use App\Data\Repositories\Tribunais;
 use App\Data\Repositories\Users;
-use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -170,8 +169,8 @@ class Import
                 // AÇÃO - SIGLA e AÇÃO POR EXTENSO
                 $acao = $this->acoesRepository
                     ->firstOrCreate([
-                        'abreviacao' => $this->upper($value->acao_sigla ?: 'N/C')
-                    ],[
+                        'abreviacao' => $this->upper($value->acao_sigla ?: 'N/C'),
+                    ], [
                         'nome'       => $this->upper($value->acao_por_extenso ?: 'N/C'),
                     ]);
 

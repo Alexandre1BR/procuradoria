@@ -50,6 +50,11 @@ abstract class Base
         return $this->model::firstOrCreate($search, $attributes);
     }
 
+    public function findByAbreviacao($abreviacao)
+    {
+        return $this->model::where('abreviacao', $abreviacao)->first();
+    }
+
     public function new()
     {
         return new $this->model();

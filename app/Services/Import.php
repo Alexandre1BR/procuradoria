@@ -12,6 +12,7 @@ use App\Data\Repositories\Processos;
 use App\Data\Repositories\TiposJuizes;
 use App\Data\Repositories\Tribunais;
 use App\Data\Repositories\Users;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -145,7 +146,8 @@ class Import
 
         $this->command->info("Importing $file");
 
-        $data = Cache::remember('importExcel', 30, function () use ($file) {
+        Cache::flush();
+        $data = Cache::remember('importExcel', 1, function () use ($file) {
             return Excel::load($file, function ($reader) {
             })->get();
         });
@@ -156,34 +158,34 @@ class Import
 
                 $obs = '';
 
-                $tribunal = null;
-                $vara = null;
-                if (!is_null($value->origem)) {
-                    list($tribunal, $vara) = $this->split($value);
-                }
+                // ORIGEM e ORIGEM POR EXTENSO
                 $tribunal = $this->tribunaisRepository
-                    ->firstOrCreate(
-                        [
-                            'nome'       => $this->upper($tribunal ?: 'N/C'),
-                            'abreviacao' => $this->upper($tribunal ?: 'N/C'),
-                        ]
-                    );
-                // Nome e Abreviação receberam os mesmos dados , já que ora esta abreviado e ora esta 'nomeado'
+                    ->firstOrCreate([
+                        'abreviacao' => $this->upper($value->origem ?: 'N/C'),
+                    ],
+                    [
+                        'nome'       => $this->upper($value->origem_por_extenso ?: 'N/C'),
+                    ]);
+
+                // AÇÃO - SIGLA e AÇÃO POR EXTENSO
                 $acao = $this->acoesRepository
                     ->firstOrCreate([
-                                        'nome'       => $this->upper($value->acao ?: 'N/C'),
-                                        'abreviacao' => $this->upper($value->acao ?: 'N/C'),
-                                    ]);
+                        'abreviacao' => $this->upper($value->acao_sigla ?: 'N/C')
+                    ],[
+                        'nome'       => $this->upper($value->acao_por_extenso ?: 'N/C'),
+                    ]);
 
                 //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
-                $tipo_relator = $this->ajustaTipoRelator($value->relator);
-                $tipo_relator = $this->tiposJuizesRepository->firstOrCreate(['nome' => $tipo_relator]);
+                //$tipo_relator = $this->ajustaTipoRelator($value->titulo_do_relator);
+                //$tipo_relator = $this->tiposJuizesRepository->firstOrCreate(['nome' => $tipo_relator]);
 
-                $nome_relator = $this->ajustaNomeRelator($value->relator);
+                //TÍTULO DO RELATOR
+                $tipo_relator = $this->tiposJuizesRepository->firstOrCreate(['nome' => $value->titulo_do_relator ?: 'N/C']);
 
+                //$nome_relator = $this->ajustaNomeRelator($value->relator);
                 $relator_juiz = $this->juizesRepository
                     ->firstOrCreate([
-                        'nome'         => $this->upper($nome_relator ?: 'N/C'),
+                        'nome'         => $this->upper($value->relator ?: 'N/C'),
                         'lotacao_id'   => $tribunal->id,
                         'tipo_juiz_id' => $tipo_relator->id,
                     ]);
@@ -247,21 +249,20 @@ class Import
 //                if(is_null($value->reu)){
 //                    $value->reu = 'N/C';
 //                }
-
                 $tipo_meio = $this->ajustaTipoMeio($value->tipo);
-
                 $tipo_meio = $this->meiosRepository
                     ->firstOrCreate(['nome' => $tipo_meio]); //TODO => 'N/C'
+
                 $insert[] =
                     [
                         'numero_judicial' => str_ireplace("\n", '', $value->no_judicial),
                         'numero_alerj'    => str_ireplace("\n", '', $value->no_alerj),
                         'apensos_obs'     => str_ireplace("\n", '', $value->apensos),
                         'tribunal_id'     => str_ireplace("\n", '', $tribunal->id), //Origem
-                        'vara'            => str_ireplace("\n", '', $vara),
+                        'vara'            => str_ireplace("\n", '', $value->orgão_julgador),
                         'acao_id'         => str_ireplace("\n", '', $acao->id),
                         'relator_id'      => str_ireplace("\n", '', $relator_juiz->id),
-                        //'                                 tipo_juiz_id'  =>str_ireplace("\n", "", trim($tipo_relator->id)), //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
+                        //'tipo_juiz_id'  => str_ireplace("\n", "", trim($tipo_relator->id)), //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
                         'autor'           => str_ireplace("\n", '', $value->autor),
                         'reu'             => str_ireplace("\n", '', $value->reu),
                         'objeto'          => str_ireplace("\n", '', $value->objeto),
@@ -371,15 +372,6 @@ class Import
         $tipo_user = mb_strtolower(trim($tipo_user));
 
         return ModelTipoUsuario::whereRaw("lower(nome) like '%{$tipo_user}%'")->get()->first();
-    }
-
-    public function split($value): array
-    {
-        $split = explode('-', $value->origem);
-        $tribunal = isset($split[0]) ? trim($split[0]) : null;
-        $vara = isset($split[1]) ? trim($split[1]) : null;
-
-        return [$tribunal, $vara];
     }
 
     private function ajustaNomeRelator($relator)

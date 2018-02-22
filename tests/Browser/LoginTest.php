@@ -9,6 +9,14 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LoginTest extends DuskTestCase
 {
+    public function testRedirectLogin()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                ->assertPathIs('/login');
+        });
+    }
+
     public function testWrongLogin()
     {
         $this->browse(function (Browser $browser) {

@@ -24,8 +24,8 @@ return [
     ],
 
     'authorization' => [
-        'mock'    => env('APP_AUTHORIZATION_MOCKED'),
-        'enabled' => env('APP_AUTHORIZATION_ENABLED', env('APP_AUTHORIZATION')),
+        'mock'    => env('APP_AUTHORIZATION_MOCKED', false),
+        'enabled' => env('APP_AUTHORIZATION_ENABLED', env('APP_AUTHORIZATION', true)),
     ],
 
     /*

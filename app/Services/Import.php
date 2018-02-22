@@ -152,8 +152,22 @@ class Import
             })->get();
         });
 
+//        // Loop through all sheets
+//        $data->each(function($sheet) {
+//
+//            // Loop through all rows
+//            $sheet->each(function($row) {
+//                dump($row);
+//            });
+//
+//        });
+
         if (!empty($data) && $data->count()) {
             foreach ($data[0] as $key => $value) {
+
+                if(empty($value->no_judicial))
+                    continue;
+
                 $value = $this->cleanAndNormalize($value);
 
                 $obs = '';
@@ -182,10 +196,10 @@ class Import
                 //TÍTULO DO RELATOR
                 $tipo_relator = $this->tiposJuizesRepository->firstOrCreate(['nome' => $value->titulo_do_relator ?: 'N/C']);
 
-                //$nome_relator = $this->ajustaNomeRelator($value->relator);
+                $nome_relator = $this->ajustaNomeRelator($value->relator);
                 $relator_juiz = $this->juizesRepository
                     ->firstOrCreate([
-                        'nome'         => $this->upper($value->relator ?: 'N/C'),
+                        'nome'         => $this->upper($nome_relator ?: 'N/C'),
                         'lotacao_id'   => $tribunal->id,
                         'tipo_juiz_id' => $tipo_relator->id,
                     ]);
@@ -228,7 +242,7 @@ class Import
                     $assessor = null;
                 }
 
-                $this->command->line("{$value->no_judicial} - $value->no_alerj");
+                //$this->command->line("{$value->no_judicial} - $value->no_alerj");
 
 //                if(is_null($value->no_judicial)){
 //                    $value->no_judicial = 'N/C';
@@ -251,18 +265,19 @@ class Import
 //                }
                 $tipo_meio = $this->ajustaTipoMeio($value->tipo);
                 $tipo_meio = $this->meiosRepository
-                    ->firstOrCreate(['nome' => $tipo_meio]); //TODO => 'N/C'
+                    ->firstOrCreate(['nome' => $tipo_meio]);
 
                 $insert[] =
                     [
                         'numero_judicial' => str_ireplace("\n", '', $value->no_judicial),
                         'numero_alerj'    => str_ireplace("\n", '', $value->no_alerj),
-                        'apensos_obs'     => str_ireplace("\n", '', $value->apensos),
                         'tribunal_id'     => str_ireplace("\n", '', $tribunal->id), //Origem
                         'vara'            => str_ireplace("\n", '', $value->orgao_julgador),
                         'acao_id'         => str_ireplace("\n", '', $acao->id),
-                        'relator_id'      => str_ireplace("\n", '', $relator_juiz->id),
-                        //'tipo_juiz_id'  => str_ireplace("\n", "", trim($tipo_relator->id)), //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
+                        //'relator_id'      => str_ireplace("\n", '', $relator_juiz->id),
+                        'apensos_obs'     => str_ireplace("\n", '', $value->apensos),
+                        //'juiz_id'    => str_ireplace("\n", '', $relator_juiz->id)
+                        (($value->titulo_do_relator == "JUIZ" or $value->titulo_do_relator == "JUIZA") ? 'juiz_id' : 'relator_id' ) => str_ireplace("\n", '', $relator_juiz->id),
                         'autor'           => str_ireplace("\n", '', $value->autor),
                         'reu'             => str_ireplace("\n", '', $value->reu),
                         'objeto'          => str_ireplace("\n", '', $value->objeto),
@@ -301,7 +316,9 @@ class Import
                 }
             }
             if (!empty($insert)) {
-                Processo::insert($insert);
+                foreach ($insert as $k1 => $vinsert) {
+                    Processo::insert($vinsert);
+                }
 
                 $this->command->info('PROCESSES: import was successful.');
             }

@@ -2,10 +2,9 @@
 
 namespace Tests\Browser;
 
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
 use App\Data\Repositories\Users as UsersRepository;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 
 class LoginTest extends DuskTestCase
 {
@@ -32,8 +31,8 @@ class LoginTest extends DuskTestCase
     public function testRightLoginAndLogout()
     {
         $user = 'transporteop';
-        $this->browse(function (Browser $browser) use($user) {
-            $browser->loginAs(app( UsersRepository::class)->findUserByEmail($user.'@alerj.rj.gov.br'))
+        $this->browse(function (Browser $browser) use ($user) {
+            $browser->loginAs(app(UsersRepository::class)->findUserByEmail($user.'@alerj.rj.gov.br'))
                 ->visit('/')
                 ->waitForText($user)
                 ->assertSee($user)

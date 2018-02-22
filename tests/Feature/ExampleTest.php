@@ -12,7 +12,8 @@ class ExampleTest extends TestCase
     public function testRedirectToLoginResponse()
     {
         //$this->withoutMiddleware();
-
+        $response = $this->get('/');
+        dd($response);
         $this->get('/')->assertRedirect('/login');
     }
 
@@ -21,7 +22,7 @@ class ExampleTest extends TestCase
 
         //$this->withoutMiddleware();
 
-        $response = $this->get('/login1');
+        $response = $this->get('/login');
 
         $response->assertStatus(200);
 

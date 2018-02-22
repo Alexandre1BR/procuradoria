@@ -8,25 +8,16 @@ use Tests\DuskTestCase;
 
 class LoginTest extends DuskTestCase
 {
-    public function testRedirectLogin()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/')
-                ->assertPathIs('/login');
-        });
-    }
-
-    public function testWrongLogin()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/login')
-                ->type('email', '123')
-                ->type('password', '123')
-                ->press('Login')
-//                ->waitForText('Credenciais informadas não correspondem com nossos registros.')
-                ->assertSee('Credenciais informadas não correspondem com nossos registros.');
-        });
-    }
+//    public function testWrongLogin()
+//    {
+//        $this->browse(function (Browser $browser) {
+//            $browser->visit('/login')
+//                ->type('email', '123')
+//                ->type('password', '123')
+//                ->press('Login')
+//                ->assertSee('Credenciais informadas não correspondem com nossos registros.');
+//        });
+//    }
 
     public function testRightLoginAndLogout()
     {

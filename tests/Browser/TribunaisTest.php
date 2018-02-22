@@ -2,12 +2,9 @@
 
 namespace Tests\Browser;
 
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
-use App\Data\Repositories\Users as UsersRepository;
-use App\Data\Repositories\Tribunais as TribunaisRepository;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Faker\Generator as Faker;
+use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 
 class TribunaisTest extends DuskTestCase
 {
@@ -24,9 +21,9 @@ class TribunaisTest extends DuskTestCase
     {
         $this->init();
         $nomet = static::$nomeTribunal;
-        $abrevt =  static::$abreviacaoTribunal;
+        $abrevt = static::$abreviacaoTribunal;
 
-        $this->browse(function (Browser $browser) use ($nomet, $abrevt){
+        $this->browse(function (Browser $browser) use ($nomet, $abrevt) {
             $browser->visit('/tribunais')
                 ->clickLink('Novo')
                 ->type('nome', $nomet)
@@ -40,7 +37,7 @@ class TribunaisTest extends DuskTestCase
 
     public function testValidation()
     {
-        $this->browse(function (Browser $browser){
+        $this->browse(function (Browser $browser) {
             $browser->visit('/tribunais')
                 ->clickLink('Novo')
 //                ->type('nome', $nomet)
@@ -53,7 +50,7 @@ class TribunaisTest extends DuskTestCase
 
     public function testWrongSearch()
     {
-        $this->browse(function (Browser $browser){
+        $this->browse(function (Browser $browser) {
             $browser->visit('/tribunais')
                 ->type('pesquisa', '45879349875348975387958973489734897345893478957984')
 //                ->assertInputValue('pesquisa',$nomet)
@@ -68,17 +65,15 @@ class TribunaisTest extends DuskTestCase
     public function testRightSearch()
     {
         $nomet = static::$nomeTribunal;
-        $abrevt =  static::$abreviacaoTribunal;
+        $abrevt = static::$abreviacaoTribunal;
 
-        $this->browse(function (Browser $browser) use ($nomet, $abrevt){
+        $this->browse(function (Browser $browser) use ($nomet, $abrevt) {
             $browser->visit('/tribunais')
 //                ->type('abreviacao', $abrevt)
                 ->type('pesquisa', $nomet)
                 ->click('#searchButton')
                 ->waitForText($nomet)
-                ->assertSeeIn('#tribunalTable',$nomet);
+                ->assertSeeIn('#tribunalTable', $nomet);
         });
     }
-
-
 }

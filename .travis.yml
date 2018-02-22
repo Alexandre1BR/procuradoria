@@ -17,7 +17,7 @@ cache:
 
 before_script:
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
-  - cp .env.example .env
+  - cp .env.dusk.local .env
   - php artisan key:generate
 
 script:

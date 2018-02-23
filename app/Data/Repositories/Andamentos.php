@@ -5,6 +5,7 @@ namespace App\Data\Repositories;
 use App\Data\Models\Andamento as AndamentoModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Andamentos extends Base
 {

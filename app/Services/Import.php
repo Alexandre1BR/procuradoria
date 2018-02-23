@@ -260,7 +260,7 @@ class Import
                         'numero_alerj'    => str_ireplace("\n", '', $value->no_alerj),
                         'apensos_obs'     => str_ireplace("\n", '', $value->apensos),
                         'tribunal_id'     => str_ireplace("\n", '', $tribunal->id), //Origem
-                        'vara'            => str_ireplace("\n", '', $value->orgão_julgador),
+                        'vara'            => str_ireplace("\n", '', $value->orgao_julgador),
                         'acao_id'         => str_ireplace("\n", '', $acao->id),
                         'relator_id'      => str_ireplace("\n", '', $relator_juiz->id),
                         //'tipo_juiz_id'  => str_ireplace("\n", "", trim($tipo_relator->id)), //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)

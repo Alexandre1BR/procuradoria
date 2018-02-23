@@ -33,6 +33,8 @@ class Users extends Controller
 
     public function index()
     {
-        return app(UsersRepository::class)->all();
+        return view('users.index')
+                ->with('users', $this->usersRepository->all());
     }
+
 }

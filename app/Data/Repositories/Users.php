@@ -57,4 +57,9 @@ class Users extends Base
     {
         return $this->makeResultForSelect($this->model::type($type)->get(), 'name');
     }
+
+    public function search(Request $request = null)
+    {
+        return User::all();
+    }
 }

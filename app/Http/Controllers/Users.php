@@ -36,5 +36,4 @@ class Users extends Controller
         return view('users.index')
                 ->with('users', $this->usersRepository->all());
     }
-
 }

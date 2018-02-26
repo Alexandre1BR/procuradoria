@@ -2,9 +2,6 @@
 
 namespace Tests\Browser;
 
-use App\Data\Repositories\Processos as ProcessosRepository;
-use App\Data\Repositories\TiposAndamentos as TiposAndamentosRepository;
-use App\Data\Repositories\TiposPrazos as TiposPrazosRepository;
 use Faker\Generator as Faker;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -36,8 +33,8 @@ class AcoesTest extends DuskTestCase
                 ->screenshot('acoes')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->assertSeeIn('#acoesTable',$nomeA)
-                ->assertSeeIn('#acoesTable',$abreviacaoA);
+                ->assertSeeIn('#acoesTable', $nomeA)
+                ->assertSeeIn('#acoesTable', $abreviacaoA);
         });
     }
 

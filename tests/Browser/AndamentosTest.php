@@ -50,15 +50,11 @@ class AndamentosTest extends DuskTestCase
                 ->select('#processo_id', $processoA)
                 ->select('#tipo_andamento_id', $tipoAndamentoA)
                 ->select('#tipo_prazo_id', $tipoPrazoA)
-                ->screenshot('1')
                 ->keys('#data_prazo', $dataPrazoA)
-                ->screenshot('2')
                 ->keys('#data_entrega', $dataEntregaA)
                 ->type('#observacoes', $observacaoA)
-                ->screenshot('3')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->screenshot('4')
                 ->assertSee($observacaoA);
         });
     }

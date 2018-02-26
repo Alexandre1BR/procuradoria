@@ -25,8 +25,8 @@ class AndamentosTest extends DuskTestCase
         static::$tipoAndamentoAndamento = $faker->randomElement(app(TiposAndamentosRepository::class)->getAllIds()->toArray());
         static::$tipoPrazoAndamento = $faker->randomElement(app(TiposPrazosRepository::class)->getAllIds()->toArray());
 //        static::$dataPrazoAndamento = $faker->date('d-m-Y','now');
-        static::$dataPrazoAndamento = "01-01-2001";
-        static::$dataEntregaAndamento = "01-01-2001";
+        static::$dataPrazoAndamento = '01-01-2001';
+        static::$dataEntregaAndamento = '01-01-2001';
 //            $faker->date('d-m-Y','now');
 //        dd(static::$dataEntregaAndamento);
 //        static::$dataEntregaAndamento;

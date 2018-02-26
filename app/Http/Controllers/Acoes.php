@@ -29,7 +29,8 @@ class Acoes extends Controller
     {
         $repository->createFromRequest($request);
 
-        return redirect()->route('acoes.index');
+        return redirect()->route('acoes.index')
+            ->with($this->getSuccessMessage());
     }
 
     public function index(AcoesRepository $acoes, Request $request)

@@ -54,6 +54,11 @@ class Processos extends Base
         return true;
     }
 
+    public function getAllIds()
+    {
+        return Processo::pluck('id');
+    }
+
     public function search(Request $request)
     {
         info($request);

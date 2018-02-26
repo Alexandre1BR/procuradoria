@@ -30,4 +30,10 @@ class Users extends Controller
     {
         return $this->usersRepository->getByType('Estagiario');
     }
+
+    public function index()
+    {
+        return view('users.index')
+                ->with('users', $this->usersRepository->all());
+    }
 }

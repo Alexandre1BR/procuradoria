@@ -12,7 +12,6 @@ use App\Data\Repositories\Processos;
 use App\Data\Repositories\TiposJuizes;
 use App\Data\Repositories\Tribunais;
 use App\Data\Repositories\Users;
-use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -164,9 +163,9 @@ class Import
 
         if (!empty($data) && $data->count()) {
             foreach ($data[0] as $key => $value) {
-
-                if(empty($value->no_judicial))
+                if (empty($value->no_judicial)) {
                     continue;
+                }
 
                 $value = $this->cleanAndNormalize($value);
 
@@ -184,8 +183,8 @@ class Import
                 // AÇÃO - SIGLA e AÇÃO POR EXTENSO
                 $acao = $this->acoesRepository
                     ->firstOrCreate([
-                        'abreviacao' => $this->upper($value->acao_sigla ?: 'N/C')
-                    ],[
+                        'abreviacao' => $this->upper($value->acao_sigla ?: 'N/C'),
+                    ], [
                         'nome'       => $this->upper($value->acao_por_extenso ?: 'N/C'),
                     ]);
 
@@ -277,20 +276,20 @@ class Import
                         //'relator_id'      => str_ireplace("\n", '', $relator_juiz->id),
                         'apensos_obs'     => str_ireplace("\n", '', $value->apensos),
                         //'juiz_id'    => str_ireplace("\n", '', $relator_juiz->id)
-                        (($value->titulo_do_relator == "JUIZ" or $value->titulo_do_relator == "JUIZA") ? 'juiz_id' : 'relator_id' ) => str_ireplace("\n", '', $relator_juiz->id),
-                        'autor'           => str_ireplace("\n", '', $value->autor),
-                        'reu'             => str_ireplace("\n", '', $value->reu),
-                        'objeto'          => str_ireplace("\n", '', $value->objeto),
-                        'merito'          => str_ireplace("\n", '', $value->merito),
-                        'liminar'         => str_ireplace("\n", '', $value->liminar),
-                        'recurso'         => str_ireplace("\n", '', $value->recurso),
-                        'procurador_id'   => $procurador,
-                        'estagiario_id'   => $estagiario,
-                        'assessor_id'     => $assessor,
-                        'tipo_meio_id'    => str_ireplace("\n", '', $tipo_meio->id),
-                        'created_at'      => now(),
-                        'updated_at'      => now(),
-                        'observacao'      => str_ireplace("\n", '', $obs),
+                        (($value->titulo_do_relator == 'JUIZ' or $value->titulo_do_relator == 'JUIZA') ? 'juiz_id' : 'relator_id') => str_ireplace("\n", '', $relator_juiz->id),
+                        'autor'                                                                                                    => str_ireplace("\n", '', $value->autor),
+                        'reu'                                                                                                      => str_ireplace("\n", '', $value->reu),
+                        'objeto'                                                                                                   => str_ireplace("\n", '', $value->objeto),
+                        'merito'                                                                                                   => str_ireplace("\n", '', $value->merito),
+                        'liminar'                                                                                                  => str_ireplace("\n", '', $value->liminar),
+                        'recurso'                                                                                                  => str_ireplace("\n", '', $value->recurso),
+                        'procurador_id'                                                                                            => $procurador,
+                        'estagiario_id'                                                                                            => $estagiario,
+                        'assessor_id'                                                                                              => $assessor,
+                        'tipo_meio_id'                                                                                             => str_ireplace("\n", '', $tipo_meio->id),
+                        'created_at'                                                                                               => now(),
+                        'updated_at'                                                                                               => now(),
+                        'observacao'                                                                                               => str_ireplace("\n", '', $obs),
                     ];
             }
             $colunas =

@@ -57,5 +57,4 @@ class Users extends Controller
         $model->save();
         return view('users.index')->with('users', $this->usersRepository->all());
     }
-
 }

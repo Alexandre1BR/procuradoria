@@ -2,8 +2,7 @@
     <div class="row">
         <div class="col-xs-4">
             <a href="{{ route($routeCreate) }}" class="btn btn-danger pull-right">
-                <i class="fa fa-plus"></i> Novo
-            </a>
+                <i class="fa fa-plus"></i> Novo</a>
         </div>
 
         <div class="col-xs-8 pull-right">

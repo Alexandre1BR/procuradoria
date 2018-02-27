@@ -61,5 +61,6 @@ class Users extends Base
     public function search(Request $request = null)
     {
         return User::all();
+        //return User::all()->history()->withTrashed()->get();
     }
 }

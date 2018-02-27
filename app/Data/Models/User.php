@@ -3,10 +3,10 @@
 namespace App\Data\Models;
 
 use App\Data\Repositories\TiposUsuarios;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Venturecraft\Revisionable\RevisionableTrait;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'user_type_id', 'disabled_by_id', 'disabled_at'
+        'name', 'email', 'password', 'username', 'user_type_id', 'disabled_by_id', 'disabled_at',
     ];
 
     /**

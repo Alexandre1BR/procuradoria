@@ -92,6 +92,7 @@ class Andamentos extends Base
         } catch (\Exception $exception) {
             return;
         }
+
         return $item;
     }
 

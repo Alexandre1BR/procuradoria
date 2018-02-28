@@ -88,13 +88,10 @@ class Andamentos extends Base
     protected function toDate($item)
     {
         try {
-//            $item = Carbon::createFromFormat('d/m/Y', $item);
             $item = Carbon::createFromFormat('d/m/Y', $item)->format('Y-m-d');
-            //dd($item);
         } catch (\Exception $exception) {
             return;
         }
-
         return $item;
     }
 

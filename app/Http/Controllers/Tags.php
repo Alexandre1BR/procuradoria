@@ -10,7 +10,7 @@ class Tags extends Controller
     {
         return app(TagsRepository::class)->all()->map(function ($tag) {
             return [
-                'id' => $tag->name,
+                'id'   => $tag->name,
                 'name' => $tag->name,
                 'text' => $tag->name,
             ];

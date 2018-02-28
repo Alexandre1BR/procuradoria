@@ -66,6 +66,10 @@ class Andamentos extends Base
                 }
             });
 
+            $query->orWhereHas('processo', function ($query) use ($item) {
+                $query->whereRaw("lower(numero_judicial) like '%{$item}%'");
+            });
+
             $query->orWhereHas('tipoAndamento', function ($query) use ($item) {
                 $query->whereRaw("lower(nome) like '%{$item}%'");
             });

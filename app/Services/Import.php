@@ -173,12 +173,14 @@ class Import
 
                 // ORIGEM e ORIGEM POR EXTENSO
                 $tribunal = $this->tribunaisRepository
-                    ->firstOrCreate([
+                    ->firstOrCreate(
+                        [
                         'abreviacao' => $this->upper($value->origem ?: 'N/C'),
                     ],
                     [
                         'nome'       => $this->upper($value->origem_por_extenso ?: 'N/C'),
-                    ]);
+                    ]
+                    );
 
                 // AÇÃO - SIGLA e AÇÃO POR EXTENSO
                 $acao = $this->acoesRepository

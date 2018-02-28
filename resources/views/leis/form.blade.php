@@ -30,7 +30,7 @@
 
                 <div class="row">
                     <input name="id" type='hidden' value="{{$lei->id}}" id="id" >
-                    <input name="processo_id" type='hidden' value="{{$processo_id}}" id="processo_id" >
+                    <input name="processo_id" type='hidden' value="{{isset($processo_id) ? $processo_id : $lei->processo_id}}" id="processo_id" >
                     <div class="form-group col-md-4">
                         <label for="numero_lei">Número lei</label>
                         <input value="{{$lei->numero_lei}}" name="numero_lei" class="form-control" id="numero_lei" placeholder="Número Lei" @include('partials.readonly')>

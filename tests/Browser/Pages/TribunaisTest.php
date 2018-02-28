@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Browser;
 
 use Faker\Generator as Faker;
@@ -10,19 +9,16 @@ class TribunaisTest extends DuskTestCase
 {
     private static $nomeTribunal;
     private static $abreviacaoTribunal;
-
     public function init()
     {
         static::$nomeTribunal = app(Faker::class)->name;
         static::$abreviacaoTribunal = app(Faker::class)->name;
     }
-
     public function testInsert()
     {
         $this->init();
         $nomet = static::$nomeTribunal;
         $abrevt = static::$abreviacaoTribunal;
-
         $this->browse(function (Browser $browser) use ($nomet, $abrevt) {
             $browser->visit('/tribunais')
                 ->clickLink('Novo')
@@ -34,20 +30,22 @@ class TribunaisTest extends DuskTestCase
                 ->assertSee($abrevt);
         });
     }
-
     public function testValidation()
     {
-        $this->browse(function (Browser $browser) {
+        $nomet = static::$nomeTribunal;
+        $this->browse(function (Browser $browser) use ($nomet) {
             $browser->visit('/tribunais')
                 ->clickLink('Novo')
 //                ->type('nome', $nomet)
+//                ->assertSee('ASDADDDD')
+
 //                ->type('abreviacao', $abrevt)
+
                 ->press('Gravar')
                 ->assertSee('O campo Nome é obrigatório.')
                 ->assertSee('O campo Abreviação é obrigatório.');
         });
     }
-
     public function testWrongSearch()
     {
         $this->browse(function (Browser $browser) {
@@ -61,12 +59,10 @@ class TribunaisTest extends DuskTestCase
 //                ->assertSeeIn('table',$nomet);
         });
     }
-
     public function testRightSearch()
     {
         $nomet = static::$nomeTribunal;
         $abrevt = static::$abreviacaoTribunal;
-
         $this->browse(function (Browser $browser) use ($nomet, $abrevt) {
             $browser->visit('/tribunais')
 //                ->type('abreviacao', $abrevt)

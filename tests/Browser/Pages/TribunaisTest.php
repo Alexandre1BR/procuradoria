@@ -22,7 +22,6 @@ class TribunaisTest extends DuskTestCase
         $this->init();
         $nomet = static::$nomeTribunal;
         $abrevt = static::$abreviacaoTribunal;
-
         $this->browse(function (Browser $browser) use ($nomet, $abrevt) {
             $browser->visit('/tribunais')
                 ->clickLink('Novo')
@@ -37,11 +36,15 @@ class TribunaisTest extends DuskTestCase
 
     public function testValidation()
     {
-        $this->browse(function (Browser $browser) {
+        $nomet = static::$nomeTribunal;
+        $this->browse(function (Browser $browser) use ($nomet) {
             $browser->visit('/tribunais')
                 ->clickLink('Novo')
 //                ->type('nome', $nomet)
+//                ->assertSee('ASDADDDD')
+
 //                ->type('abreviacao', $abrevt)
+
                 ->press('Gravar')
                 ->assertSee('O campo Nome é obrigatório.')
                 ->assertSee('O campo Abreviação é obrigatório.');
@@ -66,7 +69,6 @@ class TribunaisTest extends DuskTestCase
     {
         $nomet = static::$nomeTribunal;
         $abrevt = static::$abreviacaoTribunal;
-
         $this->browse(function (Browser $browser) use ($nomet, $abrevt) {
             $browser->visit('/tribunais')
 //                ->type('abreviacao', $abrevt)

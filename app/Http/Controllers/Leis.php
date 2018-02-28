@@ -30,7 +30,9 @@ class Leis extends Controller
     {
         $repository->createFromRequest($request);
 
-        return redirect()->route('leis.index');
+        return redirect()->route('processos.show', ['processo_id' => $request->input('processo_id')])
+//            ->with('processo_id',$request->input('processo_id'))
+            ->with($this->getSuccessMessage());
     }
 
     public function index(LeisRepository $leis, Request $request)

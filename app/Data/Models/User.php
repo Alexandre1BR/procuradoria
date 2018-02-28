@@ -3,6 +3,7 @@
 namespace App\Data\Models;
 
 use App\Data\Repositories\TiposUsuarios;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Venturecraft\Revisionable\RevisionableTrait;
@@ -11,8 +12,10 @@ class User extends Authenticatable
 {
     use Notifiable;
     use RevisionableTrait;
+    //use SoftDeletes;
 
     protected $with = ['userType'];
+    //protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'user_type_id',
+        'name', 'email', 'password', 'username', 'user_type_id', 'disabled_by_id', 'disabled_at',
     ];
 
     /**

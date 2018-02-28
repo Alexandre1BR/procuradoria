@@ -55,6 +55,11 @@ abstract class Base
         return $this->model::where('abreviacao', $abreviacao)->first();
     }
 
+    public function findById($user_id)
+    {
+        return $this->model::where('id', $user_id)->first();
+    }
+
     public function new()
     {
         return new $this->model();

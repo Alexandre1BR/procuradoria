@@ -54,7 +54,7 @@ class Processo extends BaseModel
     ];
 
     protected $presenters = [
-        'data_distribuicao_formatado'
+        'data_distribuicao_formatado',
     ];
 
     protected $dataTypes = [

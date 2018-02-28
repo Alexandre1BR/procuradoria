@@ -54,7 +54,7 @@ class Processo extends BaseModel
     ];
 
     protected $presenters = [
-        'data_distribuicao_formatado'
+        'data_distribuicao_formatado',
     ];
 
     protected $dataTypes = [
@@ -80,6 +80,7 @@ class Processo extends BaseModel
         'observacao'                    => 'string',
         'data_arquivamento'             => 'date',
         'observacao_arquivamento'       => 'string',
+        'tags'                          => 'tags',
     ];
 
     public function getDataSemHoraAttribute()

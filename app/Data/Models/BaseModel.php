@@ -17,6 +17,8 @@ abstract class BaseModel extends Model implements HasPresenter
 
     protected $dataTypes = [];
 
+    protected $presenters = [];
+
     public static function getDataTypeOf($column)
     {
         $model = new static();
@@ -26,8 +28,24 @@ abstract class BaseModel extends Model implements HasPresenter
 
     public function getPresenterClass()
     {
-        //return static::class;
-        //return parent::class;
         return BasePresenter::class;
+    }
+
+    /**
+     * Convert the model's attributes to an array.
+     *
+     * @return array
+     */
+    public function attributesToArray()
+    {
+        $decorator = app('autopresenter');
+
+        $attributes = parent::attributesToArray();
+
+        foreach ($this->presenters as $key) {
+            $attributes[$key] = $decorator->decorate($this)->{$key};
+        }
+
+        return $attributes;
     }
 }

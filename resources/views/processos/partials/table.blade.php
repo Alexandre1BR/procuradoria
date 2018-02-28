@@ -117,7 +117,7 @@
             </td>
             <td width="10%">@{{ processo.numero_alerj }}</td>
             <td width="5%">@{{ processo.tribunal_nome }}</td>
-            <td width="5%">@{{ processo.data_distribuicao }}</td>
+            <td width="5%">@{{ processo.data_distribuicao_formatado }}</td>
             <td width="5%">@{{ processo.acao_nome }}</td>
             <td width="15%">@{{ processo.autor }}</td>
             <td width="15%">@{{ processo.objeto }}</td>

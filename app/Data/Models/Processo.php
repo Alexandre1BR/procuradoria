@@ -53,6 +53,10 @@ class Processo extends BaseModel
         'observacao_arquivamento',
     ];
 
+    protected $presenters = [
+        'data_distribuicao_formatado'
+    ];
+
     protected $dataTypes = [
         'numero_judicial'               => 'id',
         'numero_alerj'                  => 'id',

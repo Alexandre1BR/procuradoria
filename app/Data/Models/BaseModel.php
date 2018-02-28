@@ -4,6 +4,7 @@ namespace App\Data\Models;
 
 use App\Data\Presenters\BasePresenter;
 use Illuminate\Database\Eloquent\Model;
+use McCool\LaravelAutoPresenter\Facades\AutoPresenter;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use Venturecraft\Revisionable\RevisionableTrait;
 
@@ -31,19 +32,14 @@ abstract class BaseModel extends Model implements HasPresenter
         return BasePresenter::class;
     }
 
-    /**
-     * Convert the model's attributes to an array.
-     *
-     * @return array
-     */
     public function attributesToArray()
     {
-        $decorator = app('autopresenter');
-
         $attributes = parent::attributesToArray();
 
+        $decorated = AutoPresenter::decorate($this);
+
         foreach ($this->presenters as $key) {
-            $attributes[$key] = $decorator->decorate($this)->{$key};
+            $attributes[$key] = $decorated->{$key};
         }
 
         return $attributes;

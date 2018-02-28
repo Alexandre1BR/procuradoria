@@ -143,23 +143,18 @@ class Import
             return;
         }
 
+        $links = [];
+
         $this->command->info("Importing $file");
 
-        Cache::flush();
-        $data = Cache::remember('importExcel', 1, function () use ($file) {
-            return Excel::load($file, function ($reader) {
-            })->get();
+        $data = Excel::load($file, function ($reader) {
         });
 
-//        // Loop through all sheets
-//        $data->each(function($sheet) {
-//
-//            // Loop through all rows
-//            $sheet->each(function($row) {
-//                dump($row);
-//            });
-//
-//        });
+        foreach ($data->sheet(0)->toArray() as $key => $row) {
+            $links[trim($data->sheet(0)->getCell($cell = 'A'.($key+2))->getValue())] = $data->sheet(0)->getCell($cell)->getHyperlink()->getUrl();
+        }
+
+        $data = $data->get();
 
         if (!empty($data) && $data->count()) {
             foreach ($data[0] as $key => $value) {
@@ -256,6 +251,7 @@ class Import
                         'created_at'                                                       => now(),
                         'updated_at'                                                       => now(),
                         'observacao'                                                       => str_ireplace("\n", '', $obs),
+                        'link'                                                             => isset($links[$value->no_judicial]) && !empty($links[$value->no_judicial]) ? $links[$value->no_judicial] : null,
                     ];
             }
             $colunas =

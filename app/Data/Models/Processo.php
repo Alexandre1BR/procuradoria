@@ -80,6 +80,7 @@ class Processo extends BaseModel
         'observacao'                    => 'string',
         'data_arquivamento'             => 'date',
         'observacao_arquivamento'       => 'string',
+        'tags'                          => 'tags',
     ];
 
     public function getDataSemHoraAttribute()

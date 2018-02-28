@@ -112,6 +112,9 @@ class Processos extends Base
             case 'string':
                 $query->where(DB::raw("lower({$column})"), 'like', "%{$search}%");
                 break;
+            case 'tags':
+                $query->withAnyTags((array) $search);
+                break;
             case 'date':
                 $query->where($column, '=', $search);
                 break;

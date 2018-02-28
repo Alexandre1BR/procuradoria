@@ -4,9 +4,9 @@ namespace App\Data\Models;
 
 use App\Data\Presenters\BasePresenter;
 use Illuminate\Database\Eloquent\Model;
+use McCool\LaravelAutoPresenter\Facades\AutoPresenter;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use Venturecraft\Revisionable\RevisionableTrait;
-use McCool\LaravelAutoPresenter\Facades\AutoPresenter;
 
 abstract class BaseModel extends Model implements HasPresenter
 {

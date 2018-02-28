@@ -5,7 +5,6 @@ namespace App\Data\Repositories;
 use App\Data\Models\Andamento as AndamentoModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class Andamentos extends Base
 {
@@ -93,8 +92,9 @@ class Andamentos extends Base
             $item = Carbon::createFromFormat('d/m/Y', $item)->format('Y-m-d');
             //dd($item);
         } catch (\Exception $exception) {
-            return null;
+            return;
         }
+
         return $item;
     }
 

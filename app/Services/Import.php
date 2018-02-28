@@ -187,7 +187,6 @@ class Import
                         'nome'       => $this->upper($value->acao_por_extenso ?: 'N/C'),
                     ]);
 
-
                 //TÍTULO DO RELATOR
                 $tipo_relator = $this->tiposJuizesRepository->firstOrCreate(['nome' => $value->titulo_do_relator ?: 'N/C']);
 
@@ -237,12 +236,12 @@ class Import
 
                 $insert[] =
                     [
-                        'numero_judicial' => str_ireplace("\n", '', $value->no_judicial),
-                        'numero_alerj'    => str_ireplace("\n", '', $value->no_alerj),
-                        'tribunal_id'     => str_ireplace("\n", '', $tribunal->id), //Origem
-                        'vara'            => str_ireplace("\n", '', $value->orgao_julgador),
-                        'acao_id'         => str_ireplace("\n", '', $acao->id),
-                        'apensos_obs'     => str_ireplace("\n", '', $value->apensos),
+                        'numero_judicial'                                                  => str_ireplace("\n", '', $value->no_judicial),
+                        'numero_alerj'                                                     => str_ireplace("\n", '', $value->no_alerj),
+                        'tribunal_id'                                                      => str_ireplace("\n", '', $tribunal->id), //Origem
+                        'vara'                                                             => str_ireplace("\n", '', $value->orgao_julgador),
+                        'acao_id'                                                          => str_ireplace("\n", '', $acao->id),
+                        'apensos_obs'                                                      => str_ireplace("\n", '', $value->apensos),
                         (($value->titulo_do_relator == 'JUIZ') ? 'juiz_id' : 'relator_id') => str_ireplace("\n", '', $relator_juiz->id),
                         'autor'                                                            => str_ireplace("\n", '', $value->autor),
                         'reu'                                                              => str_ireplace("\n", '', $value->reu),

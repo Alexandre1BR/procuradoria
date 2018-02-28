@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Models\User;
 use App\Data\Models\User as UserModel;
 use App\Data\Repositories\Users as UsersRepository;
 use Illuminate\Support\Facades\Auth;
@@ -38,23 +37,24 @@ class Users extends Controller
 
     public function index()
     {
-        return view('users.index')
-                ->with('users', $this->usersRepository->all());
+        return view('users.index')->with('users', $this->usersRepository->all());
     }
 
-    public function alterarStatus($email)
+    public function enable($id, $enable = true)
     {
-        $model = $this->usersRepository->findUserByEmail($email);
+        $model = $this->usersRepository->findUserById($id);
 
-        if ($model->disabled_by_id == null) {
-            $model->disabled_at = now();
-            $model->disabled_by_id = Auth::user()->id;
-        } else {
-            $model->disabled_at = null;
-            $model->disabled_by_id = null;
-        }
+        $model->disabled_at = $enable ? null : now();
+        $model->disabled_by_id = $enable ? null : Auth::user()->id;
+
         $model->save();
 
-        return view('users.index')->with('users', $this->usersRepository->all());
+        return redirect()->action('Users@index')->with('users', $this->usersRepository->all());
+        //return $this->index();
+    }
+
+    public function disable($id)
+    {
+        return $this->enable($id, false);
     }
 }

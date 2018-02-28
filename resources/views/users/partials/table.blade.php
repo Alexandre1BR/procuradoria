@@ -5,8 +5,7 @@
         <th>Email</th>
         <th>Login</th>
         <th>Tipo Usuário</th>
-        <th>Habilitado/Desabilitado</th>
-        <th>&nbsp;</th>
+        <th>Status</th>
     </tr>
     </thead>
     @forelse ($users as $user)
@@ -15,12 +14,16 @@
             <td>{{ $user->email }}</td>
             <td>{{ $user->username }}</td>
             <td>{{ $user->userType->nome }}</td>
-            <td>{{ $user->disabled_at ? "Desabilitado" : "Habilitado" }}</td>
-            <td>
-                <a href="{{ route('users.alterarStatus',['user_email'=>$user->email]) }}" class="btn btn-primary pull-right">
-                    <i class="fa fa-plus"></i>
-                    {{ $user->disabled_at ? "Desabilitado" : "Habilitado" }}
-                </a>
+            <td class="text-center">
+                @if($user->disabled_at == null)
+                    <a href="{{ route('users.disable',['id'=>$user->id]) }}" class="btn btn-danger pull-right">
+                        Desabilitar
+                    </a>
+                @else
+                    <a href="{{ route('users.enable',['id'=>$user->id]) }}" class="btn btn-primary pull-right" >
+                        Habilitar
+                    </a>
+                @endif
             </td>
         </tr>
     @empty

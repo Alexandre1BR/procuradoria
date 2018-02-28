@@ -219,3 +219,5 @@
 
     @include('partials.save-button')
 </form>
+
+[{"id":1,"name":{"pt_BR":"trabalho"},"slug":{"pt_BR":"trabalho"},"type":null,"order_column":1,"created_at":"2018-02-28 16:06:10","updated_at":"2018-02-28 16:06:10","text":null,"value":1},{"id":2,"name":{"pt_BR":"rio de janeiro"},"slug":{"pt_BR":"rio-de-janeiro"},"type":null,"order_column":2,"created_at":"2018-02-28 16:06:10","updated_at":"2018-02-28 16:06:10","text":null,"value":2},{"id":3,"name":{"pt_BR":"alerj"},"slug":{"pt_BR":"alerj"},"type":null,"order_column":3,"created_at":"2018-02-28 16:06:10","updated_at":"2018-02-28 16:06:10","text":null,"value":3}]

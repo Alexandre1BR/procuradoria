@@ -8,6 +8,12 @@ class Tags extends Controller
 {
     public function index()
     {
-        return app(TagsRepository::class)->all();
+        return app(TagsRepository::class)->all()->map(function ($tag) {
+            return [
+                'id' => $tag->name,
+                'name' => $tag->name,
+                'text' => $tag->name,
+            ];
+        });
     }
 }

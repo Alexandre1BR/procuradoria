@@ -59,17 +59,16 @@ class Processos extends Base
         return Processo::pluck('id');
     }
 
+    private function listTags($tags)
+    {
+        // dd($tags);
+    }
+
     public function search(Request $request)
     {
         info($request);
 
-//        $starttime = microtime(true);
-
         $this->searchFromRequest($request->get('pesquisa'));
-
-//        $endtime = microtime(true);
-//        $timediff = $endtime - $starttime;
-//        dump($timediff, 'Teste');
 
         return $this->searchFromRequest($request->get('pesquisa'));
     }
@@ -178,8 +177,6 @@ class Processos extends Base
             });
         });
 
-//        \DB::listen(function($query) { dump($query->sql); dump($query->bindings); });
-
         return $query->orderBy('updated_at', 'desc');
     }
 
@@ -260,6 +257,8 @@ class Processos extends Base
             $processo['estagiario_nome'] = is_null($processo->estagiario) ? 'N/C' : $processo->estagiario->name;
 
             $processo['show_url'] = route('processos.show', ['id' => $processo['id']]);
+
+            $processo['tags'] = $this->listTags($processo['tags']);
 
             return $processo;
         })->toArray();

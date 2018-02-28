@@ -41,7 +41,7 @@ class Home extends Controller
     public function index(Request $request)
     {
         info($request->all());
-
+        //dd($request->expectsJson());
         return $request->expectsJson()
             ? $this->processosRepository->filter($request)
             : $this->buildView($request);

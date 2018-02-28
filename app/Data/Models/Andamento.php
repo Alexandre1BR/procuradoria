@@ -28,6 +28,7 @@ class Andamento extends BaseModel
      *
      * @var array
      */
+
     protected $dates = [
         'data_prazo',
         'data_entrega',

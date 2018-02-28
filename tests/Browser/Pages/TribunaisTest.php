@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Browser;
 
 use Faker\Generator as Faker;
@@ -9,11 +10,13 @@ class TribunaisTest extends DuskTestCase
 {
     private static $nomeTribunal;
     private static $abreviacaoTribunal;
+
     public function init()
     {
         static::$nomeTribunal = app(Faker::class)->name;
         static::$abreviacaoTribunal = app(Faker::class)->name;
     }
+
     public function testInsert()
     {
         $this->init();
@@ -30,6 +33,7 @@ class TribunaisTest extends DuskTestCase
                 ->assertSee($abrevt);
         });
     }
+
     public function testValidation()
     {
         $nomet = static::$nomeTribunal;
@@ -46,6 +50,7 @@ class TribunaisTest extends DuskTestCase
                 ->assertSee('O campo Abreviação é obrigatório.');
         });
     }
+
     public function testWrongSearch()
     {
         $this->browse(function (Browser $browser) {
@@ -59,6 +64,7 @@ class TribunaisTest extends DuskTestCase
 //                ->assertSeeIn('table',$nomet);
         });
     }
+
     public function testRightSearch()
     {
         $nomet = static::$nomeTribunal;

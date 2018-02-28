@@ -2,12 +2,11 @@
 
 namespace Tests\Browser;
 
-use App\Data\Repositories\Tribunais;
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
-use App\Data\Repositories\Tribunais as TribunaisRepository;
 use App\Data\Repositories\TiposJuizes as TiposJuizesRepository;
+use App\Data\Repositories\Tribunais as TribunaisRepository;
 use Faker\Generator as Faker;
+use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 
 class JuizesTest extends DuskTestCase
 {
@@ -42,6 +41,7 @@ class JuizesTest extends DuskTestCase
                 ->assertSee($nomej);
         });
     }
+
     public function testValidation()
     {
         $this->browse(function (Browser $browser) {
@@ -58,6 +58,7 @@ class JuizesTest extends DuskTestCase
                 ->assertSee('O campo Tipo juiz é obrigatório.');
         });
     }
+
     public function testWrongSearch()
     {
         $this->browse(function (Browser $browser) {
@@ -71,6 +72,7 @@ class JuizesTest extends DuskTestCase
 //                ->assertSeeIn('table',$nomet);
         });
     }
+
     public function testRightSearch()
     {
         $nomej = static::$nomeJuiz;

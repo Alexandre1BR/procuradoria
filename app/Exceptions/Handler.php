@@ -28,9 +28,11 @@ class Handler extends ExceptionHandler
 
     private function handlerError($exception)
     {
-        if (!app()->environment('local') && $this->isPHPException($exception)) {
-            return view('errors.500');
-        }
+//        if (!app()->environment('local') && $this->isPHPException($exception)) {
+//            return view('errors.500');
+//        }
+
+        return false;
     }
 
     private function isPHPException($exception)

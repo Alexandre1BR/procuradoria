@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: ovalenca
  * Date: 20/02/2018
- * Time: 11:02
+ * Time: 11:02.
  */
 
 namespace Tests\Feature;

@@ -258,7 +258,7 @@
         <div class="col-md-12">
             <hr/>
         </div>
-
+        @if(isset($processo) && !is_null($processo->id))
         <div class="col-md-4">
             <div class="form-group">
                 <label for="data_arquivamento">Data do arquivamento</label>
@@ -284,7 +284,7 @@
         <div class="col-md-12">
             <hr/>
         </div>
-
+        @endif
         <div class="col-md-12">
             <div class="form-group">
                 <label for="tags">Tags</label>

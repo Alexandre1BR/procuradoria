@@ -27,6 +27,11 @@ class Users extends Base
         return User::where('email', $email)->first();
     }
 
+    public function findUserById($id)
+    {
+        return User::find($id);
+    }
+
     private function getTipoUsuario($username)
     {
         return TipoUsuario::where('nome', $this->authorization->getUserProfiles($username)->first())->first();
@@ -58,9 +63,9 @@ class Users extends Base
         return $this->makeResultForSelect($this->model::type($type)->get(), 'name');
     }
 
-    public function search(Request $request = null)
+    public function all()
     {
-        return User::all();
-        //return User::all()->history()->withTrashed()->get();
+        //return User::all();
+        return User::orderBy('name')->get();
     }
 }

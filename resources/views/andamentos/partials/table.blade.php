@@ -23,14 +23,15 @@
     </tr>
     </thead>
 
+
     @forelse ($andamentos as $andamento)
         <tr>
             <td><a href="{{ route('andamentos.show',['id' => $andamento->id]) }}">{{ $andamento->processo->numero_judicial }}</a></td>
             <td>{{ $andamento->tipoAndamento->nome }}</td>
             <td>{{ $andamento->tipoEntrada->nome }}</td>
             <td>{{ $andamento->tipoPrazo->nome }}</td>
-            <td>{{ $andamento->data_prazo }}</td>
-            <td>{{ $andamento->data_entrega }}</td>
+            <td>{{ $andamento->data_prazo_formatado }}</td>
+            <td>{{ $andamento->data_entrega_formatado }}</td>
             <td>{{ $andamento->observacoes }}</td>
         </tr>
     @empty

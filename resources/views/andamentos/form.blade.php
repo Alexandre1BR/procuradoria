@@ -110,7 +110,7 @@
                         @if(!is_null(old('data_prazo')))
                             <input  value="{{old('data_prazo')}}"  type="date"  name="data_prazo" class="form-control" id="data_prazo" placeholder="Data Prazo" @include('partials.disabled') >
                         @else
-                            <input  value="{{$andamento->data_prazo}}"  type="date"  name="data_prazo" class="form-control" id="data_prazo" placeholder="Data Prazo" @include('partials.disabled') >
+                            <input  value="{{Carbon\Carbon::createFromFormat('d/m/Y', $andamento->data_prazo)->format('Y-m-d')}}"  type="date"  name="data_prazo" class="form-control" id="data_prazo" placeholder="Data Prazo" @include('partials.disabled') >
                         @endif
                     </div>
                 </div>
@@ -121,7 +121,7 @@
                         @if(!is_null(old('data_entrega')))
                             <input  value="{{old('data_entrega')}}" type="date" name="data_entrega" class="form-control" id="data_entrega" placeholder="Data Entrega" @include('partials.disabled')>
                         @else
-                            <input  value="{{$andamento->data_entrega}}" type="date" name="data_entrega" class="form-control" id="data_entrega" placeholder="Data Entrega" @include('partials.disabled')>
+                            <input  value="{{Carbon\Carbon::createFromFormat('d/m/Y', $andamento->data_entrega)->format('Y-m-d')}}" type="date" name="data_entrega" class="form-control" id="data_entrega" placeholder="Data Entrega" @include('partials.disabled')>
                         @endif
                     </div>
                 </div>

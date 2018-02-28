@@ -95,7 +95,7 @@ class Processos extends Base
             });
         }
 
-        return $this->transform($query->get());
+        return dump($this->transform($query->get()));
     }
 
     /**

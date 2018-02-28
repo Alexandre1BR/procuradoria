@@ -11,6 +11,12 @@ class Andamentos extends Base
 {
     protected $model = AndamentoModel::class;
 
+    protected $dataTypes = [
+        'data_prazo'   => 'date',
+        'data_entrega' => 'date',
+        'observacoes'  => 'string',
+    ];
+
     protected function makeFeedTitle($andamento)
     {
         return "\n".
@@ -36,7 +42,7 @@ class Andamentos extends Base
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function searchFromRequest($search = null)
+    public function searchFromRequest($search = null, $query = null)
     {
         $search = is_null($search)
             ? collect()
@@ -44,52 +50,48 @@ class Andamentos extends Base
                 return strtolower($item);
             });
 
-        $columns = collect([
-//            'numero_judicial' => 'string',
-//            'numero_alerj'    => 'string',
-//            'vara'            => 'string',
-//            //'origem_complemento' => 'string,
-//            'apensos_obs'       => 'string',
-//            'autor'             => 'string',
-//            'reu'               => 'string',
-//            'objeto'            => 'string',
-//            'merito'            => 'string',
-//            'liminar'           => 'string',
-//            'recurso'           => 'string',
-            //'tipo_meio'         => 'string',
-              'data_prazo'   => 'date',
-              'data_entrega' => 'date',
-              'observacoes'  => 'string',
-        ]);
+        $columns = collect($this->dataTypes);
 
-        $query = AndamentoModel::query();
+        $query = $query ?: $this->makeAndamentoQuery();
 
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
                 if ($type === 'string') {
-                    $query->orWhere(DB::raw("lower({$column})"), 'like', '%'.$item.'%');
+                    $query->orWhere($column, 'ilike', '%'.$item.'%');
                 } else {
-                    if ($this->isDate($item)) {
-                        $query->orWhere($column, '=', $item);
+                    $ifdate = $this->toDate($item);
+                    if ($ifdate != null) {
+                        $query->orWhereDate($column, '=', $ifdate);
                     }
                 }
             });
-        });
 
-//        \DB::listen(function($query) { dump($query->sql); dump($query->bindings); });
+            $query->orWhereHas('tipoAndamento', function ($query) use ($item) {
+                $query->whereRaw("lower(nome) like '%{$item}%'");
+            });
+
+            $query->orWhereHas('tipoEntrada', function ($query) use ($item) {
+                $query->whereRaw("lower(nome) like '%{$item}%'");
+            });
+
+            $query->orWhereHas('tipoPrazo', function ($query) use ($item) {
+                $query->whereRaw("lower(nome) like '%{$item}%'");
+            });
+        });
 
         return $query->get();
     }
 
-    protected function isDate($item)
+    protected function toDate($item)
     {
         try {
-            Carbon::createFromFormat('d/m/Y', $item);
+//            $item = Carbon::createFromFormat('d/m/Y', $item);
+            $item = Carbon::createFromFormat('d/m/Y', $item)->format('Y-m-d');
+            //dd($item);
         } catch (\Exception $exception) {
-            return false;
+            return null;
         }
-
-        return true;
+        return $item;
     }
 
     public function feedForFullcalendar()
@@ -104,5 +106,12 @@ class Andamentos extends Base
                 'url'         => route('processos.show', ['id' => $andamento->processo->id]),
             ];
         });
+    }
+
+    public function makeAndamentoQuery()
+    {
+        return (new AndamentoModel())
+            ->with(['tipoAndamento', 'tipoEntrada', 'tipoPrazo'])
+            ->orderBy('updated_at', 'desc');
     }
 }

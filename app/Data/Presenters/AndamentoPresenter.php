@@ -22,8 +22,22 @@ class AndamentoPresenter extends BasePresenter
 
     public function data_entrega()
     {
-        $data_entrega = $this->wrappedObject->data_prazo;
+        $data_entrega = $this->wrappedObject->data_entrega;
 
         return !is_null($data_entrega) ? Carbon::createFromFormat('Y-m-d H:i:s', $data_entrega)->format('Y-m-d') : null;
+    }
+
+    public function data_prazo_formatado()
+    {
+        $data_prazo = $this->wrappedObject->data_prazo;
+
+        return !is_null($data_prazo) ? Carbon::createFromFormat('Y-m-d H:i:s', $data_prazo)->format('d/m/Y') : null;
+    }
+
+    public function data_entrega_formatado()
+    {
+        $data_entrega = $this->wrappedObject->data_entrega;
+
+        return !is_null($data_entrega) ? Carbon::createFromFormat('Y-m-d H:i:s', $data_entrega)->format('d/m/Y') : null;
     }
 }

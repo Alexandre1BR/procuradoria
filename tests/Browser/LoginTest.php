@@ -6,8 +6,8 @@ use App\Data\Repositories\Users as UsersRepository;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class LoginTest extends DuskTestCase
-{
+//class LoginTest extends DuskTestCase
+//{
 //    public function testWrongLogin()
 //    {
 //        $this->browse(function (Browser $browser) {
@@ -19,8 +19,8 @@ class LoginTest extends DuskTestCase
 //        });
 //    }
 
-    public function testRightLoginAndLogout()
-    {
+//    public function testRightLoginAndLogout()
+//    {
         /*  $user = 'transporteop';
           $this->browse(function (Browser $browser) use ($user) {
               $browser->loginAs(app(UsersRepository::class)->findUserByEmail($user.'@alerj.rj.gov.br'))
@@ -34,5 +34,5 @@ class LoginTest extends DuskTestCase
                   ->clickLink('Login')
                   ->assertPathIs('/login');
           });*/
-    }
-}
+//    }
+//}

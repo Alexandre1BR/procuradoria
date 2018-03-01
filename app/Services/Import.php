@@ -143,23 +143,18 @@ class Import
             return;
         }
 
+        $links = [];
+
         $this->command->info("Importing $file");
 
-        Cache::flush();
-        $data = Cache::remember('importExcel', 1, function () use ($file) {
-            return Excel::load($file, function ($reader) {
-            })->get();
+        $data = Excel::load($file, function ($reader) {
         });
 
-//        // Loop through all sheets
-//        $data->each(function($sheet) {
-//
-//            // Loop through all rows
-//            $sheet->each(function($row) {
-//                dump($row);
-//            });
-//
-//        });
+        foreach ($data->sheet(0)->toArray() as $key => $row) {
+            $links[trim($data->sheet(0)->getCell($cell = 'A'.($key + 2))->getValue())] = $data->sheet(0)->getCell($cell)->getHyperlink()->getUrl();
+        }
+
+        $data = $data->get();
 
         if (!empty($data) && $data->count()) {
             foreach ($data[0] as $key => $value) {
@@ -173,14 +168,11 @@ class Import
 
                 // ORIGEM e ORIGEM POR EXTENSO
                 $tribunal = $this->tribunaisRepository
-                    ->firstOrCreate(
-                        [
-                        'abreviacao' => $this->upper($value->origem ?: 'N/C'),
-                    ],
-                    [
+                    ->firstOrCreate([
+                        'abreviacao' => $this->upper($value->origem),
+                    ], [
                         'nome'       => $this->upper($value->origem_por_extenso ?: 'N/C'),
-                    ]
-                    );
+                    ]);
 
                 // AÇÃO - SIGLA e AÇÃO POR EXTENSO
                 $acao = $this->acoesRepository
@@ -189,10 +181,6 @@ class Import
                     ], [
                         'nome'       => $this->upper($value->acao_por_extenso ?: 'N/C'),
                     ]);
-
-                //Tipo_Relator → (juiz, Ministro, Desembargador, N/C)
-                //$tipo_relator = $this->ajustaTipoRelator($value->titulo_do_relator);
-                //$tipo_relator = $this->tiposJuizesRepository->firstOrCreate(['nome' => $tipo_relator]);
 
                 //TÍTULO DO RELATOR
                 $tipo_relator = $this->tiposJuizesRepository->firstOrCreate(['nome' => $value->titulo_do_relator ?: 'N/C']);
@@ -215,11 +203,6 @@ class Import
                 } else {
                     $procurador = null;
                 }
-//                    $procurador = !is_null($value->procurador)
-//                        ? !is_null($this->buscaUsuario($value->procurador))
-//                            ?   $this->buscaUsuario($value->procurador)->id
-//                            :   $obs = $obs . 'Procurador: ' . $value->procurador . '\n'
-//                        : null;
 
                 if (!is_null($value->estagiario)) {
                     if (!is_null($this->buscaUsuario($value->estagiario, 2))) {
@@ -243,55 +226,32 @@ class Import
                     $assessor = null;
                 }
 
-                //$this->command->line("{$value->no_judicial} - $value->no_alerj");
-
-//                if(is_null($value->no_judicial)){
-//                    $value->no_judicial = 'N/C';
-//                }
-//
-//                if(is_null($value->no_alerj)){
-//                    $value->no_alerj = 'N/C';
-//                }
-//
-//                if(is_null($value->vara)){
-//                    $value->vara = 'N/C';
-//                }
-//
-//                if(is_null($value->autor)){
-//                    $value->autor = 'N/C';
-//                }
-//
-//                if(is_null($value->reu)){
-//                    $value->reu = 'N/C';
-//                }
                 $tipo_meio = $this->ajustaTipoMeio($value->tipo);
-                $tipo_meio = $this->meiosRepository
-                    ->firstOrCreate(['nome' => $tipo_meio]);
+                $tipo_meio = $this->meiosRepository->firstOrCreate(['nome' => $tipo_meio]);
 
                 $insert[] =
                     [
-                        'numero_judicial' => str_ireplace("\n", '', $value->no_judicial),
-                        'numero_alerj'    => str_ireplace("\n", '', $value->no_alerj),
-                        'tribunal_id'     => str_ireplace("\n", '', $tribunal->id), //Origem
-                        'vara'            => str_ireplace("\n", '', $value->orgao_julgador),
-                        'acao_id'         => str_ireplace("\n", '', $acao->id),
-                        //'relator_id'      => str_ireplace("\n", '', $relator_juiz->id),
-                        'apensos_obs'     => str_ireplace("\n", '', $value->apensos),
-                        //'juiz_id'    => str_ireplace("\n", '', $relator_juiz->id)
-                        (($value->titulo_do_relator == 'JUIZ' or $value->titulo_do_relator == 'JUIZA') ? 'juiz_id' : 'relator_id') => str_ireplace("\n", '', $relator_juiz->id),
-                        'autor'                                                                                                    => str_ireplace("\n", '', $value->autor),
-                        'reu'                                                                                                      => str_ireplace("\n", '', $value->reu),
-                        'objeto'                                                                                                   => str_ireplace("\n", '', $value->objeto),
-                        'merito'                                                                                                   => str_ireplace("\n", '', $value->merito),
-                        'liminar'                                                                                                  => str_ireplace("\n", '', $value->liminar),
-                        'recurso'                                                                                                  => str_ireplace("\n", '', $value->recurso),
-                        'procurador_id'                                                                                            => $procurador,
-                        'estagiario_id'                                                                                            => $estagiario,
-                        'assessor_id'                                                                                              => $assessor,
-                        'tipo_meio_id'                                                                                             => str_ireplace("\n", '', $tipo_meio->id),
-                        'created_at'                                                                                               => now(),
-                        'updated_at'                                                                                               => now(),
-                        'observacao'                                                                                               => str_ireplace("\n", '', $obs),
+                        'numero_judicial'                                                  => str_ireplace("\n", '', $value->no_judicial),
+                        'numero_alerj'                                                     => str_ireplace("\n", '', $value->no_alerj),
+                        'tribunal_id'                                                      => str_ireplace("\n", '', $tribunal->id), //Origem
+                        'vara'                                                             => str_ireplace("\n", '', $value->orgao_julgador),
+                        'acao_id'                                                          => str_ireplace("\n", '', $acao->id),
+                        'apensos_obs'                                                      => str_ireplace("\n", '', $value->apensos),
+                        (($value->titulo_do_relator == 'JUIZ') ? 'juiz_id' : 'relator_id') => str_ireplace("\n", '', $relator_juiz->id),
+                        'autor'                                                            => str_ireplace("\n", '', $value->autor),
+                        'reu'                                                              => str_ireplace("\n", '', $value->reu),
+                        'objeto'                                                           => str_ireplace("\n", '', $value->objeto),
+                        'merito'                                                           => str_ireplace("\n", '', $value->merito),
+                        'liminar'                                                          => str_ireplace("\n", '', $value->liminar),
+                        'recurso'                                                          => str_ireplace("\n", '', $value->recurso),
+                        'procurador_id'                                                    => $procurador,
+                        'estagiario_id'                                                    => $estagiario,
+                        'assessor_id'                                                      => $assessor,
+                        'tipo_meio_id'                                                     => str_ireplace("\n", '', $tipo_meio->id),
+                        'created_at'                                                       => now(),
+                        'updated_at'                                                       => now(),
+                        'observacao'                                                       => str_ireplace("\n", '', $obs),
+                        'link'                                                             => isset($links[$value->no_judicial]) && !empty($links[$value->no_judicial]) ? $links[$value->no_judicial] : null,
                     ];
             }
             $colunas =

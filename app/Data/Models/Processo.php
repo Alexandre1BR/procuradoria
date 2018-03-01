@@ -51,6 +51,7 @@ class Processo extends BaseModel
         'observacao',
         'data_arquivamento',
         'observacao_arquivamento',
+        'link',
     ];
 
     protected $presenters = [
@@ -81,6 +82,7 @@ class Processo extends BaseModel
         'data_arquivamento'             => 'date',
         'observacao_arquivamento'       => 'string',
         'tags'                          => 'tags',
+        'link'                          => 'link',
     ];
 
     public function getDataSemHoraAttribute()

@@ -97,6 +97,7 @@
 <table id="example" class="table table-striped table-bordered visible-lg" cellspacing="0" width="100%">
     <thead>
         <tr>
+            <th>Link</th>
             <th>Número judicial</th>
             <th>Número ALERJ</th>
             <th>Tribunal</th>
@@ -112,6 +113,11 @@
 
     <tbody>
         <tr v-if="tables.processos" v-for="processo in tables.processos">
+            <td>
+                <a class="btn btn-success" v-if="processo.link" :href="processo.link" target="_blank">
+                    <i class="fa fa-external-link-square"></i>
+                </a>
+            </td>
             <td width="15%">
                 <a :href="processo.show_url">@{{ processo.numero_judicial }}</a>
             </td>

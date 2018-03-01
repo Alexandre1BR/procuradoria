@@ -213,7 +213,7 @@ class Import
                     } else {
                         $estagiario = null;
                         $obs = $obs.'Estagiário: '.$value->estagiario.', ';
-                       // $this->command->line("{$value->no_judicial} - $value->no_alerj - $obs");
+                        // $this->command->line("{$value->no_judicial} - $value->no_alerj - $obs");
                     }
                 } else {
                     $estagiario = null;

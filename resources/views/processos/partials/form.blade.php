@@ -256,6 +256,14 @@
         </div>
 
         <div class="col-md-12">
+            <div class="form-group">
+                <label for="link">Link</label>
+                <textarea name="link" class="form-control" @include('partials.readonly') id="link"
+                          placeholder="Informe o link do processo">{{is_null(old('link'))? $processo->link : old('link')}}</textarea>
+            </div>
+        </div>
+
+        <div class="col-md-12">
             <hr/>
         </div>
         @if(isset($processo) && !is_null($processo->id))

@@ -51,6 +51,7 @@ class Processo extends BaseModel
         'observacao',
         'data_arquivamento',
         'observacao_arquivamento',
+        'link',
     ];
 
     protected $presenters = [

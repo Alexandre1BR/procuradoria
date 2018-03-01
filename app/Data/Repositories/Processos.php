@@ -41,6 +41,7 @@ class Processos extends Base
         //'tipo_meio'         => 'string',
         'data_distribuicao' => 'date',
         'observacao'        => 'string',
+        'link'        => 'string',
     ];
 
     protected function toDate($item)

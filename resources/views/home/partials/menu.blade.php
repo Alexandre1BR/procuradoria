@@ -14,6 +14,7 @@
         <li><a href="{{ route('tribunais.index') }}">Tribunais</a></li>
         <li><a href="{{ route('juizes.index') }}">Juizes</a></li>
         <li><a href="{{ route('acoes.index') }}">Acoes</a></li>
+        <li><a href="{{ route('users.index') }}">Usuários</a></li>
     </ul>
 </li>
 

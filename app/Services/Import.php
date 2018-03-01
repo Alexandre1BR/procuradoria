@@ -163,9 +163,12 @@ class Import
 
         if (!empty($data) && $data->count()) {
             foreach ($data[0] as $key => $value) {
-                if (empty($value->no_judicial)) {
+                if (empty($value->no_judicial) or starts_with($value->estagiario, 'RETIRAR')) {
+                    $this->command->line("{$value->no_judicial} - $value->no_alerj - $value->estagiario");
                     continue;
                 }
+
+                //$this->command->line("{$value->no_judicial} - $value->no_alerj");
 
                 $value = $this->cleanAndNormalize($value);
 
@@ -216,6 +219,7 @@ class Import
                     } else {
                         $estagiario = null;
                         $obs = $obs.'Estagiário: '.$value->estagiario.', ';
+                       // $this->command->line("{$value->no_judicial} - $value->no_alerj - $obs");
                     }
                 } else {
                     $estagiario = null;
@@ -227,6 +231,7 @@ class Import
                     } else {
                         $assessor = null;
                         $obs = $obs.'Assessor: '.$value->assessor.', ';
+                        //$this->command->line("{$value->no_judicial} - $value->no_alerj - $obs");
                     }
                 } else {
                     $assessor = null;
@@ -318,7 +323,6 @@ class Import
                             ]
                         );
                     }
-                    //dump($name);
                 }
 
                 $this->command->info('USERS: import was successful.');

@@ -151,7 +151,7 @@ class Import
         });
 
         foreach ($data->sheet(0)->toArray() as $key => $row) {
-            $links[trim($data->sheet(0)->getCell($cell = 'A'.($key+2))->getValue())] = $data->sheet(0)->getCell($cell)->getHyperlink()->getUrl();
+            $links[trim($data->sheet(0)->getCell($cell = 'A'.($key + 2))->getValue())] = $data->sheet(0)->getCell($cell)->getHyperlink()->getUrl();
         }
 
         $data = $data->get();

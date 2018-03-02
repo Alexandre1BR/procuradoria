@@ -62,7 +62,6 @@ class TribunaisTest extends DuskTestCase
         });
     }
 
-
     public function testValidation()
     {
         $nomet = static::$nomeTribunal;

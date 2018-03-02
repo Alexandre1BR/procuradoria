@@ -5,10 +5,10 @@ namespace Tests\Browser;
 use App\Data\Repositories\Processos as ProcessosRepository;
 use App\Data\Repositories\TiposAndamentos as TiposAndamentosRepository;
 use App\Data\Repositories\TiposPrazos as TiposPrazosRepository;
+use Carbon\Carbon;
 use Faker\Generator as Faker;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Carbon\Carbon;
 
 class AndamentosTest extends DuskTestCase
 {

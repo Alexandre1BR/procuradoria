@@ -12,7 +12,7 @@
                     @include(
                         'layouts.partials.search-form',
                         [
-                            'routeSearch' => 'acoes.index',
+                            'routeSearch' => 'agenda.index',
                             'routeCreate' => 'andamentos.create',
                         ]
                     )

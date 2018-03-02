@@ -23,7 +23,7 @@
         <div class="panel-body">
             @include('partials.alerts')
 
-            <form action="{{ route('andamentos.store') }}" method="POST">
+            <form name="formulario" id="formulario" action="{{ route('andamentos.store') }}" method="POST">
                 {{ csrf_field() }}
                 <input type="hidden" name="id" id="id" value="{{$andamento->id}}">
                 {{--{{dump($andamento->id)}}--}}

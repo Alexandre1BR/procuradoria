@@ -1,4 +1,4 @@
-<form id="processoForm" action="{{ route($isFilter ? 'home.filter' : 'processos.store') }}" method="POST">
+<form name="formulario" id="formulario" action="{{ route($isFilter ? 'home.filter' : 'processos.store') }}" method="POST">
     {{ csrf_field() }}
 
     @if (isset($processo))

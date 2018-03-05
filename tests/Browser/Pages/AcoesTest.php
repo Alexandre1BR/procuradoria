@@ -80,4 +80,25 @@ class AcoesTest extends DuskTestCase
                 ->assertSeeIn('#acoesTable', $abreviacaoA);
         });
     }
+
+    public function testAlter()
+    {
+        $nomeA = static::$nomeAcao;
+        $abreviacaoA = static::$abreviacaoAcao;
+        $this->browse(function (Browser $browser) use ($nomeA, $abreviacaoA) {
+            $browser->visit('/acoes')
+                ->clickLink($nomeA)
+//                ->screenshot('1')
+                ->click('#editar')
+                ->type('nome', '*'.$nomeA.'*')
+                ->type('abreviacao', '*'.$abreviacaoA.'*')
+//                ->screenshot('2')
+                ->press('Gravar')
+//                ->screenshot('3')
+                ->assertSee('Gravado com sucesso')
+                ->assertSee('*'.$nomeA.'*')
+                ->assertSee('*'.$abreviacaoA.'*');
+//                ->screenshot('4');
+        });
+    }
 }

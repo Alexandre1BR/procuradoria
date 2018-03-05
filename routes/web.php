@@ -4,6 +4,11 @@ use App\Services\Routes;
 
 Auth::routes();
 
+Route::get('/import', function () {
+    ini_set('max_execution_time', 300);
+    Artisan::call('procuradoria:import:processos', ['usersFile' => '/home/vagrant/code/alerj/procuradoria/u.xlsx', 'processesFile' => '/home/vagrant/code/alerj/procuradoria/procv2.xlsx']);
+});
+
 Route::group(['middleware' => app(Routes::class)->makeAppRootRouteMiddlewares()], function () {
     require __DIR__.'/services/home.php';
 

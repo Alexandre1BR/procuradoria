@@ -36,11 +36,6 @@ class Andamentos extends Base
         return $this->searchFromRequest($request->get('pesquisa'));
     }
 
-    /**
-     * @param null|string $search
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
     public function searchFromRequest($search = null, $query = null)
     {
         $search = is_null($search)
@@ -117,5 +112,24 @@ class Andamentos extends Base
         return (new AndamentoModel())
             ->with(['tipoAndamento', 'tipoEntrada', 'tipoPrazo'])
             ->orderBy('updated_at', 'desc');
+    }
+
+    public function filter($request)
+    {
+        $query = $this->makeAndamentoQuery();
+
+        if (!empty($search = $request->get('search'))) {
+            $query = $this->searchString($search, $query);
+        }
+
+//        if ($request->get('advancedFilter')) {
+//            collect($this->filterToJson($request))->each(function ($search, $column) use ($query) {
+//                if (!empty($search)) {
+//                    $this->addQueryByType($search, $column, $query);
+//                }
+//            });
+//        }
+
+        return $this->transform($query->get());
     }
 }

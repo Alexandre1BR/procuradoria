@@ -9,13 +9,14 @@
                 </div>
 
                 <div class="col-md-9">
-                    @include(
-                        'layouts.partials.search-form',
-                        [
-                            'routeSearch' => 'agenda.index',
-                            'routeCreate' => 'andamentos.create',
-                        ]
-                    )
+                    <div class="form-group pull-right">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <a href="{{ route('andamentos.create') }}" class="btn btn-danger pull-right">
+                                    <i class="fa fa-plus"></i> Novo</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

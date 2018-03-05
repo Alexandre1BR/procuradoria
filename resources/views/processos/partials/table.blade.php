@@ -16,7 +16,9 @@
     </div>
 </div>
 
-<div class="hidden-lg">
+<a title='Imprimir conteúdo' href='javascript:printerDiv("processos_div")'><img src="linkdaimagem" border="0" /></a>
+
+<div class="hidden-lg" id="processos_div">
     <div class="row">
         <div class="col-xs-12" v-for="processo in tables.processos" @click="openProcesso(processo.id)">
             <div class="panel panel-info">
@@ -91,7 +93,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <table id="example" class="table table-striped table-bordered visible-lg" cellspacing="0" width="100%">
@@ -133,3 +134,18 @@
         </tr>
     </tbody>
 </table>
+
+<script language="javascript" type="text/javascript">
+    function printerDiv(divID) {
+        //Get the HTML of div
+        var divElements = document.getElementById(divID).innerHTML;
+        //Get the HTML of whole page
+        var oldPage = document.body.innerHTML;
+        //Reset the pages HTML with divs HTML only
+        document.body.innerHTML = "<html><head><title></title></head><body>" + divElements + "</body>";
+        //Print Page
+        window.print();
+        //Restore orignal HTML
+        document.body.innerHTML = oldPage;
+    }
+</script>

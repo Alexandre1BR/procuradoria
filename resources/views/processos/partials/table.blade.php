@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<a title='Imprimir conteúdo' href='javascript:printerDiv("processos_div")'><img src="linkdaimagem" border="0" /></a>
+<a title='Imprimir conteúdo' href='javascript:printerDiv("processos_div")'><i class="fa fa-print"></i> Imprimir</a>
 
 <div class="hidden-lg" id="processos_div">
     <div class="row">

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Data\Models\TipoAndamento;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class Andamento extends FormRequest
 {
@@ -23,10 +25,13 @@ class Andamento extends FormRequest
      */
     public function rules()
     {
+        //dd($this->processo_id);
         return [
-            'tipo_prazo_id'         => 'required',
+//            'tipo_prazo_id'         => 'required',
             'processo_id'           => 'required',
-            'tipo_andamento_id'     => 'required',
+            'tipo_andamento_id'     => ['required',
+                $this->tipo_andamento_id == (TipoAndamento::where('nome', 'Recebimento')->get()->first()->id) ?
+                Rule::unique('andamentos')->whereIn('processo_id', [$this->processo_id]) : ''],
         ];
     }
 }

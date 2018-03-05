@@ -10,8 +10,35 @@
             {{ session()->get('message') }}
         </div>
     @endif
-
     <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+                <label for="data_recebimento">Data Recebimento</label>
+                <input
+                        value="{{ is_null(old('data_recebimento'))? (! is_null($processo->id) ? $processo->data_recebimento : '' ) :  old('data_recebimento')}}"
+                        type="date"
+                        name="data_recebimento"
+                        class="form-control"
+                        id="data_recebimento" @include('partials.readonly')
+                />
+
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+                <label for="data_distribuicao">Data distribuição</label>
+                <input
+                        value="{{ is_null(old('data_distribuicao'))? (! is_null($processo->id) ? $processo->data_distribuicao : '' ) :  old('data_distribuicao')}}"
+                        type="date"
+                        name="data_distribuicao"
+                        class="form-control"
+                        id="data_distribuicao" @include('partials.readonly')
+                />
+                {{--<input value="{{Carbon\Carbon::parse($processo->data_distribuicao)->format('Y-m-d')}}" type="date" name="data_distribuicao" class="form-control" id="data_distribuicao" @include('partials.readonly') />--}}
+            </div>
+        </div>
+
         <div class="col-xs-12 col-md-6">
             <div class="form-group">
                 <label for="numero_judicial">Número judicial</label>
@@ -24,6 +51,8 @@
                 >
             </div>
         </div>
+
+
 
         <div class="col-xs-12 col-md-6">
             <div class="form-group">
@@ -54,20 +83,6 @@
             <div class="form-group">
                 <label for="vara">Vara</label>
                 <input value="{{is_null(old('vara'))? $processo->vara : old('vara') }}" name="vara" class="form-control" @include('partials.readonly') id="vara" placeholder="Digite a Vara">
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-md-6">
-            <div class="form-group">
-                <label for="data_distribuicao">Data distribuição</label>
-                <input
-                        value="{{ is_null(old('data_distribuicao'))? (! is_null($processo->id) ? $processo->data_distribuicao : '' ) :  old('data_distribuicao')}}"
-                        type="date"
-                        name="data_distribuicao"
-                        class="form-control"
-                        id="data_distribuicao" @include('partials.readonly')
-                />
-                {{--<input value="{{Carbon\Carbon::parse($processo->data_distribuicao)->format('Y-m-d')}}" type="date" name="data_distribuicao" class="form-control" id="data_distribuicao" @include('partials.readonly') />--}}
             </div>
         </div>
 

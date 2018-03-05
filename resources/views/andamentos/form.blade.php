@@ -83,8 +83,13 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="Processo">Tipo de entrada</label>
-                        <p><label name="tipo_entrada">Manual</label></p>
-                        <input type="hidden" name="tipo_entrada_id" id="tipo_entrada_id" value="1" />
+                        @if(is_null($andamento->id))
+                            <p><label name="tipo_entrada">Manual</label></p>
+                            <input type="hidden" name="tipo_entrada_id" id="tipo_entrada_id" value="1" />
+                        @else
+                            <p><label name="tipo_entrada">{{$andamento->tipoEntrada->nome}}</label></p>
+                            <input type="hidden" name="tipo_entrada_id" id="tipo_entrada_id" value="{{$andamento->tipoEntrada->id}}" />
+                        @endif
                     </div>
                 </div>
 

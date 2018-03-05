@@ -3,6 +3,10 @@
 namespace App\Data\Repositories;
 
 use App\Data\Models\Andamento as AndamentoModel;
+use App\Data\Models\Processo;
+use App\Data\Models\TipoAndamento;
+use App\Data\Models\TipoEntrada;
+use App\Http\Requests\Processo as ProcessoRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -34,6 +38,21 @@ class Andamentos extends Base
     public function search(Request $request)
     {
         return $this->searchFromRequest($request->get('pesquisa'));
+    }
+
+    public function createFromProcessos(ProcessoRequest $request, Processo $p)
+    {
+        if (is_null($request->input('id'))) {
+            $andamentoModel = new AndamentoModel();
+            $tipoAndamento = TipoAndamento::where('nome', 'Recebimento')->get()->first();
+            $tipoEntrada = TipoEntrada::where('nome', 'Automatico')->get()->first();
+
+            $andamentoModel->setAttribute('processo_id', $p->id);
+            $andamentoModel->setAttribute('tipo_andamento_id', $tipoAndamento->id);
+            $andamentoModel->setAttribute('tipo_entrada_id', $tipoEntrada->id);
+
+            $andamentoModel->save();
+        }
     }
 
     /**

@@ -17,6 +17,7 @@
                 </div>
 
                 <div class="col-xs-4 col-md-2">
+                    @include('partials.save-button')
                     @include('partials.edit-button', ['model' => $juiz])
                 </div>
             </div>
@@ -25,7 +26,7 @@
         <div class="panel-body">
             @include('partials.alerts')
 
-            <form action="{{ route('juizes.store') }}" method="POST">
+            <form name="formulario" id="formulario" action="{{ route('juizes.store') }}" method="POST">
                 {{ csrf_field() }}
 
                 <div class="row">

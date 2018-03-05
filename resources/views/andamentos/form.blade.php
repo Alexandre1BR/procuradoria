@@ -15,6 +15,7 @@
                 </div>
 
                 <div class="col-xs-4 col-md-2">
+                    @include('partials.save-button')
                     @include('partials.edit-button', ['model' => $andamento])
                 </div>
             </div>
@@ -23,7 +24,7 @@
         <div class="panel-body">
             @include('partials.alerts')
 
-            <form action="{{ route('andamentos.store') }}" method="POST">
+            <form name="formulario" id="formulario" action="{{ route('andamentos.store') }}" method="POST">
                 {{ csrf_field() }}
                 <input type="hidden" name="id" id="id" value="{{$andamento->id}}">
                 {{--{{dump($andamento->id)}}--}}
@@ -32,7 +33,7 @@
                         <label for="nome">Processo</label>
 
                         @if(!isset($processo_id))
-                            <select name="processo_id" class="form-control select2" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo" @include('partials.readonly')>
+                            <select name="processo_id" class="form-control select2" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo" @include('partials.disabled')>
                                 @if(!is_null(old('processo_id')))
                                     <option value="">Selecione...</option>
                                 @else
@@ -64,7 +65,7 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="tipo_andamento_id">Tipo de andamento</label>
-                        <select name="tipo_andamento_id" class="form-control select2" id="tipo_andamento_id" aria-describedby="numero_judicialHelp" placeholder="Processo"  @include('partials.readonly')>
+                        <select name="tipo_andamento_id" class="form-control select2" id="tipo_andamento_id" aria-describedby="numero_judicialHelp" placeholder="Processo"  @include('partials.disabled')>
                             <option value="" >Selecione...</option>
 
                             @foreach ($tipoAndamentos as $key => $tipoAndamento)

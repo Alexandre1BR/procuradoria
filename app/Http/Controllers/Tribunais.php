@@ -52,9 +52,9 @@ class Tribunais extends Controller
             ->with($this->getSuccessMessage());
     }
 
-    public function show(TribunalRequest $request)
+    public function show($id)
     {
-        $tribunal = Tribunal::find($request->id);
+        $tribunal = Tribunal::find($id);
 
         return view('tribunais.form')
             ->with('tribunal', $tribunal)

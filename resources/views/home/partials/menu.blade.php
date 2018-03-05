@@ -13,7 +13,8 @@
         <li><a href="{{ route('andamentos.index') }}">Andamentos</a></li>
         <li><a href="{{ route('tribunais.index') }}">Tribunais</a></li>
         <li><a href="{{ route('juizes.index') }}">Juizes</a></li>
-        <li><a href="{{ route('acoes.index') }}">Acoes</a></li>
+        <li><a href="{{ route('acoes.index') }}">Ações</a></li>
+        <li><a href="{{ route('users.index') }}">Usuários</a></li>
     </ul>
 </li>
 

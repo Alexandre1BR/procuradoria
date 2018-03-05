@@ -17,6 +17,7 @@
                 </div>
 
                 <div class="col-xs-4 col-md-2">
+                    @include('partials.save-button')
                     @include('partials.edit-button', ['model' => $processo])
                 </div>
             </div>
@@ -28,10 +29,11 @@
             @include('processos.partials.form')
         </div>
     </div>
+    @if(isset($processo) && !is_null($processo->id))
+        @include('processos.partials.andamentos')
 
-    @include('processos.partials.andamentos')
+        @include('processos.partials.apensos')
 
-    @include('processos.partials.apensos')
-
-    @include('processos.partials.leis')
+        @include('processos.partials.leis')
+    @endif
 @endsection

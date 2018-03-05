@@ -34,23 +34,6 @@ class TribunaisTest extends DuskTestCase
         });
     }
 
-    public function testValidation()
-    {
-        $nomet = static::$nomeTribunal;
-        $this->browse(function (Browser $browser) use ($nomet) {
-            $browser->visit('/tribunais')
-                ->clickLink('Novo')
-//                ->type('nome', $nomet)
-//                ->assertSee('ASDADDDD')
-
-//                ->type('abreviacao', $abrevt)
-
-                ->press('Gravar')
-                ->assertSee('O campo Nome é obrigatório.')
-                ->assertSee('O campo Abreviação é obrigatório.');
-        });
-    }
-
     public function testWrongSearch()
     {
         $this->browse(function (Browser $browser) {
@@ -76,6 +59,44 @@ class TribunaisTest extends DuskTestCase
                 ->click('#searchButton')
                 ->waitForText($nomet)
                 ->assertSeeIn('#tribunalTable', $nomet);
+        });
+    }
+
+    public function testValidation()
+    {
+        $nomet = static::$nomeTribunal;
+        $this->browse(function (Browser $browser) use ($nomet) {
+            $browser->visit('/tribunais')
+                ->clickLink('Novo')
+//                ->type('nome', $nomet)
+//                ->assertSee('ASDADDDD')
+
+//                ->type('abreviacao', $abrevt)
+
+                ->press('Gravar')
+                ->assertSee('O campo Nome é obrigatório.')
+                ->assertSee('O campo Abreviação é obrigatório.');
+        });
+    }
+
+    public function testAlter()
+    {
+        $nomet = static::$nomeTribunal;
+        $abrevt = static::$abreviacaoTribunal;
+        $this->browse(function (Browser $browser) use ($nomet, $abrevt) {
+            $browser->visit('/tribunais')
+                ->clickLink($nomet)
+//                ->screenshot('1')
+                ->click('#editar')
+                ->type('nome', '*'.$nomet.'*')
+                ->type('abreviacao', '*'.$abrevt.'*')
+//                ->screenshot('2')
+                ->press('Gravar')
+//                ->screenshot('3')
+                ->assertSee('Gravado com sucesso')
+                ->assertSee('*'.$nomet.'*')
+                ->assertSee('*'.$abrevt.'*');
+//                ->screenshot('4');
         });
     }
 }

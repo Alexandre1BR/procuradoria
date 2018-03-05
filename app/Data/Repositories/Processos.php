@@ -41,17 +41,18 @@ class Processos extends Base
         //'tipo_meio'         => 'string',
         'data_distribuicao' => 'date',
         'observacao'        => 'string',
+        'link'              => 'string',
     ];
 
-    protected function isDate($item)
+    protected function toDate($item)
     {
         try {
-            Carbon::createFromFormat('d/m/Y', $item);
+            $item = Carbon::createFromFormat('d/m/Y', $item)->format('Y-m-d');
         } catch (\Exception $exception) {
-            return false;
+            return;
         }
 
-        return true;
+        return $item;
     }
 
     public function getAllIds()
@@ -142,8 +143,9 @@ class Processos extends Base
                 if ($type === 'string') {
                     $query->orWhere($column, 'ilike', '%'.$item.'%');
                 } else {
-                    if ($this->isDate($item)) {
-                        $query->orWhere($column, '=', $item);
+                    $ifdate = $this->toDate($item);
+                    if ($ifdate != null) {
+                        $query->orWhereDate($column, '=', $ifdate);
                     }
                 }
             });

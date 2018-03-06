@@ -23,22 +23,32 @@ class Andamentos extends Controller
         $this->repository = $repository;
     }
 
-    public function create($processo_id = null)
+    public function create($id = null)
     {
         return view('andamentos.form', $this->getAndamentosData())
-            ->with('processo_id', $processo_id)
+            ->with('id', $id)
             ->with(['andamento' => $this->repository->new()]);
+    }
+
+    public function storeDeProcesso(AndamentoRequest $request, AndamentosRepository $repository)
+    {
+        $repository->createFromRequest($request);
+
+        return redirect()->route('processos.show', ['id' => $request->processo_id])
+            ->with($this->getSuccessMessage());
     }
 
     public function store(AndamentoRequest $request, AndamentosRepository $repository)
     {
         $repository->createFromRequest($request);
 
-        //return $this->index($repository,$request);
-
-        //    return redirect('form')->withInput();
-        return redirect()->route('andamentos.index')
-            ->with($this->getSuccessMessage());
+        if(isset($request->redirect)){
+            return redirect()->route('processos.show', ['id' => $request->redirect])
+                ->with($this->getSuccessMessage());
+        }else{
+            return redirect()->route('andamentos.index')
+                ->with($this->getSuccessMessage());
+        }
     }
 
     public function show($id)

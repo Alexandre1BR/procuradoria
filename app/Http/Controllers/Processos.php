@@ -41,7 +41,8 @@ class Processos extends Controller
     {
         $repository->createFromRequest($request);
         //dd($request->processo_id);
-        return view('processos.form')
+        return redirect()
+        ->route('processos.show', $request->processo_id)
         ->with('processo', ProcessoModel::find($request->processo_id))
         ->with('formDisabled', true)
         ->with($this->repository->getProcessosData($request->processo_id))

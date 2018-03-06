@@ -12,7 +12,7 @@
                     {{ csrf_field() }}
                     <input name="processo_id" type="hidden" value="{{$processo->id}}">
 
-                    <div class="row">
+                    <div class="row">z
                         <div class="col-md-10">
                             <select name="apensado_id" class="select2 form-control" disabled="disabled" id="apensado_id">
                                 <option value="">SELECIONE O PROCESSO</option>

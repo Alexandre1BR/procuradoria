@@ -2,168 +2,132 @@
 
 namespace Tests\Browser;
 
-use App\Data\Repositories\Processos as ProcessosRepository;
-use App\Data\Repositories\TiposAndamentos as TiposAndamentosRepository;
-use App\Data\Repositories\TiposPrazos as TiposPrazosRepository;
+use App\Data\Repositories\Tribunais as TribunaisRepository;
+use App\Data\Repositories\Juizes as JuizesRepository;
+use App\Data\Repositories\Acoes as AcoesRepository;
+use App\Data\Repositories\Users as UsersRepository;
+use App\Data\Repositories\Meios as MeiosRepository;
 use Carbon\Carbon;
 use Faker\Generator as Faker;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class AndamentosTest extends DuskTestCase
+class ProcessosTest extends DuskTestCase
 {
-    private static $processoAndamento;
-    private static $tipoAndamentoAndamento;
-    private static $tipoPrazoAndamento;
-    private static $dataPrazoAndamento;
-    private static $dataEntregaAndamento;
-    private static $observacaoAndamento;
+    private static $numeroJudicialProcesso;
+    private static $numeroAlerjProcesso;
+    private static $tribunalProcesso;
+    private static $varaProcesso;
+    private static $dataDistribuicaoProcesso;
+    private static $acaoProcesso;
+    private static $juizProcesso;
+    private static $autorProcesso;
+    private static $relatorProcesso;
+    private static $reuProcesso;
+    private static $procuradorProcesso;
+    private static $estagiarioProcesso;
+    private static $assessorProcesso;
+    private static $tipoMeioProcesso;
+    private static $objetoProcesso;
+    private static $meritoProcesso;
+    private static $liminarProcesso;
+    private static $apensosObsProcesso;
+    private static $recursoObsProcesso;
+    private static $observacaoProcesso;
+    private static $linkProcesso;
 
     public function init()
     {
         $faker = app(Faker::class);
-        static::$processoAndamento = $faker->randomElement(app(ProcessosRepository::class)->all()->toArray());
-        static::$tipoAndamentoAndamento = $faker->randomElement(app(TiposAndamentosRepository::class)->all()->toArray());
-        static::$tipoPrazoAndamento = $faker->randomElement(app(TiposPrazosRepository::class)->all()->toArray());
-        static::$dataPrazoAndamento = '01-01-2001';
-        static::$dataEntregaAndamento = '01-01-2001';
-        static::$observacaoAndamento = $faker->name;
+        static::$numeroJudicialProcesso = $faker->randomNumber();
+        static::$numeroAlerjProcesso = $faker->randomNumber();
+        static::$tribunalProcesso = $faker->randomElement(app(TribunaisRepository::class)->all()->toArray());
+        static::$varaProcesso = $faker->name;
+        static::$dataDistribuicaoProcesso = $faker->date('m-d-Y');
+        static::$acaoProcesso = $faker->randomElement(app(AcoesRepository::class)->all()->toArray());
+        static::$juizProcesso = $faker->randomElement(app(JuizesRepository::class)->all()->toArray());
+        static::$autorProcesso = $faker->name;
+        static::$relatorProcesso = $faker->randomElement(app(JuizesRepository::class)->all()->toArray());
+        static::$reuProcesso = $faker->name;
+        static::$procuradorProcesso = $faker->randomElement(app(UsersRepository::class)->getByType('Procurador')->toArray());
+        static::$estagiarioProcesso = $faker->randomElement(app(UsersRepository::class)->getByType('Estagiario')->toArray());
+        static::$assessorProcesso = $faker->randomElement(app(UsersRepository::class)->getByType('Assessor')->toArray());
+        static::$tipoMeioProcesso = $faker->randomElement(app(MeiosRepository::class)->all()->toArray());
+        static::$objetoProcesso = $faker->name;
+        static::$meritoProcesso = $faker->name;
+        static::$liminarProcesso = $faker->name;
+        static::$apensosObsProcesso = $faker->name;
+        static::$recursoObsProcesso = $faker->name;
+        static::$observacaoProcesso = $faker->name;
+        static::$linkProcesso = $faker->name;
     }
 
     public function testInsert()
     {
         $this->init();
 
-        $processoA = static::$processoAndamento;
-        $tipoAndamentoA = static::$tipoAndamentoAndamento;
-        $tipoPrazoA = static::$tipoPrazoAndamento;
-        $dataPrazoA = static::$dataPrazoAndamento;
-        $dataEntregaA = static::$dataEntregaAndamento;
-        $observacaoA = static::$observacaoAndamento;
+        $numeroJudicialP = static::$numeroJudicialProcesso;
+        $numeroAlerjP = static::$numeroAlerjProcesso;
+        $tribunalP = static::$tribunalProcesso;
+        $varaP = static::$varaProcesso;
+        $dataDistribuicaoP = static::$dataDistribuicaoProcesso;
+        $acaoP = static::$acaoProcesso;
+        $juizP = static::$juizProcesso;
+        $autorP = static::$autorProcesso;
+        $relatorP = static::$relatorProcesso;
+        $reuP = static::$reuProcesso;
+        $procuradorP = static::$procuradorProcesso;
+        $estagiarioP = static::$estagiarioProcesso;
+        $assessorP = static::$assessorProcesso;
+        $tipoMeioP = static::$tipoMeioProcesso;
+        $objetoP = static::$objetoProcesso;
+        $meritoP = static::$meritoProcesso;
+        $liminarP = static::$liminarProcesso;
+        $apensosObsP = static::$apensosObsProcesso;
+        $recursoObsP = static::$recursoObsProcesso;
+        $observacaoP = static::$observacaoProcesso;
+        $linkP = static::$linkProcesso;
 
-        $this->browse(function (Browser $browser) use ($processoA, $tipoAndamentoA, $tipoPrazoA, $dataPrazoA, $dataEntregaA, $observacaoA) {
-            $browser->visit('/andamentos')
+    $this->browse(function (Browser $browser) use ($numeroJudicialP, $numeroAlerjP, $tribunalP, $varaP, $dataDistribuicaoP, $acaoP, $juizP, $autorP, $relatorP, $reuP,
+        $procuradorP, $estagiarioP, $assessorP, $tipoMeioP, $objetoP, $meritoP, $liminarP, $apensosObsP, $recursoObsP, $observacaoP, $linkP) {
+            $browser->visit('/')
                 ->clickLink('Novo')
-                ->select('#processo_id', $processoA['id'])
-                ->select('#tipo_andamento_id', $tipoAndamentoA['id'])
-                ->select('#tipo_prazo_id', $tipoPrazoA['id'])
-                ->keys('#data_prazo', $dataPrazoA)
-                ->keys('#data_entrega', $dataEntregaA)
-                ->type('#observacoes', $observacaoA)
+                ->screenshot('0')
+                ->type('#numero_judicial', $numeroJudicialP)
+                ->type('#numero_alerj', $numeroAlerjP)
+                ->select('#tribunal_id', $tribunalP['id'])
+                ->type('#vara', $varaP)
+                ->keys('#data_distribuicao', $dataDistribuicaoP)
+                ->select('#acao_id', $acaoP['id'])
+                ->select('#juiz_id', $juizP['id'])
+                ->type('#autor', $autorP)
+                ->select('#relator_id', $relatorP['id'])
+                ->type('#reu', $reuP)
+                ->select('#procurador_id', $procuradorP['id'])
+                ->select('#estagiario_id', $estagiarioP['id'])
+                ->select('#assessor_id', $assessorP['id'])
+                ->select('#tipo_meio', $tipoMeioP['id'])
+                ->type('#objeto', $objetoP)
+                ->type('#merito', $meritoP)
+                ->type('#liminar', $liminarP)
+                ->type('#apensos_obs', $apensosObsP)
+                ->type('#recurso', $recursoObsP)
+                ->type('#observacao', $observacaoP)
+                ->type('#link', $linkP)
+                ->screenshot('1')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->assertSee($observacaoA);
-        });
-    }
-
-    public function testValidation()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/andamentos')
-                ->clickLink('Novo')
-                ->press('Gravar')
-                ->assertSee('O campo Tipo prazo é obrigatório.')
-                ->assertSee('O campo Processo é obrigatório.')
-                ->assertSee('O campo Tipo de andamento é obrigatório.');
-        });
-    }
-
-    public function testWrongSearch()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/andamentos')
-                ->type('pesquisa', '45879349875348975387958973489734897345893478957984')
-//                ->assertInputValue('pesquisa',$nomet)
-//                ->type('abreviacao', $abrevt)
-                ->click('#searchButton')
-                ->waitForText('Nenhum andamento encontrado')
-                ->assertSee('Nenhum andamento encontrado');
-//                ->assertSeeIn('table',$nomet);
-        });
-    }
-
-    public function testRightSearch()
-    {
-        $observacaoA = static::$observacaoAndamento;
-
-        $this->browse(function (Browser $browser) use ($observacaoA) {
-            $browser->visit('/andamentos')
-                ->type('pesquisa', $observacaoA)
-                ->click('#searchButton')
-                ->waitForText($observacaoA)
-                ->assertSeeIn('#andamentosTable', $observacaoA);
-        });
-    }
-
-    public function testAlter()
-    {
-        $faker = app(Faker::class);
-
-        $processoA = $faker->randomElement(app(ProcessosRepository::class)->all()->toArray());
-        $tipoAndamentoA = $faker->randomElement(app(TiposAndamentosRepository::class)->all()->toArray());
-        $tipoPrazoA = $faker->randomElement(app(TiposPrazosRepository::class)->all()->toArray());
-        $dataPrazoA = \DateTime::createFromFormat('m-d-Y', '03-02-2333')->format('m-d-Y');
-        $dataEntregaA = \DateTime::createFromFormat('m-d-Y', '04-05-2444')->format('m-d-Y');
-        $observacaoA = $faker->name;
-
-//        DateTime::createFromFormat('m-d-Y', '10-16-2003');
-
-        $numProcesso = static::$processoAndamento['numero_judicial'];
-//        Carbon::createFromFormat('Y-m-d', $dataPrazoA)->format('d/m/Y')
-
-        $this->browse(function (Browser $browser) use ($processoA, $tipoAndamentoA, $tipoPrazoA, $dataPrazoA, $dataEntregaA, $observacaoA, $numProcesso) {
-            $browser->visit('/andamentos')
-//                ->screenshot('0')
-                ->clickLink($numProcesso)
-//                ->screenshot('1')
-                ->click('#editar')
-                ->select('#processo_id', $processoA['id'])
-                ->select('#tipo_andamento_id', $tipoAndamentoA['id'])
-                ->select('#tipo_prazo_id', $tipoPrazoA['id'])
-                ->keys('#data_prazo', $dataPrazoA)
-                ->keys('#data_entrega', $dataEntregaA)
-                ->type('#observacoes', $observacaoA)
-//                ->screenshot('2')
-                ->press('Gravar')
-//                ->screenshot('3')
-                ->assertSee('Gravado com sucesso')
-                ->assertSee($processoA['numero_judicial'])
-                ->assertSee($tipoAndamentoA['nome'])
-                ->assertSee($tipoPrazoA['nome'])
-                ->assertSee(Carbon::createFromFormat('m-d-Y', $dataPrazoA)->format('d/m/Y'))
-                ->assertSee(Carbon::createFromFormat('m-d-Y', $dataEntregaA)->format('d/m/Y'))
-                ->assertSee($observacaoA);
-//                ->screenshot('4');
-        });
-    }
-
-
-    public function testInsertInsideProcesso()
-    {
-        $this->init();
-
-        $processoA = static::$processoAndamento;
-        $tipoAndamentoA = static::$tipoAndamentoAndamento;
-        $tipoPrazoA = static::$tipoPrazoAndamento;
-        $dataPrazoA = static::$dataPrazoAndamento;
-        $dataEntregaA = static::$dataEntregaAndamento;
-        $observacaoA = static::$observacaoAndamento;
-
-        $this->browse(function (Browser $browser) use ($processoA,$tipoAndamentoA,$tipoPrazoA,$dataPrazoA,$dataEntregaA,$observacaoA) {
-            $browser->visit('/processos/'.$processoA['id'])
-                ->click('#editar')
-                ->click('#buttonAndamentos')
-//                ->screenshot('1')
-//                ->select('#processo_id', $processoA['id'])
-                ->select('#tipo_andamento_id', $tipoAndamentoA['id'])
-                ->select('#tipo_prazo_id', $tipoPrazoA['id'])
-                ->keys('#data_prazo', $dataPrazoA)
-                ->keys('#data_entrega', $dataEntregaA)
-                ->type('#observacoes', $observacaoA)
-                ->press('Gravar')
-                ->assertSee('Gravado com sucesso')
-//                ->screenshot('2')
-                ->assertSeeIn('#andamentosTable', $observacaoA);
+                ->screenshot('3')
+                ->waitForText($numeroJudicialP)
+                ->assertSee($numeroJudicialP)
+                ->assertSee($numeroAlerjP)
+                ->assertSee($tribunalP['nome'])
+                ->assertSee($autorP)
+                ->assertSee($objetoP)
+                ->assertSee($procuradorP['name'])
+                ->assertSee($assessorP['name'])
+                ->assertSee($estagiarioP['name'])
+                ->screenshot('4');
         });
     }
 }

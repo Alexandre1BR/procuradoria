@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Data\Repositories\Processos as ProcessosRepository;
 use App\Data\Repositories\Tribunais as TribunaisRepository;
 use App\Data\Repositories\Juizes as JuizesRepository;
 use App\Data\Repositories\Acoes as AcoesRepository;
@@ -92,7 +93,7 @@ class ProcessosTest extends DuskTestCase
         $procuradorP, $estagiarioP, $assessorP, $tipoMeioP, $objetoP, $meritoP, $liminarP, $apensosObsP, $recursoObsP, $observacaoP, $linkP) {
             $browser->visit('/')
                 ->clickLink('Novo')
-                ->screenshot('0')
+//                ->screenshot('0')
                 ->type('#numero_judicial', $numeroJudicialP)
                 ->type('#numero_alerj', $numeroAlerjP)
                 ->select('#tribunal_id', $tribunalP['id'])
@@ -114,10 +115,10 @@ class ProcessosTest extends DuskTestCase
                 ->type('#recurso', $recursoObsP)
                 ->type('#observacao', $observacaoP)
                 ->type('#link', $linkP)
-                ->screenshot('1')
+//                ->screenshot('1')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->screenshot('3')
+//                ->screenshot('3')
                 ->waitForText($numeroJudicialP)
                 ->assertSee($numeroJudicialP)
                 ->assertSee($numeroAlerjP)
@@ -126,8 +127,114 @@ class ProcessosTest extends DuskTestCase
                 ->assertSee($objetoP)
                 ->assertSee($procuradorP['name'])
                 ->assertSee($assessorP['name'])
-                ->assertSee($estagiarioP['name'])
-                ->screenshot('4');
+                ->assertSee($estagiarioP['name']);
+//                ->screenshot('4');
+        });
+    }
+
+    public function testWrongSearch()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                ->type('pesquisa', '132312312vcxvdsf4142354346asfdb455756awsdgdn756867897887934645654')
+                ->pause('3000')
+                ->waitForText('0 Processos')
+                ->assertSee('0 Processos');
+        });
+    }
+
+    public function testRightSearch()
+    {
+        $numeroJudicialP = static::$numeroJudicialProcesso;
+        $numeroAlerjP = static::$numeroAlerjProcesso;
+        $tribunalP = static::$tribunalProcesso;
+        $varaP = static::$varaProcesso;
+        $dataDistribuicaoP = static::$dataDistribuicaoProcesso;
+        $acaoP = static::$acaoProcesso;
+        $juizP = static::$juizProcesso;
+        $autorP = static::$autorProcesso;
+        $relatorP = static::$relatorProcesso;
+        $reuP = static::$reuProcesso;
+        $procuradorP = static::$procuradorProcesso;
+        $estagiarioP = static::$estagiarioProcesso;
+        $assessorP = static::$assessorProcesso;
+        $tipoMeioP = static::$tipoMeioProcesso;
+        $objetoP = static::$objetoProcesso;
+        $meritoP = static::$meritoProcesso;
+        $liminarP = static::$liminarProcesso;
+        $apensosObsP = static::$apensosObsProcesso;
+        $recursoObsP = static::$recursoObsProcesso;
+        $observacaoP = static::$observacaoProcesso;
+        $linkP = static::$linkProcesso;
+
+        $this->browse(function (Browser $browser) use ($numeroJudicialP, $numeroAlerjP, $tribunalP, $varaP, $dataDistribuicaoP, $acaoP, $juizP, $autorP, $relatorP, $reuP,
+            $procuradorP, $estagiarioP, $assessorP, $tipoMeioP, $objetoP, $meritoP, $liminarP, $apensosObsP, $recursoObsP, $observacaoP, $linkP) {
+            $browser->visit('/')
+                ->type('pesquisa', $numeroJudicialP)
+                ->waitForText($numeroAlerjP)
+                ->assertSee($numeroAlerjP);
+        });
+    }
+
+    public function testValidation()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                ->clickLink('Novo')
+                ->press('Gravar')
+                ->assertSee('O campo Número judicial é obrigatório.')
+                ->assertSee('O campo Tribunal é obrigatório.')
+                ->assertSee('O campo Ação é obrigatório.')
+                ->assertSee('O campo Autor é obrigatório.')
+                ->assertSee('O campo Réu é obrigatório.');
+        });
+    }
+
+    public function testAlter()
+    {
+        $faker = app(Faker::class);
+        $ProcessoP = $faker->randomElement(app(ProcessosRepository::class)->all()->toArray());
+        $novoNumeroJudicialP = $faker->randomNumber();
+
+        $novoDataDistribuicaoP = $faker->date('m-d-Y');
+        $novoTribunalP = $faker->randomElement(app(TribunaisRepository::class)->all()->toArray());
+        $novoAutorP = $faker->name;
+        $novoObjetoP = $faker->name;
+        $novoProcuradorP = $faker->randomElement(app(UsersRepository::class)->getByType('Procurador')->toArray());
+        $novoAssessorP = $faker->randomElement(app(UsersRepository::class)->getByType('Assessor')->toArray());
+        $novoEstagiarioP = $faker->randomElement(app(UsersRepository::class)->getByType('Estagiario')->toArray());
+
+        $this->browse(function (Browser $browser) use ($ProcessoP, $novoNumeroJudicialP, $novoDataDistribuicaoP, $novoTribunalP, $novoAutorP, $novoObjetoP,
+            $novoProcuradorP, $novoAssessorP, $novoEstagiarioP){
+            $browser->visit('/processos/'.$ProcessoP['id'])
+//                ->screenshot('0')
+                ->click('#editar')
+//                ->screenshot('1')
+                ->type('#numero_judicial', $novoNumeroJudicialP)
+                ->select('#tribunal_id', $novoTribunalP['id'])
+                ->keys('#data_distribuicao', $novoDataDistribuicaoP)
+//                ->screenshot('1.5')
+                ->type('#autor', $novoAutorP)
+                ->select('#procurador_id', $novoProcuradorP['id'])
+                ->select('#estagiario_id', $novoEstagiarioP['id'])
+                ->select('#assessor_id', $novoAssessorP['id'])
+                ->type('#objeto', $novoObjetoP)
+//                ->screenshot('2')
+                ->press('Gravar')
+                ->assertSee('Gravado com sucesso')
+//                ->screenshot('3')
+                ->waitForText($novoNumeroJudicialP)
+                ->assertSee($novoNumeroJudicialP)
+                ->assertSee($ProcessoP['numero_alerj'])
+                ->assertDontSee($ProcessoP['numero_judicial'])
+                ->assertSee($novoNumeroJudicialP)
+                ->assertSee($novoTribunalP['nome'])
+                ->assertSee($novoAutorP)
+                ->assertSee($novoObjetoP)
+                ->assertSee($novoProcuradorP['name'])
+                ->assertSee($novoAssessorP['name'])
+                ->assertSee($novoEstagiarioP['name']);
+//                ->screenshot('4');
         });
     }
 }

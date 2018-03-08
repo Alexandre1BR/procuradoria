@@ -10,6 +10,7 @@ use App\Data\Models\TipoPrazo as  ModelTipoPrazo;
 use App\Data\Repositories\Andamentos as AndamentosRepository;
 use App\Http\Requests\Andamento as AndamentoRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class Andamentos extends Controller
 {
@@ -30,17 +31,11 @@ class Andamentos extends Controller
             ->with(['andamento' => $this->repository->new()]);
     }
 
-    public function storeDeProcesso(AndamentoRequest $request, AndamentosRepository $repository)
-    {
-        $repository->createFromRequest($request);
-
-        return redirect()->route('processos.show', ['id' => $request->processo_id])
-            ->with($this->getSuccessMessage());
-    }
-
     public function store(AndamentoRequest $request, AndamentosRepository $repository)
     {
         $repository->createFromRequest($request);
+
+        Cache::forget('getProcessosData'.$request->redirect);
 
         if(isset($request->redirect)){
             return redirect()->route('processos.show', ['id' => $request->redirect])

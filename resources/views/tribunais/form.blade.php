@@ -17,6 +17,7 @@
                 </div>
 
                 <div class="col-xs-4 col-md-2">
+                    @include('partials.save-button')
                     @include('partials.edit-button', ['model' => $tribunal])
                 </div>
             </div>
@@ -24,7 +25,7 @@
 
         <div class="panel-body">
 
-            <form action="{{ route('tribunais.store') }}" method="POST">
+            <form name="formulario" id="formulario" action="{{ route('tribunais.store') }}" method="POST">
                 {{ csrf_field() }}
 
                 <input name="id" type="hidden" value="{{$tribunal->id}}"/>

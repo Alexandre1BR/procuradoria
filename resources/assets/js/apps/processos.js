@@ -138,6 +138,12 @@ if (jQuery("#" + appName).length > 0) {
             openProcesso(id) {
                 window.location.href = '/processos/'+id;
             },
+
+            printer() {
+                $( "#cabecalho-processos" ).addClass( "hidden-print" );
+                window.print();
+                $( "#cabecalho-processos" ).removeClass( "hidden-print" );
+            },
         },
 
         mounted() {
@@ -160,5 +166,5 @@ if (jQuery("#" + appName).length > 0) {
             this.refreshTable('tags')
         },
     })
-}
 
+}

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="panel panel-default ">
+    <div class="panel panel-default" id="vue-agenda">
         <div class="panel-heading hidden-print">
             <div class="row">
                 <div class="col-md-3">
@@ -20,6 +20,7 @@
                     </div>
                 </div>
             </div>
+            <div class="btn btn-primary" onclick="window.print();"><i class="fa fa-print"></i> Imprimir</div>
         </div>
 
         <div class="panel-body">

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="panel panel-default" id="vue-processos">
-        <div class="panel-heading">
+        <div class="panel-heading" id="cabecalho-processos">
             <div class="row">
                 <div class="col-md-3">
                     <h3><span>@{{ tables.processos.length }}</span> Processo<span>@{{ tables.processos.length == 1 ? '' : 's' }}</span></h3>
@@ -31,6 +31,7 @@
                     </div>
                 </div>
             </div>
+            <div class="btn btn-primary" @click="printer()"><i class="fa fa-print"></i> Imprimir</div>
         </div>
 
         <div class="panel-body">

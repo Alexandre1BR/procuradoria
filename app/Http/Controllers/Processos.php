@@ -52,7 +52,6 @@ class Processos extends Controller
           ->with('formDisabled', true)
           ->with($this->repository->getProcessosData($request->processo_id))
           ->with($this->getSuccessMessage());
-
     }
 
     public function show($id)

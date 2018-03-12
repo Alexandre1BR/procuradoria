@@ -91,7 +91,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <table id="example" class="table table-striped table-bordered visible-lg" cellspacing="0" width="100%">

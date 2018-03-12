@@ -40,12 +40,12 @@ class Processos extends Controller
     public function apensar(ApensoRequest $request, ApensosRepository $repository)
     {
         $repository->createFromRequest($request);
-        //dd($request->processo_id);
+
         return view('processos.form')
-        ->with('processo', ProcessoModel::find($request->processo_id))
-        ->with('formDisabled', true)
-        ->with($this->repository->getProcessosData($request->processo_id))
-        ->with($this->getSuccessMessage());
+                ->with('processo', ProcessoModel::find($request->processo_id))
+                ->with('formDisabled', true)
+                ->with($this->repository->getProcessosData($request->processo_id))
+                ->with($this->getSuccessMessage());
     }
 
     public function show($id)

@@ -39,8 +39,7 @@
                 <select name="tribunal_id" class="form-control select2" id="tribunal_id" @include('partials.disabled')>
                     <option value="">SELECIONE</option>
                     @foreach ($tribunais as $key => $tribunal)
-
-                        @if(((!is_null($processo->id)) && $processo->tribunal->id === $key) || (!is_null(old('tribunal_id'))) && old('tribunal_id') == $key))
+                        @if(((!is_null($processo->id)) && (!is_null($processo->tribunal) && $processo->tribunal->id === $key) || (!is_null(old('tribunal_id'))) && old('tribunal_id') == $key))
                             <option value="{{ $key }}" selected="selected">{{ $tribunal }}</option>
                         @else
                             <option value="{{ $key }}">{{ $tribunal }}</option>
@@ -83,6 +82,28 @@
                             <option value="{{ $key }}" selected="selected">{{ $acao }}</option>
                         @else
                             <option value="{{ $key }}">{{ $acao }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+                <label for="tipo_processo_id">Tipo Processo</label>
+                <select name="tipo_processo_id" class="form-control select2" @include('partials.disabled') id="tipo_processo_id">
+                    <option value="">SELECIONE</option>
+                    @foreach ($tiposProcessos as $key => $tipo_processo)
+                        {{-- Seleciona o valor "ALERJ" como default quando se está criando um processo novo --}}
+                        @if(is_null($processo->tipoProcesso) && $tipo_processo->id == 1 && is_null($processo->id))
+                            <option value="{{ $tipo_processo->id }}" selected="selected">{{ $tipo_processo->nome }}</option>
+                        {{-- Seleciona o valor anteriormente escolhido ou anteriormente salvo --}}
+                        @elseif((!is_null($processo->tipoProcesso)) && $processo->tipoProcesso->id == $tipo_processo->id
+                        || (!is_null(old('tipo_processo_id'))) && old('tipo_processo_id') == $tipo_processo->id))
+                            <option value="{{ $tipo_processo->id }}" selected="selected">{{ $tipo_processo->nome }}</option>
+                        {{-- Outros Cenários --}}
+                        @else
+                            <option value="{{ $tipo_processo->id }}">{{ $tipo_processo->nome }}</option>
                         @endif
                     @endforeach
                 </select>
@@ -196,7 +217,11 @@
                 <select name="tipo_meio_id" class="form-control select2" @include('partials.disabled') id="tipo_meio">
                     <option value="">SELECIONE</option>
                     @foreach ($meios as $key => $meio)
-                        @if((!is_null($processo->id)) && $processo->tipoMeio->id == $key
+                        {{$key}}
+                        {{-- Seleciona o valor "ALERJ" como default quando se está criando um processo novo --}}
+                        @if(is_null($processo->tipoMeio) && $key == 3 && is_null($processo->id))
+                            <option value="{{ $key }}" selected="selected">{{ $meio }}</option>
+                        @elseif((!is_null($processo->id)) && $processo->tipoMeio->id == $key
                         || (!is_null(old('tipo_meio_id'))) && old('tipo_meio_id') == $key))
                             <option value="{{ $key }}" selected="selected">{{ $meio }}</option>
                         @else

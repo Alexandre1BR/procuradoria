@@ -70,6 +70,13 @@
 
         <div class="col-xs-12 col-md-6">
             <div class="form-group">
+                <label for="tipo_processo_id">Tipo Processo</label>
+                <select2 v-model="form.tipo_processo_id" :options="tables.tipos_processos"></select2>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <div class="form-group">
                 <label for="juiz_id">Juiz</label>
                 <select2 v-model="form.juiz_id" :options="tables.juizes"></select2>
             </div>

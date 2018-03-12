@@ -52,6 +52,7 @@ class Processo extends BaseModel
         'data_arquivamento',
         'observacao_arquivamento',
         'link',
+        'tipo_processo_id',
     ];
 
     protected $presenters = [
@@ -83,6 +84,7 @@ class Processo extends BaseModel
         'observacao_arquivamento'       => 'string',
         'tags'                          => 'tags',
         'link'                          => 'link',
+        'tipo_processo_id'              => 'id',
     ];
 
     public function getDataSemHoraAttribute()
@@ -135,6 +137,11 @@ class Processo extends BaseModel
     public function tipoMeio()
     {
         return $this->belongsTo(Meio::class);
+    }
+
+    public function tipoProcesso()
+    {
+        return $this->belongsTo(TipoProcesso::class);
     }
 
     public function apensos()

@@ -6,6 +6,7 @@ use App\Data\Models\Lei;
 use App\Data\Repositories\Leis as LeisRepository;
 use App\Http\Requests\Lei as LeiRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class Leis extends Controller
 {
@@ -29,6 +30,8 @@ class Leis extends Controller
     public function store(LeiRequest $request, LeisRepository $repository)
     {
         $repository->createFromRequest($request);
+
+        Cache::forget('getProcessosData'.$request->input('processo_id'));
 
         return redirect()->route('processos.show', ['processo_id' => $request->input('processo_id')])
 //            ->with('processo_id',$request->input('processo_id'))

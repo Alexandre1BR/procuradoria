@@ -80221,7 +80221,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Select2.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Select2.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -80230,9 +80230,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4b953bcf", Component.options)
+    hotAPI.createRecord("data-v-22a6e68f", Component.options)
   } else {
-    hotAPI.reload("data-v-4b953bcf", Component.options)
+    hotAPI.reload("data-v-22a6e68f", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -80417,7 +80417,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-4b953bcf", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-22a6e68f", module.exports)
   }
 }
 
@@ -80526,7 +80526,7 @@ if (jQuery("#" + appName).length > 0) {
                 tribunal_id: null,
                 vara: null,
                 data_distribuicao: null
-            }, _defineProperty(_form, 'data_distribuicao', null), _defineProperty(_form, 'acao_id', null), _defineProperty(_form, 'juiz_id', null), _defineProperty(_form, 'autor', null), _defineProperty(_form, 'relator_id', null), _defineProperty(_form, 'reu', null), _defineProperty(_form, 'procurador_id', null), _defineProperty(_form, 'estagiario_id', null), _defineProperty(_form, 'assessor_id', null), _defineProperty(_form, 'tipo_meio_id', null), _defineProperty(_form, 'objeto', null), _defineProperty(_form, 'merito', null), _defineProperty(_form, 'liminar', null), _defineProperty(_form, 'apensos_obs', null), _defineProperty(_form, 'recurso', null), _defineProperty(_form, 'observacao', null), _defineProperty(_form, 'data_arquivamento', null), _defineProperty(_form, 'data_arquivamento', null), _defineProperty(_form, 'observacao_arquivamento', null), _defineProperty(_form, 'tags', []), _form)
+            }, _defineProperty(_form, 'data_distribuicao', null), _defineProperty(_form, 'acao_id', null), _defineProperty(_form, 'juiz_id', null), _defineProperty(_form, 'autor', null), _defineProperty(_form, 'relator_id', null), _defineProperty(_form, 'reu', null), _defineProperty(_form, 'procurador_id', null), _defineProperty(_form, 'estagiario_id', null), _defineProperty(_form, 'assessor_id', null), _defineProperty(_form, 'tipo_meio_id', null), _defineProperty(_form, 'objeto', null), _defineProperty(_form, 'merito', null), _defineProperty(_form, 'liminar', null), _defineProperty(_form, 'apensos_obs', null), _defineProperty(_form, 'recurso', null), _defineProperty(_form, 'observacao', null), _defineProperty(_form, 'link', null), _defineProperty(_form, 'data_arquivamento', null), _defineProperty(_form, 'data_arquivamento', null), _defineProperty(_form, 'observacao_arquivamento', null), _defineProperty(_form, 'tags', []), _form)
         },
 
         methods: {
@@ -80588,6 +80588,11 @@ if (jQuery("#" + appName).length > 0) {
             },
             openProcesso: function openProcesso(id) {
                 window.location.href = '/processos/' + id;
+            },
+            printer: function printer() {
+                $("#cabecalho-processos").addClass("hidden-print");
+                window.print();
+                $("#cabecalho-processos").removeClass("hidden-print");
             }
         },
 

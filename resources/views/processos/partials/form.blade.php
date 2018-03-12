@@ -70,7 +70,7 @@
                     @foreach ($tribunais as $key => $tribunal)
 
                         @if(((!is_null($processo->id)) && $processo->tribunal->id === $key) || (!is_null(old('tribunal_id'))) && old('tribunal_id') == $key))
-                            <option value="{{ $key }}" selected="selected">{{ $tribunal }}</option>
+                        <option value="{{ $key }}" selected="selected">{{ $tribunal }}</option>
                         @else
                             <option value="{{ $key }}">{{ $tribunal }}</option>
                         @endif
@@ -95,7 +95,7 @@
                         <option value="{{ $key }}">{{ $acao }}</option>
                         @if((!is_null($processo->acao)) && $processo->acao->id == $key
                         || (!is_null(old('acao_id'))) && old('acao_id') == $key))
-                            <option value="{{ $key }}" selected="selected">{{ $acao }}</option>
+                        <option value="{{ $key }}" selected="selected">{{ $acao }}</option>
                         @else
                             <option value="{{ $key }}">{{ $acao }}</option>
                         @endif
@@ -161,7 +161,7 @@
                     @foreach ($procuradores as $key => $procurador)
                         @if((!is_null($processo->procurador)) && $processo->procurador->id == $key
                         || (!is_null(old('procurador_id'))) && old('procurador_id') == $key))
-                            <option value="{{ $key }}" selected="selected">{{ $procurador }}</option>
+                        <option value="{{ $key }}" selected="selected">{{ $procurador }}</option>
                         @else
                             <option value="{{ $key }}">{{ $procurador }}</option>
                         @endif
@@ -179,7 +179,7 @@
                         @if((!is_null($processo->estagiario)) && $processo->estagiario->id == $key
                         || (!is_null(old('estagiario_id'))) && old('estagiario_id') == $key))
 
-                            <option value="{{ $key }}" selected="selected">{{ $estagiario }}</option>
+                        <option value="{{ $key }}" selected="selected">{{ $estagiario }}</option>
                         @else
                             <option value="{{ $key }}">{{ $estagiario }}</option>
                         @endif
@@ -196,7 +196,7 @@
                     @foreach ($assessores as $key => $assessor)
                         @if((!is_null($processo->assessor)) && $processo->assessor->id == $key
                         || (!is_null(old('assessor_id'))) && old('assessor_id') == $key))
-                            <option value="{{ $key }}" selected="selected">{{ $assessor }}</option>
+                        <option value="{{ $key }}" selected="selected">{{ $assessor }}</option>
                         @else
                             <option value="{{ $key }}">{{ $assessor }}</option>
                         @endif
@@ -213,7 +213,7 @@
                     @foreach ($meios as $key => $meio)
                         @if((!is_null($processo->id)) && $processo->tipoMeio->id == $key
                         || (!is_null(old('tipo_meio_id'))) && old('tipo_meio_id') == $key))
-                            <option value="{{ $key }}" selected="selected">{{ $meio }}</option>
+                        <option value="{{ $key }}" selected="selected">{{ $meio }}</option>
                         @else
                             <option value="{{ $key }}">{{ $meio }}</option>
                         @endif
@@ -226,7 +226,7 @@
             <div class="form-group">
                 <label for="objeto">Objeto</label>
                 <textarea name="objeto" class="form-control" @include('partials.readonly')
-                        id="objeto" placeholder="Informe o Objeto">{{is_null(old('objeto'))? $processo->objeto : old('objeto')}}</textarea>
+                id="objeto" placeholder="Informe o Objeto">{{is_null(old('objeto'))? $processo->objeto : old('objeto')}}</textarea>
             </div>
         </div>
 
@@ -234,7 +234,7 @@
             <div class="form-group">
                 <label for="merito">Mérito</label>
                 <textarea name="merito" class="form-control" @include('partials.readonly')
-                        id="merito" placeholder="Informe o Mérito">{{is_null(old('merito'))? $processo->merito : old('merito')}}</textarea>
+                id="merito" placeholder="Informe o Mérito">{{is_null(old('merito'))? $processo->merito : old('merito')}}</textarea>
             </div>
         </div>
 
@@ -282,31 +282,31 @@
             <hr/>
         </div>
         @if(isset($processo) && !is_null($processo->id))
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="data_arquivamento">Data do arquivamento</label>
-                <input
-                        value="{{ is_null(old('data_arquivamento')) ? ! is_null($processo->id) ? $processo->data_arquivamento : '' : old('data_arquivamento')}}"
-                        type="date"
-                        name="data_arquivamento"
-                        class="form-control"
-                        id="data_arquivamento" @include('partials.readonly')
-                />
-                {{--<input value="{{Carbon\Carbon::parse($processo->data_arquivamento)->format('Y-m-d')}}" type="date" name="data_arquivamento" class="form-control" id="data_arquivamento" @include('partials.readonly') />--}}
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="data_arquivamento">Data do arquivamento</label>
+                    <input
+                            value="{{ is_null(old('data_arquivamento')) ? ! is_null($processo->id) ? $processo->data_arquivamento : '' : old('data_arquivamento')}}"
+                            type="date"
+                            name="data_arquivamento"
+                            class="form-control"
+                            id="data_arquivamento" @include('partials.readonly')
+                    />
+                    {{--<input value="{{Carbon\Carbon::parse($processo->data_arquivamento)->format('Y-m-d')}}" type="date" name="data_arquivamento" class="form-control" id="data_arquivamento" @include('partials.readonly') />--}}
+                </div>
             </div>
-        </div>
 
-        <div class="col-md-8">
-            <div class="form-group">
-                <label for="observacao_arquivamento">Observação do arquivamento</label>
-                <textarea name="observacao_arquivamento" class="form-control" @include('partials.readonly') id="observacao_arquivamento"
-                          placeholder="Caso deseje, entre com uma observação sobre o arquivamento">{{is_null(old('observacao_arquivamento'))? $processo->observacao_arquivamento : old('observacao_arquivamento')}}</textarea>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="observacao_arquivamento">Observação do arquivamento</label>
+                    <textarea name="observacao_arquivamento" class="form-control" @include('partials.readonly') id="observacao_arquivamento"
+                              placeholder="Caso deseje, entre com uma observação sobre o arquivamento">{{is_null(old('observacao_arquivamento'))? $processo->observacao_arquivamento : old('observacao_arquivamento')}}</textarea>
+                </div>
             </div>
-        </div>
 
-        <div class="col-md-12">
-            <hr/>
-        </div>
+            <div class="col-md-12">
+                <hr/>
+            </div>
         @endif
         <div class="col-md-12">
             <div class="form-group">

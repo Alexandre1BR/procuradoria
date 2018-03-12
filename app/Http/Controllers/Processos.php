@@ -11,6 +11,7 @@ use App\Data\Scope\Processo as ProcessoScope;
 use App\Http\Requests\Andamento;
 use App\Http\Requests\Apenso as ApensoRequest;
 use App\Http\Requests\Processo as ProcessoRequest;
+use Illuminate\Support\Facades\Cache;
 
 class Processos extends Controller
 {
@@ -40,6 +41,8 @@ class Processos extends Controller
         $a->createFromProcessos($request, $p);
 
 
+        Cache::forget('getProcessosData'.$request->id);
+
         return redirect()
                 ->route('home.index')
                 ->with($this->getSuccessMessage());
@@ -48,8 +51,11 @@ class Processos extends Controller
     public function apensar(ApensoRequest $request, ApensosRepository $repository)
     {
         $repository->createFromRequest($request);
-        //dd($request->processo_id);
-        return view('processos.form')
+
+        Cache::forget('getProcessosData'.$request->processo_id);
+
+        return redirect()
+        ->route('processos.show', $request->processo_id)
         ->with('processo', ProcessoModel::find($request->processo_id))
         ->with('formDisabled', true)
         ->with($this->repository->getProcessosData($request->processo_id))

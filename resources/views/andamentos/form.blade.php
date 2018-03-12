@@ -23,8 +23,15 @@
 
         <div class="panel-body">
             @include('partials.alerts')
+{{--            {{dd(isset($id))}}--}}
+            <form name="formulario" id="formulario"
+                  @if(isset($id))
+                        action="{{ route('andamentos.store',['redirect'=>$id]) }}"
+                  @else
+                        action="{{ route('andamentos.store') }}"
+                  @endif
+                  method="POST">
 
-            <form name="formulario" id="formulario" action="{{ route('andamentos.store') }}" method="POST">
                 {{ csrf_field() }}
                 <input type="hidden" name="id" id="id" value="{{$andamento->id}}">
                 {{--{{dump($andamento->id)}}--}}
@@ -32,7 +39,7 @@
                     <div class="form-group col-md-4">
                         <label for="nome">Processo</label>
 
-                        @if(!isset($processo_id))
+                        @if(!isset($id))
                             <select name="processo_id" class="form-control select2" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo" @include('partials.disabled')>
                                 @if(!is_null(old('processo_id')))
                                     <option value="">Selecione...</option>
@@ -49,10 +56,10 @@
                                 @endforeach
                             </select>
                         @else
-                            <input type="hidden" name="processo_id" id="processo_id" value="{{$processo_id}}">
+                            <input type="hidden" name="processo_id" id="processo_id" value="{{$id}}">
                             <select name="processo_id" class="form-control select2" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo" disabled="disabled">
                                 @foreach ($processos as $key => $processo)
-                                    @if($processo_id == $key || (!is_null(old('processo_id')) && old('processo_id')==$key))
+                                    @if($id == $key || (!is_null(old('id')) && old('id')==$key))
                                         <option value="{{ $key }}" selected>{{ $processo }}</option>
 
                                     @endif

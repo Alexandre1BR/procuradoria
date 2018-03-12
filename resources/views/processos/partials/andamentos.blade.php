@@ -9,9 +9,9 @@
             </div>
 
             <div class="col-md-9">
-                <a href="{{ route('andamentos.create',['processo_id'=>$processo->id]) }}" class="btn btn-primary pull-right" onclick="f_editar()">
+                <a id="buttonAndamentos" href="{{ route('andamentos.create',['id'=>$processo->id]) }}" class="btn btn-primary pull-right">
                     <i class="fa fa-plus"></i>
-                    novo andamento
+                    Novo andamento
                 </a>
             </div>
         </div>
@@ -20,7 +20,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-                <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <table id="andamentosTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
 
                         <tr>

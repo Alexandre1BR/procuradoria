@@ -136,4 +136,33 @@ class AndamentosTest extends DuskTestCase
 //                ->screenshot('4');
         });
     }
+
+    public function testInsertInsideProcesso()
+    {
+        $this->init();
+
+        $processoA = static::$processoAndamento;
+        $tipoAndamentoA = static::$tipoAndamentoAndamento;
+        $tipoPrazoA = static::$tipoPrazoAndamento;
+        $dataPrazoA = static::$dataPrazoAndamento;
+        $dataEntregaA = static::$dataEntregaAndamento;
+        $observacaoA = static::$observacaoAndamento;
+
+        $this->browse(function (Browser $browser) use ($processoA,$tipoAndamentoA,$tipoPrazoA,$dataPrazoA,$dataEntregaA,$observacaoA) {
+            $browser->visit('/processos/'.$processoA['id'])
+                ->click('#editar')
+                ->click('#buttonAndamentos')
+//                ->screenshot('1')
+//                ->select('#processo_id', $processoA['id'])
+                ->select('#tipo_andamento_id', $tipoAndamentoA['id'])
+                ->select('#tipo_prazo_id', $tipoPrazoA['id'])
+                ->keys('#data_prazo', $dataPrazoA)
+                ->keys('#data_entrega', $dataEntregaA)
+                ->type('#observacoes', $observacaoA)
+                ->press('Gravar')
+                ->assertSee('Gravado com sucesso')
+//                ->screenshot('2')
+                ->assertSeeIn('#andamentosTable', $observacaoA);
+        });
+    }
 }

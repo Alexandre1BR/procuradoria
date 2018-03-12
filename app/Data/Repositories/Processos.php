@@ -12,6 +12,7 @@ use App\Data\Models\Processo;
 use App\Data\Models\Tag;
 use App\Data\Models\Tribunal;
 use App\Data\Models\User as UserModel;
+use App\Data\Models\TipoProcesso as ModelTipoProcesso;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -225,6 +226,7 @@ class Processos extends Base
                 'processos'      => $processos,
                 'leis'           => Lei::where('processo_id', $id)->get(),
                 'tags'           => Tag::all(),
+                'tiposProcessos' => ModelTipoProcesso::orderBy('nome')->get(),
             ];
         });
     }

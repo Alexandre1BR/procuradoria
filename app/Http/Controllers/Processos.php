@@ -47,11 +47,12 @@ class Processos extends Controller
         Cache::forget('getProcessosData'.$request->processo_id);
 
         return redirect()
-        ->route('processos.show', $request->processo_id)
-        ->with('processo', ProcessoModel::find($request->processo_id))
-        ->with('formDisabled', true)
-        ->with($this->repository->getProcessosData($request->processo_id))
-        ->with($this->getSuccessMessage());
+          ->route('processos.show', $request->processo_id)
+          ->with('processo', ProcessoModel::find($request->processo_id))
+          ->with('formDisabled', true)
+          ->with($this->repository->getProcessosData($request->processo_id))
+          ->with($this->getSuccessMessage());
+
     }
 
     public function show($id)

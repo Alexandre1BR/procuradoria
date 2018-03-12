@@ -2,10 +2,10 @@
 
 namespace Tests\Browser;
 
+use App\Data\Repositories\Processos as ProcessosRepository;
 use Faker\Generator as Faker;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Data\Repositories\Processos as ProcessosRepository;
 
 class ApensosTest extends DuskTestCase
 {
@@ -18,7 +18,7 @@ class ApensosTest extends DuskTestCase
         static::$apensoApenso = $faker->randomElement(app(ProcessosRepository::class)->all()->toArray());
         static::$apensadoApenso = $faker->randomElement(app(ProcessosRepository::class)->all()->toArray());
 
-        while(static::$apensoApenso['id'] == static::$apensadoApenso['id']){
+        while (static::$apensoApenso['id'] == static::$apensadoApenso['id']) {
             static::$apensadoApenso = $faker->randomElement(app(ProcessosRepository::class)->all()->toArray());
         }
     }

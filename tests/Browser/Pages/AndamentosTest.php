@@ -137,7 +137,6 @@ class AndamentosTest extends DuskTestCase
         });
     }
 
-
     public function testInsertInsideProcesso()
     {
         $this->init();

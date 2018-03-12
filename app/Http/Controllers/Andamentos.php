@@ -37,10 +37,10 @@ class Andamentos extends Controller
 
         Cache::forget('getProcessosData'.$request->redirect);
 
-        if(isset($request->redirect)){
+        if (isset($request->redirect)) {
             return redirect()->route('processos.show', ['id' => $request->redirect])
                 ->with($this->getSuccessMessage());
-        }else{
+        } else {
             return redirect()->route('andamentos.index')
                 ->with($this->getSuccessMessage());
         }

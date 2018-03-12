@@ -8,11 +8,6 @@ abstract class Base
 {
     protected $model;
 
-    /**
-     * @param $request
-     *
-     * @return object
-     */
     public function createFromRequest(Request $request)
     {
         is_null($id = $request->input('id'))

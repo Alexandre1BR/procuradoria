@@ -22,6 +22,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <div
+                                id="filtrar"
                                 class="btn btn-success pull-right"
                                 data-dismiss="modal"
                                 @click="filter"

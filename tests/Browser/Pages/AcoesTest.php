@@ -30,7 +30,7 @@ class AcoesTest extends DuskTestCase
                 ->clickLink('Novo')
                 ->type('#nome', $nomeA)
                 ->type('#abreviacao', $abreviacaoA)
-                ->screenshot('acoes')
+//                ->screenshot('acoes')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
                 ->assertSeeIn('#acoesTable', $nomeA)

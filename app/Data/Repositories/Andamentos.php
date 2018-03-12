@@ -3,6 +3,7 @@
 namespace App\Data\Repositories;
 
 use App\Data\Models\Andamento as AndamentoModel;
+use App\Data\Models\Andamento;
 use App\Data\Models\Processo;
 use App\Data\Models\TipoAndamento;
 use App\Data\Models\TipoEntrada;
@@ -42,18 +43,46 @@ class Andamentos extends Base
 
     public function createFromProcessos(ProcessoRequest $request, Processo $p)
     {
+        $tipoAndamento = TipoAndamento::where('nome', 'Recebimento')->get()->first();
+        $model = new AndamentoModel();
+
         if (is_null($request->input('id'))) {
-            $andamentoModel = new AndamentoModel();
-            $tipoAndamento = TipoAndamento::where('nome', 'Recebimento')->get()->first();
             $tipoEntrada = TipoEntrada::where('nome', 'Automatico')->get()->first();
+            $model->setAttribute('processo_id', $p->id);
+            $model->setAttribute('tipo_andamento_id', $tipoAndamento->id);
+            $model->setAttribute('tipo_entrada_id', $tipoEntrada->id);
 
-            $andamentoModel->setAttribute('processo_id', $p->id);
-            $andamentoModel->setAttribute('tipo_andamento_id', $tipoAndamento->id);
-            $andamentoModel->setAttribute('tipo_entrada_id', $tipoEntrada->id);
+        /*
+         *  It means that the value of data_recebimento
+         *  has changed and need to be changed in Andamento
+         *
+         */
+        } elseif ($request->old('data_recebimento') != $request->input('data_recebimento')) {
+            $model = AndamentoModel::where('processo_id', $p->id)
+                ->where('tipo_andamento_id', $tipoAndamento->id)->get()->first();
+        }
 
-            $andamentoModel->save();
+
+        $model->setAttribute('data_andamento', $p->data_recebimento);
+
+        $model->save();
+    }
+
+    public function checkforchanges(Request $request)
+    {
+        $tipoAndamento = TipoAndamento::where('nome', 'Recebimento')->get()->first();
+
+        if ($request->input('tipo_andamento_id') == $tipoAndamento->id) {
+            if ($request->old('data_andamento') != $request->input('data_andamento')) {
+                $processo = Processo::where('id', $request->input('processo_id'))->get()->first();
+
+                $processo->setAttribute('data_recebimento', $request->data_andamento);
+                $processo->save();
+            }
         }
     }
+
+
 
     /**
      * @param null|string $search

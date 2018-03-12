@@ -18,6 +18,7 @@ class Andamento extends BaseModel
         'tipo_prazo_id',
         'data_prazo',
         'data_entrega',
+        'data_andamento',
         'observacoes',
     ];
 
@@ -31,6 +32,7 @@ class Andamento extends BaseModel
     protected $dates = [
         'data_prazo',
         'data_entrega',
+        'data_andamento',
     ];
 
     public function processo()

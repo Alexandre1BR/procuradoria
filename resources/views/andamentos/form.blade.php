@@ -110,6 +110,17 @@
                         </select>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="data_prazo">Data do Andamento</label>
+                        @if(!is_null(old('data_andamento')))
+                            <input  value="{{old('data_andamento')}}"  type="date"  name="data_andamento" class="form-control" id="data_andamento" placeholder="Data Prazo" @include('partials.disabled') >
+                        @else
+                            <input  value="{{$andamento->data_andamento}}"  type="date"  name="data_andamento" class="form-control" id="data_andamento" placeholder="Data Prazo" @include('partials.disabled') >
+                        @endif
+                    </div>
+                </div>
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="data_prazo">Data prazo</label>

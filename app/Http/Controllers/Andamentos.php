@@ -34,6 +34,8 @@ class Andamentos extends Controller
     {
         $repository->createFromRequest($request);
 
+        $repository->checkforchanges($request);
+
         //return $this->index($repository,$request);
 
         //    return redirect('form')->withInput();

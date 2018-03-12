@@ -27,16 +27,16 @@ class Processo extends FormRequest
 
             'numero_judicial' => 'required',
 //            'numero_alerj'    => 'size:7',
-            'tribunal_id' => 'required',
+//            'tribunal_id' => 'required',
 //            'vara' => 'required', //'origem_complemento',
 //            'data_distribuicao',
-            'acao_id' => 'required',
+//            'acao_id' => 'required',
 //            'relator_id' => 'required',
             'autor' => 'required',
             'reu'   => 'required',
-//            'procurador_id' => 'required',
+//           'procurador_id' => 'required',
 //           'estagiario_id'  => 'required',
-//            'tipo_meio_id'  => 'required',
+//              'tipo_meio_id'  => 'required',
         ];
     }
 }

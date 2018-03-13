@@ -3,9 +3,8 @@
 namespace App\Data\Repositories;
 
 use App\Data\Models\Revision;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Data\Models\Revision as RevisionModel;
+use Illuminate\Http\Request;
 
 class Revisions extends Base
 {

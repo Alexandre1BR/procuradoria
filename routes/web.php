@@ -37,4 +37,6 @@ Route::group(['middleware' => app(Routes::class)->makeAppRootRouteMiddlewares()]
     require __DIR__.'/services/users.php';
 
     require __DIR__.'/services/tipos_processos.php';
+
+    require __DIR__.'/services/revisions.php';
 });

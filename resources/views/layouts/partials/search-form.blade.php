@@ -4,8 +4,11 @@
     <div class="form-group pull-right">
         <div class="row">
             <div class="col-xs-4">
-                <a href="{{ route($routeCreate) }}" class="btn btn-danger pull-right">
-                    <i class="fa fa-plus"></i> Novo</a>
+                @if (isset($routeCreate))
+                    <a href="{{ route($routeCreate) }}" class="btn btn-danger pull-right">
+                        <i class="fa fa-plus"></i> Novo
+                    </a>
+                @endif
             </div>
 
             <div class="col-xs-8 pull-right">

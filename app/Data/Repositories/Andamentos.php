@@ -2,8 +2,8 @@
 
 namespace App\Data\Repositories;
 
-use App\Data\Models\Andamento as AndamentoModel;
 use App\Data\Models\Andamento;
+use App\Data\Models\Andamento as AndamentoModel;
 use App\Data\Models\Processo;
 use App\Data\Models\TipoAndamento;
 use App\Data\Models\TipoEntrada;
@@ -62,7 +62,6 @@ class Andamentos extends Base
                 ->where('tipo_andamento_id', $tipoAndamento->id)->get()->first();
         }
 
-
         $model->setAttribute('data_andamento', $p->data_recebimento);
 
         $model->save();
@@ -81,8 +80,6 @@ class Andamentos extends Base
             }
         }
     }
-
-
 
     /**
      * @param null|string $search

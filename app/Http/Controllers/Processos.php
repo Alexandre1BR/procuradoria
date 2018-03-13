@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Models\Processo as ProcessoModel;
 use App\Data\Models\Processo;
+use App\Data\Models\Processo as ProcessoModel;
 use App\Data\Repositories\Andamentos as AndamentosRepository;
 use App\Data\Repositories\Apensos as ApensosRepository;
 use App\Data\Repositories\Processos as ProcessosRepository;
@@ -34,12 +34,11 @@ class Processos extends Controller
 
     public function store(ProcessoRequest $request, ProcessosRepository $repository)
     {
-        $p =  $repository->createFromRequest($request);
+        $p = $repository->createFromRequest($request);
         $AndamentosRequest = new Andamento();
 
         $a = new AndamentosRepository();
         $a->createFromProcessos($request, $p);
-
 
         Cache::forget('getProcessosData'.$request->id);
 

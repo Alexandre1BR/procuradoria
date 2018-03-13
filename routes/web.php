@@ -9,6 +9,8 @@ Route::get('/import', function () {
     Artisan::call('procuradoria:import:processos', ['usersFile' => '/home/vagrant/code/alerj/procuradoria/u.xlsx', 'processesFile' => '/home/vagrant/code/alerj/procuradoria/procv2.xlsx']);
 });
 
+require __DIR__.'/services/errors.php';
+
 Route::group(['middleware' => app(Routes::class)->makeAppRootRouteMiddlewares()], function () {
     require __DIR__.'/services/home.php';
 

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Data\Models\Tribunal;
 use App\Data\Repositories\Revisions as RevisionsRepository;
+use Illuminate\Http\Request;
 
 class Revisions extends Controller
 {

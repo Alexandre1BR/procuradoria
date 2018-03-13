@@ -35,6 +35,9 @@ class Andamentos extends Controller
     {
         $repository->createFromRequest($request);
 
+        $repository->checkforchanges($request);
+
+        //return $this->index($repository,$request);
         Cache::forget('getProcessosData'.$request->redirect);
 
         if (isset($request->redirect)) {

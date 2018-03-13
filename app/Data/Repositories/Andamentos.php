@@ -3,6 +3,11 @@
 namespace App\Data\Repositories;
 
 use App\Data\Models\Andamento as AndamentoModel;
+use App\Data\Models\Andamento;
+use App\Data\Models\Processo;
+use App\Data\Models\TipoAndamento;
+use App\Data\Models\TipoEntrada;
+use App\Http\Requests\Processo as ProcessoRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -36,6 +41,54 @@ class Andamentos extends Base
         return $this->searchFromRequest($request->get('pesquisa'));
     }
 
+    public function createFromProcessos(ProcessoRequest $request, Processo $p)
+    {
+        $tipoAndamento = TipoAndamento::where('nome', 'Recebimento')->get()->first();
+        $model = new AndamentoModel();
+
+        if (is_null($request->input('id'))) {
+            $tipoEntrada = TipoEntrada::where('nome', 'Automatico')->get()->first();
+            $model->setAttribute('processo_id', $p->id);
+            $model->setAttribute('tipo_andamento_id', $tipoAndamento->id);
+            $model->setAttribute('tipo_entrada_id', $tipoEntrada->id);
+
+        /*
+         *  It means that the value of data_recebimento
+         *  has changed and need to be changed in Andamento
+         *
+         */
+        } elseif ($request->old('data_recebimento') != $request->input('data_recebimento')) {
+            $model = AndamentoModel::where('processo_id', $p->id)
+                ->where('tipo_andamento_id', $tipoAndamento->id)->get()->first();
+        }
+
+
+        $model->setAttribute('data_andamento', $p->data_recebimento);
+
+        $model->save();
+    }
+
+    public function checkforchanges(Request $request)
+    {
+        $tipoAndamento = TipoAndamento::where('nome', 'Recebimento')->get()->first();
+
+        if ($request->input('tipo_andamento_id') == $tipoAndamento->id) {
+            if ($request->old('data_andamento') != $request->input('data_andamento')) {
+                $processo = Processo::where('id', $request->input('processo_id'))->get()->first();
+
+                $processo->setAttribute('data_recebimento', $request->data_andamento);
+                $processo->save();
+            }
+        }
+    }
+
+
+
+    /**
+     * @param null|string $search
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function searchFromRequest($search = null, $query = null)
     {
         $search = is_null($search)

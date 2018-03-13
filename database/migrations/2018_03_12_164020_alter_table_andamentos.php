@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,35 +16,29 @@ class AlterTableAndamentos extends Migration
             $table->string('quem')->nullable();
             $table->integer('tipo_parecer')->nullable();
         });
-
-        Schema::create('tipos_parecer', function (Blueprint $table) {
+        Schema::create('tipo_parecer', function (Blueprint $table) {
             $table->increments('id');
-
             $table->string('nome');
         });
-
         DB::table('tipos_andamentos')->insert(
             [
                 'id'   => '3',
                 'nome' => 'Manifestação',
             ]
         );
-
-        DB::table('tipos_parecer')->insert(
+        DB::table('tipo_parecer')->insert(
             [
                 'id'   => '1',
                 'nome' => 'Favorável',
             ]
         );
-
-        DB::table('tipos_parecer')->insert(
+        DB::table('tipo_parecer')->insert(
             [
                 'id'   => '2',
                 'nome' => 'Não favorável',
             ]
         );
     }
-
     /**
      * Reverse the migrations.
      *
@@ -56,18 +49,14 @@ class AlterTableAndamentos extends Migration
         Schema::table('andamentos', function (Blueprint $table) {
             $table->dropColumn('quem');
         });
-
         Schema::table('andamentos', function (Blueprint $table) {
             $table->dropColumn('tipo_parecer');
         });
-
         DB::table('tipos_andamentos')->delete(
             [
                 'id'   => '3',
-
             ]
         );
-
-        Schema::drop('tipos_parecer');
+        Schema::drop('tipo_parecer');
     }
 }

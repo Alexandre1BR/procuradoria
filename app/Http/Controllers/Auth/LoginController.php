@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Auth;
 use App\Http\Controllers\Controller;
 use App\Services\Authentication;
+use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
@@ -70,8 +70,7 @@ class LoginController extends Controller
         if ($this->attemptLogin($request)) {
             return Auth::user()->disabled_at
                 ? $this->sendDisabledResponse()
-                : $this->sendLoginResponse($request)
-            ;
+                : $this->sendLoginResponse($request);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts

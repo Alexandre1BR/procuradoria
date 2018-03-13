@@ -35,4 +35,6 @@ Route::group(['middleware' => app(Routes::class)->makeAppRootRouteMiddlewares()]
     require __DIR__.'/services/tags.php';
 
     require __DIR__.'/services/users.php';
+
+    require __DIR__.'/services/tipos_processos.php';
 });

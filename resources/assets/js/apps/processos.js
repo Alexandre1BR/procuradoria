@@ -23,6 +23,8 @@ if (jQuery("#" + appName).length > 0) {
                 meios: [],
 
                 tags: [],
+
+                tipos_processos: [],
             },
 
             pesquisa: '',
@@ -65,6 +67,7 @@ if (jQuery("#" + appName).length > 0) {
                 data_arquivamento: null,
                 observacao_arquivamento: null,
                 tags: [],
+                tipo_processo_id: null,
             }
         },
 
@@ -164,6 +167,8 @@ if (jQuery("#" + appName).length > 0) {
             this.refreshTable('meios')
 
             this.refreshTable('tags')
+
+            this.refreshTable('tipos_processos')
         },
     })
 

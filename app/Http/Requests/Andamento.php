@@ -35,8 +35,8 @@ class Andamento extends FormRequest
                     is_null($this->id) ?
                         Rule::unique('andamentos')->whereIn('processo_id', [$this->processo_id]) :
                         Rule::unique('andamentos')->whereIn('processo_id', [$this->processo_id])
-                            ->whereNot('id', $this->id) : ''
-          ]
+                            ->whereNot('id', $this->id) : '',
+          ],
         ];
     }
 }

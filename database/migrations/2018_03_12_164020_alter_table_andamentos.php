@@ -18,7 +18,7 @@ class AlterTableAndamentos extends Migration
             $table->integer('tipo_parecer')->nullable();
         });
 
-        Schema::create('tipo_parecer', function (Blueprint $table) {
+        Schema::create('tipos_parecer', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('nome');
@@ -32,14 +32,14 @@ class AlterTableAndamentos extends Migration
             ]
         );
 
-        DB::table('tipo_parecer')->insert(
+        DB::table('tipos_parecer')->insert(
             [
                 'id'   => '1',
                 'nome' => 'Favorável',
             ]
         );
 
-        DB::table('tipo_parecer')->insert(
+        DB::table('tipos_parecer')->insert(
             [
                 'id'   => '2',
                 'nome' => 'Não favorável',
@@ -69,6 +69,6 @@ class AlterTableAndamentos extends Migration
             ]
         );
 
-        Schema::drop('tipo_parecer');
+        Schema::drop('tipos_parecer');
     }
 }

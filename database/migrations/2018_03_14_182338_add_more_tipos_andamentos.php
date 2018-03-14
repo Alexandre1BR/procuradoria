@@ -25,6 +25,7 @@ class AddMoreTiposAndamentos extends Migration
 
         collect([
             ['nome' => 'Prazo'],
+            ['nome' => 'Recebimento'],
             ['nome' => 'Manifestação'],
             ['nome' => 'Despacho'],
             ['nome' => 'Petição'],

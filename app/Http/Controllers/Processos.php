@@ -40,8 +40,6 @@ class Processos extends Controller
         $a = new AndamentosRepository();
         $a->createFromProcessos($request, $p);
 
-        Cache::forget('getProcessosData'.$request->id);
-
         return redirect()
                 ->route('home.index')
                 ->with($this->getSuccessMessage());
@@ -50,8 +48,6 @@ class Processos extends Controller
     public function apensar(ApensoRequest $request, ApensosRepository $repository)
     {
         $repository->createFromRequest($request);
-
-        Cache::forget('getProcessosData'.$request->processo_id);
 
         return redirect()
           ->route('processos.show', $request->processo_id)

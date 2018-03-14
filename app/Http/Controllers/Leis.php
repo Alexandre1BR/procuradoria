@@ -31,8 +31,6 @@ class Leis extends Controller
     {
         $repository->createFromRequest($request);
 
-        Cache::forget('getProcessosData'.$request->input('processo_id'));
-
         return redirect()->route('processos.show', ['processo_id' => $request->input('processo_id')])
 //            ->with('processo_id',$request->input('processo_id'))
             ->with($this->getSuccessMessage());

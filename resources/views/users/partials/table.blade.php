@@ -10,7 +10,7 @@
     </thead>
     @forelse ($users as $user)
         <tr>
-            <td>{{ $user->name }}</td>
+            <td><a href="{{ route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a></td>
             <td>{{ $user->email }}</td>
             <td>{{ $user->username }}</td>
             <td>{{ $user->userType->nome }}</td>

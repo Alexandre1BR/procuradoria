@@ -20,7 +20,8 @@ use Illuminate\Support\Facades\DB;
 
 use App\Data\Scope\Processo as ProcessoScope;
 
-class Processos extends Base {
+class Processos extends Base
+{
 
     protected $model = Processo::class;
 

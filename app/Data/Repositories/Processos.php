@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\DB;
 use App\Data\Scope\Processo as ProcessoScope;
 
 class Processos extends Base {
+
     protected $model = Processo::class;
 
     public function __construct() {
@@ -197,14 +198,9 @@ class Processos extends Base {
      *
      * @return array
      */
-
     public function getProcessosData($id = null)
     {
         return Cache::remember('getProcessosData'.$id, 1, function () use ($id) {
-<<<<<<< HEAD
-
-=======
->>>>>>> 9bbdaf52bfa9a40ec12eabe7eb9c743d48096799
             $apensos = Apenso::where('processo_id', $id)->orWhere('apensado_id', $id)->get();
 
             $processos = $this->getProcessosWithoutApensos($apensos);

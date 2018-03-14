@@ -62,7 +62,6 @@ class AndamentosTest extends DuskTestCase
             $browser->visit('/andamentos')
                 ->clickLink('Novo')
                 ->press('Gravar')
-                ->assertSee('O campo Tipo prazo é obrigatório.')
                 ->assertSee('O campo Processo é obrigatório.')
                 ->assertSee('O campo Tipo de andamento é obrigatório.');
         });

@@ -3,6 +3,7 @@
 namespace App\Data\Models;
 
 use App\Data\Presenters\AndamentoPresenter;
+use Illuminate\Support\Facades\Cache;
 
 class Andamento extends BaseModel
 {
@@ -58,5 +59,10 @@ class Andamento extends BaseModel
     public function getPresenterClass()
     {
         return AndamentoPresenter::class;
+    }
+
+    public function save(array $options = []){
+        Cache::forget('getProcessosData'.$this->processo_id);
+        parent::save();
     }
 }

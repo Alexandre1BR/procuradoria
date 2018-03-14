@@ -63,6 +63,7 @@ if (jQuery("#" + appName).length > 0) {
                 recurso: null,
                 observacao: null,
                 link: null,
+                site_alerj_link: null,
                 data_arquivamento: null,
                 data_arquivamento: null,
                 observacao_arquivamento: null,

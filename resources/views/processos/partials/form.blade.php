@@ -304,6 +304,14 @@
         </div>
 
         <div class="col-md-12">
+            <div class="form-group">
+                <label for="link">Link site ALERJ</label>
+                <textarea name="site_alerj_link" class="form-control" @include('partials.readonly') id="site_alerj_link"
+                          placeholder="Informe o link do processo no site da ALERJ">{{is_null(old('site_alerj_link'))? $processo->site_alerj_link : old('site_alerj_link')}}</textarea>
+            </div>
+        </div>
+
+        <div class="col-md-12">
             <hr/>
         </div>
         @if(isset($processo) && !is_null($processo->id))

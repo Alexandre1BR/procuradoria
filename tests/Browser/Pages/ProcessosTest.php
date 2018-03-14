@@ -182,8 +182,6 @@ class ProcessosTest extends DuskTestCase
                 ->clickLink('Novo')
                 ->press('Gravar')
                 ->assertSee('O campo Número judicial é obrigatório.')
-                ->assertSee('O campo Tribunal é obrigatório.')
-                ->assertSee('O campo Ação é obrigatório.')
                 ->assertSee('O campo Autor é obrigatório.')
                 ->assertSee('O campo Réu é obrigatório.');
         });

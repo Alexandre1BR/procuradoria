@@ -7,6 +7,7 @@
  */
 
 namespace App\Data\Models;
+use Illuminate\Support\Facades\Cache;
 
 class Apenso extends BaseModel
 {
@@ -25,5 +26,11 @@ class Apenso extends BaseModel
     public function processo()
     {
         return $this->belongsTo(Processo::class);
+    }
+
+    public function save(array $options = []){
+        Cache::forget('getProcessosData'.$this->processo_id);
+        Cache::forget('getProcessosData'.$this->apensado_id);
+        parent::save();
     }
 }

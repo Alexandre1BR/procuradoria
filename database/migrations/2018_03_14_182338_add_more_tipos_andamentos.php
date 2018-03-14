@@ -23,7 +23,7 @@ class AddMoreTiposAndamentos extends Migration
         ])->each(function ($tipo) {
             $found = TipoAndamento::where('nome', $tipo['nome'])->first();
 
-            if (! $found) {
+            if (!$found) {
                 $a = new TipoAndamento();
 
                 $a->nome = $tipo['nome'];

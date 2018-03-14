@@ -37,9 +37,6 @@ class Andamentos extends Controller
 
         $repository->checkforchanges($request);
 
-        //return $this->index($repository,$request);
-        Cache::forget('getProcessosData'.$request->redirect);
-
         if (isset($request->redirect)) {
             return redirect()->route('processos.show', ['id' => $request->redirect])
                 ->with($this->getSuccessMessage());

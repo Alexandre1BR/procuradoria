@@ -1,6 +1,7 @@
 <?php
 
 use App\Data\Models\TipoAndamento;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class AddMoreTiposAndamentos extends Migration
@@ -12,6 +13,16 @@ class AddMoreTiposAndamentos extends Migration
      */
     public function up()
     {
+        Schema::drop('tipos_andamentos');
+
+        Schema::create('tipos_andamentos', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->string('nome');
+
+            $table->timestamps();
+        });
+
         collect([
             ['nome' => 'Manifestação'],
             ['nome' => 'Despacho'],
@@ -21,15 +32,7 @@ class AddMoreTiposAndamentos extends Migration
             ['nome' => 'Andamento'],
             ['nome' => 'Carga'],
         ])->each(function ($tipo) {
-            $found = TipoAndamento::where('nome', $tipo['nome'])->first();
-
-            if (! $found) {
-                $a = new TipoAndamento();
-
-                $a->nome = $tipo['nome'];
-
-                $a->save();
-            }
+            TipoAndamento::firstOrCreate($tipo);
         });
     }
 

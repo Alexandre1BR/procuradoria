@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Repositories\Andamentos;
+use App\Data\Repositories\Andamentos as AndamentosRepository;
+use Illuminate\Http\Request;
 
 class Agenda extends Controller
 {
@@ -11,14 +12,22 @@ class Agenda extends Controller
      */
     private $andamentosRepository;
 
-    public function __construct(Andamentos $andamentosRepository)
+    public function __construct(AndamentosRepository $andamentosRepository)
     {
         $this->andamentosRepository = $andamentosRepository;
     }
 
-    public function index()
+    public function index(AndamentosRepository $andamentosRepository, Request $request)
     {
-        return view('agenda.index');
+        $pesquisa = $request->get('pesquisa');
+
+        if (empty($pesquisa)) {
+            return view('agenda.index');
+        } else {
+            return view('andamentos.index')
+                    ->with('pesquisa', $pesquisa)
+                    ->with('andamentos', $andamentosRepository->search($request));
+        }
     }
 
     public function feed()

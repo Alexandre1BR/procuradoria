@@ -26,4 +26,18 @@ class ProcessoPresenter extends BasePresenter
 
         return !is_null($data_distribuicao) ? Carbon::createFromFormat('Y-m-d H:i:s', $data_distribuicao)->format('d/m/Y') : null;
     }
+
+    public function data_recebimento()
+    {
+        $data_recebimento = $this->wrappedObject->data_recebimento;
+
+        return !is_null($data_recebimento) ? Carbon::createFromFormat('Y-m-d H:i:s', $data_recebimento)->format('Y-m-d') : null;
+    }
+
+    public function data_recebimento_formatado()
+    {
+        $data_recebimento = $this->wrappedObject->data_recebimento;
+
+        return !is_null($data_recebimento) ? Carbon::createFromFormat('Y-m-d H:i:s', $data_recebimento)->format('d/m/Y') : null;
+    }
 }

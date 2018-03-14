@@ -10,6 +10,7 @@ use App\Data\Models\Lei;
 use App\Data\Models\Meio;
 use App\Data\Models\Processo;
 use App\Data\Models\Tag;
+use App\Data\Models\TipoProcesso as ModelTipoProcesso;
 use App\Data\Models\Tribunal;
 use App\Data\Models\User as UserModel;
 use Carbon\Carbon;
@@ -225,6 +226,7 @@ class Processos extends Base
                 'processos'      => $processos,
                 'leis'           => Lei::where('processo_id', $id)->get(),
                 'tags'           => Tag::all(),
+                'tiposProcessos' => ModelTipoProcesso::orderBy('nome')->get(),
             ];
         });
     }

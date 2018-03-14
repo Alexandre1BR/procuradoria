@@ -23,6 +23,8 @@ if (jQuery("#" + appName).length > 0) {
                 meios: [],
 
                 tags: [],
+
+                tipos_processos: [],
             },
 
             pesquisa: '',
@@ -65,6 +67,7 @@ if (jQuery("#" + appName).length > 0) {
                 data_arquivamento: null,
                 observacao_arquivamento: null,
                 tags: [],
+                tipo_processo_id: null,
             }
         },
 
@@ -138,6 +141,12 @@ if (jQuery("#" + appName).length > 0) {
             openProcesso(id) {
                 window.location.href = '/processos/'+id;
             },
+
+            printer() {
+                $( "#cabecalho-processos" ).addClass( "hidden-print" );
+                window.print();
+                $( "#cabecalho-processos" ).removeClass( "hidden-print" );
+            },
         },
 
         mounted() {
@@ -158,7 +167,9 @@ if (jQuery("#" + appName).length > 0) {
             this.refreshTable('meios')
 
             this.refreshTable('tags')
+
+            this.refreshTable('tipos_processos')
         },
     })
-}
 
+}

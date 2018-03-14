@@ -28,8 +28,8 @@
         <tr>
             <td><a href="{{ route('andamentos.show',['id' => $andamento->id]) }}">{{ $andamento->processo->numero_judicial }}</a></td>
             <td>{{ $andamento->tipoAndamento->nome }}</td>
-            <td>{{ $andamento->tipoEntrada->nome }}</td>
-            <td>{{ $andamento->tipoPrazo->nome }}</td>
+            <td>{{ is_null($andamento->tipoEntrada)? '' : $andamento->tipoEntrada->nome }}</td>
+            <td>{{ is_null($andamento->tipoPrazo) ? '' :$andamento->tipoPrazo->nome }}</td>
             <td>{{ $andamento->data_prazo_formatado }}</td>
             <td>{{ $andamento->data_entrega_formatado }}</td>
             <td>{{ $andamento->observacoes }}</td>

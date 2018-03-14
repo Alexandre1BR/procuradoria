@@ -2,7 +2,12 @@
 
 namespace App\Data\Repositories;
 
+use App\Data\Models\Andamento;
 use App\Data\Models\Andamento as AndamentoModel;
+use App\Data\Models\Processo;
+use App\Data\Models\TipoAndamento;
+use App\Data\Models\TipoEntrada;
+use App\Http\Requests\Processo as ProcessoRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -34,6 +39,46 @@ class Andamentos extends Base
     public function search(Request $request)
     {
         return $this->searchFromRequest($request->get('pesquisa'));
+    }
+
+    public function createFromProcessos(ProcessoRequest $request, Processo $p)
+    {
+        $tipoAndamento = TipoAndamento::where('nome', 'Recebimento')->get()->first();
+        $model = new AndamentoModel();
+
+        if (is_null($request->input('id'))) {
+            $tipoEntrada = TipoEntrada::where('nome', 'Automatico')->get()->first();
+            $model->setAttribute('processo_id', $p->id);
+            $model->setAttribute('tipo_andamento_id', $tipoAndamento->id);
+            $model->setAttribute('tipo_entrada_id', $tipoEntrada->id);
+
+        /*
+         *  It means that the value of data_recebimento
+         *  has changed and need to be changed in Andamento
+         *
+         */
+        } elseif ($request->old('data_recebimento') != $request->input('data_recebimento')) {
+            $model = AndamentoModel::where('processo_id', $p->id)
+                ->where('tipo_andamento_id', $tipoAndamento->id)->get()->first();
+        }
+
+        $model->setAttribute('data_andamento', $p->data_recebimento);
+
+        $model->save();
+    }
+
+    public function checkforchanges(Request $request)
+    {
+        $tipoAndamento = TipoAndamento::where('nome', 'Recebimento')->get()->first();
+
+        if ($request->input('tipo_andamento_id') == $tipoAndamento->id) {
+            if ($request->old('data_andamento') != $request->input('data_andamento')) {
+                $processo = Processo::where('id', $request->input('processo_id'))->get()->first();
+
+                $processo->setAttribute('data_recebimento', $request->data_andamento);
+                $processo->save();
+            }
+        }
     }
 
     /**
@@ -115,5 +160,24 @@ class Andamentos extends Base
         return (new AndamentoModel())
             ->with(['tipoAndamento', 'tipoEntrada', 'tipoPrazo'])
             ->orderBy('updated_at', 'desc');
+    }
+
+    public function filter($request)
+    {
+        $query = $this->makeAndamentoQuery();
+
+        if (!empty($search = $request->get('search'))) {
+            $query = $this->searchString($search, $query);
+        }
+
+//        if ($request->get('advancedFilter')) {
+//            collect($this->filterToJson($request))->each(function ($search, $column) use ($query) {
+//                if (!empty($search)) {
+//                    $this->addQueryByType($search, $column, $query);
+//                }
+//            });
+//        }
+
+        return $this->transform($query->get());
     }
 }

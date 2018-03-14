@@ -2,13 +2,12 @@
 
 namespace Tests\Browser;
 
+use App\Data\Repositories\Acoes as AcoesRepository;
+use App\Data\Repositories\Juizes as JuizesRepository;
+use App\Data\Repositories\Meios as MeiosRepository;
 use App\Data\Repositories\Processos as ProcessosRepository;
 use App\Data\Repositories\Tribunais as TribunaisRepository;
-use App\Data\Repositories\Juizes as JuizesRepository;
-use App\Data\Repositories\Acoes as AcoesRepository;
 use App\Data\Repositories\Users as UsersRepository;
-use App\Data\Repositories\Meios as MeiosRepository;
-use Carbon\Carbon;
 use Faker\Generator as Faker;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -89,7 +88,7 @@ class ProcessosTest extends DuskTestCase
         $observacaoP = static::$observacaoProcesso;
         $linkP = static::$linkProcesso;
 
-    $this->browse(function (Browser $browser) use ($numeroJudicialP, $numeroAlerjP, $tribunalP, $varaP, $dataDistribuicaoP, $acaoP, $juizP, $autorP, $relatorP, $reuP,
+        $this->browse(function (Browser $browser) use ($numeroJudicialP, $numeroAlerjP, $tribunalP, $varaP, $dataDistribuicaoP, $acaoP, $juizP, $autorP, $relatorP, $reuP,
         $procuradorP, $estagiarioP, $assessorP, $tipoMeioP, $objetoP, $meritoP, $liminarP, $apensosObsP, $recursoObsP, $observacaoP, $linkP) {
             $browser->visit('/')
                 ->clickLink('Novo')
@@ -205,7 +204,7 @@ class ProcessosTest extends DuskTestCase
         $novoEstagiarioP = $faker->randomElement(app(UsersRepository::class)->getByType('Estagiario')->toArray());
 
         $this->browse(function (Browser $browser) use ($ProcessoP, $novoNumeroJudicialP, $novoDataDistribuicaoP, $novoTribunalP, $novoAutorP, $novoObjetoP,
-            $novoProcuradorP, $novoAssessorP, $novoEstagiarioP){
+            $novoProcuradorP, $novoAssessorP, $novoEstagiarioP) {
             $browser->visit('/processos/'.$ProcessoP['id'])
 //                ->screenshot('0')
                 ->click('#editar')

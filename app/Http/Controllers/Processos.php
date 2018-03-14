@@ -11,7 +11,6 @@ use App\Data\Scope\Processo as ProcessoScope;
 use App\Http\Requests\Andamento;
 use App\Http\Requests\Apenso as ApensoRequest;
 use App\Http\Requests\Processo as ProcessoRequest;
-use Illuminate\Support\Facades\Cache;
 
 class Processos extends Controller
 {

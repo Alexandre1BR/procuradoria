@@ -2,10 +2,10 @@
 
 namespace Tests\Browser;
 
+use App\Data\Repositories\Users as UsersRepository;
 use Faker\Generator as Faker;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Data\Repositories\Users as UsersRepository;
 
 class UsersTest extends DuskTestCase
 {
@@ -28,7 +28,7 @@ class UsersTest extends DuskTestCase
         $randomUserU = static::$randomUserUsers;
         $NameU = static::$NameUsers;
 
-        $this->browse(function (Browser $browser) use ($randomUserU, $NameU){
+        $this->browse(function (Browser $browser) use ($randomUserU, $NameU) {
             $browser->visit('/users/'.$randomUserU['id'])
 //                ->screenshot('testValidation1')
                 ->click('#editar')

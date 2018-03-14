@@ -61,7 +61,8 @@ class Andamento extends BaseModel
         return AndamentoPresenter::class;
     }
 
-    public function save(array $options = []){
+    public function save(array $options = [])
+    {
         Cache::forget('getProcessosData'.$this->processo_id);
         parent::save();
     }

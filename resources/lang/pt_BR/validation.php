@@ -194,6 +194,6 @@ return [
 
         'email'                    => 'Email',
         'user_type_id'             => 'Tipo de usuário',
-        'personal_email'           => 'Email pessoal'
+        'personal_email'           => 'Email pessoal',
     ],
 ];

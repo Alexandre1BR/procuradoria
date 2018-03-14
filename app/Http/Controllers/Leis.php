@@ -6,7 +6,6 @@ use App\Data\Models\Lei;
 use App\Data\Repositories\Leis as LeisRepository;
 use App\Http\Requests\Lei as LeiRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 class Leis extends Controller
 {

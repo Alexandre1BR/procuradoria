@@ -7,7 +7,7 @@
 
         <div class="col-xs-8 pull-right">
             <div class="input-group" role="button">
-                <input v-model="pesquisa" class="form-control" placeholder="Pesquisar" @keyup="typeKeyUp">
+                <input v-model="pesquisa" name="pesquisa" class="form-control" placeholder="Pesquisar" @keyup="typeKeyUp">
 
                 <input type="checkbox"  v-model="processos_arquivados" class="form-control">
 

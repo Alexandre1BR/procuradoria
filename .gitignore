@@ -15,3 +15,6 @@ yarn-error.log
 /tests/coverage
 composer.phar
 config/version.yml
+package-lock.json
+package.json
+u.xlsx

@@ -18,35 +18,34 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
-class Processos extends Base
-{
+use App\Data\Scope\Processo as ProcessoScope;
+
+class Processos extends Base {
     protected $model = Processo::class;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->tiposUsuariosRepository = app(TiposUsuarios::class);
     }
 
     protected $dataTypes = [
-        'numero_judicial' => 'string',
-        'numero_alerj'    => 'string',
-        'vara'            => 'string',
+            'numero_judicial' => 'string',
+            'numero_alerj' => 'string',
+            'vara' => 'string',
         //'origem_complemento' => 'string,
-        'apensos_obs'       => 'string',
-        'autor'             => 'string',
-        'reu'               => 'string',
-        'objeto'            => 'string',
-        'merito'            => 'string',
-        'liminar'           => 'string',
-        'recurso'           => 'string',
+            'apensos_obs' => 'string',
+            'autor' => 'string',
+            'reu' => 'string',
+            'objeto' => 'string',
+            'merito' => 'string',
+            'liminar' => 'string',
+            'recurso' => 'string',
         //'tipo_meio'         => 'string',
-        'data_distribuicao' => 'date',
-        'observacao'        => 'string',
-        'link'              => 'string',
+            'data_distribuicao' => 'date',
+            'observacao' => 'string',
+            'link' => 'string',
     ];
 
-    protected function toDate($item)
-    {
+    protected function toDate($item) {
         try {
             $item = Carbon::createFromFormat('d/m/Y', $item)->format('Y-m-d');
         } catch (\Exception $exception) {
@@ -56,18 +55,15 @@ class Processos extends Base
         return $item;
     }
 
-    public function getAllIds()
-    {
+    public function getAllIds() {
         return Processo::pluck('id');
     }
 
-    private function listTags($tags)
-    {
+    private function listTags($tags) {
         // dd($tags);
     }
 
-    public function search(Request $request)
-    {
+    public function search(Request $request) {
         info($request);
 
         $this->searchFromRequest($request->get('pesquisa'));
@@ -80,10 +76,8 @@ class Processos extends Base
      *
      * @return mixed
      */
-    public function filter($request)
-    {
-        $query = $this->makeProcessoQuery();
-
+    public function filter($request) {
+        $query = $this->makeProcessoQuery($request->get('processos_arquivados'));
         if (!empty($search = $request->get('search'))) {
             $query = $this->searchString($search, $query);
         }
@@ -104,8 +98,7 @@ class Processos extends Base
      * @param $column
      * @param $query
      */
-    public function addQueryByType($search, $column, $query): void
-    {
+    public function addQueryByType($search, $column, $query): void {
         switch (Processo::getDataTypeOf($column)) {
             case 'id':
                 $query->where($column, '=', $search);
@@ -127,13 +120,12 @@ class Processos extends Base
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function searchString($search = null, $query = null)
-    {
+    public function searchString($search = null, $query = null) {
         $search = is_null($search)
-            ? collect()
-            : collect(explode(' ', $search))->map(function ($item) {
-                return strtolower($item);
-            });
+                ? collect()
+                : collect(explode(' ', $search))->map(function ($item) {
+                    return strtolower($item);
+                });
 
         $columns = collect($this->dataTypes);
 
@@ -142,7 +134,7 @@ class Processos extends Base
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
                 if ($type === 'string') {
-                    $query->orWhere($column, 'ilike', '%'.$item.'%');
+                    $query->orWhere($column, 'ilike', '%' . $item . '%');
                 } else {
                     $ifdate = $this->toDate($item);
                     if ($ifdate != null) {
@@ -188,8 +180,7 @@ class Processos extends Base
      *
      * @return mixed
      */
-    public function getProcessosWithoutApensos($apensos)
-    {
+    public function getProcessosWithoutApensos($apensos) {
         $processos = Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id');
 
         foreach ($apensos as $key => $apenso) {
@@ -206,27 +197,26 @@ class Processos extends Base
      *
      * @return array
      */
-    public function getProcessosData($id = null)
-    {
+    public function getProcessosData($id = null) {
         return Cache::remember('getProcessosData', 1, function () use ($id) {
             $apensos = Apenso::where('processo_id', $id)->orWhere('apensado_id', $id)->get();
 
             $processos = $this->getProcessosWithoutApensos($apensos);
 
             return [
-                'juizes'         => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
-                'tribunais'      => Tribunal::orderBy('nome')->pluck('nome', 'id'),
-                'procuradores'   => UserModel::type('Procurador')->orderBy('name')->pluck('name', 'id'),
-                'assessores'     => UserModel::type('Assessor')->orderBy('name')->pluck('name', 'id'),
-                'estagiarios'    => UserModel::type('Estagiario')->orderBy('name')->pluck('name', 'id'),
-                'meios'          => Meio::orderBy('nome')->pluck('nome', 'id'),
-                'acoes'          => Acao::orderBy('nome')->pluck('nome', 'id'),
-                'andamentos'     => Andamento::where('processo_id', $id)->get(),
-                'apensos'        => $apensos,
-                'processos'      => $processos,
-                'leis'           => Lei::where('processo_id', $id)->get(),
-                'tags'           => Tag::all(),
-                'tiposProcessos' => ModelTipoProcesso::orderBy('nome')->get(),
+                    'juizes' => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
+                    'tribunais' => Tribunal::orderBy('nome')->pluck('nome', 'id'),
+                    'procuradores' => UserModel::type('Procurador')->orderBy('name')->pluck('name', 'id'),
+                    'assessores' => UserModel::type('Assessor')->orderBy('name')->pluck('name', 'id'),
+                    'estagiarios' => UserModel::type('Estagiario')->orderBy('name')->pluck('name', 'id'),
+                    'meios' => Meio::orderBy('nome')->pluck('nome', 'id'),
+                    'acoes' => Acao::orderBy('nome')->pluck('nome', 'id'),
+                    'andamentos' => Andamento::where('processo_id', $id)->get(),
+                    'apensos' => $apensos,
+                    'processos' => $processos,
+                    'leis' => Lei::where('processo_id', $id)->get(),
+                    'tags' => Tag::all(),
+                    'tiposProcessos' => ModelTipoProcesso::orderBy('nome')->get(),
             ];
         });
     }
@@ -236,8 +226,7 @@ class Processos extends Base
      *
      * @return mixed
      */
-    protected function filterToJson($request)
-    {
+    protected function filterToJson($request) {
         if (is_array($filter = $request->get('filter'))) {
             return $filter;
         }
@@ -247,8 +236,14 @@ class Processos extends Base
         return is_array($result) ? $result : [];
     }
 
-    protected function transform($processos)
-    {
+    public function makeProcessoQuery($arquivados = false) {
+        $query = $arquivados ? (new Processo())->withoutGlobalScope(ProcessoScope::class) : (new Processo())
+                        ->with(['acao', 'tribunal', 'procurador', 'assessor', 'estagiario'])
+                        ->orderBy('updated_at', 'desc');
+        return $query;
+    }
+
+    protected function transform($processos) {
         return $processos->map(function ($processo) {
             $processo['acao_nome'] = is_null($processo->acao) ? 'N/C' : $processo->acao->nome;
 
@@ -266,12 +261,5 @@ class Processos extends Base
 
             return $processo;
         })->toArray();
-    }
-
-    public function makeProcessoQuery()
-    {
-        return (new Processo())
-                ->with(['acao', 'tribunal', 'procurador', 'assessor', 'estagiario'])
-                ->orderBy('updated_at', 'desc');
     }
 }

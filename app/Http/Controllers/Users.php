@@ -46,6 +46,7 @@ class Users extends Controller
         $model->save();
 
         return redirect()->action('Users@index')->with('users', $this->usersRepository->all());
+        
         //return $this->index();
     }
 

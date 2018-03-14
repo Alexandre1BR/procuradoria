@@ -36,7 +36,7 @@
 
                             <td><a href="{{ route('andamentos.show',['id' => $andamento->id]) }}">{{ $andamento->tipoAndamento->nome }}</a></td>
                             <td>{{ $andamento->tipoEntrada->nome }}</td>
-                            <td>{{ $andamento->tipoPrazo->nome }}</td>
+                            <td>{{ is_null($andamento->tipoPrazo)? '' :$andamento->tipoPrazo->nome }}</td>
                             <td>{{ $andamento->data_prazo }}</td>
                             <td>{{ $andamento->observacoes }}</td>
                         </tr>

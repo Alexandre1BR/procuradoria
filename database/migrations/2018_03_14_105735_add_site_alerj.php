@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableProcessos extends Migration
+class AddSiteAlerj extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AlterTableProcessos extends Migration
     public function up()
     {
         Schema::table('processos', function (Blueprint $table) {
-            $table->integer('tipo_processo_id')->nullable()->unsigned();
-            $table->integer('acao_id')->nullable()->unsigned()->change();
+            $table->string('site_alerj_link', 2048)->nullable();
         });
     }
 
@@ -27,8 +26,7 @@ class AlterTableProcessos extends Migration
     public function down()
     {
         Schema::table('processos', function (Blueprint $table) {
-            $table->dropColumn('tipo_processo_id');
-            $table->integer('acao_id')->unsigned();
+            $table->dropColumn('site_alerj_link');
         });
     }
 }

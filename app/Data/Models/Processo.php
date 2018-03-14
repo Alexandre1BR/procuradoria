@@ -4,6 +4,7 @@ namespace App\Data\Models;
 
 use App\Data\Presenters\ProcessoPresenter;
 use App\Data\Scope\Processo as ProcessoScope;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Tags\HasTags;
 
 class Processo extends BaseModel
@@ -12,6 +13,7 @@ class Processo extends BaseModel
 
     protected $dates = [
         'data_distribuicao',
+        'data_recebimento',
     ];
 
     protected $with = [
@@ -29,11 +31,12 @@ class Processo extends BaseModel
      * @var array
      */
     protected $fillable = [
+        'data_distribuicao',
+        'data_recebimento',
         'numero_judicial',
         'numero_alerj',
         'tribunal_id', //'origem_id',
         'vara', //'origem_complemento',
-        'data_distribuicao',
         'acao_id',
         'relator_id',
         'apensos_obs',
@@ -52,11 +55,13 @@ class Processo extends BaseModel
         'data_arquivamento',
         'observacao_arquivamento',
         'link',
+        'site_alerj_link',
         'tipo_processo_id',
     ];
 
     protected $presenters = [
         'data_distribuicao_formatado',
+        'data_recebimento_formatado',
     ];
 
     protected $dataTypes = [
@@ -65,6 +70,7 @@ class Processo extends BaseModel
         'tribunal_id'                   => 'id',
         'vara'                          => 'string',
         'data_distribuicao'             => 'date',
+        'data_recebimento'              => 'date',
         'acao_id'                       => 'id',
         'juiz_id'                       => 'id',
         'relator_id'                    => 'id',
@@ -84,6 +90,7 @@ class Processo extends BaseModel
         'observacao_arquivamento'       => 'string',
         'tags'                          => 'tags',
         'link'                          => 'link',
+        'site_alerj_link'               => 'link',
         'tipo_processo_id'              => 'id',
     ];
 
@@ -159,5 +166,11 @@ class Processo extends BaseModel
         parent::boot();
 
         static::addGlobalScope(new ProcessoScope());
+    }
+
+    public function save(array $options = [])
+    {
+        Cache::forget('getProcessosData'.$this->id);
+        parent::save();
     }
 }

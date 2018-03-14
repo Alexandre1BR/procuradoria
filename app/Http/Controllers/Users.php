@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Data\Repositories\Users as UsersRepository;
+use App\Http\Requests\User as UserRequest;
 use Illuminate\Support\Facades\Auth;
 
 class Users extends Controller
@@ -53,5 +54,37 @@ class Users extends Controller
     public function disable($id)
     {
         return $this->enable($id, false);
+    }
+
+    public function create()
+    {
+        return view('users.create');
+    }
+
+    public function getUsersData(): array
+    {
+        return [
+            'userType' => app(UsersRepository::class)->all()->pluck('nome', 'id'),
+        ];
+    }
+
+    public function show($id)
+    {
+        $user = app(UsersRepository::class)->findUserById($id);
+
+        return view('users.form')
+            ->with('user', $user)
+            ->with('formDisabled', true)
+            ->with($this->getUsersData());
+    }
+
+    public function store(UserRequest $request, UsersRepository $repository)
+    {
+//        dd($request->all());
+
+        $repository->createFromRequest($request);
+
+        return redirect()->route('users.index')
+            ->with($this->getSuccessMessage());
     }
 }

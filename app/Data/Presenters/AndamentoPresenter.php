@@ -27,6 +27,13 @@ class AndamentoPresenter extends BasePresenter
         return !is_null($data_entrega) ? Carbon::createFromFormat('Y-m-d H:i:s', $data_entrega)->format('Y-m-d') : null;
     }
 
+    public function data_andamento()
+    {
+        $data_andamento = $this->wrappedObject->data_andamento;
+
+        return !is_null($data_andamento) ? Carbon::createFromFormat('Y-m-d H:i:s', $data_andamento)->format('Y-m-d') : null;
+    }
+
     public function data_prazo_formatado()
     {
         $data_prazo = $this->wrappedObject->data_prazo;
@@ -39,5 +46,12 @@ class AndamentoPresenter extends BasePresenter
         $data_entrega = $this->wrappedObject->data_entrega;
 
         return !is_null($data_entrega) ? Carbon::createFromFormat('Y-m-d H:i:s', $data_entrega)->format('d/m/Y') : null;
+    }
+
+    public function data_andamento_formatado()
+    {
+        $data_andamento = $this->wrappedObject->data_andamento;
+
+        return !is_null($data_andamento) ? Carbon::createFromFormat('Y-m-d H:i:s', $data_andamento)->format('d/m/Y') : null;
     }
 }

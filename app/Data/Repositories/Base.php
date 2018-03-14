@@ -13,7 +13,6 @@ abstract class Base
         is_null($id = $request->input('id'))
                 ? $model = new $this->model()
                 : $model = $this->model::find($id);
-
         $model->fill($request->all());
 
         $model->save();

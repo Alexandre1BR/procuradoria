@@ -8,11 +8,6 @@ abstract class Base
 {
     protected $model;
 
-    /**
-     * @param $request
-     *
-     * @return object
-     */
     public function createFromRequest(Request $request)
     {
         is_null($id = $request->input('id'))
@@ -75,10 +70,6 @@ abstract class Base
         return str_replace(["\n"], [''], $string);
     }
 
-    /**
-     * @param Request $request
-     * @param $model
-     */
     protected function saveTags(Request $request, $model)
     {
         if ($request->has('tags')) {

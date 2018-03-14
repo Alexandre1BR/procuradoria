@@ -23,9 +23,9 @@
                         </div>
 
                         <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary btn-block" disabled="disabled">
+                            <button type="submit" id='buttonApensar' class="btn btn-primary btn-block" disabled="disabled">
                                 <i class="fa fa-plus"></i>
-                                apensar
+                                Apensar
                             </button>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
 
 
     <div class="panel-body">
-        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <table id="apensosTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>Processo</th>
@@ -63,7 +63,7 @@
         </table>
     </div>
 </div>
-    <script>
+<script>
     function createApenso(){
         $('#form_apensar *').prop("disabled",false).prop("readonly",false);
     }

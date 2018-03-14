@@ -28,13 +28,13 @@
                                 </td>
                                 <td>{{ $processo->numero_alerj }}</td>
                                 <td>{{ $processo->tribunal->nome }}</td>
-                                <td class=".hidden-xs">{{ $processo->data_distribuicao }}</td>
+                                <td class=".hidden-xs">{{ $processo->data_distribuicao_formatado }}</td>
                                 <td>{{ $processo->acao->nome }}</td>
                                 <td class=".hidden-xs">{{ $processo->autor }}</td>
                                 <td class=".hidden-xs">{{ $processo->objeto }}</td>
-                                <td class=".hidden-xs">{{ is_null($processo->procurador) ? : $processo->procurador->name }}</td>
-                                <td class=".hidden-xs">{{ is_null($processo->assessor) ? : $processo->assessor->name }}</td>
-                                <td class=".hidden-xs">{{ is_null($processo->estagiario) ? : $processo->estagiario->name }}</td>
+                                <td class=".hidden-xs">{{ is_null($processo->procurador) ? 'N/C' : $processo->procurador->name }}</td>
+                                <td class=".hidden-xs">{{ is_null($processo->assessor) ? 'N/C' : $processo->assessor->name }}</td>
+                                <td class=".hidden-xs">{{ is_null($processo->estagiario) ? 'N/C' : $processo->estagiario->name }}</td>
                             </tr>
                         @empty
                             <p>Nenhum processo encontrado</p>

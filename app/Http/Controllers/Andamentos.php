@@ -10,12 +10,11 @@ use App\Data\Models\TipoPrazo as  ModelTipoPrazo;
 use App\Data\Repositories\Andamentos as AndamentosRepository;
 use App\Http\Requests\Andamento as AndamentoRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class Andamentos extends Controller
 {
-    /**
-     * @var AndamentoRequest
-     */
+
     private $repository;
 
     public function __construct(AndamentosRepository $repository)
@@ -23,10 +22,10 @@ class Andamentos extends Controller
         $this->repository = $repository;
     }
 
-    public function create($processo_id = null)
+    public function create($id = null)
     {
         return view('andamentos.form', $this->getAndamentosData())
-            ->with('processo_id', $processo_id)
+            ->with('id', $id)
             ->with(['andamento' => $this->repository->new()]);
     }
 
@@ -34,11 +33,15 @@ class Andamentos extends Controller
     {
         $repository->createFromRequest($request);
 
-        //return $this->index($repository,$request);
+        Cache::forget('getProcessosData'.$request->redirect);
 
-        //    return redirect('form')->withInput();
-        return redirect()->route('andamentos.index')
-            ->with($this->getSuccessMessage());
+        if (isset($request->redirect)) {
+            return redirect()->route('processos.show', ['id' => $request->redirect])
+                ->with($this->getSuccessMessage());
+        } else {
+            return redirect()->route('andamentos.index')
+                ->with($this->getSuccessMessage());
+        }
     }
 
     public function show($id)

@@ -197,8 +197,11 @@ class Processos extends Base {
      *
      * @return array
      */
-    public function getProcessosData($id = null) {
-        return Cache::remember('getProcessosData', 1, function () use ($id) {
+
+    public function getProcessosData($id = null)
+    {
+        return Cache::remember('getProcessosData'.$id, 1, function () use ($id) {
+
             $apensos = Apenso::where('processo_id', $id)->orWhere('apensado_id', $id)->get();
 
             $processos = $this->getProcessosWithoutApensos($apensos);

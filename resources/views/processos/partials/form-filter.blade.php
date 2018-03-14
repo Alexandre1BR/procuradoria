@@ -221,7 +221,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="tags">Tags</label>
-                <select2 v-model="form.tags" :options="tables.tags" multiple></select2>
+                <select2 id="tags" v-model="form.tags" :options="tables.tags" multiple></select2>
             </div>
         </div>
     </div>

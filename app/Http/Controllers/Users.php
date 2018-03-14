@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Models\User as UserModel;
 use App\Data\Repositories\Users as UsersRepository;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class Users extends Controller

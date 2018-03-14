@@ -24,7 +24,8 @@ class Processos extends Base {
 
     protected $model = Processo::class;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->tiposUsuariosRepository = app(TiposUsuarios::class);
     }
 
@@ -46,7 +47,8 @@ class Processos extends Base {
             'link' => 'string',
     ];
 
-    protected function toDate($item) {
+    protected function toDate($item)
+    {
         try {
             $item = Carbon::createFromFormat('d/m/Y', $item)->format('Y-m-d');
         } catch (\Exception $exception) {
@@ -56,15 +58,18 @@ class Processos extends Base {
         return $item;
     }
 
-    public function getAllIds() {
+    public function getAllIds()
+    {
         return Processo::pluck('id');
     }
 
-    private function listTags($tags) {
+    private function listTags($tags)
+    {
         // dd($tags);
     }
 
-    public function search(Request $request) {
+    public function search(Request $request)
+    {
         info($request);
 
         $this->searchFromRequest($request->get('pesquisa'));
@@ -77,7 +82,8 @@ class Processos extends Base {
      *
      * @return mixed
      */
-    public function filter($request) {
+    public function filter($request)
+    {
         $query = $this->makeProcessoQuery($request->get('processos_arquivados'));
         if (!empty($search = $request->get('search'))) {
             $query = $this->searchString($search, $query);
@@ -99,7 +105,8 @@ class Processos extends Base {
      * @param $column
      * @param $query
      */
-    public function addQueryByType($search, $column, $query): void {
+    public function addQueryByType($search, $column, $query): void
+    {
         switch (Processo::getDataTypeOf($column)) {
             case 'id':
                 $query->where($column, '=', $search);
@@ -121,7 +128,8 @@ class Processos extends Base {
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function searchString($search = null, $query = null) {
+    public function searchString($search = null, $query = null)
+    {
         $search = is_null($search)
                 ? collect()
                 : collect(explode(' ', $search))->map(function ($item) {
@@ -181,7 +189,8 @@ class Processos extends Base {
      *
      * @return mixed
      */
-    public function getProcessosWithoutApensos($apensos) {
+    public function getProcessosWithoutApensos($apensos)
+    {
         $processos = Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id');
 
         foreach ($apensos as $key => $apenso) {
@@ -228,7 +237,8 @@ class Processos extends Base {
      *
      * @return mixed
      */
-    protected function filterToJson($request) {
+    protected function filterToJson($request)
+    {
         if (is_array($filter = $request->get('filter'))) {
             return $filter;
         }
@@ -238,15 +248,18 @@ class Processos extends Base {
         return is_array($result) ? $result : [];
     }
 
-    public function makeProcessoQuery($arquivados = false) {
+    public function makeProcessoQuery($arquivados = false)
+    {
         $query = $arquivados ? (new Processo())->withoutGlobalScope(ProcessoScope::class) : (new Processo())
                         ->with(['acao', 'tribunal', 'procurador', 'assessor', 'estagiario'])
                         ->orderBy('updated_at', 'desc');
         return $query;
     }
 
-    protected function transform($processos) {
-        return $processos->map(function ($processo) {
+    protected function transform($processos)
+    {
+        return $processos->map(function ($processo)
+        {
             $processo['acao_nome'] = is_null($processo->acao) ? 'N/C' : $processo->acao->nome;
 
             $processo['tribunal_nome'] = is_null($processo->tribunal) ? 'N/C' : $processo->tribunal->nome;

@@ -51,6 +51,8 @@ class Andamentos extends Base
             $model->setAttribute('processo_id', $p->id);
             $model->setAttribute('tipo_andamento_id', $tipoAndamento->id);
             $model->setAttribute('tipo_entrada_id', $tipoEntrada->id);
+            $model->setAttribute('data_andamento', $p->data_recebimento);
+            $model->save();
 
         /*
          *  It means that the value of data_recebimento
@@ -60,11 +62,10 @@ class Andamentos extends Base
         } elseif ($request->old('data_recebimento') != $request->input('data_recebimento')) {
             $model = AndamentoModel::where('processo_id', $p->id)
                 ->where('tipo_andamento_id', $tipoAndamento->id)->get()->first();
+
+            $model->setAttribute('data_andamento', $p->data_recebimento);
+            $model->save();
         }
-
-        $model->setAttribute('data_andamento', $p->data_recebimento);
-
-        $model->save();
     }
 
     public function checkforchanges(Request $request)

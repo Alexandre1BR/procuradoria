@@ -14,17 +14,29 @@ class Acoes extends Controller
      */
     private $repository;
 
+    /**
+     * Acoes constructor.
+     * @param AcoesRepository $repository
+     */
     public function __construct(AcoesRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return $this
+     */
     public function create()
     {
         return view('acoes.form')
             ->with(['acao' => $this->repository->new()]);
     }
 
+    /**
+     * @param AcaoRequest $request
+     * @param AcoesRepository $repository
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(AcaoRequest $request, AcoesRepository $repository)
     {
         $repository->createFromRequest($request);
@@ -33,6 +45,11 @@ class Acoes extends Controller
             ->with($this->getSuccessMessage());
     }
 
+    /**
+     * @param AcoesRepository $acoes
+     * @param Request $request
+     * @return $this|\Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function index(AcoesRepository $acoes, Request $request)
     {
         return $request->expectsJson()
@@ -42,6 +59,10 @@ class Acoes extends Controller
                 ->with('acoes', $acoes->search($request));
     }
 
+    /**
+     * @param $id
+     * @return $this
+     */
     public function show($id)
     {
         return view('acoes.form')

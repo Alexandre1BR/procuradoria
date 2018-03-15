@@ -13,13 +13,23 @@ use App\Http\Requests\Processo as ProcessoRequest;
 
 class Processos extends Controller
 {
+    /**
+     * @var ProcessosRepository
+     */
     private $repository;
 
+    /**
+     * Processos constructor.
+     * @param ProcessosRepository $repository
+     */
     public function __construct(ProcessosRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return $this
+     */
     public function create()
     {
         return view('processos.form')
@@ -27,6 +37,11 @@ class Processos extends Controller
             ->with(['processo' => $this->repository->new()]);
     }
 
+    /**
+     * @param ProcessoRequest $request
+     * @param ProcessosRepository $repository
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(ProcessoRequest $request, ProcessosRepository $repository)
     {
         $p = $repository->createFromRequest($request);
@@ -39,6 +54,11 @@ class Processos extends Controller
                 ->with($this->getSuccessMessage());
     }
 
+    /**
+     * @param ApensoRequest $request
+     * @param ApensosRepository $repository
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function apensar(ApensoRequest $request, ApensosRepository $repository)
     {
         $repository->createFromRequest($request);
@@ -51,6 +71,10 @@ class Processos extends Controller
           ->with($this->getSuccessMessage());
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function show($id)
     {
         return view('processos.form')

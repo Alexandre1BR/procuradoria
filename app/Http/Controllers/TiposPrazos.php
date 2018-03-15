@@ -13,11 +13,19 @@ use App\Http\Requests\TipoPrazo as TipoPrazoRequest;
 
 class TiposPrazos extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view('tipos_prazos.create');
     }
 
+    /**
+     * @param TipoPrazoRequest $request
+     * @param TiposPrazosRepository $repository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function store(TipoPrazoRequest $request, TiposPrazosRepository $repository)
     {
         $repository->createFromRequest($request);

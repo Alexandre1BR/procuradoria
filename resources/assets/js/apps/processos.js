@@ -29,6 +29,8 @@ if (jQuery("#" + appName).length > 0) {
 
             pesquisa: '',
 
+            processos_arquivados: '',
+
             refreshing: false,
 
             filler: false,
@@ -77,11 +79,11 @@ if (jQuery("#" + appName).length > 0) {
                 me = this
 
                 me.refreshing = true
-
                 axios.get('/', {
                     params: {
                         search: this.pesquisa,
-                            advancedFilter: this.advancedFilter,
+                        processos_arquivados: this.processos_arquivados,
+                        advancedFilter: this.advancedFilter,
                         filter: this.form
                     }
                 })

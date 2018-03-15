@@ -23,7 +23,9 @@
 
         <div class="panel-body">
             @include('partials.alerts')
-{{--            {{dd(isset($id))}}--}}
+
+            {{--{{dd(isset($id))}}--}}
+
             <form name="formulario" id="formulario"
                   @if(isset($id))
                         action="{{ route('andamentos.store',['redirect'=>$id]) }}"

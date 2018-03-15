@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Models\User as UserModel;
 use App\Data\Repositories\Users as UsersRepository;
 use App\Http\Requests\User as UserRequest;
 use Illuminate\Support\Facades\Auth;
 
 class Users extends Controller
 {
-    /**
-     * @var UsersRepository
-     */
     private $usersRepository;
 
     protected $model = UserModel::class;
@@ -51,6 +47,7 @@ class Users extends Controller
         $model->save();
 
         return redirect()->action('Users@index')->with('users', $this->usersRepository->all());
+
         //return $this->index();
     }
 

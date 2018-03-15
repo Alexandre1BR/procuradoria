@@ -29,7 +29,8 @@ class Home extends Controller
     private function buildView(Request $request)
     {
         return view('home.index')
-            ->with('pesquisa', $request->get('pesquisa'))
+            ->with('pesquisa', $request->get('search'))
+            ->with('processos_arquivados', $request->get('processos_arquivados'))
             ->with('processo', new Processo());
     }
 

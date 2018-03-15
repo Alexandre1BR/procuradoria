@@ -14,6 +14,10 @@ use Illuminate\Database\Eloquent\Scope;
 
 class Processo implements Scope
 {
+    /**
+     * @param Builder $builder
+     * @param Model $model
+     */
     public function apply(Builder $builder, Model $model)
     {
         $builder->where('data_arquivamento', '=', null);

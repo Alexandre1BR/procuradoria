@@ -17,6 +17,7 @@ class Tribunais extends Base
 
     /**
      * @param Request $request
+     *
      * @return mixed
      */
     public function search(Request $request)
@@ -26,6 +27,7 @@ class Tribunais extends Base
 
     /**
      * @param null $search
+     *
      * @return mixed
      */
     public function searchFromRequest($search = null)

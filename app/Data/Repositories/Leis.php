@@ -14,6 +14,7 @@ class Leis extends Base
 
     /**
      * @param Request|null $request
+     *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function search(Request $request = null)

@@ -61,13 +61,14 @@ class Import
 
     /**
      * Import constructor.
-     * @param Tribunais $tribunaisRepository
-     * @param Acoes $acoesRepository
-     * @param Processos $processosRepository
+     *
+     * @param Tribunais   $tribunaisRepository
+     * @param Acoes       $acoesRepository
+     * @param Processos   $processosRepository
      * @param TiposJuizes $tiposJuizesRepository
-     * @param Juizes $juizesRepository
-     * @param Meios $meiosRepository
-     * @param Users $usersRepository
+     * @param Juizes      $juizesRepository
+     * @param Meios       $meiosRepository
+     * @param Users       $usersRepository
      */
     public function __construct(
         Tribunais $tribunaisRepository,
@@ -95,6 +96,7 @@ class Import
 
     /**
      * @param $values
+     *
      * @return mixed
      */
     private function cleanAndNormalize($values)
@@ -320,6 +322,7 @@ class Import
 
     /**
      * @param $file
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function importUsers($file)
@@ -359,6 +362,7 @@ class Import
     /**
      * @param $user
      * @param $type
+     *
      * @return mixed
      */
     private function buscaUsuario($user, $type)
@@ -385,6 +389,7 @@ class Import
 
     /**
      * @param $tipo_user
+     *
      * @return mixed
      */
     private function ajustaTipoUsuario($tipo_user)
@@ -396,6 +401,7 @@ class Import
 
     /**
      * @param $relator
+     *
      * @return null|string|string[]
      */
     private function ajustaNomeRelator($relator)
@@ -439,6 +445,7 @@ class Import
 
     /**
      * @param $relator
+     *
      * @return mixed|null|string|string[]
      */
     private function ajustaTipoRelator($relator)
@@ -459,6 +466,7 @@ class Import
 
     /**
      * @param $tipo_meio
+     *
      * @return mixed|null|string|string[]
      */
     private function ajustaTipoMeio($tipo_meio)
@@ -478,6 +486,7 @@ class Import
     /**
      * @param $str
      * @param bool $utf8
+     *
      * @return mixed|string
      */
     private function removerAcentuacao($str, $utf8 = true)
@@ -641,6 +650,7 @@ class Import
 
     /**
      * @param $string
+     *
      * @return mixed|null|string|string[]
      */
     private function upper($string)

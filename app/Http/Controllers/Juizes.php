@@ -18,6 +18,7 @@ class Juizes extends Controller
 
     /**
      * Juizes constructor.
+     *
      * @param JuizesRepository $repository
      */
     public function __construct(JuizesRepository $repository)
@@ -35,8 +36,9 @@ class Juizes extends Controller
     }
 
     /**
-     * @param JuizRequest $request
+     * @param JuizRequest      $request
      * @param JuizesRepository $repository
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(JuizRequest $request, JuizesRepository $repository)
@@ -60,6 +62,7 @@ class Juizes extends Controller
 
     /**
      * @param $id
+     *
      * @return mixed
      */
     public function show($id)
@@ -75,7 +78,8 @@ class Juizes extends Controller
 
     /**
      * @param JuizesRepository $juizes
-     * @param Request $request
+     * @param Request          $request
+     *
      * @return $this|\Illuminate\Database\Eloquent\Collection|static[]
      */
     public function index(JuizesRepository $juizes, Request $request)

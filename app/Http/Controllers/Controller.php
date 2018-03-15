@@ -13,6 +13,7 @@ class Controller extends BaseController
 
     /**
      * @param string $message
+     *
      * @return array
      */
     public function getSuccessMessage($message = 'Gravado com sucesso')

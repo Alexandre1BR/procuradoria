@@ -20,6 +20,7 @@ class Users extends Controller
 
     /**
      * Users constructor.
+     *
      * @param UsersRepository $usersRepository
      */
     public function __construct(UsersRepository $usersRepository)
@@ -62,6 +63,7 @@ class Users extends Controller
     /**
      * @param $id
      * @param bool $enable
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function enable($id, $enable = true)
@@ -80,6 +82,7 @@ class Users extends Controller
 
     /**
      * @param $id
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function disable($id)
@@ -107,6 +110,7 @@ class Users extends Controller
 
     /**
      * @param $id
+     *
      * @return mixed
      */
     public function show($id)
@@ -120,8 +124,9 @@ class Users extends Controller
     }
 
     /**
-     * @param UserRequest $request
+     * @param UserRequest     $request
      * @param UsersRepository $repository
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(UserRequest $request, UsersRepository $repository)

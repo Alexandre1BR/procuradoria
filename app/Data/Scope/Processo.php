@@ -16,7 +16,7 @@ class Processo implements Scope
 {
     /**
      * @param Builder $builder
-     * @param Model $model
+     * @param Model   $model
      */
     public function apply(Builder $builder, Model $model)
     {

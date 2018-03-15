@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class Leis extends Controller
 {
-
     /**
      * @var LeisRepository
      */
@@ -17,6 +16,7 @@ class Leis extends Controller
 
     /**
      * Leis constructor.
+     *
      * @param LeisRepository $repository
      */
     public function __construct(LeisRepository $repository)
@@ -26,6 +26,7 @@ class Leis extends Controller
 
     /**
      * @param null $processo_id
+     *
      * @return $this
      */
     public function create($processo_id = null)
@@ -36,8 +37,9 @@ class Leis extends Controller
     }
 
     /**
-     * @param LeiRequest $request
+     * @param LeiRequest     $request
      * @param LeisRepository $repository
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(LeiRequest $request, LeisRepository $repository)
@@ -51,7 +53,8 @@ class Leis extends Controller
 
     /**
      * @param LeisRepository $leis
-     * @param Request $request
+     * @param Request        $request
+     *
      * @return $this
      */
     public function index(LeisRepository $leis, Request $request)
@@ -63,6 +66,7 @@ class Leis extends Controller
 
     /**
      * @param $id
+     *
      * @return $this
      */
     public function show($id)

@@ -43,6 +43,7 @@ class Apenso extends BaseModel
 
     /**
      * @param array $options
+     *
      * @return bool|void
      */
     public function save(array $options = [])

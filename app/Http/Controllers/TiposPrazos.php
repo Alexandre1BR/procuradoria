@@ -22,8 +22,9 @@ class TiposPrazos extends Controller
     }
 
     /**
-     * @param TipoPrazoRequest $request
+     * @param TipoPrazoRequest      $request
      * @param TiposPrazosRepository $repository
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function store(TipoPrazoRequest $request, TiposPrazosRepository $repository)

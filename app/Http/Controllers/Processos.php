@@ -20,6 +20,7 @@ class Processos extends Controller
 
     /**
      * Processos constructor.
+     *
      * @param ProcessosRepository $repository
      */
     public function __construct(ProcessosRepository $repository)
@@ -38,8 +39,9 @@ class Processos extends Controller
     }
 
     /**
-     * @param ProcessoRequest $request
+     * @param ProcessoRequest     $request
      * @param ProcessosRepository $repository
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ProcessoRequest $request, ProcessosRepository $repository)
@@ -55,8 +57,9 @@ class Processos extends Controller
     }
 
     /**
-     * @param ApensoRequest $request
+     * @param ApensoRequest     $request
      * @param ApensosRepository $repository
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function apensar(ApensoRequest $request, ApensosRepository $repository)
@@ -73,6 +76,7 @@ class Processos extends Controller
 
     /**
      * @param $id
+     *
      * @return mixed
      */
     public function show($id)

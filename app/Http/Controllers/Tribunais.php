@@ -16,6 +16,7 @@ class Tribunais extends Controller
 
     /**
      * Tribunais constructor.
+     *
      * @param TribunaisRepository $repository
      */
     public function __construct(TribunaisRepository $repository)
@@ -25,7 +26,8 @@ class Tribunais extends Controller
 
     /**
      * @param TribunaisRepository $tribunais
-     * @param Request $request
+     * @param Request             $request
+     *
      * @return $this|mixed
      */
     public function index(TribunaisRepository $tribunais, Request $request)
@@ -63,6 +65,7 @@ class Tribunais extends Controller
 
     /**
      * @param $id
+     *
      * @return mixed
      */
     public function show($id)

@@ -15,6 +15,7 @@ class Juizes extends Base
 
     /**
      * @param Request $request
+     *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function search(Request $request)

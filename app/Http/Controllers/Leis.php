@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class Leis extends Controller
 {
-
     private $repository;
 
     public function __construct(LeisRepository $repository)

@@ -14,6 +14,7 @@ class TiposUsuarios extends Base
 
     /**
      * @param $name
+     *
      * @return mixed
      */
     public function findByName($name)

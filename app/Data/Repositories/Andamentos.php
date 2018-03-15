@@ -29,6 +29,7 @@ class Andamentos extends Base
 
     /**
      * @param $andamento
+     *
      * @return string
      */
     protected function makeFeedTitle($andamento)
@@ -43,6 +44,7 @@ class Andamentos extends Base
 
     /**
      * @param $andamento
+     *
      * @return string
      */
     protected function makeFeedDescription($andamento)
@@ -52,6 +54,7 @@ class Andamentos extends Base
 
     /**
      * @param Request $request
+     *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function search(Request $request)
@@ -61,7 +64,7 @@ class Andamentos extends Base
 
     /**
      * @param ProcessoRequest $request
-     * @param Processo $p
+     * @param Processo        $p
      */
     public function createFromProcessos(ProcessoRequest $request, Processo $p)
     {
@@ -158,6 +161,7 @@ class Andamentos extends Base
 
     /**
      * @param $item
+     *
      * @return string|void
      */
     protected function toDate($item)
@@ -200,6 +204,7 @@ class Andamentos extends Base
 
     /**
      * @param $request
+     *
      * @return mixed
      */
     public function filter($request)

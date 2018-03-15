@@ -13,6 +13,7 @@ abstract class Base
 
     /**
      * @param Request $request
+     *
      * @return mixed
      */
     public function createFromRequest(Request $request)
@@ -31,6 +32,7 @@ abstract class Base
 
     /**
      * @param $data
+     *
      * @return mixed
      */
     public function create($data)
@@ -53,6 +55,7 @@ abstract class Base
     /**
      * @param array $search
      * @param array $attributes
+     *
      * @return mixed
      */
     public function firstOrCreate(array $search, array $attributes = [])
@@ -62,6 +65,7 @@ abstract class Base
 
     /**
      * @param $abreviacao
+     *
      * @return mixed
      */
     public function findByAbreviacao($abreviacao)
@@ -71,6 +75,7 @@ abstract class Base
 
     /**
      * @param $user_id
+     *
      * @return mixed
      */
     public function findById($user_id)
@@ -96,6 +101,7 @@ abstract class Base
 
     /**
      * @param $string
+     *
      * @return mixed
      */
     public function cleanString($string)
@@ -118,6 +124,7 @@ abstract class Base
      * @param $result
      * @param string $label
      * @param string $value
+     *
      * @return mixed
      */
     protected function makeResultForSelect($result, $label = 'nome', $value = 'id')

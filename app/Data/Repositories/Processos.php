@@ -57,8 +57,10 @@ class Processos extends Base
             'recurso' => 'string',
         //'tipo_meio'         => 'string',
             'data_distribuicao' => 'date',
-            'observacao' => 'string',
-            'link' => 'string',
+            'observacao'        => 'string',
+            'link'              => 'string',
+            'site_alerj_link'   => 'string',
+
     ];
 
     /**
@@ -140,7 +142,12 @@ class Processos extends Base
                 $query->where($column, '=', $search);
                 break;
             case 'string':
-                $query->where(DB::raw("lower({$column})"), 'like', "%{$search}%");
+//                $query->where(DB::raw("lower({$column})"), 'like', "%{$search}%");
+                $query->where($column, 'ilike', '%'.$search.'%');
+                break;
+            case 'link':
+//                $query->where(DB::raw("lower({$column})"), 'like', "%{$search}%");
+                $query->where($column, 'ilike', '%'.$search.'%');
                 break;
             case 'tags':
                 $query->withAnyTags((array) $search);

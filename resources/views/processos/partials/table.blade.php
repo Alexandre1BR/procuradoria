@@ -30,7 +30,7 @@
                             Tribunal
                         </div>
                         <div class="col-xs-9">
-                            <strong>@{{ processo.tribunal_nome }}</strong>
+                            <strong>@{{ processo.tribunal_abreviacao }}</strong>
                         </div>
                     </div>
 
@@ -39,7 +39,7 @@
                             Ação
                         </div>
                         <div class="col-xs-9">
-                            <strong>@{{ processo.acao_nome }}</strong>
+                            <strong>@{{ processo.acao_abreviacao }}</strong>
                         </div>
                     </div>
 
@@ -121,9 +121,9 @@
                 <a :href="processo.show_url">@{{ processo.numero_judicial }}</a>
             </td>
             <td width="10%">@{{ processo.numero_alerj }}</td>
-            <td width="5%">@{{ processo.tribunal_nome }}</td>
-            <td width="5%">@{{ processo.data_distribuicao_formatado }}</td>
-            <td width="5%">@{{ processo.acao_nome }}</td>
+            <td width="5%">@{{ processo.tribunal_abreviacao }}</td>
+            <td width="6%">@{{ processo.data_distribuicao_formatado }}</td>
+            <td width="4%">@{{ processo.acao_abreviacao }}</td>
             <td width="15%">@{{ processo.autor }}</td>
             <td width="15%">@{{ processo.objeto }}</td>
             <td width="10%">@{{ processo.procurador_nome }}</td>

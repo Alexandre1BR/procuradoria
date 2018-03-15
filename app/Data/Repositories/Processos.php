@@ -147,7 +147,6 @@ class Processos extends Base
 
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
-                dump($column);
                 if ($type === 'string') {
                     $query->orWhere($column, 'ilike', '%'.$item.'%');
                 } else {

@@ -19,6 +19,9 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class Import
 {
+    /**
+     * @var Command
+     */
     protected $command;
 
     /**
@@ -56,6 +59,16 @@ class Import
      */
     private $processosRepository;
 
+    /**
+     * Import constructor.
+     * @param Tribunais $tribunaisRepository
+     * @param Acoes $acoesRepository
+     * @param Processos $processosRepository
+     * @param TiposJuizes $tiposJuizesRepository
+     * @param Juizes $juizesRepository
+     * @param Meios $meiosRepository
+     * @param Users $usersRepository
+     */
     public function __construct(
         Tribunais $tribunaisRepository,
                                 Acoes $acoesRepository,
@@ -80,6 +93,10 @@ class Import
         $this->processosRepository = $processosRepository;
     }
 
+    /**
+     * @param $values
+     * @return mixed
+     */
     private function cleanAndNormalize($values)
     {
         foreach ($values as $key => $value) {
@@ -113,11 +130,19 @@ class Import
         $this->juizesRepository->new()->truncate();
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function importExport()
     {
         return view('excel.importExport');
     }
 
+    /**
+     * @param $usersFile
+     * @param $processesFile
+     * @param $command
+     */
     public function execute($usersFile, $processesFile, $command)
     {
         $this->command = $command;
@@ -293,6 +318,10 @@ class Import
         return back();
     }
 
+    /**
+     * @param $file
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function importUsers($file)
     {
         $this->command->info("Importing $file");
@@ -327,6 +356,11 @@ class Import
         return back();
     }
 
+    /**
+     * @param $user
+     * @param $type
+     * @return mixed
+     */
     private function buscaUsuario($user, $type)
     {
         //Does not work with duplicate users
@@ -349,6 +383,10 @@ class Import
         }
     }
 
+    /**
+     * @param $tipo_user
+     * @return mixed
+     */
     private function ajustaTipoUsuario($tipo_user)
     {
         $tipo_user = mb_strtolower(trim($tipo_user));
@@ -356,6 +394,10 @@ class Import
         return ModelTipoUsuario::whereRaw("lower(nome) like '%{$tipo_user}%'")->get()->first();
     }
 
+    /**
+     * @param $relator
+     * @return null|string|string[]
+     */
     private function ajustaNomeRelator($relator)
     {
         if (!is_null($relator)) {
@@ -395,6 +437,10 @@ class Import
         return $relator;
     }
 
+    /**
+     * @param $relator
+     * @return mixed|null|string|string[]
+     */
     private function ajustaTipoRelator($relator)
     {
         $tipo_relator = mb_strtolower(trim($relator));
@@ -411,6 +457,10 @@ class Import
         return $tipo_relator;
     }
 
+    /**
+     * @param $tipo_meio
+     * @return mixed|null|string|string[]
+     */
     private function ajustaTipoMeio($tipo_meio)
     {
         $tipo_meio = mb_strtolower(trim($tipo_meio));
@@ -425,6 +475,11 @@ class Import
         return $tipo_meio;
     }
 
+    /**
+     * @param $str
+     * @param bool $utf8
+     * @return mixed|string
+     */
     private function removerAcentuacao($str, $utf8 = true)
     {
         try {
@@ -584,6 +639,10 @@ class Import
         return $str;
     }
 
+    /**
+     * @param $string
+     * @return mixed|null|string|string[]
+     */
     private function upper($string)
     {
         return mb_strtoupper($string);

@@ -15,11 +15,19 @@ class Authorization
      */
     private $remoteRequest;
 
+    /**
+     * Authorization constructor.
+     * @param RemoteRequest $remoteRequest
+     */
     public function __construct(RemoteRequest $remoteRequest)
     {
         $this->remoteRequest = $remoteRequest;
     }
 
+    /**
+     * @param $username
+     * @return \Illuminate\Support\Collection
+     */
     public function getUserPermissions($username)
     {
         if (config('auth.authorization.mock')) {
@@ -35,11 +43,19 @@ class Authorization
         ));
     }
 
+    /**
+     * @param $username
+     * @return \Illuminate\Support\Collection
+     */
     public function getUserProfiles($username)
     {
         return collect(['Estagiario']);
     }
 
+    /**
+     * @param $username
+     * @return \Illuminate\Support\Collection
+     */
     private function mockedPermissions($username)
     {
         return collect(['Editar']);

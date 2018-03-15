@@ -11,6 +11,9 @@ class TipoAndamento extends BaseModel
      */
     protected $table = 'tipos_andamentos';
 
+    /**
+     * @var array
+     */
     protected $fillable = [
         'nome',
     ];

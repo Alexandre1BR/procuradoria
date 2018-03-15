@@ -4,6 +4,9 @@ namespace App\Data\Models;
 
 class Tribunal extends BaseModel
 {
+    /**
+     * @var string
+     */
     protected $table = 'tribunais';
 
     /**
@@ -17,6 +20,9 @@ class Tribunal extends BaseModel
         'url_api',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function processos()
     {
         return $this->hasMany(Processo::class);

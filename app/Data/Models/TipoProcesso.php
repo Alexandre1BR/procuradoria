@@ -11,6 +11,9 @@ class TipoProcesso extends BaseModel
      */
     protected $table = 'tipos_processos';
 
+    /**
+     * @var array
+     */
     protected $fillable = [
         'nome',
     ];

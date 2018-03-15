@@ -5,6 +5,11 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateTipoProcesso extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::create('tipos_processos', function (Blueprint $table) {
@@ -27,6 +32,11 @@ class CreateTipoProcesso extends Migration
         );
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::drop('tipos_processos');

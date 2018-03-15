@@ -11,6 +11,9 @@ class TipoUsuario extends BaseModel
      */
     protected $table = 'tipos_usuarios';
 
+    /**
+     * @var array
+     */
     protected $fillable = [
         'nome',
     ];

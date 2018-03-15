@@ -8,35 +8,62 @@ use Illuminate\Support\Facades\Auth;
 
 class Users extends Controller
 {
+    /**
+     * @var UsersRepository
+     */
     private $usersRepository;
 
+    /**
+     * @var string
+     */
     protected $model = UserModel::class;
 
+    /**
+     * Users constructor.
+     * @param UsersRepository $usersRepository
+     */
     public function __construct(UsersRepository $usersRepository)
     {
         $this->usersRepository = $usersRepository;
     }
 
+    /**
+     * @return mixed
+     */
     public function procuradores()
     {
         return $this->usersRepository->getByType('Procurador');
     }
 
+    /**
+     * @return mixed
+     */
     public function assessores()
     {
         return $this->usersRepository->getByType('Assessor');
     }
 
+    /**
+     * @return mixed
+     */
     public function estagiarios()
     {
         return $this->usersRepository->getByType('Estagiario');
     }
 
+    /**
+     * @return $this
+     */
     public function index()
     {
         return view('users.index')->with('users', $this->usersRepository->all());
     }
 
+    /**
+     * @param $id
+     * @param bool $enable
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function enable($id, $enable = true)
     {
         $model = $this->usersRepository->findUserById($id);
@@ -51,16 +78,26 @@ class Users extends Controller
         //return $this->index();
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function disable($id)
     {
         return $this->enable($id, false);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view('users.create');
     }
 
+    /**
+     * @return array
+     */
     public function getUsersData(): array
     {
         return [
@@ -68,6 +105,10 @@ class Users extends Controller
         ];
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function show($id)
     {
         $user = app(UsersRepository::class)->findUserById($id);
@@ -78,6 +119,11 @@ class Users extends Controller
             ->with($this->getUsersData());
     }
 
+    /**
+     * @param UserRequest $request
+     * @param UsersRepository $repository
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(UserRequest $request, UsersRepository $repository)
     {
 //        dd($request->all());

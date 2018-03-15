@@ -11,10 +11,16 @@ class TipoJuiz extends BaseModel
      */
     protected $table = 'tipos_juizes';
 
+    /**
+     * @var array
+     */
     protected $fillable = [
         'nome',
     ];
 
+    /**
+     * @return mixed|string
+     */
     public function getAbreviacaoAttribute()
     {
         if (strlen($this->nome) > 4) {

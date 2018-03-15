@@ -13,6 +13,9 @@ use McCool\LaravelAutoPresenter\BasePresenter;
 
 class ProcessoPresenter extends BasePresenter
 {
+    /**
+     * @return null|string
+     */
     public function data_distribuicao()
     {
         $data_distribuicao = $this->wrappedObject->data_distribuicao;
@@ -20,6 +23,9 @@ class ProcessoPresenter extends BasePresenter
         return !is_null($data_distribuicao) ? Carbon::createFromFormat('Y-m-d H:i:s', $data_distribuicao)->format('Y-m-d') : null;
     }
 
+    /**
+     * @return null|string
+     */
     public function data_distribuicao_formatado()
     {
         $data_distribuicao = $this->wrappedObject->data_distribuicao;
@@ -27,6 +33,9 @@ class ProcessoPresenter extends BasePresenter
         return !is_null($data_distribuicao) ? Carbon::createFromFormat('Y-m-d H:i:s', $data_distribuicao)->format('d/m/Y') : null;
     }
 
+    /**
+     * @return null|string
+     */
     public function data_recebimento()
     {
         $data_recebimento = $this->wrappedObject->data_recebimento;
@@ -34,6 +43,9 @@ class ProcessoPresenter extends BasePresenter
         return !is_null($data_recebimento) ? Carbon::createFromFormat('Y-m-d H:i:s', $data_recebimento)->format('Y-m-d') : null;
     }
 
+    /**
+     * @return null|string
+     */
     public function data_recebimento_formatado()
     {
         $data_recebimento = $this->wrappedObject->data_recebimento;

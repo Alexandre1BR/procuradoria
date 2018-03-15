@@ -7,13 +7,25 @@ use Illuminate\Http\Request;
 
 class Agenda extends Controller
 {
+    /**
+     * @var AndamentosRepository
+     */
     private $andamentosRepository;
 
+    /**
+     * Agenda constructor.
+     * @param AndamentosRepository $andamentosRepository
+     */
     public function __construct(AndamentosRepository $andamentosRepository)
     {
         $this->andamentosRepository = $andamentosRepository;
     }
 
+    /**
+     * @param AndamentosRepository $andamentosRepository
+     * @param Request $request
+     * @return $this
+     */
     public function index(AndamentosRepository $andamentosRepository, Request $request)
     {
         $pesquisa = $request->get('pesquisa');
@@ -27,6 +39,9 @@ class Agenda extends Controller
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function feed()
     {
         return $this->andamentosRepository->feedForFullCalendar();

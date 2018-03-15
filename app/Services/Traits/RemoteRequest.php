@@ -13,11 +13,19 @@ class RemoteRequest
      */
     protected $guzzle;
 
+    /**
+     * RemoteRequest constructor.
+     */
     public function __construct()
     {
         $this->guzzle = new Guzzle();
     }
 
+    /**
+     * @param $url
+     * @param $data
+     * @return mixed
+     */
     public function post($url, $data)
     {
         try {

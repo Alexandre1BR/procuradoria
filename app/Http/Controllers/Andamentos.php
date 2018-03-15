@@ -13,13 +13,25 @@ use Illuminate\Http\Request;
 
 class Andamentos extends Controller
 {
+
+    /**
+     * @var AndamentosRepository
+     */
     private $repository;
 
+    /**
+     * Andamentos constructor.
+     * @param AndamentosRepository $repository
+     */
     public function __construct(AndamentosRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @param null $id
+     * @return $this
+     */
     public function create($id = null)
     {
         return view('andamentos.form', $this->getAndamentosData())
@@ -27,6 +39,11 @@ class Andamentos extends Controller
             ->with(['andamento' => $this->repository->new()]);
     }
 
+    /**
+     * @param AndamentoRequest $request
+     * @param AndamentosRepository $repository
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(AndamentoRequest $request, AndamentosRepository $repository)
     {
         $repository->createFromRequest($request);
@@ -42,6 +59,10 @@ class Andamentos extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function show($id)
     {
         $andamento = Andamento::find($id);
@@ -52,6 +73,10 @@ class Andamentos extends Controller
             ->with($this->getAndamentosData());
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function detail(Request $request)
     {
         $andamento = Andamento::find($request->id);
@@ -68,6 +93,11 @@ class Andamentos extends Controller
         return view('andamentos.form', compact('andamento', 'processos', 'tipoAndamentos', 'tipoEntradas', 'tipoPrazos'));
     }
 
+    /**
+     * @param AndamentosRepository $andamentos
+     * @param Request $request
+     * @return $this
+     */
     public function index(AndamentosRepository $andamentos, Request $request)
     {
         return view('andamentos.index')
@@ -75,6 +105,9 @@ class Andamentos extends Controller
             ->with('andamentos', $andamentos->search($request));
     }
 
+    /**
+     * @return array
+     */
     public function getAndamentosData(): array
     {
         return [

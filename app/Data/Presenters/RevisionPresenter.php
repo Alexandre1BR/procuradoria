@@ -6,6 +6,9 @@ use McCool\LaravelAutoPresenter\BasePresenter;
 
 class RevisionPresenter extends BasePresenter
 {
+    /**
+     * @var array
+     */
     protected $routes = [
         'App\Data\Models\TipoUsuario' => null,
         'App\Data\Models\Tribunal'    => 'tribunais.show',
@@ -17,6 +20,9 @@ class RevisionPresenter extends BasePresenter
         'App\Data\Models\User'        => null,
     ];
 
+    /**
+     * @return mixed
+     */
     public function revisionable()
     {
         $parts = explode('\\', $this->wrappedObject->revisionable_type);
@@ -26,6 +32,9 @@ class RevisionPresenter extends BasePresenter
         );
     }
 
+    /**
+     * @return string|void
+     */
     public function link()
     {
         if (is_null($routeName = $this->routes[$this->wrappedObject->revisionable_type])) {

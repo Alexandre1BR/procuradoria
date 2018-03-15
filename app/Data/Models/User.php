@@ -24,7 +24,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
             //id
-        'name', 'email', 'password', 'username', 'user_type_id', 'disabled_by_id', 'disabled_at', 'personal_email'
+        'name', 'email', 'password', 'username', 'user_type_id', 'disabled_by_id', 'disabled_at', 'personal_email',
     ];
 
     /**
@@ -48,5 +48,4 @@ class User extends Authenticatable
             app(TiposUsuarios::class)->findByName($type)->id
         );
     }
-
 }

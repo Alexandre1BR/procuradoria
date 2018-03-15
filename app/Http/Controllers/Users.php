@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Data\Models\User as UserModel;
 use App\Data\Repositories\Users as UsersRepository;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\User as UserRequest;
+use Illuminate\Support\Facades\Auth;
 
 class Users extends Controller
 {
@@ -91,4 +91,3 @@ class Users extends Controller
             ->with($this->getSuccessMessage());
     }
 }
-

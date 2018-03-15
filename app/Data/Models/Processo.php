@@ -4,9 +4,8 @@ namespace App\Data\Models;
 
 use App\Data\Presenters\ProcessoPresenter;
 use App\Data\Scope\Processo as ProcessoScope;
-use Spatie\Tags\HasTags;
 use Illuminate\Support\Facades\Cache;
-
+use Spatie\Tags\HasTags;
 
 class Processo extends BaseModel
 {
@@ -169,7 +168,8 @@ class Processo extends BaseModel
         static::addGlobalScope(new ProcessoScope());
     }
 
-    public function save(array $options = []){
+    public function save(array $options = [])
+    {
         Cache::forget('getProcessosData'.$this->id);
         parent::save();
     }

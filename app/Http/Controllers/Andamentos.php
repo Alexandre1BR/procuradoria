@@ -10,7 +10,6 @@ use App\Data\Models\TipoPrazo as  ModelTipoPrazo;
 use App\Data\Repositories\Andamentos as AndamentosRepository;
 use App\Http\Requests\Andamento as AndamentoRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 class Andamentos extends Controller
 {

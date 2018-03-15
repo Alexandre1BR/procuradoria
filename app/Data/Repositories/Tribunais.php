@@ -10,13 +10,24 @@ use Illuminate\Support\Facades\DB;
 
 class Tribunais extends Base
 {
+    /**
+     * @var string
+     */
     protected $model = TribunalModel::class;
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function search(Request $request)
     {
         return $this->searchFromRequest($request->get('pesquisa'));
     }
 
+    /**
+     * @param null $search
+     * @return mixed
+     */
     public function searchFromRequest($search = null)
     {
         $search = is_null($search)
@@ -46,16 +57,27 @@ class Tribunais extends Base
         return $this->makeResultForSelect($query->orderBy('nome')->get());
     }
 
+    /**
+     * @param PackageInterface $package
+     */
     public function hasPackage(PackageInterface $package)
     {
         // TODO: Implement hasPackage() method.
     }
 
+    /**
+     * @param $name
+     * @param $constraint
+     */
     public function findPackage($name, $constraint)
     {
         // TODO: Implement findPackage() method.
     }
 
+    /**
+     * @param $name
+     * @param null $constraint
+     */
     public function findPackages($name, $constraint = null)
     {
         // TODO: Implement findPackages() method.

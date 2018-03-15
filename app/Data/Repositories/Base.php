@@ -6,8 +6,15 @@ use Illuminate\Http\Request;
 
 abstract class Base
 {
+    /**
+     * @var
+     */
     protected $model;
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function createFromRequest(Request $request)
     {
         is_null($id = $request->input('id'))
@@ -22,6 +29,10 @@ abstract class Base
         return $model;
     }
 
+    /**
+     * @param $data
+     * @return mixed
+     */
     public function create($data)
     {
         $model = is_null($id = isset($data['id'])
@@ -39,31 +50,54 @@ abstract class Base
         return $model;
     }
 
+    /**
+     * @param array $search
+     * @param array $attributes
+     * @return mixed
+     */
     public function firstOrCreate(array $search, array $attributes = [])
     {
         return $this->model::firstOrCreate($search, $attributes);
     }
 
+    /**
+     * @param $abreviacao
+     * @return mixed
+     */
     public function findByAbreviacao($abreviacao)
     {
         return $this->model::where('abreviacao', $abreviacao)->first();
     }
 
+    /**
+     * @param $user_id
+     * @return mixed
+     */
     public function findById($user_id)
     {
         return $this->model::where('id', $user_id)->first();
     }
 
+    /**
+     * @return mixed
+     */
     public function new()
     {
         return new $this->model();
     }
 
+    /**
+     * @return mixed
+     */
     public function all()
     {
         return $this->makeResultForSelect($this->model::all());
     }
 
+    /**
+     * @param $string
+     * @return mixed
+     */
     public function cleanString($string)
     {
         return str_replace(["\n"], [''], $string);
@@ -80,6 +114,12 @@ abstract class Base
         }
     }
 
+    /**
+     * @param $result
+     * @param string $label
+     * @param string $value
+     * @return mixed
+     */
     protected function makeResultForSelect($result, $label = 'nome', $value = 'id')
     {
         return $result->map(function ($row) use ($value, $label) {

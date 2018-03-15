@@ -13,9 +13,6 @@ use App\Http\Requests\Processo as ProcessoRequest;
 
 class Processos extends Controller
 {
-    /**
-     * @var ProcessosRepository
-     */
     private $repository;
 
     public function __construct(ProcessosRepository $repository)

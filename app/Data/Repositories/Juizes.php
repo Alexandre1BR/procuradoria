@@ -8,8 +8,15 @@ use Illuminate\Support\Facades\DB;
 
 class Juizes extends Base
 {
+    /**
+     * @var string
+     */
     protected $model = Juiz::class;
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function search(Request $request)
     {
         return $this->searchFromRequest($request->get('pesquisa'));

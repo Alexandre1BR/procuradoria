@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 
 class Agenda extends Controller
 {
-    /**
-     * @var Andamentos
-     */
     private $andamentosRepository;
 
     public function __construct(AndamentosRepository $andamentosRepository)

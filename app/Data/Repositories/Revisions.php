@@ -15,6 +15,7 @@ class Revisions extends Base
 
     /**
      * @param Request $request
+     *
      * @return mixed
      */
     public function search(Request $request)
@@ -24,6 +25,7 @@ class Revisions extends Base
 
     /**
      * @param null $search
+     *
      * @return mixed
      */
     public function searchFromRequest($search = null)
@@ -57,17 +59,11 @@ class Revisions extends Base
         // TODO: Implement findPackages() method.
     }
 
-    /**
-     *
-     */
     public function getPackages()
     {
         // TODO: Implement getPackages() method.
     }
 
-    /**
-     *
-     */
     public function count()
     {
         // TODO: Implement count() method.

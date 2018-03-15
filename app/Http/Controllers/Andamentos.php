@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 
 class Andamentos extends Controller
 {
-
     private $repository;
 
     public function __construct(AndamentosRepository $repository)

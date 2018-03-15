@@ -13,16 +13,14 @@ use App\Data\Models\Tag;
 use App\Data\Models\TipoProcesso as ModelTipoProcesso;
 use App\Data\Models\Tribunal;
 use App\Data\Models\User as UserModel;
+use App\Data\Scope\Processo as ProcessoScope;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
-use App\Data\Scope\Processo as ProcessoScope;
-
 class Processos extends Base
 {
-
     /**
      * @var string
      */
@@ -41,16 +39,16 @@ class Processos extends Base
      */
     protected $dataTypes = [
             'numero_judicial' => 'string',
-            'numero_alerj' => 'string',
-            'vara' => 'string',
+            'numero_alerj'    => 'string',
+            'vara'            => 'string',
         //'origem_complemento' => 'string,
             'apensos_obs' => 'string',
-            'autor' => 'string',
-            'reu' => 'string',
-            'objeto' => 'string',
-            'merito' => 'string',
-            'liminar' => 'string',
-            'recurso' => 'string',
+            'autor'       => 'string',
+            'reu'         => 'string',
+            'objeto'      => 'string',
+            'merito'      => 'string',
+            'liminar'     => 'string',
+            'recurso'     => 'string',
         //'tipo_meio'         => 'string',
             'data_distribuicao' => 'date',
             'observacao'        => 'string',
@@ -61,6 +59,7 @@ class Processos extends Base
 
     /**
      * @param $item
+     *
      * @return string|void
      */
     protected function toDate($item)
@@ -92,6 +91,7 @@ class Processos extends Base
 
     /**
      * @param Request $request
+     *
      * @return mixed
      */
     public function search(Request $request)
@@ -174,7 +174,7 @@ class Processos extends Base
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
                 if ($type === 'string') {
-                    $query->orWhere($column, 'ilike', '%' . $item . '%');
+                    $query->orWhere($column, 'ilike', '%'.$item.'%');
                 } else {
                     $ifdate = $this->toDate($item);
                     if ($ifdate != null) {
@@ -246,18 +246,18 @@ class Processos extends Base
             $processos = $this->getProcessosWithoutApensos($apensos);
 
             return [
-                    'juizes' => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
-                    'tribunais' => Tribunal::orderBy('nome')->pluck('nome', 'id'),
-                    'procuradores' => UserModel::type('Procurador')->orderBy('name')->pluck('name', 'id'),
-                    'assessores' => UserModel::type('Assessor')->orderBy('name')->pluck('name', 'id'),
-                    'estagiarios' => UserModel::type('Estagiario')->orderBy('name')->pluck('name', 'id'),
-                    'meios' => Meio::orderBy('nome')->pluck('nome', 'id'),
-                    'acoes' => Acao::orderBy('nome')->pluck('nome', 'id'),
-                    'andamentos' => Andamento::where('processo_id', $id)->get(),
-                    'apensos' => $apensos,
-                    'processos' => $processos,
-                    'leis' => Lei::where('processo_id', $id)->get(),
-                    'tags' => Tag::all(),
+                    'juizes'         => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
+                    'tribunais'      => Tribunal::orderBy('nome')->pluck('nome', 'id'),
+                    'procuradores'   => UserModel::type('Procurador')->orderBy('name')->pluck('name', 'id'),
+                    'assessores'     => UserModel::type('Assessor')->orderBy('name')->pluck('name', 'id'),
+                    'estagiarios'    => UserModel::type('Estagiario')->orderBy('name')->pluck('name', 'id'),
+                    'meios'          => Meio::orderBy('nome')->pluck('nome', 'id'),
+                    'acoes'          => Acao::orderBy('nome')->pluck('nome', 'id'),
+                    'andamentos'     => Andamento::where('processo_id', $id)->get(),
+                    'apensos'        => $apensos,
+                    'processos'      => $processos,
+                    'leis'           => Lei::where('processo_id', $id)->get(),
+                    'tags'           => Tag::all(),
                     'tiposProcessos' => ModelTipoProcesso::orderBy('nome')->get(),
             ];
         });
@@ -281,6 +281,7 @@ class Processos extends Base
 
     /**
      * @param bool $arquivados
+     *
      * @return $this
      */
     public function makeProcessoQuery($arquivados = false)
@@ -288,17 +289,18 @@ class Processos extends Base
         $query = $arquivados ? (new Processo())->withoutGlobalScope(ProcessoScope::class) : (new Processo())
                         ->with(['acao', 'tribunal', 'procurador', 'assessor', 'estagiario'])
                         ->orderBy('updated_at', 'desc');
+
         return $query;
     }
 
     /**
      * @param $processos
+     *
      * @return mixed
      */
     protected function transform($processos)
     {
-        return $processos->map(function ($processo)
-        {
+        return $processos->map(function ($processo) {
             $processo['acao_nome'] = is_null($processo->acao) ? 'N/C' : $processo->acao->nome;
 
             $processo['tribunal_nome'] = is_null($processo->tribunal) ? 'N/C' : $processo->tribunal->nome;

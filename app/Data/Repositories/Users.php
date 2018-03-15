@@ -22,6 +22,7 @@ class Users extends Base
 
     /**
      * Users constructor.
+     *
      * @param Authorization $authorization
      */
     public function __construct(Authorization $authorization)
@@ -31,6 +32,7 @@ class Users extends Base
 
     /**
      * @param $email
+     *
      * @return mixed
      */
     public function findUserByEmail($email)
@@ -40,6 +42,7 @@ class Users extends Base
 
     /**
      * @param $id
+     *
      * @return mixed
      */
     public function findUserById($id)
@@ -49,6 +52,7 @@ class Users extends Base
 
     /**
      * @param $username
+     *
      * @return mixed
      */
     private function getTipoUsuario($username)
@@ -83,6 +87,7 @@ class Users extends Base
 
     /**
      * @param $type
+     *
      * @return mixed
      */
     public function getByType($type)

@@ -43,6 +43,7 @@ class Processos extends Base
         'data_distribuicao' => 'date',
         'observacao'        => 'string',
         'link'              => 'string',
+        'site_alerj_link'   => 'string',
     ];
 
     protected function toDate($item)
@@ -111,7 +112,12 @@ class Processos extends Base
                 $query->where($column, '=', $search);
                 break;
             case 'string':
-                $query->where(DB::raw("lower({$column})"), 'like', "%{$search}%");
+//                $query->where(DB::raw("lower({$column})"), 'like', "%{$search}%");
+                $query->where($column, 'ilike', '%'.$search.'%');
+                break;
+            case 'link':
+//                $query->where(DB::raw("lower({$column})"), 'like', "%{$search}%");
+                $query->where($column, 'ilike', '%'.$search.'%');
                 break;
             case 'tags':
                 $query->withAnyTags((array) $search);
@@ -141,6 +147,7 @@ class Processos extends Base
 
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
+                dump($column);
                 if ($type === 'string') {
                     $query->orWhere($column, 'ilike', '%'.$item.'%');
                 } else {

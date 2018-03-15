@@ -34,7 +34,6 @@ class Processos extends Controller
     public function store(ProcessoRequest $request, ProcessosRepository $repository)
     {
         $p = $repository->createFromRequest($request);
-        $AndamentosRequest = new Andamento();
 
         $a = new AndamentosRepository();
         $a->createFromProcessos($request, $p);

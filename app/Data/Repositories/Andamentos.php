@@ -46,6 +46,7 @@ class Andamentos extends Base
         $tipoAndamento = TipoAndamento::where('nome', 'Recebimento')->get()->first();
         $model = new AndamentoModel();
 
+
         if (is_null($request->input('id'))) {
             $tipoEntrada = TipoEntrada::where('nome', 'Automatico')->get()->first();
             $model->setAttribute('processo_id', $p->id);

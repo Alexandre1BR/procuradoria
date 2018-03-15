@@ -11,10 +11,6 @@ use App\Http\Requests\Processo as ProcessoRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-/**
- * Class Andamentos
- * @package App\Data\Repositories
- */
 class Andamentos extends Base
 {
     /**

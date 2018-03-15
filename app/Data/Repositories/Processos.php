@@ -20,10 +20,6 @@ use Illuminate\Support\Facades\DB;
 
 use App\Data\Scope\Processo as ProcessoScope;
 
-/**
- * Class Processos
- * @package App\Data\Repositories
- */
 class Processos extends Base
 {
 

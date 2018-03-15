@@ -5,10 +5,6 @@ namespace App\Data\Repositories;
 use App\Data\Models\Lei as LeiModel;
 use Illuminate\Http\Request;
 
-/**
- * Class Leis
- * @package App\Data\Repositories
- */
 class Leis extends Base
 {
     /**

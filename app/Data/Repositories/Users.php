@@ -8,10 +8,6 @@ use App\Services\Authorization;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-/**
- * Class Users
- * @package App\Data\Repositories
- */
 class Users extends Base
 {
     /**

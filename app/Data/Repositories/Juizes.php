@@ -6,10 +6,6 @@ use App\Data\Models\Juiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-/**
- * Class Juizes
- * @package App\Data\Repositories
- */
 class Juizes extends Base
 {
     /**

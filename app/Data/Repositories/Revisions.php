@@ -6,10 +6,6 @@ use App\Data\Models\Revision;
 use App\Data\Models\Revision as RevisionModel;
 use Illuminate\Http\Request;
 
-/**
- * Class Revisions
- * @package App\Data\Repositories
- */
 class Revisions extends Base
 {
     /**

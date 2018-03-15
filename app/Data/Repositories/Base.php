@@ -4,10 +4,6 @@ namespace App\Data\Repositories;
 
 use Illuminate\Http\Request;
 
-/**
- * Class Base
- * @package App\Data\Repositories
- */
 abstract class Base
 {
     /**

@@ -6,10 +6,6 @@ use App\Data\Models\Acao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-/**
- * Class Acoes
- * @package App\Data\Repositories
- */
 class Acoes extends Base
 {
     /**

@@ -4,10 +4,6 @@ namespace App\Data\Repositories;
 
 use App\Data\Models\TipoPrazo;
 
-/**
- * Class TiposPrazos
- * @package App\Data\Repositories
- */
 class TiposPrazos extends Base
 {
     /**

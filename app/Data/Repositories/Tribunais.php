@@ -8,10 +8,6 @@ use Composer\Package\PackageInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-/**
- * Class Tribunais
- * @package App\Data\Repositories
- */
 class Tribunais extends Base
 {
     /**
@@ -87,17 +83,11 @@ class Tribunais extends Base
         // TODO: Implement findPackages() method.
     }
 
-    /**
-     *
-     */
     public function getPackages()
     {
         // TODO: Implement getPackages() method.
     }
 
-    /**
-     *
-     */
     public function count()
     {
         // TODO: Implement count() method.

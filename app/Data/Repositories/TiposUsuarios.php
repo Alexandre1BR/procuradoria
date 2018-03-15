@@ -5,10 +5,6 @@ namespace App\Data\Repositories;
 use App\Data\Models\TipoUsuario;
 use Illuminate\Support\Facades\Cache;
 
-/**
- * Class TiposUsuarios
- * @package App\Data\Repositories
- */
 class TiposUsuarios extends Base
 {
     /**

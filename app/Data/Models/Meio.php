@@ -11,6 +11,9 @@ class Meio extends BaseModel
      */
     protected $table = 'meios';
 
+    /**
+     * @var array
+     */
     protected $fillable = [
         'nome',
     ];

@@ -20,16 +20,29 @@ use Illuminate\Support\Facades\DB;
 
 use App\Data\Scope\Processo as ProcessoScope;
 
+/**
+ * Class Processos
+ * @package App\Data\Repositories
+ */
 class Processos extends Base
 {
 
+    /**
+     * @var string
+     */
     protected $model = Processo::class;
 
+    /**
+     * Processos constructor.
+     */
     public function __construct()
     {
         $this->tiposUsuariosRepository = app(TiposUsuarios::class);
     }
 
+    /**
+     * @var array
+     */
     protected $dataTypes = [
             'numero_judicial' => 'string',
             'numero_alerj' => 'string',
@@ -48,6 +61,10 @@ class Processos extends Base
             'link' => 'string',
     ];
 
+    /**
+     * @param $item
+     * @return string|void
+     */
     protected function toDate($item)
     {
         try {
@@ -59,16 +76,26 @@ class Processos extends Base
         return $item;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAllIds()
     {
         return Processo::pluck('id');
     }
 
+    /**
+     * @param $tags
+     */
     private function listTags($tags)
     {
         // dd($tags);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function search(Request $request)
     {
         info($request);
@@ -249,6 +276,10 @@ class Processos extends Base
         return is_array($result) ? $result : [];
     }
 
+    /**
+     * @param bool $arquivados
+     * @return $this
+     */
     public function makeProcessoQuery($arquivados = false)
     {
         $query = $arquivados ? (new Processo())->withoutGlobalScope(ProcessoScope::class) : (new Processo())
@@ -257,6 +288,10 @@ class Processos extends Base
         return $query;
     }
 
+    /**
+     * @param $processos
+     * @return mixed
+     */
     protected function transform($processos)
     {
         return $processos->map(function ($processo)

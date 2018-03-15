@@ -6,10 +6,21 @@ use App\Data\Models\Juiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class Juizes
+ * @package App\Data\Repositories
+ */
 class Juizes extends Base
 {
+    /**
+     * @var string
+     */
     protected $model = Juiz::class;
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function search(Request $request)
     {
         return $this->searchFromRequest($request->get('pesquisa'));

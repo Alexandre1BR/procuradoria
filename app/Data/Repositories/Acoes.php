@@ -6,10 +6,21 @@ use App\Data\Models\Acao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class Acoes
+ * @package App\Data\Repositories
+ */
 class Acoes extends Base
 {
+    /**
+     * @var string
+     */
     protected $model = Acao::class;
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function search(Request $request)
     {
         return $this->searchFromRequest($request->get('pesquisa'));

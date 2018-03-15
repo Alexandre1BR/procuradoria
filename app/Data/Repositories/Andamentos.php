@@ -11,16 +11,30 @@ use App\Http\Requests\Processo as ProcessoRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+/**
+ * Class Andamentos
+ * @package App\Data\Repositories
+ */
 class Andamentos extends Base
 {
+    /**
+     * @var string
+     */
     protected $model = AndamentoModel::class;
 
+    /**
+     * @var array
+     */
     protected $dataTypes = [
         'data_prazo'   => 'date',
         'data_entrega' => 'date',
         'observacoes'  => 'string',
     ];
 
+    /**
+     * @param $andamento
+     * @return string
+     */
     protected function makeFeedTitle($andamento)
     {
         return "\n".
@@ -31,16 +45,28 @@ class Andamentos extends Base
             'réu: '.$this->cleanString($andamento->processo->reu)."\n";
     }
 
+    /**
+     * @param $andamento
+     * @return string
+     */
     protected function makeFeedDescription($andamento)
     {
         return 'njud:'.$andamento->processo->numero_judicial.'<br>nalerj: '.$andamento->processo->numero_alerj;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function search(Request $request)
     {
         return $this->searchFromRequest($request->get('pesquisa'));
     }
 
+    /**
+     * @param ProcessoRequest $request
+     * @param Processo $p
+     */
     public function createFromProcessos(ProcessoRequest $request, Processo $p)
     {
         $tipoAndamento = TipoAndamento::where('nome', 'Recebimento')->get()->first();
@@ -68,6 +94,9 @@ class Andamentos extends Base
         }
     }
 
+    /**
+     * @param Request $request
+     */
     public function checkforchanges(Request $request)
     {
         $tipoAndamento = TipoAndamento::where('nome', 'Recebimento')->get()->first();
@@ -131,6 +160,10 @@ class Andamentos extends Base
         return $query->get();
     }
 
+    /**
+     * @param $item
+     * @return string|void
+     */
     protected function toDate($item)
     {
         try {
@@ -142,6 +175,9 @@ class Andamentos extends Base
         return $item;
     }
 
+    /**
+     * @return mixed
+     */
     public function feedForFullcalendar()
     {
         return $this->all()->map(function ($andamento) {
@@ -156,6 +192,9 @@ class Andamentos extends Base
         });
     }
 
+    /**
+     * @return $this
+     */
     public function makeAndamentoQuery()
     {
         return (new AndamentoModel())
@@ -163,6 +202,10 @@ class Andamentos extends Base
             ->orderBy('updated_at', 'desc');
     }
 
+    /**
+     * @param $request
+     * @return mixed
+     */
     public function filter($request)
     {
         $query = $this->makeAndamentoQuery();

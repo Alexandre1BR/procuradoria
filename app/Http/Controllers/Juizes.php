@@ -16,17 +16,31 @@ class Juizes extends Controller
      */
     private $repository;
 
+    /**
+     * Juizes constructor.
+     *
+     * @param JuizesRepository $repository
+     */
     public function __construct(JuizesRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return $this
+     */
     public function create()
     {
         return view('juizes.form', $this->getJuizesData())
             ->with(['juiz' => $this->repository->new()]);
     }
 
+    /**
+     * @param JuizRequest      $request
+     * @param JuizesRepository $repository
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(JuizRequest $request, JuizesRepository $repository)
     {
         $repository->createFromRequest($request);
@@ -35,6 +49,9 @@ class Juizes extends Controller
             ->with($this->getSuccessMessage());
     }
 
+    /**
+     * @return array
+     */
     public function getJuizesData(): array
     {
         return [
@@ -43,6 +60,11 @@ class Juizes extends Controller
         ];
     }
 
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
     public function show($id)
     {
         $juiz = Juiz::find($id);
@@ -54,6 +76,12 @@ class Juizes extends Controller
             ->with($this->getJuizesData());
     }
 
+    /**
+     * @param JuizesRepository $juizes
+     * @param Request          $request
+     *
+     * @return $this|\Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function index(JuizesRepository $juizes, Request $request)
     {
         return $request->expectsJson()

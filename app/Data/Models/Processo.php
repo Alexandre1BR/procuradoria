@@ -11,11 +11,17 @@ class Processo extends BaseModel
 {
     use HasTags;
 
+    /**
+     * @var array
+     */
     protected $dates = [
         'data_distribuicao',
         'data_recebimento',
     ];
 
+    /**
+     * @var array
+     */
     protected $with = [
         'acao',
         'tribunal',
@@ -59,11 +65,17 @@ class Processo extends BaseModel
         'tipo_processo_id',
     ];
 
+    /**
+     * @var array
+     */
     protected $presenters = [
         'data_distribuicao_formatado',
         'data_recebimento_formatado',
     ];
 
+    /**
+     * @var array
+     */
     protected $dataTypes = [
         'numero_judicial'               => 'id',
         'numero_alerj'                  => 'id',
@@ -94,31 +106,49 @@ class Processo extends BaseModel
         'tipo_processo_id'              => 'id',
     ];
 
+    /**
+     * @return mixed
+     */
     public function getDataSemHoraAttribute()
     {
         return $this->data_distribuicao->format('d/m/Y');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function andamentos()
     {
         return  $this->hasMany(Andamento::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function tribunal()
     {
         return $this->belongsTo(Tribunal::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function acao()
     {
         return $this->belongsTo(Acao::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function relator()
     {
         return $this->belongsTo(Juiz::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function juiz()
     {
         self::with('juiz');
@@ -126,36 +156,57 @@ class Processo extends BaseModel
         return $this->belongsTo(Juiz::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function procurador()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function estagiario()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function assessor()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function tipoMeio()
     {
         return $this->belongsTo(Meio::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function tipoProcesso()
     {
         return $this->belongsTo(TipoProcesso::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function apensos()
     {
         return $this->hasMany(Apenso::class);
     }
 
+    /**
+     * @return string
+     */
     public function getPresenterClass()
     {
         return ProcessoPresenter::class;
@@ -168,6 +219,11 @@ class Processo extends BaseModel
         static::addGlobalScope(new ProcessoScope());
     }
 
+    /**
+     * @param array $options
+     *
+     * @return bool|void
+     */
     public function save(array $options = [])
     {
         Cache::forget('getProcessosData'.$this->id);

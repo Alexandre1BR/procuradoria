@@ -9,13 +9,26 @@ use Illuminate\Http\Request;
 
 class Leis extends Controller
 {
+    /**
+     * @var LeisRepository
+     */
     private $repository;
 
+    /**
+     * Leis constructor.
+     *
+     * @param LeisRepository $repository
+     */
     public function __construct(LeisRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @param null $processo_id
+     *
+     * @return $this
+     */
     public function create($processo_id = null)
     {
         return view('leis.form')
@@ -23,6 +36,12 @@ class Leis extends Controller
                 ->with(['lei' => $this->repository->new()]);
     }
 
+    /**
+     * @param LeiRequest     $request
+     * @param LeisRepository $repository
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(LeiRequest $request, LeisRepository $repository)
     {
         $repository->createFromRequest($request);
@@ -32,6 +51,12 @@ class Leis extends Controller
             ->with($this->getSuccessMessage());
     }
 
+    /**
+     * @param LeisRepository $leis
+     * @param Request        $request
+     *
+     * @return $this
+     */
     public function index(LeisRepository $leis, Request $request)
     {
         return view('leis.index')
@@ -39,6 +64,11 @@ class Leis extends Controller
             ->with('leis', $leis->search($request));
     }
 
+    /**
+     * @param $id
+     *
+     * @return $this
+     */
     public function show($id)
     {
         return view('leis.form')

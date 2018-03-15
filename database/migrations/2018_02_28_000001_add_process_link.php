@@ -5,6 +5,11 @@ use Illuminate\Database\Schema\Blueprint;
 
 class AddProcessLink extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::table('processos', function (Blueprint $table) {
@@ -12,6 +17,11 @@ class AddProcessLink extends Migration
         });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::table('processos', function (Blueprint $table) {

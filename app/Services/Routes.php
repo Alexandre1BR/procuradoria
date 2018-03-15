@@ -4,6 +4,9 @@ namespace App\Services;
 
 class Routes
 {
+    /**
+     * @return array
+     */
     public function makeAppRootRouteMiddlewares()
     {
         return collect([

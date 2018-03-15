@@ -14,11 +14,22 @@ class Tribunais extends Controller
      */
     private $repository;
 
+    /**
+     * Tribunais constructor.
+     *
+     * @param TribunaisRepository $repository
+     */
     public function __construct(TribunaisRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @param TribunaisRepository $tribunais
+     * @param Request             $request
+     *
+     * @return $this|mixed
+     */
     public function index(TribunaisRepository $tribunais, Request $request)
     {
         return $request->expectsJson()
@@ -52,6 +63,11 @@ class Tribunais extends Controller
             ->with($this->getSuccessMessage());
     }
 
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
     public function show($id)
     {
         $tribunal = Tribunal::find($id);

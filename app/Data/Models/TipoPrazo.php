@@ -11,6 +11,9 @@ class TipoPrazo extends BaseModel
      */
     protected $table = 'tipos_prazos';
 
+    /**
+     * @var array
+     */
     protected $fillable = [
         'nome',
     ];

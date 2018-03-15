@@ -13,11 +13,22 @@ class Revisions extends Controller
      */
     private $repository;
 
+    /**
+     * Revisions constructor.
+     *
+     * @param RevisionsRepository $repository
+     */
     public function __construct(RevisionsRepository $repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @param RevisionsRepository $revisions
+     * @param Request             $request
+     *
+     * @return $this|mixed
+     */
     public function index(RevisionsRepository $revisions, Request $request)
     {
         return $request->expectsJson()
@@ -27,6 +38,11 @@ class Revisions extends Controller
                 ->with('revisions', $revisions->search($request));
     }
 
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
     public function show($id)
     {
         $tribunal = Tribunal::find($id);

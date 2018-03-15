@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Cache;
 
 class Lei extends BaseModel
 {
+    /**
+     * @var array
+     */
     protected $fillable = [
         'numero_lei',
         'autor',
@@ -20,13 +23,24 @@ class Lei extends BaseModel
         'processo_id',
     ];
 
+    /**
+     * @var array
+     */
     protected $with = ['processo'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function processo()
     {
         return $this->belongsTo(Processo::class);
     }
 
+    /**
+     * @param array $options
+     *
+     * @return bool|void
+     */
     public function save(array $options = [])
     {
         Cache::forget('getProcessosData'.$this->processo_id);

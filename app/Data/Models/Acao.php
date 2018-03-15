@@ -11,6 +11,9 @@ class Acao extends BaseModel
      */
     protected $table = 'acoes';
 
+    /**
+     * @var array
+     */
     protected $fillable = [
         'nome',
         'abreviacao',

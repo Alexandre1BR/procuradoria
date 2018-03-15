@@ -11,6 +11,9 @@ class TipoEntrada extends BaseModel
      */
     protected $table = 'tipos_entradas';
 
+    /**
+     * @var array
+     */
     protected $fillable = [
         'nome',
     ];

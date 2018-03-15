@@ -14,6 +14,9 @@ class User extends Authenticatable
     use RevisionableTrait;
     //use SoftDeletes;
 
+    /**
+     * @var array
+     */
     protected $with = ['userType'];
     //protected $dates = ['deleted_at'];
 
@@ -36,11 +39,20 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function userType()
     {
         return $this->belongsTo(TipoUsuario::class, 'user_type_id');
     }
 
+    /**
+     * @param $query
+     * @param $type
+     *
+     * @return mixed
+     */
     public function scopeType($query, $type)
     {
         return $query->where(

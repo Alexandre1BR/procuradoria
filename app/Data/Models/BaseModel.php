@@ -34,6 +34,7 @@ abstract class BaseModel extends Model implements HasPresenter
 
     /**
      * @param $column
+     *
      * @return mixed
      */
     public static function getDataTypeOf($column)

@@ -16,8 +16,9 @@ class TiposJuizes extends Controller
     }
 
     /**
-     * @param TipoJuizRequest $request
+     * @param TipoJuizRequest       $request
      * @param TiposJuizesRepository $repository
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function store(TipoJuizRequest $request, TiposJuizesRepository $repository)

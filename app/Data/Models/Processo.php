@@ -212,9 +212,6 @@ class Processo extends BaseModel
         return ProcessoPresenter::class;
     }
 
-    /**
-     *
-     */
     public static function boot()
     {
         parent::boot();
@@ -224,6 +221,7 @@ class Processo extends BaseModel
 
     /**
      * @param array $options
+     *
      * @return bool|void
      */
     public function save(array $options = [])

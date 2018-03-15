@@ -17,6 +17,7 @@ class Authorization
 
     /**
      * Authorization constructor.
+     *
      * @param RemoteRequest $remoteRequest
      */
     public function __construct(RemoteRequest $remoteRequest)
@@ -26,6 +27,7 @@ class Authorization
 
     /**
      * @param $username
+     *
      * @return \Illuminate\Support\Collection
      */
     public function getUserPermissions($username)
@@ -45,6 +47,7 @@ class Authorization
 
     /**
      * @param $username
+     *
      * @return \Illuminate\Support\Collection
      */
     public function getUserProfiles($username)
@@ -54,6 +57,7 @@ class Authorization
 
     /**
      * @param $username
+     *
      * @return \Illuminate\Support\Collection
      */
     private function mockedPermissions($username)

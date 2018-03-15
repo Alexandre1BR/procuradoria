@@ -22,8 +22,9 @@ class TiposUsuarios extends Controller
     }
 
     /**
-     * @param TipoUsuarioRequest $request
+     * @param TipoUsuarioRequest      $request
      * @param TiposUsuariosRepository $repository
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function store(TipoUsuarioRequest $request, TiposUsuariosRepository $repository)

@@ -50,6 +50,7 @@ class User extends Authenticatable
     /**
      * @param $query
      * @param $type
+     *
      * @return mixed
      */
     public function scopeType($query, $type)

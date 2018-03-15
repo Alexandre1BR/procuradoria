@@ -24,6 +24,7 @@ class RemoteRequest
     /**
      * @param $url
      * @param $data
+     *
      * @return mixed
      */
     public function post($url, $data)

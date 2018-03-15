@@ -14,6 +14,7 @@ class Agenda extends Controller
 
     /**
      * Agenda constructor.
+     *
      * @param AndamentosRepository $andamentosRepository
      */
     public function __construct(AndamentosRepository $andamentosRepository)
@@ -23,7 +24,8 @@ class Agenda extends Controller
 
     /**
      * @param AndamentosRepository $andamentosRepository
-     * @param Request $request
+     * @param Request              $request
+     *
      * @return $this
      */
     public function index(AndamentosRepository $andamentosRepository, Request $request)

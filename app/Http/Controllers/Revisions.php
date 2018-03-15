@@ -15,6 +15,7 @@ class Revisions extends Controller
 
     /**
      * Revisions constructor.
+     *
      * @param RevisionsRepository $repository
      */
     public function __construct(RevisionsRepository $repository)
@@ -24,7 +25,8 @@ class Revisions extends Controller
 
     /**
      * @param RevisionsRepository $revisions
-     * @param Request $request
+     * @param Request             $request
+     *
      * @return $this|mixed
      */
     public function index(RevisionsRepository $revisions, Request $request)
@@ -38,6 +40,7 @@ class Revisions extends Controller
 
     /**
      * @param $id
+     *
      * @return mixed
      */
     public function show($id)

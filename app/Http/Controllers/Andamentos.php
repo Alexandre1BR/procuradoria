@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 
 class Andamentos extends Controller
 {
-
     /**
      * @var AndamentosRepository
      */
@@ -21,6 +20,7 @@ class Andamentos extends Controller
 
     /**
      * Andamentos constructor.
+     *
      * @param AndamentosRepository $repository
      */
     public function __construct(AndamentosRepository $repository)
@@ -30,6 +30,7 @@ class Andamentos extends Controller
 
     /**
      * @param null $id
+     *
      * @return $this
      */
     public function create($id = null)
@@ -40,8 +41,9 @@ class Andamentos extends Controller
     }
 
     /**
-     * @param AndamentoRequest $request
+     * @param AndamentoRequest     $request
      * @param AndamentosRepository $repository
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(AndamentoRequest $request, AndamentosRepository $repository)
@@ -61,6 +63,7 @@ class Andamentos extends Controller
 
     /**
      * @param $id
+     *
      * @return mixed
      */
     public function show($id)
@@ -75,6 +78,7 @@ class Andamentos extends Controller
 
     /**
      * @param Request $request
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function detail(Request $request)
@@ -95,7 +99,8 @@ class Andamentos extends Controller
 
     /**
      * @param AndamentosRepository $andamentos
-     * @param Request $request
+     * @param Request              $request
+     *
      * @return $this
      */
     public function index(AndamentosRepository $andamentos, Request $request)

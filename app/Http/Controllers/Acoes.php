@@ -16,6 +16,7 @@ class Acoes extends Controller
 
     /**
      * Acoes constructor.
+     *
      * @param AcoesRepository $repository
      */
     public function __construct(AcoesRepository $repository)
@@ -33,8 +34,9 @@ class Acoes extends Controller
     }
 
     /**
-     * @param AcaoRequest $request
+     * @param AcaoRequest     $request
      * @param AcoesRepository $repository
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(AcaoRequest $request, AcoesRepository $repository)
@@ -47,7 +49,8 @@ class Acoes extends Controller
 
     /**
      * @param AcoesRepository $acoes
-     * @param Request $request
+     * @param Request         $request
+     *
      * @return $this|\Illuminate\Database\Eloquent\Collection|static[]
      */
     public function index(AcoesRepository $acoes, Request $request)
@@ -61,6 +64,7 @@ class Acoes extends Controller
 
     /**
      * @param $id
+     *
      * @return $this
      */
     public function show($id)

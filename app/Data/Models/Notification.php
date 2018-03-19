@@ -16,5 +16,9 @@ class Notification extends BaseModel
      */
     protected $fillable = [
         'hash',
+        'subject',
+        'subject_id',
+        'via',
+        'to',
     ];
 }

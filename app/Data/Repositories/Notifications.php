@@ -11,9 +11,15 @@ class Notifications extends Base
         return sha1($this->toString($notifiable).$this->toString($subject));
     }
 
-    public function storeAsSent($notifiable, $subject)
+    public function storeAsSent($via, $notifiable, $subject)
     {
-        return Notification::create(['hash' => $this->createHash($notifiable, $subject)]);
+        return Notification::create([
+            'hash' => $this->createHash($notifiable, $subject),
+            'via' => $via,
+            'to' => is_object($notifiable) ? $notifiable->preferredEmail : $notifiable,
+            'subject_id' => $subject->id,
+            'subject' => get_class($subject),
+        ]);
     }
 
     public function findByHash($notifiable, $subject)

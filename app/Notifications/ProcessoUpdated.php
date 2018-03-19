@@ -56,7 +56,11 @@ class ProcessoUpdated extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        $via = ['mail'];
+        $via = [];
+
+        if (is_null($this->notificationsRepository->findByHash($notifiable, $this->processo))) {
+            $via[] = 'mail';
+        }
 
         if (is_null($this->notificationsRepository->findByHash($this->getSlackNotifiable(), $this->processo))) {
             $via[] = 'slack';
@@ -73,6 +77,8 @@ class ProcessoUpdated extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
+        $this->notificationsRepository->storeAsSent('mail', $notifiable, $this->processo);
+
         $message = (new MailMessage)
                     ->line($this->getMessage());
 
@@ -105,7 +111,7 @@ class ProcessoUpdated extends Notification implements ShouldQueue
      */
     public function toSlack()
     {
-        $this->notificationsRepository->storeAsSent($this->getSlackNotifiable(), $this->processo);
+        $this->notificationsRepository->storeAsSent('slack', $this->getSlackNotifiable(), $this->processo);
 
         $message = (new SlackMessage($this->getSlackNotifiable()))
             ->success()

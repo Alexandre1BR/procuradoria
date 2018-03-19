@@ -246,6 +246,7 @@ class Processo extends BaseModel
 
     /**
      * @param $event
+     *
      * @return \Illuminate\Support\Collection
      */
     public function getNotifiableUsersFor($event)
@@ -267,7 +268,7 @@ class Processo extends BaseModel
      */
     public function addNotifiable(&$notifiables, $notifiable)
     {
-        if (! is_null($notifiable) && is_null($notifiables->where('id', $notifiable->id)->first())) {
+        if (!is_null($notifiable) && is_null($notifiables->where('id', $notifiable->id)->first())) {
             $notifiables->push($notifiable);
         }
     }

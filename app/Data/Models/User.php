@@ -60,4 +60,14 @@ class User extends Authenticatable
             app(TiposUsuarios::class)->findByName($type)->id
         );
     }
+
+    /**
+     * Route notifications for the Slack channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForSlack()
+    {
+        return config('services.slack.webhook_url');
+    }
 }

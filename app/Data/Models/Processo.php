@@ -4,12 +4,15 @@ namespace App\Data\Models;
 
 use App\Data\Presenters\ProcessoPresenter;
 use App\Data\Scope\Processo as ProcessoScope;
+use App\Events\ProcessoCreated;
+use App\Events\ProcessoUpdated;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
 use Spatie\Tags\HasTags;
 
 class Processo extends BaseModel
 {
-    use HasTags;
+    use HasTags, Notifiable;
 
     /**
      * @var array
@@ -104,6 +107,16 @@ class Processo extends BaseModel
         'link'                          => 'link',
         'site_alerj_link'               => 'link',
         'tipo_processo_id'              => 'id',
+    ];
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => ProcessoCreated::class,
+        'updated' => ProcessoUpdated::class,
     ];
 
     /**
@@ -227,6 +240,60 @@ class Processo extends BaseModel
     public function save(array $options = [])
     {
         Cache::forget('getProcessosData'.$this->id);
+
         parent::save();
+    }
+
+    /**
+     * @param $event
+     * @return \Illuminate\Support\Collection
+     */
+    public function getNotifiableUsersFor($event)
+    {
+        $notifiables = collect();
+
+        $this->addNotifiable($notifiables, $this->procurador);
+
+        $this->addNotifiable($notifiables, $this->assessor);
+
+        $this->addNotifiable($notifiables, $this->estagiario);
+
+        return $notifiables;
+    }
+
+    /**
+     * @param $notifiables
+     * @param $notifiable
+     */
+    public function addNotifiable(&$notifiables, $notifiable)
+    {
+        if (! is_null($notifiable) && is_null($notifiables->where('id', $notifiable->id)->first())) {
+            $notifiables->push($notifiable);
+        }
+    }
+
+    public function getResponsaveisAttribute()
+    {
+        $responsaveis = collect();
+
+        if ($responsavel = $this->estagiario) {
+            $responsavel->type = 'estagiário';
+
+            $responsaveis->push($responsavel);
+        }
+
+        if ($responsavel = $this->assessor) {
+            $responsavel->type = 'assessor';
+
+            $responsaveis->push($responsavel);
+        }
+
+        if ($responsavel = $this->procurador) {
+            $responsavel->type = 'procurador';
+
+            $responsaveis->push($responsavel);
+        }
+
+        return $responsaveis;
     }
 }

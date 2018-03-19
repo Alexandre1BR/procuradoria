@@ -3,8 +3,8 @@
 namespace App\Listeners;
 
 use App\Notifications\ProcessoUpdated;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
 
 class SendProcessoUpdatedNotification implements ShouldQueue
@@ -14,7 +14,8 @@ class SendProcessoUpdatedNotification implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param object $event
+     *
      * @return void
      */
     public function handle($event)

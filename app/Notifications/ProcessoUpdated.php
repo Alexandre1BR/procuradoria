@@ -28,11 +28,17 @@ class ProcessoUpdated extends Notification implements ShouldQueue
         $this->notificationsRepository = app(Notifications::class);
     }
 
+    /**
+     * @return mixed
+     */
     private function getNotifiables()
     {
         return $this->processo->notifiables;
     }
 
+    /**
+     * @return string
+     */
     private function getMessage()
     {
         return 'Os dados do processo '.$this->processo->numero_judicial.' sofreram alterações';
@@ -73,16 +79,14 @@ class ProcessoUpdated extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
-     *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         $message = (new MailMessage())->line($this->getMessage());
 
         $this->getNotifiables()->each(function ($manager) use ($message) {
-            $message->line("Responsável ({$manager->type}): {$manager->name}");
+            $message->line("$manager->type: {$manager->name}");
         });
 
         $message->action('Ver processo', route('processos.show', $this->processo->id));

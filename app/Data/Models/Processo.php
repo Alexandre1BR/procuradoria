@@ -123,6 +123,22 @@ class Processo extends BaseModel
     /**
      * @return mixed
      */
+    private function getResponsibles()
+    {
+        $notifiables = collect();
+
+        $this->addNotifiable($notifiables, $this->procurador, 'Responsável (estagiário)');
+
+        $this->addNotifiable($notifiables, $this->assessor, 'Responsável (assessor)');
+
+        $this->addNotifiable($notifiables, $this->estagiario, 'Responsável (procurador)');
+
+        return $notifiables;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getDataSemHoraAttribute()
     {
         return $this->data_distribuicao->format('d/m/Y');
@@ -252,54 +268,39 @@ class Processo extends BaseModel
      */
     public function getNotifiableUsersFor($event)
     {
-        $notifiables = collect();
-
-        $this->addNotifiable($notifiables, $this->procurador);
-
-        $this->addNotifiable($notifiables, $this->assessor);
-
-        $this->addNotifiable($notifiables, $this->estagiario);
-
-        return $notifiables;
+        return $this->notifiables;
     }
 
     /**
      * @param $notifiables
      * @param $notifiable
      */
-    public function addNotifiable(&$notifiables, $notifiable)
+    public function addNotifiable(&$notifiables, $notifiable, $type = '')
     {
-        if (!is_null($notifiable) && is_null($notifiables->where('id', $notifiable->id)->first())) {
-            $notifiables->push($notifiable);
+        if (!is_null($notifiable)) {
+            $notifiable->type = $type;
+
+            if (!is_null($notifiable) && is_null($notifiables->where('id', $notifiable->id)->first())) {
+                $notifiables->push($notifiable);
+            }
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function getNotifiablesAttribute()
     {
-        $responsaveis = collect();
-
-        if ($responsavel = $this->estagiario) {
-            $responsavel->type = 'estagiário';
-
-            $responsaveis->push($responsavel);
-        }
-
-        if ($responsavel = $this->assessor) {
-            $responsavel->type = 'assessor';
-
-            $responsaveis->push($responsavel);
-        }
-
-        if ($responsavel = $this->procurador) {
-            $responsavel->type = 'procurador';
-
-            $responsaveis->push($responsavel);
-        }
-
-        $responsaveis = $responsaveis->reject(function ($responsavel) {
+        $notifiables = $this->getResponsibles()->reject(function ($responsavel) {
             return $responsavel->no_notifications;
-        })->merge(app(Users::class)->notifiables());
+        })->merge(
+            app(Users::class)->notifiables()->map(function ($user) {
+                $user->type = 'Usuário';
 
-        return $responsaveis;
+                return $user;
+            })
+        );
+
+        return $notifiables;
     }
 }

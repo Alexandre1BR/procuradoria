@@ -14,11 +14,11 @@ class Notifications extends Base
     public function storeAsSent($via, $notifiable, $subject)
     {
         return Notification::create([
-            'hash' => $this->createHash($notifiable, $subject),
-            'via' => $via,
-            'to' => is_object($notifiable) ? $notifiable->preferredEmail : $notifiable,
+            'hash'       => $this->createHash($notifiable, $subject),
+            'via'        => $via,
+            'to'         => is_object($notifiable) ? $notifiable->preferredEmail : $notifiable,
             'subject_id' => $subject->id,
-            'subject' => get_class($subject),
+            'subject'    => get_class($subject),
         ]);
     }
 

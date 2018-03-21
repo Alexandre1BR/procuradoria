@@ -126,7 +126,7 @@ class ProcessoUpdated extends Notification implements ShouldQueue
 
         $this->getNotifiables()->each(function ($manager) use ($message) {
             $message->attachment(function ($attachment) use ($manager) {
-                $attachment->title("Responsável ({$manager->type}): {$manager->name}");
+                $attachment->title("$manager->type} notificado: {$manager->name}");
             });
         });
 

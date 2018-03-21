@@ -1,9 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Data\Models\User as UserModel;
+use Illuminate\Support\Facades\Schema;
 
 class AddAllAndNoNotifications extends Migration
 {

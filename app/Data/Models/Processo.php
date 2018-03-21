@@ -297,7 +297,6 @@ class Processo extends BaseModel
         }
 
         $responsaveis = $responsaveis->reject(function ($responsavel) {
-            dump($responsavel->no_notifications);
             return $responsavel->no_notifications;
         })->merge(app(Users::class)->notifiables());
 

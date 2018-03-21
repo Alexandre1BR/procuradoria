@@ -70,22 +70,22 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="User">Receber nenhuma notificação</label>
                                 <input name="no_notifications" id="no_notifications" type="checkbox" value="1" disabled
                                        @if($user->no_notifications)
                                             checked
                                     @endif
                                 >
+                                <label for="no_notifications">Não deseja receber notificações</label>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="User">Receber todas as notificações</label>
                                 <input name="all_notifications" id="all_notifications" type="checkbox" value="1" disabled
                                        @if($user->all_notifications)
                                             checked
                                         @endif
                                 >
+                                <label for="all_notifications">Deseja receber TODAS as notificações</label>
                             </div>
                         </div>
 

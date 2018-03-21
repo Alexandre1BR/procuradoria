@@ -3,6 +3,7 @@
 namespace App\Data\Models;
 
 use App\Data\Presenters\ProcessoPresenter;
+use App\Data\Repositories\Users;
 use App\Data\Scope\Processo as ProcessoScope;
 use App\Events\ProcessoCreated;
 use App\Events\ProcessoUpdated;
@@ -273,7 +274,7 @@ class Processo extends BaseModel
         }
     }
 
-    public function getResponsaveisAttribute()
+    public function getNotifiablesAttribute()
     {
         $responsaveis = collect();
 
@@ -294,6 +295,11 @@ class Processo extends BaseModel
 
             $responsaveis->push($responsavel);
         }
+
+        $responsaveis = $responsaveis->reject(function ($responsavel) {
+            dump($responsavel->no_notifications);
+            return $responsavel->no_notifications;
+        })->merge(app(Users::class)->notifiables());
 
         return $responsaveis;
     }

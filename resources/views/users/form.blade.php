@@ -88,7 +88,6 @@
                                 <label for="all_notifications">Deseja receber TODAS as notificações</label>
                             </div>
                         </div>
-
                     </div>
                 </div>
 

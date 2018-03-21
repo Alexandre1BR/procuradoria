@@ -28,9 +28,9 @@ class ProcessoUpdated extends Notification implements ShouldQueue
         $this->notificationsRepository = app(Notifications::class);
     }
 
-    private function getManagers()
+    private function getNotifiables()
     {
-        return $this->processo->responsaveis;
+        return $this->processo->notifiables;
     }
 
     private function getMessage()
@@ -81,7 +81,7 @@ class ProcessoUpdated extends Notification implements ShouldQueue
     {
         $message = (new MailMessage())->line($this->getMessage());
 
-        $this->getManagers()->each(function ($manager) use ($message) {
+        $this->getNotifiables()->each(function ($manager) use ($message) {
             $message->line("Responsável ({$manager->type}): {$manager->name}");
         });
 
@@ -120,7 +120,7 @@ class ProcessoUpdated extends Notification implements ShouldQueue
                 $attachment->title('Ver processo', route('processos.show', $this->processo->id));
             });
 
-        $this->getManagers()->each(function ($manager) use ($message) {
+        $this->getNotifiables()->each(function ($manager) use ($message) {
             $message->attachment(function ($attachment) use ($manager) {
                 $attachment->title("Responsável ({$manager->type}): {$manager->name}");
             });

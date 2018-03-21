@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Data\Repositories\Users as UsersRepository;
 use App\Http\Requests\User as UserRequest;
-use function GuzzleHttp\Promise\is_settled;
 use Illuminate\Support\Facades\Auth;
 
 class Users extends Controller

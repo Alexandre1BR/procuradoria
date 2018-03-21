@@ -33,6 +33,8 @@ class User extends Authenticatable
         'disabled_by_id',
         'disabled_at',
         'personal_email',
+        'all_notifications',
+        'no_notifications',
     ];
 
     /**

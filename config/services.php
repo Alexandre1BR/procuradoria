@@ -36,7 +36,7 @@ return [
     ],
 
     'slack' => [
-        'webhook_url' => 'https://hooks.slack.com/services/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'
+        'webhook_url' => 'https://hooks.slack.com/services/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',
     ],
 
 ];

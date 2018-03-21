@@ -68,6 +68,26 @@
                                 <input name="personal_email" value="{{$user->personal_email}}" @include('partials.readonly') class="form-control" id="personal_email" aria-describedby="nomeHelp" placeholder="email pessoal">
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="User">Receber nenhuma notificação</label>
+                                <input name="no_notifications" id="no_notifications" type="checkbox" value="1" disabled
+                                       @if($user->no_notifications)
+                                            checked
+                                    @endif
+                                >
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="User">Receber todas as notificações</label>
+                                <input name="all_notifications" id="all_notifications" type="checkbox" value="1" disabled
+                                       @if($user->all_notifications)
+                                            checked
+                                        @endif
+                                >
+                            </div>
+                        </div>
 
                     </div>
                 </div>

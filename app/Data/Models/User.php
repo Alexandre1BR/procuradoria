@@ -3,9 +3,9 @@
 namespace App\Data\Models;
 
 use App\Data\Repositories\TiposUsuarios;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Venturecraft\Revisionable\RevisionableTrait;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {

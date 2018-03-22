@@ -313,7 +313,11 @@ class Processos extends Base
         return $processos->map(function ($processo) {
             $processo['acao_nome'] = is_null($processo->acao) ? 'N/C' : $processo->acao->nome;
 
+            $processo['acao_abreviacao'] = is_null($processo->acao) ? 'N/C' : $processo->acao->abreviacao;
+
             $processo['tribunal_nome'] = is_null($processo->tribunal) ? 'N/C' : $processo->tribunal->nome;
+
+            $processo['tribunal_abreviacao'] = is_null($processo->tribunal) ? 'N/C' : $processo->tribunal->abreviacao;
 
             $processo['procurador_nome'] = is_null($processo->procurador) ? 'N/C' : $processo->procurador->name;
 

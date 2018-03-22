@@ -3,13 +3,17 @@
 namespace App\Data\Models;
 
 use App\Data\Presenters\ProcessoPresenter;
+use App\Data\Repositories\Users;
 use App\Data\Scope\Processo as ProcessoScope;
+use App\Events\ProcessoCreated;
+use App\Events\ProcessoUpdated;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
 use Spatie\Tags\HasTags;
 
 class Processo extends BaseModel
 {
-    use HasTags;
+    use HasTags, Notifiable;
 
     /**
      * @var array
@@ -106,6 +110,32 @@ class Processo extends BaseModel
         'site_alerj_link'               => 'link',
         'tipo_processo_id'              => 'id',
     ];
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => ProcessoCreated::class,
+        'updated' => ProcessoUpdated::class,
+    ];
+
+    /**
+     * @return mixed
+     */
+    private function getResponsibles()
+    {
+        $notifiables = collect();
+
+        $this->addNotifiable($notifiables, $this->procurador, 'Responsável (estagiário)');
+
+        $this->addNotifiable($notifiables, $this->assessor, 'Responsável (assessor)');
+
+        $this->addNotifiable($notifiables, $this->estagiario, 'Responsável (procurador)');
+
+        return $notifiables;
+    }
 
     /**
      * @return mixed
@@ -228,6 +258,50 @@ class Processo extends BaseModel
     public function save(array $options = [])
     {
         Cache::forget('getProcessosData'.$this->id);
+
         parent::save();
+    }
+
+    /**
+     * @param $event
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getNotifiableUsersFor($event)
+    {
+        return $this->notifiables;
+    }
+
+    /**
+     * @param $notifiables
+     * @param $notifiable
+     */
+    public function addNotifiable(&$notifiables, $notifiable, $type = '')
+    {
+        if (!is_null($notifiable)) {
+            $notifiable->type = $type;
+
+            if (!is_null($notifiable) && is_null($notifiables->where('id', $notifiable->id)->first())) {
+                $notifiables->push($notifiable);
+            }
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNotifiablesAttribute()
+    {
+        $notifiables = $this->getResponsibles()->reject(function ($responsavel) {
+            return $responsavel->no_notifications;
+        })->merge(
+            app(Users::class)->notifiables()->map(function ($user) {
+                $user->type = 'Usuário';
+
+                return $user;
+            })
+        );
+
+        return $notifiables;
     }
 }

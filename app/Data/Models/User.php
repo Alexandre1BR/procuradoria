@@ -3,7 +3,6 @@
 namespace App\Data\Models;
 
 use App\Data\Repositories\TiposUsuarios;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Venturecraft\Revisionable\RevisionableTrait;
@@ -26,8 +25,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-            //id
-        'name', 'email', 'password', 'username', 'user_type_id', 'disabled_by_id', 'disabled_at', 'personal_email',
+        'name',
+        'email',
+        'password',
+        'username',
+        'user_type_id',
+        'disabled_by_id',
+        'disabled_at',
+        'personal_email',
+        'all_notifications',
+        'no_notifications',
     ];
 
     /**
@@ -36,7 +43,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -59,5 +67,25 @@ class User extends Authenticatable
             'user_type_id',
             app(TiposUsuarios::class)->findByName($type)->id
         );
+    }
+
+    /**
+     * Route notifications for the Slack channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForSlack()
+    {
+        return config('services.slack.webhook_url');
+    }
+
+    public function routeNotificationForMail()
+    {
+        return $this->preferredEmail;
+    }
+
+    public function getPreferredEmailAttribute()
+    {
+        return $this->personal_email ?: $this->email;
     }
 }

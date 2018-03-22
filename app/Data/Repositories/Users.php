@@ -100,7 +100,11 @@ class Users extends Base
      */
     public function all()
     {
-        //return User::all();
         return User::orderBy('name')->get();
+    }
+
+    public function notifiables()
+    {
+        return User::where('all_notifications', true)->get();
     }
 }

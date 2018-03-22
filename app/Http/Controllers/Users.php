@@ -131,7 +131,13 @@ class Users extends Controller
      */
     public function store(UserRequest $request, UsersRepository $repository)
     {
-//        dd($request->all());
+        if (!$request->has('no_notifications')) {
+            $request->merge(['no_notifications' => 0]);
+        }
+
+        if (!$request->has('all_notifications')) {
+            $request->merge(['all_notifications' => 0]);
+        }
 
         $repository->createFromRequest($request);
 

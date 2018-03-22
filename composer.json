@@ -59,8 +59,8 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover",
             "git fetch --tags",
-            "@php artisan version:absorb",
-            "@php artisan cache:flush",
+            "@php artisan version:absorb --ignore-errors",
+            "@php artisan cache:clear",
             "@php artisan route:cache",
             "@php artisan config:cache"
         ]

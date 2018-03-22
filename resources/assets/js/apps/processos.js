@@ -28,8 +28,8 @@ if (jQuery("#" + appName).length > 0) {
             },
 
             pesquisa: '',
-
-            processos_arquivados: '',
+            processos_arquivados_incluidos: '',
+            processos_arquivados_apenas: '',
 
             refreshing: false,
 
@@ -47,7 +47,6 @@ if (jQuery("#" + appName).length > 0) {
                 numero_alerj: null,
                 tribunal_id: null,
                 vara: null,
-                data_distribuicao: null,
                 data_distribuicao: null,
                 acao_id: null,
                 juiz_id: null,
@@ -67,7 +66,6 @@ if (jQuery("#" + appName).length > 0) {
                 link: null,
                 site_alerj_link: null,
                 data_arquivamento: null,
-                data_arquivamento: null,
                 observacao_arquivamento: null,
                 tags: [],
                 tipo_processo_id: null,
@@ -79,10 +77,12 @@ if (jQuery("#" + appName).length > 0) {
                 me = this
 
                 me.refreshing = true
+
                 axios.get('/', {
                     params: {
                         search: this.pesquisa,
-                        processos_arquivados: this.processos_arquivados,
+                        processos_arquivados_incluidos: this.processos_arquivados_incluidos,
+                        processos_arquivados_apenas: this.processos_arquivados_apenas,
                         advancedFilter: this.advancedFilter,
                         filter: this.form
                     }
@@ -106,9 +106,7 @@ if (jQuery("#" + appName).length > 0) {
 
                 me = this
 
-                this.timeout = setTimeout(function () {
-                    me.refresh()
-                }, 500)
+                this.timeout = setTimeout(function () { me.refresh() }, 500)
             },
 
             clearSearch() {
@@ -146,9 +144,17 @@ if (jQuery("#" + appName).length > 0) {
             },
 
             printer() {
-                $( "#cabecalho-processos" ).addClass( "hidden-print" );
+                let cabecalhoProcesso = $( "#cabecalho-processos" );
+                cabecalhoProcesso.addClass( "hidden-print" );
                 window.print();
-                $( "#cabecalho-processos" ).removeClass( "hidden-print" );
+                cabecalhoProcesso.removeClass( "hidden-print" );
+            },
+
+            processosArquivados() {
+                if(this.processos_arquivados_apenas == "1") {
+                    this.processos_arquivados_incluidos = "0"
+                }
+                this.refresh()
             },
         },
 

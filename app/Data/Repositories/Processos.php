@@ -110,7 +110,11 @@ class Processos extends Base
      */
     public function filter($request)
     {
-        $query = $this->makeProcessoQuery($request->get('processos_arquivados'));
+        $query = $this->makeProcessoQuery(
+                $request->get('processos_arquivados_incluidos'),
+                $request->get('processos_arquivados_apenas')
+        );
+        
         if (!empty($search = $request->get('search'))) {
             $query = $this->searchString($search, $query);
         }
@@ -284,11 +288,17 @@ class Processos extends Base
      *
      * @return $this
      */
-    public function makeProcessoQuery($arquivados = false)
+    public function makeProcessoQuery($processos_arquivados_incluidos = false, $processos_arquivados_apenas = false)
     {
-        $query = $arquivados ? (new Processo())->withoutGlobalScope(ProcessoScope::class) : (new Processo())
-                        ->with(['acao', 'tribunal', 'procurador', 'assessor', 'estagiario'])
-                        ->orderBy('updated_at', 'desc');
+        $query = (new Processo());
+
+        if ( toBoolean($processos_arquivados_apenas) ) {
+            $query = (new Processo())->withoutGlobalScope(ProcessoScope::class)->whereNotNull('data_arquivamento');
+        } else if ( toBoolean($processos_arquivados_incluidos) ) {
+            $query = (new Processo())->withoutGlobalScope(ProcessoScope::class);
+        }
+
+        $query = $query->with(['acao', 'tribunal', 'procurador', 'assessor', 'estagiario'])->orderBy('updated_at', 'desc');
 
         return $query;
     }

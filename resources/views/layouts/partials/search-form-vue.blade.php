@@ -16,10 +16,6 @@
                 <input type="checkbox" v-model="processos_arquivados_incluidos" id="processos_arquivados_incluidos" value="true" @change="processosArquivados" v-bind:true-value="1" v-bind:false-value="0">
                 <label for="processos_arquivados_incluidos"> Mostrar arquivados </label>
             </div>
-            <div>
-                <input type="checkbox" v-model="processos_arquivados_apenas" id="processos_arquivados_apenas" value="true" @change="processosArquivados" v-bind:true-value="1" v-bind:false-value="0">
-                <label for="processos_arquivados_apenas"> Exibir apenas os Processos Arquivados </label>
-            </div>
         </div>
     </div>
 </div>

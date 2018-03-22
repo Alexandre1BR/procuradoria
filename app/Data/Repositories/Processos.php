@@ -119,7 +119,7 @@ class Processos extends Base
             $query = $this->searchString($search, $query);
         }
 
-        if ($request->get('advancedFilter')) {
+        if (toBoolean($request->get('advancedFilter'))) {
             collect($this->filterToJson($request))->each(function ($search, $column) use ($query) {
                 if (!empty($search)) {
                     $this->addQueryByType($search, $column, $query);

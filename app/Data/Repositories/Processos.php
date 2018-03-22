@@ -114,7 +114,7 @@ class Processos extends Base
                 $request->get('processos_arquivados_incluidos'),
                 $request->get('processos_arquivados_apenas')
         );
-        
+
         if (!empty($search = $request->get('search'))) {
             $query = $this->searchString($search, $query);
         }
@@ -292,9 +292,9 @@ class Processos extends Base
     {
         $query = (new Processo());
 
-        if ( toBoolean($processos_arquivados_apenas) ) {
+        if (toBoolean($processos_arquivados_apenas)) {
             $query = (new Processo())->withoutGlobalScope(ProcessoScope::class)->whereNotNull('data_arquivamento');
-        } else if ( toBoolean($processos_arquivados_incluidos) ) {
+        } elseif (toBoolean($processos_arquivados_incluidos)) {
             $query = (new Processo())->withoutGlobalScope(ProcessoScope::class);
         }
 

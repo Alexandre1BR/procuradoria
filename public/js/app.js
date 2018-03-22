@@ -80667,10 +80667,15 @@ if (jQuery("#" + appName).length > 0) {
                 cabecalhoProcesso.removeClass("hidden-print");
             },
             processosArquivados: function processosArquivados() {
-                if (this.processos_arquivados_apenas == "1") {
-                    this.processos_arquivados_incluidos = "0";
-                }
+                //checkboxProcessoLikeRadio();
                 this.refresh();
+            },
+            checkboxProcessoLikeRadio: function checkboxProcessoLikeRadio(processos_arquivados) {
+                if (processos_arquivados == "apenas") {
+                    this.processos_arquivados_incluidos = "0";
+                } else if (processos_arquivados == "incluidos") {
+                    this.processos_arquivados_apenas = "0";
+                }
             }
         },
 

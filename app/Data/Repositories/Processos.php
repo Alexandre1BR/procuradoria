@@ -6,7 +6,7 @@ use App\Data\Models\Acao;
 use App\Data\Models\Andamento;
 use App\Data\Models\Apenso;
 use App\Data\Models\Juiz;
-use App\Data\Models\Lei;
+use App\Data\Models\ProcessoLei;
 use App\Data\Models\Meio;
 use App\Data\Models\Processo;
 use App\Data\Models\Tag;
@@ -21,22 +21,13 @@ use Illuminate\Support\Facades\DB;
 
 class Processos extends Base
 {
-    /**
-     * @var string
-     */
     protected $model = Processo::class;
 
-    /**
-     * Processos constructor.
-     */
     public function __construct()
     {
         $this->tiposUsuariosRepository = app(TiposUsuarios::class);
     }
 
-    /**
-     * @var array
-     */
     protected $dataTypes = [
             'numero_judicial' => 'string',
             'numero_alerj'    => 'string',
@@ -57,11 +48,6 @@ class Processos extends Base
 
     ];
 
-    /**
-     * @param $item
-     *
-     * @return string|void
-     */
     protected function toDate($item)
     {
         try {
@@ -73,27 +59,16 @@ class Processos extends Base
         return $item;
     }
 
-    /**
-     * @return mixed
-     */
     public function getAllIds()
     {
         return Processo::pluck('id');
     }
 
-    /**
-     * @param $tags
-     */
     private function listTags($tags)
     {
         // dd($tags);
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return mixed
-     */
     public function search(Request $request)
     {
         info($request);
@@ -103,11 +78,6 @@ class Processos extends Base
         return $this->searchFromRequest($request->get('pesquisa'));
     }
 
-    /**
-     * @param $request
-     *
-     * @return mixed
-     */
     public function filter($request)
     {
         $query = $this->makeProcessoQuery($request->get('processos_arquivados'));
@@ -126,11 +96,6 @@ class Processos extends Base
         return $this->transform($query->get());
     }
 
-    /**
-     * @param $search
-     * @param $column
-     * @param $query
-     */
     public function addQueryByType($search, $column, $query): void
     {
         switch (Processo::getDataTypeOf($column)) {
@@ -154,11 +119,6 @@ class Processos extends Base
         }
     }
 
-    /**
-     * @param null|string $search
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
     public function searchString($search = null, $query = null)
     {
         $search = is_null($search)
@@ -215,11 +175,6 @@ class Processos extends Base
         return $query->orderBy('updated_at', 'desc');
     }
 
-    /**
-     * @param $apensos
-     *
-     * @return mixed
-     */
     public function getProcessosWithoutApensos($apensos)
     {
         $processos = Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id');
@@ -233,17 +188,18 @@ class Processos extends Base
         return $processos;
     }
 
-    /**
-     * @param null $id
-     *
-     * @return array
-     */
     public function getProcessosData($id = null)
     {
         return Cache::remember('getProcessosData'.$id, 1, function () use ($id) {
             $apensos = Apenso::where('processo_id', $id)->orWhere('apensado_id', $id)->get();
 
             $processos = $this->getProcessosWithoutApensos($apensos);
+
+            $query = ProcessoLei::where('processo_id', $id)->get();
+            $leis = [];
+            foreach ($query as $q){
+                $leis[] = $q->lei;
+            }
 
             return [
                     'juizes'         => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
@@ -256,18 +212,13 @@ class Processos extends Base
                     'andamentos'     => Andamento::where('processo_id', $id)->get(),
                     'apensos'        => $apensos,
                     'processos'      => $processos,
-                    'leis'           => Lei::where('processo_id', $id)->get(),
+                    'leis'           => $leis,
                     'tags'           => Tag::all(),
                     'tiposProcessos' => ModelTipoProcesso::orderBy('nome')->get(),
             ];
         });
     }
 
-    /**
-     * @param $request
-     *
-     * @return mixed
-     */
     protected function filterToJson($request)
     {
         if (is_array($filter = $request->get('filter'))) {
@@ -279,11 +230,6 @@ class Processos extends Base
         return is_array($result) ? $result : [];
     }
 
-    /**
-     * @param bool $arquivados
-     *
-     * @return $this
-     */
     public function makeProcessoQuery($arquivados = false)
     {
         $query = $arquivados ? (new Processo())->withoutGlobalScope(ProcessoScope::class) : (new Processo())
@@ -293,11 +239,6 @@ class Processos extends Base
         return $query;
     }
 
-    /**
-     * @param $processos
-     *
-     * @return mixed
-     */
     protected function transform($processos)
     {
         return $processos->map(function ($processo) {

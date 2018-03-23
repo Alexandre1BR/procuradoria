@@ -39,16 +39,16 @@
                     <div class="form-group col-md-4">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="User">Login ALERJ</label>
-                                <p><label name="email">{{$user->email}}</label></p>
+                                <label for="username">Login ALERJ</label>
                                 <input type="hidden" name="username" id="username" value="{{$user->username}}" />
+                                <p><label for="email">{{$user->email}}</label></p>
                                 <input type="hidden" name="email" id="email" value="{{$user->email}}" />
                             </div>
                         </div>
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="User">Nome</label>
+                                <label for="name">Nome</label>
                                 <p><label name="name">{{$user->name}}</label></p>
                                 <input type="hidden" name="name" id="name" value="{{$user->name}}" />
                             </div>
@@ -56,7 +56,7 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="User">Tipo de usuário</label>
+                                <label for="user_type_id">Tipo de usuário</label>
                                 <p><label name="user_type_id">{{$user->userType->nome}}</label></p>
                                 <input type="hidden" name="user_type_id" id="user_type_id" value="{{$user->userType->id}}" />
                             </div>
@@ -64,7 +64,7 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="User">Email pessoal</label>
+                                <label for="personal_email">Email pessoal</label>
                                 <input name="personal_email" value="{{$user->personal_email}}" @include('partials.readonly') class="form-control" id="personal_email" aria-describedby="nomeHelp" placeholder="email pessoal">
                             </div>
                         </div>

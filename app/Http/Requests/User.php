@@ -27,7 +27,7 @@ class User extends FormRequest
             'username'       => 'required',
             'email'          => 'required',
             'user_type_id'   => 'required',
-            'personal_email' => 'email',
+            'personal_email' => 'email|nullable',
         ];
     }
 }

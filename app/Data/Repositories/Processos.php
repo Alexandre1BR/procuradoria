@@ -21,13 +21,22 @@ use Illuminate\Support\Facades\DB;
 
 class Processos extends Base
 {
+    /**
+     * @var string
+     */
     protected $model = Processo::class;
 
+    /**
+     * Processos constructor.
+     */
     public function __construct()
     {
         $this->tiposUsuariosRepository = app(TiposUsuarios::class);
     }
 
+    /**
+     * @var array
+     */
     protected $dataTypes = [
             'numero_judicial' => 'string',
             'numero_alerj'    => 'string',
@@ -48,6 +57,11 @@ class Processos extends Base
 
     ];
 
+    /**
+     * @param $item
+     *
+     * @return string|void
+     */
     protected function toDate($item)
     {
         try {
@@ -59,16 +73,27 @@ class Processos extends Base
         return $item;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAllIds()
     {
         return Processo::pluck('id');
     }
 
+    /**
+     * @param $tags
+     */
     private function listTags($tags)
     {
         // dd($tags);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return mixed
+     */
     public function search(Request $request)
     {
         info($request);
@@ -78,14 +103,23 @@ class Processos extends Base
         return $this->searchFromRequest($request->get('pesquisa'));
     }
 
+    /**
+     * @param $request
+     *
+     * @return mixed
+     */
     public function filter($request)
     {
-        $query = $this->makeProcessoQuery($request->get('processos_arquivados'));
+        $query = $this->makeProcessoQuery(
+                $request->get('processos_arquivados_incluidos'),
+                $request->get('processos_arquivados_apenas')
+        );
+
         if (!empty($search = $request->get('search'))) {
             $query = $this->searchString($search, $query);
         }
 
-        if ($request->get('advancedFilter')) {
+        if (toBoolean($request->get('advancedFilter'))) {
             collect($this->filterToJson($request))->each(function ($search, $column) use ($query) {
                 if (!empty($search)) {
                     $this->addQueryByType($search, $column, $query);
@@ -96,6 +130,11 @@ class Processos extends Base
         return $this->transform($query->get());
     }
 
+    /**
+     * @param $search
+     * @param $column
+     * @param $query
+     */
     public function addQueryByType($search, $column, $query): void
     {
         switch (Processo::getDataTypeOf($column)) {
@@ -119,6 +158,11 @@ class Processos extends Base
         }
     }
 
+    /**
+     * @param null|string $search
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function searchString($search = null, $query = null)
     {
         $search = is_null($search)
@@ -175,6 +219,11 @@ class Processos extends Base
         return $query->orderBy('updated_at', 'desc');
     }
 
+    /**
+     * @param $apensos
+     *
+     * @return mixed
+     */
     public function getProcessosWithoutApensos($apensos)
     {
         $processos = Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id');
@@ -188,6 +237,11 @@ class Processos extends Base
         return $processos;
     }
 
+    /**
+     * @param null $id
+     *
+     * @return array
+     */
     public function getProcessosData($id = null)
     {
         return Cache::remember('getProcessosData'.$id, 1, function () use ($id) {
@@ -219,6 +273,11 @@ class Processos extends Base
         });
     }
 
+    /**
+     * @param $request
+     *
+     * @return mixed
+     */
     protected function filterToJson($request)
     {
         if (is_array($filter = $request->get('filter'))) {
@@ -230,15 +289,31 @@ class Processos extends Base
         return is_array($result) ? $result : [];
     }
 
-    public function makeProcessoQuery($arquivados = false)
+    /**
+     * @param bool $arquivados
+     *
+     * @return $this
+     */
+    public function makeProcessoQuery($processos_arquivados_incluidos = false, $processos_arquivados_apenas = false)
     {
-        $query = $arquivados ? (new Processo())->withoutGlobalScope(ProcessoScope::class) : (new Processo())
-                        ->with(['acao', 'tribunal', 'procurador', 'assessor', 'estagiario'])
-                        ->orderBy('updated_at', 'desc');
+        $query = (new Processo());
+
+        if (toBoolean($processos_arquivados_apenas)) {
+            $query = (new Processo())->withoutGlobalScope(ProcessoScope::class)->whereNotNull('data_arquivamento');
+        } elseif (toBoolean($processos_arquivados_incluidos)) {
+            $query = (new Processo())->withoutGlobalScope(ProcessoScope::class);
+        }
+
+        $query = $query->with(['acao', 'tribunal', 'procurador', 'assessor', 'estagiario'])->orderBy('updated_at', 'desc');
 
         return $query;
     }
 
+    /**
+     * @param $processos
+     *
+     * @return mixed
+     */
     protected function transform($processos)
     {
         return $processos->map(function ($processo) {

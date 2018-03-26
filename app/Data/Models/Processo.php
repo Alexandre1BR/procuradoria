@@ -21,6 +21,7 @@ class Processo extends BaseModel
     protected $dates = [
         'data_distribuicao',
         'data_recebimento',
+        'data_arquivamento',
     ];
 
     /**

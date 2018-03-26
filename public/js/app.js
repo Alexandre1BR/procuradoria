@@ -80524,13 +80524,9 @@ jQuery(document).ready(function () {
 /* 170 */
 /***/ (function(module, exports) {
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var appName = 'vue-processos';
 
 if (jQuery("#" + appName).length > 0) {
-    var _form;
-
     var app = new Vue({
         el: '#' + appName,
 
@@ -80558,8 +80554,8 @@ if (jQuery("#" + appName).length > 0) {
             },
 
             pesquisa: '',
-
-            processos_arquivados: '',
+            processos_arquivados_incluidos: '',
+            processos_arquivados_apenas: '',
 
             refreshing: false,
 
@@ -80571,14 +80567,35 @@ if (jQuery("#" + appName).length > 0) {
 
             modalMode: 'filter',
 
-            form: (_form = {
+            form: {
                 id: null,
                 numero_judicial: null,
                 numero_alerj: null,
                 tribunal_id: null,
                 vara: null,
-                data_distribuicao: null
-            }, _defineProperty(_form, 'data_distribuicao', null), _defineProperty(_form, 'acao_id', null), _defineProperty(_form, 'juiz_id', null), _defineProperty(_form, 'autor', null), _defineProperty(_form, 'relator_id', null), _defineProperty(_form, 'reu', null), _defineProperty(_form, 'procurador_id', null), _defineProperty(_form, 'estagiario_id', null), _defineProperty(_form, 'assessor_id', null), _defineProperty(_form, 'tipo_meio_id', null), _defineProperty(_form, 'objeto', null), _defineProperty(_form, 'merito', null), _defineProperty(_form, 'liminar', null), _defineProperty(_form, 'apensos_obs', null), _defineProperty(_form, 'recurso', null), _defineProperty(_form, 'observacao', null), _defineProperty(_form, 'link', null), _defineProperty(_form, 'site_alerj_link', null), _defineProperty(_form, 'data_arquivamento', null), _defineProperty(_form, 'data_arquivamento', null), _defineProperty(_form, 'observacao_arquivamento', null), _defineProperty(_form, 'tags', []), _defineProperty(_form, 'tipo_processo_id', null), _form)
+                data_distribuicao: null,
+                acao_id: null,
+                juiz_id: null,
+                autor: null,
+                relator_id: null,
+                reu: null,
+                procurador_id: null,
+                estagiario_id: null,
+                assessor_id: null,
+                tipo_meio_id: null,
+                objeto: null,
+                merito: null,
+                liminar: null,
+                apensos_obs: null,
+                recurso: null,
+                observacao: null,
+                link: null,
+                site_alerj_link: null,
+                data_arquivamento: null,
+                observacao_arquivamento: null,
+                tags: [],
+                tipo_processo_id: null
+            }
         },
 
         methods: {
@@ -80586,10 +80603,12 @@ if (jQuery("#" + appName).length > 0) {
                 me = this;
 
                 me.refreshing = true;
+
                 axios.get('/', {
                     params: {
                         search: this.pesquisa,
-                        processos_arquivados: this.processos_arquivados,
+                        processos_arquivados_incluidos: this.processos_arquivados_incluidos,
+                        processos_arquivados_apenas: this.processos_arquivados_apenas,
                         advancedFilter: this.advancedFilter,
                         filter: this.form
                     }
@@ -80642,9 +80661,21 @@ if (jQuery("#" + appName).length > 0) {
                 window.location.href = '/processos/' + id;
             },
             printer: function printer() {
-                $("#cabecalho-processos").addClass("hidden-print");
+                var cabecalhoProcesso = $("#cabecalho-processos");
+                cabecalhoProcesso.addClass("hidden-print");
                 window.print();
-                $("#cabecalho-processos").removeClass("hidden-print");
+                cabecalhoProcesso.removeClass("hidden-print");
+            },
+            processosArquivados: function processosArquivados() {
+                //checkboxProcessoLikeRadio();
+                this.refresh();
+            },
+            checkboxProcessoLikeRadio: function checkboxProcessoLikeRadio(processos_arquivados) {
+                if (processos_arquivados == "apenas") {
+                    this.processos_arquivados_incluidos = "0";
+                } else if (processos_arquivados == "incluidos") {
+                    this.processos_arquivados_apenas = "0";
+                }
             }
         },
 

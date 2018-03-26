@@ -30,7 +30,8 @@ class Home extends Controller
     {
         return view('home.index')
             ->with('pesquisa', $request->get('search'))
-            ->with('processos_arquivados', $request->get('processos_arquivados'))
+            ->with('processos_arquivados_incluidos', $request->get('processos_arquivados_incluidos'))
+            ->with('processos_arquivados_apenas', $request->get('processos_arquivados_apenas'))
             ->with('processo', new Processo());
     }
 

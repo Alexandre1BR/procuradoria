@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ovalenca
- * Date: 24/01/2018
- * Time: 15:55.
- */
 
 namespace App\Data\Models;
 
@@ -20,27 +14,32 @@ class Lei extends BaseModel
         'autor',
         'assunto',
         'link',
-        'processo_id',
+        'artigo',
+        'paragrafo',
+        'inciso',
+        'alinea',
+        'item',
+        'nivel_federativo_id',
+        'tipo_lei_id',
     ];
 
-    /**
-     * @var array
-     */
-    protected $with = ['processo'];
+    protected $with = ['tipoLei', 'nivelFederativo'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function processo()
+    public function tipoLei()
     {
-        return $this->belongsTo(Processo::class);
+        return $this->belongsTo(tipoLei::class);
     }
 
-    /**
-     * @param array $options
-     *
-     * @return bool|void
-     */
+    public function nivelFederativo()
+    {
+        return $this->belongsTo(NivelFederativo::class);
+    }
+
+//    public function processo()
+//    {
+//        return $this->hasMany(Apenso::class);
+//    }
+
     public function save(array $options = [])
     {
         Cache::forget('getProcessosData'.$this->processo_id);

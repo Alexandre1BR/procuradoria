@@ -6,7 +6,7 @@ use App\Data\Models\Acao;
 use App\Data\Models\Andamento;
 use App\Data\Models\Apenso;
 use App\Data\Models\Juiz;
-use App\Data\Models\Lei;
+use App\Data\Models\ProcessoLei;
 use App\Data\Models\Meio;
 use App\Data\Models\Processo;
 use App\Data\Models\Tag;
@@ -247,6 +247,12 @@ class Processos extends Base
 
             $processos = $this->getProcessosWithoutApensos($apensos);
 
+            $query = ProcessoLei::where('processo_id', $id)->get();
+            $leis = [];
+            foreach ($query as $q){
+                $leis[] = $q->lei;
+            }
+
             return [
                     'juizes'         => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
                     'tribunais'      => Tribunal::orderBy('nome')->pluck('nome', 'id'),
@@ -258,7 +264,7 @@ class Processos extends Base
                     'andamentos'     => Andamento::where('processo_id', $id)->get(),
                     'apensos'        => $apensos,
                     'processos'      => $processos,
-                    'leis'           => Lei::where('processo_id', $id)->get(),
+                    'leis'           => $leis,
                     'tags'           => Tag::all(),
                     'tiposProcessos' => ModelTipoProcesso::orderBy('nome')->get(),
             ];

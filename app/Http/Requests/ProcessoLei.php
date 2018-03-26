@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Lei extends FormRequest
+class ProcessoLei extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,8 @@ class Lei extends FormRequest
     public function rules()
     {
         return [
-            'lei_id' => 'nullable',
-            'numero_lei' => 'required',
-            'autor'      => 'required',
-            'assunto'    => 'required',
-            'link',
-//            'processo_id' => 'required',
-//            'lei_id' => 'required',
+            'processo_id' => 'required',
+            'apensado_id' => 'required',
         ];
     }
 }

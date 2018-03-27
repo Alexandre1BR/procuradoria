@@ -234,6 +234,19 @@
         </div>
     </div>
 
+    <div>
+        <input type="checkbox" v-model="processos_arquivados_incluidos" @include('partials.readonly') 
+                id="processos_arquivados_incluidos" value="true" @change="checkboxProcessoLikeRadio('incluidos')" 
+                v-bind:true-value="1" v-bind:false-value="0">
+        <label for="processos_arquivados_incluidos"> Mostrar arquivados </label>
+    </div>
+    <div>
+        <input type="checkbox" v-model="processos_arquivados_apenas" @include('partials.readonly') 
+                id="processos_arquivados_apenas" value="true" @change="checkboxProcessoLikeRadio('apenas')" 
+                v-bind:true-value="1" v-bind:false-value="0">
+        <label for="processos_arquivados_apenas"> Exibir apenas os Processos Arquivados </label>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <hr/>

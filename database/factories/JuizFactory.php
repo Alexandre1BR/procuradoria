@@ -13,18 +13,22 @@ use Faker\Generator as Faker;
 |
 */
 
+$factory->define(App\Data\Models\TipoJuiz::class, function (Faker $faker) {
+    return [
+        'nome' => $faker->name,
+    ];
+});
+
 $factory->define(App\Data\Models\Juiz::class, function (Faker $faker) {
     return [
             'nome'       => $faker->name,
             'lotacao_id' => function () {
                 return factory(\App\Data\Models\Tribunal::class)->create()->id;
             },
-            'tipo_juiz_id' => $faker->randomElement(\App\Data\Models\TipoJuiz::pluck('id')->toArray()),
+            'tipo_juiz_id'     => function () {
+                return factory(\App\Data\Models\TipoJuiz::class)->create()->id;
+            },
     ];
 });
 
-$factory->define(App\Data\Models\Tipo_Juiz::class, function (Faker $faker) {
-    return [
-            'nome' => $faker->name,
-    ];
-});
+

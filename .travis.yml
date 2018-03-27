@@ -22,14 +22,11 @@ before_script:
   - cp .env.dusk.local .env
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
   - php artisan key:generate
+  - psql -c 'create database teste;' -U postgres
 
 script:
-  - sudo su - postgres
-  - travis_wait 30 createdb teste
-  - exit
   - php artisan migrate
   - php artisan dusk
-  - php artisan
 
 after_script:
   - |

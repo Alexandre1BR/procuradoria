@@ -29,6 +29,7 @@ script:
   - exit
   - php artisan migrate
   - php artisan dusk
+  - php artisan
 
 after_script:
   - |

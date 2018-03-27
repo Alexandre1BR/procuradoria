@@ -22,10 +22,14 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - cp .env.dusk.local .env
+  - cp .env.travis .env
+  - cp .env.travis .env.dusk.local
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
   - php artisan key:generate
-  - sudo createdb teste
+  - psql -c 'create database teste;' -U postgres
+  - psql -c alter user vagrant with encrypted password 'vagrant';
+  - psql -c 'create user vagrant;' -U postgres
+  - psql -c 'grant all privileges on database teste to vagrant'  -U postgres
 
 script:
   - php artisan migrate

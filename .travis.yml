@@ -6,9 +6,12 @@ php:
   - 7.1
   - 7.2
 
+addons:
+  postgresql: "9.5.10"
+
 # This triggers builds to run on the new TravisCI infrastructure.
 # See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
-sudo: false
+sudo: true
 
 ## Cache composer
 cache:
@@ -21,7 +24,10 @@ before_script:
   - php artisan key:generate
 
 script:
-  - vendor/bin/phpunit --coverage-clover=coverage.clover
+  - sudo su - postgres
+  - createdb teste
+  - exit
+  - php artisan migrate
   - php artisan dusk
 
 after_script:

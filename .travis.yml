@@ -28,7 +28,7 @@ before_script:
   - php artisan key:generate
   - psql -c 'create database teste;' -U postgres
   - psql -c 'create user vagrant;' -U postgres
-  - psql -c alter user vagrant with encrypted password 'vagrant';
+  - psql -c 'alter user vagrant with encrypted password 'vagrant'';
   - psql -c 'grant all privileges on database teste to vagrant'  -U postgres
 
 script:

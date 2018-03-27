@@ -39,7 +39,7 @@ before_script:
 
 script:
   - php artisan migrate
-  - php artisan dusk --filter ApensosTest
+  - php artisan dusk
 
 after_script:
   - |

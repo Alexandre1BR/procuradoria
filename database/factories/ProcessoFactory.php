@@ -48,6 +48,8 @@ $factory->define(App\Data\Models\Processo::class, function (Faker $faker) {
             'assessor_id' => function () {
                 return factory(\App\Data\Models\User::class)->create()->id;
             },
-            'tipo_meio_id' => $faker->randomElement(\App\Data\Models\Meio::pluck('id')->toArray()),
+            'tipo_meio_id' => function () {
+                return factory(\App\Data\Models\Meio::class)->create()->id;
+            },
     ];
 });

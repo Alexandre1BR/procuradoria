@@ -6,9 +6,15 @@ php:
   - 7.1
   - 7.2
 
+services:
+    - postgresql
+
+#addons:
+#  postgresql: "9.5"
+
 # This triggers builds to run on the new TravisCI infrastructure.
 # See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
-sudo: false
+sudo: true
 
 ## Cache composer
 cache:
@@ -16,12 +22,23 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - cp .env.dusk.local .env
+  - cp .env.travis .env
+  - cp .env.travis .env.dusk.local
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
   - php artisan key:generate
+  - psql -c 'create database teste;' -U postgres
+  - psql -c 'create user vagrant;' -U postgres
+  - psql -c "alter user vagrant with encrypted password 'vagrant'" -U postgres;
+  - psql -c 'grant all privileges on database teste to vagrant'  -U postgres
+  - php artisan migrate
+  - php artisan db:seed
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - ./vendor/laravel/dusk/bin/chromedriver-linux &
+  - php artisan serve &
 
 script:
-  - vendor/bin/phpunit --coverage-clover=coverage.clover
+  - php artisan migrate
   - php artisan dusk
 
 after_script:

@@ -184,12 +184,12 @@ class Andamentos extends Base
 
         return $andamentosComPrazo->map(function ($andamento) {
             return [
-                    'id' => $andamento->id,
-                    'title' => $this->makeFeedTitle($andamento),
-                    'start' => $andamento->data_prazo->toIso8601String(),
-                    'end' => $andamento->data_prazo->addHour()->toIso8601String(),
+                    'id'          => $andamento->id,
+                    'title'       => $this->makeFeedTitle($andamento),
+                    'start'       => $andamento->data_prazo->toIso8601String(),
+                    'end'         => $andamento->data_prazo->addHour()->toIso8601String(),
                     'description' => $this->makeFeedDescription($andamento),
-                    'url' => route('processos.show', ['id' => $andamento->processo->id]),
+                    'url'         => route('processos.show', ['id' => $andamento->processo->id]),
             ];
         });
     }

@@ -69,7 +69,10 @@ class ProcessoUpdated extends Notification implements ShouldQueue
             $via[] = 'mail';
         }
 
-        if (is_null($this->notificationsRepository->findByHash($this->getSlackNotifiable(), $this->processo))) {
+        if (
+            !is_null($this->getSlackNotifiable()) &&
+            is_null($this->notificationsRepository->findByHash($this->getSlackNotifiable(), $this->processo))
+        ) {
             $via[] = 'slack';
         }
 

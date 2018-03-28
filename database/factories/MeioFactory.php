@@ -18,5 +18,3 @@ $factory->define(App\Data\Models\Meio::class, function (Faker $faker) {
         'nome' => $faker->name,
     ];
 });
-
-

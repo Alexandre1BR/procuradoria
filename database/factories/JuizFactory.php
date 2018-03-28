@@ -30,5 +30,3 @@ $factory->define(App\Data\Models\Juiz::class, function (Faker $faker) {
             },
     ];
 });
-
-

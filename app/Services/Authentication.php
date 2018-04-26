@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Data\Repositories\Users;
 use App\Services\Traits\RemoteRequest;
-use Mockery\Exception;
 
 class Authentication
 {
@@ -58,6 +57,7 @@ class Authentication
 
     /**
      * @param $request
+     *
      * @return mixed
      */
     protected function loginRequest($request)
@@ -73,8 +73,10 @@ class Authentication
      * @param $request
      * @param $response
      * @param $remember
-     * @return mixed
+     *
      * @throws \Exception
+     *
+     * @return mixed
      */
     protected function loginUser($request, $response, $remember)
     {
@@ -87,6 +89,7 @@ class Authentication
 
     /**
      * @param $credentials
+     *
      * @return array
      */
     protected function mockedAuthentication($credentials)

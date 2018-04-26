@@ -32,6 +32,7 @@ class Users extends Base
 
     /**
      * @param $request
+     *
      * @return mixed
      */
     private function credentials($request)
@@ -72,6 +73,7 @@ class Users extends Base
     /**
      * @param $request
      * @param $remember
+     *
      * @return bool
      */
     public function loginUser($request, $remember)

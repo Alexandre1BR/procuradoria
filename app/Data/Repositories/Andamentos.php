@@ -180,14 +180,16 @@ class Andamentos extends Base
      */
     public function feedForFullcalendar()
     {
-        return $this->all()->map(function ($andamento) {
+        $andamentosComPrazo = AndamentoModel::whereNotNull('data_prazo')->whereNotNull('tipo_prazo_id')->get();
+
+        return $andamentosComPrazo->map(function ($andamento) {
             return [
-                'id'          => $andamento->id,
-                'title'       => $this->makeFeedTitle($andamento),
-                'start'       => $andamento->data_prazo->toIso8601String(),
-                'end'         => $andamento->data_prazo->addHour()->toIso8601String(),
-                'description' => $this->makeFeedDescription($andamento),
-                'url'         => route('processos.show', ['id' => $andamento->processo->id]),
+                    'id'          => $andamento->id,
+                    'title'       => $this->makeFeedTitle($andamento),
+                    'start'       => $andamento->data_prazo->toIso8601String(),
+                    'end'         => $andamento->data_prazo->addHour()->toIso8601String(),
+                    'description' => $this->makeFeedDescription($andamento),
+                    'url'         => route('processos.show', ['id' => $andamento->processo->id]),
             ];
         });
     }

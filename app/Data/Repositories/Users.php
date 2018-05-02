@@ -31,6 +31,16 @@ class Users extends Base
     }
 
     /**
+     * @param $request
+     *
+     * @return mixed
+     */
+    private function credentials($request)
+    {
+        return $request->only(['username', 'password']);
+    }
+
+    /**
      * @param $email
      *
      * @return mixed
@@ -61,28 +71,38 @@ class Users extends Base
     }
 
     /**
-     * @param $credentials
+     * @param $request
      * @param $remember
+     *
+     * @return bool
      */
-    public function loginUser($credentials, $remember)
+    public function loginUser($request, $remember)
     {
-        if (is_null($user = $this->findUserByEmail($email = "{$credentials['username']}@alerj.rj.gov.br"))) {
-            $user = new User();
+        try {
+            $credentials = extract_credentials($request);
 
-            $user->name = $credentials['username'];
+            if (is_null($user = $this->findUserByEmail($email = "{$credentials['username']}@alerj.rj.gov.br"))) {
+                $user = new User();
 
-            $user->username = $credentials['username'];
+                $user->name = $credentials['username'];
 
-            $user->email = $email;
+                $user->username = $credentials['username'];
 
-            $user->password = Hash::make($email);
+                $user->email = $email;
 
-            $user->user_type_id = $this->getTipoUsuario($credentials['username'])->id;
+                $user->password = Hash::make($email);
 
-            $user->save();
+                $user->user_type_id = $this->getTipoUsuario($credentials['username'])->id;
+
+                $user->save();
+            }
+
+            Auth::login($user, $remember);
+        } catch (\Exception $exception) {
+            return false;
         }
 
-        Auth::login($user, $remember);
+        return true;
     }
 
     /**

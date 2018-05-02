@@ -17,6 +17,15 @@ function toBoolean($boolean)
     return $boolean === 'true' || $boolean === '1' || $boolean === 1 || $boolean === true;
 }
 
+function extract_credentials($request)
+{
+    $credentials = $request->only(['email', 'password']);
+
+    $credentials['username'] = $credentials['email'];
+
+    return $credentials;
+}
+
 class Timer
 {
     public static $starttime;

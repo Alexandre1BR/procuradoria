@@ -91,7 +91,7 @@ class LoginController extends Controller
     protected function attemptLogin(Request $request)
     {
         return $this->authentication->attempt(
-            $this->credentials($request),
+            $request,
             $request->filled('remember')
         );
     }

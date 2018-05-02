@@ -32,13 +32,11 @@ class Authentication
         $this->remoteRequest = $remoteRequest;
     }
 
-    public function attempt($credentials, $remember)
+    public function attempt($request, $remember)
     {
-        $credentials['username'] = $this->extractUsernameFromEmail($credentials['email']);
-
         return $this->loginUser(
-            $credentials,
-            $this->loginRequest($credentials),
+            $request,
+            $this->loginRequest($request),
             $remember
         );
     }
@@ -58,35 +56,42 @@ class Authentication
     }
 
     /**
-     * @param $credentials
+     * @param $request
      *
      * @return mixed
      */
-    protected function loginRequest($credentials)
+    protected function loginRequest($request)
     {
         if (config('auth.authentication.mock')) {
-            return $this->mockedAuthentication($credentials);
+            return $this->mockedAuthentication($request);
         }
 
-        return $this->remoteRequest->post(static::LOGIN_URL, $credentials);
+        return $this->remoteRequest->post(static::LOGIN_URL, extract_credentials($request));
     }
 
     /**
-     * @param $credentials
+     * @param $request
      * @param $response
      * @param $remember
      *
+     * @throws \Exception
+     *
      * @return mixed
      */
-    protected function loginUser($credentials, $response, $remember)
+    protected function loginUser($request, $response, $remember)
     {
         if ($success = $response['success']) {
-            $this->usersRepository->loginUser($credentials, $remember);
+            $success = $this->usersRepository->loginUser($request, $remember);
         }
 
         return $success;
     }
 
+    /**
+     * @param $credentials
+     *
+     * @return array
+     */
     protected function mockedAuthentication($credentials)
     {
         return [

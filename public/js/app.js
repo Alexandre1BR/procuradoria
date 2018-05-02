@@ -80473,15 +80473,17 @@ if (false) {
 /* 168 */
 /***/ (function(module, exports) {
 
+// noinspection BadExpressionStatementJS JSLint
 /**
  * Select2
  */
 
 $(function () {
+    // jshint ignore:line
     $(document).ready(function () {
         $('.select2').select2({
             theme: "bootstrap",
-            tags: false,
+            tags: true,
             width: "100%"
             //minimumResultsForSearch: Infinity,
         });

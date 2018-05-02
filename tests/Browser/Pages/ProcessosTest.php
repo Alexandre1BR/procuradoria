@@ -176,17 +176,19 @@ class ProcessosTest extends DuskTestCase
         });
     }
 
-    public function testValidation()
-    {
+    public function testValidation() {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->clickLink('Novo')
+                ->select('#tipo_meio',  "")
                 ->press('Gravar')
                 ->assertSee('O campo Número judicial é obrigatório.')
                 ->assertSee('O campo Autor é obrigatório.')
-                ->assertSee('O campo Réu é obrigatório.');
+                ->assertSee('O campo Réu é obrigatório.')
+                ->assertSee('O campo Meio é obrigatório.');
         });
     }
+
 
     public function testAlter()
     {

@@ -1,8 +1,9 @@
+// noinspection BadExpressionStatementJS JSLint
 /**
  * Select2
  */
 
-$(() => {
+$(() => { // jshint ignore:line
     $(document).ready(function() {
         $('.select2').select2({
             theme: "bootstrap",

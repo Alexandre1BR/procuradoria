@@ -4,8 +4,6 @@ namespace Tests\Unit;
 
 use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
-use App\Http\Requests\Processo as ProcessoRequest;
-use Illuminate\Http\Request;
 
 class ProcessosValidationTest extends TestCase
 {
@@ -29,77 +27,77 @@ class ProcessosValidationTest extends TestCase
             ->withHeader('X-CSRF-TOKEN', csrf_token())
             ->json('POST', '/processos',
                 [
-                    'tipo_meio_id' => null,
+                    'tipo_meio_id'    => null,
                     'numero_judicial' => 123,
-                    'autor' => 'Alexandre',
-                    'reu' => 'Bruno',
+                    'autor'           => 'Alexandre',
+                    'reu'             => 'Bruno',
                 ]
             );
 
         $response->assertSee("O campo Meio deve conter um valor num\u00e9rico.");
         $response->assertSee("O campo Meio \u00e9 obrigat\u00f3rio.");
 
-        dump("tipo_meio_id = null → Campo obrigatório");
-        dump("");
+        dump('tipo_meio_id = null → Campo obrigatório');
+        dump('');
         dump(json_decode($response->getContent()));
-        dump("------------------------------------------");
+        dump('------------------------------------------');
     }
 
     public function tipoMeioValorMaior()
     {
         $response = $this->json('POST', '/processos',
             [
-                'tipo_meio_id' => "100",
+                'tipo_meio_id'    => '100',
                 'numero_judicial' => 123,
-                'autor' => 'Alexandre',
-                'reu' => 'Bruno',
+                'autor'           => 'Alexandre',
+                'reu'             => 'Bruno',
             ]
         );
 
         $response->assertSee("O campo Meio n\u00e3o pode conter um valor superior a 99.");
 
         dump("tipo_meio_id = 100 → Testando 'Insertion Code' ");
-        dump("");
+        dump('');
         dump(json_decode($response->getContent()));
 
-        dump("------------------------------------------");
+        dump('------------------------------------------');
     }
 
     public function tipoMeioValorAlfanumerico()
     {
         $response = $this->json('POST', '/processos',
             [
-                'tipo_meio_id' => "A",
+                'tipo_meio_id'    => 'A',
                 'numero_judicial' => 123,
-                'autor' => 'Alexandre',
-                'reu' => 'Bruno',
+                'autor'           => 'Alexandre',
+                'reu'             => 'Bruno',
             ]
         );
         $response->assertSee("O campo Meio deve conter um valor num\u00e9rico.");
 
-        dump("tipo_meio_id = A → Testando se aceita apenas números");
-        dump("");
+        dump('tipo_meio_id = A → Testando se aceita apenas números');
+        dump('');
         dump(json_decode($response->getContent()));
 
-        dump("------------------------------------------");
+        dump('------------------------------------------');
     }
 
     public function tipoMeioViolandoChaveEstrangeria()
     {
         $response = $this->json('POST', '/processos',
             [
-                'tipo_meio_id' => "4",
+                'tipo_meio_id'    => '4',
                 'numero_judicial' => 123,
-                'autor' => 'Alexandre',
-                'reu' => 'Bruno',
+                'autor'           => 'Alexandre',
+                'reu'             => 'Bruno',
             ]
         );
         $response->assertSee("O valor selecionado para o campo Meio \u00e9 inv\u00e1lido.");
 
-        dump("tipo_meio_id = 4 → Testando se o valor existe na base de dados [foreign key]");
-        dump("");
+        dump('tipo_meio_id = 4 → Testando se o valor existe na base de dados [foreign key]');
+        dump('');
         dump(json_decode($response->getContent()));
 
-        dump("------------------------------------------");
+        dump('------------------------------------------');
     }
 }

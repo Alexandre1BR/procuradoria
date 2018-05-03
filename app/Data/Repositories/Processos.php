@@ -6,12 +6,15 @@ use App\Data\Models\Acao;
 use App\Data\Models\Andamento;
 use App\Data\Models\Apenso;
 use App\Data\Models\Juiz;
+use App\Data\Models\Lei;
 use App\Data\Models\ProcessoLei;
 use App\Data\Models\Meio;
 use App\Data\Models\Processo;
 use App\Data\Models\Tag;
 use App\Data\Models\TipoProcesso as ModelTipoProcesso;
 use App\Data\Models\Tribunal;
+use App\Data\Models\Lei as LeiModel;
+use App\Data\Repositories\Leis as LeiRepository;
 use App\Data\Models\User as UserModel;
 use App\Data\Scope\Processo as ProcessoScope;
 use Carbon\Carbon;
@@ -255,6 +258,14 @@ class Processos extends Base
                 $leis[] = $q->lei;
             }
 
+            $query = app(LeiRepository::class)->allOrdenado()->get()->toArray();
+            $allLeis = [];
+            foreach ($query as $q){
+                $allLeis[$q['id']] = $q['lei_formatada'];
+            }
+            $allLeis = collect($allLeis);
+            //dd($allLeis);
+
             return [
                     'juizes'         => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
                     'tribunais'      => Tribunal::orderBy('nome')->pluck('nome', 'id'),
@@ -267,6 +278,7 @@ class Processos extends Base
                     'apensos'        => $apensos,
                     'processos'      => $processos,
                     'leis'           => $leis,
+                    'allLeis'        => $allLeis,
                     'tags'           => Tag::all(),
                     'tiposProcessos' => ModelTipoProcesso::orderBy('nome')->get(),
             ];

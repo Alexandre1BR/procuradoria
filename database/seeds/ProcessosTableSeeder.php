@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Data\Models\Processo as ProcessoModel;
 
 class ProcessosTableSeeder extends Seeder
 {
@@ -11,6 +12,6 @@ class ProcessosTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Data\Models\Processo::class, 50)->create();
+        factory(ProcessoModel::class, 50)->create();
     }
 }

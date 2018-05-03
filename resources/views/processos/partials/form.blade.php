@@ -344,7 +344,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="tags">Tags</label>
-                <select name="tags[]" class="form-control select2" multiple="multiple" id="tags" @include('partials.disabled')>
+                <select name="tags[]" class="form-control select2-tag" multiple="multiple" id="tags" @include('partials.disabled')>
                     @foreach ($tags as $tag)
                         <option {{ isset($processo) && $processo->tags->contains('name', $tag->name) ? 'selected="selected"' : '' }}>{{ $tag->name }}</option>
                     @endforeach

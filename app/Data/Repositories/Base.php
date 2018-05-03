@@ -99,6 +99,11 @@ abstract class Base
         return $this->makeResultForSelect($this->model::all());
     }
 
+    public function allOrderBy($field)
+    {
+        return ($this->model::orderBy($field))->get();
+    }
+
     /**
      * @param $string
      *

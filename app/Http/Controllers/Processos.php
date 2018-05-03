@@ -81,6 +81,8 @@ class Processos extends Controller
      */
     public function show($id)
     {
+//        dd($this->repository->getProcessosData($id)['leis']);
+
         return view('processos.form')
             ->with('processo', ProcessoModel::withoutGlobalScope(ProcessoScope::class)->find($id))
             ->with('formDisabled', true)

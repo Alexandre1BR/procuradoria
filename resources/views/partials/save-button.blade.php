@@ -13,7 +13,7 @@
                 </button>
 
                 <script>
-                    function f_gravar(){
+                    function f_gravar() {
                         $("#formulario").submit();
                     }
                 </script>

@@ -14,10 +14,16 @@ class DisabledUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            //$table->softDeletes();
-            //$table->date('deleted_at')->nullable();
             $table->string('disabled_by_id')->nullable();
             $table->string('disabled_at')->nullable();
+        });
+    }
+
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('disabled_by_id');
+            $table->dropColumn('disabled_at');
         });
     }
 }

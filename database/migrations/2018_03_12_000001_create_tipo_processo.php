@@ -40,6 +40,5 @@ class CreateTipoProcesso extends Migration
     public function down()
     {
         Schema::drop('tipos_processos');
-        \App\Data\Models\TipoProcesso::truncate();
     }
 }

@@ -24,7 +24,7 @@ class ModifyTableLeis extends Migration
             $table->timestamps();
         });
 
-        $leis = DB::table("leis")->get();
+        $leis = DB::table('leis')->get();
 
         //Mapeia pelo numero_lei
         foreach ($leis as $lei) {
@@ -64,7 +64,7 @@ class ModifyTableLeis extends Migration
         });
 
         //Transfere para tabela Leis
-        $processoleis = DB::table("processos_leis")->get();
+        $processoleis = DB::table('processos_leis')->get();
 
         //Passa a coluna processo
         foreach ($processoleis as $processolei) {

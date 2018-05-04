@@ -33,7 +33,9 @@ class AddNotificationColumns extends Migration
     {
         Schema::table('notifications', function (Blueprint $table) {
             $table->dropColumn('via');
-            $table->dropColumn('email');
+            $table->dropColumn('to');
+            $table->dropColumn('subject');
+            $table->dropColumn('subject_id')->unsigned();
         });
     }
 }

@@ -66,6 +66,7 @@ class Processos extends Controller
      */
     public function apensar(ApensoRequest $request, ApensosRepository $repository)
     {
+        dump('oi');
         $repository->createFromRequest($request);
 
         return redirect()
@@ -76,8 +77,15 @@ class Processos extends Controller
             ->with($this->getSuccessMessage());
     }
 
+    /**
+     * @param ProcessoLeiRequest     $request
+     * @param ProcessosLeisRepository $repository
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function relacionarLei(ProcessoLeiRequest $request, ProcessosLeisRepository $repository)
     {
+        dump('oi');
         $repository->createFromRequest($request);
 
         return redirect()

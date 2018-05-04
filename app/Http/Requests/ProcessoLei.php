@@ -24,8 +24,8 @@ class ProcessoLei extends FormRequest
     public function rules()
     {
         return [
-            'processo_id' => 'required',
-            'apensado_id' => 'required',
+            'processo_id' => 'required|unique_with:processos_leis,lei_id',
+            'lei_id' => 'required',
         ];
     }
 }

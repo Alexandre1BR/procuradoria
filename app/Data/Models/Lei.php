@@ -27,7 +27,7 @@ class Lei extends BaseModel
 
     public function tipoLei()
     {
-        return $this->belongsTo(tipoLei::class);
+        return $this->belongsTo(TipoLei::class);
     }
 
     public function nivelFederativo()

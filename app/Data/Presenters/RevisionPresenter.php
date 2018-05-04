@@ -17,7 +17,8 @@ class RevisionPresenter extends BasePresenter
         'App\Data\Models\Juiz'        => 'juizes.show',
         'App\Data\Models\Meio'        => null,
         'App\Data\Models\Processo'    => 'processos.show',
-        'App\Data\Models\User'        => null,
+        'App\Data\Models\User'        => 'users.show',
+        'App\Data\Models\TipoAndamento' => null,
     ];
 
     /**

@@ -1,7 +1,5 @@
 <?php
 
-use App\Data\Models\Lei as LeiModel;
-use App\Data\Models\ProcessoLei as ProcessosLeiModel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -26,13 +24,13 @@ class ModifyTableLeis extends Migration
             $table->timestamps();
         });
 
-        $leis = app(LeiModel::class)->all();
+        $leis = DB::table("leis")->get();
 
         //Mapeia pelo numero_lei
         foreach ($leis as $lei) {
             if (isset($array[$lei->numero_lei])) {
 //                dump('Apagando ' . $lei->id . ' Numero lei ' . $lei->numero_lei);
-                LeiModel::find($lei->id)->delete();
+                DB::table('leis')->where('id', '=', $lei->id)->delete();
             } else {
                 $array[$lei->numero_lei] = $lei->id;
             }
@@ -66,18 +64,19 @@ class ModifyTableLeis extends Migration
         });
 
         //Transfere para tabela Leis
-        $processoleis = app(ProcessosLeiModel::class)->all();
+        $processoleis = DB::table("processos_leis")->get();
+
 
         //Passa a coluna processo
         foreach ($processoleis as $processolei) {
 //            dd($processolei);
-            $lei = LeiModel::find($processolei->lei_id);
+            $lei = DB::table('leis')->where('id', '=', $processolei->lei_id)->get();
 //            $id = $lei['id'];
 
 //            dd($id);
 
             if ($lei['processo_id'] == null) {
-                $lei->update(['processo_id' => $processolei->processo_id]);
+                DB::table('leis')->where('id', '=', $processolei->lei_id)->update(['processo_id' => $processolei->processo_id]);
             } else {
                 DB::table('leis')->insert(
                     [

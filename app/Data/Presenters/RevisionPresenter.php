@@ -23,8 +23,8 @@ class RevisionPresenter extends BasePresenter
      */
     private function getRouteName()
     {
-        if (! isset($this->routes[$this->wrappedObject->revisionable_type])) {
-            return null;
+        if (!isset($this->routes[$this->wrappedObject->revisionable_type])) {
+            return;
         }
 
         return $this->routes[$this->wrappedObject->revisionable_type];

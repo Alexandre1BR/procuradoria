@@ -35,7 +35,7 @@ class AddNotificationColumns extends Migration
             $table->dropColumn('via');
             $table->dropColumn('to');
             $table->dropColumn('subject');
-            $table->dropColumn('subject_id')->unsigned();
+            $table->dropColumn('subject_id');
         });
     }
 }

@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-6">
                 <h4>
-                    <a href="{{ route('home.index') }}">Apensos</a>
+                    Apensos
                 </h4>
             </div>
 

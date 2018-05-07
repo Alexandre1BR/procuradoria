@@ -1,21 +1,11 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <h4>
-                    <a href="{{ route('home.index') }}">Leis</a>
-
+                    <a href="{{ route('leis.index') }}">Leis</a>
                 </h4>
             </div>
-<!--
-            <div class="col-md-9">
-                <a href="{{ route('leis.create',['processo_id'=>$processo->id]) }}" class="btn btn-primary pull-right" onclick="f_editar()">
-                    <i class="fa fa-plus"></i>
-                    Nova lei
-                </a>
-            </div>
-            -->
-
             <div class="col-md-6">
                 <form class="form" id="form_relacionarLei" name="form_relacionarLei" action="{{ route('processos.relacionarLei') }}" method="post">
                     {{ csrf_field() }}

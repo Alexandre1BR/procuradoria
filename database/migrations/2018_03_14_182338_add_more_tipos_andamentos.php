@@ -45,5 +45,6 @@ class AddMoreTiposAndamentos extends Migration
      */
     public function down()
     {
+        DB::table('tipos_andamentos')->truncate();
     }
 }

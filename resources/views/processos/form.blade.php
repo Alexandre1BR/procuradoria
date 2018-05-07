@@ -34,6 +34,8 @@
 
         @include('processos.partials.apensos')
 
-        @include('processos.partials.leis')
+        @if(app()->environment('local'))
+            @include('processos.partials.leis')
+        @endif
     @endif
 @endsection

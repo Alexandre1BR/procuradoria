@@ -101,8 +101,6 @@ class Processos extends Base
     {
         info($request);
 
-        $this->searchFromRequest($request->get('pesquisa'));
-
         return $this->searchFromRequest($request->get('pesquisa'));
     }
 

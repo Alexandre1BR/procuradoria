@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Data\Repositories\Leis as LeisRepository;
 use App\Data\Repositories\NiveisFederativos as NiveisFederativosRepository;
-use App\Data\Repositories\TiposLeis as TiposLeisRepository;
 use App\Data\Repositories\ProcessosLeis as ProcessosLeisRepository;
+use App\Data\Repositories\TiposLeis as TiposLeisRepository;
 use App\Http\Requests\Lei as LeiRequest;
 use App\Http\Requests\ProcessoLei as ProcessoLeiRequest;
 use Illuminate\Http\Request;
@@ -76,7 +76,7 @@ class Leis extends Controller
     {
         return [
             'niveisFederativos' => app(NiveisFederativosRepository::class)->allOrderBy('nome')->pluck('nome', 'id'),
-            'tiposLeis'   => app(TiposLeisRepository::class)->allOrderBy('nome')->pluck('nome', 'id'),
+            'tiposLeis'         => app(TiposLeisRepository::class)->allOrderBy('nome')->pluck('nome', 'id'),
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueProcessoLei;
 
 class ProcessoLei extends FormRequest
 {
@@ -24,7 +25,7 @@ class ProcessoLei extends FormRequest
     public function rules()
     {
         return [
-            'processo_id' => 'required|unique_with:processos_leis,lei_id',
+            'processo_id' => ['required', new UniqueProcessoLei],
             'lei_id' => 'required',
         ];
     }

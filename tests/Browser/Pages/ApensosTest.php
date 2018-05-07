@@ -32,16 +32,12 @@ class ApensosTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($apensoA, $apensadoA) {
             $browser->visit('/processos/'.$apensoA['id'])
-//                ->screenshot('1')
                 ->click('#editar')
                 ->select('#apensado_id', $apensadoA['id'])
                 ->click('#buttonApensar')
-//                ->screenshot('2')
                 ->assertSeeIn('#apensosTable', $apensadoA['numero_judicial'])
-//                ->screenshot('3')
                 ->visit('/processos/'.$apensadoA['id'])
                 ->assertSeeIn('#apensosTable', $apensoA['numero_judicial']);
-//                ->screenshot('4');
         });
     }
 }

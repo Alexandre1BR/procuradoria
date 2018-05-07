@@ -30,12 +30,10 @@ class UsersTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($randomUserU, $NameU) {
             $browser->visit('/users/'.$randomUserU['id'])
-//                ->screenshot('testValidation1')
                 ->click('#editar')
                 ->type('#personal_email', $NameU)
                 ->press('Gravar')
                 ->assertSee('O campo Email pessoal não contém um endereço de email válido.');
-//                ->screenshot('testValidation2');
         });
     }
 
@@ -46,13 +44,10 @@ class UsersTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($personalEmailU, $randomUserU) {
             $browser->visit('/users/'.$randomUserU['id'])
-//                ->screenshot('testAlter1')
                 ->click('#editar')
                 ->type('#personal_email', $personalEmailU)
-//                ->screenshot('testAlter2')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso');
-//                ->screenshot('testAlter3');
         });
     }
 
@@ -63,11 +58,9 @@ class UsersTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($personalEmailU, $randomUserU) {
             $browser->visit('/users')
-//                ->screenshot('testRoute1')
                 ->clickLink($randomUserU['name'])
                 ->assertPathIs('/users/'.$randomUserU['id'])
                 ->assertSee($randomUserU['email']);
-//                ->screenshot('testRoute2');
         });
     }
 }

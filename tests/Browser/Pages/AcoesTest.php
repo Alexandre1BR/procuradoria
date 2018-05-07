@@ -30,7 +30,6 @@ class AcoesTest extends DuskTestCase
                 ->clickLink('Novo')
                 ->type('#nome', $nomeA)
                 ->type('#abreviacao', $abreviacaoA)
-//                ->screenshot('acoes')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
                 ->assertSeeIn('#acoesTable', $nomeA)
@@ -54,12 +53,9 @@ class AcoesTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/acoes')
                 ->type('pesquisa', '45879349875348975387958973489734897345893478957984')
-//                ->assertInputValue('pesquisa',$nomet)
-//                ->type('abreviacao', $abrevt)
                 ->click('#searchButton')
                 ->waitForText('Nenhuma ação encontrada')
                 ->assertSee('Nenhuma ação encontrada');
-//                ->assertSeeIn('table',$nomet);
         });
     }
 
@@ -72,11 +68,9 @@ class AcoesTest extends DuskTestCase
             $browser->visit('/acoes')
                 ->type('pesquisa', $nomeA)
                 ->click('#searchButton')
-//                ->waitForText($nomeA)
                 ->assertSeeIn('#acoesTable', $nomeA)
                 ->type('pesquisa', $abreviacaoA)
                 ->click('#searchButton')
-//                ->waitForText($abreviacaoA)
                 ->assertSeeIn('#acoesTable', $abreviacaoA);
         });
     }
@@ -88,17 +82,13 @@ class AcoesTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($nomeA, $abreviacaoA) {
             $browser->visit('/acoes')
                 ->clickLink($nomeA)
-//                ->screenshot('1')
                 ->click('#editar')
                 ->type('nome', '*'.$nomeA.'*')
                 ->type('abreviacao', '*'.$abreviacaoA.'*')
-//                ->screenshot('2')
                 ->press('Gravar')
-//                ->screenshot('3')
                 ->assertSee('Gravado com sucesso')
                 ->assertSee('*'.$nomeA.'*')
                 ->assertSee('*'.$abreviacaoA.'*');
-//                ->screenshot('4');
         });
     }
 }

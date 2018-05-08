@@ -8,7 +8,6 @@
 
 namespace App\Data\Presenters;
 
-use Carbon\Carbon;
 use McCool\LaravelAutoPresenter\BasePresenter;
 
 class LeiPresenter extends BasePresenter
@@ -26,15 +25,15 @@ class LeiPresenter extends BasePresenter
 
         $r = $this->wrappedObject->numero_lei;
 
-        if(!is_null($artigo)){
+        if (!is_null($artigo)) {
             $r .= ', Art. '.$artigo;
-            if(!is_null($paragrafo)){
+            if (!is_null($paragrafo)) {
                 $r .= ', Par. '.$paragrafo;
-                if(!is_null($inciso)){
+                if (!is_null($inciso)) {
                     $r .= ', Inc. '.$inciso;
-                    if(!is_null($alinea)){
+                    if (!is_null($alinea)) {
                         $r .= ', Alin. '.$alinea;
-                        if(!is_null($item)){
+                        if (!is_null($item)) {
                             $r .= ', Itm. '.$item;
                         }
                     }

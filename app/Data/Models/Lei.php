@@ -2,15 +2,14 @@
 
 namespace App\Data\Models;
 
-use Illuminate\Support\Facades\Cache;
 use App\Data\Presenters\LeiPresenter;
+use Illuminate\Support\Facades\Cache;
 
 class Lei extends BaseModel
 {
     /**
      * @var array
      */
-
     protected $table = 'leis';
 
     protected $fillable = [

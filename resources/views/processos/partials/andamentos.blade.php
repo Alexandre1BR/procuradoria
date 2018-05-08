@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-3">
                 <h4>
-                    <a href="{{ route('home.index') }}">Andamentos</a>
+                    <a href="{{ route('andamentos.index') }}">Andamentos</a>
 
                 </h4>
             </div>

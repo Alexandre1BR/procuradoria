@@ -92,7 +92,6 @@ class ProcessosTest extends DuskTestCase
         $procuradorP, $estagiarioP, $assessorP, $tipoMeioP, $objetoP, $meritoP, $liminarP, $apensosObsP, $recursoObsP, $observacaoP, $linkP) {
             $browser->visit('/')
                 ->clickLink('Novo')
-//                ->screenshot('0')
                 ->type('#numero_judicial', $numeroJudicialP)
                 ->type('#numero_alerj', $numeroAlerjP)
                 ->select('#tribunal_id', $tribunalP['id'])
@@ -114,12 +113,9 @@ class ProcessosTest extends DuskTestCase
                 ->type('#recurso', $recursoObsP)
                 ->type('#observacao', $observacaoP)
                 ->type('#link', $linkP)
-//                ->screenshot('1')
                 ->press('Gravar')
                 ->waitForText('Gravado com sucesso', 40)
-//                ->screenshot('3')
                 ->waitForText($numeroJudicialP)
-
                 ->assertSee($numeroJudicialP)
                 ->assertSee($numeroAlerjP)
                 ->assertSee($tribunalP['abreviacao'])
@@ -128,7 +124,6 @@ class ProcessosTest extends DuskTestCase
                 ->assertSee($procuradorP['name'])
                 ->assertSee($assessorP['name'])
                 ->assertSee($estagiarioP['name']);
-//                ->screenshot('4');
         });
     }
 
@@ -207,26 +202,20 @@ class ProcessosTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($ProcessoP, $novoNumeroJudicialP, $novoDataDistribuicaoP, $novoTribunalP, $novoAutorP, $novoObjetoP,
             $novoProcuradorP, $novoAssessorP, $novoEstagiarioP) {
             $browser->visit('/processos/'.$ProcessoP['id'])
-//                ->screenshot('0')
                 ->click('#editar')
-//                ->screenshot('1')
                 ->type('#numero_judicial', $novoNumeroJudicialP)
                 ->select('#tribunal_id', $novoTribunalP['id'])
                 ->keys('#data_distribuicao', $novoDataDistribuicaoP)
-//                ->screenshot('1.5')
                 ->type('#autor', $novoAutorP)
                 ->select('#procurador_id', $novoProcuradorP['id'])
                 ->select('#estagiario_id', $novoEstagiarioP['id'])
                 ->select('#assessor_id', $novoAssessorP['id'])
                 ->type('#objeto', $novoObjetoP)
-//                ->screenshot('2')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso', 30)
-//                ->screenshot('3')
                 ->waitForText($novoNumeroJudicialP)
                 ->assertSee($novoNumeroJudicialP)
                 ->assertSee($ProcessoP['numero_alerj'])
-//                ->assertDontSee($ProcessoP['numero_judicial'])
                 ->assertSee($novoNumeroJudicialP)
                 ->assertSee($novoTribunalP['abreviacao'])
                 ->assertSee($novoAutorP)
@@ -234,7 +223,6 @@ class ProcessosTest extends DuskTestCase
                 ->assertSee($novoProcuradorP['name'])
                 ->assertSee($novoAssessorP['name'])
                 ->assertSee($novoEstagiarioP['name']);
-//                ->screenshot('4');
         });
     }
 }

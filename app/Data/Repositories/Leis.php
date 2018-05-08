@@ -72,4 +72,15 @@ class Leis extends Base
         return (new LeiModel())
             ->orderBy('updated_at', 'desc');
     }
+
+    public function allOrdenado()
+    {
+        return (new LeiModel())
+            ->orderBy('numero_lei')
+            ->orderBy('artigo')
+            ->orderBy('paragrafo')
+            ->orderBy('inciso')
+            ->orderBy('alinea')
+            ->orderBy('item');
+    }
 }

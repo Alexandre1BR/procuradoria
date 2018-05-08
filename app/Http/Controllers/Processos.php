@@ -7,9 +7,11 @@ use App\Data\Models\Processo as ProcessoModel;
 use App\Data\Repositories\Andamentos as AndamentosRepository;
 use App\Data\Repositories\Apensos as ApensosRepository;
 use App\Data\Repositories\Processos as ProcessosRepository;
+use App\Data\Repositories\ProcessosLeis as ProcessosLeisRepository;
 use App\Data\Scope\Processo as ProcessoScope;
 use App\Http\Requests\Apenso as ApensoRequest;
 use App\Http\Requests\Processo as ProcessoRequest;
+use App\Http\Requests\ProcessoLei as ProcessoLeiRequest;
 
 class Processos extends Controller
 {
@@ -67,11 +69,29 @@ class Processos extends Controller
         $repository->createFromRequest($request);
 
         return redirect()
-          ->route('processos.show', $request->processo_id)
-          ->with('processo', ProcessoModel::find($request->processo_id))
-          ->with('formDisabled', true)
-          ->with($this->repository->getProcessosData($request->processo_id))
-          ->with($this->getSuccessMessage());
+            ->route('processos.show', $request->processo_id)
+            ->with('processo', ProcessoModel::find($request->processo_id))
+            ->with('formDisabled', true)
+            ->with($this->repository->getProcessosData($request->processo_id))
+            ->with($this->getSuccessMessage());
+    }
+
+    /**
+     * @param ProcessoLeiRequest      $request
+     * @param ProcessosLeisRepository $repository
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function relacionarLei(ProcessoLeiRequest $request, ProcessosLeisRepository $repository)
+    {
+        $repository->createFromRequest($request);
+
+        return redirect()
+            ->route('processos.show', $request->processo_id)
+            ->with('processo', ProcessoModel::find($request->processo_id))
+            ->with('formDisabled', true)
+            ->with($this->repository->getProcessosData($request->processo_id))
+            ->with($this->getSuccessMessage());
     }
 
     /**

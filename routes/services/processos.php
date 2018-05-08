@@ -17,6 +17,8 @@ Route::group(['prefix' => '/processos'], function () { //www.procuradoria.test/p
     Route::get('/{id}', 'Processos@show')->name('processos.show');
 
     Route::post('/apensar', 'Processos@apensar')->name('processos.apensar');
+
+    Route::post('/relacionarLei', 'Processos@relacionarLei')->name('processos.relacionarLei');
 });
 
 // "name" serve pra atender o método route do Laravel no HTML. Vide : /resource/view/processos/form.blade.php

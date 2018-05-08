@@ -83,6 +83,11 @@ abstract class Base
         return $this->model::where('id', $user_id)->first();
     }
 
+    public function maxId()
+    {
+        return $this->model::max('id');
+    }
+
     /**
      * @return mixed
      */

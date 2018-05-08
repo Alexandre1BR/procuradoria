@@ -2,6 +2,7 @@
 
 namespace App\Data\Models;
 
+use App\Data\Presenters\LeiPresenter;
 use Illuminate\Support\Facades\Cache;
 
 class Lei extends BaseModel
@@ -9,6 +10,8 @@ class Lei extends BaseModel
     /**
      * @var array
      */
+    protected $table = 'leis';
+
     protected $fillable = [
         'numero_lei',
         'autor',
@@ -25,6 +28,15 @@ class Lei extends BaseModel
 
     protected $with = ['tipoLei', 'nivelFederativo'];
 
+    protected $presenters = [
+        'lei_formatada',
+    ];
+
+    public function getPresenterClass()
+    {
+        return LeiPresenter::class;
+    }
+
     public function tipoLei()
     {
         return $this->belongsTo(TipoLei::class);
@@ -34,11 +46,6 @@ class Lei extends BaseModel
     {
         return $this->belongsTo(NivelFederativo::class);
     }
-
-//    public function processo()
-//    {
-//        return $this->hasMany(Apenso::class);
-//    }
 
     public function save(array $options = [])
     {

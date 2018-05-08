@@ -3,7 +3,6 @@
 namespace App\Data\Repositories;
 
 use App\Data\Models\Lei as LeiModel;
-use App\Data\Models\Lei;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

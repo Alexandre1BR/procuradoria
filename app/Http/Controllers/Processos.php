@@ -77,7 +77,7 @@ class Processos extends Controller
     }
 
     /**
-     * @param ProcessoLeiRequest     $request
+     * @param ProcessoLeiRequest      $request
      * @param ProcessosLeisRepository $repository
      *
      * @return \Illuminate\Http\RedirectResponse

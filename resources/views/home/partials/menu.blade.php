@@ -16,6 +16,7 @@
         <li><a href="{{ route('acoes.index') }}">Ações</a></li>
         <li><a href="{{ route('revisions.index') }}">Revisões</a></li>
         <li><a href="{{ route('users.index') }}">Usuários</a></li>
+        <li><a href="{{ route('leis.index') }}">Leis</a></li>
     </ul>
 </li>
 

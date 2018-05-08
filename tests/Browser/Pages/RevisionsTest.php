@@ -11,7 +11,6 @@ class RevisionsTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/revisions')
-//                ->screenshot('1')
                 ->assertSee('Revisões');
         });
     }

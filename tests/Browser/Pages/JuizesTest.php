@@ -47,11 +47,6 @@ class JuizesTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/juizes')
                 ->clickLink('Novo')
-//                ->type('nome', $nomet)
-//                ->assertSee('ASDADDDD')
-
-//                ->type('abreviacao', $abrevt)
-
                 ->press('Gravar')
                 ->assertSee('O campo Nome é obrigatório.')
                 ->assertSee('O campo Lotação é obrigatório.')
@@ -64,12 +59,9 @@ class JuizesTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/juizes')
                 ->type('pesquisa', '45879349875348975387958973489734897345893478957984')
-//                ->assertInputValue('pesquisa',$nomet)
-//                ->type('abreviacao', $abrevt)
                 ->click('#searchButton')
                 ->waitForText('Nenhum juiz encontrado')
                 ->assertSee('Nenhum juiz encontrado');
-//                ->assertSeeIn('table',$nomet);
         });
     }
 
@@ -79,7 +71,6 @@ class JuizesTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($nomej) {
             $browser->visit('/juizes')
-//                ->type('abreviacao', $abrevt)
                 ->type('pesquisa', $nomej)
                 ->click('#searchButton')
                 ->waitForText($nomej)
@@ -98,19 +89,15 @@ class JuizesTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($nomej, $tribunal, $tipoJuiz) {
             $browser->visit('/juizes')
                 ->clickLink($nomej)
-                ->screenshot('1')
                 ->click('#editar')
                 ->type('nome', '*'.$nomej.'*')
                 ->select('lotacao_id', $tribunal['id'])
                 ->select('tipo_juiz_id', $tipoJuiz['id'])
-                ->screenshot('2')
                 ->press('Gravar')
-                ->screenshot('3')
                 ->assertSee('Gravado com sucesso')
                 ->assertSee('*'.$nomej.'*')
                 ->assertSee($tribunal['nome'])
-                ->assertSee($tipoJuiz['nome'])
-                ->screenshot('4');
+                ->assertSee($tipoJuiz['nome']);
         });
     }
 }

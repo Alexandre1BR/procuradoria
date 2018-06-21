@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Data\Models;
 
 class Opinion extends BaseModel
@@ -23,6 +24,6 @@ class Opinion extends BaseModel
         'date',
         'party',
         'abstract',
-        'opinion'
+        'opinion',
     ];
 }

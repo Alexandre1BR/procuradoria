@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 class OpinionScope extends BaseModel
@@ -14,7 +13,5 @@ class OpinionScope extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = [
-        'name',
-    ];
+    protected $fillable = ['name'];
 }

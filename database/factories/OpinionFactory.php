@@ -4,11 +4,15 @@ use Faker\Generator as Faker;
 use App\Data\Models\Opinion as OpinionModel;
 use App\Data\Models\OpinionScope as OpinionScopeModel;
 use App\Data\Models\OpinionSubject as OpinionSubjectModel;
+use App\Data\Models\OpinionsSubject as OpinionsSubjectModel;
 use App\Data\Models\OpinionType as OpinionTypeModel;
 
 use App\Data\Repositories\OpinionScopes as OpinionScopesRepository;
 use App\Data\Repositories\Users as UsersRepository;
 use App\Data\Repositories\OpinionTypes as OpinionTypesRepository;
+use App\Data\Repositories\Opinions as OpinionsRepository;
+use App\Data\Repositories\OpinionsSubjects as OpinionsSubjectsRepository;
+use App\Data\Repositories\OpinionSubjects as OpinionSubjectsRepository;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +31,23 @@ $factory->define(OpinionScopeModel::class, function (Faker $faker) {
 
 $factory->define(OpinionSubjectModel::class, function (Faker $faker) {
     return ['name' => $faker->name];
+});
+
+$factory->define(OpinionsSubjectModel::class, function (Faker $faker) {
+    return [
+        'opinion_id' =>
+            $faker->randomElement(
+                app(OpinionsRepository::class)
+                    ->all()
+                    ->toArray()
+            )['id'],
+        'subject_id' =>
+            $faker->randomElement(
+                app(OpinionSubjectsRepository::class)
+                    ->all()
+                    ->toArray()
+            )['id']
+    ];
 });
 
 $factory->define(OpinionTypeModel::class, function (Faker $faker) {

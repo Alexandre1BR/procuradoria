@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Data\Models\Processo;
@@ -46,16 +45,18 @@ class Processos extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(ProcessoRequest $request, ProcessosRepository $repository)
-    {
+    public function store(
+        ProcessoRequest $request,
+        ProcessosRepository $repository
+    ) {
         $p = $repository->createFromRequest($request);
 
         $a = new AndamentosRepository();
         $a->createFromProcessos($request, $p);
 
         return redirect()
-                ->route('home.index')
-                ->with($this->getSuccessMessage());
+            ->route('home.index')
+            ->with($this->getSuccessMessage());
     }
 
     /**
@@ -64,8 +65,10 @@ class Processos extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apensar(ApensoRequest $request, ApensosRepository $repository)
-    {
+    public function apensar(
+        ApensoRequest $request,
+        ApensosRepository $repository
+    ) {
         $repository->createFromRequest($request);
 
         return redirect()
@@ -82,8 +85,10 @@ class Processos extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function relacionarLei(ProcessoLeiRequest $request, ProcessosLeisRepository $repository)
-    {
+    public function relacionarLei(
+        ProcessoLeiRequest $request,
+        ProcessosLeisRepository $repository
+    ) {
         $repository->createFromRequest($request);
 
         return redirect()
@@ -101,10 +106,13 @@ class Processos extends Controller
      */
     public function show($id)
     {
-//        dd($this->repository->getProcessosData($id)['leis']);
-
         return view('processos.form')
-            ->with('processo', ProcessoModel::withoutGlobalScope(ProcessoScope::class)->find($id))
+            ->with(
+                'processo',
+                ProcessoModel
+                    ::withoutGlobalScope(ProcessoScope::class)
+                    ->find($id)
+            )
             ->with('formDisabled', true)
             ->with($this->repository->getProcessosData($id));
     }

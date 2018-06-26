@@ -1,6 +1,8 @@
 <?php
 namespace App\Data\Models;
 
+use App\Data\Presenters\OpinionSubjectPresenter;
+
 class OpinionSubject extends BaseModel
 {
     /**
@@ -14,4 +16,11 @@ class OpinionSubject extends BaseModel
      * @var array
      */
     protected $fillable = ['name'];
+
+    protected $presenters = ['edit_link'];
+
+    public function getPresenterClass()
+    {
+        return OpinionSubjectPresenter::class;
+    }
 }

@@ -1,9 +1,10 @@
 <?php
 namespace App\Http\Requests;
 
+use App\Rules\UniqueOpinionsSubject;
 use Illuminate\Foundation\Http\FormRequest;
 
-class Opinion extends FormRequest
+class OpinionsSubject extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +24,8 @@ class Opinion extends FormRequest
     public function rules()
     {
         return [
-            'opinion_scope_id' => 'required',
-            'attorney_id' => 'required',
-            'opinion_type_id' => 'required',
-            'date' => 'required',
-            'abstract' => 'required'
+            'opinion_id' => ['required', new UniqueOpinionsSubject()],
+            'subject_id' => 'required'
         ];
     }
 }

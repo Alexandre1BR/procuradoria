@@ -33,7 +33,7 @@ class AddOpinionsTable extends Migration
 
             $table->text('opinion')->nullable(); // parecer
 
-            $table->string('file');
+            $table->string('file')->nullable();
 
             // $table->string('file'); ---------- TAGS!!!!
 

@@ -13,8 +13,9 @@ class OpinionSubjects extends Base
 
         $array[] = (object) [
             'name' => 'name',
-            'showName' => 'Nome',
-            'columnSize' => '100%'
+            'showName' => 'Nome do Assunto',
+            'columnSize' => '100%',
+            'type' => 'string'
         ];
 
         return $array;
@@ -23,9 +24,10 @@ class OpinionSubjects extends Base
     public function formAttributes(): array
     {
         $array = [];
+
         $array[] = (object) [
             'name' => 'name',
-            'showName' => 'Nome',
+            'showName' => 'Nome do Assunto',
             'type' => 'string'
         ];
         return $array;

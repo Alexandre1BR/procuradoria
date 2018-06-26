@@ -3,7 +3,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Opinion extends FormRequest
+class OpinionSubject extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,6 @@ class Opinion extends FormRequest
      */
     public function rules()
     {
-        return [
-            'opinion_scope_id' => 'required',
-            'attorney_id' => 'required',
-            'opinion_type_id' => 'required',
-            'date' => 'required',
-            'abstract' => 'required'
-        ];
+        return ['name' => 'required'];
     }
 }

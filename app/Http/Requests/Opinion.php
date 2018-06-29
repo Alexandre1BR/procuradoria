@@ -27,7 +27,9 @@ class Opinion extends FormRequest
             'attorney_id' => 'required',
             'opinion_type_id' => 'required',
             'date' => 'required',
-            'abstract' => 'required'
+            'abstract' => 'required',
+            'pdf_file' => 'required|mimes:pdf',
+            'doc_file' => 'required|mimes:doc'
         ];
     }
 }

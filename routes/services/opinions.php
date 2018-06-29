@@ -6,6 +6,10 @@ Route::group(['prefix' => '/opinioes'], function () {
 
     Route::get('/{id}', 'Opinions@show')->name('opinions.show');
 
+    Route
+        ::get('/{id}/{fileName}', 'Opinions@download')
+        ->name('opinions.download');
+
     Route::get('/', 'Opinions@index')->name('opinions.index');
 
     Route

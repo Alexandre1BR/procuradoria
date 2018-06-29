@@ -33,4 +33,30 @@ class OpinionPresenter extends BasePresenter
 
         return route('opinions.show', ['id' => $id]);
     }
+
+    public function pdf_file_name()
+    {
+        $id = $this->wrappedObject->id;
+        $date = $this->wrappedObject->date;
+
+        $extension = 'pdf';
+
+        return route('opinions.download', [
+            'id' => $id,
+            'fileName' => ($date . '-' . $id . '.' . $extension)
+        ]);
+    }
+
+    public function doc_file_name()
+    {
+        $id = $this->wrappedObject->id;
+        $date = $this->wrappedObject->date;
+
+        $extension = 'doc';
+
+        return route('opinions.download', [
+            'id' => $id,
+            'fileName' => ($date . '-' . $id . '.' . $extension)
+        ]);
+    }
 }

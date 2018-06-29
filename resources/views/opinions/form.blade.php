@@ -23,10 +23,12 @@
             </div>
         </div>
 
+        {{$opinion->pdf_file_name}}
+
         <div class="panel-body">
             @include('partials.alerts')
 
-            <form name="formulario" id="formulario" action="{{ route('opinions.store') }}" method="POST">
+            <form name="formulario" id="formulario" action="{{ route('opinions.store') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 <input name="id" type='hidden' value="{{$opinion->id}}" id="id" >
@@ -62,6 +64,21 @@
                                         @endif
                                     @endforeach
                                 </select>
+                            @endif
+
+                            @if($attr->type == 'textarea')
+                                <textarea name="{{$attr->name}}" class="form-control" @include('partials.readonly') id="{{$attr->name}}"
+                                          placeholder="{{$attr->showName}}">{{is_null(old($attr->name))? $opinion->{$attr->name} : old($attr->name)}}</textarea>
+                            @endif
+
+                            @if($attr->type == 'file')
+                                <input name="{{$attr->name}}" id="{{$attr->name}}" type="file" @include('partials.disabled')/>
+                            @endif
+
+                            @if($attr->type == 'linkImage')
+                                <a href="{{$opinion->{$attr->name} }}">
+                                    <img border="0" alt="W3Schools" src="{{$attr->imageName}}" width="100" height="100">
+                                </a>
                             @endif
                         </div>
                     </div>

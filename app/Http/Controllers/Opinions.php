@@ -14,6 +14,8 @@ use App\Data\Repositories\Users as UsersRepository;
 use App\Http\Requests\Opinion as OpinionRequest;
 use App\Http\Requests\OpinionsSubject as OpinionsSubjectRequest;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class Opinions extends Controller
 {
@@ -56,11 +58,23 @@ class Opinions extends Controller
         OpinionRequest $request,
         OpinionsRepository $repository
     ) {
+        foreach ($request->allFiles() as $key => $file) {
+            $extension = $file->getClientOriginalExtension();
+            $date = $request->date;
+            $fileName = $date . '-' . $request->id . '.' . $extension;
+            $file->storeAs('', $fileName, 'opinion-files');
+        }
+
         $repository->createFromRequest($request);
 
         return redirect()
             ->route('opinions.index')
             ->with($this->getSuccessMessage());
+    }
+
+    public function download($id, $fileName)
+    {
+        return Storage::disk('opinion-files')->download($fileName);
     }
 
     /**
@@ -76,6 +90,16 @@ class Opinions extends Controller
             ->with('opinions', $opinions->search($request))
             ->with('opinionsAttributes', $opinions->attributesShowing())
             ->with('opinionEditAttribute', $opinions->editAttribute);
+    }
+
+    public function iconLinks()
+    {
+        $docPath = Storage::disk('opinion-files')->path('doc-icon.png');
+        $pdfPath = Storage::disk('opinion-files')->path('doc-icon.png');
+        return [
+            'pdf-icon' => $pdfPath . '.png',
+            'doc-icon' => $docPath . '.png'
+        ];
     }
 
     /**
@@ -99,7 +123,8 @@ class Opinions extends Controller
                 'opinionSubjectsEditAttribute',
                 $opinionSubjectsRepository->editAttribute
             )
-            ->with($this->getOpinionsData($id));
+            ->with($this->getOpinionsData($id))
+            ->with($this->iconLinks());
     }
 
     /**

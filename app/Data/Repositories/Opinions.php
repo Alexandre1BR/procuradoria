@@ -70,6 +70,7 @@ class Opinions extends Base
             'name' => 'opinion_scope_id',
             'showName' => 'Abrangência',
             'type' => 'id',
+            'modelName' => 'opinionScope',
             'attributeArray' => 'opinionScopes',
             'relationName' => 'opinionScope',
             'foreignName' => 'name'
@@ -78,6 +79,7 @@ class Opinions extends Base
             'name' => 'attorney_id',
             'showName' => 'Procurador',
             'type' => 'id',
+            'modelName' => 'user',
             'attributeArray' => 'attorneys',
             'relationName' => 'attorney',
             'foreignName' => 'name'
@@ -86,6 +88,7 @@ class Opinions extends Base
             'name' => 'opinion_type_id',
             'showName' => 'Tipo',
             'type' => 'id',
+            'modelName' => 'opinionType',
             'attributeArray' => 'opinionTypes',
             'relationName' => 'opinionType',
             'foreignName' => 'name'
@@ -118,18 +121,40 @@ class Opinions extends Base
         $array[] = (object) [
             'name' => 'abstract',
             'showName' => 'Ementa',
-            'type' => 'string'
+            'type' => 'textarea'
         ];
         $array[] = (object) [
             'name' => 'opinion',
             'showName' => 'Parecer',
-            'type' => 'string'
+            'type' => 'textarea'
         ];
+
         $array[] = (object) [
-            'name' => 'file',
-            'showName' => 'Arquivo',
-            'type' => 'string'
+            'name' => 'pdf_file',
+            'showName' => 'Arquivo .pdf',
+            'type' => 'file'
         ];
+
+        $array[] = (object) [
+            'name' => 'doc_file',
+            'showName' => 'Arquivo .doc',
+            'type' => 'file'
+        ];
+
+        $array[] = (object) [
+            'name' => 'pdf_file_name',
+            'showName' => 'PDF',
+            'imageName' => 'pdf-icon',
+            'type' => 'linkImage'
+        ];
+
+        $array[] = (object) [
+            'name' => 'doc_file_name',
+            'showName' => 'DOC',
+            'imageName' => 'doc-icon',
+            'type' => 'linkImage'
+        ];
+
         return $array;
     }
 

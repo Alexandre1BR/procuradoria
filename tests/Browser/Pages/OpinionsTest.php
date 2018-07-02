@@ -1,13 +1,13 @@
 <?php
+
 namespace Tests\Browser;
 
 use App\Data\Repositories\Leis as LeisRepository;
 use App\Data\Repositories\Opinions as OpinionsRepository;
-use App\Data\Repositories\OpinionTypes as OpinionTypesRepository;
 use App\Data\Repositories\OpinionScopes as OpinionScopesRepository;
-use App\Data\Repositories\Users as UsersRepository;
-use App\Data\Repositories\OpinionsSubjects as OpinionsSubjectsRepository;
 use App\Data\Repositories\OpinionSubjects as OpinionSubjectsRepository;
+use App\Data\Repositories\OpinionTypes as OpinionTypesRepository;
+use App\Data\Repositories\Users as UsersRepository;
 use Faker\Generator as Faker;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -36,15 +36,15 @@ class OpinionsTest extends DuskTestCase
         foreach ($attributes as $attr) {
             $newAttr = '';
             switch ($attr->type) {
-                case "string":
+                case 'string':
                     $newAttr = $faker->name;
                     break;
-                case "id":
+                case 'id':
                     $newAttr = $faker->randomElement(
-                        ${$attr->modelName . 'sRepository'}->all()->toArray()
+                        ${$attr->modelName.'sRepository'}->all()->toArray()
                     )['id'];
                     break;
-                case "date":
+                case 'date':
                     $newAttr = $faker->date;
                     break;
             }
@@ -55,15 +55,15 @@ class OpinionsTest extends DuskTestCase
         foreach ($attributes as $attr) {
             $newAttr = '';
             switch ($attr->type) {
-                case "string":
+                case 'string':
                     $newAttr = $faker->name;
                     break;
-                case "id":
+                case 'id':
                     $newAttr = $faker->randomElement(
-                        ${$attr->modelName . 'sRepository'}->all()->toArray()
+                        ${$attr->modelName.'sRepository'}->all()->toArray()
                     )['id'];
                     break;
-                case "date":
+                case 'date':
                     $newAttr = $faker->date;
                     break;
             }
@@ -101,21 +101,21 @@ class OpinionsTest extends DuskTestCase
             $browser->visit('/opinioes')->clickLink('Novo');
             foreach ($attributes as $attr) {
                 switch ($attr->type) {
-                    case "string":
+                    case 'string':
                         $browser->type(
-                            '#' . $attr->name,
+                            '#'.$attr->name,
                             $newOpinion[$attr->name]
                         );
                         break;
-                    case "id":
+                    case 'id':
                         $browser->select(
-                            '#' . $attr->name,
+                            '#'.$attr->name,
                             $newOpinion[$attr->name]
                         );
                         break;
-                    case "date":
+                    case 'date':
                         $browser->keys(
-                            '#' . $attr->name,
+                            '#'.$attr->name,
                             $newOpinion[$attr->name]
                         );
                         break;
@@ -234,7 +234,7 @@ class OpinionsTest extends DuskTestCase
             $insertLeiId
         ) {
             $browser
-                ->visit('/processos/' . $insertProcessoId)
+                ->visit('/processos/'.$insertProcessoId)
                 ->click('#editar')
                 ->select('#lei_id', $insertLeiId)
                 ->click('#buttonRelacionarLei')
@@ -283,12 +283,12 @@ class OpinionsTest extends DuskTestCase
             $numero_lei
         ) {
             $browser
-                ->visit('/leis/' . $insertLeiId)
+                ->visit('/leis/'.$insertLeiId)
                 ->click('#editar')
-                ->type('#numero_lei', '*' . $numero_lei . '*')
+                ->type('#numero_lei', '*'.$numero_lei.'*')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->assertSee('*' . $numero_lei . '*');
+                ->assertSee('*'.$numero_lei.'*');
         });
     }
 }

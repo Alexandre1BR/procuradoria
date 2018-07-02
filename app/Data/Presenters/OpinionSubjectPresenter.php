@@ -8,7 +8,6 @@
 
 namespace App\Data\Presenters;
 
-use Carbon\Carbon;
 use McCool\LaravelAutoPresenter\BasePresenter;
 
 class OpinionSubjectPresenter extends BasePresenter

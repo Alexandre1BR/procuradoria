@@ -10,7 +10,6 @@
     @forelse ($leis as $lei)
         <tr>
             <td><a href="{{ route('leis.show',['id' => $lei->id]) }}">{{ $lei->lei_formatada }}</a></td>
-            {{--<td><a href="{{ route('leis.show', ['id' => $lei->id]) }} ">{{ is_null($lei->numero_lei) ? : $lei->numero_lei }}</a></td>--}}
             <td>{{ $lei->autor }}</td>
             <td>{{ $lei->assunto }}</td>
             <td>{{ $lei->link }}</td>

@@ -1,5 +1,4 @@
 <?php
-
 use App\Data\Models\OpinionScope;
 use App\Data\Models\OpinionSubject;
 use App\Data\Models\OpinionType;
@@ -34,7 +33,7 @@ class AddOpinionsTable extends Migration
 
             $table->text('opinion')->nullable(); // parecer
 
-            $table->string('file');
+            $table->string('file')->nullable();
 
             // $table->string('file'); ---------- TAGS!!!!
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Data\Repositories\Leis as LeisRepository;
@@ -22,35 +21,38 @@ class Leis extends Controller
     public function create($processo_id = null)
     {
         return view('leis.form')
-                ->with('processo_id', $processo_id)
-                ->with(['lei' => $this->repository->new()])
-                ->with($this->getLeisData());
+            ->with('processo_id', $processo_id)
+            ->with(['lei' => $this->repository->new()])
+            ->with($this->getLeisData());
     }
 
     public function store(LeiRequest $request, LeisRepository $repository)
     {
-
-//        dd($request->all());
+        //        dd($request->all());
 
         $novaLei = $repository->createFromRequest($request);
 
         $processoLeiRequest = new ProcessoLeiRequest();
 
-//        dd($processoLeiRequest);
+        //        dd($processoLeiRequest);
 
         if (isset($request->processo_id)) {
             $processoLeirepository = app(ProcessosLeisRepository::class);
 
             $processoLeiRequest->setMethod('POST');
-            $processoLeiRequest->request->add(['processo_id' => $request->processo_id]);
+            $processoLeiRequest->request->add([
+                'processo_id' => $request->processo_id
+            ]);
             $processoLeiRequest->request->add(['lei_id' => $novaLei->id]);
 
             $processoLeirepository->createFromRequest($processoLeiRequest);
 
-            return redirect()->route('processos.show', ['id' => $request->processo_id])
+            return redirect()
+                ->route('processos.show', ['id' => $request->processo_id])
                 ->with($this->getSuccessMessage());
         } else {
-            return redirect()->route('leis.index')
+            return redirect()
+                ->route('leis.index')
                 ->with($this->getSuccessMessage());
         }
     }
@@ -75,8 +77,14 @@ class Leis extends Controller
     public function getLeisData(): array
     {
         return [
-            'niveisFederativos' => app(NiveisFederativosRepository::class)->allOrderBy('nome')->pluck('nome', 'id'),
-            'tiposLeis'         => app(TiposLeisRepository::class)->allOrderBy('nome')->pluck('nome', 'id'),
+            'niveisFederativos' =>
+                app(NiveisFederativosRepository::class)
+                    ->allOrderBy('nome')
+                    ->pluck('nome', 'id'),
+            'tiposLeis' =>
+                app(TiposLeisRepository::class)
+                    ->allOrderBy('nome')
+                    ->pluck('nome', 'id')
         ];
     }
 }

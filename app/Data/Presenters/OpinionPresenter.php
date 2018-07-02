@@ -42,8 +42,8 @@ class OpinionPresenter extends BasePresenter
         $extension = 'pdf';
 
         return route('opinions.download', [
-            'id' => $id,
-            'fileName' => ($date . '-' . $id . '.' . $extension)
+            'id'       => $id,
+            'fileName' => ($date.'-'.$id.'.'.$extension),
         ]);
     }
 
@@ -55,8 +55,8 @@ class OpinionPresenter extends BasePresenter
         $extension = 'doc';
 
         return route('opinions.download', [
-            'id' => $id,
-            'fileName' => ($date . '-' . $id . '.' . $extension)
+            'id'       => $id,
+            'fileName' => ($date.'-'.$id.'.'.$extension),
         ]);
     }
 }

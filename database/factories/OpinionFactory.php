@@ -1,18 +1,16 @@
 <?php
-use Faker\Generator as Faker;
 
 use App\Data\Models\Opinion as OpinionModel;
 use App\Data\Models\OpinionScope as OpinionScopeModel;
-use App\Data\Models\OpinionSubject as OpinionSubjectModel;
 use App\Data\Models\OpinionsSubject as OpinionsSubjectModel;
+use App\Data\Models\OpinionSubject as OpinionSubjectModel;
 use App\Data\Models\OpinionType as OpinionTypeModel;
-
-use App\Data\Repositories\OpinionScopes as OpinionScopesRepository;
-use App\Data\Repositories\Users as UsersRepository;
-use App\Data\Repositories\OpinionTypes as OpinionTypesRepository;
 use App\Data\Repositories\Opinions as OpinionsRepository;
-use App\Data\Repositories\OpinionsSubjects as OpinionsSubjectsRepository;
+use App\Data\Repositories\OpinionScopes as OpinionScopesRepository;
 use App\Data\Repositories\OpinionSubjects as OpinionSubjectsRepository;
+use App\Data\Repositories\OpinionTypes as OpinionTypesRepository;
+use App\Data\Repositories\Users as UsersRepository;
+use Faker\Generator as Faker;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,18 +33,16 @@ $factory->define(OpinionSubjectModel::class, function (Faker $faker) {
 
 $factory->define(OpinionsSubjectModel::class, function (Faker $faker) {
     return [
-        'opinion_id' =>
-            $faker->randomElement(
+        'opinion_id' => $faker->randomElement(
                 app(OpinionsRepository::class)
                     ->all()
                     ->toArray()
             )['id'],
-        'subject_id' =>
-            $faker->randomElement(
+        'subject_id' => $faker->randomElement(
                 app(OpinionSubjectsRepository::class)
                     ->all()
                     ->toArray()
-            )['id']
+            )['id'],
     ];
 });
 
@@ -56,31 +52,28 @@ $factory->define(OpinionTypeModel::class, function (Faker $faker) {
 
 $factory->define(OpinionModel::class, function (Faker $faker) {
     return [
-        'opinion_scope_id' =>
-            $faker->randomElement(
+        'opinion_scope_id' => $faker->randomElement(
                 app(OpinionScopesRepository::class)
                     ->all()
                     ->toArray()
             )['id'],
-        'opinion_type_id' =>
-            $faker->randomElement(
+        'opinion_type_id' => $faker->randomElement(
                 app(OpinionTypesRepository::class)
                     ->all()
                     ->toArray()
             )['id'],
-        'attorney_id' =>
-            $faker->randomElement(
+        'attorney_id' => $faker->randomElement(
                 app(UsersRepository::class)
                     ->getByType('Procurador')
                     ->toArray()
             )['id'],
         'suit_number' => $faker->name,
-        'suit_sheet' => $faker->name,
-        'identifier' => $faker->name,
-        'date' => $faker->date,
-        'party' => $faker->name,
-        'abstract' => $faker->text,
-        'opinion' => $faker->text,
-        'file' => $faker->name
+        'suit_sheet'  => $faker->name,
+        'identifier'  => $faker->name,
+        'date'        => $faker->date,
+        'party'       => $faker->name,
+        'abstract'    => $faker->text,
+        'opinion'     => $faker->text,
+        'file'        => $faker->name,
     ];
 });

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 use App\Data\Repositories\TiposUsuarios;
@@ -34,7 +33,7 @@ class User extends Authenticatable
         'disabled_at',
         'personal_email',
         'all_notifications',
-        'no_notifications',
+        'no_notifications'
     ];
 
     /**
@@ -42,10 +41,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -87,5 +83,10 @@ class User extends Authenticatable
     public function getPreferredEmailAttribute()
     {
         return $this->personal_email ?: $this->email;
+    }
+
+    public function isProcurador()
+    {
+        return strtolower($this->userType->nome) == 'procurador';
     }
 }

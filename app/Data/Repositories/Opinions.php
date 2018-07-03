@@ -62,7 +62,7 @@ class Opinions extends Base
         return $array;
     }
 
-    public function formAttributes(): array
+    public function createFormAttributes(): array
     {
         $array = [];
 
@@ -141,18 +141,98 @@ class Opinions extends Base
             'type' => 'file'
         ];
 
+        return $array;
+    }
+
+    public function showFormAttributes($isProcurador): array
+    {
+        $array = [];
+
+        $array[] = (object) [
+            'name' => 'opinion_scope_id',
+            'showName' => 'Abrangência',
+            'type' => 'id',
+            'modelName' => 'opinionScope',
+            'attributeArray' => 'opinionScopes',
+            'relationName' => 'opinionScope',
+            'foreignName' => 'name',
+            'visible' => true
+        ];
+        $array[] = (object) [
+            'name' => 'attorney_id',
+            'showName' => 'Procurador',
+            'type' => 'id',
+            'modelName' => 'user',
+            'attributeArray' => 'attorneys',
+            'relationName' => 'attorney',
+            'foreignName' => 'name',
+            'visible' => true
+        ];
+        $array[] = (object) [
+            'name' => 'opinion_type_id',
+            'showName' => 'Tipo',
+            'type' => 'id',
+            'modelName' => 'opinionType',
+            'attributeArray' => 'opinionTypes',
+            'relationName' => 'opinionType',
+            'foreignName' => 'name',
+            'visible' => true
+        ];
+        $array[] = (object) [
+            'name' => 'suit_number',
+            'showName' => 'Número do Processo',
+            'type' => 'string',
+            'visible' => true
+        ];
+        $array[] = (object) [
+            'name' => 'suit_sheet',
+            'showName' => 'Folha do Processo',
+            'type' => 'string',
+            'visible' => true
+        ];
+        $array[] = (object) [
+            'name' => 'identifier',
+            'showName' => 'Identificador',
+            'type' => 'string',
+            'visible' => true
+        ];
+        $array[] = (object) [
+            'name' => 'date',
+            'showName' => 'Data',
+            'type' => 'date',
+            'visible' => true
+        ];
+        $array[] = (object) [
+            'name' => 'party',
+            'showName' => 'Interessado',
+            'type' => 'string',
+            'visible' => true
+        ];
+        $array[] = (object) [
+            'name' => 'abstract',
+            'showName' => 'Ementa',
+            'type' => 'textarea',
+            'visible' => true
+        ];
+        $array[] = (object) [
+            'name' => 'opinion',
+            'showName' => 'Parecer',
+            'type' => 'textarea',
+            'visible' => $isProcurador
+        ];
         $array[] = (object) [
             'name' => 'pdf_file_name',
             'showName' => 'PDF',
-            'imageName' => 'pdf-icon',
-            'type' => 'linkImage'
+            'linkName' => 'Visualizar',
+            'type' => 'link',
+            'visible' => $isProcurador
         ];
-
         $array[] = (object) [
             'name' => 'doc_file_name',
             'showName' => 'DOC',
-            'imageName' => 'doc-icon',
-            'type' => 'linkImage'
+            'linkName' => 'Visualizar',
+            'type' => 'link',
+            'visible' => $isProcurador
         ];
 
         return $array;
@@ -188,26 +268,50 @@ class Opinions extends Base
                 return strtolower($item);
             });
 
-        $columns = collect(['identifier' => 'string']);
+        $columns = $this->createFormAttributes();
 
         $query = Opinion::query();
 
         $search->each(function ($item) use ($columns, $query) {
-            $columns->each(function ($type, $column) use ($query, $item) {
-                if ($type === 'string') {
-                    $query->orWhere(
-                        DB::raw("lower({$column})"),
-                        'like',
-                        '%' . $item . '%'
-                    );
-                } else {
-                    if ($this->isDate($item)) {
-                        $query->orWhere($column, '=', $item);
-                    }
+            foreach ($columns as $column) {
+                switch ($column->type) {
+                    case 'string':
+                        $query->orWhere(
+                            DB::raw("lower({$column->name})"),
+                            'like',
+                            '%' . $item . '%'
+                        );
+                        break;
+                    case 'textarea':
+                        $query->orWhere(
+                            DB::raw("lower({$column->name})"),
+                            'like',
+                            '%' . $item . '%'
+                        );
+                        break;
+                    case 'id':
+                        $query->orWhereHas($column->relationName, function (
+                            $query
+                        ) use ($item, $column) {
+                            $query->whereRaw(
+                                "lower(" .
+                                    $column->foreignName .
+                                    ") like '%{$item}%'"
+                            );
+                        });
+                        break;
+                    case 'date':
+                        $ifdate = $this->toDate($item);
+                        if ($ifdate != null) {
+                            $query->orWhereDate($column->name, '=', $ifdate);
+                        }
+                        break;
                 }
-            });
+            }
         });
 
-        return $this->makeResultForSelect($query->orderBy('identifier')->get());
+        return $this->makeResultForSelect(
+            $query->orderBy('updated_at', 'desc')->get()
+        );
     }
 }

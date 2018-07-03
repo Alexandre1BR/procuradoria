@@ -23,7 +23,7 @@
 
                         <div class="col-md-3">
                             <button type="submit" id='buttonRelacionarLei' class="btn btn-primary btn-block" disabled="disabled">
-                                <i class="fa fa-plus"></i> Relacionar assunto</button>
+                                <i class="fa fa-plus"></i> Relacionar</button>
                         </div>
                     </div>
                 </form>

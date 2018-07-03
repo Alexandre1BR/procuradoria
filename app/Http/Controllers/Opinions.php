@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Data\Models\Opinion as OpinionModel;
 use App\Data\Models\OpinionsSubject;
+use App\Data\Models\User;
 use App\Data\Repositories\Opinions as OpinionsRepository;
 
 use App\Data\Repositories\OpinionTypes as OpinionTypesRepository;
@@ -15,6 +16,7 @@ use App\Http\Requests\Opinion as OpinionRequest;
 use App\Http\Requests\OpinionsSubject as OpinionsSubjectRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class Opinions extends Controller
@@ -43,7 +45,7 @@ class Opinions extends Controller
             ->with(['opinion' => $this->repository->new()])
             ->with(
                 'opinionsFormAttributes',
-                $this->repository->formAttributes()
+                $this->repository->createFormAttributes()
             )
             ->with($this->getOpinionsData());
     }
@@ -85,21 +87,22 @@ class Opinions extends Controller
      */
     public function index(OpinionsRepository $opinions, Request $request)
     {
+        $user = Auth::user();
+
+        if (is_null($user)) {
+            //Mocked login in test ENV
+            $user = User
+                ::where('user_type_id', '!=', '1')
+                ->get()
+                ->first();
+        }
+
         return view('opinions.index')
             ->with('pesquisa', $request->get('pesquisa'))
             ->with('opinions', $opinions->search($request))
+            ->with('isProcurador', $user->isProcurador())
             ->with('opinionsAttributes', $opinions->attributesShowing())
             ->with('opinionEditAttribute', $opinions->editAttribute);
-    }
-
-    public function iconLinks()
-    {
-        $docPath = Storage::disk('opinion-files')->path('doc-icon.png');
-        $pdfPath = Storage::disk('opinion-files')->path('doc-icon.png');
-        return [
-            'pdf-icon' => $pdfPath . '.png',
-            'doc-icon' => $docPath . '.png'
-        ];
     }
 
     /**
@@ -109,12 +112,26 @@ class Opinions extends Controller
      */
     public function show($id)
     {
+        $user = Auth::user();
+
+        if (is_null($user)) {
+            //Mocked login in test ENV
+            $user = User
+                ::where('user_type_id', '=', '1')
+                ->get()
+                ->first();
+        }
+
         $repository = app(OpinionsRepository::class);
         $opinionSubjectsRepository = app(OpinionSubjectsRepository::class);
         return view('opinions.form')
             ->with('formDisabled', true)
             ->with(['opinion' => OpinionModel::find($id)])
-            ->with('opinionsFormAttributes', $repository->formAttributes())
+            ->with('isProcurador', $user->isProcurador())
+            ->with(
+                'opinionsFormAttributes',
+                $repository->showFormAttributes($user->isProcurador())
+            )
             ->with(
                 'opinionSubjectsAttributes',
                 $opinionSubjectsRepository->attributesShowing()
@@ -123,8 +140,7 @@ class Opinions extends Controller
                 'opinionSubjectsEditAttribute',
                 $opinionSubjectsRepository->editAttribute
             )
-            ->with($this->getOpinionsData($id))
-            ->with($this->iconLinks());
+            ->with($this->getOpinionsData($id));
     }
 
     /**
@@ -156,9 +172,6 @@ class Opinions extends Controller
                 $opinionSubjects[] = $item->subject;
             }
         }
-
-        //        dd($opinionSubjects);
-
         return [
             'opinionTypes' =>
                 app(OpinionTypesRepository::class)

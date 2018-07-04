@@ -86,7 +86,7 @@ class User extends Authenticatable
         return $this->personal_email ?: $this->email;
     }
 
-    public function isProcurador()
+    public function getIsProcuradorAttribute()
     {
         return strtolower($this->userType->nome) == 'procurador';
     }

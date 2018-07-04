@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Data\Repositories\Users as UsersRepository;
@@ -57,7 +56,10 @@ class Users extends Controller
      */
     public function index()
     {
-        return view('users.index')->with('users', $this->usersRepository->all());
+        return view('users.index')->with(
+            'users',
+            $this->usersRepository->all()
+        );
     }
 
     /**
@@ -75,7 +77,9 @@ class Users extends Controller
 
         $model->save();
 
-        return redirect()->action('Users@index')->with('users', $this->usersRepository->all());
+        return redirect()
+            ->action('Users@index')
+            ->with('users', $this->usersRepository->all());
 
         //return $this->index();
     }
@@ -104,7 +108,10 @@ class Users extends Controller
     public function getUsersData(): array
     {
         return [
-            'userType' => app(UsersRepository::class)->all()->pluck('nome', 'id'),
+            'userType' =>
+                app(UsersRepository::class)
+                    ->all()
+                    ->pluck('nome', 'id')
         ];
     }
 
@@ -141,7 +148,8 @@ class Users extends Controller
 
         $repository->createFromRequest($request);
 
-        return redirect()->route('users.index')
+        return redirect()
+            ->route('users.index')
             ->with($this->getSuccessMessage());
     }
 }

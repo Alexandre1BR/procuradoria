@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use App\Rules\UniqueOpinionsSubject;
@@ -26,7 +25,7 @@ class OpinionsSubject extends FormRequest
     {
         return [
             'opinion_id' => ['required', new UniqueOpinionsSubject()],
-            'subject_id' => 'required',
+            'subject_id' => 'required'
         ];
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Repositories;
 
 use App\Data\Models\Opinion;
@@ -13,51 +12,51 @@ class Opinions extends Base
         $array = [];
 
         $array[] = (object) [
-            'name'       => 'identifier',
-            'showName'   => 'Identificador',
+            'name' => 'identifier',
+            'showName' => 'Identificador',
             'columnSize' => '10%',
-            'type'       => 'string',
+            'type' => 'string'
         ];
 
         $array[] = (object) [
-            'name'         => 'opinion_scope',
-            'showName'     => 'Abrangência',
-            'columnSize'   => '10%',
-            'type'         => 'id',
+            'name' => 'opinion_scope',
+            'showName' => 'Abrangência',
+            'columnSize' => '10%',
+            'type' => 'id',
             'relationName' => 'opinionScope',
-            'foreignName'  => 'name',
+            'foreignName' => 'name'
         ];
 
         $array[] = (object) [
-            'name'         => 'attorney',
-            'showName'     => 'Procurador',
-            'columnSize'   => '10%',
-            'type'         => 'id',
-            'relationName' => 'attorney',
-            'foreignName'  => 'name',
-        ];
-
-        $array[] = (object) [
-            'name'         => 'opinion_type',
-            'showName'     => 'Tipo',
-            'columnSize'   => '10%',
-            'type'         => 'id',
-            'relationName' => 'opinionType',
-            'foreignName'  => 'name',
-        ];
-
-        $array[] = (object) [
-            'name'       => 'formatted_date',
-            'showName'   => 'Data',
+            'name' => 'attorney',
+            'showName' => 'Procurador',
             'columnSize' => '10%',
-            'type'       => 'date',
+            'type' => 'id',
+            'relationName' => 'attorney',
+            'foreignName' => 'name'
         ];
 
         $array[] = (object) [
-            'name'       => 'abstract',
-            'showName'   => 'Ementa',
+            'name' => 'opinion_type',
+            'showName' => 'Tipo',
+            'columnSize' => '10%',
+            'type' => 'id',
+            'relationName' => 'opinionType',
+            'foreignName' => 'name'
+        ];
+
+        $array[] = (object) [
+            'name' => 'formatted_date',
+            'showName' => 'Data',
+            'columnSize' => '10%',
+            'type' => 'date'
+        ];
+
+        $array[] = (object) [
+            'name' => 'abstract',
+            'showName' => 'Ementa',
             'columnSize' => '50%',
-            'type'       => 'string',
+            'type' => 'string'
         ];
 
         return $array;
@@ -68,78 +67,78 @@ class Opinions extends Base
         $array = [];
 
         $array[] = (object) [
-            'name'           => 'opinion_scope_id',
-            'showName'       => 'Abrangência',
-            'type'           => 'id',
-            'modelName'      => 'opinionScope',
+            'name' => 'opinion_scope_id',
+            'showName' => 'Abrangência',
+            'type' => 'id',
+            'modelName' => 'opinionScope',
             'attributeArray' => 'opinionScopes',
-            'relationName'   => 'opinionScope',
-            'foreignName'    => 'name',
+            'relationName' => 'opinionScope',
+            'foreignName' => 'name'
         ];
         $array[] = (object) [
-            'name'           => 'attorney_id',
-            'showName'       => 'Procurador',
-            'type'           => 'id',
-            'modelName'      => 'user',
+            'name' => 'attorney_id',
+            'showName' => 'Procurador',
+            'type' => 'id',
+            'modelName' => 'user',
             'attributeArray' => 'attorneys',
-            'relationName'   => 'attorney',
-            'foreignName'    => 'name',
+            'relationName' => 'attorney',
+            'foreignName' => 'name'
         ];
         $array[] = (object) [
-            'name'           => 'opinion_type_id',
-            'showName'       => 'Tipo',
-            'type'           => 'id',
-            'modelName'      => 'opinionType',
+            'name' => 'opinion_type_id',
+            'showName' => 'Tipo',
+            'type' => 'id',
+            'modelName' => 'opinionType',
             'attributeArray' => 'opinionTypes',
-            'relationName'   => 'opinionType',
-            'foreignName'    => 'name',
+            'relationName' => 'opinionType',
+            'foreignName' => 'name'
         ];
         $array[] = (object) [
-            'name'     => 'suit_number',
+            'name' => 'suit_number',
             'showName' => 'Número do Processo',
-            'type'     => 'string',
+            'type' => 'string'
         ];
         $array[] = (object) [
-            'name'     => 'suit_sheet',
+            'name' => 'suit_sheet',
             'showName' => 'Folha do Processo',
-            'type'     => 'string',
+            'type' => 'string'
         ];
         $array[] = (object) [
-            'name'     => 'identifier',
+            'name' => 'identifier',
             'showName' => 'Identificador',
-            'type'     => 'string',
+            'type' => 'string'
         ];
         $array[] = (object) [
-            'name'     => 'date',
+            'name' => 'date',
             'showName' => 'Data',
-            'type'     => 'date',
+            'type' => 'date'
         ];
         $array[] = (object) [
-            'name'     => 'party',
+            'name' => 'party',
             'showName' => 'Interessado',
-            'type'     => 'string',
+            'type' => 'string'
         ];
         $array[] = (object) [
-            'name'     => 'abstract',
+            'name' => 'abstract',
             'showName' => 'Ementa',
-            'type'     => 'textarea',
+            'type' => 'textarea'
         ];
         $array[] = (object) [
-            'name'     => 'opinion',
+            'name' => 'opinion',
             'showName' => 'Parecer',
-            'type'     => 'textarea',
+            'type' => 'textarea'
         ];
 
         $array[] = (object) [
-            'name'     => 'pdf_file',
+            'name' => 'pdf_file',
             'showName' => 'Arquivo .pdf',
-            'type'     => 'file',
+            'type' => 'file'
         ];
 
         $array[] = (object) [
-            'name'     => 'doc_file',
+            'name' => 'doc_file',
             'showName' => 'Arquivo .doc',
-            'type'     => 'file',
+            'type' => 'file'
         ];
 
         return $array;

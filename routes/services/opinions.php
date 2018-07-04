@@ -1,6 +1,5 @@
 <?php
-
-Route::group(['prefix' => '/opinioes'], function () {
+Route::group(['prefix' => '/pareceres'], function () {
     Route::get('/create', 'Opinions@create')->name('opinions.create');
 
     Route::post('/', 'Opinions@store')->name('opinions.store');

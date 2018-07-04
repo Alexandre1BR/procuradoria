@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Data\Models\Opinion as OpinionModel;
@@ -58,14 +57,14 @@ class Opinions extends Controller
         OpinionRequest $request,
         OpinionsRepository $repository
     ) {
+        $newOpinion = $repository->createFromRequest($request);
+
         foreach ($request->allFiles() as $key => $file) {
             $extension = $file->getClientOriginalExtension();
-            $date = $request->date;
-            $fileName = $date.'-'.$request->id.'.'.$extension;
+            $date = $newOpinion->date;
+            $fileName = $date . '-' . $newOpinion->id . '.' . $extension;
             $file->storeAs('', $fileName, 'opinion-files');
         }
-
-        $repository->createFromRequest($request);
 
         return redirect()
             ->route('opinions.index')
@@ -87,20 +86,12 @@ class Opinions extends Controller
     {
         $user = Auth::user();
 
-        if (is_null($user)) {
-            //Mocked login in test ENV
-            $user = User
-                ::where('user_type_id', '!=', '1')
-                ->get()
-                ->first();
-        }
-
         return view('opinions.index')
             ->with('pesquisa', $request->get('pesquisa'))
-            ->with('opinions', $opinions->search($request))
-            ->with('isProcurador', $user->isProcurador())
-            ->with('opinionsAttributes', $opinions->attributesShowing())
-            ->with('opinionEditAttribute', $opinions->editAttribute);
+            ->with('opinions', $this->repository->search($request))
+            ->with('isProcurador', $user->is_procurador)
+            ->with('opinionsAttributes', $this->repository->attributesShowing())
+            ->with('opinionEditAttribute', $this->repository->editAttribute);
     }
 
     /**
@@ -112,25 +103,16 @@ class Opinions extends Controller
     {
         $user = Auth::user();
 
-        if (is_null($user)) {
-            //Mocked login in test ENV
-            $user = User
-                ::where('user_type_id', '=', '1')
-                ->get()
-                ->first();
-        }
-
         $repository = app(OpinionsRepository::class);
         $opinionSubjectsRepository = app(OpinionSubjectsRepository::class);
 
         return view('opinions.form')
             ->with('formDisabled', true)
-            ->with('canSeeDocuments', Auth::user()->isProcurador)
             ->with(['opinion' => OpinionModel::find($id)])
-            ->with('isProcurador', $user->isProcurador())
+            ->with('isProcurador', $user->is_procurador)
             ->with(
                 'opinionsFormAttributes',
-                $repository->showFormAttributes($user->isProcurador())
+                $repository->showFormAttributes($user->is_procurador)
             )
             ->with(
                 'opinionSubjectsAttributes',
@@ -174,19 +156,23 @@ class Opinions extends Controller
         }
 
         return [
-            'opinionTypes' => app(OpinionTypesRepository::class)
+            'opinionTypes' =>
+                app(OpinionTypesRepository::class)
                     ->allOrderBy('name')
                     ->pluck('name', 'id'),
-            'opinionScopes' => app(OpinionScopesRepository::class)
+            'opinionScopes' =>
+                app(OpinionScopesRepository::class)
                     ->allOrderBy('name')
                     ->pluck('name', 'id'),
-            'attorneys' => app(UsersRepository::class)
+            'attorneys' =>
+                app(UsersRepository::class)
                     ->getByType('Procurador')
                     ->pluck('name', 'id'),
-            'opinionSubjects'    => $opinionSubjects,
-            'allOpinionSubjects' => app(OpinionSubjectsRepository::class)
+            'opinionSubjects' => $opinionSubjects,
+            'allOpinionSubjects' =>
+                app(OpinionSubjectsRepository::class)
                     ->allOrderBy('name')
-                    ->pluck('name', 'id'),
+                    ->pluck('name', 'id')
         ];
     }
 }

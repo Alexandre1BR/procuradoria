@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Data\Repositories\Leis as LeisRepository;
@@ -41,7 +42,7 @@ class Leis extends Controller
 
             $processoLeiRequest->setMethod('POST');
             $processoLeiRequest->request->add([
-                'processo_id' => $request->processo_id
+                'processo_id' => $request->processo_id,
             ]);
             $processoLeiRequest->request->add(['lei_id' => $novaLei->id]);
 
@@ -77,14 +78,12 @@ class Leis extends Controller
     public function getLeisData(): array
     {
         return [
-            'niveisFederativos' =>
-                app(NiveisFederativosRepository::class)
+            'niveisFederativos' => app(NiveisFederativosRepository::class)
                     ->allOrderBy('nome')
                     ->pluck('nome', 'id'),
-            'tiposLeis' =>
-                app(TiposLeisRepository::class)
+            'tiposLeis' => app(TiposLeisRepository::class)
                     ->allOrderBy('nome')
-                    ->pluck('nome', 'id')
+                    ->pluck('nome', 'id'),
         ];
     }
 }

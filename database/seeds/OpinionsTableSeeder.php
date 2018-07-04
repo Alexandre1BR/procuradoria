@@ -1,4 +1,5 @@
 <?php
+
 use App\Data\Models\Opinion as OpinionModel;
 use App\Data\Models\OpinionsSubject as OpinionsSubjectModel;
 use App\Data\Models\OpinionSubject as OpinionSubjectModel;

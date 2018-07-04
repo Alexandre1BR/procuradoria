@@ -5,7 +5,7 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-3">
-                    <h4>Opiniões</h4>
+                    <h4>Pareceres</h4>
                 </div>
 
                 <div class="col-md-9">

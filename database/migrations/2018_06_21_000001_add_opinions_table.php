@@ -1,5 +1,4 @@
 <?php
-
 use App\Data\Models\OpinionScope;
 use App\Data\Models\OpinionSubject;
 use App\Data\Models\OpinionType;

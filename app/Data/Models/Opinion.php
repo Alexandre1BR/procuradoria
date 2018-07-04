@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 use App\Data\Models\OpinionScope as OpinionScopeModel;
@@ -32,13 +31,13 @@ class Opinion extends BaseModel
         'party',
         'abstract',
         'opinion',
-        'file',
+        'file'
     ];
 
     protected $presenters = [
         'formatted_date',
         'pdf_file_name',
-        'doc_file_name',
+        'doc_file_name'
     ];
 
     public function opinionScope()

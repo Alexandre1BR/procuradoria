@@ -1,7 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Data\Models\Opinion as OpinionModel;
 use App\Data\Models\OpinionsSubject;
 use App\Data\Repositories\Opinions as OpinionsRepository;
@@ -13,6 +13,7 @@ use App\Data\Repositories\Users as UsersRepository;
 use App\Http\Requests\Opinion as OpinionRequest;
 use App\Http\Requests\OpinionsSubject as OpinionsSubjectRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class Opinions extends Controller
@@ -59,7 +60,7 @@ class Opinions extends Controller
         foreach ($request->allFiles() as $key => $file) {
             $extension = $file->getClientOriginalExtension();
             $date = $request->date;
-            $fileName = $date . '-' . $request->id . '.' . $extension;
+            $fileName = $date.'-'.$request->id.'.'.$extension;
             $file->storeAs('', $fileName, 'opinion-files');
         }
 
@@ -96,8 +97,8 @@ class Opinions extends Controller
         $pdfPath = Storage::disk('opinion-files')->path('doc-icon.png');
 
         return [
-            'pdf-icon' => $pdfPath . '.png',
-            'doc-icon' => $docPath . '.png'
+            'pdf-icon' => $pdfPath.'.png',
+            'doc-icon' => $docPath.'.png',
         ];
     }
 
@@ -161,23 +162,19 @@ class Opinions extends Controller
         //        dd($opinionSubjects);
 
         return [
-            'opinionTypes' =>
-                app(OpinionTypesRepository::class)
+            'opinionTypes' => app(OpinionTypesRepository::class)
                     ->allOrderBy('name')
                     ->pluck('name', 'id'),
-            'opinionScopes' =>
-                app(OpinionScopesRepository::class)
+            'opinionScopes' => app(OpinionScopesRepository::class)
                     ->allOrderBy('name')
                     ->pluck('name', 'id'),
-            'attorneys' =>
-                app(UsersRepository::class)
+            'attorneys' => app(UsersRepository::class)
                     ->getByType('Procurador')
                     ->pluck('name', 'id'),
-            'opinionSubjects' => $opinionSubjects,
-            'allOpinionSubjects' =>
-                app(OpinionSubjectsRepository::class)
+            'opinionSubjects'    => $opinionSubjects,
+            'allOpinionSubjects' => app(OpinionSubjectsRepository::class)
                     ->allOrderBy('name')
-                    ->pluck('name', 'id')
+                    ->pluck('name', 'id'),
         ];
     }
 }

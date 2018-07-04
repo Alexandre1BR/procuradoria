@@ -1,17 +1,18 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Data\Models\Processo;
-use App\Data\Repositories\Processos as ProcessosRepository;
-use App\Http\Requests\Processo as ProcessoRequest;
 use App\Data\Models\Processo as ProcessoModel;
 use App\Data\Repositories\Andamentos as AndamentosRepository;
 use App\Data\Repositories\Apensos as ApensosRepository;
+use App\Data\Repositories\Processos as ProcessosRepository;
 use App\Data\Repositories\ProcessosLeis as ProcessosLeisRepository;
 use App\Data\Scope\Processo as ProcessoScope;
 use App\Http\Requests\Apenso as ApensoRequest;
+use App\Http\Requests\Processo as ProcessoRequest;
 use App\Http\Requests\ProcessoLei as ProcessoLeiRequest;
+use Illuminate\Http\Request;
 
 class Processos extends Controller
 {
@@ -140,6 +141,7 @@ class Processos extends Controller
 
     /**
      * @param Request $request
+     *
      * @return $this
      */
     private function buildView(Request $request)

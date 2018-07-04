@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Closure;
-use Session;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class SelectSubsystem
 {

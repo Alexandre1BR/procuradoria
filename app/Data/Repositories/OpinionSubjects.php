@@ -76,14 +76,14 @@ class OpinionSubjects extends Base
                         $query->orWhere(
                             DB::raw("lower({$column->name})"),
                             'like',
-                            '%' . $item . '%'
+                            '%'.$item.'%'
                         );
                         break;
                     case 'textarea':
                         $query->orWhere(
                             DB::raw("lower({$column->name})"),
                             'like',
-                            '%' . $item . '%'
+                            '%'.$item.'%'
                         );
                         break;
                     case 'id':
@@ -91,8 +91,8 @@ class OpinionSubjects extends Base
                             $query
                         ) use ($item, $column) {
                             $query->whereRaw(
-                                "lower(" .
-                                    $column->foreignName .
+                                'lower('.
+                                    $column->foreignName.
                                     ") like '%{$item}%'"
                             );
                         });

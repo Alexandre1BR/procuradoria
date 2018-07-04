@@ -1,11 +1,11 @@
 <?php
+
 namespace App\Data\Models;
 
-use App\Data\Presenters\OpinionPresenter;
-use App\Data\Models\OpinionType as OpinionTypeModel;
-use App\Data\Models\OpinionSubject as OpinionSubjectModel;
-use App\Data\Models\User as UserModel;
 use App\Data\Models\OpinionScope as OpinionScopeModel;
+use App\Data\Models\OpinionType as OpinionTypeModel;
+use App\Data\Models\User as UserModel;
+use App\Data\Presenters\OpinionPresenter;
 
 class Opinion extends BaseModel
 {
@@ -32,13 +32,13 @@ class Opinion extends BaseModel
         'party',
         'abstract',
         'opinion',
-        'file'
+        'file',
     ];
 
     protected $presenters = [
         'formatted_date',
         'pdf_file_name',
-        'doc_file_name'
+        'doc_file_name',
     ];
 
     public function opinionScope()

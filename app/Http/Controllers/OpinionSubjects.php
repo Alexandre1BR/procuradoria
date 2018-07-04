@@ -1,9 +1,9 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Data\Models\OpinionSubject as OpinionSubjectModel;
 use App\Data\Repositories\OpinionSubjects as OpinionSubjectsRepository;
-
 use App\Http\Requests\OpinionSubject as OpinionSubjectRequest;
 use Illuminate\Http\Request;
 
@@ -56,7 +56,7 @@ class OpinionSubjects extends Controller
 
     /**
      * @param OpinionSubjectsRepository $opinionSubjects
-     * @param Request         $request
+     * @param Request                   $request
      *
      * @return $this|\Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -85,6 +85,7 @@ class OpinionSubjects extends Controller
     public function show($id)
     {
         $repository = app(OpinionSubjectsRepository::class);
+
         return view('opinionSubjects.form')
             ->with('formDisabled', true)
             ->with(['opinionSubject' => OpinionSubjectModel::find($id)])

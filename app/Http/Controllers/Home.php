@@ -1,43 +1,17 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Data\Models\Processo;
-use App\Data\Repositories\Processos as ProcessosRepository;
-use App\Http\Requests\Processo as ProcessoRequest;
+use App\Support\Constants;
 use Illuminate\Http\Request;
 
 class Home extends Controller
 {
-    protected $processosRepository;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @param ProcessosRepository $processosRepository
-     */
-    public function __construct(ProcessosRepository $processosRepository)
+    private function getProcessosController()
     {
-        $this->processosRepository = $processosRepository;
-    }
-
-    /**
-     * @param ProcessoRequest|Request $request
-     *
-     * @return mixed
-     */
-    private function buildView(Request $request)
-    {
-        return view('home.index')
-            ->with('pesquisa', $request->get('search'))
-            ->with(
-                'processos_arquivados_incluidos',
-                $request->get('processos_arquivados_incluidos')
-            )
-            ->with(
-                'processos_arquivados_apenas',
-                $request->get('processos_arquivados_apenas')
-            )
-            ->with('processo', new Processo());
+        return subsystem_is(Constants::SUBSYSTEM_OPINIOES)
+            ? app(Opinions::class)
+            : app(Processos::class);
     }
 
     /**
@@ -47,8 +21,6 @@ class Home extends Controller
      */
     public function index(Request $request)
     {
-        return $request->expectsJson()
-            ? $this->processosRepository->filter($request)
-            : $this->buildView($request);
+        return $this->getProcessosController()->index($request);
     }
 }

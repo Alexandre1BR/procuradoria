@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Data\Models\Processo;
@@ -11,13 +12,14 @@ use App\Data\Scope\Processo as ProcessoScope;
 use App\Http\Requests\Apenso as ApensoRequest;
 use App\Http\Requests\Processo as ProcessoRequest;
 use App\Http\Requests\ProcessoLei as ProcessoLeiRequest;
+use Illuminate\Http\Request;
 
 class Processos extends Controller
 {
     /**
      * @var ProcessosRepository
      */
-    private $repository;
+    private $processosRepository;
 
     /**
      * Processos constructor.
@@ -26,7 +28,7 @@ class Processos extends Controller
      */
     public function __construct(ProcessosRepository $repository)
     {
-        $this->repository = $repository;
+        $this->processosRepository = $repository;
     }
 
     /**
@@ -35,8 +37,8 @@ class Processos extends Controller
     public function create()
     {
         return view('processos.form')
-            ->with($this->repository->getProcessosData())
-            ->with(['processo' => $this->repository->new()]);
+            ->with($this->processosRepository->getProcessosData())
+            ->with(['processo' => $this->processosRepository->new()]);
     }
 
     /**
@@ -75,7 +77,11 @@ class Processos extends Controller
             ->route('processos.show', $request->processo_id)
             ->with('processo', ProcessoModel::find($request->processo_id))
             ->with('formDisabled', true)
-            ->with($this->repository->getProcessosData($request->processo_id))
+            ->with(
+                $this->processosRepository->getProcessosData(
+                    $request->processo_id
+                )
+            )
             ->with($this->getSuccessMessage());
     }
 
@@ -95,7 +101,11 @@ class Processos extends Controller
             ->route('processos.show', $request->processo_id)
             ->with('processo', ProcessoModel::find($request->processo_id))
             ->with('formDisabled', true)
-            ->with($this->repository->getProcessosData($request->processo_id))
+            ->with(
+                $this->processosRepository->getProcessosData(
+                    $request->processo_id
+                )
+            )
             ->with($this->getSuccessMessage());
     }
 
@@ -114,6 +124,38 @@ class Processos extends Controller
                     ->find($id)
             )
             ->with('formDisabled', true)
-            ->with($this->repository->getProcessosData($id));
+            ->with($this->processosRepository->getProcessosData($id));
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        return $request->expectsJson()
+            ? $this->processosRepository->filter($request)
+            : $this->buildView($request);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return $this
+     */
+    private function buildView(Request $request)
+    {
+        return view('home.index')
+            ->with('pesquisa', $request->get('search'))
+            ->with(
+                'processos_arquivados_incluidos',
+                $request->get('processos_arquivados_incluidos')
+            )
+            ->with(
+                'processos_arquivados_apenas',
+                $request->get('processos_arquivados_apenas')
+            )
+            ->with('processo', new Processo());
     }
 }

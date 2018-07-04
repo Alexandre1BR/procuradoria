@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Rules;
 
 use App\Data\Repositories\OpinionsSubjects as OpinionsSubjectsRepository;
@@ -19,18 +20,18 @@ class UniqueOpinionsSubject implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed  $value
+     *
      * @return bool
      */
     public function passes($attribute, $value)
     {
-        return (
+        return
             app(OpinionsSubjectsRepository::class)->whereOpinionAndSubjectCount(
                 request('opinion_id'),
                 request('subject_id')
-            ) < 1
-        );
+            ) < 1;
     }
 
     /**

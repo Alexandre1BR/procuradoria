@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Data\Repositories;
 
 use App\Data\Models\OpinionSubject as OpinionSubjectsModel;
@@ -12,10 +13,10 @@ class OpinionSubjects extends Base
         $array = [];
 
         $array[] = (object) [
-            'name' => 'name',
-            'showName' => 'Nome do Assunto',
+            'name'       => 'name',
+            'showName'   => 'Nome do Assunto',
             'columnSize' => '100%',
-            'type' => 'string'
+            'type'       => 'string',
         ];
 
         return $array;
@@ -26,9 +27,9 @@ class OpinionSubjects extends Base
         $array = [];
 
         $array[] = (object) [
-            'name' => 'name',
+            'name'     => 'name',
             'showName' => 'Nome do Assunto',
-            'type' => 'string'
+            'type'     => 'string',
         ];
 
         return $array;

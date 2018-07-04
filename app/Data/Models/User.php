@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 use App\Data\Repositories\TiposUsuarios;
@@ -34,7 +33,7 @@ class User extends Authenticatable
         'disabled_at',
         'personal_email',
         'all_notifications',
-        'no_notifications',
+        'no_notifications'
     ];
 
     /**

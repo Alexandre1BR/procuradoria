@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Repositories;
 
 use App\Data\Models\Acao;
@@ -39,21 +38,21 @@ class Processos extends Base
      */
     protected $dataTypes = [
         'numero_judicial' => 'string',
-        'numero_alerj'    => 'string',
-        'vara'            => 'string',
+        'numero_alerj' => 'string',
+        'vara' => 'string',
         //'origem_complemento' => 'string,
         'apensos_obs' => 'string',
-        'autor'       => 'string',
-        'reu'         => 'string',
-        'objeto'      => 'string',
-        'merito'      => 'string',
-        'liminar'     => 'string',
-        'recurso'     => 'string',
+        'autor' => 'string',
+        'reu' => 'string',
+        'objeto' => 'string',
+        'merito' => 'string',
+        'liminar' => 'string',
+        'recurso' => 'string',
         //'tipo_meio'         => 'string',
         'data_distribuicao' => 'date',
-        'observacao'        => 'string',
-        'link'              => 'string',
-        'site_alerj_link'   => 'string',
+        'observacao' => 'string',
+        'link' => 'string',
+        'site_alerj_link' => 'string'
     ];
 
     /**
@@ -127,11 +126,11 @@ class Processos extends Base
                 break;
             case 'string':
                 //                $query->where(DB::raw("lower({$column})"), 'like', "%{$search}%");
-                $query->where($column, 'ilike', '%'.$search.'%');
+                $query->where($column, 'ilike', '%' . $search . '%');
                 break;
             case 'link':
                 //                $query->where(DB::raw("lower({$column})"), 'like', "%{$search}%");
-                $query->where($column, 'ilike', '%'.$search.'%');
+                $query->where($column, 'ilike', '%' . $search . '%');
                 break;
             case 'tags':
                 $query->withAnyTags((array) $search);
@@ -162,7 +161,7 @@ class Processos extends Base
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
                 if ($type === 'string') {
-                    $query->orWhere($column, 'ilike', '%'.$item.'%');
+                    $query->orWhere($column, 'ilike', '%' . $item . '%');
                 } else {
                     $ifdate = $this->toDate($item);
                     if ($ifdate != null) {
@@ -230,7 +229,7 @@ class Processos extends Base
      */
     public function getProcessosData($id = null)
     {
-        return Cache::remember('getProcessosData'.$id, 1, function () use (
+        return Cache::remember('getProcessosData' . $id, 1, function () use (
             $id
         ) {
             $apensos = Apenso
@@ -258,29 +257,32 @@ class Processos extends Base
             //dd($allLeis);
 
             return [
-                'juizes'       => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
-                'tribunais'    => Tribunal::orderBy('nome')->pluck('nome', 'id'),
-                'procuradores' => UserModel
+                'juizes' => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
+                'tribunais' => Tribunal::orderBy('nome')->pluck('nome', 'id'),
+                'procuradores' =>
+                    UserModel
                         ::type('Procurador')
                         ->orderBy('name')
                         ->pluck('name', 'id'),
-                'assessores' => UserModel
+                'assessores' =>
+                    UserModel
                         ::type('Assessor')
                         ->orderBy('name')
                         ->pluck('name', 'id'),
-                'estagiarios' => UserModel
+                'estagiarios' =>
+                    UserModel
                         ::type('Estagiario')
                         ->orderBy('name')
                         ->pluck('name', 'id'),
-                'meios'          => Meio::orderBy('nome')->pluck('nome', 'id'),
-                'acoes'          => Acao::orderBy('nome')->pluck('nome', 'id'),
-                'andamentos'     => Andamento::where('processo_id', $id)->get(),
-                'apensos'        => $apensos,
-                'processos'      => $processos,
-                'leis'           => $leis,
-                'allLeis'        => $allLeis,
-                'tags'           => Tag::all(),
-                'tiposProcessos' => ModelTipoProcesso::orderBy('nome')->get(),
+                'meios' => Meio::orderBy('nome')->pluck('nome', 'id'),
+                'acoes' => Acao::orderBy('nome')->pluck('nome', 'id'),
+                'andamentos' => Andamento::where('processo_id', $id)->get(),
+                'apensos' => $apensos,
+                'processos' => $processos,
+                'leis' => $leis,
+                'allLeis' => $allLeis,
+                'tags' => Tag::all(),
+                'tiposProcessos' => ModelTipoProcesso::orderBy('nome')->get()
             ];
         });
     }
@@ -365,7 +367,7 @@ class Processos extends Base
                     : $processo->estagiario->name;
 
                 $processo['show_url'] = route('processos.show', [
-                    'id' => $processo['id'],
+                    'id' => $processo['id']
                 ]);
 
                 $processo['tags'] = $this->listTags($processo['tags']);

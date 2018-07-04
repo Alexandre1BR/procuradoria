@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Data\Models\Opinion as OpinionModel;
@@ -61,7 +60,7 @@ class Opinions extends Controller
         foreach ($request->allFiles() as $key => $file) {
             $extension = $file->getClientOriginalExtension();
             $date = $request->date;
-            $fileName = $date.'-'.$request->id.'.'.$extension;
+            $fileName = $date . '-' . $request->id . '.' . $extension;
             $file->storeAs('', $fileName, 'opinion-files');
         }
 
@@ -174,19 +173,23 @@ class Opinions extends Controller
         }
 
         return [
-            'opinionTypes' => app(OpinionTypesRepository::class)
+            'opinionTypes' =>
+                app(OpinionTypesRepository::class)
                     ->allOrderBy('name')
                     ->pluck('name', 'id'),
-            'opinionScopes' => app(OpinionScopesRepository::class)
+            'opinionScopes' =>
+                app(OpinionScopesRepository::class)
                     ->allOrderBy('name')
                     ->pluck('name', 'id'),
-            'attorneys' => app(UsersRepository::class)
+            'attorneys' =>
+                app(UsersRepository::class)
                     ->getByType('Procurador')
                     ->pluck('name', 'id'),
-            'opinionSubjects'    => $opinionSubjects,
-            'allOpinionSubjects' => app(OpinionSubjectsRepository::class)
+            'opinionSubjects' => $opinionSubjects,
+            'allOpinionSubjects' =>
+                app(OpinionSubjectsRepository::class)
                     ->allOrderBy('name')
-                    ->pluck('name', 'id'),
+                    ->pluck('name', 'id')
         ];
     }
 }

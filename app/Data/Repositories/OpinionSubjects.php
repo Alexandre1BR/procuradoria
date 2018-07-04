@@ -65,26 +65,50 @@ class OpinionSubjects extends Base
                 return strtolower($item);
             });
 
-        $columns = collect(['name' => 'string']);
+        $columns = $this->formAttributes();
 
         $query = OpinionSubjectsModel::query();
 
         $search->each(function ($item) use ($columns, $query) {
-            $columns->each(function ($type, $column) use ($query, $item) {
-                if ($type === 'string') {
-                    $query->orWhere(
-                        DB::raw("lower({$column})"),
-                        'like',
-                        '%'.$item.'%'
-                    );
-                } else {
-                    if ($this->isDate($item)) {
-                        $query->orWhere($column, '=', $item);
-                    }
+            foreach ($columns as $column) {
+                switch ($column->type) {
+                    case 'string':
+                        $query->orWhere(
+                            DB::raw("lower({$column->name})"),
+                            'like',
+                            '%' . $item . '%'
+                        );
+                        break;
+                    case 'textarea':
+                        $query->orWhere(
+                            DB::raw("lower({$column->name})"),
+                            'like',
+                            '%' . $item . '%'
+                        );
+                        break;
+                    case 'id':
+                        $query->orWhereHas($column->relationName, function (
+                            $query
+                        ) use ($item, $column) {
+                            $query->whereRaw(
+                                "lower(" .
+                                    $column->foreignName .
+                                    ") like '%{$item}%'"
+                            );
+                        });
+                        break;
+                    case 'date':
+                        $ifdate = $this->toDate($item);
+                        if ($ifdate != null) {
+                            $query->orWhereDate($column->name, '=', $ifdate);
+                        }
+                        break;
                 }
-            });
+            }
         });
 
-        return $this->makeResultForSelect($query->orderBy('name')->get());
+        return $this->makeResultForSelect(
+            $query->orderBy('updated_at', 'desc')->get()
+        );
     }
 }

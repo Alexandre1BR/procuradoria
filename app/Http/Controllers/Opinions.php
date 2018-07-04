@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Data\Models\Opinion as OpinionModel;
 use App\Data\Models\OpinionsSubject;
+use App\Data\Models\User;
 use App\Data\Repositories\Opinions as OpinionsRepository;
 use App\Data\Repositories\OpinionScopes as OpinionScopesRepository;
 use App\Data\Repositories\OpinionsSubjects as OpinionsSubjectsRepository;
@@ -13,6 +14,7 @@ use App\Data\Repositories\Users as UsersRepository;
 use App\Http\Requests\Opinion as OpinionRequest;
 use App\Http\Requests\OpinionsSubject as OpinionsSubjectRequest;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -42,7 +44,7 @@ class Opinions extends Controller
             ->with(['opinion' => $this->repository->new()])
             ->with(
                 'opinionsFormAttributes',
-                $this->repository->formAttributes()
+                $this->repository->createFormAttributes()
             )
             ->with($this->getOpinionsData());
     }
@@ -84,22 +86,22 @@ class Opinions extends Controller
      */
     public function index(Request $request)
     {
+        $user = Auth::user();
+
+        if (is_null($user)) {
+            //Mocked login in test ENV
+            $user = User
+                ::where('user_type_id', '!=', '1')
+                ->get()
+                ->first();
+        }
+
         return view('opinions.index')
             ->with('pesquisa', $request->get('pesquisa'))
-            ->with('opinions', $this->repository->search($request))
-            ->with('opinionsAttributes', $this->repository->attributesShowing())
-            ->with('opinionEditAttribute', $this->repository->editAttribute);
-    }
-
-    public function iconLinks()
-    {
-        $docPath = Storage::disk('opinion-files')->path('doc-icon.png');
-        $pdfPath = Storage::disk('opinion-files')->path('doc-icon.png');
-
-        return [
-            'pdf-icon' => $pdfPath.'.png',
-            'doc-icon' => $docPath.'.png',
-        ];
+            ->with('opinions', $opinions->search($request))
+            ->with('isProcurador', $user->isProcurador())
+            ->with('opinionsAttributes', $opinions->attributesShowing())
+            ->with('opinionEditAttribute', $opinions->editAttribute);
     }
 
     /**
@@ -109,6 +111,16 @@ class Opinions extends Controller
      */
     public function show($id)
     {
+        $user = Auth::user();
+
+        if (is_null($user)) {
+            //Mocked login in test ENV
+            $user = User
+                ::where('user_type_id', '=', '1')
+                ->get()
+                ->first();
+        }
+
         $repository = app(OpinionsRepository::class);
         $opinionSubjectsRepository = app(OpinionSubjectsRepository::class);
 
@@ -116,7 +128,11 @@ class Opinions extends Controller
             ->with('formDisabled', true)
             ->with('canSeeDocuments', Auth::user()->isProcurador)
             ->with(['opinion' => OpinionModel::find($id)])
-            ->with('opinionsFormAttributes', $repository->formAttributes())
+            ->with('isProcurador', $user->isProcurador())
+            ->with(
+                'opinionsFormAttributes',
+                $repository->showFormAttributes($user->isProcurador())
+            )
             ->with(
                 'opinionSubjectsAttributes',
                 $opinionSubjectsRepository->attributesShowing()
@@ -125,8 +141,7 @@ class Opinions extends Controller
                 'opinionSubjectsEditAttribute',
                 $opinionSubjectsRepository->editAttribute
             )
-            ->with($this->getOpinionsData($id))
-            ->with($this->iconLinks());
+            ->with($this->getOpinionsData($id));
     }
 
     /**
@@ -158,9 +173,6 @@ class Opinions extends Controller
                 $opinionSubjects[] = $item->subject;
             }
         }
-
-        //        dd($opinionSubjects);
-
         return [
             'opinionTypes' => app(OpinionTypesRepository::class)
                     ->allOrderBy('name')

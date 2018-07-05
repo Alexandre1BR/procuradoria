@@ -19,9 +19,7 @@
                 <div class="col-xs-4 col-md-2">
                     @if(!is_null($opinion->id))
                         {{-- Create --}}
-                        @if($isProcurador)
-                            @include('partials.edit-button', ['model' => $opinion])
-                        @endIf
+                        @include('partials.edit-button', ['model' => $opinion])
                     @else
                         {{-- Show --}}
                         @include('partials.save-button')

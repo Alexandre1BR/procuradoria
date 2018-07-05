@@ -1,5 +1,4 @@
 <?php
-
 use App\Data\Models\OpinionScope;
 use App\Data\Models\OpinionSubject;
 use App\Data\Models\OpinionType;
@@ -33,10 +32,6 @@ class AddOpinionsTable extends Migration
             $table->text('abstract'); // ementa
 
             $table->text('opinion')->nullable(); // parecer
-
-            $table->string('file')->nullable();
-
-            // $table->string('file'); ---------- TAGS!!!!
 
             $table->timestamps();
         });

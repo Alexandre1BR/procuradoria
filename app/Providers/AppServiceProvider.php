@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Providers;
 
+use App\Data\Repositories\Users;
 use App\Services\Authorization;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
@@ -9,6 +9,16 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * @var Users
+     */
+    private $usersRepository;
+
+    public function __construct()
+    {
+        $this->usersRepository = app(Users::class);
+    }
+
     /**
      * Bootstrap any application services.
      *
@@ -24,10 +34,12 @@ class AppServiceProvider extends ServiceProvider
     private function bootComposers()
     {
         View::composer('*', function ($view) {
-            $view->with(array_merge([
-                'formDisabled' => false,
-                'isFilter'     => false,
-            ], $view->getData()));
+            $view->with(
+                array_merge(
+                    ['formDisabled' => false, 'isFilter' => false],
+                    $view->getData()
+                )
+            );
         });
     }
 
@@ -44,8 +56,16 @@ class AppServiceProvider extends ServiceProvider
     private function bootGates()
     {
         Gate::define('use-app', function ($user) {
+            $permissions = app(Authorization::class)->getUserPermissions(
+                $user->username
+            );
+
+            $this->usersRepository->updateCurrentUserTypeViaPermissions(
+                $permissions
+            );
+
             // If the user has any permissions in the system, it is allowed to use it.
-            return app(Authorization::class)->getUserPermissions($user->username)->count() > 0;
+            return $permissions->count() > 0;
         });
     }
 }

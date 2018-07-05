@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Services;
 
 use App\Services\Traits\RemoteRequest;
@@ -36,13 +35,12 @@ class Authorization
             return $this->mockedPermissions($username);
         }
 
-        return collect($this->remoteRequest->post(
-            static::PERMISSIONS_URL,
-            [
+        return collect(
+            $this->remoteRequest->post(static::PERMISSIONS_URL, [
                 'username' => $username,
-                'system'   => static::SYSTEM_NAME,
-            ]
-        ));
+                'system' => static::SYSTEM_NAME
+            ])
+        );
     }
 
     /**

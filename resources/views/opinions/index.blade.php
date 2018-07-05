@@ -9,22 +9,13 @@
                 </div>
 
                 <div class="col-md-9">
-                    @if($isProcurador)
-                        @include(
-                            'layouts.partials.search-form',
-                            [
-                                'routeSearch' => 'opinions.index',
-                                'routeCreate' => 'opinions.create',
-                            ]
-                        )
-                        @else
-                        @include(
-                            'layouts.partials.search-form',
-                            [
-                                'routeSearch' => 'opinions.index',
-                            ]
-                        )
-                    @endIf
+                    @include(
+                        'layouts.partials.search-form',
+                        [
+                            'routeSearch' => 'opinions.index',
+                            'routeCreate' => 'opinions.create',
+                        ]
+                    )
                 </div>
             </div>
         </div>

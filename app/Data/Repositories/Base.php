@@ -1,8 +1,9 @@
 <?php
+
 namespace App\Data\Repositories;
 
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 abstract class Base
 {

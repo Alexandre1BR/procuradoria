@@ -149,90 +149,90 @@ class Opinions extends Base
         $array = [];
 
         $array[] = (object) [
-            'name' => 'opinion_scope_id',
-            'showName' => 'Abrangência',
-            'type' => 'id',
-            'modelName' => 'opinionScope',
+            'name'           => 'opinion_scope_id',
+            'showName'       => 'Abrangência',
+            'type'           => 'id',
+            'modelName'      => 'opinionScope',
             'attributeArray' => 'opinionScopes',
-            'relationName' => 'opinionScope',
-            'foreignName' => 'name',
-            'visible' => true
+            'relationName'   => 'opinionScope',
+            'foreignName'    => 'name',
+            'visible'        => true,
         ];
         $array[] = (object) [
-            'name' => 'attorney_id',
-            'showName' => 'Procurador',
-            'type' => 'id',
-            'modelName' => 'user',
+            'name'           => 'attorney_id',
+            'showName'       => 'Procurador',
+            'type'           => 'id',
+            'modelName'      => 'user',
             'attributeArray' => 'attorneys',
-            'relationName' => 'attorney',
-            'foreignName' => 'name',
-            'visible' => true
+            'relationName'   => 'attorney',
+            'foreignName'    => 'name',
+            'visible'        => true,
         ];
         $array[] = (object) [
-            'name' => 'opinion_type_id',
-            'showName' => 'Tipo',
-            'type' => 'id',
-            'modelName' => 'opinionType',
+            'name'           => 'opinion_type_id',
+            'showName'       => 'Tipo',
+            'type'           => 'id',
+            'modelName'      => 'opinionType',
             'attributeArray' => 'opinionTypes',
-            'relationName' => 'opinionType',
-            'foreignName' => 'name',
-            'visible' => true
+            'relationName'   => 'opinionType',
+            'foreignName'    => 'name',
+            'visible'        => true,
         ];
         $array[] = (object) [
-            'name' => 'suit_number',
+            'name'     => 'suit_number',
             'showName' => 'Número do Processo',
-            'type' => 'string',
-            'visible' => true
+            'type'     => 'string',
+            'visible'  => true,
         ];
         $array[] = (object) [
-            'name' => 'suit_sheet',
+            'name'     => 'suit_sheet',
             'showName' => 'Folha do Processo',
-            'type' => 'string',
-            'visible' => true
+            'type'     => 'string',
+            'visible'  => true,
         ];
         $array[] = (object) [
-            'name' => 'identifier',
+            'name'     => 'identifier',
             'showName' => 'Identificador',
-            'type' => 'string',
-            'visible' => true
+            'type'     => 'string',
+            'visible'  => true,
         ];
         $array[] = (object) [
-            'name' => 'date',
+            'name'     => 'date',
             'showName' => 'Data',
-            'type' => 'date',
-            'visible' => true
+            'type'     => 'date',
+            'visible'  => true,
         ];
         $array[] = (object) [
-            'name' => 'party',
+            'name'     => 'party',
             'showName' => 'Interessado',
-            'type' => 'string',
-            'visible' => true
+            'type'     => 'string',
+            'visible'  => true,
         ];
         $array[] = (object) [
-            'name' => 'abstract',
+            'name'     => 'abstract',
             'showName' => 'Ementa',
-            'type' => 'textarea',
-            'visible' => true
+            'type'     => 'textarea',
+            'visible'  => true,
         ];
         $array[] = (object) [
-            'name' => 'opinion',
+            'name'     => 'opinion',
             'showName' => 'Parecer',
-            'type' => 'textarea',
-            'visible' => $isProcurador
+            'type'     => 'textarea',
+            'visible'  => $isProcurador,
         ];
         $array[] = (object) [
-            'name' => 'pdf_file_name',
+            'name'     => 'pdf_file_name',
             'showName' => 'PDF',
             'linkName' => 'Visualizar',
-            'type' => 'link',
-            'visible' => $isProcurador
+            'type'     => 'link',
+            'visible'  => $isProcurador,
         ];
         $array[] = (object) [
-            'name' => 'doc_file_name',
+            'name'     => 'doc_file_name',
             'showName' => 'DOC',
             'linkName' => 'Visualizar',
-            'type' => 'link',
-            'visible' => $isProcurador
+            'type'     => 'link',
+            'visible'  => $isProcurador,
         ];
 
         return $array;
@@ -279,14 +279,14 @@ class Opinions extends Base
                         $query->orWhere(
                             DB::raw("lower({$column->name})"),
                             'like',
-                            '%' . $item . '%'
+                            '%'.$item.'%'
                         );
                         break;
                     case 'textarea':
                         $query->orWhere(
                             DB::raw("lower({$column->name})"),
                             'like',
-                            '%' . $item . '%'
+                            '%'.$item.'%'
                         );
                         break;
                     case 'id':
@@ -294,8 +294,8 @@ class Opinions extends Base
                             $query
                         ) use ($item, $column) {
                             $query->whereRaw(
-                                "lower(" .
-                                    $column->foreignName .
+                                'lower('.
+                                    $column->foreignName.
                                     ") like '%{$item}%'"
                             );
                         });

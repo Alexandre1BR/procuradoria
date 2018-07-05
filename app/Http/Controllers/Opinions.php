@@ -13,7 +13,6 @@ use App\Data\Repositories\Users as UsersRepository;
 use App\Http\Requests\Opinion as OpinionRequest;
 use App\Http\Requests\OpinionsSubject as OpinionsSubjectRequest;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -155,6 +154,7 @@ class Opinions extends Controller
                 $opinionSubjects[] = $item->subject;
             }
         }
+
         return [
             'opinionTypes' =>
                 app(OpinionTypesRepository::class)

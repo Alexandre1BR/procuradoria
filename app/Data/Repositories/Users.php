@@ -167,8 +167,10 @@ class Users extends Base
      */
     public function getByType($type)
     {
+        $type = $this->tiposUsuarios->findByName($type);
+
         return $this->makeResultForSelect(
-            $this->model::type($type)->get(),
+            $this->model->where('user_type_id', $type->id)->get(),
             'name'
         );
     }

@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Data\Models\Andamento;
 use App\Data\Models\Processo as ModelProcesso;
 use App\Data\Models\TipoAndamento as ModelTipoAndamento;
 use App\Data\Models\TipoEntrada as ModelTipoEntrada;
-use App\Data\Models\TipoPrazo as  ModelTipoPrazo;
+use App\Data\Models\TipoPrazo as ModelTipoPrazo;
 use App\Data\Repositories\Andamentos as AndamentosRepository;
 use App\Http\Requests\Andamento as AndamentoRequest;
 use Illuminate\Http\Request;
@@ -46,17 +45,21 @@ class Andamentos extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(AndamentoRequest $request, AndamentosRepository $repository)
-    {
+    public function store(
+        AndamentoRequest $request,
+        AndamentosRepository $repository
+    ) {
         $repository->createFromRequest($request);
 
         $repository->checkforchanges($request);
 
         if (isset($request->redirect)) {
-            return redirect()->route('processos.show', ['id' => $request->redirect])
+            return redirect()
+                ->route('processos.show', ['id' => $request->redirect])
                 ->with($this->getSuccessMessage());
         } else {
-            return redirect()->route('andamentos.index')
+            return redirect()
+                ->route('andamentos.index')
                 ->with($this->getSuccessMessage());
         }
     }
@@ -94,7 +97,16 @@ class Andamentos extends Controller
 
         $tipoEntradas = ModelTipoEntrada::pluck('nome', 'id');
 
-        return view('andamentos.form', compact('andamento', 'processos', 'tipoAndamentos', 'tipoEntradas', 'tipoPrazos'));
+        return view(
+            'andamentos.form',
+            compact(
+                'andamento',
+                'processos',
+                'tipoAndamentos',
+                'tipoEntradas',
+                'tipoPrazos'
+            )
+        );
     }
 
     /**
@@ -113,13 +125,19 @@ class Andamentos extends Controller
     /**
      * @return array
      */
-    public function getAndamentosData(): array
+    public function getAndamentosData()
     {
         return [
-            'processos'      => ModelProcesso::orderBy('numero_judicial')->pluck('numero_judicial', 'id'),
-            'tipoPrazos'     => ModelTipoPrazo::orderBy('nome')->pluck('nome', 'id'),
-            'tipoAndamentos' => ModelTipoAndamento::orderBy('nome')->pluck('nome', 'id'),
-            'tipoEntradas'   => ModelTipoEntrada::orderBy('nome')->pluck('nome', 'id'),
+            'processos' =>
+                ModelProcesso
+                    ::orderBy('numero_judicial')
+                    ->pluck('numero_judicial', 'id'),
+            'tipoPrazos' =>
+                ModelTipoPrazo::orderBy('nome')->pluck('nome', 'id'),
+            'tipoAndamentos' =>
+                ModelTipoAndamento::orderBy('nome')->pluck('nome', 'id'),
+            'tipoEntradas' =>
+                ModelTipoEntrada::orderBy('nome')->pluck('nome', 'id')
         ];
     }
 }

@@ -87,6 +87,17 @@ abstract class Base
     }
 
     /**
+     * @param $attribute
+     * @param $sign
+     * @param $value
+     * @return mixed
+     */
+    public function whereNull($attribute)
+    {
+        return $this->model::whereNull($attribute);
+    }
+
+    /**
      * @return mixed
      */
     public function new()

@@ -170,9 +170,7 @@ class Opinions extends Controller
                     ->pluck('name', 'id'),
             'opinionSubjects' => $opinionSubjects,
             'allOpinionSubjects' =>
-                app(OpinionSubjectsRepository::class)
-                    ->allOrderBy('name')
-                    ->pluck('name', 'id')
+                app(OpinionSubjectsRepository::class)->allOrderBy('name')
         ];
     }
 }

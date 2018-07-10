@@ -19,9 +19,9 @@ class OpinionSubject extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'parent_id'];
 
-    protected $presenters = ['edit_link'];
+    protected $presenters = ['edit_link', 'full_name'];
 
     public function getPresenterClass()
     {

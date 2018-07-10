@@ -9,13 +9,18 @@
                 </div>
 
                 <div class="col-md-9">
-                    @include(
-                        'layouts.partials.search-form',
-                        [
-                            'routeSearch' => 'opinionSubjects.index',
-                            'routeCreate' => 'opinionSubjects.create',
-                        ]
-                    )
+                    <div class="form-group pull-right">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                    <a href="{{ route('opinionSubjects.create') }}" class="btn btn-danger pull-right">
+                                        <i class="fa fa-plus"></i> Novo
+                                    </a>
+                            </div>
+
+                            <div class="col-xs-8 pull-right">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

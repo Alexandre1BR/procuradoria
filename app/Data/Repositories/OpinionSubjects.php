@@ -4,6 +4,7 @@ namespace App\Data\Repositories;
 use App\Data\Models\OpinionSubject as OpinionSubjectsModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class OpinionSubjects extends Base
 {
@@ -12,7 +13,7 @@ class OpinionSubjects extends Base
         $array = [];
 
         $array[] = (object) [
-            'name' => 'name',
+            'name' => 'full_name',
             'showName' => 'Nome do Assunto',
             'columnSize' => '100%',
             'type' => 'string'
@@ -34,7 +35,7 @@ class OpinionSubjects extends Base
         return $array;
     }
 
-    public $editAttribute = 'name';
+    public $editAttribute = 'full_name';
 
     /**
      * @var string
@@ -66,7 +67,7 @@ class OpinionSubjects extends Base
 
         $columns = $this->formAttributes();
 
-        $query = OpinionSubjectsModel::query();
+        $query = OpinionSubjectsModel::query()->whereNotNull('parent_id');
 
         $search->each(function ($item) use ($columns, $query) {
             foreach ($columns as $column) {
@@ -106,8 +107,75 @@ class OpinionSubjects extends Base
             }
         });
 
-        return $this->makeResultForSelect(
-            $query->orderBy('updated_at', 'desc')->get()
-        );
+        //        $sorted = $query->get()->sortByDesc(function ($product, $key) {
+        //            return ($product['full_name']);
+        //        });
+
+        //        dd($query->get());
+        $array = $query->get()->toArray();
+        $array = array_sort($array, 'full_name', SORT_ASC);
+        $objects = [];
+        foreach ($array as $item) {
+            $objects[] = (object) $item;
+        }
+
+        //        $sorted->sortByDesc('full_name');
+
+        //        dd($sorted);
+
+        //        return $this->makeResultForSelect($query->get());
+        //        return $this->makeResultForSelect(collect($objects));
+        return collect($objects);
+    }
+
+    public function orderedArray($subject, &$array)
+    {
+        if (!is_null($subject->parent_id)) {
+            $array[] = $subject;
+        }
+
+        foreach (
+            $subject
+                ->children()
+                ->orderBy('name')
+                ->get()
+            as $child
+        ) {
+            $this->orderedArray($child, $array);
+        }
+    }
+
+    public function fullTreeArray()
+    {
+        $array = [];
+        $this->orderedArray($this->whereNull('parent_id')->first(), $array);
+        return $array;
+    }
+
+    public function fullTree()
+    {
+        return $this->nodeToTree($this->whereNull('parent_id')->first());
+    }
+
+    public function nodeToTree($subject)
+    {
+        $array = [];
+
+        foreach ($subject->children()->get() as $child) {
+            $array[] = $this->nodeToTree($child);
+        }
+
+        $ownArray = ['id' => $subject->id, 'text' => $subject->name];
+        if (!empty($array)) {
+            $array = array_sort($array, 'text', SORT_ASC);
+            $array2 = [];
+            foreach ($array as $key => $item) {
+                $array2[] = $item;
+            }
+
+            $ownArray['inc'] = $array2;
+        }
+
+        return $ownArray;
     }
 }

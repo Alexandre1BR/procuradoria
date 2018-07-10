@@ -9,6 +9,7 @@
 namespace App\Data\Presenters;
 
 use McCool\LaravelAutoPresenter\BasePresenter;
+use App\Data\Models\OpinionSubject as OpinionSubjectModel;
 
 class OpinionSubjectPresenter extends BasePresenter
 {
@@ -17,5 +18,25 @@ class OpinionSubjectPresenter extends BasePresenter
         $id = $this->wrappedObject->id;
 
         return route('opinionSubjects.show', ['id' => $id]);
+    }
+
+    public function full_name()
+    {
+        $id = $this->wrappedObject->id;
+
+        $current = OpinionSubjectModel::find($id);
+        $ancestors = $current->ancestors;
+
+        $fullName = '';
+        foreach ($ancestors as $key => $ancestor) {
+            if ($key != 0) {
+                $fullName .= $ancestor->name;
+                $fullName .= ' - ';
+            }
+        }
+
+        $fullName .= $current->name;
+
+        return $fullName;
     }
 }

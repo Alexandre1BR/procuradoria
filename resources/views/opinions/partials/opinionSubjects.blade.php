@@ -12,13 +12,16 @@
                     <input name="opinion_id" type="hidden" value="{{$opinion->id}}">
 
                     <div class="row">
-                        <div class="col-md-9">
-                            <select name="subject_id" class="select2 form-control" disabled="disabled" id="subject_id">
-                                <option value="">SELECIONE O ASSUNTO</option>
-                                @foreach($allOpinionSubjects as $key => $subject)
-                                <option value="{{ $key }}">{{ $subject }}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-md-5">
+
+                        </div>
+                        <div class="col-md-4">
+                            @include(
+                                    'opinionSubjects.partials.selectTree',
+                                    [
+                                        'attributeName' => 'subject_id',
+                                    ]
+                            )
                         </div>
 
                         <div class="col-md-3">

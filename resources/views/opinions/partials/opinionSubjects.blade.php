@@ -16,7 +16,7 @@
                             <select name="subject_id" class="select2 form-control" disabled="disabled" id="subject_id">
                                 <option value="">SELECIONE O ASSUNTO</option>
                                 @foreach($allOpinionSubjects as $key => $subject)
-                                    <option value="{{ $key }}">{{ $subject }}</option>
+                                <option value="{{ $key }}">{{ $subject }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -40,4 +40,3 @@
         </div>
     </div>
 </div>
-

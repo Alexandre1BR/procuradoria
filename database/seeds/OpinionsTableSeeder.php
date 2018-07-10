@@ -1,5 +1,4 @@
 <?php
-
 use App\Data\Models\Opinion as OpinionModel;
 use App\Data\Models\OpinionsSubject as OpinionsSubjectModel;
 use App\Data\Models\OpinionSubject as OpinionSubjectModel;
@@ -15,7 +14,6 @@ class OpinionsTableSeeder extends Seeder
     public function run()
     {
         factory(OpinionModel::class, 50)->create();
-        factory(OpinionSubjectModel::class, 50)->create();
         factory(OpinionsSubjectModel::class, 300)->create();
     }
 }

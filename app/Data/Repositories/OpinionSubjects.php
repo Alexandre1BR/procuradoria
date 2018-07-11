@@ -166,6 +166,7 @@ class OpinionSubjects extends Base
         }
 
         $ownArray = ['id' => $subject->id, 'text' => $subject->name];
+
         if (!empty($array)) {
             $array = array_sort($array, 'text', SORT_ASC);
             $array2 = [];

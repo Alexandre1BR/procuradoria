@@ -78,7 +78,7 @@ $factory->define(OpinionModel::class, function (Faker $faker) {
         'party' => $faker->name,
         'abstract' => $faker->text,
         'opinion' => $faker->text,
-        'pdf_file' => $faker->text,
-        'doc_file' => $faker->text
+        'file_pdf' => $faker->text,
+        'file_doc' => $faker->text
     ];
 });

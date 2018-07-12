@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Data\Repositories;
 
 use Carbon\Carbon;
@@ -90,6 +91,7 @@ abstract class Base
      * @param $attribute
      * @param $sign
      * @param $value
+     *
      * @return mixed
      */
     public function whereNull($attribute)

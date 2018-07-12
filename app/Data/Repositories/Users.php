@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Data\Repositories;
 
 use App\Data\Models\TipoUsuario;
@@ -109,13 +110,12 @@ class Users extends Base
      */
     private function isType($permissions, $type)
     {
-        return (
+        return
             $permissions
                 ->filter(function ($user) use ($type) {
                     return starts_with($user['nomeFuncao'], $type);
                 })
-                ->count() > 0
-        );
+                ->count() > 0;
     }
 
     /**

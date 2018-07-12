@@ -1,8 +1,8 @@
 <?php
+
 namespace App\Data\Models;
 
 use App\Data\Presenters\OpinionSubjectPresenter;
-
 use Kalnoy\Nestedset\NodeTrait;
 
 class OpinionSubject extends BaseModel
@@ -25,7 +25,7 @@ class OpinionSubject extends BaseModel
         'edit_link',
         'full_name',
         'level',
-        'indented_name'
+        'indented_name',
     ];
 
     public function getPresenterClass()

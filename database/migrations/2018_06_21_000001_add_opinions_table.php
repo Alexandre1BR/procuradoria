@@ -89,7 +89,5 @@ class AddOpinionsTable extends Migration
 
         OpinionType::create(['name' => 'Parecer']);
         OpinionType::create(['name' => 'Decisão']);
-
-        OpinionSubject::create(['name' => 'Estágio']);
     }
 }

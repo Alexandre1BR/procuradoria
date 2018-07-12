@@ -24,7 +24,11 @@
         <tr>
             @forelse($opinionSubjectsAttributes as $attr)
                 @if($attr->name == $opinionSubjectsEditAttribute)
-                    <td width="{{$attr->columnSize}}"><a href="{{$opinionSubject->edit_link}}">{{ $opinionSubject->{$opinionSubjectsEditAttribute} }}</a></td>
+                    {{--Atributo com o nome já identado--}}
+                    <td class="level-{{$opinionSubject->level}}" width="{{$attr->columnSize}}"><a href="{{$opinionSubject->edit_link}}">{{ $opinionSubject->indented_name}}</a></td>
+
+                    {{--Atributo com o nome completo--}}
+{{--                    <td class="level-{{$opinionSubject->level}}" width="{{$attr->columnSize}}"><a href="{{$opinionSubject->edit_link}}">{{ $opinionSubject->{$opinionSubjectsEditAttribute} }}</a></td>--}}
                 @else
                     @if($attr->type == 'id')
                         <td width="{{$attr->columnSize}}">{{ is_null($opinionSubject->{$attr->relationName}->{$attr->foreignName}) ? : $opinionSubject->{$attr->relationName}->{$attr->foreignName} }}</td>

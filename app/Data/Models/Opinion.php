@@ -31,7 +31,8 @@ class Opinion extends BaseModel
         'party',
         'abstract',
         'opinion',
-        'file'
+        'file_pdf',
+        'file_doc'
     ];
 
     protected $presenters = [

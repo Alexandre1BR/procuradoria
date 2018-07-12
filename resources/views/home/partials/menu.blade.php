@@ -1,6 +1,6 @@
 <!-- Authentication Links -->
-@if (!subsystem_is(App\Support\Constants::SUBSYSTEM_UNDEFINED)) {
-    @if (subsystem_is(App\Support\Constants::SUBSYSTEM_PROCESSOS)) {
+@if (!subsystem_is(App\Support\Constants::SUBSYSTEM_UNDEFINED))
+    @if (subsystem_is(App\Support\Constants::SUBSYSTEM_PROCESSOS))
     <li><a href="{{ route('home.index') }}">Processos</a></li>
 
         <li><a href="{{ route('agenda.index') }}">Agenda</a></li>
@@ -12,28 +12,32 @@
         </a>
 
         <ul class="dropdown-menu">
-            @if (subsystem_is(App\Support\Constants::SUBSYSTEM_PROCESSOS)) {
+            @if (subsystem_is(App\Support\Constants::SUBSYSTEM_PROCESSOS))
                 <li><a href="{{ route('agenda.index') }}">Agenda</a></li>
             @endif
 
             <li><a href="{{ route('home.index') }}">
-                @if (subsystem_is(App\Support\Constants::SUBSYSTEM_PROCESSOS)) {
+                @if (subsystem_is(App\Support\Constants::SUBSYSTEM_PROCESSOS))
                     Processos
                 @else
                     Pareceres
                 @endif
             </a></li>
 
-            @if (subsystem_is(App\Support\Constants::SUBSYSTEM_PROCESSOS)) {
+            @if (subsystem_is(App\Support\Constants::SUBSYSTEM_OPINIOES))
+                <li><a href="{{ route('opinionSubjects.index') }}">Assuntos</a></li>
+            @endif
+
+            @if (subsystem_is(App\Support\Constants::SUBSYSTEM_PROCESSOS))
                 <li><a href="{{ route('andamentos.index') }}">Andamentos</a></li>
                 <li><a href="{{ route('tribunais.index') }}">Tribunais</a></li>
                 <li><a href="{{ route('juizes.index') }}">Juizes</a></li>
                 <li><a href="{{ route('acoes.index') }}">Ações</a></li>
                 <li><a href="{{ route('revisions.index') }}">Revisões</a></li>
                 <li><a href="{{ route('leis.index') }}">Leis</a></li>
-            @endif
+                @endif
 
-            <li><a href="{{ route('users.index') }}">Usuários</a></li>
+                <li><a href="{{ route('users.index') }}">Usuários</a></li>
         </ul>
     </li>
 @endif

@@ -12,9 +12,11 @@ use App\Data\Repositories\OpinionTypes as OpinionTypesRepository;
 use App\Data\Repositories\Users as UsersRepository;
 use App\Http\Requests\Opinion as OpinionRequest;
 use App\Http\Requests\OpinionsSubject as OpinionsSubjectRequest;
+use Illuminate\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
 
 class Opinions extends Controller
 {
@@ -57,23 +59,69 @@ class Opinions extends Controller
         OpinionRequest $request,
         OpinionsRepository $repository
     ) {
-        $newOpinion = $repository->createFromRequest($request);
-
         foreach ($request->allFiles() as $key => $file) {
             $extension = $file->getClientOriginalExtension();
-            $date = $newOpinion->date;
-            $fileName = $date . '-' . $newOpinion->id . '.' . $extension;
-            $file->storeAs('', $fileName, 'opinion-files');
+
+            $base64Content = base64_encode(
+                file_get_contents($file->getPathName())
+            );
+
+            $request->merge(['file_' . $extension => $base64Content]);
+            //            $date = $newOpinion->date;
+            //            $fileName = $date . '-' . $newOpinion->id . '.' . $extension;
+            //            $file->storeAs('', $fileName, 'opinion-files');
         }
 
+        //        dd($request);
+
+        $newOpinion = $repository->createFromRequest($request);
+
         return redirect()
-            ->route('opinions.index')
-            ->with($this->getSuccessMessage());
+            ->route('opinions.show', ['id' => $newOpinion->id])
+            ->with('formDisabled', false)
+            ->with(
+                $this->getSuccessMessage(
+                    'Gravado com sucesso. Insira os assuntos correspondentes.'
+                )
+            );
     }
 
-    public function download($id, $fileName)
+    public function download($id, $fileExtension)
     {
-        return Storage::disk('opinion-files')->download($fileName);
+        if (!Auth::user()->is_procurador) {
+            return view('home.index');
+        }
+
+        $mime = '';
+        $attributeName = '';
+        $currentOpinion = OpinionModel::find($id);
+
+        if ($fileExtension == 'pdf') {
+            $mime = 'application/pdf';
+            $attributeName = 'file_pdf';
+        } elseif ($fileExtension == 'doc') {
+            $mime = 'application/msword';
+            $attributeName = 'file_doc';
+        }
+
+        $fileName = (
+            $currentOpinion->date .
+                '-' .
+                $currentOpinion->id .
+                '.' .
+                $fileExtension
+        );
+
+        $response = response(
+            base64_decode($currentOpinion->{$attributeName}),
+            200,
+            [
+                'Content-Type' => $mime,
+                'Content-Disposition' =>
+                    'attachment; filename="' . $fileName . '"'
+            ]
+        );
+        return $response;
     }
 
     /**

@@ -36,7 +36,7 @@
                     @if(is_null($opinionSubject->id))
                         <div class="row">
                             <div class="form-group col-md-6" @include('partials.disabled')>
-                                <label for="parent_id">Árvore</label>
+                                <label for="parent_id">Salvar em:</label>
 
                                 @include(
                                     'opinionSubjects.partials.selectTree',

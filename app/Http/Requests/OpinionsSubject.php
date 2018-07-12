@@ -1,8 +1,9 @@
 <?php
+
 namespace App\Http\Requests;
 
-use App\Rules\UniqueOpinionsSubject;
 use App\Rules\NotRootSubject;
+use App\Rules\UniqueOpinionsSubject;
 use Illuminate\Foundation\Http\FormRequest;
 
 class OpinionsSubject extends FormRequest
@@ -26,7 +27,7 @@ class OpinionsSubject extends FormRequest
     {
         return [
             'opinion_id' => ['required', new UniqueOpinionsSubject()],
-            'subject_id' => ['required', new NotRootSubject()]
+            'subject_id' => ['required', new NotRootSubject()],
         ];
     }
 }

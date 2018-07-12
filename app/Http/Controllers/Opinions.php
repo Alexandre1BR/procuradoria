@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Data\Models\Opinion as OpinionModel;
@@ -12,10 +13,8 @@ use App\Data\Repositories\OpinionTypes as OpinionTypesRepository;
 use App\Data\Repositories\Users as UsersRepository;
 use App\Http\Requests\Opinion as OpinionRequest;
 use App\Http\Requests\OpinionsSubject as OpinionsSubjectRequest;
-use Illuminate\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
 class Opinions extends Controller
@@ -66,7 +65,7 @@ class Opinions extends Controller
                 file_get_contents($file->getPathName())
             );
 
-            $request->merge(['file_' . $extension => $base64Content]);
+            $request->merge(['file_'.$extension => $base64Content]);
             //            $date = $newOpinion->date;
             //            $fileName = $date . '-' . $newOpinion->id . '.' . $extension;
             //            $file->storeAs('', $fileName, 'opinion-files');
@@ -105,10 +104,10 @@ class Opinions extends Controller
         }
 
         $fileName = (
-            $currentOpinion->date .
-                '-' .
-                $currentOpinion->id .
-                '.' .
+            $currentOpinion->date.
+                '-'.
+                $currentOpinion->id.
+                '.'.
                 $fileExtension
         );
 
@@ -116,11 +115,11 @@ class Opinions extends Controller
             base64_decode($currentOpinion->{$attributeName}),
             200,
             [
-                'Content-Type' => $mime,
-                'Content-Disposition' =>
-                    'attachment; filename="' . $fileName . '"'
+                'Content-Type'        => $mime,
+                'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
             ]
         );
+
         return $response;
     }
 
@@ -204,21 +203,17 @@ class Opinions extends Controller
         }
 
         return [
-            'opinionTypes' =>
-                app(OpinionTypesRepository::class)
+            'opinionTypes' => app(OpinionTypesRepository::class)
                     ->allOrderBy('name')
                     ->pluck('name', 'id'),
-            'opinionScopes' =>
-                app(OpinionScopesRepository::class)
+            'opinionScopes' => app(OpinionScopesRepository::class)
                     ->allOrderBy('name')
                     ->pluck('name', 'id'),
-            'attorneys' =>
-                app(UsersRepository::class)
+            'attorneys' => app(UsersRepository::class)
                     ->getByType('Procurador')
                     ->pluck('name', 'id'),
-            'opinionSubjects' => $opinionSubjects,
-            'allOpinionSubjects' =>
-                app(OpinionSubjectsRepository::class)->allOrderBy('name')
+            'opinionSubjects'    => $opinionSubjects,
+            'allOpinionSubjects' => app(OpinionSubjectsRepository::class)->allOrderBy('name'),
         ];
     }
 }

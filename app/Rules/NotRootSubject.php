@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Rules;
 
 use App\Data\Models\OpinionSubject as OpinionSubjectModel;
@@ -19,8 +20,9 @@ class NotRootSubject implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed  $value
+     *
      * @return bool
      */
     public function passes($attribute, $value)

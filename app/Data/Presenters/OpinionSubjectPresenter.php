@@ -39,18 +39,18 @@ class OpinionSubjectPresenter extends BasePresenter
 
     public function level()
     {
-        return sizeof($this->wrappedObject->ancestors);
+        return count($this->wrappedObject->ancestors);
     }
 
     public function indented_name()
     {
         $current = $this->wrappedObject;
-        $level = sizeof($this->wrappedObject->ancestors);
+        $level = count($this->wrappedObject->ancestors);
         $str = $current->name;
 
         for ($i = 1; $i < $level; $i++) {
             $str =
-                "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" .
+                '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.
                 $str;
         }
 

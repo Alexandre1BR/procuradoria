@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Data\Models\OpinionSubject as OpinionSubjectModel;
@@ -64,7 +63,8 @@ class OpinionSubjects extends Controller
         OpinionSubjectsRepository $opinionSubjects,
         Request $request
     ) {
-        return view('opinionSubjects.index')
+        return //            ->with('opinionSubjects', $opinionSubjects->fullTreeArray())
+        view('opinionSubjects.index')
             ->with('pesquisa', $request->get('pesquisa'))
             ->with('opinionSubjects', $opinionSubjects->search($request))
             ->with(
@@ -93,5 +93,14 @@ class OpinionSubjects extends Controller
                 'opinionSubjectsFormAttributes',
                 $repository->formAttributes()
             );
+    }
+
+    public function jsonTree()
+    {
+        $opinionSubjectsRepository = app(OpinionSubjectsRepository::class);
+
+        $return = [$opinionSubjectsRepository->fullTree()];
+
+        return $return;
     }
 }

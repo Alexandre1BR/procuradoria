@@ -36,6 +36,6 @@
             @endforelse
         </tr>
     @empty
-        <p>Nenhuma opinião encontrada</p>
+        <p>Nenhum parecer encontrado</p>
     @endforelse
 </table>

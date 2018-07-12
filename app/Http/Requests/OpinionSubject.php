@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,6 +22,6 @@ class OpinionSubject extends FormRequest
      */
     public function rules()
     {
-        return ['name' => 'required'];
+        return ['name' => 'required', 'parent_id' => 'required'];
     }
 }

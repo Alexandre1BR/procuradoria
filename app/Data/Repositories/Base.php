@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Repositories;
 
 use Carbon\Carbon;
@@ -85,6 +84,17 @@ abstract class Base
     public function maxId()
     {
         return $this->model::max('id');
+    }
+
+    /**
+     * @param $attribute
+     * @param $sign
+     * @param $value
+     * @return mixed
+     */
+    public function whereNull($attribute)
+    {
+        return $this->model::whereNull($attribute);
     }
 
     /**

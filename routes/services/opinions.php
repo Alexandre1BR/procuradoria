@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['prefix' => '/pareceres'], function () {
     Route::get('/create', 'Opinions@create')->name('opinions.create');
 
@@ -28,4 +27,8 @@ Route::group(['prefix' => '/assuntos'], function () {
     Route::get('/{id}', 'OpinionSubjects@show')->name('opinionSubjects.show');
 
     Route::get('/', 'OpinionSubjects@index')->name('opinionSubjects.index');
+
+    Route
+        ::get('/json/tree', 'OpinionSubjects@jsonTree')
+        ->name('opinionsubjects.jsontree');
 });

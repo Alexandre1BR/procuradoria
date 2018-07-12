@@ -18,4 +18,44 @@ class OpinionSubjectPresenter extends BasePresenter
 
         return route('opinionSubjects.show', ['id' => $id]);
     }
+
+    public function full_name()
+    {
+        $current = $this->wrappedObject;
+        $ancestors = $current->ancestors;
+
+        $fullName = '';
+        foreach ($ancestors as $key => $ancestor) {
+            if ($key != 0) {
+                $fullName .= $ancestor->name;
+                $fullName .= ' - ';
+            }
+        }
+
+        $fullName .= $current->name;
+
+        return $fullName;
+    }
+
+    public function level()
+    {
+        return sizeof($this->wrappedObject->ancestors);
+    }
+
+    public function indented_name()
+    {
+        $current = $this->wrappedObject;
+        $level = sizeof($this->wrappedObject->ancestors);
+        $str = $current->name;
+
+        for ($i = 1; $i < $level; $i++) {
+            $str =
+                "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" .
+                $str;
+        }
+
+        //        dd($str);
+
+        return $str;
+    }
 }

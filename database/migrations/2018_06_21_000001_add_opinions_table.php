@@ -1,5 +1,4 @@
 <?php
-
 use App\Data\Models\OpinionScope;
 use App\Data\Models\OpinionSubject;
 use App\Data\Models\OpinionType;
@@ -90,7 +89,5 @@ class AddOpinionsTable extends Migration
 
         OpinionType::create(['name' => 'Parecer']);
         OpinionType::create(['name' => 'Decisão']);
-
-        OpinionSubject::create(['name' => 'Estágio']);
     }
 }

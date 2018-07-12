@@ -37,26 +37,24 @@ class OpinionPresenter extends BasePresenter
     public function pdf_file_name()
     {
         $id = $this->wrappedObject->id;
-        $date = $this->wrappedObject->date;
 
         $extension = 'pdf';
 
         return route('opinions.download', [
-            'id'       => $id,
-            'fileName' => ($date.'-'.$id.'.'.$extension),
+            'id' => $id,
+            'fileName' => $extension
         ]);
     }
 
     public function doc_file_name()
     {
         $id = $this->wrappedObject->id;
-        $date = $this->wrappedObject->date;
 
         $extension = 'doc';
 
         return route('opinions.download', [
-            'id'       => $id,
-            'fileName' => ($date.'-'.$id.'.'.$extension),
+            'id' => $id,
+            'fileName' => $extension
         ]);
     }
 }

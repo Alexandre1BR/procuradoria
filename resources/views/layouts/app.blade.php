@@ -87,6 +87,9 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
 
+
+
+
         @include('layouts.partials.google-analytics')
     </body>
 </html>

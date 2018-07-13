@@ -32,14 +32,10 @@ class Opinion extends BaseModel
         'abstract',
         'opinion',
         'file_pdf',
-        'file_doc'
+        'file_doc',
     ];
 
-    protected $presenters = [
-        'formatted_date',
-        'pdf_file_name',
-        'doc_file_name'
-    ];
+    protected $presenters = ['formatted_date', 'pdf_file_name', 'doc_file_name'];
 
     public function opinionScope()
     {

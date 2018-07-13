@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Data\Models\Tribunal;
@@ -44,8 +43,7 @@ class Tribunais extends Controller
      */
     public function create()
     {
-        return view('tribunais.form')
-            ->with(['tribunal' => $this->repository->new()]);
+        return view('tribunais.form')->with(['tribunal' => $this->repository->new()]);
     }
 
     /**

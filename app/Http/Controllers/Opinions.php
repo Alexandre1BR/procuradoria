@@ -12,10 +12,8 @@ use App\Data\Repositories\OpinionTypes as OpinionTypesRepository;
 use App\Data\Repositories\Users as UsersRepository;
 use App\Http\Requests\Opinion as OpinionRequest;
 use App\Http\Requests\OpinionsSubject as OpinionsSubjectRequest;
-use Illuminate\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
 class Opinions extends Controller
@@ -42,10 +40,7 @@ class Opinions extends Controller
     {
         return view('opinions.form')
             ->with(['opinion' => $this->repository->new()])
-            ->with(
-                'opinionsFormAttributes',
-                $this->repository->createFormAttributes()
-            )
+            ->with('opinionsFormAttributes', $this->repository->createFormAttributes())
             ->with($this->getOpinionsData());
     }
 
@@ -55,16 +50,12 @@ class Opinions extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(
-        OpinionRequest $request,
-        OpinionsRepository $repository
-    ) {
+    public function store(OpinionRequest $request, OpinionsRepository $repository)
+    {
         foreach ($request->allFiles() as $key => $file) {
             $extension = $file->getClientOriginalExtension();
 
-            $base64Content = base64_encode(
-                file_get_contents($file->getPathName())
-            );
+            $base64Content = base64_encode(file_get_contents($file->getPathName()));
 
             $request->merge(['file_' . $extension => $base64Content]);
             //            $date = $newOpinion->date;
@@ -79,11 +70,7 @@ class Opinions extends Controller
         return redirect()
             ->route('opinions.show', ['id' => $newOpinion->id])
             ->with('formDisabled', false)
-            ->with(
-                $this->getSuccessMessage(
-                    'Gravado com sucesso. Insira os assuntos correspondentes.'
-                )
-            );
+            ->with($this->getSuccessMessage('Gravado com sucesso. Insira os assuntos correspondentes.'));
     }
 
     public function download($id, $fileExtension)
@@ -116,15 +103,11 @@ class Opinions extends Controller
                 $fileExtension
         );
 
-        $response = response(
-            base64_decode($currentOpinion->{$attributeName}),
-            200,
-            [
-                'Content-Type' => $mime,
-                'Content-Disposition' =>
-                    'attachment; filename="' . $fileName . '"'
-            ]
-        );
+        $response = response(base64_decode($currentOpinion->{$attributeName}), 200, [
+            'Content-Type' => $mime,
+            'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+        ]);
+
         return $response;
     }
 
@@ -162,18 +145,9 @@ class Opinions extends Controller
             ->with('formDisabled', true)
             ->with(['opinion' => OpinionModel::find($id)])
             ->with('isProcurador', $user->is_procurador)
-            ->with(
-                'opinionsFormAttributes',
-                $repository->showFormAttributes($user->is_procurador)
-            )
-            ->with(
-                'opinionSubjectsAttributes',
-                $opinionSubjectsRepository->attributesShowing()
-            )
-            ->with(
-                'opinionSubjectsEditAttribute',
-                $opinionSubjectsRepository->editAttribute
-            )
+            ->with('opinionsFormAttributes', $repository->showFormAttributes($user->is_procurador))
+            ->with('opinionSubjectsAttributes', $opinionSubjectsRepository->attributesShowing())
+            ->with('opinionSubjectsEditAttribute', $opinionSubjectsRepository->editAttribute)
             ->with($this->getOpinionsData($id));
     }
 
@@ -182,10 +156,8 @@ class Opinions extends Controller
      *
      * @return $this
      */
-    public function relacionarAssunto(
-        OpinionsSubjectRequest $request,
-        OpinionsSubjectsRepository $repository
-    ) {
+    public function relacionarAssunto(OpinionsSubjectRequest $request, OpinionsSubjectsRepository $repository)
+    {
         $repository->createFromRequest($request);
 
         return redirect()
@@ -196,9 +168,7 @@ class Opinions extends Controller
     public function getOpinionsData($id = null)
     {
         if ($id == null) {
-            $opinionSubjects = app(
-                OpinionSubjectsRepository::class
-            )->allOrderBy('name');
+            $opinionSubjects = app(OpinionSubjectsRepository::class)->allOrderBy('name');
         } else {
             $query = OpinionsSubject::where('opinion_id', $id)->get();
             $opinionSubjects = [];
@@ -221,8 +191,7 @@ class Opinions extends Controller
                     ->getByType('Procurador')
                     ->pluck('name', 'id'),
             'opinionSubjects' => $opinionSubjects,
-            'allOpinionSubjects' =>
-                app(OpinionSubjectsRepository::class)->allOrderBy('name')
+            'allOpinionSubjects' => app(OpinionSubjectsRepository::class)->allOrderBy('name'),
         ];
     }
 }

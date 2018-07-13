@@ -43,7 +43,7 @@ $factory->define(OpinionsSubjectModel::class, function (Faker $faker) {
                 app(OpinionSubjectsRepository::class)
                     ->all()
                     ->toArray()
-            )['id']
+            )['id'],
     ];
 });
 
@@ -79,6 +79,6 @@ $factory->define(OpinionModel::class, function (Faker $faker) {
         'abstract' => $faker->text,
         'opinion' => $faker->text,
         'file_pdf' => $faker->text,
-        'file_doc' => $faker->text
+        'file_doc' => $faker->text,
     ];
 });

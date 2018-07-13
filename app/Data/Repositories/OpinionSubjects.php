@@ -4,7 +4,6 @@ namespace App\Data\Repositories;
 use App\Data\Models\OpinionSubject as OpinionSubjectsModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class OpinionSubjects extends Base
 {
@@ -16,7 +15,7 @@ class OpinionSubjects extends Base
             'name' => 'full_name',
             'showName' => 'Nome do Assunto',
             'columnSize' => '100%',
-            'type' => 'string'
+            'type' => 'string',
         ];
 
         return $array;
@@ -26,11 +25,7 @@ class OpinionSubjects extends Base
     {
         $array = [];
 
-        $array[] = (object) [
-            'name' => 'name',
-            'showName' => 'Nome do Assunto',
-            'type' => 'string'
-        ];
+        $array[] = (object) ['name' => 'name', 'showName' => 'Nome do Assunto', 'type' => 'string'];
 
         return $array;
     }
@@ -73,28 +68,14 @@ class OpinionSubjects extends Base
             foreach ($columns as $column) {
                 switch ($column->type) {
                     case 'string':
-                        $query->orWhere(
-                            DB::raw("lower({$column->name})"),
-                            'like',
-                            '%' . $item . '%'
-                        );
+                        $query->orWhere(DB::raw("lower({$column->name})"), 'like', '%' . $item . '%');
                         break;
                     case 'textarea':
-                        $query->orWhere(
-                            DB::raw("lower({$column->name})"),
-                            'like',
-                            '%' . $item . '%'
-                        );
+                        $query->orWhere(DB::raw("lower({$column->name})"), 'like', '%' . $item . '%');
                         break;
                     case 'id':
-                        $query->orWhereHas($column->relationName, function (
-                            $query
-                        ) use ($item, $column) {
-                            $query->whereRaw(
-                                'lower(' .
-                                    $column->foreignName .
-                                    ") like '%{$item}%'"
-                            );
+                        $query->orWhereHas($column->relationName, function ($query) use ($item, $column) {
+                            $query->whereRaw('lower(' . $column->foreignName . ") like '%{$item}%'");
                         });
                         break;
                     case 'date':
@@ -149,6 +130,7 @@ class OpinionSubjects extends Base
     {
         $array = [];
         $this->orderedArray($this->whereNull('parent_id')->first(), $array);
+
         return $array;
     }
 

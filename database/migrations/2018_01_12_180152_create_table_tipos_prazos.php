@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,12 +20,7 @@ class CreateTableTiposPrazos extends Migration
             $table->timestamps();
         });
 
-        DB::table('tipos_prazos')->insert(
-            [
-                'id'   => '1',
-                'nome' => 'Audiência',
-            ]
-        );
+        DB::table('tipos_prazos')->insert(['id' => '1', 'nome' => 'Audiência']);
     }
 
     /**

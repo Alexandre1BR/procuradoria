@@ -11,7 +11,6 @@
  */
 
 namespace Illuminate\Support\Facades {
-
     class App
     {
         /**
@@ -3330,9 +3329,28 @@ namespace Illuminate\Support\Facades {
          * @return \Symfony\Component\HttpFoundation\Cookie
          * @static
          */
-        public static function make($name, $value, $minutes = 0, $path = null, $domain = null, $secure = false, $httpOnly = true, $raw = false, $sameSite = null)
-        {
-            return \Illuminate\Cookie\CookieJar::make($name, $value, $minutes, $path, $domain, $secure, $httpOnly, $raw, $sameSite);
+        public static function make(
+            $name,
+            $value,
+            $minutes = 0,
+            $path = null,
+            $domain = null,
+            $secure = false,
+            $httpOnly = true,
+            $raw = false,
+            $sameSite = null
+        ) {
+            return \Illuminate\Cookie\CookieJar::make(
+                $name,
+                $value,
+                $minutes,
+                $path,
+                $domain,
+                $secure,
+                $httpOnly,
+                $raw,
+                $sameSite
+            );
         }
 
         /**
@@ -3350,9 +3368,26 @@ namespace Illuminate\Support\Facades {
          * @return \Symfony\Component\HttpFoundation\Cookie
          * @static
          */
-        public static function forever($name, $value, $path = null, $domain = null, $secure = false, $httpOnly = true, $raw = false, $sameSite = null)
-        {
-            return \Illuminate\Cookie\CookieJar::forever($name, $value, $path, $domain, $secure, $httpOnly, $raw, $sameSite);
+        public static function forever(
+            $name,
+            $value,
+            $path = null,
+            $domain = null,
+            $secure = false,
+            $httpOnly = true,
+            $raw = false,
+            $sameSite = null
+        ) {
+            return \Illuminate\Cookie\CookieJar::forever(
+                $name,
+                $value,
+                $path,
+                $domain,
+                $secure,
+                $httpOnly,
+                $raw,
+                $sameSite
+            );
         }
 
         /**
@@ -7417,8 +7452,14 @@ namespace Illuminate\Support\Facades {
          * @return static
          * @static
          */
-        public static function duplicate($query = null, $request = null, $attributes = null, $cookies = null, $files = null, $server = null)
-        {
+        public static function duplicate(
+            $query = null,
+            $request = null,
+            $attributes = null,
+            $cookies = null,
+            $files = null,
+            $server = null
+        ) {
             return \Illuminate\Http\Request::duplicate($query, $request, $attributes, $cookies, $files, $server);
         }
 
@@ -7626,10 +7667,25 @@ namespace Illuminate\Support\Facades {
          * @param string|resource|null $content    The raw body data
          * @static
          */
-        public static function initialize($query = [], $request = [], $attributes = [], $cookies = [], $files = [], $server = [], $content = null)
-        {
+        public static function initialize(
+            $query = [],
+            $request = [],
+            $attributes = [],
+            $cookies = [],
+            $files = [],
+            $server = [],
+            $content = null
+        ) {
             //Method inherited from \Symfony\Component\HttpFoundation\Request
-            return \Illuminate\Http\Request::initialize($query, $request, $attributes, $cookies, $files, $server, $content);
+            return \Illuminate\Http\Request::initialize(
+                $query,
+                $request,
+                $attributes,
+                $cookies,
+                $files,
+                $server,
+                $content
+            );
         }
 
         /**
@@ -7661,8 +7717,15 @@ namespace Illuminate\Support\Facades {
          * @return static
          * @static
          */
-        public static function create($uri, $method = 'GET', $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
-        {
+        public static function create(
+            $uri,
+            $method = 'GET',
+            $parameters = [],
+            $cookies = [],
+            $files = [],
+            $server = [],
+            $content = null
+        ) {
             //Method inherited from \Symfony\Component\HttpFoundation\Request
             return \Illuminate\Http\Request::create($uri, $method, $parameters, $cookies, $files, $server, $content);
         }
@@ -11523,7 +11586,12 @@ namespace Illuminate\Support\Facades {
          */
         public static function getRackspaceTemporaryUrl($adapter, $path, $expiration, $options)
         {
-            return \Illuminate\Filesystem\FilesystemAdapter::getRackspaceTemporaryUrl($adapter, $path, $expiration, $options);
+            return \Illuminate\Filesystem\FilesystemAdapter::getRackspaceTemporaryUrl(
+                $adapter,
+                $path,
+                $expiration,
+                $options
+            );
         }
 
         /**
@@ -12969,11 +13037,9 @@ namespace Illuminate\Support\Facades {
             return \Illuminate\View\Factory::renderTranslation();
         }
     }
-
 }
 
 namespace McCool\LaravelAutoPresenter\Facades {
-
     class AutoPresenter
     {
         /**
@@ -13013,11 +13079,9 @@ namespace McCool\LaravelAutoPresenter\Facades {
             return \McCool\LaravelAutoPresenter\AutoPresenter::getDecorators();
         }
     }
-
 }
 
 namespace Maatwebsite\Excel\Facades {
-
     class Excel
     {
         /**
@@ -13046,8 +13110,13 @@ namespace Maatwebsite\Excel\Facades {
          * @return \Maatwebsite\Excel\LaravelExcelReader
          * @static
          */
-        public static function load($file, $callback = null, $encoding = null, $noBasePath = false, $callbackConfigReader = null)
-        {
+        public static function load(
+            $file,
+            $callback = null,
+            $encoding = null,
+            $noBasePath = false,
+            $callbackConfigReader = null
+        ) {
             return \Maatwebsite\Excel\Excel::load($file, $callback, $encoding, $noBasePath, $callbackConfigReader);
         }
 
@@ -13161,11 +13230,9 @@ namespace Maatwebsite\Excel\Facades {
             return \Maatwebsite\Excel\Excel::getFilters($key);
         }
     }
-
 }
 
 namespace Barryvdh\Debugbar {
-
     class Facade
     {
         /**
@@ -13562,10 +13629,17 @@ namespace Barryvdh\Debugbar {
          * @return array
          * @static
          */
-        public static function getDataAsHeaders($headerName = 'phpdebugbar', $maxHeaderLength = 4096, $maxTotalHeaderLength = 250000)
-        {
+        public static function getDataAsHeaders(
+            $headerName = 'phpdebugbar',
+            $maxHeaderLength = 4096,
+            $maxTotalHeaderLength = 250000
+        ) {
             //Method inherited from \DebugBar\DebugBar
-            return \Barryvdh\Debugbar\LaravelDebugbar::getDataAsHeaders($headerName, $maxHeaderLength, $maxTotalHeaderLength);
+            return \Barryvdh\Debugbar\LaravelDebugbar::getDataAsHeaders(
+                $headerName,
+                $maxHeaderLength,
+                $maxTotalHeaderLength
+            );
         }
 
         /**
@@ -13578,10 +13652,17 @@ namespace Barryvdh\Debugbar {
          * @return $this
          * @static
          */
-        public static function sendDataInHeaders($useOpenHandler = null, $headerName = 'phpdebugbar', $maxHeaderLength = 4096)
-        {
+        public static function sendDataInHeaders(
+            $useOpenHandler = null,
+            $headerName = 'phpdebugbar',
+            $maxHeaderLength = 4096
+        ) {
             //Method inherited from \DebugBar\DebugBar
-            return \Barryvdh\Debugbar\LaravelDebugbar::sendDataInHeaders($useOpenHandler, $headerName, $maxHeaderLength);
+            return \Barryvdh\Debugbar\LaravelDebugbar::sendDataInHeaders(
+                $useOpenHandler,
+                $headerName,
+                $maxHeaderLength
+            );
         }
 
         /**
@@ -13711,11 +13792,9 @@ namespace Barryvdh\Debugbar {
             return \Barryvdh\Debugbar\LaravelDebugbar::offsetUnset($key);
         }
     }
-
 }
 
 namespace PragmaRX\Version\Package {
-
     class Facade
     {
         /**
@@ -13811,11 +13890,9 @@ namespace PragmaRX\Version\Package {
             return \PragmaRX\Version\Package\Version::refresh();
         }
     }
-
 }
 
 namespace PragmaRX\Yaml\Package {
-
     class Facade
     {
         /**
@@ -13882,53 +13959,62 @@ namespace PragmaRX\Yaml\Package {
             return \PragmaRX\Yaml\Package\Yaml::instance();
         }
     }
-
 }
 
 namespace  {
-
     class App extends \Illuminate\Support\Facades\App
     {
+
     }
 
     class Artisan extends \Illuminate\Support\Facades\Artisan
     {
+
     }
 
     class Auth extends \Illuminate\Support\Facades\Auth
     {
+
     }
 
     class Blade extends \Illuminate\Support\Facades\Blade
     {
+
     }
 
     class Broadcast extends \Illuminate\Support\Facades\Broadcast
     {
+
     }
 
     class Bus extends \Illuminate\Support\Facades\Bus
     {
+
     }
 
     class Cache extends \Illuminate\Support\Facades\Cache
     {
+
     }
 
     class Config extends \Illuminate\Support\Facades\Config
     {
+
     }
 
     class Cookie extends \Illuminate\Support\Facades\Cookie
     {
+
     }
 
     class Crypt extends \Illuminate\Support\Facades\Crypt
     {
+
     }
 
     class DB extends \Illuminate\Support\Facades\DB
     {
+
     }
 
     class Eloquent extends \Illuminate\Database\Eloquent\Model
@@ -16157,102 +16243,126 @@ namespace  {
 
     class Event extends \Illuminate\Support\Facades\Event
     {
+
     }
 
     class File extends \Illuminate\Support\Facades\File
     {
+
     }
 
     class Gate extends \Illuminate\Support\Facades\Gate
     {
+
     }
 
     class Hash extends \Illuminate\Support\Facades\Hash
     {
+
     }
 
     class Lang extends \Illuminate\Support\Facades\Lang
     {
+
     }
 
     class Log extends \Illuminate\Support\Facades\Log
     {
+
     }
 
     class Mail extends \Illuminate\Support\Facades\Mail
     {
+
     }
 
     class Notification extends \Illuminate\Support\Facades\Notification
     {
+
     }
 
     class Password extends \Illuminate\Support\Facades\Password
     {
+
     }
 
     class Queue extends \Illuminate\Support\Facades\Queue
     {
+
     }
 
     class Redirect extends \Illuminate\Support\Facades\Redirect
     {
+
     }
 
     class Request extends \Illuminate\Support\Facades\Request
     {
+
     }
 
     class Response extends \Illuminate\Support\Facades\Response
     {
+
     }
 
     class Route extends \Illuminate\Support\Facades\Route
     {
+
     }
 
     class Schema extends \Illuminate\Support\Facades\Schema
     {
+
     }
 
     class Session extends \Illuminate\Support\Facades\Session
     {
+
     }
 
     class Storage extends \Illuminate\Support\Facades\Storage
     {
+
     }
 
     class URL extends \Illuminate\Support\Facades\URL
     {
+
     }
 
     class Validator extends \Illuminate\Support\Facades\Validator
     {
+
     }
 
     class View extends \Illuminate\Support\Facades\View
     {
+
     }
 
     class AutoPresenter extends \McCool\LaravelAutoPresenter\Facades\AutoPresenter
     {
+
     }
 
     class Excel extends \Maatwebsite\Excel\Facades\Excel
     {
+
     }
 
     class Debugbar extends \Barryvdh\Debugbar\Facade
     {
+
     }
 
     class Version extends \PragmaRX\Version\Package\Facade
     {
+
     }
 
     class Yaml extends \PragmaRX\Yaml\Package\Facade
     {
-    }
 
+    }
 }

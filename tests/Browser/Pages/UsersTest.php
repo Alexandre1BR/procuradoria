@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Browser;
 
 use App\Data\Repositories\Users as UsersRepository;
@@ -18,7 +17,11 @@ class UsersTest extends DuskTestCase
         $faker = app(Faker::class);
         static::$personalEmailUsers = $faker->email;
         static::$NameUsers = $faker->name;
-        static::$randomUserUsers = $faker->randomElement(app(UsersRepository::class)->all()->toArray());
+        static::$randomUserUsers = $faker->randomElement(
+            app(UsersRepository::class)
+                ->all()
+                ->toArray()
+        );
     }
 
     public function testValidation()
@@ -29,7 +32,8 @@ class UsersTest extends DuskTestCase
         $NameU = static::$NameUsers;
 
         $this->browse(function (Browser $browser) use ($randomUserU, $NameU) {
-            $browser->visit('/users/'.$randomUserU['id'])
+            $browser
+                ->visit('/users/' . $randomUserU['id'])
                 ->click('#editar')
                 ->type('#personal_email', $NameU)
                 ->press('Gravar')
@@ -43,7 +47,8 @@ class UsersTest extends DuskTestCase
         $randomUserU = static::$randomUserUsers;
 
         $this->browse(function (Browser $browser) use ($personalEmailU, $randomUserU) {
-            $browser->visit('/users/'.$randomUserU['id'])
+            $browser
+                ->visit('/users/' . $randomUserU['id'])
                 ->click('#editar')
                 ->type('#personal_email', $personalEmailU)
                 ->press('Gravar')
@@ -57,9 +62,10 @@ class UsersTest extends DuskTestCase
         $randomUserU = static::$randomUserUsers;
 
         $this->browse(function (Browser $browser) use ($personalEmailU, $randomUserU) {
-            $browser->visit('/users')
+            $browser
+                ->visit('/users')
                 ->clickLink($randomUserU['name'])
-                ->assertPathIs('/users/'.$randomUserU['id'])
+                ->assertPathIs('/users/' . $randomUserU['id'])
                 ->assertSee($randomUserU['email']);
         });
     }

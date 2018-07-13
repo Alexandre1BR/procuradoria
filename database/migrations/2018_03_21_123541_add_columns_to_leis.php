@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,8 +14,14 @@ class AddColumnsToLeis extends Migration
             $table->string('alinea')->nullable();
             $table->string('item')->nullable();
 
-            $table->integer('nivel_federativo_id')->nullable()->unsigned();
-            $table->integer('tipo_lei_id')->nullable()->unsigned();
+            $table
+                ->integer('nivel_federativo_id')
+                ->nullable()
+                ->unsigned();
+            $table
+                ->integer('tipo_lei_id')
+                ->nullable()
+                ->unsigned();
         });
     }
 

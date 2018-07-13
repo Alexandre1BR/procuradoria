@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,12 +16,7 @@ class AlterTableProcessos extends Migration
             $table->timestamp('data_recebimento')->nullable();
         });
 
-        DB::table('tipos_andamentos')->insert(
-            [
-                'id'   => '2',
-                'nome' => 'Recebimento',
-            ]
-        );
+        DB::table('tipos_andamentos')->insert(['id' => '2', 'nome' => 'Recebimento']);
     }
 
     /**

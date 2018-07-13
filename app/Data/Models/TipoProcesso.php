@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 class TipoProcesso extends BaseModel
@@ -14,7 +13,5 @@ class TipoProcesso extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = [
-        'nome',
-    ];
+    protected $fillable = ['nome'];
 }

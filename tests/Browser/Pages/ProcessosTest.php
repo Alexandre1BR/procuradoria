@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Browser;
 
 use App\Data\Repositories\Acoes as AcoesRepository;
@@ -41,18 +40,50 @@ class ProcessosTest extends DuskTestCase
         $faker = app(Faker::class);
         static::$numeroJudicialProcesso = $faker->randomNumber();
         static::$numeroAlerjProcesso = $faker->randomNumber();
-        static::$tribunalProcesso = $faker->randomElement(app(TribunaisRepository::class)->all()->toArray());
+        static::$tribunalProcesso = $faker->randomElement(
+            app(TribunaisRepository::class)
+                ->all()
+                ->toArray()
+        );
         static::$varaProcesso = $faker->name;
         static::$dataDistribuicaoProcesso = $faker->date('m-d-Y');
-        static::$acaoProcesso = $faker->randomElement(app(AcoesRepository::class)->all()->toArray());
-        static::$juizProcesso = $faker->randomElement(app(JuizesRepository::class)->all()->toArray());
+        static::$acaoProcesso = $faker->randomElement(
+            app(AcoesRepository::class)
+                ->all()
+                ->toArray()
+        );
+        static::$juizProcesso = $faker->randomElement(
+            app(JuizesRepository::class)
+                ->all()
+                ->toArray()
+        );
         static::$autorProcesso = $faker->name;
-        static::$relatorProcesso = $faker->randomElement(app(JuizesRepository::class)->all()->toArray());
+        static::$relatorProcesso = $faker->randomElement(
+            app(JuizesRepository::class)
+                ->all()
+                ->toArray()
+        );
         static::$reuProcesso = $faker->name;
-        static::$procuradorProcesso = $faker->randomElement(app(UsersRepository::class)->getByType('Procurador')->toArray());
-        static::$estagiarioProcesso = $faker->randomElement(app(UsersRepository::class)->getByType('Estagiario')->toArray());
-        static::$assessorProcesso = $faker->randomElement(app(UsersRepository::class)->getByType('Assessor')->toArray());
-        static::$tipoMeioProcesso = $faker->randomElement(app(MeiosRepository::class)->all()->toArray());
+        static::$procuradorProcesso = $faker->randomElement(
+            app(UsersRepository::class)
+                ->getByType('Procurador')
+                ->toArray()
+        );
+        static::$estagiarioProcesso = $faker->randomElement(
+            app(UsersRepository::class)
+                ->getByType('Estagiario')
+                ->toArray()
+        );
+        static::$assessorProcesso = $faker->randomElement(
+            app(UsersRepository::class)
+                ->getByType('Assessor')
+                ->toArray()
+        );
+        static::$tipoMeioProcesso = $faker->randomElement(
+            app(MeiosRepository::class)
+                ->all()
+                ->toArray()
+        );
         static::$objetoProcesso = $faker->name;
         static::$meritoProcesso = $faker->name;
         static::$liminarProcesso = $faker->name;
@@ -88,9 +119,31 @@ class ProcessosTest extends DuskTestCase
         $observacaoP = static::$observacaoProcesso;
         $linkP = static::$linkProcesso;
 
-        $this->browse(function (Browser $browser) use ($numeroJudicialP, $numeroAlerjP, $tribunalP, $varaP, $dataDistribuicaoP, $acaoP, $juizP, $autorP, $relatorP, $reuP,
-        $procuradorP, $estagiarioP, $assessorP, $tipoMeioP, $objetoP, $meritoP, $liminarP, $apensosObsP, $recursoObsP, $observacaoP, $linkP) {
-            $browser->visit('/')
+        $this->browse(function (Browser $browser) use (
+            $numeroJudicialP,
+            $numeroAlerjP,
+            $tribunalP,
+            $varaP,
+            $dataDistribuicaoP,
+            $acaoP,
+            $juizP,
+            $autorP,
+            $relatorP,
+            $reuP,
+            $procuradorP,
+            $estagiarioP,
+            $assessorP,
+            $tipoMeioP,
+            $objetoP,
+            $meritoP,
+            $liminarP,
+            $apensosObsP,
+            $recursoObsP,
+            $observacaoP,
+            $linkP
+        ) {
+            $browser
+                ->visit('/')
                 ->clickLink('Novo')
                 ->type('#numero_judicial', $numeroJudicialP)
                 ->type('#numero_alerj', $numeroAlerjP)
@@ -130,7 +183,8 @@ class ProcessosTest extends DuskTestCase
     public function testWrongSearch()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
+            $browser
+                ->visit('/')
                 ->type('pesquisa', '132312312vcxvdsf4142354346asfdb455756awsdgdn756867897887934645654')
                 ->pause('3000')
                 ->waitForText('0 Processos')
@@ -162,9 +216,31 @@ class ProcessosTest extends DuskTestCase
         $observacaoP = static::$observacaoProcesso;
         $linkP = static::$linkProcesso;
 
-        $this->browse(function (Browser $browser) use ($numeroJudicialP, $numeroAlerjP, $tribunalP, $varaP, $dataDistribuicaoP, $acaoP, $juizP, $autorP, $relatorP, $reuP,
-            $procuradorP, $estagiarioP, $assessorP, $tipoMeioP, $objetoP, $meritoP, $liminarP, $apensosObsP, $recursoObsP, $observacaoP, $linkP) {
-            $browser->visit('/')
+        $this->browse(function (Browser $browser) use (
+            $numeroJudicialP,
+            $numeroAlerjP,
+            $tribunalP,
+            $varaP,
+            $dataDistribuicaoP,
+            $acaoP,
+            $juizP,
+            $autorP,
+            $relatorP,
+            $reuP,
+            $procuradorP,
+            $estagiarioP,
+            $assessorP,
+            $tipoMeioP,
+            $objetoP,
+            $meritoP,
+            $liminarP,
+            $apensosObsP,
+            $recursoObsP,
+            $observacaoP,
+            $linkP
+        ) {
+            $browser
+                ->visit('/')
                 ->type('pesquisa', $numeroJudicialP)
                 ->waitForText($numeroAlerjP)
                 ->assertSee($numeroAlerjP);
@@ -174,7 +250,8 @@ class ProcessosTest extends DuskTestCase
     public function testValidation()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
+            $browser
+                ->visit('/')
                 ->clickLink('Novo')
                 ->select('#tipo_meio', '')
                 ->press('Gravar')
@@ -188,20 +265,50 @@ class ProcessosTest extends DuskTestCase
     public function testAlter()
     {
         $faker = app(Faker::class);
-        $ProcessoP = $faker->randomElement(app(ProcessosRepository::class)->all()->toArray());
+        $ProcessoP = $faker->randomElement(
+            app(ProcessosRepository::class)
+                ->all()
+                ->toArray()
+        );
         $novoNumeroJudicialP = $faker->randomNumber();
 
         $novoDataDistribuicaoP = $faker->date('m-d-Y');
-        $novoTribunalP = $faker->randomElement(app(TribunaisRepository::class)->all()->toArray());
+        $novoTribunalP = $faker->randomElement(
+            app(TribunaisRepository::class)
+                ->all()
+                ->toArray()
+        );
         $novoAutorP = $faker->name;
         $novoObjetoP = $faker->name;
-        $novoProcuradorP = $faker->randomElement(app(UsersRepository::class)->getByType('Procurador')->toArray());
-        $novoAssessorP = $faker->randomElement(app(UsersRepository::class)->getByType('Assessor')->toArray());
-        $novoEstagiarioP = $faker->randomElement(app(UsersRepository::class)->getByType('Estagiario')->toArray());
+        $novoProcuradorP = $faker->randomElement(
+            app(UsersRepository::class)
+                ->getByType('Procurador')
+                ->toArray()
+        );
+        $novoAssessorP = $faker->randomElement(
+            app(UsersRepository::class)
+                ->getByType('Assessor')
+                ->toArray()
+        );
+        $novoEstagiarioP = $faker->randomElement(
+            app(UsersRepository::class)
+                ->getByType('Estagiario')
+                ->toArray()
+        );
 
-        $this->browse(function (Browser $browser) use ($ProcessoP, $novoNumeroJudicialP, $novoDataDistribuicaoP, $novoTribunalP, $novoAutorP, $novoObjetoP,
-            $novoProcuradorP, $novoAssessorP, $novoEstagiarioP) {
-            $browser->visit('/processos/'.$ProcessoP['id'])
+        $this->browse(function (Browser $browser) use (
+            $ProcessoP,
+            $novoNumeroJudicialP,
+            $novoDataDistribuicaoP,
+            $novoTribunalP,
+            $novoAutorP,
+            $novoObjetoP,
+            $novoProcuradorP,
+            $novoAssessorP,
+            $novoEstagiarioP
+        ) {
+            $browser
+                ->visit('/processos/' . $ProcessoP['id'])
                 ->click('#editar')
                 ->type('#numero_judicial', $novoNumeroJudicialP)
                 ->select('#tribunal_id', $novoTribunalP['id'])

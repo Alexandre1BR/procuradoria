@@ -1,5 +1,4 @@
 <?php
-
 use App\Data\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,7 +14,11 @@ class AddUsernameToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('username')->nullable()->unique()->index();
+            $table
+                ->string('username')
+                ->nullable()
+                ->unique()
+                ->index();
         });
 
         User::all()->each(function ($user) {
@@ -25,7 +28,10 @@ class AddUsernameToUsers extends Migration
         });
 
         Schema::table('users', function (Blueprint $table) {
-            $table->string('username')->nullable(false)->change();
+            $table
+                ->string('username')
+                ->nullable(false)
+                ->change();
         });
     }
 

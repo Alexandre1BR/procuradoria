@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Browser\Pages;
 
 use Laravel\Dusk\Browser;
@@ -18,8 +17,6 @@ class HomePage extends Page
 
     public function elements()
     {
-        return [
-            '@element' => '#selector',
-        ];
+        return ['@element' => '#selector'];
     }
 }

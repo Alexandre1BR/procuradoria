@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 class Tribunal extends BaseModel
@@ -14,11 +13,7 @@ class Tribunal extends BaseModel
      *
      * @var array
      */
-    protected $fillable = [
-        'nome',
-        'abreviacao',
-        'url_api',
-    ];
+    protected $fillable = ['nome', 'abreviacao', 'url_api'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

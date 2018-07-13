@@ -30,9 +30,7 @@ class Juizes extends Controller
      */
     public function create()
     {
-        return view('juizes.form', $this->getJuizesData())->with([
-            'juiz' => $this->repository->new()
-        ]);
+        return view('juizes.form', $this->getJuizesData())->with(['juiz' => $this->repository->new()]);
     }
 
     /**
@@ -56,9 +54,8 @@ class Juizes extends Controller
     public function getJuizesData()
     {
         return [
-            'tiposJuizes' =>
-                ModelTipoJuiz::orderBy('nome')->pluck('nome', 'id'),
-            'tribunais' => ModelTribunal::orderBy('nome')->pluck('nome', 'id')
+            'tiposJuizes' => ModelTipoJuiz::orderBy('nome')->pluck('nome', 'id'),
+            'tribunais' => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
         ];
     }
 

@@ -56,10 +56,7 @@ class Users extends Controller
      */
     public function index()
     {
-        return view('users.index')->with(
-            'users',
-            $this->usersRepository->all()
-        );
+        return view('users.index')->with('users', $this->usersRepository->all());
     }
 
     /**
@@ -111,7 +108,7 @@ class Users extends Controller
             'userType' =>
                 app(UsersRepository::class)
                     ->all()
-                    ->pluck('nome', 'id')
+                    ->pluck('nome', 'id'),
         ];
     }
 

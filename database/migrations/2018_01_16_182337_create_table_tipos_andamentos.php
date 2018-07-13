@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,12 +21,7 @@ class CreateTableTiposAndamentos extends Migration
         });
 
         //Ficamos de resolver quais os possíveis tipos de andamento
-        DB::table('tipos_andamentos')->insert(
-            [
-                'id'   => '1',
-                'nome' => 'Prazo',
-            ]
-        );
+        DB::table('tipos_andamentos')->insert(['id' => '1', 'nome' => 'Prazo']);
     }
 
     /**

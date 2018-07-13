@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Services\Traits;
 
 use GuzzleHttp\Client as Guzzle;
@@ -30,19 +29,12 @@ class RemoteRequest
     public function post($url, $data)
     {
         try {
-            $response = $this->guzzle->request(
-                'POST',
-                $url,
-                [
-                    'verify' => false,
-
-                    'debug' => false,
-
-                    RequestOptions::JSON => $data,
-
-                    'allow_redirects' => true,
-                ]
-            );
+            $response = $this->guzzle->request('POST', $url, [
+                'verify' => false,
+                'debug' => false,
+                RequestOptions::JSON => $data,
+                'allow_redirects' => true,
+            ]);
         } catch (ClientException $exception) {
             $response = $exception->getResponse();
         }

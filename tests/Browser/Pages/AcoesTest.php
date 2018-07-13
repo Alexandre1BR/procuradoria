@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Browser;
 
 use Faker\Generator as Faker;
@@ -26,7 +25,8 @@ class AcoesTest extends DuskTestCase
         $abreviacaoA = static::$abreviacaoAcao;
 
         $this->browse(function (Browser $browser) use ($nomeA, $abreviacaoA) {
-            $browser->visit('/acoes')
+            $browser
+                ->visit('/acoes')
                 ->clickLink('Novo')
                 ->type('#nome', $nomeA)
                 ->type('#abreviacao', $abreviacaoA)
@@ -40,7 +40,8 @@ class AcoesTest extends DuskTestCase
     public function testValidation()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/acoes')
+            $browser
+                ->visit('/acoes')
                 ->clickLink('Novo')
                 ->press('Gravar')
                 ->assertSee('O campo Nome é obrigatório.')
@@ -51,7 +52,8 @@ class AcoesTest extends DuskTestCase
     public function testWrongSearch()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/acoes')
+            $browser
+                ->visit('/acoes')
                 ->type('pesquisa', '45879349875348975387958973489734897345893478957984')
                 ->click('#searchButton')
                 ->waitForText('Nenhuma ação encontrada')
@@ -65,7 +67,8 @@ class AcoesTest extends DuskTestCase
         $abreviacaoA = static::$abreviacaoAcao;
 
         $this->browse(function (Browser $browser) use ($nomeA, $abreviacaoA) {
-            $browser->visit('/acoes')
+            $browser
+                ->visit('/acoes')
                 ->type('pesquisa', $nomeA)
                 ->click('#searchButton')
                 ->assertSeeIn('#acoesTable', $nomeA)
@@ -80,15 +83,16 @@ class AcoesTest extends DuskTestCase
         $nomeA = static::$nomeAcao;
         $abreviacaoA = static::$abreviacaoAcao;
         $this->browse(function (Browser $browser) use ($nomeA, $abreviacaoA) {
-            $browser->visit('/acoes')
+            $browser
+                ->visit('/acoes')
                 ->clickLink($nomeA)
                 ->click('#editar')
-                ->type('nome', '*'.$nomeA.'*')
-                ->type('abreviacao', '*'.$abreviacaoA.'*')
+                ->type('nome', '*' . $nomeA . '*')
+                ->type('abreviacao', '*' . $abreviacaoA . '*')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->assertSee('*'.$nomeA.'*')
-                ->assertSee('*'.$abreviacaoA.'*');
+                ->assertSee('*' . $nomeA . '*')
+                ->assertSee('*' . $abreviacaoA . '*');
         });
     }
 }

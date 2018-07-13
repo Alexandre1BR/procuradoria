@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,19 +20,9 @@ class CreateTableMeios extends Migration
             $table->timestamps();
         });
 
-        DB::table('meios')->insert(
-            [
-                'id'   => '1',
-                'nome' => 'Físico',
-            ]
-        );
+        DB::table('meios')->insert(['id' => '1', 'nome' => 'Físico']);
 
-        DB::table('meios')->insert(
-            [
-                'id'   => '2',
-                'nome' => 'Eletrônico',
-            ]
-        );
+        DB::table('meios')->insert(['id' => '2', 'nome' => 'Eletrônico']);
     }
 
     /**

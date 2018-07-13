@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -10,9 +9,9 @@ class ModifyTableLeis extends Migration
 
     public function up()
     {
-//        Schema::table('leis', function ($table) {
-//            $table->dropColumn('user_type_id');
-//        });
+        //        Schema::table('leis', function ($table) {
+        //            $table->dropColumn('user_type_id');
+        //        });
 
         //Cria a tabela processosleis
         Schema::create('processos_leis', function (Blueprint $table) {
@@ -29,8 +28,11 @@ class ModifyTableLeis extends Migration
         //Mapeia pelo numero_lei
         foreach ($leis as $lei) {
             if (isset($array[$lei->numero_lei])) {
-//                dump('Apagando ' . $lei->id . ' Numero lei ' . $lei->numero_lei);
-                DB::table('leis')->where('id', '=', $lei->id)->delete();
+                //                dump('Apagando ' . $lei->id . ' Numero lei ' . $lei->numero_lei);
+                DB
+                    ::table('leis')
+                    ->where('id', '=', $lei->id)
+                    ->delete();
             } else {
                 $array[$lei->numero_lei] = $lei->id;
             }
@@ -38,16 +40,16 @@ class ModifyTableLeis extends Migration
 
         //Popula a tabela pivo
         foreach ($leis as $lei) {
-//            dump('Processo id = '.$lei->processo_id.'      Lei id = '.$lei->id.'      $array[$lei->numero_lei] = '.$array[$lei->numero_lei]);
+            //            dump('Processo id = '.$lei->processo_id.'      Lei id = '.$lei->id.'      $array[$lei->numero_lei] = '.$array[$lei->numero_lei]);
 
-            DB::table('processos_leis')->insert(
-                [
+            DB
+                ::table('processos_leis')
+                ->insert([
                     'processo_id' => $lei->processo_id,
-                    'lei_id'      => $array[$lei->numero_lei],
-                    'created_at'  => now(),
-                    'updated_at'  => now(),
-                ]
-            );
+                    'lei_id' => $array[$lei->numero_lei],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
         }
 
         //Apaga a coluna de lei
@@ -58,9 +60,12 @@ class ModifyTableLeis extends Migration
 
     public function down()
     {
-//        Adiciona coluna em processo
+        //        Adiciona coluna em processo
         Schema::table('leis', function (Blueprint $table) {
-            $table->integer('processo_id')->unsigned()->nullable(true);
+            $table
+                ->integer('processo_id')
+                ->unsigned()
+                ->nullable(true);
         });
 
         //Transfere para tabela Leis
@@ -68,31 +73,40 @@ class ModifyTableLeis extends Migration
 
         //Passa a coluna processo
         foreach ($processoleis as $processolei) {
-//            dd($processolei);
-            $lei = DB::table('leis')->where('id', '=', $processolei->lei_id)->get();
-//            $id = $lei['id'];
+            //            dd($processolei);
+            $lei = DB
+                ::table('leis')
+                ->where('id', '=', $processolei->lei_id)
+                ->get();
+            //            $id = $lei['id'];
 
-//            dd($id);
+            //            dd($id);
 
             if ($lei[0]->processo_id == null) {
-                DB::table('leis')->where('id', '=', $processolei->lei_id)->update(['processo_id' => $processolei->processo_id]);
+                DB
+                    ::table('leis')
+                    ->where('id', '=', $processolei->lei_id)
+                    ->update(['processo_id' => $processolei->processo_id]);
             } else {
-                DB::table('leis')->insert(
-                    [
-                        'numero_lei'  => $lei[0]->numero_lei,
-                        'autor'       => $lei[0]->autor,
-                        'assunto'     => $lei[0]->assunto,
-                        'link'        => $lei[0]->link,
+                DB
+                    ::table('leis')
+                    ->insert([
+                        'numero_lei' => $lei[0]->numero_lei,
+                        'autor' => $lei[0]->autor,
+                        'assunto' => $lei[0]->assunto,
+                        'link' => $lei[0]->link,
                         'processo_id' => $processolei->processo_id,
-                        'created_at'  => now(),
-                        'updated_at'  => now(),
-                    ]
-                );
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
             }
         }
 
         Schema::table('leis', function (Blueprint $table) {
-            $table->integer('processo_id')->nullable(false)->change();
+            $table
+                ->integer('processo_id')
+                ->nullable(false)
+                ->change();
         });
 
         //Dropa a tabela processolei

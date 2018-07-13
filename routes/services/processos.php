@@ -1,6 +1,6 @@
 <?php
-
-Route::group(['prefix' => '/processos'], function () { //www.procuradoria.test/processos
+Route::group(['prefix' => '/processos'], function () {
+    //www.procuradoria.test/processos
     //Index
 
     //Create and Store
@@ -10,9 +10,9 @@ Route::group(['prefix' => '/processos'], function () { //www.procuradoria.test/p
     // Search and Detail
     Route::get('/search', 'Processos@search')->name('processos.search');
 
-//    Route::post('/resultSearch', 'Processos@resultSearch')->name('processos.resultSearch');
+    //    Route::post('/resultSearch', 'Processos@resultSearch')->name('processos.resultSearch');
 
-//    Route::get('/resultSearch', 'Processos@search')->name('processos.search');
+    //    Route::get('/resultSearch', 'Processos@search')->name('processos.search');
 
     Route::get('/{id}', 'Processos@show')->name('processos.show');
 

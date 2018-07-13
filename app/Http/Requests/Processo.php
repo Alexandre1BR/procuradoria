@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,19 +23,18 @@ class Processo extends FormRequest
     public function rules()
     {
         return [
-
             'numero_judicial' => 'required',
-//            'numero_alerj'    => 'size:7',
-//            'tribunal_id' => 'required',
-//            'vara' => 'required', //'origem_complemento',
-//            'data_distribuicao',
-//            'acao_id' => 'required',
-//            'relator_id' => 'required',
+            //            'numero_alerj'    => 'size:7',
+            //            'tribunal_id' => 'required',
+            //            'vara' => 'required', //'origem_complemento',
+            //            'data_distribuicao',
+            //            'acao_id' => 'required',
+            //            'relator_id' => 'required',
             'autor' => 'required',
-            'reu'   => 'required',
-//           'procurador_id' => 'required',
-//           'estagiario_id'  => 'required',
-            'tipo_meio_id'  => 'numeric|required|max:99|exists:meios,id',
+            'reu' => 'required',
+            //           'procurador_id' => 'required',
+            //           'estagiario_id'  => 'required',
+            'tipo_meio_id' => 'numeric|required|max:99|exists:meios,id',
         ];
     }
 }

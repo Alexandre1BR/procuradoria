@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['prefix' => '/tribunais'], function () {
     //INDEX
     Route::get('/', 'Tribunais@index')->name('tribunais.index');

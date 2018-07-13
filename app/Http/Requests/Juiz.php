@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,10 +22,6 @@ class Juiz extends FormRequest
      */
     public function rules()
     {
-        return [
-            'nome'          => 'required',
-            'lotacao_id'    => 'required',
-            'tipo_juiz_id'  => 'required',
-        ];
+        return ['nome' => 'required', 'lotacao_id' => 'required', 'tipo_juiz_id' => 'required'];
     }
 }

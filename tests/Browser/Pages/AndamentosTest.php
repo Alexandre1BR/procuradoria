@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Browser;
 
 use App\Data\Repositories\Processos as ProcessosRepository;
@@ -22,9 +21,21 @@ class AndamentosTest extends DuskTestCase
     public function init()
     {
         $faker = app(Faker::class);
-        static::$processoAndamento = $faker->randomElement(app(ProcessosRepository::class)->all()->toArray());
-        static::$tipoAndamentoAndamento = $faker->randomElement(app(TiposAndamentosRepository::class)->all()->toArray());
-        static::$tipoPrazoAndamento = $faker->randomElement(app(TiposPrazosRepository::class)->all()->toArray());
+        static::$processoAndamento = $faker->randomElement(
+            app(ProcessosRepository::class)
+                ->all()
+                ->toArray()
+        );
+        static::$tipoAndamentoAndamento = $faker->randomElement(
+            app(TiposAndamentosRepository::class)
+                ->all()
+                ->toArray()
+        );
+        static::$tipoPrazoAndamento = $faker->randomElement(
+            app(TiposPrazosRepository::class)
+                ->all()
+                ->toArray()
+        );
         static::$dataPrazoAndamento = '01-01-2001';
         static::$dataEntregaAndamento = '01-01-2001';
         static::$observacaoAndamento = $faker->name;
@@ -41,8 +52,16 @@ class AndamentosTest extends DuskTestCase
         $dataEntregaA = static::$dataEntregaAndamento;
         $observacaoA = static::$observacaoAndamento;
 
-        $this->browse(function (Browser $browser) use ($processoA, $tipoAndamentoA, $tipoPrazoA, $dataPrazoA, $dataEntregaA, $observacaoA) {
-            $browser->visit('/andamentos')
+        $this->browse(function (Browser $browser) use (
+            $processoA,
+            $tipoAndamentoA,
+            $tipoPrazoA,
+            $dataPrazoA,
+            $dataEntregaA,
+            $observacaoA
+        ) {
+            $browser
+                ->visit('/andamentos')
                 ->clickLink('Novo')
                 ->select('#processo_id', $processoA['id'])
                 ->select('#tipo_andamento_id', $tipoAndamentoA['id'])
@@ -59,7 +78,8 @@ class AndamentosTest extends DuskTestCase
     public function testValidation()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/andamentos')
+            $browser
+                ->visit('/andamentos')
                 ->clickLink('Novo')
                 ->press('Gravar')
                 ->assertSee('O campo Processo é obrigatório.')
@@ -70,7 +90,8 @@ class AndamentosTest extends DuskTestCase
     public function testWrongSearch()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/andamentos')
+            $browser
+                ->visit('/andamentos')
                 ->type('pesquisa', '45879349875348975387958973489734897345893478957984')
                 ->click('#searchButton')
                 ->waitForText('Nenhum andamento encontrado')
@@ -83,7 +104,8 @@ class AndamentosTest extends DuskTestCase
         $observacaoA = static::$observacaoAndamento;
 
         $this->browse(function (Browser $browser) use ($observacaoA) {
-            $browser->visit('/andamentos')
+            $browser
+                ->visit('/andamentos')
                 ->type('pesquisa', $observacaoA)
                 ->click('#searchButton')
                 ->waitForText($observacaoA)
@@ -95,17 +117,38 @@ class AndamentosTest extends DuskTestCase
     {
         $faker = app(Faker::class);
 
-        $processoA = $faker->randomElement(app(ProcessosRepository::class)->all()->toArray());
-        $tipoAndamentoA = $faker->randomElement(app(TiposAndamentosRepository::class)->all()->toArray());
-        $tipoPrazoA = $faker->randomElement(app(TiposPrazosRepository::class)->all()->toArray());
+        $processoA = $faker->randomElement(
+            app(ProcessosRepository::class)
+                ->all()
+                ->toArray()
+        );
+        $tipoAndamentoA = $faker->randomElement(
+            app(TiposAndamentosRepository::class)
+                ->all()
+                ->toArray()
+        );
+        $tipoPrazoA = $faker->randomElement(
+            app(TiposPrazosRepository::class)
+                ->all()
+                ->toArray()
+        );
         $dataPrazoA = \DateTime::createFromFormat('m-d-Y', '03-02-2333')->format('m-d-Y');
         $dataEntregaA = \DateTime::createFromFormat('m-d-Y', '04-05-2444')->format('m-d-Y');
         $observacaoA = $faker->name;
 
         $numProcesso = static::$processoAndamento['numero_judicial'];
 
-        $this->browse(function (Browser $browser) use ($processoA, $tipoAndamentoA, $tipoPrazoA, $dataPrazoA, $dataEntregaA, $observacaoA, $numProcesso) {
-            $browser->visit('/andamentos')
+        $this->browse(function (Browser $browser) use (
+            $processoA,
+            $tipoAndamentoA,
+            $tipoPrazoA,
+            $dataPrazoA,
+            $dataEntregaA,
+            $observacaoA,
+            $numProcesso
+        ) {
+            $browser
+                ->visit('/andamentos')
                 ->clickLink($numProcesso)
                 ->click('#editar')
                 ->select('#processo_id', $processoA['id'])
@@ -136,8 +179,16 @@ class AndamentosTest extends DuskTestCase
         $dataEntregaA = static::$dataEntregaAndamento;
         $observacaoA = static::$observacaoAndamento;
 
-        $this->browse(function (Browser $browser) use ($processoA,$tipoAndamentoA,$tipoPrazoA,$dataPrazoA,$dataEntregaA,$observacaoA) {
-            $browser->visit('/processos/'.$processoA['id'])
+        $this->browse(function (Browser $browser) use (
+            $processoA,
+            $tipoAndamentoA,
+            $tipoPrazoA,
+            $dataPrazoA,
+            $dataEntregaA,
+            $observacaoA
+        ) {
+            $browser
+                ->visit('/processos/' . $processoA['id'])
                 ->click('#editar')
                 ->click('#buttonAndamentos')
                 ->select('#tipo_andamento_id', $tipoAndamentoA['id'])

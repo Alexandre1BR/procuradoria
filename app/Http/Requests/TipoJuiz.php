@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,8 +22,6 @@ class TipoJuiz extends FormRequest
      */
     public function rules()
     {
-        return [
-            'nome' => 'required',
-        ];
+        return ['nome' => 'required'];
     }
 }

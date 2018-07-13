@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Data\Models\Acao;
@@ -29,8 +28,7 @@ class Acoes extends Controller
      */
     public function create()
     {
-        return view('acoes.form')
-            ->with(['acao' => $this->repository->new()]);
+        return view('acoes.form')->with(['acao' => $this->repository->new()]);
     }
 
     /**
@@ -43,7 +41,8 @@ class Acoes extends Controller
     {
         $repository->createFromRequest($request);
 
-        return redirect()->route('acoes.index')
+        return redirect()
+            ->route('acoes.index')
             ->with($this->getSuccessMessage());
     }
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,9 +22,6 @@ class Acao extends FormRequest
      */
     public function rules()
     {
-        return [
-            'nome'          => 'required',
-            'abreviacao'    => 'required',
-        ];
+        return ['nome' => 'required', 'abreviacao' => 'required'];
     }
 }

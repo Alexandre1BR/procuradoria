@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Browser;
 
 use Faker\Generator as Faker;
@@ -23,7 +22,8 @@ class TribunaisTest extends DuskTestCase
         $nomet = static::$nomeTribunal;
         $abrevt = static::$abreviacaoTribunal;
         $this->browse(function (Browser $browser) use ($nomet, $abrevt) {
-            $browser->visit('/tribunais')
+            $browser
+                ->visit('/tribunais')
                 ->clickLink('Novo')
                 ->type('nome', $nomet)
                 ->type('abreviacao', $abrevt)
@@ -37,7 +37,8 @@ class TribunaisTest extends DuskTestCase
     public function testWrongSearch()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/tribunais')
+            $browser
+                ->visit('/tribunais')
                 ->type('pesquisa', '45879349875348975387958973489734897345893478957984')
                 ->click('#searchButton')
                 ->waitForText('Nenhum tribunal encontrado')
@@ -50,7 +51,8 @@ class TribunaisTest extends DuskTestCase
         $nomet = static::$nomeTribunal;
         $abrevt = static::$abreviacaoTribunal;
         $this->browse(function (Browser $browser) use ($nomet, $abrevt) {
-            $browser->visit('/tribunais')
+            $browser
+                ->visit('/tribunais')
                 ->type('pesquisa', $nomet)
                 ->click('#searchButton')
                 ->waitForText($nomet)
@@ -62,7 +64,8 @@ class TribunaisTest extends DuskTestCase
     {
         $nomet = static::$nomeTribunal;
         $this->browse(function (Browser $browser) use ($nomet) {
-            $browser->visit('/tribunais')
+            $browser
+                ->visit('/tribunais')
                 ->clickLink('Novo')
                 ->press('Gravar')
                 ->assertSee('O campo Nome é obrigatório.')
@@ -75,15 +78,16 @@ class TribunaisTest extends DuskTestCase
         $nomet = static::$nomeTribunal;
         $abrevt = static::$abreviacaoTribunal;
         $this->browse(function (Browser $browser) use ($nomet, $abrevt) {
-            $browser->visit('/tribunais')
+            $browser
+                ->visit('/tribunais')
                 ->clickLink($nomet)
                 ->click('#editar')
-                ->type('nome', '*'.$nomet.'*')
-                ->type('abreviacao', '*'.$abrevt.'*')
+                ->type('nome', '*' . $nomet . '*')
+                ->type('abreviacao', '*' . $abrevt . '*')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->assertSee('*'.$nomet.'*')
-                ->assertSee('*'.$abrevt.'*');
+                ->assertSee('*' . $nomet . '*')
+                ->assertSee('*' . $abrevt . '*');
         });
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -20,16 +19,8 @@ class CreateTipoProcesso extends Migration
             $table->timestamps();
         });
 
-        \App\Data\Models\TipoProcesso::insert(
-                [
-                    'nome' => 'Alerj',
-                ]
-        );
-        \App\Data\Models\TipoProcesso::insert(
-                [
-                    'nome' => 'Outros processos',
-                ]
-        );
+        \App\Data\Models\TipoProcesso::insert(['nome' => 'Alerj']);
+        \App\Data\Models\TipoProcesso::insert(['nome' => 'Outros processos']);
     }
 
     /**

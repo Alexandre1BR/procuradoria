@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Notifications;
 
 use App\Mail\ProcessoChanged;
@@ -43,9 +42,9 @@ class ProcessoCreated extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new ProcessoChanged())
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     /**

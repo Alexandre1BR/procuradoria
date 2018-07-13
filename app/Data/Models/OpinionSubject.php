@@ -2,7 +2,6 @@
 namespace App\Data\Models;
 
 use App\Data\Presenters\OpinionSubjectPresenter;
-
 use Kalnoy\Nestedset\NodeTrait;
 
 class OpinionSubject extends BaseModel
@@ -21,12 +20,7 @@ class OpinionSubject extends BaseModel
      */
     protected $fillable = ['name', 'parent_id'];
 
-    protected $presenters = [
-        'edit_link',
-        'full_name',
-        'level',
-        'indented_name'
-    ];
+    protected $presenters = ['edit_link', 'full_name', 'level', 'indented_name'];
 
     public function getPresenterClass()
     {

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 class TipoEntrada extends BaseModel
@@ -14,7 +13,5 @@ class TipoEntrada extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = [
-        'nome',
-    ];
+    protected $fillable = ['nome'];
 }

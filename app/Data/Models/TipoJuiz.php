@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 class TipoJuiz extends BaseModel
@@ -14,9 +13,7 @@ class TipoJuiz extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = [
-        'nome',
-    ];
+    protected $fillable = ['nome'];
 
     /**
      * @return mixed|string
@@ -24,7 +21,7 @@ class TipoJuiz extends BaseModel
     public function getAbreviacaoAttribute()
     {
         if (strlen($this->nome) > 4) {
-            return substr($this->nome, 0, 3).'.';
+            return substr($this->nome, 0, 3) . '.';
         }
 
         return $this->nome;

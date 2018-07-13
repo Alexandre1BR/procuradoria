@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Browser;
 
 use App\Data\Repositories\Users as UsersRepository;
@@ -21,7 +20,7 @@ use Tests\DuskTestCase;
 
 //    public function testRightLoginAndLogout()
 //    {
-        /*  $user = 'transporteop';
+/*  $user = 'transporteop';
           $this->browse(function (Browser $browser) use ($user) {
               $browser->loginAs(app(UsersRepository::class)->findUserByEmail($user.'@alerj.rj.gov.br'))
                   ->visit('/')

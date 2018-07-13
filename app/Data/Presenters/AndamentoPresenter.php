@@ -40,7 +40,9 @@ class AndamentoPresenter extends BasePresenter
     {
         $data_andamento = $this->wrappedObject->data_andamento;
 
-        return !is_null($data_andamento) ? Carbon::createFromFormat('Y-m-d H:i:s', $data_andamento)->format('Y-m-d') : null;
+        return !is_null($data_andamento)
+            ? Carbon::createFromFormat('Y-m-d H:i:s', $data_andamento)->format('Y-m-d')
+            : null;
     }
 
     /**
@@ -70,6 +72,8 @@ class AndamentoPresenter extends BasePresenter
     {
         $data_andamento = $this->wrappedObject->data_andamento;
 
-        return !is_null($data_andamento) ? Carbon::createFromFormat('Y-m-d H:i:s', $data_andamento)->format('d/m/Y') : null;
+        return !is_null($data_andamento)
+            ? Carbon::createFromFormat('Y-m-d H:i:s', $data_andamento)->format('d/m/Y')
+            : null;
     }
 }

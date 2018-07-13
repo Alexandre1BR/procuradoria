@@ -15,7 +15,7 @@ class Opinions extends Base
             'name' => 'identifier',
             'showName' => 'Identificador',
             'columnSize' => '10%',
-            'type' => 'string'
+            'type' => 'string',
         ];
 
         $array[] = (object) [
@@ -24,7 +24,7 @@ class Opinions extends Base
             'columnSize' => '10%',
             'type' => 'id',
             'relationName' => 'opinionScope',
-            'foreignName' => 'name'
+            'foreignName' => 'name',
         ];
 
         $array[] = (object) [
@@ -33,7 +33,7 @@ class Opinions extends Base
             'columnSize' => '10%',
             'type' => 'id',
             'relationName' => 'attorney',
-            'foreignName' => 'name'
+            'foreignName' => 'name',
         ];
 
         $array[] = (object) [
@@ -42,22 +42,12 @@ class Opinions extends Base
             'columnSize' => '10%',
             'type' => 'id',
             'relationName' => 'opinionType',
-            'foreignName' => 'name'
+            'foreignName' => 'name',
         ];
 
-        $array[] = (object) [
-            'name' => 'formatted_date',
-            'showName' => 'Data',
-            'columnSize' => '10%',
-            'type' => 'date'
-        ];
+        $array[] = (object) ['name' => 'formatted_date', 'showName' => 'Data', 'columnSize' => '10%', 'type' => 'date'];
 
-        $array[] = (object) [
-            'name' => 'abstract',
-            'showName' => 'Ementa',
-            'columnSize' => '50%',
-            'type' => 'string'
-        ];
+        $array[] = (object) ['name' => 'abstract', 'showName' => 'Ementa', 'columnSize' => '50%', 'type' => 'string'];
 
         return $array;
     }
@@ -73,7 +63,7 @@ class Opinions extends Base
             'modelName' => 'opinionScope',
             'attributeArray' => 'opinionScopes',
             'relationName' => 'opinionScope',
-            'foreignName' => 'name'
+            'foreignName' => 'name',
         ];
         $array[] = (object) [
             'name' => 'attorney_id',
@@ -82,7 +72,7 @@ class Opinions extends Base
             'modelName' => 'user',
             'attributeArray' => 'attorneys',
             'relationName' => 'attorney',
-            'foreignName' => 'name'
+            'foreignName' => 'name',
         ];
         $array[] = (object) [
             'name' => 'opinion_type_id',
@@ -91,55 +81,19 @@ class Opinions extends Base
             'modelName' => 'opinionType',
             'attributeArray' => 'opinionTypes',
             'relationName' => 'opinionType',
-            'foreignName' => 'name'
+            'foreignName' => 'name',
         ];
-        $array[] = (object) [
-            'name' => 'suit_number',
-            'showName' => 'Número do Processo',
-            'type' => 'string'
-        ];
-        $array[] = (object) [
-            'name' => 'suit_sheet',
-            'showName' => 'Folha do Processo',
-            'type' => 'string'
-        ];
-        $array[] = (object) [
-            'name' => 'identifier',
-            'showName' => 'Identificador',
-            'type' => 'string'
-        ];
-        $array[] = (object) [
-            'name' => 'date',
-            'showName' => 'Data',
-            'type' => 'date'
-        ];
-        $array[] = (object) [
-            'name' => 'party',
-            'showName' => 'Interessado',
-            'type' => 'string'
-        ];
-        $array[] = (object) [
-            'name' => 'abstract',
-            'showName' => 'Ementa',
-            'type' => 'textarea'
-        ];
-        $array[] = (object) [
-            'name' => 'opinion',
-            'showName' => 'Parecer',
-            'type' => 'textarea'
-        ];
+        $array[] = (object) ['name' => 'suit_number', 'showName' => 'Número do Processo', 'type' => 'string'];
+        $array[] = (object) ['name' => 'suit_sheet', 'showName' => 'Folha do Processo', 'type' => 'string'];
+        $array[] = (object) ['name' => 'identifier', 'showName' => 'Identificador', 'type' => 'string'];
+        $array[] = (object) ['name' => 'date', 'showName' => 'Data', 'type' => 'date'];
+        $array[] = (object) ['name' => 'party', 'showName' => 'Interessado', 'type' => 'string'];
+        $array[] = (object) ['name' => 'abstract', 'showName' => 'Ementa', 'type' => 'textarea'];
+        $array[] = (object) ['name' => 'opinion', 'showName' => 'Parecer', 'type' => 'textarea'];
 
-        $array[] = (object) [
-            'name' => 'pdf_file',
-            'showName' => 'Arquivo .pdf',
-            'type' => 'file'
-        ];
+        $array[] = (object) ['name' => 'pdf_file', 'showName' => 'Arquivo .pdf', 'type' => 'file'];
 
-        $array[] = (object) [
-            'name' => 'doc_file',
-            'showName' => 'Arquivo .doc',
-            'type' => 'file'
-        ];
+        $array[] = (object) ['name' => 'doc_file', 'showName' => 'Arquivo .doc', 'type' => 'file'];
 
         return $array;
     }
@@ -156,7 +110,7 @@ class Opinions extends Base
             'attributeArray' => 'opinionScopes',
             'relationName' => 'opinionScope',
             'foreignName' => 'name',
-            'visible' => true
+            'visible' => true,
         ];
         $array[] = (object) [
             'name' => 'attorney_id',
@@ -166,7 +120,7 @@ class Opinions extends Base
             'attributeArray' => 'attorneys',
             'relationName' => 'attorney',
             'foreignName' => 'name',
-            'visible' => true
+            'visible' => true,
         ];
         $array[] = (object) [
             'name' => 'opinion_type_id',
@@ -176,63 +130,48 @@ class Opinions extends Base
             'attributeArray' => 'opinionTypes',
             'relationName' => 'opinionType',
             'foreignName' => 'name',
-            'visible' => true
+            'visible' => true,
         ];
         $array[] = (object) [
             'name' => 'suit_number',
             'showName' => 'Número do Processo',
             'type' => 'string',
-            'visible' => true
+            'visible' => true,
         ];
         $array[] = (object) [
             'name' => 'suit_sheet',
             'showName' => 'Folha do Processo',
             'type' => 'string',
-            'visible' => true
+            'visible' => true,
         ];
         $array[] = (object) [
             'name' => 'identifier',
             'showName' => 'Identificador',
             'type' => 'string',
-            'visible' => true
+            'visible' => true,
         ];
-        $array[] = (object) [
-            'name' => 'date',
-            'showName' => 'Data',
-            'type' => 'date',
-            'visible' => true
-        ];
-        $array[] = (object) [
-            'name' => 'party',
-            'showName' => 'Interessado',
-            'type' => 'string',
-            'visible' => true
-        ];
-        $array[] = (object) [
-            'name' => 'abstract',
-            'showName' => 'Ementa',
-            'type' => 'textarea',
-            'visible' => true
-        ];
+        $array[] = (object) ['name' => 'date', 'showName' => 'Data', 'type' => 'date', 'visible' => true];
+        $array[] = (object) ['name' => 'party', 'showName' => 'Interessado', 'type' => 'string', 'visible' => true];
+        $array[] = (object) ['name' => 'abstract', 'showName' => 'Ementa', 'type' => 'textarea', 'visible' => true];
         $array[] = (object) [
             'name' => 'opinion',
             'showName' => 'Parecer',
             'type' => 'textarea',
-            'visible' => $isProcurador
+            'visible' => $isProcurador,
         ];
         $array[] = (object) [
             'name' => 'pdf_file_name',
             'showName' => 'PDF',
             'linkName' => 'Visualizar',
             'type' => 'link',
-            'visible' => $isProcurador
+            'visible' => $isProcurador,
         ];
         $array[] = (object) [
             'name' => 'doc_file_name',
             'showName' => 'DOC',
             'linkName' => 'Visualizar',
             'type' => 'link',
-            'visible' => $isProcurador
+            'visible' => $isProcurador,
         ];
 
         return $array;
@@ -276,28 +215,14 @@ class Opinions extends Base
             foreach ($columns as $column) {
                 switch ($column->type) {
                     case 'string':
-                        $query->orWhere(
-                            DB::raw("lower({$column->name})"),
-                            'like',
-                            '%' . $item . '%'
-                        );
+                        $query->orWhere(DB::raw("lower({$column->name})"), 'like', '%' . $item . '%');
                         break;
                     case 'textarea':
-                        $query->orWhere(
-                            DB::raw("lower({$column->name})"),
-                            'like',
-                            '%' . $item . '%'
-                        );
+                        $query->orWhere(DB::raw("lower({$column->name})"), 'like', '%' . $item . '%');
                         break;
                     case 'id':
-                        $query->orWhereHas($column->relationName, function (
-                            $query
-                        ) use ($item, $column) {
-                            $query->whereRaw(
-                                'lower(' .
-                                    $column->foreignName .
-                                    ") like '%{$item}%'"
-                            );
+                        $query->orWhereHas($column->relationName, function ($query) use ($item, $column) {
+                            $query->whereRaw('lower(' . $column->foreignName . ") like '%{$item}%'");
                         });
                         break;
                     case 'date':
@@ -310,8 +235,6 @@ class Opinions extends Base
             }
         });
 
-        return $this->makeResultForSelect(
-            $query->orderBy('updated_at', 'desc')->get()
-        );
+        return $this->makeResultForSelect($query->orderBy('updated_at', 'desc')->get());
     }
 }

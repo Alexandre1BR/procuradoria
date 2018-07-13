@@ -1,7 +1,5 @@
 <?php
-
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Search Engine
@@ -16,7 +14,6 @@ return [
     */
 
     'driver' => env('SCOUT_DRIVER', 'algolia'),
-
     /*
     |--------------------------------------------------------------------------
     | Index Prefix
@@ -29,7 +26,6 @@ return [
     */
 
     'prefix' => env('SCOUT_PREFIX', ''),
-
     /*
     |--------------------------------------------------------------------------
     | Queue Data Syncing
@@ -55,11 +51,7 @@ return [
     |
     */
 
-    'chunk' => [
-        'searchable'   => 500,
-        'unsearchable' => 500,
-    ],
-
+    'chunk' => ['searchable' => 500, 'unsearchable' => 500],
     /*
     |--------------------------------------------------------------------------
     | Algolia Configuration
@@ -71,9 +63,5 @@ return [
     |
     */
 
-    'algolia' => [
-        'id'     => env('ALGOLIA_APP_ID', ''),
-        'secret' => env('ALGOLIA_SECRET', ''),
-    ],
-
+    'algolia' => ['id' => env('ALGOLIA_APP_ID', ''), 'secret' => env('ALGOLIA_SECRET', '')],
 ];

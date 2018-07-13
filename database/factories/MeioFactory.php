@@ -1,5 +1,4 @@
 <?php
-
 use Faker\Generator as Faker;
 
 /*
@@ -14,7 +13,5 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\Data\Models\Meio::class, function (Faker $faker) {
-    return [
-        'nome' => $faker->name,
-    ];
+    return ['nome' => $faker->name];
 });

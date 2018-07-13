@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Exceptions;
 
 use Exception;
@@ -21,24 +20,20 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontFlash = [
-        'password',
-        'password_confirmation',
-    ];
+    protected $dontFlash = ['password', 'password_confirmation'];
 
     private function handlerError($exception)
     {
-//        if (!app()->environment('local') && $this->isPHPException($exception)) {
-//            return view('errors.500');
-//        }
+        //        if (!app()->environment('local') && $this->isPHPException($exception)) {
+        //            return view('errors.500');
+        //        }
 
         return false;
     }
 
     private function isPHPException($exception)
     {
-        return $exception instanceof \ErrorException ||
-            $exception instanceof \Exception;
+        return $exception instanceof \ErrorException || $exception instanceof \Exception;
     }
 
     /**

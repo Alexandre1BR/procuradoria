@@ -26,10 +26,8 @@ class Users extends Base
      *
      * @param Authorization $authorization
      */
-    public function __construct(
-        Authorization $authorization,
-        TiposUsuarios $tiposUsuarios
-    ) {
+    public function __construct(Authorization $authorization, TiposUsuarios $tiposUsuarios)
+    {
         $this->authorization = $authorization;
 
         $this->tiposUsuarios = $tiposUsuarios;
@@ -72,16 +70,15 @@ class Users extends Base
      */
     private function getTipoUsuario($username)
     {
-        return TipoUsuario
-            ::where(
-                'nome',
-                $this->authorization->getUserProfiles($username)->first()
-            )
-            ->first();
+        return TipoUsuario::where('nome', $this->authorization->getUserProfiles($username)->first())->first();
     }
 
     private function getUserTypeFromPermissions($permissions)
     {
+        if ($this->isAdministrador($permissions)) {
+            return 'Administrador';
+        }
+
         return studly_case(
             $this->isType($permissions, 'Administrador')
                 ? 'administrador'
@@ -91,13 +88,18 @@ class Users extends Base
                         : (
                             $this->isType($permissions, 'Assessor')
                                 ? $type = 'assessor'
-                                : (
-                                    $this->isType($permissions, 'Estagi')
-                                        ? $type = 'estagiario'
-                                        : ''
-                                )
+                                : ($this->isType($permissions, 'Estagi') ? $type = 'estagiario' : '')
                         )
                 )
+        );
+    }
+
+    private function isAdministrador($permissions)
+    {
+        return (
+            $this->isType($permissions, 'Procurador') &&
+            $this->isType($permissions, 'Assessor') &&
+            $this->isType($permissions, 'Estagi')
         );
     }
 
@@ -129,13 +131,7 @@ class Users extends Base
         try {
             $credentials = extract_credentials($request);
 
-            if (
-                is_null(
-                    $user = $this->findUserByEmail(
-                        $email = "{$credentials['username']}@alerj.rj.gov.br"
-                    )
-                )
-            ) {
+            if (is_null($user = $this->findUserByEmail($email = "{$credentials['username']}@alerj.rj.gov.br"))) {
                 $user = new User();
 
                 $user->name = $credentials['username'];
@@ -146,9 +142,7 @@ class Users extends Base
 
                 $user->password = Hash::make($email);
 
-                $user->user_type_id = $this->getTipoUsuario(
-                    $credentials['username']
-                )->id;
+                $user->user_type_id = $this->getTipoUsuario($credentials['username'])->id;
 
                 $user->save();
             }
@@ -170,10 +164,9 @@ class Users extends Base
     {
         $type = $this->tiposUsuarios->findByName($type);
 
-        return $this->makeResultForSelect(
-            $this->model::where('user_type_id', $type->id)->get(),
-            'name'
-        );
+        $model = $this->model;
+
+        return $this->makeResultForSelect($model::where('user_type_id', $type->id)->get(), 'name');
     }
 
     /**
@@ -181,7 +174,15 @@ class Users extends Base
      */
     public function all()
     {
-        return User::orderBy('name')->get();
+        $query = User::orderBy('name');
+
+        if (!is_administrator()) {
+            $administrator = TiposUsuarios::findByName('Administrador');
+
+            $query->where('user_type_id', '!=', $administrator->id);
+        }
+
+        return $query->get();
     }
 
     public function notifiables()
@@ -193,9 +194,7 @@ class Users extends Base
     {
         $user = Auth::user();
 
-        $userType = $this->tiposUsuarios->findByName(
-            $this->getUserTypeFromPermissions($permissions)
-        );
+        $userType = $this->tiposUsuarios->findByName($this->getUserTypeFromPermissions($permissions));
 
         if ($userType) {
             $user->user_type_id = $userType->id;

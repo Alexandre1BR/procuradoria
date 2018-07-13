@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 class Meio extends BaseModel
@@ -14,7 +13,5 @@ class Meio extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = [
-        'nome',
-    ];
+    protected $fillable = ['nome'];
 }

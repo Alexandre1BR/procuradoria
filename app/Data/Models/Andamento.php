@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 use App\Data\Presenters\AndamentoPresenter;
@@ -33,11 +32,7 @@ class Andamento extends BaseModel
      *
      * @var array
      */
-    protected $dates = [
-        'data_prazo',
-        'data_entrega',
-        'data_andamento',
-    ];
+    protected $dates = ['data_prazo', 'data_entrega', 'data_andamento'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -86,7 +81,7 @@ class Andamento extends BaseModel
      */
     public function save(array $options = [])
     {
-        Cache::forget('getProcessosData'.$this->processo_id);
+        Cache::forget('getProcessosData' . $this->processo_id);
         parent::save();
     }
 }

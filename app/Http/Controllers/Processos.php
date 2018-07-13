@@ -46,10 +46,8 @@ class Processos extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(
-        ProcessoRequest $request,
-        ProcessosRepository $repository
-    ) {
+    public function store(ProcessoRequest $request, ProcessosRepository $repository)
+    {
         $p = $repository->createFromRequest($request);
 
         $a = new AndamentosRepository();
@@ -66,21 +64,15 @@ class Processos extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function apensar(
-        ApensoRequest $request,
-        ApensosRepository $repository
-    ) {
+    public function apensar(ApensoRequest $request, ApensosRepository $repository)
+    {
         $repository->createFromRequest($request);
 
         return redirect()
             ->route('processos.show', $request->processo_id)
             ->with('processo', ProcessoModel::find($request->processo_id))
             ->with('formDisabled', true)
-            ->with(
-                $this->processosRepository->getProcessosData(
-                    $request->processo_id
-                )
-            )
+            ->with($this->processosRepository->getProcessosData($request->processo_id))
             ->with($this->getSuccessMessage());
     }
 
@@ -90,21 +82,15 @@ class Processos extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function relacionarLei(
-        ProcessoLeiRequest $request,
-        ProcessosLeisRepository $repository
-    ) {
+    public function relacionarLei(ProcessoLeiRequest $request, ProcessosLeisRepository $repository)
+    {
         $repository->createFromRequest($request);
 
         return redirect()
             ->route('processos.show', $request->processo_id)
             ->with('processo', ProcessoModel::find($request->processo_id))
             ->with('formDisabled', true)
-            ->with(
-                $this->processosRepository->getProcessosData(
-                    $request->processo_id
-                )
-            )
+            ->with($this->processosRepository->getProcessosData($request->processo_id))
             ->with($this->getSuccessMessage());
     }
 
@@ -116,12 +102,7 @@ class Processos extends Controller
     public function show($id)
     {
         return view('processos.form')
-            ->with(
-                'processo',
-                ProcessoModel
-                    ::withoutGlobalScope(ProcessoScope::class)
-                    ->find($id)
-            )
+            ->with('processo', ProcessoModel::withoutGlobalScope(ProcessoScope::class)->find($id))
             ->with('formDisabled', true)
             ->with($this->processosRepository->getProcessosData($id));
     }
@@ -133,9 +114,7 @@ class Processos extends Controller
      */
     public function index(Request $request)
     {
-        return $request->expectsJson()
-            ? $this->processosRepository->filter($request)
-            : $this->buildView($request);
+        return $request->expectsJson() ? $this->processosRepository->filter($request) : $this->buildView($request);
     }
 
     /**
@@ -147,14 +126,8 @@ class Processos extends Controller
     {
         return view('home.index')
             ->with('pesquisa', $request->get('search'))
-            ->with(
-                'processos_arquivados_incluidos',
-                $request->get('processos_arquivados_incluidos')
-            )
-            ->with(
-                'processos_arquivados_apenas',
-                $request->get('processos_arquivados_apenas')
-            )
+            ->with('processos_arquivados_incluidos', $request->get('processos_arquivados_incluidos'))
+            ->with('processos_arquivados_apenas', $request->get('processos_arquivados_apenas'))
             ->with('processo', new Processo());
     }
 }

@@ -45,14 +45,14 @@ return [
                     'driver' => 'local',
                     'root' => storage_path('pareceres'),
                     'url' => env('APP_URL') . '/storage/pareceres',
-                    'visibility' => 'public'
+                    'visibility' => 'public',
                 ],
             'public' =>
                 [
                     'driver' => 'local',
                     'root' => storage_path('app/public'),
                     'url' => env('APP_URL') . '/storage',
-                    'visibility' => 'public'
+                    'visibility' => 'public',
                 ],
             's3' =>
                 [
@@ -60,7 +60,7 @@ return [
                     'key' => env('AWS_ACCESS_KEY_ID'),
                     'secret' => env('AWS_SECRET_ACCESS_KEY'),
                     'region' => env('AWS_DEFAULT_REGION'),
-                    'bucket' => env('AWS_BUCKET')
-                ]
-        ]
+                    'bucket' => env('AWS_BUCKET'),
+                ],
+        ],
 ];

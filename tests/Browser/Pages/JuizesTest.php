@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Browser;
 
 use App\Data\Repositories\TiposJuizes as TiposJuizesRepository;
@@ -19,8 +18,16 @@ class JuizesTest extends DuskTestCase
         $faker = app(Faker::class);
         static::$nomeJuiz = app(Faker::class)->name;
 
-        static::$tribunal = $faker->randomElement(app(TribunaisRepository::class)->searchFromRequest()->toArray());
-        static::$tipoJuiz = $faker->randomElement(app(TiposJuizesRepository::class)->all()->toArray());
+        static::$tribunal = $faker->randomElement(
+            app(TribunaisRepository::class)
+                ->searchFromRequest()
+                ->toArray()
+        );
+        static::$tipoJuiz = $faker->randomElement(
+            app(TiposJuizesRepository::class)
+                ->all()
+                ->toArray()
+        );
     }
 
     public function testInsert()
@@ -31,7 +38,8 @@ class JuizesTest extends DuskTestCase
         $tipoJuiz = static::$tipoJuiz;
 
         $this->browse(function (Browser $browser) use ($nomej, $tribunal, $tipoJuiz) {
-            $browser->visit('/juizes')
+            $browser
+                ->visit('/juizes')
                 ->clickLink('Novo')
                 ->type('nome', $nomej)
                 ->select('lotacao_id', $tribunal['id'])
@@ -45,7 +53,8 @@ class JuizesTest extends DuskTestCase
     public function testValidation()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/juizes')
+            $browser
+                ->visit('/juizes')
                 ->clickLink('Novo')
                 ->press('Gravar')
                 ->assertSee('O campo Nome é obrigatório.')
@@ -57,7 +66,8 @@ class JuizesTest extends DuskTestCase
     public function testWrongSearch()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/juizes')
+            $browser
+                ->visit('/juizes')
                 ->type('pesquisa', '45879349875348975387958973489734897345893478957984')
                 ->click('#searchButton')
                 ->waitForText('Nenhum juiz encontrado')
@@ -70,7 +80,8 @@ class JuizesTest extends DuskTestCase
         $nomej = static::$nomeJuiz;
 
         $this->browse(function (Browser $browser) use ($nomej) {
-            $browser->visit('/juizes')
+            $browser
+                ->visit('/juizes')
                 ->type('pesquisa', $nomej)
                 ->click('#searchButton')
                 ->waitForText($nomej)
@@ -83,19 +94,28 @@ class JuizesTest extends DuskTestCase
         $faker = app(Faker::class);
 
         $nomej = static::$nomeJuiz;
-        $tribunal = $faker->randomElement(app(TribunaisRepository::class)->searchFromRequest()->toArray());
-        $tipoJuiz = $faker->randomElement(app(TiposJuizesRepository::class)->all()->toArray());
+        $tribunal = $faker->randomElement(
+            app(TribunaisRepository::class)
+                ->searchFromRequest()
+                ->toArray()
+        );
+        $tipoJuiz = $faker->randomElement(
+            app(TiposJuizesRepository::class)
+                ->all()
+                ->toArray()
+        );
 
         $this->browse(function (Browser $browser) use ($nomej, $tribunal, $tipoJuiz) {
-            $browser->visit('/juizes')
+            $browser
+                ->visit('/juizes')
                 ->clickLink($nomej)
                 ->click('#editar')
-                ->type('nome', '*'.$nomej.'*')
+                ->type('nome', '*' . $nomej . '*')
                 ->select('lotacao_id', $tribunal['id'])
                 ->select('tipo_juiz_id', $tipoJuiz['id'])
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->assertSee('*'.$nomej.'*')
+                ->assertSee('*' . $nomej . '*')
                 ->assertSee($tribunal['nome'])
                 ->assertSee($tipoJuiz['nome']);
         });

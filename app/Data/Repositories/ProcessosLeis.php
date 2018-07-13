@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Repositories;
 
 use App\Data\Models\ProcessoLei as ProcessoLeiModel;
@@ -10,7 +9,8 @@ class ProcessosLeis extends Base
 
     public function whereProcessoAndLeiCount($processo_id, $lei_id)
     {
-        return ProcessoLeiModel::where('processo_id', '=', $processo_id)
+        return ProcessoLeiModel
+            ::where('processo_id', '=', $processo_id)
             ->where('lei_id', '=', $lei_id)
             ->count();
     }

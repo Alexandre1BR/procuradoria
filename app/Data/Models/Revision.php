@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 use App\Data\Presenters\RevisionPresenter;
@@ -14,9 +13,7 @@ class Revision extends BaseModel
     /**
      * @var array
      */
-    protected $relations = [
-        'user',
-    ];
+    protected $relations = ['user'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

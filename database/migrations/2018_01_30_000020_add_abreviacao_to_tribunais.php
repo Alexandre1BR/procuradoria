@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +13,11 @@ class AddAbreviacaoToTribunais extends Migration
     public function up()
     {
         Schema::table('tribunais', function (Blueprint $table) {
-            $table->string('abreviacao')->nullable()->unique()->index();
+            $table
+                ->string('abreviacao')
+                ->nullable()
+                ->unique()
+                ->index();
         });
 
         \App\Data\Models\Tribunal::all()->each(function ($tribunal) {
@@ -24,7 +27,10 @@ class AddAbreviacaoToTribunais extends Migration
         });
 
         Schema::table('tribunais', function (Blueprint $table) {
-            $table->string('abreviacao')->nullable(false)->change();
+            $table
+                ->string('abreviacao')
+                ->nullable(false)
+                ->change();
         });
     }
 

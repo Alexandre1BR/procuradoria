@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Data\Repositories\Andamentos as AndamentosRepository;
@@ -36,8 +35,8 @@ class Agenda extends Controller
             return view('agenda.index');
         } else {
             return view('andamentos.index')
-                    ->with('pesquisa', $pesquisa)
-                    ->with('andamentos', $andamentosRepository->search($request));
+                ->with('pesquisa', $pesquisa)
+                ->with('andamentos', $andamentosRepository->search($request));
         }
     }
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Notifications;
 
 use App\Data\Models\Processo;
@@ -41,7 +40,7 @@ class ProcessoUpdated extends Notification implements ShouldQueue
      */
     private function getMessage()
     {
-        return 'Os dados do processo '.$this->processo->numero_judicial.' sofreram alterações';
+        return 'Os dados do processo ' . $this->processo->numero_judicial . ' sofreram alterações';
     }
 
     /**
@@ -89,7 +88,7 @@ class ProcessoUpdated extends Notification implements ShouldQueue
         $message = (new MailMessage())->line($this->getMessage());
 
         $this->getNotifiables()->each(function ($manager) use ($message) {
-            $message->line("$manager->type: {$manager->name}");
+            $message->line("{$manager->type}: {$manager->name}");
         });
 
         $message->action('Ver processo', route('processos.show', $this->processo->id));
@@ -129,7 +128,7 @@ class ProcessoUpdated extends Notification implements ShouldQueue
 
         $this->getNotifiables()->each(function ($manager) use ($message) {
             $message->attachment(function ($attachment) use ($manager) {
-                $attachment->title("$manager->type} notificado: {$manager->name}");
+                $attachment->title("{$manager->type}} notificado: {$manager->name}");
             });
         });
 

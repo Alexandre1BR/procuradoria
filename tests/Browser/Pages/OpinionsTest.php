@@ -2,84 +2,106 @@
 namespace Tests\Browser;
 
 use App\Data\Repositories\Leis as LeisRepository;
-use App\Data\Repositories\NiveisFederativos as NiveisFederativosRepository;
-use App\Data\Repositories\Processos as ProcessosRepository;
-use App\Data\Repositories\TiposLeis as TiposLeisRepository;
-use App\Http\Controllers\Leis;
+use App\Data\Repositories\Opinions as OpinionsRepository;
+use App\Data\Repositories\OpinionScopes as OpinionScopesRepository;
+use App\Data\Repositories\OpinionSubjects as OpinionSubjectsRepository;
+use App\Data\Repositories\OpinionTypes as OpinionTypesRepository;
+use App\Data\Repositories\Users as UsersRepository;
 use Faker\Generator as Faker;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class LeisTest extends DuskTestCase
+class OpinionsTest extends DuskTestCase
 {
-    private static $numero_lei;
-    private static $autor;
-    private static $assunto;
-    private static $link;
-    private static $artigo;
-    private static $paragrafo;
-    private static $inciso;
-    private static $alinea;
-    private static $item;
-    private static $nivel_federativo;
-    private static $tipo_lei;
-    private static $processo;
-    private static $insertProcessoId;
-    private static $insertLeiId;
-
-    public function insertProcesso()
+    public function addProperty($object, $array)
     {
-        $numeroJudicialP = static::$numero_lei;
-        $autorP = static::$autor;
-        $reuP = static::$assunto;
-
-        $this->browse(function (Browser $browser) use ($numeroJudicialP, $autorP, $reuP) {
-            $browser
-                ->visit('/')
-                ->clickLink('Novo')
-                ->type('#numero_judicial', $numeroJudicialP)
-                ->type('#autor', $autorP)
-                ->type('#reu', $reuP)
-                ->press('Gravar')
-                ->waitForText('Gravado com sucesso', 40)
-                ->waitForText($numeroJudicialP);
-        });
+        return (object) array_merge($array, (array) $object);
     }
 
-    public function init()
+    public function generateRandomObjects(): array
     {
         $faker = app(Faker::class);
 
-        static::$numero_lei = (string) $faker->randomNumber(4) . '/' . (string) $faker->randomNumber(4);
+        $opinionTypesRepository = app(OpinionTypesRepository::class);
+        $opinionScopesRepository = app(OpinionScopesRepository::class);
+        $usersRepository = app(UsersRepository::class);
+        $opinionsRepository = app(OpinionsRepository::class);
+        $opinionSubjectsRepository = app(OpinionSubjectsRepository::class);
 
-        static::$autor = $faker->name;
-        static::$assunto = $faker->name;
-        static::$link = $faker->name;
+        $newOpinion = [];
+        $newSubject = [];
 
-        static::$artigo = $faker->randomNumber(2);
-        static::$paragrafo = $faker->randomNumber(2);
-        static::$inciso = $faker->randomNumber(2);
-        static::$alinea = $faker->randomNumber(2);
-        static::$item = $faker->randomNumber(2);
+        $attributes = $opinionsRepository->formAttributes();
+        foreach ($attributes as $attr) {
+            $newAttr = '';
+            switch ($attr->type) {
+                case 'string':
+                    $newAttr = $faker->name;
+                    break;
+                case 'id':
+                    $newAttr = $faker->randomElement(${$attr->modelName . 'sRepository'}->all()->toArray())['id'];
+                    break;
+                case 'date':
+                    $newAttr = $faker->date;
+                    break;
+            }
+            $newOpinion[$attr->name] = $newAttr;
+        }
 
-        static::$nivel_federativo = (object) $faker->randomElement(
-            app(NiveisFederativosRepository::class)
-                ->all()
-                ->toArray()
-        );
-        static::$tipo_lei = (object) $faker->randomElement(
-            app(TiposLeisRepository::class)
-                ->all()
-                ->toArray()
-        );
+        $attributes = $opinionSubjectsRepository->formAttributes();
+        foreach ($attributes as $attr) {
+            $newAttr = '';
+            switch ($attr->type) {
+                case 'string':
+                    $newAttr = $faker->name;
+                    break;
+                case 'id':
+                    $newAttr = $faker->randomElement(${$attr->modelName . 'sRepository'}->all()->toArray())['id'];
+                    break;
+                case 'date':
+                    $newAttr = $faker->date;
+                    break;
+            }
+            $newSubject[$attr->name] = $newAttr;
+        }
 
-        $this->insertProcesso();
-        static::$insertProcessoId = (app(ProcessosRepository::class)->maxId());
-        static::$processo = (object) $faker->randomElement(
-            app(ProcessosRepository::class)
-                ->all()
-                ->toArray()
-        );
+        $newOpinionsSubject = [];
+        $newOpinionsSubject['opinion_id'] = $faker->randomElement($opinionsRepository->all()->toArray())['id'];
+        $newOpinionsSubject['subject_id'] = $faker->randomElement($opinionSubjectsRepository->all()->toArray())['id'];
+
+        $array = [];
+        $array['opinion'] = $newOpinion;
+        $array['opinionSubject'] = $newSubject;
+        $array['opinionsSubject'] = $newOpinionsSubject;
+
+        return $array;
+    }
+
+    public function testInsertOpinion()
+    {
+        $newOpinion = $this->generateRandomObjects()['opinion'];
+
+        $opinionsRepository = app(OpinionsRepository::class);
+        $attributes = $opinionsRepository->formAttributes();
+        $toSee = $opinionsRepository->attributesShowing();
+
+        $this->browse(function (Browser $browser) use ($newOpinion, $attributes) {
+            $browser->visit('/opinioes')->clickLink('Novo');
+            foreach ($attributes as $attr) {
+                switch ($attr->type) {
+                    case 'string':
+                        $browser->type('#' . $attr->name, $newOpinion[$attr->name]);
+                        break;
+                    case 'id':
+                        $browser->select('#' . $attr->name, $newOpinion[$attr->name]);
+                        break;
+                    case 'date':
+                        $browser->keys('#' . $attr->name, $newOpinion[$attr->name]);
+                        break;
+                }
+                $browser->press('Gravar')->assertSee('Gravado com sucesso');
+            }
+        });
     }
 
     public function testVisit()

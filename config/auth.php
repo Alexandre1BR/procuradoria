@@ -1,7 +1,5 @@
 <?php
-
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -13,21 +11,17 @@ return [
     |
     */
 
-    'defaults' => [
-        'guard'     => 'web',
-        'passwords' => 'users',
-    ],
-
-    'authentication' => [
-        'mock'    => env('APP_AUTHENTICATION_MOCKED', false),
-        'enabled' => env('APP_AUTHENTICATION_ENABLED', env('APP_AUTHENTICATION', true)),
-    ],
-
-    'authorization' => [
-        'mock'    => env('APP_AUTHORIZATION_MOCKED', false),
-        'enabled' => env('APP_AUTHORIZATION_ENABLED', env('APP_AUTHORIZATION', true)),
-    ],
-
+    'defaults' => ['guard' => 'web', 'passwords' => 'users'],
+    'authentication' =>
+        [
+            'mock' => env('APP_AUTHENTICATION_MOCKED', false),
+            'enabled' => env('APP_AUTHENTICATION_ENABLED', env('APP_AUTHENTICATION', true)),
+        ],
+    'authorization' =>
+        [
+            'mock' => env('APP_AUTHORIZATION_MOCKED', false),
+            'enabled' => env('APP_AUTHORIZATION_ENABLED', env('APP_AUTHORIZATION', true)),
+        ],
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -45,18 +39,11 @@ return [
     |
     */
 
-    'guards' => [
-        'web' => [
-            'driver'   => 'session',
-            'provider' => 'users',
+    'guards' =>
+        [
+            'web' => ['driver' => 'session', 'provider' => 'users'],
+            'api' => ['driver' => 'token', 'provider' => 'users'],
         ],
-
-        'api' => [
-            'driver'   => 'token',
-            'provider' => 'users',
-        ],
-    ],
-
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -74,18 +61,15 @@ return [
     |
     */
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model'  => App\Data\Models\User::class,
+    'providers' =>
+        [
+            'users' => ['driver' => 'eloquent', 'model' => App\Data\Models\User::class],
+
+            // 'users' => [
+            //     'driver' => 'database',
+            //     'table' => 'users',
+            // ],
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-    ],
-
     /*
     |--------------------------------------------------------------------------
     | Resetting Passwords
@@ -101,12 +85,5 @@ return [
     |
     */
 
-    'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table'    => 'password_resets',
-            'expire'   => 60,
-        ],
-    ],
-
+    'passwords' => ['users' => ['provider' => 'users', 'table' => 'password_resets', 'expire' => 60]],
 ];

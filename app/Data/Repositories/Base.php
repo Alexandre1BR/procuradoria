@@ -18,9 +18,7 @@ abstract class Base
      */
     public function createFromRequest(Request $request)
     {
-        is_null($id = $request->input('id'))
-            ? $model = new $this->model()
-            : $model = $this->model::find($id);
+        is_null($id = $request->input('id')) ? $model = new $this->model() : $model = $this->model::find($id);
         $model->fill($request->all());
 
         $model->save();
@@ -37,9 +35,7 @@ abstract class Base
      */
     public function create($data)
     {
-        $model = is_null($id = isset($data['id']) ? $data['id'] : null)
-            ? new $this->model()
-            : $this->model::find($id);
+        $model = is_null($id = isset($data['id']) ? $data['id'] : null) ? new $this->model() : $this->model::find($id);
 
         $model->fill($data);
 
@@ -90,6 +86,7 @@ abstract class Base
      * @param $attribute
      * @param $sign
      * @param $value
+     *
      * @return mixed
      */
     public function whereNull($attribute)
@@ -146,11 +143,8 @@ abstract class Base
      *
      * @return mixed
      */
-    protected function makeResultForSelect(
-        $result,
-        $label = 'nome',
-        $value = 'id'
-    ) {
+    protected function makeResultForSelect($result, $label = 'nome', $value = 'id')
+    {
         return $result->map(function ($row) use ($value, $label) {
             $row['text'] = empty($row->text) ? $row[$label] : $row->text;
 

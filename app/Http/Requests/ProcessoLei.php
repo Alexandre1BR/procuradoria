@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use App\Rules\UniqueProcessoLei;
@@ -24,9 +23,6 @@ class ProcessoLei extends FormRequest
      */
     public function rules()
     {
-        return [
-            'processo_id' => ['required', new UniqueProcessoLei()],
-            'lei_id'      => 'required',
-        ];
+        return ['processo_id' => ['required', new UniqueProcessoLei()], 'lei_id' => 'required'];
     }
 }

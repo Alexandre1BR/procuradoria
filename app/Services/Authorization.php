@@ -38,7 +38,7 @@ class Authorization
         return collect(
             $this->remoteRequest->post(static::PERMISSIONS_URL, [
                 'username' => $username,
-                'system' => static::SYSTEM_NAME
+                'system' => static::SYSTEM_NAME,
             ])
         );
     }

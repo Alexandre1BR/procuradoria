@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 use App\Data\Presenters\ProcessoPresenter;
@@ -18,23 +17,12 @@ class Processo extends BaseModel
     /**
      * @var array
      */
-    protected $dates = [
-        'data_distribuicao',
-        'data_recebimento',
-        'data_arquivamento',
-    ];
+    protected $dates = ['data_distribuicao', 'data_recebimento', 'data_arquivamento'];
 
     /**
      * @var array
      */
-    protected $with = [
-        'acao',
-        'tribunal',
-        'procurador',
-        'assessor',
-        'estagiario',
-        'tags',
-    ];
+    protected $with = ['acao', 'tribunal', 'procurador', 'assessor', 'estagiario', 'tags'];
 
     /**
      * The attributes that are mass assignable.
@@ -73,42 +61,39 @@ class Processo extends BaseModel
     /**
      * @var array
      */
-    protected $presenters = [
-        'data_distribuicao_formatado',
-        'data_recebimento_formatado',
-    ];
+    protected $presenters = ['data_distribuicao_formatado', 'data_recebimento_formatado'];
 
     /**
      * @var array
      */
     protected $dataTypes = [
-        'numero_judicial'               => 'id',
-        'numero_alerj'                  => 'id',
-        'tribunal_id'                   => 'id',
-        'vara'                          => 'string',
-        'data_distribuicao'             => 'date',
-        'data_recebimento'              => 'date',
-        'acao_id'                       => 'id',
-        'juiz_id'                       => 'id',
-        'relator_id'                    => 'id',
-        'apensos_obs'                   => 'string',
-        'autor'                         => 'string',
-        'reu'                           => 'string',
-        'objeto'                        => 'string',
-        'merito'                        => 'string',
-        'liminar'                       => 'string',
-        'recurso'                       => 'string',
-        'procurador_id'                 => 'id',
-        'estagiario_id'                 => 'id',
-        'assessor_id'                   => 'id',
-        'tipo_meio_id'                  => 'id',
-        'observacao'                    => 'string',
-        'data_arquivamento'             => 'date',
-        'observacao_arquivamento'       => 'string',
-        'tags'                          => 'tags',
-        'link'                          => 'link',
-        'site_alerj_link'               => 'link',
-        'tipo_processo_id'              => 'id',
+        'numero_judicial' => 'id',
+        'numero_alerj' => 'id',
+        'tribunal_id' => 'id',
+        'vara' => 'string',
+        'data_distribuicao' => 'date',
+        'data_recebimento' => 'date',
+        'acao_id' => 'id',
+        'juiz_id' => 'id',
+        'relator_id' => 'id',
+        'apensos_obs' => 'string',
+        'autor' => 'string',
+        'reu' => 'string',
+        'objeto' => 'string',
+        'merito' => 'string',
+        'liminar' => 'string',
+        'recurso' => 'string',
+        'procurador_id' => 'id',
+        'estagiario_id' => 'id',
+        'assessor_id' => 'id',
+        'tipo_meio_id' => 'id',
+        'observacao' => 'string',
+        'data_arquivamento' => 'date',
+        'observacao_arquivamento' => 'string',
+        'tags' => 'tags',
+        'link' => 'link',
+        'site_alerj_link' => 'link',
+        'tipo_processo_id' => 'id',
     ];
 
     /**
@@ -116,10 +101,7 @@ class Processo extends BaseModel
      *
      * @var array
      */
-    protected $dispatchesEvents = [
-        'created' => ProcessoCreated::class,
-        'updated' => ProcessoUpdated::class,
-    ];
+    protected $dispatchesEvents = ['created' => ProcessoCreated::class, 'updated' => ProcessoUpdated::class];
 
     /**
      * @return mixed
@@ -150,7 +132,7 @@ class Processo extends BaseModel
      */
     public function andamentos()
     {
-        return  $this->hasMany(Andamento::class);
+        return $this->hasMany(Andamento::class);
     }
 
     /**
@@ -257,7 +239,7 @@ class Processo extends BaseModel
      */
     public function save(array $options = [])
     {
-        Cache::forget('getProcessosData'.$this->id);
+        Cache::forget('getProcessosData' . $this->id);
 
         parent::save();
     }
@@ -292,15 +274,19 @@ class Processo extends BaseModel
      */
     public function getNotifiablesAttribute()
     {
-        $notifiables = $this->getResponsibles()->reject(function ($responsavel) {
-            return $responsavel->no_notifications;
-        })->merge(
-            app(Users::class)->notifiables()->map(function ($user) {
-                $user->type = 'Usuário';
-
-                return $user;
+        $notifiables = $this->getResponsibles()
+            ->reject(function ($responsavel) {
+                return $responsavel->no_notifications;
             })
-        );
+            ->merge(
+                app(Users::class)
+                    ->notifiables()
+                    ->map(function ($user) {
+                        $user->type = 'Usuário';
+
+                        return $user;
+                    })
+            );
 
         return $notifiables;
     }

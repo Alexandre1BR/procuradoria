@@ -29,7 +29,7 @@ class Opinion extends FormRequest
             'date' => 'required',
             'abstract' => 'required',
             'pdf_file' => 'required|mimes:pdf',
-            'doc_file' => 'required|mimes:doc'
+            'doc_file' => 'required|mimes:doc',
         ];
     }
 }

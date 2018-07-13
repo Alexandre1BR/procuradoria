@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 class Notification extends BaseModel
@@ -14,11 +13,5 @@ class Notification extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = [
-        'hash',
-        'subject',
-        'subject_id',
-        'via',
-        'to',
-    ];
+    protected $fillable = ['hash', 'subject', 'subject_id', 'via', 'to'];
 }

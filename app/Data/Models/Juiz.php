@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 class Juiz extends BaseModel
@@ -19,11 +18,7 @@ class Juiz extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = [
-        'nome',
-        'lotacao_id',
-        'tipo_juiz_id',
-    ];
+    protected $fillable = ['nome', 'lotacao_id', 'tipo_juiz_id'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

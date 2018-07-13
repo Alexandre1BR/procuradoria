@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -21,7 +20,11 @@ class CreateTagTables extends Migration
             $table->integer('taggable_id')->unsigned();
             $table->string('taggable_type');
 
-            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+            $table
+                ->foreign('tag_id')
+                ->references('id')
+                ->on('tags')
+                ->onDelete('cascade');
         });
     }
 

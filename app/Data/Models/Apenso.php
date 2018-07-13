@@ -15,10 +15,7 @@ class Apenso extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = [
-        'processo_id',
-        'apensado_id',
-    ];
+    protected $fillable = ['processo_id', 'apensado_id'];
 
     /**
      * @var array
@@ -48,8 +45,8 @@ class Apenso extends BaseModel
      */
     public function save(array $options = [])
     {
-        Cache::forget('getProcessosData'.$this->processo_id);
-        Cache::forget('getProcessosData'.$this->apensado_id);
+        Cache::forget('getProcessosData' . $this->processo_id);
+        Cache::forget('getProcessosData' . $this->apensado_id);
         parent::save();
     }
 }

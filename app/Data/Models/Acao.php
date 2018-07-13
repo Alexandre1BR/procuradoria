@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 class Acao extends BaseModel
@@ -14,8 +13,5 @@ class Acao extends BaseModel
     /**
      * @var array
      */
-    protected $fillable = [
-        'nome',
-        'abreviacao',
-    ];
+    protected $fillable = ['nome', 'abreviacao'];
 }

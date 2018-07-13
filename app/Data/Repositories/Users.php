@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Repositories;
 
 use App\Data\Models\TipoUsuario;
@@ -83,6 +82,10 @@ class Users extends Base
 
     private function getUserTypeFromPermissions($permissions)
     {
+        if ($this->isAdministrador($permissions)) {
+            return 'Administrador';
+        }
+
         return studly_case(
             $this->isType($permissions, 'Administrador')
                 ? 'administrador'
@@ -102,6 +105,15 @@ class Users extends Base
         );
     }
 
+    private function isAdministrador($permissions)
+    {
+        return (
+            $this->isType($permissions, 'Procurador') &&
+            $this->isType($permissions, 'Assessor') &&
+            $this->isType($permissions, 'Estagi')
+        );
+    }
+
     /**
      * @param $permissions
      * @param $type
@@ -110,12 +122,13 @@ class Users extends Base
      */
     private function isType($permissions, $type)
     {
-        return
+        return (
             $permissions
                 ->filter(function ($user) use ($type) {
                     return starts_with($user['nomeFuncao'], $type);
                 })
-                ->count() > 0;
+                ->count() > 0
+        );
     }
 
     /**

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 use App\Data\Presenters\OpinionSubjectPresenter;
@@ -25,7 +24,7 @@ class OpinionSubject extends BaseModel
         'edit_link',
         'full_name',
         'level',
-        'indented_name',
+        'indented_name'
     ];
 
     public function getPresenterClass()

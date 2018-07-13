@@ -1,5 +1,4 @@
 <?php
-
 use App\Data\Models\OpinionSubject;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -48,80 +47,95 @@ class AddNestedSubjects extends Migration
     public function populate()
     {
         OpinionSubject::create([
-            'name'     => 'Root',
-            'children' => [
+            'name' => 'Root',
+            'children' =>
+                [
                     [
-                        'name'     => 'Servidor Público',
-                        'children' => [
+                        'name' => 'Servidor Público',
+                        'children' =>
+                            [
                                 ['name' => 'Abono permanência'],
                                 [
-                                    'name'     => 'Aposentadoria',
-                                    'children' => [
+                                    'name' => 'Aposentadoria',
+                                    'children' =>
+                                        [
                                             ['name' => 'Voluntária'],
                                             ['name' => 'Compulsória'],
                                             ['name' => 'Invalidez'],
                                             [
-                                                'name'     => 'Revisão dos proventos',
-                                                'children' => [
+                                                'name' =>
+                                                    'Revisão dos proventos',
+                                                'children' =>
+                                                    [
                                                         [
-                                                            'name' => 'Gratificação Especial de Serviço de Segurança',
-                                                        ],
-                                                    ],
+                                                            'name' =>
+                                                                'Gratificação Especial de Serviço de Segurança'
+                                                        ]
+                                                    ]
                                             ],
                                             [
-                                                'name' => 'Tempo Especial para Aposentadoria Segurança',
+                                                'name' =>
+                                                    'Tempo Especial para Aposentadoria Segurança'
                                             ],
                                             [
-                                                'name' => 'Sustação de Imposto de Renda',
+                                                'name' =>
+                                                    'Sustação de Imposto de Renda'
                                             ],
                                             [
-                                                'name' => 'Suspensão de desconto previdenciário',
-                                            ],
-                                        ],
+                                                'name' =>
+                                                    'Suspensão de desconto previdenciário'
+                                            ]
+                                        ]
                                 ],
                                 ['name' => 'Adicional de qualificação'],
                                 ['name' => 'Averbação de tempo de serviço'],
                                 [
-                                    'name' => 'Cancelamento de desconto previdenciário',
+                                    'name' =>
+                                        'Cancelamento de desconto previdenciário'
                                 ],
                                 ['name' => '1/3 de férias indenizado'],
                                 [
-                                    'name' => 'Auxílio funeral, encerramento de folha e 13º salário',
+                                    'name' =>
+                                        'Auxílio funeral, encerramento de folha e 13º salário'
                                 ],
                                 ['name' => 'Reversão de pensão IPALERJ'],
                                 [
-                                    'name' => 'Bolsa de reforço escolar/Auxílio-educação',
+                                    'name' =>
+                                        'Bolsa de reforço escolar/Auxílio-educação'
                                 ],
                                 ['name' => 'Revisão de incorporação'],
                                 ['name' => 'Inclusão de dependentes'],
                                 [
-                                    'name' => 'Gratificação dedicação legislativa',
+                                    'name' =>
+                                        'Gratificação dedicação legislativa'
                                 ],
                                 ['name' => 'Estágio'],
                                 [
-                                    'name' => 'Gratificação Especial de Serviço de Segurança',
-                                ],
-                            ],
+                                    'name' =>
+                                        'Gratificação Especial de Serviço de Segurança'
+                                ]
+                            ]
                     ],
                     ['name' => 'Licitação'],
                     ['name' => 'Contrato Administrativo'],
                     ['name' => 'CPI'],
                     [
-                        'name'     => 'Patrimonial',
-                        'children' => [['name' => 'Veículos']],
+                        'name' => 'Patrimonial',
+                        'children' => [['name' => 'Veículos']]
                     ],
                     ['name' => 'Estatuto dos Parlamentares'],
                     [
-                        'name'     => 'Judicial',
-                        'children' => [
+                        'name' => 'Judicial',
+                        'children' =>
+                            [
                                 ['name' => 'ADIN'],
                                 ['name' => 'RI'],
                                 ['name' => 'Ação Popular'],
                                 ['name' => 'MS'],
-                                ['name' => 'Ações Diversas'],
-                            ],
-                    ],
-                ],
+                                ['name' => 'Ações Diversas']
+                            ]
+                    ]
+                ]
         ]);
     }
 }

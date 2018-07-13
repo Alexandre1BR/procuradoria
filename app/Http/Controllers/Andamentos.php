@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Data\Models\Andamento;
@@ -129,12 +128,16 @@ class Andamentos extends Controller
     public function getAndamentosData()
     {
         return [
-            'processos' => ModelProcesso
+            'processos' =>
+                ModelProcesso
                     ::orderBy('numero_judicial')
                     ->pluck('numero_judicial', 'id'),
-            'tipoPrazos'     => ModelTipoPrazo::orderBy('nome')->pluck('nome', 'id'),
-            'tipoAndamentos' => ModelTipoAndamento::orderBy('nome')->pluck('nome', 'id'),
-            'tipoEntradas'   => ModelTipoEntrada::orderBy('nome')->pluck('nome', 'id'),
+            'tipoPrazos' =>
+                ModelTipoPrazo::orderBy('nome')->pluck('nome', 'id'),
+            'tipoAndamentos' =>
+                ModelTipoAndamento::orderBy('nome')->pluck('nome', 'id'),
+            'tipoEntradas' =>
+                ModelTipoEntrada::orderBy('nome')->pluck('nome', 'id')
         ];
     }
 }

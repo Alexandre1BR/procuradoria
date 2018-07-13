@@ -1,7 +1,7 @@
 <?php
-use Illuminate\Database\Migrations\Migration;
 
 use App\Data\Models\TipoUsuario as TipoUsuarioModel;
+use Illuminate\Database\Migrations\Migration;
 
 class AddTypeAdministrador extends Migration
 {

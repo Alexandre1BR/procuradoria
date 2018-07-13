@@ -103,4 +103,18 @@ class OpinionSubjects extends Controller
 
         return $return;
     }
+
+    public function jsonArray()
+    {
+        $opinionSubjectsRepository = app(OpinionSubjectsRepository::class);
+
+        $aux = $opinionSubjectsRepository->allOrderBy('id');
+
+        $return = [];
+        foreach ($aux as $item) {
+            $return[$item->id] = $item;
+        }
+
+        return $return;
+    }
 }

@@ -105,8 +105,12 @@ class Opinions extends Controller
         }
 
         $fileName = (
-            $currentOpinion->date .
-                '-' .
+            'Parecer' .
+                ' - ' .
+                $currentOpinion->attorney->name .
+                ' - ' .
+                $currentOpinion->date .
+                ' - ' .
                 $currentOpinion->id .
                 '.' .
                 $fileExtension

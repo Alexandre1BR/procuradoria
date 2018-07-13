@@ -91,10 +91,9 @@
                 <select name="acao_id" class="form-control select2" @include('partials.disabled') id="acao_id">
                     <option value="">SELECIONE</option>
                     @foreach ($acoes as $key => $acao)
-                        <option value="{{ $key }}">{{ $acao }}</option>
                         @if((!is_null($processo->acao)) && $processo->acao->id == $key
                         || (!is_null(old('acao_id'))) && old('acao_id') == $key))
-                        <option value="{{ $key }}" selected="selected">{{ $acao }}</option>
+                            <option value="{{ $key }}" selected="selected">{{ $acao }}</option>
                         @else
                             <option value="{{ $key }}">{{ $acao }}</option>
                         @endif

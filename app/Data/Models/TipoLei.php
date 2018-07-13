@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Data\Models;
 
 class TipoLei extends BaseModel

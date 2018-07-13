@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Auth;
 
 function startTimer()
 {
@@ -14,11 +15,12 @@ function endTimer()
 
 function toBoolean($boolean)
 {
-    return
+    return (
         $boolean === 'true' ||
         $boolean === '1' ||
         $boolean === 1 ||
-        $boolean === true;
+        $boolean === true
+    );
 }
 
 function extract_credentials($request)
@@ -33,6 +35,15 @@ function extract_credentials($request)
 function subsystem_is($subsystem)
 {
     return \Session::get('subsystem') === $subsystem;
+}
+
+function is_administrator()
+{
+    if (!$user = Auth::user()) {
+        return false;
+    }
+
+    return $user->is_administrator;
 }
 
 class Timer

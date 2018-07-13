@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Repositories;
 
 use App\Data\Models\OpinionSubject as OpinionSubjectsModel;
@@ -13,10 +12,10 @@ class OpinionSubjects extends Base
         $array = [];
 
         $array[] = (object) [
-            'name'       => 'full_name',
-            'showName'   => 'Nome do Assunto',
+            'name' => 'full_name',
+            'showName' => 'Nome do Assunto',
             'columnSize' => '100%',
-            'type'       => 'string',
+            'type' => 'string'
         ];
 
         return $array;
@@ -27,9 +26,9 @@ class OpinionSubjects extends Base
         $array = [];
 
         $array[] = (object) [
-            'name'     => 'name',
+            'name' => 'name',
             'showName' => 'Nome do Assunto',
-            'type'     => 'string',
+            'type' => 'string'
         ];
 
         return $array;
@@ -76,14 +75,14 @@ class OpinionSubjects extends Base
                         $query->orWhere(
                             DB::raw("lower({$column->name})"),
                             'like',
-                            '%'.$item.'%'
+                            '%' . $item . '%'
                         );
                         break;
                     case 'textarea':
                         $query->orWhere(
                             DB::raw("lower({$column->name})"),
                             'like',
-                            '%'.$item.'%'
+                            '%' . $item . '%'
                         );
                         break;
                     case 'id':
@@ -91,8 +90,8 @@ class OpinionSubjects extends Base
                             $query
                         ) use ($item, $column) {
                             $query->whereRaw(
-                                'lower('.
-                                    $column->foreignName.
+                                'lower(' .
+                                    $column->foreignName .
                                     ") like '%{$item}%'"
                             );
                         });

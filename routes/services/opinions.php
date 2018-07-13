@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['prefix' => '/pareceres'], function () {
     Route::get('/create', 'Opinions@create')->name('opinions.create');
 

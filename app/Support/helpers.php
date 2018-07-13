@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Auth;
 
 function startTimer()
@@ -16,11 +15,12 @@ function endTimer()
 
 function toBoolean($boolean)
 {
-    return
+    return (
         $boolean === 'true' ||
         $boolean === '1' ||
         $boolean === 1 ||
-        $boolean === true;
+        $boolean === true
+    );
 }
 
 function extract_credentials($request)

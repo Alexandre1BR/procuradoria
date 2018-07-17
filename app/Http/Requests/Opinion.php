@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -25,12 +24,12 @@ class Opinion extends FormRequest
     {
         return [
             'opinion_scope_id' => 'required',
-            'attorney_id'      => 'required',
-            'opinion_type_id'  => 'required',
-            'date'             => 'required',
-            'abstract'         => 'required',
-            'pdf_file'         => 'required|mimes:pdf',
-            'doc_file'         => 'required|mimes:doc',
+            'attorney_id' => 'required',
+            'opinion_type_id' => 'required',
+            'date' => 'required',
+            'abstract' => 'required',
+            'pdf_file' => 'required|mimes:pdf',
+            // 'doc_file' => 'required|mimes:doc',
         ];
     }
 }

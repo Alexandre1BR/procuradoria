@@ -10,5 +10,4 @@ namespace App\Data\Models;
 
 class TiposParecer
 {
-
 }

@@ -19,10 +19,12 @@ abstract class Base
     public function createFromRequest($request)
     {
         if ($request instanceof Request) {
-            $request = collect($request->all());
+            $request = $request->all();
         }
 
-        is_null($id = $request['id']) ? $model = new $this->model() : $model = $this->model::find($id);
+        $id = isset($request['id']) ? $request['id'] : null;
+
+        is_null($id) ? $model = new $this->model() : $model = $this->model::find($id);
 
         $model->fill($request);
 

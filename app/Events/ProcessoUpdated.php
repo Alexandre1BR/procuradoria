@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Events;
 
 use App\Data\Models\Processo;

@@ -26,15 +26,15 @@ class LeiPresenter extends BasePresenter
         $r = $this->wrappedObject->numero_lei;
 
         if (!is_null($artigo)) {
-            $r .= ', Art. ' . $artigo;
+            $r .= ', Art. '.$artigo;
             if (!is_null($paragrafo)) {
-                $r .= ', Par. ' . $paragrafo;
+                $r .= ', Par. '.$paragrafo;
                 if (!is_null($inciso)) {
-                    $r .= ', Inc. ' . $inciso;
+                    $r .= ', Inc. '.$inciso;
                     if (!is_null($alinea)) {
-                        $r .= ', Alin. ' . $alinea;
+                        $r .= ', Alin. '.$alinea;
                         if (!is_null($item)) {
-                            $r .= ', Itm. ' . $item;
+                            $r .= ', Itm. '.$item;
                         }
                     }
                 }

@@ -1,5 +1,5 @@
 <?php
-use App\Data\Models\TipoUsuario as TipoUsuarioModel;
+
 use Illuminate\Database\Migrations\Migration;
 
 class RemoveNotNullFromDoc extends Migration
@@ -26,6 +26,5 @@ class RemoveNotNullFromDoc extends Migration
      */
     public function down()
     {
-
     }
 }

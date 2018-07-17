@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Browser;
 
 use App\Data\Repositories\TiposJuizes as TiposJuizesRepository;
@@ -110,12 +111,12 @@ class JuizesTest extends DuskTestCase
                 ->visit('/juizes')
                 ->clickLink($nomej)
                 ->click('#editar')
-                ->type('nome', '*' . $nomej . '*')
+                ->type('nome', '*'.$nomej.'*')
                 ->select('lotacao_id', $tribunal['id'])
                 ->select('tipo_juiz_id', $tipoJuiz['id'])
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->assertSee('*' . $nomej . '*')
+                ->assertSee('*'.$nomej.'*')
                 ->assertSee($tribunal['nome'])
                 ->assertSee($tipoJuiz['nome']);
         });

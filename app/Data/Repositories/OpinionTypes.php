@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Data\Repositories;
 
 use App\Data\Models\OpinionType as OpinionTypeModel;
@@ -61,7 +62,7 @@ class OpinionTypes extends Base
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
                 if ($type === 'string') {
-                    $query->orWhere(DB::raw("lower({$column})"), 'like', '%' . $item . '%');
+                    $query->orWhere(DB::raw("lower({$column})"), 'like', '%'.$item.'%');
                 } else {
                     if ($this->isDate($item)) {
                         $query->orWhere($column, '=', $item);

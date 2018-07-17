@@ -2,7 +2,7 @@
 use App\Data\Models\TipoUsuario as TipoUsuarioModel;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTypeAdministrador extends Migration
+class RemoveNotNullFromDoc extends Migration
 {
     /**
      * Run the migrations.
@@ -11,7 +11,12 @@ class AddTypeAdministrador extends Migration
      */
     public function up()
     {
-        TipoUsuarioModel::create(['nome' => 'Administrador']);
+        Schema::table('opinions', function ($table) {
+            $table
+                ->text('file_doc')
+                ->nullable()
+                ->change();
+        });
     }
 
     /**

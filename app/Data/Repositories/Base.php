@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Repositories;
 
 use Carbon\Carbon;
@@ -17,10 +16,15 @@ abstract class Base
      *
      * @return mixed
      */
-    public function createFromRequest(Request $request)
+    public function createFromRequest($request)
     {
-        is_null($id = $request->input('id')) ? $model = new $this->model() : $model = $this->model::find($id);
-        $model->fill($request->all());
+        if ($request instanceof Request) {
+            $request = collect($request->all());
+        }
+
+        is_null($id = $request['id']) ? $model = new $this->model() : $model = $this->model::find($id);
+
+        $model->fill($request);
 
         $model->save();
 
@@ -130,10 +134,10 @@ abstract class Base
      * @param Request $request
      * @param $model
      */
-    protected function saveTags(Request $request, $model)
+    protected function saveTags($request, $model)
     {
-        if ($request->has('tags')) {
-            $model->syncTags($request->get('tags'));
+        if (isset($request['tags'])) {
+            $model->syncTags($request['tags']);
         }
     }
 

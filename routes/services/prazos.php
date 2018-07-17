@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['prefix' => '/tipos_prazos'], function () {
     Route::get('/', 'TiposPrazos@create')->name('tipos_prazos.create');
 

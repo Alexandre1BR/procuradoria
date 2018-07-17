@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Notifications;
 
 use App\Data\Models\Processo;
@@ -41,7 +40,7 @@ class ProcessoUpdated extends Notification implements ShouldQueue
      */
     private function getMessage()
     {
-        return 'Os dados do processo '.$this->processo->numero_judicial.' sofreram alterações';
+        return 'Os dados do processo ' . $this->processo->numero_judicial . ' sofreram alterações';
     }
 
     /**

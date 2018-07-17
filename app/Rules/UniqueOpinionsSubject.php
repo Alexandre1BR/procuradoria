@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Rules;
 
 use App\Data\Repositories\OpinionsSubjects as OpinionsSubjectsRepository;
@@ -27,11 +26,12 @@ class UniqueOpinionsSubject implements Rule
      */
     public function passes($attribute, $value)
     {
-        return
+        return (
             app(OpinionsSubjectsRepository::class)->whereOpinionAndSubjectCount(
                 request('opinion_id'),
                 request('subject_id')
-            ) < 1;
+            ) < 1
+        );
     }
 
     /**

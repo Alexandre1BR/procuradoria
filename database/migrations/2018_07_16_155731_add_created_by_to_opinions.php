@@ -1,8 +1,7 @@
 <?php
-use App\Data\Models\TipoUsuario as TipoUsuarioModel;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTypeAdministrador extends Migration
+class AddCreatedByToOpinions extends Migration
 {
     /**
      * Run the migrations.
@@ -11,7 +10,11 @@ class AddTypeAdministrador extends Migration
      */
     public function up()
     {
-        TipoUsuarioModel::create(['nome' => 'Administrador']);
+        Schema::table('opinions', function ($table) {
+            $table->integer('created_by')->unsigned();
+
+            $table->integer('updated_by')->unsigned();
+        });
     }
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 
@@ -15,6 +16,5 @@ class FixObservacoes extends Migration
 
     public function down()
     {
-
     }
 }

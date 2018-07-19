@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Data\Models\Juiz;
@@ -55,7 +56,7 @@ class Juizes extends Controller
     {
         return [
             'tiposJuizes' => ModelTipoJuiz::orderBy('nome')->pluck('nome', 'id'),
-            'tribunais' => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
+            'tribunais'   => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
         ];
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 use App\Data\Models\TipoUsuario as TipoUsuarioModel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;

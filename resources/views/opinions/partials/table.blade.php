@@ -13,6 +13,7 @@
 <table id="opinionsTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
     @if(!is_null($opinions))
     <thead>
+        <th>ID #</th>
         @forelse($opinionsAttributes as $attr)
             <th>{{$attr->showName}}</th>
         @empty
@@ -22,9 +23,15 @@
 
     @forelse ($opinions as $opinion)
         <tr>
+            <td>
+                <a href="{{$opinion->edit_link}}">
+                    {{ $opinion->id }}
+                </a>
+            </td>
+
             @forelse($opinionsAttributes as $attr)
                 @if($attr->name == $opinionEditAttribute)
-                    <td width="{{$attr->columnSize}}"><a href="{{$opinion->edit_link}}">{{ $opinion->{$opinionEditAttribute} }}</a></td>
+                    {{--<td width="{{$attr->columnSize}}"><a href="{{$opinion->edit_link}}">{{ $opinion->{$opinionEditAttribute} }}</a></td>--}}
                 @else
                     @if($attr->type == 'id')
                         <td width="{{$attr->columnSize}}">{{ is_null($opinion->{$attr->relationName}->{$attr->foreignName}) ? : $opinion->{$attr->relationName}->{$attr->foreignName} }}</td>

@@ -177,7 +177,7 @@ class Opinions extends Base
         return $array;
     }
 
-    public $editAttribute = 'identifier';
+    public $editAttribute = 'id';
 
     /**
      * @var string

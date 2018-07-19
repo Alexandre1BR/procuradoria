@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['prefix' => '/subsystem'], function () {
     Route::get('/', 'Subsystem@index')->name('subsystem.index');
 

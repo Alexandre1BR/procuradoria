@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 
 class TruncateTiposJuizesEMeios extends Migration

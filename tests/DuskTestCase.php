@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests;
 
 use Facebook\WebDriver\Chrome\ChromeOptions;

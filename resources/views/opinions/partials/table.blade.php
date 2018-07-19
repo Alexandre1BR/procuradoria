@@ -30,14 +30,10 @@
             </td>
 
             @forelse($opinionsAttributes as $attr)
-                @if($attr->name == $opinionEditAttribute)
-                    {{--<td width="{{$attr->columnSize}}"><a href="{{$opinion->edit_link}}">{{ $opinion->{$opinionEditAttribute} }}</a></td>--}}
+                @if($attr->type == 'id')
+                    <td width="{{$attr->columnSize}}">{{ is_null($opinion->{$attr->relationName}->{$attr->foreignName}) ? : $opinion->{$attr->relationName}->{$attr->foreignName} }}</td>
                 @else
-                    @if($attr->type == 'id')
-                        <td width="{{$attr->columnSize}}">{{ is_null($opinion->{$attr->relationName}->{$attr->foreignName}) ? : $opinion->{$attr->relationName}->{$attr->foreignName} }}</td>
-                    @else
-                        <td width="{{$attr->columnSize}}">{{ is_null($opinion->{$attr->name}) ? : $opinion->{$attr->name} }}</td>
-                    @endif
+                    <td width="{{$attr->columnSize}}">{{ is_null($opinion->{$attr->name}) ? : $opinion->{$attr->name} }}</td>
                 @endif
             @empty
             @endforelse

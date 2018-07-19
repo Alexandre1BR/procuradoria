@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Data\Models;
 
 use App\Data\Presenters\OpinionSubjectPresenter;

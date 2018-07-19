@@ -45,8 +45,8 @@ class Apenso extends BaseModel
      */
     public function save(array $options = [])
     {
-        Cache::forget('getProcessosData' . $this->processo_id);
-        Cache::forget('getProcessosData' . $this->apensado_id);
+        Cache::forget('getProcessosData'.$this->processo_id);
+        Cache::forget('getProcessosData'.$this->apensado_id);
         parent::save();
     }
 }

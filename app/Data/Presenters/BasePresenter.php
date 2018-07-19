@@ -12,5 +12,4 @@ use McCool\LaravelAutoPresenter\BasePresenter as McCoolBasePresenter;
 
 class BasePresenter extends McCoolBasePresenter
 {
-
 }

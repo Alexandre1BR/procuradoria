@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Browser;
 
 use Laravel\Dusk\Browser;

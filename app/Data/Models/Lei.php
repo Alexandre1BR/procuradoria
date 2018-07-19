@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 use App\Data\Presenters\LeiPresenter;
@@ -47,7 +46,7 @@ class Lei extends BaseModel
 
     public function save(array $options = [])
     {
-        Cache::forget('getProcessosData'.$this->processo_id);
+        Cache::forget('getProcessosData' . $this->processo_id);
         parent::save();
     }
 }

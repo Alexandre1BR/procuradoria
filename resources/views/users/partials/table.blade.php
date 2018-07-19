@@ -6,6 +6,7 @@
         <th>Login</th>
         <th>Tipo Usuário</th>
         <th>Status</th>
+        <th>Notificações</th>
     </tr>
     </thead>
     @forelse ($users as $user)
@@ -22,6 +23,17 @@
                 @else
                     <a href="{{ route('users.enable',['id'=>$user->id]) }}" class="btn btn-primary pull-right" >
                         Habilitar
+                    </a>
+                @endif
+            </td>
+            <td class="text-center">
+                @if($user->all_notifications)
+                    <a href="{{ route('users.disable',['id'=>$user->id]) }}" class="btn btn-danger pull-right">
+                        Recebe notificações
+                    </a>
+                @else
+                    <a href="{{ route('users.enable',['id'=>$user->id]) }}" class="btn btn-primary pull-right" >
+                        Não notificar
                     </a>
                 @endif
             </td>

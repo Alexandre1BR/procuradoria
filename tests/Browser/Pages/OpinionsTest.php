@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Browser;
 
 use App\Data\Repositories\Leis as LeisRepository;
@@ -40,7 +39,7 @@ class OpinionsTest extends DuskTestCase
                     $newAttr = $faker->name;
                     break;
                 case 'id':
-                    $newAttr = $faker->randomElement(${$attr->modelName.'sRepository'}->all()->toArray())['id'];
+                    $newAttr = $faker->randomElement(${$attr->modelName . 'sRepository'}->all()->toArray())['id'];
                     break;
                 case 'date':
                     $newAttr = $faker->date;
@@ -57,7 +56,7 @@ class OpinionsTest extends DuskTestCase
                     $newAttr = $faker->name;
                     break;
                 case 'id':
-                    $newAttr = $faker->randomElement(${$attr->modelName.'sRepository'}->all()->toArray())['id'];
+                    $newAttr = $faker->randomElement(${$attr->modelName . 'sRepository'}->all()->toArray())['id'];
                     break;
                 case 'date':
                     $newAttr = $faker->date;
@@ -91,13 +90,13 @@ class OpinionsTest extends DuskTestCase
             foreach ($attributes as $attr) {
                 switch ($attr->type) {
                     case 'string':
-                        $browser->type('#'.$attr->name, $newOpinion[$attr->name]);
+                        $browser->type('#' . $attr->name, $newOpinion[$attr->name]);
                         break;
                     case 'id':
-                        $browser->select('#'.$attr->name, $newOpinion[$attr->name]);
+                        $browser->select('#' . $attr->name, $newOpinion[$attr->name]);
                         break;
                     case 'date':
-                        $browser->keys('#'.$attr->name, $newOpinion[$attr->name]);
+                        $browser->keys('#' . $attr->name, $newOpinion[$attr->name]);
                         break;
                 }
                 $browser->press('Gravar')->assertSee('Gravado com sucesso');
@@ -206,7 +205,7 @@ class OpinionsTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($numero_lei, $insertProcessoId, $insertLeiId) {
             $browser
-                ->visit('/processos/'.$insertProcessoId)
+                ->visit('/processos/' . $insertProcessoId)
                 ->click('#editar')
                 ->select('#lei_id', $insertLeiId)
                 ->click('#buttonRelacionarLei')
@@ -252,12 +251,12 @@ class OpinionsTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($insertLeiId, $numero_lei) {
             $browser
-                ->visit('/leis/'.$insertLeiId)
+                ->visit('/leis/' . $insertLeiId)
                 ->click('#editar')
-                ->type('#numero_lei', '*'.$numero_lei.'*')
+                ->type('#numero_lei', '*' . $numero_lei . '*')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->assertSee('*'.$numero_lei.'*');
+                ->assertSee('*' . $numero_lei . '*');
         });
     }
 }

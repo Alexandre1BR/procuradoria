@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Data\Repositories\Users as UsersRepository;
@@ -106,7 +105,8 @@ class Users extends Controller
     public function getUsersData()
     {
         return [
-            'userType' => app(UsersRepository::class)
+            'userType' =>
+                app(UsersRepository::class)
                     ->all()
                     ->pluck('nome', 'id'),
         ];

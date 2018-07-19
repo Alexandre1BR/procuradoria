@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Browser;
 
 use Faker\Generator as Faker;
@@ -83,12 +82,12 @@ class TribunaisTest extends DuskTestCase
                 ->visit('/tribunais')
                 ->clickLink($nomet)
                 ->click('#editar')
-                ->type('nome', '*'.$nomet.'*')
-                ->type('abreviacao', '*'.$abrevt.'*')
+                ->type('nome', '*' . $nomet . '*')
+                ->type('abreviacao', '*' . $abrevt . '*')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->assertSee('*'.$nomet.'*')
-                ->assertSee('*'.$abrevt.'*');
+                ->assertSee('*' . $nomet . '*')
+                ->assertSee('*' . $abrevt . '*');
         });
     }
 }

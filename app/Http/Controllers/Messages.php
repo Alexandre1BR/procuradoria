@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 class Messages extends Controller

@@ -1,4 +1,5 @@
 <?php
+
 use App\Data\Models\OpinionSubject;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -47,25 +48,21 @@ class AddNestedSubjects extends Migration
     public function populate()
     {
         OpinionSubject::create([
-            'name' => 'Root',
-            'children' =>
-                [
+            'name'     => 'Root',
+            'children' => [
                     [
-                        'name' => 'Servidor Público',
-                        'children' =>
-                            [
+                        'name'     => 'Servidor Público',
+                        'children' => [
                                 ['name' => 'Abono permanência'],
                                 [
-                                    'name' => 'Aposentadoria',
-                                    'children' =>
-                                        [
+                                    'name'     => 'Aposentadoria',
+                                    'children' => [
                                             ['name' => 'Voluntária'],
                                             ['name' => 'Compulsória'],
                                             ['name' => 'Invalidez'],
                                             [
-                                                'name' => 'Revisão dos proventos',
-                                                'children' =>
-                                                    [['name' => 'Gratificação Especial de Serviço de Segurança']],
+                                                'name'     => 'Revisão dos proventos',
+                                                'children' => [['name' => 'Gratificação Especial de Serviço de Segurança']],
                                             ],
                                             ['name' => 'Tempo Especial para Aposentadoria Segurança'],
                                             ['name' => 'Sustação de Imposto de Renda'],
@@ -92,9 +89,8 @@ class AddNestedSubjects extends Migration
                     ['name' => 'Patrimonial', 'children' => [['name' => 'Veículos']]],
                     ['name' => 'Estatuto dos Parlamentares'],
                     [
-                        'name' => 'Judicial',
-                        'children' =>
-                            [
+                        'name'     => 'Judicial',
+                        'children' => [
                                 ['name' => 'ADIN'],
                                 ['name' => 'RI'],
                                 ['name' => 'Ação Popular'],

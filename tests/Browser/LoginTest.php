@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Browser;
 
 use App\Data\Repositories\Users as UsersRepository;

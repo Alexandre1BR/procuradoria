@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Data\Repositories;
 
 use App\Data\Models\Lei as LeiModel;
@@ -32,14 +33,14 @@ class Leis extends Base
 
         $columns = collect([
             'numero_lei' => 'string',
-            'autor' => 'string',
-            'assunto' => 'string',
-            'link' => 'string',
-            'artigo' => 'string',
-            'paragrafo' => 'string',
-            'inciso' => 'string',
-            'alinea' => 'string',
-            'item' => 'string',
+            'autor'      => 'string',
+            'assunto'    => 'string',
+            'link'       => 'string',
+            'artigo'     => 'string',
+            'paragrafo'  => 'string',
+            'inciso'     => 'string',
+            'alinea'     => 'string',
+            'item'       => 'string',
         ]);
 
         $query = $query ?: $this->makeLeiQuery();
@@ -47,7 +48,7 @@ class Leis extends Base
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
                 if ($type === 'string') {
-                    $query->orWhere(DB::raw("lower({$column})"), 'like', '%' . $item . '%');
+                    $query->orWhere(DB::raw("lower({$column})"), 'like', '%'.$item.'%');
                 } else {
                     if ($this->isDate($item)) {
                         $query->orWhere($column, '=', $item);

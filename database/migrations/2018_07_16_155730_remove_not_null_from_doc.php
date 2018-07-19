@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 
 class RemoveNotNullFromDoc extends Migration
@@ -25,6 +26,5 @@ class RemoveNotNullFromDoc extends Migration
      */
     public function down()
     {
-
     }
 }

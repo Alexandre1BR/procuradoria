@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Browser;
 
 use App\Data\Repositories\Processos as ProcessosRepository;
@@ -43,12 +44,12 @@ class ApensosTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($apensoA, $apensadoA) {
             $browser
-                ->visit('/processos/' . $apensoA['id'])
+                ->visit('/processos/'.$apensoA['id'])
                 ->click('#editar')
                 ->select('#apensado_id', $apensadoA['id'])
                 ->click('#buttonApensar')
                 ->assertSeeIn('#apensosTable', $apensadoA['numero_judicial'])
-                ->visit('/processos/' . $apensadoA['id'])
+                ->visit('/processos/'.$apensadoA['id'])
                 ->assertSeeIn('#apensosTable', $apensoA['numero_judicial']);
         });
     }

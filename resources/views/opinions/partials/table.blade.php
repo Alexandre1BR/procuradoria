@@ -13,7 +13,7 @@
 <table id="opinionsTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
     @if(!is_null($opinions))
     <thead>
-        <th>ID #</th>
+        <th>ID&nbsp;#&nbsp;&nbsp;</th>
         @forelse($opinionsAttributes as $attr)
             <th>{{$attr->showName}}</th>
         @empty
@@ -23,7 +23,7 @@
 
     @forelse ($opinions as $opinion)
         <tr>
-            <td>
+            <td width="20px">
                 <a href="{{$opinion->edit_link}}">
                     {{ $opinion->id }}
                 </a>

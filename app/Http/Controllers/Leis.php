@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Data\Repositories\Leis as LeisRepository;
@@ -76,10 +75,12 @@ class Leis extends Controller
     public function getLeisData()
     {
         return [
-            'niveisFederativos' => app(NiveisFederativosRepository::class)
+            'niveisFederativos' =>
+                app(NiveisFederativosRepository::class)
                     ->allOrderBy('nome')
                     ->pluck('nome', 'id'),
-            'tiposLeis' => app(TiposLeisRepository::class)
+            'tiposLeis' =>
+                app(TiposLeisRepository::class)
                     ->allOrderBy('nome')
                     ->pluck('nome', 'id'),
         ];

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Listeners;
 
 use App\Notifications\ProcessoUpdated;

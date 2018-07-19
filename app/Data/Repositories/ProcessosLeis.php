@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Repositories;
 
 use App\Data\Models\ProcessoLei as ProcessoLeiModel;

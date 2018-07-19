@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Browser;
 
 use App\Data\Repositories\Acoes as AcoesRepository;
@@ -309,7 +308,7 @@ class ProcessosTest extends DuskTestCase
             $novoEstagiarioP
         ) {
             $browser
-                ->visit('/processos/'.$ProcessoP['id'])
+                ->visit('/processos/' . $ProcessoP['id'])
                 ->click('#editar')
                 ->type('#numero_judicial', $novoNumeroJudicialP)
                 ->select('#tribunal_id', $novoTribunalP['id'])

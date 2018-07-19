@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -47,9 +46,9 @@ class ModifyTableLeis extends Migration
                 ::table('processos_leis')
                 ->insert([
                     'processo_id' => $lei->processo_id,
-                    'lei_id'      => $array[$lei->numero_lei],
-                    'created_at'  => now(),
-                    'updated_at'  => now(),
+                    'lei_id' => $array[$lei->numero_lei],
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]);
         }
 
@@ -92,13 +91,13 @@ class ModifyTableLeis extends Migration
                 DB
                     ::table('leis')
                     ->insert([
-                        'numero_lei'  => $lei[0]->numero_lei,
-                        'autor'       => $lei[0]->autor,
-                        'assunto'     => $lei[0]->assunto,
-                        'link'        => $lei[0]->link,
+                        'numero_lei' => $lei[0]->numero_lei,
+                        'autor' => $lei[0]->autor,
+                        'assunto' => $lei[0]->assunto,
+                        'link' => $lei[0]->link,
                         'processo_id' => $processolei->processo_id,
-                        'created_at'  => now(),
-                        'updated_at'  => now(),
+                        'created_at' => now(),
+                        'updated_at' => now(),
                     ]);
             }
         }

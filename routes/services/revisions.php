@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['prefix' => '/revisions'], function () {
     Route::get('/', 'Revisions@index')->name('revisions.index');
 

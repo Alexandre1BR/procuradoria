@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['prefix' => '/processos'], function () {
     //www.procuradoria.test/processos
     //Index

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Rules;
 
 use App\Data\Models\OpinionSubject as OpinionSubjectModel;

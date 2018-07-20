@@ -19,9 +19,8 @@
                 <div class="col-xs-4 col-md-2">
                     @if(!is_null($opinion->id))
                         {{-- Create --}}
-                        @if($isProcurador)
+                            @include('partials.save-button')
                             @include('partials.edit-button', ['model' => $opinion])
-                        @endIf
                     @else
                         {{-- Show --}}
                         @include('partials.save-button')
@@ -34,10 +33,10 @@
         <div class="panel-body">
             @include('partials.alerts')
 
-
+            <form name="formulario" id="formulario" action="{{ route('opinions.store') }}" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }}
             @if(is_null($opinion->id)) {{-- Create --}}
-                <form name="formulario" id="formulario" action="{{ route('opinions.store') }}" method="POST" enctype="multipart/form-data">
-                    {{ csrf_field() }}
+
 
                     <input name="id" type='hidden' value="{{$opinion->id}}" id="id" >
 
@@ -85,14 +84,14 @@
                             </div>
                         </div>
                     @endforeach
-                </form>
             @else {{-- Show --}}
+                <input name="id" type='hidden' value="{{$opinion->id}}" id="id" >
                 @foreach($opinionsFormAttributes as $attr)
                     <div class="row">
                         <div class="form-group col-md-6" @include('partials.disabled')>
                                 @if($attr->visible)
-                                    <label for="{{$attr->name}}">{{$attr->showName}}</label>
                                     @if($attr->type == 'date')
+                                    <label for="{{$attr->name}}">{{$attr->showName}}</label>
                                         <input
                                                 value="{{ is_null(old($attr->name))? (! is_null($opinion->id) ? $opinion->{$attr->name} : '' ) :  old($attr->name)}}"
                                                 type="date"
@@ -103,10 +102,12 @@
                                     @endif
 
                                     @if($attr->type == 'string')
+                                        <label for="{{$attr->name}}">{{$attr->showName}}</label>
                                         <input name="{{$attr->name}}" value="{{is_null(old($attr->name)) ? $opinion->{$attr->name} : old($attr->name)}}" @include('partials.readonly') class="form-control" id="{{$attr->name}}" aria-describedby="nomeHelp" placeholder="{{$attr->showName}}" >
                                     @endif
 
                                     @if($attr->type == 'id')
+                                        <label for="{{$attr->name}}">{{$attr->showName}}</label>
                                         <select name="{{$attr->name}}" class="select2 form-control" @include('partials.disabled') id="{{$attr->name}}">
                                             <option value="">SELECIONE</option>
                                             @foreach (${$attr->attributeArray} as $key => $item)
@@ -121,18 +122,41 @@
                                     @endif
 
                                     @if($attr->type == 'textarea')
+                                        <label for="{{$attr->name}}">{{$attr->showName}}</label>
                                         <textarea name="{{$attr->name}}" class="form-control" @include('partials.readonly') id="{{$attr->name}}"
                                                   placeholder="{{$attr->showName}}">{{is_null(old($attr->name))? $opinion->{$attr->name} : old($attr->name)}}</textarea>
                                     @endif
 
-                                    @if($attr->type == 'link')
-                                        <a href="{{$opinion->{$attr->name} }}">{{$attr->linkName}}</a>
+                                    @if($isProcurador)
+                                        @if($attr->type == 'file')
+                                            <label for="{{$attr->name}}" style="display: none;">{{$attr->showName}}</label>
+                                            <input style="display: none;" name="{{$attr->name}}" id="{{$attr->name}}" type="file" @include('partials.disabled')/>
+                                        @endif
+
+
+                                        @if($attr->type == 'link')
+                                                @if((!isset($opinion->file_doc) && $attr->name =='doc_file_name' ))
+
+                                                @else
+
+                                                    <label for="{{$attr->name}}">{{$attr->showName}}</label>
+
+                                                    <a href="{{$opinion->{$attr->name} }}">{{$attr->linkName}}</a>
+                                                @endif
+                                        @endif
+                                    @else
+
+                                        @if($attr->type == 'file' && $attr->name =='doc_file_name' && (!isset($opinion->file_doc)))
+                                            <label for="{{$attr->name}}" style="display: none;">{{$attr->showName}}</label>
+                                            <input name="{{$attr->name}}" id="{{$attr->name}}" type="file" @include('partials.disabled') style="display: none;"/>
+                                        @endif
                                     @endif
                                 @endif
                         </div>
                     </div>
                 @endforeach
             @endIf
+            </form>
         </div>
     </div>
 

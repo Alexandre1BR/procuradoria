@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Exceptions;
 
 use Exception;
@@ -34,7 +33,10 @@ class Handler extends ExceptionHandler
 
     private function isPHPException($exception)
     {
-        return $exception instanceof \ErrorException || $exception instanceof \Exception;
+        return (
+            $exception instanceof \ErrorException ||
+            $exception instanceof \Exception
+        );
     }
 
     /**

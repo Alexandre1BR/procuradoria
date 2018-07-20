@@ -1,5 +1,4 @@
 <?php
-
 return [
     /*
     |--------------------------------------------------------------------------
@@ -12,14 +11,21 @@ return [
     |
     */
 
-    'defaults'       => ['guard' => 'web', 'passwords' => 'users'],
-    'authentication' => [
-            'mock'    => env('APP_AUTHENTICATION_MOCKED', false),
-            'enabled' => env('APP_AUTHENTICATION_ENABLED', env('APP_AUTHENTICATION', true)),
+    'defaults' => ['guard' => 'web', 'passwords' => 'users'],
+    'authentication' =>
+        [
+            'mock' => env('APP_AUTHENTICATION_MOCKED', false),
+            'enabled' =>
+                env(
+                    'APP_AUTHENTICATION_ENABLED',
+                    env('APP_AUTHENTICATION', true)
+                )
         ],
-    'authorization' => [
-            'mock'    => env('APP_AUTHORIZATION_MOCKED', false),
-            'enabled' => env('APP_AUTHORIZATION_ENABLED', env('APP_AUTHORIZATION', true)),
+    'authorization' =>
+        [
+            'mock' => env('APP_AUTHORIZATION_MOCKED', false),
+            'enabled' =>
+                env('APP_AUTHORIZATION_ENABLED', env('APP_AUTHORIZATION', true))
         ],
     /*
     |--------------------------------------------------------------------------
@@ -38,9 +44,10 @@ return [
     |
     */
 
-    'guards' => [
+    'guards' =>
+        [
             'web' => ['driver' => 'session', 'provider' => 'users'],
-            'api' => ['driver' => 'token', 'provider' => 'users'],
+            'api' => ['driver' => 'token', 'provider' => 'users']
         ],
     /*
     |--------------------------------------------------------------------------
@@ -59,8 +66,10 @@ return [
     |
     */
 
-    'providers' => [
-            'users' => ['driver' => 'eloquent', 'model' => App\Data\Models\User::class],
+    'providers' =>
+        [
+            'users' =>
+                ['driver' => 'eloquent', 'model' => App\Data\Models\User::class]
 
             // 'users' => [
             //     'driver' => 'database',
@@ -82,5 +91,13 @@ return [
     |
     */
 
-    'passwords' => ['users' => ['provider' => 'users', 'table' => 'password_resets', 'expire' => 60]],
+    'passwords' =>
+        [
+            'users' =>
+                [
+                    'provider' => 'users',
+                    'table' => 'password_resets',
+                    'expire' => 60
+                ]
+        ]
 ];

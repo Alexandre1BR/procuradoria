@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -32,10 +31,10 @@ class Processo extends FormRequest
             //            'acao_id' => 'required',
             //            'relator_id' => 'required',
             'autor' => 'required',
-            'reu'   => 'required',
+            'reu' => 'required',
             //           'procurador_id' => 'required',
             //           'estagiario_id'  => 'required',
-            'tipo_meio_id' => 'numeric|required|max:99|exists:meios,id',
+            'tipo_meio_id' => 'numeric|required|max:99|exists:meios,id'
         ];
     }
 }

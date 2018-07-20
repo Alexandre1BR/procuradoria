@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Browser;
 
 use App\Data\Repositories\Leis as LeisRepository;
@@ -34,7 +33,11 @@ class LeisTest extends DuskTestCase
         $autorP = static::$autor;
         $reuP = static::$assunto;
 
-        $this->browse(function (Browser $browser) use ($numeroJudicialP, $autorP, $reuP) {
+        $this->browse(function (Browser $browser) use (
+            $numeroJudicialP,
+            $autorP,
+            $reuP
+        ) {
             $browser
                 ->visit('/')
                 ->clickLink('Novo')
@@ -51,7 +54,9 @@ class LeisTest extends DuskTestCase
     {
         $faker = app(Faker::class);
 
-        static::$numero_lei = (string) $faker->randomNumber(4).'/'.(string) $faker->randomNumber(4);
+        static::$numero_lei = (string) $faker->randomNumber(4) .
+            '/' .
+            (string) $faker->randomNumber(4);
 
         static::$autor = $faker->name;
         static::$assunto = $faker->name;
@@ -150,7 +155,11 @@ class LeisTest extends DuskTestCase
         $autor = static::$autor;
         $assunto = static::$assunto;
 
-        $this->browse(function (Browser $browser) use ($numero_lei, $autor, $assunto) {
+        $this->browse(function (Browser $browser) use (
+            $numero_lei,
+            $autor,
+            $assunto
+        ) {
             $browser
                 ->visit('/leis')
                 ->clickLink('Novo')
@@ -182,9 +191,13 @@ class LeisTest extends DuskTestCase
         $insertLeiId = static::$insertLeiId;
         $numero_lei = static::$numero_lei;
 
-        $this->browse(function (Browser $browser) use ($numero_lei, $insertProcessoId, $insertLeiId) {
+        $this->browse(function (Browser $browser) use (
+            $numero_lei,
+            $insertProcessoId,
+            $insertLeiId
+        ) {
             $browser
-                ->visit('/processos/'.$insertProcessoId)
+                ->visit('/processos/' . $insertProcessoId)
                 ->click('#editar')
                 ->select('#lei_id', $insertLeiId)
                 ->click('#buttonRelacionarLei')
@@ -228,14 +241,17 @@ class LeisTest extends DuskTestCase
         $numero_lei = static::$numero_lei;
         $insertLeiId = static::$insertLeiId;
 
-        $this->browse(function (Browser $browser) use ($insertLeiId, $numero_lei) {
+        $this->browse(function (Browser $browser) use (
+            $insertLeiId,
+            $numero_lei
+        ) {
             $browser
-                ->visit('/leis/'.$insertLeiId)
+                ->visit('/leis/' . $insertLeiId)
                 ->click('#editar')
-                ->type('#numero_lei', '*'.$numero_lei.'*')
+                ->type('#numero_lei', '*' . $numero_lei . '*')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->assertSee('*'.$numero_lei.'*');
+                ->assertSee('*' . $numero_lei . '*');
         });
     }
 }

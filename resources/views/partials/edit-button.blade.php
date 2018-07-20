@@ -3,8 +3,10 @@
     <script>
         function f_editar(){
             $('form *').removeAttr('readonly').removeAttr('disabled');
+            $( "form *" ).show();
             $('#editar').attr('disabled','disabled');
             $('#gravar').removeAttr('readonly').removeAttr('disabled');
+
         }
     </script>
 @endif

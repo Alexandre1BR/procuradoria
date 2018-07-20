@@ -1,5 +1,4 @@
 <?php
-
 use App\Data\Models\TipoAndamento;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -32,7 +31,7 @@ class AddMoreTiposAndamentos extends Migration
             ['nome' => 'Publicação'],
             ['nome' => 'Decisão'],
             ['nome' => 'Andamento'],
-            ['nome' => 'Carga'],
+            ['nome' => 'Carga']
         ])->each(function ($tipo) {
             TipoAndamento::firstOrCreate($tipo);
         });

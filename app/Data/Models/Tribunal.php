@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 class Tribunal extends BaseModel

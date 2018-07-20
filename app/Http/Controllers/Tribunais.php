@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Data\Models\Tribunal;
@@ -44,7 +43,9 @@ class Tribunais extends Controller
      */
     public function create()
     {
-        return view('tribunais.form')->with(['tribunal' => $this->repository->new()]);
+        return view('tribunais.form')->with([
+            'tribunal' => $this->repository->new()
+        ]);
     }
 
     /**
@@ -53,8 +54,10 @@ class Tribunais extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function store(TribunalRequest $request, TribunaisRepository $repository)
-    {
+    public function store(
+        TribunalRequest $request,
+        TribunaisRepository $repository
+    ) {
         $repository->createFromRequest($request);
 
         return redirect()

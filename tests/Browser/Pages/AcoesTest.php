@@ -1,5 +1,4 @@
 <?php
-
 namespace Tests\Browser;
 
 use Faker\Generator as Faker;
@@ -55,7 +54,10 @@ class AcoesTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser
                 ->visit('/acoes')
-                ->type('pesquisa', '45879349875348975387958973489734897345893478957984')
+                ->type(
+                    'pesquisa',
+                    '45879349875348975387958973489734897345893478957984'
+                )
                 ->click('#searchButton')
                 ->waitForText('Nenhuma ação encontrada')
                 ->assertSee('Nenhuma ação encontrada');
@@ -88,12 +90,12 @@ class AcoesTest extends DuskTestCase
                 ->visit('/acoes')
                 ->clickLink($nomeA)
                 ->click('#editar')
-                ->type('nome', '*'.$nomeA.'*')
-                ->type('abreviacao', '*'.$abreviacaoA.'*')
+                ->type('nome', '*' . $nomeA . '*')
+                ->type('abreviacao', '*' . $abreviacaoA . '*')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->assertSee('*'.$nomeA.'*')
-                ->assertSee('*'.$abreviacaoA.'*');
+                ->assertSee('*' . $nomeA . '*')
+                ->assertSee('*' . $abreviacaoA . '*');
         });
     }
 }

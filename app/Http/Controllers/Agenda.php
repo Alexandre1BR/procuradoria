@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Data\Repositories\Andamentos as AndamentosRepository;
@@ -28,8 +27,10 @@ class Agenda extends Controller
      *
      * @return $this
      */
-    public function index(AndamentosRepository $andamentosRepository, Request $request)
-    {
+    public function index(
+        AndamentosRepository $andamentosRepository,
+        Request $request
+    ) {
         $pesquisa = $request->get('pesquisa');
 
         if (empty($pesquisa)) {

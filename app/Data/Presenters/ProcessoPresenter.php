@@ -21,7 +21,9 @@ class ProcessoPresenter extends BasePresenter
         $data_distribuicao = $this->wrappedObject->data_distribuicao;
 
         return !is_null($data_distribuicao)
-            ? Carbon::createFromFormat('Y-m-d H:i:s', $data_distribuicao)->format('Y-m-d')
+            ? Carbon
+                ::createFromFormat('Y-m-d H:i:s', $data_distribuicao)
+                ->format('Y-m-d')
             : null;
     }
 
@@ -33,7 +35,9 @@ class ProcessoPresenter extends BasePresenter
         $data_distribuicao = $this->wrappedObject->data_distribuicao;
 
         return !is_null($data_distribuicao)
-            ? Carbon::createFromFormat('Y-m-d H:i:s', $data_distribuicao)->format('d/m/Y')
+            ? Carbon
+                ::createFromFormat('Y-m-d H:i:s', $data_distribuicao)
+                ->format('d/m/Y')
             : null;
     }
 
@@ -45,7 +49,9 @@ class ProcessoPresenter extends BasePresenter
         $data_recebimento = $this->wrappedObject->data_recebimento;
 
         return !is_null($data_recebimento)
-            ? Carbon::createFromFormat('Y-m-d H:i:s', $data_recebimento)->format('Y-m-d')
+            ? Carbon
+                ::createFromFormat('Y-m-d H:i:s', $data_recebimento)
+                ->format('Y-m-d')
             : null;
     }
 
@@ -57,7 +63,9 @@ class ProcessoPresenter extends BasePresenter
         $data_recebimento = $this->wrappedObject->data_recebimento;
 
         return !is_null($data_recebimento)
-            ? Carbon::createFromFormat('Y-m-d H:i:s', $data_recebimento)->format('d/m/Y')
+            ? Carbon
+                ::createFromFormat('Y-m-d H:i:s', $data_recebimento)
+                ->format('d/m/Y')
             : null;
     }
 }

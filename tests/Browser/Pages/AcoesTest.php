@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Browser;
 
 use Faker\Generator as Faker;
@@ -90,12 +91,12 @@ class AcoesTest extends DuskTestCase
                 ->visit('/acoes')
                 ->clickLink($nomeA)
                 ->click('#editar')
-                ->type('nome', '*' . $nomeA . '*')
-                ->type('abreviacao', '*' . $abreviacaoA . '*')
+                ->type('nome', '*'.$nomeA.'*')
+                ->type('abreviacao', '*'.$abreviacaoA.'*')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->assertSee('*' . $nomeA . '*')
-                ->assertSee('*' . $abreviacaoA . '*');
+                ->assertSee('*'.$nomeA.'*')
+                ->assertSee('*'.$abreviacaoA.'*');
         });
     }
 }

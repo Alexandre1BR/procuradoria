@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Rules;
 
 use App\Data\Repositories\ProcessosLeis as ProcessosLeisRepository;
@@ -26,12 +27,11 @@ class UniqueProcessoLei implements Rule
      */
     public function passes($attribute, $value)
     {
-        return (
+        return
             app(ProcessosLeisRepository::class)->whereProcessoAndLeiCount(
                 request('processo_id'),
                 request('lei_id')
-            ) < 1
-        );
+            ) < 1;
     }
 
     /**

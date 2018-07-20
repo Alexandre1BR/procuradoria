@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Data\Repositories\Tags as TagsRepository;
@@ -14,9 +15,9 @@ class Tags extends Controller
             ->all()
             ->map(function ($tag) {
                 return [
-                    'id' => $tag->name,
+                    'id'   => $tag->name,
                     'name' => $tag->name,
-                    'text' => $tag->name
+                    'text' => $tag->name,
                 ];
             });
     }

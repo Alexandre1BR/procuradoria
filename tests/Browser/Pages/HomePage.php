@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Browser\Pages;
 
 use Laravel\Dusk\Browser;

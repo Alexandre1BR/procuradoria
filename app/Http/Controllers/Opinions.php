@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Data\Models\Opinion as OpinionModel;
@@ -64,7 +65,7 @@ class Opinions extends Controller
                 file_get_contents($file->getPathName())
             );
 
-            $request->merge(['file_' . $extension => $base64Content]);
+            $request->merge(['file_'.$extension => $base64Content]);
             //            $date = $newOpinion->date;
             //            $fileName = $date . '-' . $newOpinion->id . '.' . $extension;
             //            $file->storeAs('', $fileName, 'opinion-files');
@@ -94,7 +95,7 @@ class Opinions extends Controller
         if (!Auth::user()->is_procurador) {
             return redirect()
                 ->route('opinions.index')
-                ->with($this->getWarningMessage("Você não tem Permissão."));
+                ->with($this->getWarningMessage('Você não tem Permissão.'));
         }
 
         $mime = '';
@@ -110,14 +111,14 @@ class Opinions extends Controller
         }
 
         $fileName = (
-            'Parecer' .
-                ' - ' .
-                $currentOpinion->attorney->name .
-                ' - ' .
-                $currentOpinion->date .
-                ' - ' .
-                $currentOpinion->id .
-                '.' .
+            'Parecer'.
+                ' - '.
+                $currentOpinion->attorney->name.
+                ' - '.
+                $currentOpinion->date.
+                ' - '.
+                $currentOpinion->id.
+                '.'.
                 $fileExtension
         );
 
@@ -125,9 +126,8 @@ class Opinions extends Controller
             base64_decode($currentOpinion->{$attributeName}),
             200,
             [
-                'Content-Type' => $mime,
-                'Content-Disposition' =>
-                    'attachment; filename="' . $fileName . '"'
+                'Content-Type'        => $mime,
+                'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
             ]
         );
 
@@ -214,21 +214,17 @@ class Opinions extends Controller
         }
 
         return [
-            'opinionTypes' =>
-                app(OpinionTypesRepository::class)
+            'opinionTypes' => app(OpinionTypesRepository::class)
                     ->allOrderBy('name')
                     ->pluck('name', 'id'),
-            'opinionScopes' =>
-                app(OpinionScopesRepository::class)
+            'opinionScopes' => app(OpinionScopesRepository::class)
                     ->allOrderBy('name')
                     ->pluck('name', 'id'),
-            'attorneys' =>
-                app(UsersRepository::class)
+            'attorneys' => app(UsersRepository::class)
                     ->getByType('Procurador')
                     ->pluck('name', 'id'),
-            'opinionSubjects' => $opinionSubjects,
-            'allOpinionSubjects' =>
-                app(OpinionSubjectsRepository::class)->allOrderBy('name')
+            'opinionSubjects'    => $opinionSubjects,
+            'allOpinionSubjects' => app(OpinionSubjectsRepository::class)->allOrderBy('name'),
         ];
     }
 }

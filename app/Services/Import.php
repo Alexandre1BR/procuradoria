@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use App\Data\Models\Processo;
@@ -181,7 +182,7 @@ class Import
                 trim(
                     $data
                         ->sheet(0)
-                        ->getCell($cell = 'A' . ($key + 2))
+                        ->getCell($cell = 'A'.($key + 2))
                         ->getValue()
                 )
             ] = $data
@@ -215,8 +216,7 @@ class Import
                 $tribunal = $this->tribunaisRepository->firstOrCreate(
                     ['abreviacao' => $this->upper($value->origem)],
                     [
-                        'nome' =>
-                            $this->upper($value->origem_por_extenso ?: 'N/C')
+                        'nome' => $this->upper($value->origem_por_extenso ?: 'N/C'),
                     ]
                 );
 
@@ -228,14 +228,14 @@ class Import
 
                 //TÍTULO DO RELATOR
                 $tipo_relator = $this->tiposJuizesRepository->firstOrCreate([
-                    'nome' => $value->titulo_do_relator ?: 'N/C'
+                    'nome' => $value->titulo_do_relator ?: 'N/C',
                 ]);
 
                 $nome_relator = $this->ajustaNomeRelator($value->relator);
                 $relator_juiz = $this->juizesRepository->firstOrCreate([
-                    'nome' => $this->upper($nome_relator ?: 'N/C'),
-                    'lotacao_id' => $tribunal->id,
-                    'tipo_juiz_id' => $tipo_relator->id
+                    'nome'         => $this->upper($nome_relator ?: 'N/C'),
+                    'lotacao_id'   => $tribunal->id,
+                    'tipo_juiz_id' => $tipo_relator->id,
                 ]);
 
                 if (!is_null($value->procurador)) {
@@ -247,7 +247,7 @@ class Import
                     } else {
                         $procurador = null;
                         $obs =
-                            $obs . 'Procurador: ' . $value->procurador . ', ';
+                            $obs.'Procurador: '.$value->procurador.', ';
                     }
                 } else {
                     $procurador = null;
@@ -262,7 +262,7 @@ class Import
                     } else {
                         $estagiario = null;
                         $obs =
-                            $obs . 'Estagiário: ' . $value->estagiario . ', ';
+                            $obs.'Estagiário: '.$value->estagiario.', ';
                         // $this->command->line("{$value->no_judicial} - $value->no_alerj - $obs");
                     }
                 } else {
@@ -277,7 +277,7 @@ class Import
                         )->id;
                     } else {
                         $assessor = null;
-                        $obs = $obs . 'Assessor: ' . $value->assessor . ', ';
+                        $obs = $obs.'Assessor: '.$value->assessor.', ';
                         //$this->command->line("{$value->no_judicial} - $value->no_alerj - $obs");
                     }
                 } else {
@@ -286,55 +286,52 @@ class Import
 
                 $tipo_meio = $this->ajustaTipoMeio($value->tipo);
                 $tipo_meio = $this->meiosRepository->firstOrCreate([
-                    'nome' => $tipo_meio
+                    'nome' => $tipo_meio,
                 ]);
 
                 $insert[] = [
-                    'numero_judicial' =>
-                        str_ireplace("\n", '', $value->no_judicial),
-                    'numero_alerj' => str_ireplace("\n", '', $value->no_alerj),
-                    'tribunal_id' => str_ireplace("\n", '', $tribunal->id), //Origem
-                    'vara' => str_ireplace("\n", '', $value->orgao_julgador),
-                    'acao_id' => str_ireplace("\n", '', $acao->id),
-                    'apensos_obs' => str_ireplace("\n", '', $value->apensos),
+                    'numero_judicial' => str_ireplace("\n", '', $value->no_judicial),
+                    'numero_alerj'    => str_ireplace("\n", '', $value->no_alerj),
+                    'tribunal_id'     => str_ireplace("\n", '', $tribunal->id), //Origem
+                    'vara'            => str_ireplace("\n", '', $value->orgao_julgador),
+                    'acao_id'         => str_ireplace("\n", '', $acao->id),
+                    'apensos_obs'     => str_ireplace("\n", '', $value->apensos),
                     (
                         ($value->titulo_do_relator == 'JUIZ')
                             ? 'juiz_id'
                             : 'relator_id'
-                    ) =>
-                        str_ireplace("\n", '', $relator_juiz->id),
-                    'autor' => str_ireplace("\n", '', $value->autor),
-                    'reu' => str_ireplace("\n", '', $value->reu),
-                    'objeto' => str_ireplace("\n", '', $value->objeto),
-                    'merito' => str_ireplace("\n", '', $value->merito),
-                    'liminar' => str_ireplace("\n", '', $value->liminar),
-                    'recurso' => str_ireplace("\n", '', $value->recurso),
+                    )               => str_ireplace("\n", '', $relator_juiz->id),
+                    'autor'         => str_ireplace("\n", '', $value->autor),
+                    'reu'           => str_ireplace("\n", '', $value->reu),
+                    'objeto'        => str_ireplace("\n", '', $value->objeto),
+                    'merito'        => str_ireplace("\n", '', $value->merito),
+                    'liminar'       => str_ireplace("\n", '', $value->liminar),
+                    'recurso'       => str_ireplace("\n", '', $value->recurso),
                     'procurador_id' => $procurador,
                     'estagiario_id' => $estagiario,
-                    'assessor_id' => $assessor,
-                    'tipo_meio_id' => str_ireplace("\n", '', $tipo_meio->id),
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                    'observacao' => str_ireplace("\n", '', $obs),
-                    'link' =>
-                        isset($links[$value->no_judicial]) &&
+                    'assessor_id'   => $assessor,
+                    'tipo_meio_id'  => str_ireplace("\n", '', $tipo_meio->id),
+                    'created_at'    => now(),
+                    'updated_at'    => now(),
+                    'observacao'    => str_ireplace("\n", '', $obs),
+                    'link'          => isset($links[$value->no_judicial]) &&
                         !empty($links[$value->no_judicial])
                             ? $links[$value->no_judicial]
-                            : null
+                            : null,
                 ];
             }
             $colunas = [
                 'numero_judicial' => 'numero_judicial',
-                'numero_alerj' => 'numero_alerj',
-                'apensos_obs' => 'apensos_obs',
-                'vara' => 'vara',
-                'autor' => 'autor',
-                'reu' => 'reu',
-                'objeto' => 'objeto',
-                'merito' => 'merito',
-                'liminar' => 'liminar',
-                'recurso' => 'recurso',
-                'observacao' => 'observacao'
+                'numero_alerj'    => 'numero_alerj',
+                'apensos_obs'     => 'apensos_obs',
+                'vara'            => 'vara',
+                'autor'           => 'autor',
+                'reu'             => 'reu',
+                'objeto'          => 'objeto',
+                'merito'          => 'merito',
+                'liminar'         => 'liminar',
+                'recurso'         => 'recurso',
+                'observacao'      => 'observacao',
             ];
 
             foreach ($insert as $k1 => $vinsert) {
@@ -382,11 +379,11 @@ class Import
                     $user_type = $this->ajustaTipoUsuario($user_type)->id;
                     if (!empty($name)) {
                         ModelUser::create([
-                            'name' => $this->removerAcentuacao($name),
-                            'password' => '-',
-                            'username' => $username,
-                            'email' => $username . '@alerj.rj.gov.br',
-                            'user_type_id' => $user_type
+                            'name'         => $this->removerAcentuacao($name),
+                            'password'     => '-',
+                            'username'     => $username,
+                            'email'        => $username.'@alerj.rj.gov.br',
+                            'user_type_id' => $user_type,
                         ]);
                     }
                 }
@@ -418,8 +415,8 @@ class Import
 
             $q = ModelUser
                 ::whereRaw(
-                    "lower(name) like '%" .
-                        $this->removerAcentuacao($word) .
+                    "lower(name) like '%".
+                        $this->removerAcentuacao($word).
                         "%'"
                 )
                 ->whereRaw("user_type_id = {$type}")
@@ -1145,7 +1142,7 @@ class Import
             'ჭ' => 'c',
             'ხ' => 'k',
             'ჯ' => 'j',
-            'ჰ' => 'h'
+            'ჰ' => 'h',
         ];
         $str = str_replace(
             array_keys($transliteration),

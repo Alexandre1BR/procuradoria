@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Data\Repositories;
 
 use Carbon\Carbon;

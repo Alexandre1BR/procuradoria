@@ -1,4 +1,5 @@
 <?php
+
 Artisan
     ::command(
         'procuradoria:import:processos {usersFile} {processesFile}',

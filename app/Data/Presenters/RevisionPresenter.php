@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Presenters;
 
 use McCool\LaravelAutoPresenter\BasePresenter;
@@ -10,12 +9,12 @@ class RevisionPresenter extends BasePresenter
      * @var array
      */
     protected $routes = [
-        'App\Data\Models\Tribunal'  => 'tribunais.show',
-        'App\Data\Models\Acao'      => 'acoes.show',
-        'App\Data\Models\Juiz'      => 'juizes.show',
-        'App\Data\Models\Processo'  => 'processos.show',
-        'App\Data\Models\User'      => 'users.show',
-        'App\Data\Models\Andamento' => 'andamentos.show',
+        'App\Data\Models\Tribunal' => 'tribunais.show',
+        'App\Data\Models\Acao' => 'acoes.show',
+        'App\Data\Models\Juiz' => 'juizes.show',
+        'App\Data\Models\Processo' => 'processos.show',
+        'App\Data\Models\User' => 'users.show',
+        'App\Data\Models\Andamento' => 'andamentos.show'
     ];
 
     /**

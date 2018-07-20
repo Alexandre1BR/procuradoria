@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Notifications;
 
 use App\Mail\ProcessoChanged;

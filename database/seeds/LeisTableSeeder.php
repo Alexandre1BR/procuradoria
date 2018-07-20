@@ -1,5 +1,4 @@
 <?php
-
 use App\Data\Models\Lei as LeiModel;
 use App\Data\Models\ProcessoLei as ProcessoLeiModel;
 use Illuminate\Database\Seeder;

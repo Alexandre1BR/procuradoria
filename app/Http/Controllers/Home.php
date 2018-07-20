@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Support\Constants;
@@ -9,7 +8,9 @@ class Home extends Controller
 {
     private function getProcessosController()
     {
-        return subsystem_is(Constants::SUBSYSTEM_OPINIOES) ? app(Opinions::class) : app(Processos::class);
+        return subsystem_is(Constants::SUBSYSTEM_OPINIOES)
+            ? app(Opinions::class)
+            : app(Processos::class);
     }
 
     /**

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,10 +23,10 @@ class User extends FormRequest
     public function rules()
     {
         return [
-            'username'       => 'required',
-            'email'          => 'required',
-            'user_type_id'   => 'required',
-            'personal_email' => 'email|nullable',
+            'username' => 'required',
+            'email' => 'required',
+            'user_type_id' => 'required',
+            'personal_email' => 'email|nullable'
         ];
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['prefix' => '/processos'], function () {
     //www.procuradoria.test/processos
     //Index
@@ -19,7 +18,9 @@ Route::group(['prefix' => '/processos'], function () {
 
     Route::post('/apensar', 'Processos@apensar')->name('processos.apensar');
 
-    Route::post('/relacionarLei', 'Processos@relacionarLei')->name('processos.relacionarLei');
+    Route
+        ::post('/relacionarLei', 'Processos@relacionarLei')
+        ->name('processos.relacionarLei');
 });
 
 // "name" serve pra atender o método route do Laravel no HTML. Vide : /resource/view/processos/form.blade.php

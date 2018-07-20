@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Repositories;
 
 use Carbon\Carbon;
@@ -25,9 +24,13 @@ abstract class Base
 
         $id = isset($request['id']) ? $request['id'] : null;
 
-        is_null($id) ? $model = new $this->model() : $model = $this->model::find($id);
+        is_null($id)
+            ? $model = new $this->model()
+            : $model = $this->model::find($id);
 
         $model->fill($request);
+        //  dump($model);
+        //  dd($request);
 
         $model->save();
 
@@ -43,7 +46,9 @@ abstract class Base
      */
     public function create($data)
     {
-        $model = is_null($id = isset($data['id']) ? $data['id'] : null) ? new $this->model() : $this->model::find($id);
+        $model = is_null($id = isset($data['id']) ? $data['id'] : null)
+            ? new $this->model()
+            : $this->model::find($id);
 
         $model->fill($data);
 
@@ -151,8 +156,11 @@ abstract class Base
      *
      * @return mixed
      */
-    protected function makeResultForSelect($result, $label = 'nome', $value = 'id')
-    {
+    protected function makeResultForSelect(
+        $result,
+        $label = 'nome',
+        $value = 'id'
+    ) {
         return $result->map(function ($row) use ($value, $label) {
             $row['text'] = empty($row->text) ? $row[$label] : $row->text;
 

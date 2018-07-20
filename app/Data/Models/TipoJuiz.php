@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Data\Models;
 
 class TipoJuiz extends BaseModel
@@ -22,7 +21,7 @@ class TipoJuiz extends BaseModel
     public function getAbreviacaoAttribute()
     {
         if (strlen($this->nome) > 4) {
-            return substr($this->nome, 0, 3).'.';
+            return substr($this->nome, 0, 3) . '.';
         }
 
         return $this->nome;

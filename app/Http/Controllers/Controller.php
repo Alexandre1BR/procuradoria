@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -19,5 +18,10 @@ class Controller extends BaseController
     public function getSuccessMessage($message = 'Gravado com sucesso')
     {
         return ['status' => $message];
+    }
+
+    public function getWarningMessage($message)
+    {
+        return ['warning' => $message];
     }
 }

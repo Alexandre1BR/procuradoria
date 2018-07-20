@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,9 +20,13 @@ class AlterTableAndamentos extends Migration
             $table->increments('id');
             $table->string('nome');
         });
-        DB::table('tipos_andamentos')->insert(['id' => '3', 'nome' => 'Manifestação']);
+        DB
+            ::table('tipos_andamentos')
+            ->insert(['id' => '3', 'nome' => 'Manifestação']);
         DB::table('tipo_parecer')->insert(['id' => '1', 'nome' => 'Favorável']);
-        DB::table('tipo_parecer')->insert(['id' => '2', 'nome' => 'Não favorável']);
+        DB
+            ::table('tipo_parecer')
+            ->insert(['id' => '2', 'nome' => 'Não favorável']);
     }
 
     /**

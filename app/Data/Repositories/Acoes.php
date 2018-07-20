@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Data\Repositories;
 
 use App\Data\Models\Acao;
@@ -45,7 +46,7 @@ class Acoes extends Base
                     $query->orWhere(
                         DB::raw("lower({$column})"),
                         'like',
-                        '%' . $item . '%'
+                        '%'.$item.'%'
                     );
                 } else {
                     if ($this->isDate($item)) {

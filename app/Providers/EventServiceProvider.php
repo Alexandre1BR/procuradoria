@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Providers;
 
 use App\Events\ProcessoUpdated;
@@ -14,7 +15,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        ProcessoUpdated::class => [SendProcessoUpdatedNotification::class]
+        ProcessoUpdated::class => [SendProcessoUpdatedNotification::class],
     ];
 
     /**

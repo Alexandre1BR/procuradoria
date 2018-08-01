@@ -31,7 +31,7 @@ class Users extends Base
      *
      * @param Authorization $authorization
      * @param TiposUsuarios $tiposUsuarios
-     * @param UsersService $usersService
+     * @param UsersService  $usersService
      */
     public function __construct(Authorization $authorization, TiposUsuarios $tiposUsuarios, UsersService $usersService)
     {

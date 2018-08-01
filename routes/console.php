@@ -1,4 +1,5 @@
 <?php
+
 use App\Data\Repositories\Users;
 
 Artisan

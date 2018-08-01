@@ -4,6 +4,7 @@ namespace App\Data\Repositories;
 use App\Data\Models\TipoUsuario;
 use App\Data\Models\User;
 use App\Services\Authorization;
+use App\Services\Users as UsersService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,17 +21,25 @@ class Users extends Base
      * @var Authorization
      */
     private $authorization;
+    /**
+     * @var UsersService
+     */
+    private $usersService;
 
     /**
      * Users constructor.
      *
      * @param Authorization $authorization
+     * @param TiposUsuarios $tiposUsuarios
+     * @param UsersService $usersService
      */
-    public function __construct(Authorization $authorization, TiposUsuarios $tiposUsuarios)
+    public function __construct(Authorization $authorization, TiposUsuarios $tiposUsuarios, UsersService $usersService)
     {
         $this->authorization = $authorization;
 
         $this->tiposUsuarios = $tiposUsuarios;
+
+        $this->usersService = $usersService;
     }
 
     /**
@@ -193,9 +202,28 @@ class Users extends Base
         return User::where('all_notifications', true)->get();
     }
 
-    public function updateCurrentUserTypeViaPermissions($permissions)
+    public function updateCurrentUser($permissions)
     {
+        $this->updateUserNameFromLdap(Auth::user());
+
         $this->updateUserTypeFromPermissions($permissions, Auth::user());
+    }
+
+    public function updateUserNameFromLdap($user)
+    {
+        if (count(explode(' ', $user->name)) > 0) {
+            return $user;
+        }
+
+        $data = $this->usersService->getUserInfo($user->username);
+
+        if ($data && isset($data['name'][0])) {
+            $user->name = $data['name'][0];
+
+            $user->save();
+        }
+
+        return $user;
     }
 
     /**

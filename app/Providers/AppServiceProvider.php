@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Providers;
 
 use App\Data\Repositories\Users;
@@ -35,12 +34,7 @@ class AppServiceProvider extends ServiceProvider
     private function bootComposers()
     {
         View::composer('*', function ($view) {
-            $view->with(
-                array_merge(
-                    ['formDisabled' => false, 'isFilter' => false],
-                    $view->getData()
-                )
-            );
+            $view->with(array_merge(['formDisabled' => false, 'isFilter' => false], $view->getData()));
         });
     }
 
@@ -57,13 +51,9 @@ class AppServiceProvider extends ServiceProvider
     private function bootGates()
     {
         Gate::define('use-app', function ($user) {
-            $permissions = app(Authorization::class)->getUserPermissions(
-                $user->username
-            );
+            $permissions = app(Authorization::class)->getUserPermissions($user->username);
 
-            $this->usersRepository->updateCurrentUserTypeViaPermissions(
-                $permissions
-            );
+            $this->usersRepository->updateCurrentUser($permissions);
 
             // If the user has any permissions in the system, it is allowed to use it.
             return $permissions->count() > 0;

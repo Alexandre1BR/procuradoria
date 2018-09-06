@@ -18,23 +18,12 @@ class Processo extends BaseModel
     /**
      * @var array
      */
-    protected $dates = [
-        'data_distribuicao',
-        'data_recebimento',
-        'data_arquivamento',
-    ];
+    protected $dates = ['data_distribuicao', 'data_recebimento', 'data_arquivamento'];
 
     /**
      * @var array
      */
-    protected $with = [
-        'acao',
-        'tribunal',
-        'procurador',
-        'assessor',
-        'estagiario',
-        'tags',
-    ];
+    protected $with = ['acao', 'tribunal', 'procurador', 'assessor', 'estagiario', 'tags'];
 
     /**
      * The attributes that are mass assignable.
@@ -73,10 +62,7 @@ class Processo extends BaseModel
     /**
      * @var array
      */
-    protected $presenters = [
-        'data_distribuicao_formatado',
-        'data_recebimento_formatado',
-    ];
+    protected $presenters = ['data_distribuicao_formatado', 'data_recebimento_formatado'];
 
     /**
      * @var array
@@ -116,10 +102,7 @@ class Processo extends BaseModel
      *
      * @var array
      */
-    protected $dispatchesEvents = [
-        'created' => ProcessoCreated::class,
-        'updated' => ProcessoUpdated::class,
-    ];
+    protected $dispatchesEvents = ['created' => ProcessoCreated::class, 'updated' => ProcessoUpdated::class];
 
     /**
      * @return mixed
@@ -128,23 +111,11 @@ class Processo extends BaseModel
     {
         $notifiables = collect();
 
-        $this->addNotifiable(
-            $notifiables,
-            $this->procurador,
-            'Responsável (estagiário)'
-        );
+        $this->addNotifiable($notifiables, $this->procurador, 'Responsável (procurador)');
 
-        $this->addNotifiable(
-            $notifiables,
-            $this->assessor,
-            'Responsável (assessor)'
-        );
+        $this->addNotifiable($notifiables, $this->assessor, 'Responsável (assessor)');
 
-        $this->addNotifiable(
-            $notifiables,
-            $this->estagiario,
-            'Responsável (procurador)'
-        );
+        $this->addNotifiable($notifiables, $this->estagiario, 'Responsável (estagiário)');
 
         return $notifiables;
     }
@@ -293,10 +264,7 @@ class Processo extends BaseModel
         if (!is_null($notifiable)) {
             $notifiable->type = $type;
 
-            if (
-                !is_null($notifiable) &&
-                is_null($notifiables->where('id', $notifiable->id)->first())
-            ) {
+            if (!is_null($notifiable) && is_null($notifiables->where('id', $notifiable->id)->first())) {
                 $notifiables->push($notifiable);
             }
         }

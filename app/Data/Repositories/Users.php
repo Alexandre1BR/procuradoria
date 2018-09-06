@@ -203,9 +203,11 @@ class Users extends Base
 
     public function updateCurrentUser($permissions)
     {
-        $this->updateUserNameFromLdap(Auth::user());
+        if (config('auth.authorization.enabled')) {
+            $this->updateUserNameFromLdap(Auth::user());
 
-        $this->updateUserTypeFromPermissions($permissions, Auth::user());
+            $this->updateUserTypeFromPermissions($permissions, Auth::user());
+        }
     }
 
     public function updateUserNameFromLdap($user)

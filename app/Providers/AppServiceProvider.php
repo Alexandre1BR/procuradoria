@@ -52,12 +52,17 @@ class AppServiceProvider extends ServiceProvider
     private function bootGates()
     {
         Gate::define('use-app', function ($user) {
-            $permissions = app(Authorization::class)->getUserPermissions($user->username);
+            if (config('auth.authorization.enabled')) {
+                $permissions = app(Authorization::class)->getUserPermissions($user->username);
 
-            $this->usersRepository->updateCurrentUser($permissions);
+                $this->usersRepository->updateCurrentUser($permissions);
 
-            // If the user has any permissions in the system, it is allowed to use it.
-            return $permissions->count() > 0;
+                // If the user has any permissions in the system, it is allowed to use it.
+                return $permissions->count() > 0;
+            }
+
+            // When authorization is not disabled, user must not be disabled
+            return is_null($user->disabled_at);
         });
     }
 }

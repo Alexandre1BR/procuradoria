@@ -68,33 +68,33 @@ class Processo extends BaseModel
      * @var array
      */
     protected $dataTypes = [
-        'numero_judicial' => 'id',
-        'numero_alerj' => 'id',
-        'tribunal_id' => 'id',
-        'vara' => 'string',
-        'data_distribuicao' => 'date',
-        'data_recebimento' => 'date',
-        'acao_id' => 'id',
-        'juiz_id' => 'id',
-        'relator_id' => 'id',
-        'apensos_obs' => 'string',
-        'autor' => 'string',
-        'reu' => 'string',
-        'objeto' => 'string',
-        'merito' => 'string',
-        'liminar' => 'string',
-        'recurso' => 'string',
-        'procurador_id' => 'id',
-        'estagiario_id' => 'id',
-        'assessor_id' => 'id',
-        'tipo_meio_id' => 'id',
-        'observacao' => 'string',
-        'data_arquivamento' => 'date',
+        'numero_judicial'         => 'id',
+        'numero_alerj'            => 'id',
+        'tribunal_id'             => 'id',
+        'vara'                    => 'string',
+        'data_distribuicao'       => 'date',
+        'data_recebimento'        => 'date',
+        'acao_id'                 => 'id',
+        'juiz_id'                 => 'id',
+        'relator_id'              => 'id',
+        'apensos_obs'             => 'string',
+        'autor'                   => 'string',
+        'reu'                     => 'string',
+        'objeto'                  => 'string',
+        'merito'                  => 'string',
+        'liminar'                 => 'string',
+        'recurso'                 => 'string',
+        'procurador_id'           => 'id',
+        'estagiario_id'           => 'id',
+        'assessor_id'             => 'id',
+        'tipo_meio_id'            => 'id',
+        'observacao'              => 'string',
+        'data_arquivamento'       => 'date',
         'observacao_arquivamento' => 'string',
-        'tags' => 'tags',
-        'link' => 'link',
-        'site_alerj_link' => 'link',
-        'tipo_processo_id' => 'id',
+        'tags'                    => 'tags',
+        'link'                    => 'link',
+        'site_alerj_link'         => 'link',
+        'tipo_processo_id'        => 'id',
     ];
 
     /**
@@ -240,7 +240,7 @@ class Processo extends BaseModel
      */
     public function save(array $options = [])
     {
-        Cache::forget('getProcessosData' . $this->id);
+        Cache::forget('getProcessosData'.$this->id);
 
         parent::save();
     }

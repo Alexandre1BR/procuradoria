@@ -148,12 +148,9 @@ class Users extends Base
 
                 $user->password = Hash::make($email);
 
-                $user->save();
+                $user->user_type_id = $this->findUserTypeFromUsername($user->username)->id ?? null;
 
-                $this->updateUserTypeFromPermissions(
-                    $this->getUserTypeFromPermissions(app(Authorization::class)->getUserPermissions($user->username)),
-                    $user
-                );
+                $user->save();
             }
 
             Auth::login($user, $remember);
@@ -240,5 +237,12 @@ class Users extends Base
 
             $user->save();
         }
+    }
+
+    public function findUserTypeFromUsername($username)
+    {
+        return $this->tiposUsuarios->findByName(
+            $this->getUserTypeFromPermissions(app(Authorization::class)->getUserPermissions($username))
+        );
     }
 }

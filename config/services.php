@@ -14,16 +14,16 @@ return [
     */
 
     'mailgun' => ['domain' => env('MAILGUN_DOMAIN'), 'secret' => env('MAILGUN_SECRET')],
-    'ses'     => [
-            'key'    => env('SES_KEY'),
-            'secret' => env('SES_SECRET'),
-            'region' => 'us-east-1',
-        ],
+    'ses' => [
+        'key' => env('SES_KEY'),
+        'secret' => env('SES_SECRET'),
+        'region' => 'us-east-1',
+    ],
     'sparkpost' => ['secret' => env('SPARKPOST_SECRET')],
-    'stripe'    => [
-            'model'  => App\Data\Models\User::class,
-            'key'    => env('STRIPE_KEY'),
-            'secret' => env('STRIPE_SECRET'),
-        ],
+    'stripe' => [
+        'model' => App\Data\Models\User::class,
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+    ],
     'slack' => ['webhook_url' => env('SLACK_WEBHOOK_URL')],
 ];

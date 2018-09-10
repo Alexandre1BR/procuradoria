@@ -13,8 +13,7 @@ class OpinionsSubjects extends Base
 
     public function whereOpinionAndSubjectCount($opinion_id, $subject_id)
     {
-        return OpinionsSubjectModel
-            ::where('opinion_id', '=', $opinion_id)
+        return OpinionsSubjectModel::where('opinion_id', '=', $opinion_id)
             ->where('subject_id', '=', $subject_id)
             ->count();
     }

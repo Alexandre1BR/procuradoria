@@ -13,6 +13,7 @@ namespace App\Data\Models {
      */
     class Acao extends \Eloquent
     {
+
     }
 }
 
@@ -22,6 +23,7 @@ namespace App\Data\Models {
      */
     class Juiz extends \Eloquent
     {
+
     }
 }
 
@@ -31,6 +33,7 @@ namespace App\Data\Models {
      */
     class Processo extends \Eloquent
     {
+
     }
 }
 
@@ -40,6 +43,7 @@ namespace App\Data\Models {
      */
     class Tipo_Juiz extends \Eloquent
     {
+
     }
 }
 
@@ -51,5 +55,6 @@ namespace App\Data\Models {
      */
     class User extends \Eloquent
     {
+
     }
 }

@@ -22,9 +22,9 @@ class Andamentos extends Base
      * @var array
      */
     protected $dataTypes = [
-        'data_prazo'   => 'date',
+        'data_prazo' => 'date',
         'data_entrega' => 'date',
-        'observacoes'  => 'string',
+        'observacoes' => 'string',
     ];
 
     /**
@@ -34,23 +34,24 @@ class Andamentos extends Base
      */
     protected function makeFeedTitle($andamento)
     {
-        return
-            "\n".
-            'PRAZO - '.
-            $this->cleanString($andamento->tipoPrazo->nome).
-            "\n".
-            'judicial: '.
-            $this->cleanString($andamento->processo->numero_judicial).
-            "\n".
-            'alerj: '.
-            $this->cleanString($andamento->processo->numero_alerj).
-            "\n".
-            'autor: '.
-            $this->cleanString($andamento->processo->autor).
-            "\n".
-            'réu: '.
-            $this->cleanString($andamento->processo->reu).
-            "\n";
+        return (
+            "\n" .
+            'PRAZO - ' .
+            $this->cleanString($andamento->tipoPrazo->nome) .
+            "\n" .
+            'judicial: ' .
+            $this->cleanString($andamento->processo->numero_judicial) .
+            "\n" .
+            'alerj: ' .
+            $this->cleanString($andamento->processo->numero_alerj) .
+            "\n" .
+            'autor: ' .
+            $this->cleanString($andamento->processo->autor) .
+            "\n" .
+            'réu: ' .
+            $this->cleanString($andamento->processo->reu) .
+            "\n"
+        );
     }
 
     /**
@@ -60,11 +61,7 @@ class Andamentos extends Base
      */
     protected function makeFeedDescription($andamento)
     {
-        return
-            'njud:'.
-            $andamento->processo->numero_judicial.
-            '<br>nalerj: '.
-            $andamento->processo->numero_alerj;
+        return 'njud:' . $andamento->processo->numero_judicial . '<br>nalerj: ' . $andamento->processo->numero_alerj;
     }
 
     /**
@@ -83,15 +80,13 @@ class Andamentos extends Base
      */
     public function createFromProcessos(ProcessoRequest $request, Processo $p)
     {
-        $tipoAndamento = TipoAndamento
-            ::where('nome', 'Recebimento')
+        $tipoAndamento = TipoAndamento::where('nome', 'Recebimento')
             ->get()
             ->first();
         $model = new AndamentoModel();
 
         if (is_null($request->input('id'))) {
-            $tipoEntrada = TipoEntrada
-                ::where('nome', 'Automatico')
+            $tipoEntrada = TipoEntrada::where('nome', 'Automatico')
                 ->get()
                 ->first();
             $model->setAttribute('processo_id', $p->id);
@@ -100,17 +95,13 @@ class Andamentos extends Base
             $model->setAttribute('data_andamento', $p->data_recebimento);
             $model->save();
 
-        /*
-         *  It means that the value of data_recebimento
-         *  has changed and need to be changed in Andamento
-         *
-         */
-        } elseif (
-            $request->old('data_recebimento') !=
-            $request->input('data_recebimento')
-        ) {
-            $model = AndamentoModel
-                ::where('processo_id', $p->id)
+            /*
+             *  It means that the value of data_recebimento
+             *  has changed and need to be changed in Andamento
+             *
+             */
+        } elseif ($request->old('data_recebimento') != $request->input('data_recebimento')) {
+            $model = AndamentoModel::where('processo_id', $p->id)
                 ->where('tipo_andamento_id', $tipoAndamento->id)
                 ->get()
                 ->first();
@@ -125,25 +116,17 @@ class Andamentos extends Base
      */
     public function checkforchanges(Request $request)
     {
-        $tipoAndamento = TipoAndamento
-            ::where('nome', 'Recebimento')
+        $tipoAndamento = TipoAndamento::where('nome', 'Recebimento')
             ->get()
             ->first();
 
         if ($request->input('tipo_andamento_id') == $tipoAndamento->id) {
-            if (
-                $request->old('data_andamento') !=
-                $request->input('data_andamento')
-            ) {
-                $processo = Processo
-                    ::where('id', $request->input('processo_id'))
+            if ($request->old('data_andamento') != $request->input('data_andamento')) {
+                $processo = Processo::where('id', $request->input('processo_id'))
                     ->get()
                     ->first();
 
-                $processo->setAttribute(
-                    'data_recebimento',
-                    $request->data_andamento
-                );
+                $processo->setAttribute('data_recebimento', $request->data_andamento);
                 $processo->save();
             }
         }
@@ -169,7 +152,7 @@ class Andamentos extends Base
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
                 if ($type === 'string') {
-                    $query->orWhere($column, 'ilike', '%'.$item.'%');
+                    $query->orWhere($column, 'ilike', '%' . $item . '%');
                 } else {
                     $ifdate = $this->toDate($item);
                     if ($ifdate != null) {
@@ -208,6 +191,8 @@ class Andamentos extends Base
         try {
             $item = Carbon::createFromFormat('d/m/Y', $item)->format('Y-m-d');
         } catch (\Exception $exception) {
+            report($exception);
+
             return;
         }
 
@@ -219,19 +204,18 @@ class Andamentos extends Base
      */
     public function feedForFullcalendar()
     {
-        $andamentosComPrazo = AndamentoModel
-            ::whereNotNull('data_prazo')
+        $andamentosComPrazo = AndamentoModel::whereNotNull('data_prazo')
             ->whereNotNull('tipo_prazo_id')
             ->get();
 
         return $andamentosComPrazo->map(function ($andamento) {
             return [
-                'id'          => $andamento->id,
-                'title'       => $this->makeFeedTitle($andamento),
-                'start'       => $andamento->data_prazo->toIso8601String(),
-                'end'         => $andamento->data_prazo->addHour()->toIso8601String(),
+                'id' => $andamento->id,
+                'title' => $this->makeFeedTitle($andamento),
+                'start' => $andamento->data_prazo->toIso8601String(),
+                'end' => $andamento->data_prazo->addHour()->toIso8601String(),
                 'description' => $this->makeFeedDescription($andamento),
-                'url'         => route('processos.show', ['id' => $andamento->processo->id]),
+                'url' => route('processos.show', ['id' => $andamento->processo->id]),
             ];
         });
     }

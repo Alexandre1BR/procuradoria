@@ -91,15 +91,11 @@ class Users extends Base
         return studly_case(
             $this->isType($permissions, 'Administrador')
                 ? 'administrador'
-                : (
-                    $this->isType($permissions, 'Procurador')
-                        ? $type = 'procurador'
-                        : (
-                            $this->isType($permissions, 'Assessor')
-                                ? $type = 'assessor'
-                                : ($this->isType($permissions, 'Estagi') ? $type = 'estagiario' : '')
-                        )
-                )
+                : ($this->isType($permissions, 'Procurador')
+                    ? $type = 'procurador'
+                    : ($this->isType($permissions, 'Assessor')
+                        ? $type = 'assessor'
+                        : ($this->isType($permissions, 'Estagi') ? $type = 'estagiario' : '')))
         );
     }
 
@@ -161,6 +157,8 @@ class Users extends Base
 
             Auth::login($user, $remember);
         } catch (\Exception $exception) {
+            report($exception);
+
             return false;
         }
 

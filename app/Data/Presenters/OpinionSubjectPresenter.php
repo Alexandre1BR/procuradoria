@@ -49,9 +49,7 @@ class OpinionSubjectPresenter extends BasePresenter
         $str = $current->name;
 
         for ($i = 1; $i < $level; $i++) {
-            $str =
-                '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.
-                $str;
+            $str = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $str;
         }
 
         //        dd($str);

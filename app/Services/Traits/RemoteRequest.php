@@ -31,10 +31,10 @@ class RemoteRequest
     {
         try {
             $response = $this->guzzle->request('POST', $url, [
-                'verify' => false,
-                'debug' => false,
+                'verify'             => false,
+                'debug'              => false,
                 RequestOptions::JSON => $data,
-                'allow_redirects' => true,
+                'allow_redirects'    => true,
             ]);
         } catch (ClientException $exception) {
             report($exception);

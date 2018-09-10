@@ -1,4 +1,5 @@
 <?php
+
 use App\Data\Repositories\Users;
 
 Artisan::command('procuradoria:import:processos {usersFile} {processesFile}', function ($usersFile, $processesFile) {

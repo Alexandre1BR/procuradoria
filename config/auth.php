@@ -13,14 +13,17 @@ return [
     */
 
     'defaults' => ['guard' => 'web', 'passwords' => 'users'],
+
     'authentication' => [
         'mock' => env('APP_AUTHENTICATION_MOCKED', false),
         'enabled' => env('APP_AUTHENTICATION_ENABLED', env('APP_AUTHENTICATION', true)),
     ],
+
     'authorization' => [
         'mock' => env('APP_AUTHORIZATION_MOCKED', false),
         'enabled' => env('APP_AUTHORIZATION_ENABLED', env('APP_AUTHORIZATION', true)),
     ],
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards

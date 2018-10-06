@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\Models\User as UserModel;
 use App\Data\Repositories\Users as UsersRepository;
 use App\Http\Requests\User as UserRequest;
 use Illuminate\Support\Facades\Auth;
@@ -138,12 +139,10 @@ class Users extends Controller
      */
     public function store(UserRequest $request, UsersRepository $repository)
     {
-        if (!$request->has('no_notifications')) {
-            $request->merge(['no_notifications' => 0]);
-        }
-
-        if (!$request->has('all_notifications')) {
+        if ($request->get('no_notifications')) {
             $request->merge(['all_notifications' => 0]);
+        } elseif ($request->get('all_notifications')){
+            $request->merge(['no_notifications' => 0]);
         }
 
         $repository->createFromRequest($request);

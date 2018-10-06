@@ -11,12 +11,6 @@
                     @include('partials.disabled')
                 >Gravar
                 </button>
-
-                <script>
-                    function f_gravar() {
-                        $("#formulario").submit();
-                    }
-                </script>
             @else
                 <div class="row">
                     <div class="col-md-12">

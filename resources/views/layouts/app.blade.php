@@ -87,8 +87,11 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
 
-
-
+        <script type="application/javascript">
+            function f_gravar() {
+                $("#formulario").submit();
+            }
+        </script>
 
         @include('layouts.partials.google-analytics')
     </body>

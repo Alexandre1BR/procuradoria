@@ -160,6 +160,9 @@ class Processos extends Base
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
                 if ($type === 'string') {
+                    if($column == 'numero_judicial'){
+                        $item = only_numbers($item);
+                    }
                     $query->orWhere($column, 'ilike', '%'.$item.'%');
                 } else {
                     $ifdate = $this->toDate($item);

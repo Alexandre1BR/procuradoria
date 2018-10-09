@@ -70,20 +70,28 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
+                                <input name="no_notifications" type="hidden" value="0">
                                 <input name="no_notifications" id="no_notifications" type="checkbox" value="1" disabled
-                                       @if($user->no_notifications)
-                                            checked
-                                    @endif
+                                   @if($user->no_notifications)
+                                        checked
+                                   @endif
+                                   onclick="if(this.checked) {
+                                       document.getElementById('all_notifications').checked=false;
+                                   }"
                                 >
                                 <label for="no_notifications">Não deseja receber notificações</label>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
+                                <input name="all_notifications" type="hidden" value="0">
                                 <input name="all_notifications" id="all_notifications" type="checkbox" value="1" disabled
-                                       @if($user->all_notifications)
-                                            checked
-                                        @endif
+                                   @if($user->all_notifications)
+                                        checked
+                                   @endif
+                                   onclick="if(this.checked) {
+                                       document.getElementById('no_notifications').checked=false;
+                                   }"
                                 >
                                 <label for="all_notifications">Deseja receber TODAS as notificações</label>
                             </div>

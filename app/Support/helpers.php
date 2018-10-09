@@ -51,3 +51,8 @@ class Timer
     public static $starttime;
     public static $endtime;
 }
+
+function only_numbers($string)
+{
+    return preg_replace('/\D/', '', $string);
+}

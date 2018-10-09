@@ -121,7 +121,7 @@ class Users extends Base
         $userTypesArray = $this->getUserTypesArrayWithSubstrings();
 
         foreach ($permissions as $permission) {
-            if ($permission['nomeFuncao'] == 'Admini') {
+            if ($this->transformToSubstring($permission['nomeFuncao']) == $this->transformToSubstring('Administrador')) {
                 return $userTypesArray['Admini'];
             }
         }
@@ -287,8 +287,6 @@ class Users extends Base
     public function updateCurrentUserTypeViaPermissions($permissions)
     {
         $user = Auth::user();
-
-        $userType = null;
 
         $userType = $this->getUserTypeFromPermissions($permissions);
 

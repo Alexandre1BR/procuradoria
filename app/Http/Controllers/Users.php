@@ -141,7 +141,7 @@ class Users extends Controller
     {
         if ($request->get('no_notifications')) {
             $request->merge(['all_notifications' => 0]);
-        } elseif ($request->get('all_notifications')){
+        } elseif ($request->get('all_notifications')) {
             $request->merge(['no_notifications' => 0]);
         }
 

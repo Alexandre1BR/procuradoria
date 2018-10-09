@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Data\Repositories\Users;
 use App\Services\Traits\RemoteRequest;
+use App\Data\Repositories\Users as UsersRepository;
 
 class Authentication
 {
@@ -62,7 +63,41 @@ class Authentication
             return $this->mockedAuthentication($request);
         }
 
-        return $this->remoteRequest->post(static::LOGIN_URL, extract_credentials($request));
+        try {
+            $response = $this->remoteRequest->post(
+                static::LOGIN_URL,
+                extract_credentials($request)
+            );
+            return $response;
+        } catch (\Exception $exception) {
+            //Timeout no login
+            $usersRepository = app(UsersRepository::class);
+            $user = $usersRepository->findByColumn(
+                'username',
+                extract_credentials($request)['username']
+            );
+
+            if (is_null($user)) {
+                //Sistema de login fora do ar e usuário novo
+                dd(
+                    'Não é possível logar pois o sistema de login está fora do ar e o seu usuário é novo'
+                );
+            } else {
+                //Usuário já cadastrado
+                if (
+                \Hash::check(
+                    extract_credentials($request)['password'],
+                    $user->password
+                )
+                ) {
+                    //Credenciais de login conferem com as salvas no banco
+                    return $this->mockedAuthentication($request);
+                } else {
+                    //Credenciais de login não conferem com as salvas no banco
+                    return $this->failedAuthentication();
+                }
+            }
+        }
     }
 
     /**
@@ -78,6 +113,18 @@ class Authentication
     {
         if ($success = $response['success']) {
             $success = $this->usersRepository->loginUser($request, $remember);
+
+            if (!$success) {
+                return false;
+            }
+
+            $permissions = app(Authorization::class)->getUserPermissions(
+                extract_credentials($request)['username']
+            );
+
+            $this->usersRepository->updateCurrentUserTypeViaPermissions(
+                $permissions
+            );
         }
 
         return $success;
@@ -103,6 +150,20 @@ class Authentication
                 ],
                 'description' => ['matricula: N/C'],
             ],
+        ];
+    }
+
+    /**
+     *
+     * @return array
+     */
+    protected function failedAuthentication()
+    {
+        return [
+            'success' => false,
+            'code' => 401,
+            'message' => 'Attempt failed.',
+            'data' => [],
         ];
     }
 }

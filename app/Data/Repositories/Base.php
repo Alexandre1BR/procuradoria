@@ -56,6 +56,18 @@ abstract class Base
     }
 
     /**
+     * @param $column
+     * @param $value
+     *
+     * @return mixed
+     */
+    public function findByColumn($column, $value)
+    {
+        return $this->model::where($column, $value)->first();
+    }
+
+
+    /**
      * @param array $search
      * @param array $attributes
      *
@@ -161,5 +173,32 @@ abstract class Base
 
             return $row;
         });
+    }
+
+    /**
+     * @param $item
+     *
+     * @return string|void
+     */
+    protected function toDate($item)
+    {
+        try {
+            $item = Carbon::createFromFormat('d/m/Y', $item)->format('Y-m-d');
+        } catch (\Exception $exception) {
+            return;
+        }
+
+        return $item;
+    }
+
+    public function toArrayWithColumnKey($elements, $columnName)
+    {
+        $returnArray = [];
+
+        foreach ($elements as $element) {
+            $returnArray[$element->$columnName] = $element;
+        }
+
+        return $returnArray;
     }
 }

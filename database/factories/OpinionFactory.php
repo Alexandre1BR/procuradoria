@@ -76,5 +76,15 @@ $factory->define(OpinionModel::class, function (Faker $faker) {
         'opinion'     => $faker->text,
         'file_pdf'    => $faker->text,
         'file_doc'    => $faker->text,
+        'created_by' => $faker->randomElement(
+            app(UsersRepository::class)
+                ->getByType('Procurador')
+                ->toArray()
+        )['id'],
+        'updated_by' => $faker->randomElement(
+            app(UsersRepository::class)
+                ->getByType('Procurador')
+                ->toArray()
+        )['id'],
     ];
 });

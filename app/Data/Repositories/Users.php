@@ -8,6 +8,7 @@ use App\Services\Authorization;
 use App\Services\Users as UsersService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Data\Repositories\TiposUsuarios as TiposUsuariosRepository;
 
 class Users extends Base
 {
@@ -83,23 +84,55 @@ class Users extends Base
         return TipoUsuario::where('nome', $this->authorization->getUserProfiles($username)->first())->first();
     }
 
-    private function getUserTypeFromPermissions($permissions)
+    private function permitionFunctionMatches()
     {
-        if ($this->isAdministrador($permissions)) {
-            return 'Administrador';
+
+    }
+
+    private function transformToSubstring($str)
+    {
+        return substr($str, 0, 6);
+    }
+
+    private function getUserTypesArrayWithSubstrings()
+    {
+        $userTypesRepository = app(TiposUsuariosRepository::class);
+        $userTypesArray = $userTypesRepository->toArrayWithColumnKey(
+            $userTypesRepository->all(),
+            'nome'
+        );
+
+        return $this->transformArrayToSubstrings($userTypesArray);
+    }
+
+    private function transformArrayToSubstrings($userTypesArray)
+    {
+        foreach ($userTypesArray as $key => $item){
+            unset($userTypesArray[$key]);
+            $key = $this->transformToSubstring($key);
+            $userTypesArray[$key] = $item;
         }
 
-        return studly_case(
-            $this->isType($permissions, 'Administrador')
-                ? 'administrador'
-                : ($this->isType($permissions, 'Procurador')
-                    ? ($type = 'procurador')
-                    : ($this->isType($permissions, 'Assessor')
-                        ? ($type = 'assessor')
-                        : ($this->isType($permissions, 'Estagi')
-                            ? ($type = 'estagiario')
-                            : '')))
-        );
+        return $userTypesArray;
+    }
+
+    private function getUserTypeFromPermissions($permissions)
+    {
+        $userTypesArray = $this->getUserTypesArrayWithSubstrings();
+
+        foreach ($permissions as $permission) {
+            if ($permission['nomeFuncao'] == 'Admini') {
+                return $userTypesArray['Admini'];
+            }
+        }
+
+        foreach ($permissions as $permission) {
+            if (isset($userTypesArray[$this->transformToSubstring($permission['nomeFuncao'])])) {
+                return $userTypesArray[$this->transformToSubstring($permission['nomeFuncao'])];
+            }
+        }
+
+        return null;
     }
 
     private function isAdministrador($permissions)
@@ -146,8 +179,21 @@ class Users extends Base
 
                 $user->password = Hash::make($email);
 
-                $user->user_type_id = $this->findUserTypeFromUsername($user->username)->id ?? null;
+                $userType = $this->getUserTypeFromPermissions(
+                    app(Authorization::class)->getUserPermissions(
+                        $user->username
+                    )
+                );
 
+                if (is_null($userType)) {
+                    return false;
+                } else {
+                    $user->user_type_id = $userType->id;
+                }
+
+                $user->save();
+            }else{
+                $user->password = Hash::make($credentials['password']);
                 $user->save();
             }
 
@@ -237,10 +283,20 @@ class Users extends Base
         }
     }
 
-    public function findUserTypeFromUsername($username)
+
+    public function updateCurrentUserTypeViaPermissions($permissions)
     {
-        return $this->tiposUsuarios->findByName(
-            $this->getUserTypeFromPermissions(app(Authorization::class)->getUserPermissions($username))
-        );
+        $user = Auth::user();
+
+        $userType = null;
+
+        $userType = $this->getUserTypeFromPermissions($permissions);
+
+        if ($userType) {
+            $user->user_type_id = $userType->id;
+            $user->save();
+        } else {
+            dd('Você não está autorizado a usar o sistema');
+        }
     }
 }

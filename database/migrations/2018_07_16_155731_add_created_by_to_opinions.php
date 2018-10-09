@@ -25,5 +25,9 @@ class AddCreatedByToOpinions extends Migration
      */
     public function down()
     {
+        Schema::table('opinions', function ($table) {
+            $table->dropColumn('created_by');
+            $table->dropColumn('updated_by');
+        });
     }
 }

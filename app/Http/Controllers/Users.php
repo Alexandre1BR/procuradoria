@@ -111,8 +111,8 @@ class Users extends Controller
     {
         return [
             'userType' => app(UsersRepository::class)
-                    ->all()
-                    ->pluck('nome', 'id'),
+                ->all()
+                ->pluck('nome', 'id'),
         ];
     }
 

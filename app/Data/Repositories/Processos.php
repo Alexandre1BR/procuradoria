@@ -160,14 +160,24 @@ class Processos extends Base
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
                 if ($type === 'string') {
-                    if ($column == 'numero_judicial') {
-                        $item = only_numbers($item);
+                    if (
+                        in_array($column, $this->new()->getNumericColumns()) &&
+                        !empty(only_numbers($item))
+                    ) {
+                        $query->orWhereRaw(
+                            "regexp_replace( " .
+                                $column .
+                                " , '[^0-9]', '', 'g') ilike '%" .
+                                only_numbers($item) .
+                                "%'"
+                        );
+                    } else {
+                        $query->orWhere($column, 'ilike', '%' . $item . '%');
                     }
-                    $query->orWhere($column, 'ilike', '%' . $item . '%');
-                } else {
-                    $ifdate = $this->toDate($item);
-                    if ($ifdate != null) {
-                        $query->orWhereDate($column, '=', $ifdate);
+                } elseif ($type === 'date') {
+                    $date = $this->toDate($item);
+                    if ($date != null) {
+                        $query->orWhereDate($column, '=', $date);
                     }
                 }
             });

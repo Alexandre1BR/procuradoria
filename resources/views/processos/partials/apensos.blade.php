@@ -45,13 +45,13 @@
             </thead>
             @forelse($apensos as $key => $apenso)
                 {{--Apensados--}}
-                @if($processo->id == $apenso->apensado->id)
+                @if(isset($apenso->apensado) && $processo->id == $apenso->apensado->id)
                     <tr>
                         {{--<td>{{$apenso->processo->id}}</td>--}}
                         <td><a href="{{ route('processos.show', ['id' => $apenso->processo->id]) }}">{{$apenso->processo->numero_judicial }}</a></td>
                     </tr>
                 @endif
-                @if($processo->id == $apenso->processo->id)
+                @if(isset($apenso->apensado) && $processo->id == $apenso->processo->id)
                     <tr>
                         {{--<td>{{$apenso->apensado->id}}</td>--}}
                         <td><a href="{{ route('processos.show', ['id' => $apenso->apensado->id]) }}">{{$apenso->apensado->numero_judicial }}</a></td>

@@ -119,9 +119,9 @@ class Processos extends Controller
         return view('processos.form')
             ->with(
                 'processo',
-                ProcessoModel
-                    ::withoutGlobalScope(ProcessoScope::class)
-                    ->find($id)
+                ProcessoModel::withoutGlobalScope(ProcessoScope::class)->find(
+                    $id
+                )
             )
             ->with('formDisabled', true)
             ->with($this->processosRepository->getProcessosData($id));

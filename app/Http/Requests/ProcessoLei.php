@@ -26,7 +26,7 @@ class ProcessoLei extends FormRequest
     {
         return [
             'processo_id' => ['required', new UniqueProcessoLei()],
-            'lei_id' => 'required',
+            'lei_id'      => 'required',
         ];
     }
 }

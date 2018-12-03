@@ -25,9 +25,7 @@ abstract class Base
 
         $id = isset($request['id']) ? $request['id'] : null;
 
-        is_null($id)
-            ? ($model = new $this->model())
-            : ($model = $this->model::find($id));
+        is_null($id) ? ($model = new $this->model()) : ($model = $this->model::find($id));
 
         $model->fill($request);
         //  dump($model);
@@ -157,11 +155,8 @@ abstract class Base
      *
      * @return mixed
      */
-    protected function makeResultForSelect(
-        $result,
-        $label = 'nome',
-        $value = 'id'
-    ) {
+    protected function makeResultForSelect($result, $label = 'nome', $value = 'id')
+    {
         return $result->map(function ($row) use ($value, $label) {
             $row['text'] = empty($row->text) ? $row[$label] : $row->text;
 

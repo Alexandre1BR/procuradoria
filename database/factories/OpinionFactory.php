@@ -34,15 +34,15 @@ $factory->define(OpinionSubjectModel::class, function (Faker $faker) {
 $factory->define(OpinionsSubjectModel::class, function (Faker $faker) {
     return [
         'opinion_id' => $faker->randomElement(
-                app(OpinionsRepository::class)
-                    ->all()
-                    ->toArray()
-            )['id'],
+            app(OpinionsRepository::class)
+                ->all()
+                ->toArray()
+        )['id'],
         'subject_id' => $faker->randomElement(
-                app(OpinionSubjectsRepository::class)
-                    ->all()
-                    ->toArray()
-            )['id'],
+            app(OpinionSubjectsRepository::class)
+                ->all()
+                ->toArray()
+        )['id'],
     ];
 });
 
@@ -53,28 +53,28 @@ $factory->define(OpinionTypeModel::class, function (Faker $faker) {
 $factory->define(OpinionModel::class, function (Faker $faker) {
     return [
         'opinion_scope_id' => $faker->randomElement(
-                app(OpinionScopesRepository::class)
-                    ->all()
-                    ->toArray()
-            )['id'],
+            app(OpinionScopesRepository::class)
+                ->all()
+                ->toArray()
+        )['id'],
         'opinion_type_id' => $faker->randomElement(
-                app(OpinionTypesRepository::class)
-                    ->all()
-                    ->toArray()
-            )['id'],
+            app(OpinionTypesRepository::class)
+                ->all()
+                ->toArray()
+        )['id'],
         'attorney_id' => $faker->randomElement(
-                app(UsersRepository::class)
-                    ->getByType('Procurador')
-                    ->toArray()
-            )['id'],
+            app(UsersRepository::class)
+                ->getByType('Procurador')
+                ->toArray()
+        )['id'],
         'suit_number' => $faker->name,
-        'suit_sheet'  => $faker->name,
-        'identifier'  => $faker->name,
-        'date'        => $faker->date,
-        'party'       => $faker->name,
-        'abstract'    => $faker->text,
-        'opinion'     => $faker->text,
-        'file_pdf'    => $faker->text,
-        'file_doc'    => $faker->text,
+        'suit_sheet' => $faker->name,
+        'identifier' => $faker->name,
+        'date' => $faker->date,
+        'party' => $faker->name,
+        'abstract' => $faker->text,
+        'opinion' => $faker->text,
+        'file_pdf' => $faker->text,
+        'file_doc' => $faker->text,
     ];
 });

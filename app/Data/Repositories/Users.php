@@ -93,17 +93,18 @@ class Users extends Base
             $this->isType($permissions, 'Administrador')
                 ? 'administrador'
                 : ($this->isType($permissions, 'Procurador')
-                    ? $type = 'procurador'
+                    ? ($type = 'procurador')
                     : ($this->isType($permissions, 'Assessor')
-                        ? $type = 'assessor'
-                        : ($this->isType($permissions, 'Estagi') ? $type = 'estagiario' : '')))
+                        ? ($type = 'assessor')
+                        : ($this->isType($permissions, 'Estagi')
+                            ? ($type = 'estagiario')
+                            : '')))
         );
     }
 
     private function isAdministrador($permissions)
     {
-        return
-            $this->isType($permissions, 'Procurador') &&
+        return $this->isType($permissions, 'Procurador') &&
             $this->isType($permissions, 'Assessor') &&
             $this->isType($permissions, 'Estagi');
     }
@@ -116,12 +117,11 @@ class Users extends Base
      */
     private function isType($permissions, $type)
     {
-        return
-            $permissions
-                ->filter(function ($user) use ($type) {
-                    return starts_with($user['nomeFuncao'], $type);
-                })
-                ->count() > 0;
+        return $permissions
+            ->filter(function ($user) use ($type) {
+                return starts_with($user['nomeFuncao'], $type);
+            })
+            ->count() > 0;
     }
 
     /**
@@ -135,7 +135,7 @@ class Users extends Base
         try {
             $credentials = extract_credentials($request);
 
-            if (is_null($user = $this->findUserByEmail($email = "{$credentials['username']}@alerj.rj.gov.br"))) {
+            if (is_null(($user = $this->findUserByEmail(($email = "{$credentials['username']}@alerj.rj.gov.br"))))) {
                 $user = new User();
 
                 $user->name = $credentials['username'];

@@ -93,10 +93,7 @@ class AndamentosTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser
                 ->visit('/andamentos')
-                ->type(
-                    'pesquisa',
-                    '45879349875348975387958973489734897345893478957984'
-                )
+                ->type('pesquisa', '45879349875348975387958973489734897345893478957984')
                 ->click('#searchButton')
                 ->waitForText('Nenhum andamento encontrado')
                 ->assertSee('Nenhum andamento encontrado');
@@ -136,12 +133,8 @@ class AndamentosTest extends DuskTestCase
                 ->all()
                 ->toArray()
         );
-        $dataPrazoA = \DateTime
-            ::createFromFormat('m-d-Y', '03-02-2333')
-            ->format('m-d-Y');
-        $dataEntregaA = \DateTime
-            ::createFromFormat('m-d-Y', '04-05-2444')
-            ->format('m-d-Y');
+        $dataPrazoA = \DateTime::createFromFormat('m-d-Y', '03-02-2333')->format('m-d-Y');
+        $dataEntregaA = \DateTime::createFromFormat('m-d-Y', '04-05-2444')->format('m-d-Y');
         $observacaoA = $faker->name;
 
         $numProcesso = static::$processoAndamento['numero_judicial'];
@@ -170,16 +163,8 @@ class AndamentosTest extends DuskTestCase
                 ->assertSee($processoA['numero_judicial'])
                 ->assertSee($tipoAndamentoA['nome'])
                 ->assertSee($tipoPrazoA['nome'])
-                ->assertSee(
-                    Carbon
-                        ::createFromFormat('m-d-Y', $dataPrazoA)
-                        ->format('d/m/Y')
-                )
-                ->assertSee(
-                    Carbon
-                        ::createFromFormat('m-d-Y', $dataEntregaA)
-                        ->format('d/m/Y')
-                )
+                ->assertSee(Carbon::createFromFormat('m-d-Y', $dataPrazoA)->format('d/m/Y'))
+                ->assertSee(Carbon::createFromFormat('m-d-Y', $dataEntregaA)->format('d/m/Y'))
                 ->assertSee($observacaoA);
         });
     }
@@ -204,7 +189,7 @@ class AndamentosTest extends DuskTestCase
             $observacaoA
         ) {
             $browser
-                ->visit('/processos/'.$processoA['id'])
+                ->visit('/processos/' . $processoA['id'])
                 ->click('#editar')
                 ->click('#buttonAndamentos')
                 ->select('#tipo_andamento_id', $tipoAndamentoA['id'])

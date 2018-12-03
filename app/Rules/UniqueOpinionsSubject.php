@@ -27,11 +27,10 @@ class UniqueOpinionsSubject implements Rule
      */
     public function passes($attribute, $value)
     {
-        return
-            app(OpinionsSubjectsRepository::class)->whereOpinionAndSubjectCount(
-                request('opinion_id'),
-                request('subject_id')
-            ) < 1;
+        return app(OpinionsSubjectsRepository::class)->whereOpinionAndSubjectCount(
+            request('opinion_id'),
+            request('subject_id')
+        ) < 1;
     }
 
     /**

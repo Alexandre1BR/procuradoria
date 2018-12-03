@@ -39,21 +39,21 @@ class Processos extends Base
      */
     protected $dataTypes = [
         'numero_judicial' => 'string',
-        'numero_alerj'    => 'string',
-        'vara'            => 'string',
+        'numero_alerj' => 'string',
+        'vara' => 'string',
         //'origem_complemento' => 'string,
         'apensos_obs' => 'string',
-        'autor'       => 'string',
-        'reu'         => 'string',
-        'objeto'      => 'string',
-        'merito'      => 'string',
-        'liminar'     => 'string',
-        'recurso'     => 'string',
+        'autor' => 'string',
+        'reu' => 'string',
+        'objeto' => 'string',
+        'merito' => 'string',
+        'liminar' => 'string',
+        'recurso' => 'string',
         //'tipo_meio'         => 'string',
         'data_distribuicao' => 'date',
-        'observacao'        => 'string',
-        'link'              => 'string',
-        'site_alerj_link'   => 'string',
+        'observacao' => 'string',
+        'link' => 'string',
+        'site_alerj_link' => 'string',
     ];
 
     /**
@@ -247,8 +247,8 @@ class Processos extends Base
             //dd($allLeis);
 
             return [
-                'juizes'       => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
-                'tribunais'    => Tribunal::orderBy('nome')->pluck('nome', 'id'),
+                'juizes' => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
+                'tribunais' => Tribunal::orderBy('nome')->pluck('nome', 'id'),
                 'procuradores' => UserModel::type('Procurador')
                     ->orderBy('name')
                     ->pluck('name', 'id'),
@@ -258,14 +258,14 @@ class Processos extends Base
                 'estagiarios' => UserModel::type('Estagiario')
                     ->orderBy('name')
                     ->pluck('name', 'id'),
-                'meios'          => Meio::orderBy('nome')->pluck('nome', 'id'),
-                'acoes'          => Acao::orderBy('nome')->pluck('nome', 'id'),
-                'andamentos'     => Andamento::where('processo_id', $id)->get(),
-                'apensos'        => $apensos,
-                'processos'      => $processos,
-                'leis'           => $leis,
-                'allLeis'        => $allLeis,
-                'tags'           => Tag::all(),
+                'meios' => Meio::orderBy('nome')->pluck('nome', 'id'),
+                'acoes' => Acao::orderBy('nome')->pluck('nome', 'id'),
+                'andamentos' => Andamento::where('processo_id', $id)->get(),
+                'apensos' => $apensos,
+                'processos' => $processos,
+                'leis' => $leis,
+                'allLeis' => $allLeis,
+                'tags' => Tag::all(),
                 'tiposProcessos' => ModelTipoProcesso::orderBy('nome')->get(),
             ];
         });

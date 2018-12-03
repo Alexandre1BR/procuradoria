@@ -13961,7 +13961,7 @@ namespace PragmaRX\Yaml\Package {
     }
 }
 
-namespace  {
+namespace {
     class App extends \Illuminate\Support\Facades\App
     {
     }

@@ -79,11 +79,11 @@ class Leis extends Controller
     {
         return [
             'niveisFederativos' => app(NiveisFederativosRepository::class)
-                    ->allOrderBy('nome')
-                    ->pluck('nome', 'id'),
+                ->allOrderBy('nome')
+                ->pluck('nome', 'id'),
             'tiposLeis' => app(TiposLeisRepository::class)
-                    ->allOrderBy('nome')
-                    ->pluck('nome', 'id'),
+                ->allOrderBy('nome')
+                ->pluck('nome', 'id'),
         ];
     }
 }

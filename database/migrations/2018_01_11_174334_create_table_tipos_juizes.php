@@ -23,9 +23,7 @@ class CreateTableTiposJuizes extends Migration
 
         DB::table('tipos_juizes')->insert(['id' => '1', 'nome' => 'Ministro']);
 
-        DB
-            ::table('tipos_juizes')
-            ->insert(['id' => '2', 'nome' => 'Desembargador']);
+        DB::table('tipos_juizes')->insert(['id' => '2', 'nome' => 'Desembargador']);
 
         DB::table('tipos_juizes')->insert(['id' => '3', 'nome' => 'Juiz']);
     }

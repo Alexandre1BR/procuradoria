@@ -34,9 +34,7 @@ class Handler extends ExceptionHandler
 
     private function isPHPException($exception)
     {
-        return
-            $exception instanceof \ErrorException ||
-            $exception instanceof \Exception;
+        return $exception instanceof \ErrorException || $exception instanceof \Exception;
     }
 
     /**
@@ -63,7 +61,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($result = $this->handlerError($exception)) {
+        if (($result = $this->handlerError($exception))) {
             return $result;
         }
 

@@ -25,10 +25,8 @@ class Authentication
      */
     protected $usersRepository;
 
-    public function __construct(
-        Users $usersRepository,
-        RemoteRequest $remoteRequest
-    ) {
+    public function __construct(Users $usersRepository, RemoteRequest $remoteRequest)
+    {
         $this->usersRepository = $usersRepository;
 
         $this->remoteRequest = $remoteRequest;
@@ -36,11 +34,7 @@ class Authentication
 
     public function attempt($request, $remember)
     {
-        return $this->loginUser(
-            $request,
-            $this->loginRequest($request),
-            $remember
-        );
+        return $this->loginUser($request, $this->loginRequest($request), $remember);
     }
 
     protected function extractUsernameFromEmail($email)
@@ -68,10 +62,7 @@ class Authentication
             return $this->mockedAuthentication($request);
         }
 
-        return $this->remoteRequest->post(
-            static::LOGIN_URL,
-            extract_credentials($request)
-        );
+        return $this->remoteRequest->post(static::LOGIN_URL, extract_credentials($request));
     }
 
     /**
@@ -85,7 +76,7 @@ class Authentication
      */
     protected function loginUser($request, $response, $remember)
     {
-        if ($success = $response['success']) {
+        if (($success = $response['success'])) {
             $success = $this->usersRepository->loginUser($request, $remember);
         }
 
@@ -101,17 +92,17 @@ class Authentication
     {
         return [
             'success' => true,
-            'code'    => 200,
+            'code' => 200,
             'message' => null,
-            'data'    => [
-                    'name'     => [$credentials['username']],
-                    'email'    => [$credentials['username'].'@alerj.rj.gov.br'],
-                    'memberof' => [
-                            'CN=ProjEsp,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br',
-                            'CN=SDGI,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br',
-                        ],
-                    'description' => ['matricula: N/C'],
+            'data' => [
+                'name' => [$credentials['username']],
+                'email' => [$credentials['username'] . '@alerj.rj.gov.br'],
+                'memberof' => [
+                    'CN=ProjEsp,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br',
+                    'CN=SDGI,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br',
                 ],
+                'description' => ['matricula: N/C'],
+            ],
         ];
     }
 }

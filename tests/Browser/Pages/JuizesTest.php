@@ -38,11 +38,7 @@ class JuizesTest extends DuskTestCase
         $tribunal = static::$tribunal;
         $tipoJuiz = static::$tipoJuiz;
 
-        $this->browse(function (Browser $browser) use (
-            $nomej,
-            $tribunal,
-            $tipoJuiz
-        ) {
+        $this->browse(function (Browser $browser) use ($nomej, $tribunal, $tipoJuiz) {
             $browser
                 ->visit('/juizes')
                 ->clickLink('Novo')
@@ -73,10 +69,7 @@ class JuizesTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser
                 ->visit('/juizes')
-                ->type(
-                    'pesquisa',
-                    '45879349875348975387958973489734897345893478957984'
-                )
+                ->type('pesquisa', '45879349875348975387958973489734897345893478957984')
                 ->click('#searchButton')
                 ->waitForText('Nenhum juiz encontrado')
                 ->assertSee('Nenhum juiz encontrado');
@@ -113,21 +106,17 @@ class JuizesTest extends DuskTestCase
                 ->toArray()
         );
 
-        $this->browse(function (Browser $browser) use (
-            $nomej,
-            $tribunal,
-            $tipoJuiz
-        ) {
+        $this->browse(function (Browser $browser) use ($nomej, $tribunal, $tipoJuiz) {
             $browser
                 ->visit('/juizes')
                 ->clickLink($nomej)
                 ->click('#editar')
-                ->type('nome', '*'.$nomej.'*')
+                ->type('nome', '*' . $nomej . '*')
                 ->select('lotacao_id', $tribunal['id'])
                 ->select('tipo_juiz_id', $tipoJuiz['id'])
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->assertSee('*'.$nomej.'*')
+                ->assertSee('*' . $nomej . '*')
                 ->assertSee($tribunal['nome'])
                 ->assertSee($tipoJuiz['nome']);
         });

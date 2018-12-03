@@ -155,11 +155,8 @@ abstract class Base
      *
      * @return mixed
      */
-    protected function makeResultForSelect(
-        $result,
-        $label = 'nome',
-        $value = 'id'
-    ) {
+    protected function makeResultForSelect($result, $label = 'nome', $value = 'id')
+    {
         return $result->map(function ($row) use ($value, $label) {
             $row['text'] = empty($row->text) ? $row[$label] : $row->text;
 

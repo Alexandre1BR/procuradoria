@@ -22,9 +22,9 @@ class Andamentos extends Base
      * @var array
      */
     protected $dataTypes = [
-        'data_prazo'   => 'date',
+        'data_prazo' => 'date',
         'data_entrega' => 'date',
-        'observacoes'  => 'string',
+        'observacoes' => 'string',
     ];
 
     /**
@@ -34,22 +34,21 @@ class Andamentos extends Base
      */
     protected function makeFeedTitle($andamento)
     {
-        return
-            "\n".
-            'PRAZO - '.
-            $this->cleanString($andamento->tipoPrazo->nome).
-            "\n".
-            'judicial: '.
-            $this->cleanString($andamento->processo->numero_judicial).
-            "\n".
-            'alerj: '.
-            $this->cleanString($andamento->processo->numero_alerj).
-            "\n".
-            'autor: '.
-            $this->cleanString($andamento->processo->autor).
-            "\n".
-            'réu: '.
-            $this->cleanString($andamento->processo->reu).
+        return "\n" .
+            'PRAZO - ' .
+            $this->cleanString($andamento->tipoPrazo->nome) .
+            "\n" .
+            'judicial: ' .
+            $this->cleanString($andamento->processo->numero_judicial) .
+            "\n" .
+            'alerj: ' .
+            $this->cleanString($andamento->processo->numero_alerj) .
+            "\n" .
+            'autor: ' .
+            $this->cleanString($andamento->processo->autor) .
+            "\n" .
+            'réu: ' .
+            $this->cleanString($andamento->processo->reu) .
             "\n";
     }
 
@@ -60,7 +59,7 @@ class Andamentos extends Base
      */
     protected function makeFeedDescription($andamento)
     {
-        return 'njud:'.$andamento->processo->numero_judicial.'<br>nalerj: '.$andamento->processo->numero_alerj;
+        return 'njud:' . $andamento->processo->numero_judicial . '<br>nalerj: ' . $andamento->processo->numero_alerj;
     }
 
     /**
@@ -114,7 +113,7 @@ class Andamentos extends Base
             $model->tipo_andamento_id = $tipoAndamento->id;
             $model->data_andamento = $p->data_recebimento;
             $model->tipo_entrada_id =
-                $model->tipo_entrada_id ?? $tipoEntrada->id;
+            $model->tipo_entrada_id ?? $tipoEntrada->id;
 
             $model->save();
         }
@@ -219,12 +218,12 @@ class Andamentos extends Base
 
         return $andamentosComPrazo->map(function ($andamento) {
             return [
-                'id'          => $andamento->id,
-                'title'       => $this->makeFeedTitle($andamento),
-                'start'       => $andamento->data_prazo->toIso8601String(),
-                'end'         => $andamento->data_prazo->addHour()->toIso8601String(),
+                'id' => $andamento->id,
+                'title' => $this->makeFeedTitle($andamento),
+                'start' => $andamento->data_prazo->toIso8601String(),
+                'end' => $andamento->data_prazo->addHour()->toIso8601String(),
                 'description' => $this->makeFeedDescription($andamento),
-                'url'         => route('processos.show', ['id' => $andamento->processo->id]),
+                'url' => route('processos.show', ['id' => $andamento->processo->id]),
             ];
         });
     }
@@ -248,7 +247,7 @@ class Andamentos extends Base
     {
         $query = $this->makeAndamentoQuery();
 
-        if (!empty($search = $request->get('search'))) {
+        if (!empty(($search = $request->get('search')))) {
             $query = $this->searchString($search, $query);
         }
 

@@ -68,9 +68,7 @@ class LoginController extends Controller
         }
 
         if ($this->attemptLogin($request)) {
-            return Auth::user()->disabled_at
-                ? $this->sendDisabledResponse()
-                : $this->sendLoginResponse($request);
+            return Auth::user()->disabled_at ? $this->sendDisabledResponse() : $this->sendLoginResponse($request);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -90,10 +88,7 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request)
     {
-        return $this->authentication->attempt(
-            $request,
-            $request->filled('remember')
-        );
+        return $this->authentication->attempt($request, $request->filled('remember'));
     }
 
     private function sendDisabledResponse()

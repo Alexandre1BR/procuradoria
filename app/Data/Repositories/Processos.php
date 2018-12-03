@@ -165,16 +165,15 @@ class Processos extends Base
                         !empty(only_numbers($item))
                     ) {
                         $query->orWhereRaw(
-                            "regexp_replace( " .
-                                $column .
-                                " , '[^0-9]', '', 'g') ilike '%" .
-                                only_numbers($item) .
+                            'regexp_replace( '.
+                                $column.
+                                " , '[^0-9]', '', 'g') ilike '%".
+                                only_numbers($item).
                                 "%'"
                         );
                     } else {
-                        $query->orWhere($column, 'ilike', '%' . $item . '%');
+                        $query->orWhere($column, 'ilike', '%'.$item.'%');
                     }
-
                 } elseif ($type === 'date') {
                     $date = $this->toDate($item);
                     if ($date != null) {

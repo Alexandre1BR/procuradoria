@@ -48,20 +48,20 @@ class AddNestedSubjects extends Migration
     public function populate()
     {
         OpinionSubject::create([
-            'name' => 'Root',
+            'name'     => 'Root',
             'children' => [
                 [
-                    'name' => 'Servidor Público',
+                    'name'     => 'Servidor Público',
                     'children' => [
                         ['name' => 'Abono permanência'],
                         [
-                            'name' => 'Aposentadoria',
+                            'name'     => 'Aposentadoria',
                             'children' => [
                                 ['name' => 'Voluntária'],
                                 ['name' => 'Compulsória'],
                                 ['name' => 'Invalidez'],
                                 [
-                                    'name' => 'Revisão dos proventos',
+                                    'name'     => 'Revisão dos proventos',
                                     'children' => [
                                         [
                                             'name' => 'Gratificação Especial de Serviço de Segurança',
@@ -107,12 +107,12 @@ class AddNestedSubjects extends Migration
                 ['name' => 'Contrato Administrativo'],
                 ['name' => 'CPI'],
                 [
-                    'name' => 'Patrimonial',
+                    'name'     => 'Patrimonial',
                     'children' => [['name' => 'Veículos']],
                 ],
                 ['name' => 'Estatuto dos Parlamentares'],
                 [
-                    'name' => 'Judicial',
+                    'name'     => 'Judicial',
                     'children' => [
                         ['name' => 'ADIN'],
                         ['name' => 'RI'],

@@ -2,7 +2,6 @@
 
 namespace App\Data\Repositories;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 abstract class Base

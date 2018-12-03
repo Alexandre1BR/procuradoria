@@ -189,7 +189,7 @@ class AndamentosTest extends DuskTestCase
             $observacaoA
         ) {
             $browser
-                ->visit('/processos/' . $processoA['id'])
+                ->visit('/processos/'.$processoA['id'])
                 ->click('#editar')
                 ->click('#buttonAndamentos')
                 ->select('#tipo_andamento_id', $tipoAndamentoA['id'])

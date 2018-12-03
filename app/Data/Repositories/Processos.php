@@ -174,6 +174,7 @@ class Processos extends Base
                     } else {
                         $query->orWhere($column, 'ilike', '%' . $item . '%');
                     }
+
                 } elseif ($type === 'date') {
                     $date = $this->toDate($item);
                     if ($date != null) {

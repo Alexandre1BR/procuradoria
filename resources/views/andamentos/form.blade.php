@@ -35,19 +35,26 @@
                   method="POST">
 
                 {{ csrf_field() }}
+
                 <input type="hidden" name="id" id="id" value="{{$andamento->id}}">
-                {{--{{dump($andamento->id)}}--}}
+
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="nome">Processo</label>
 
-                        @if(!isset($id))
+                        @if(isset($id)) {{-- processo_id --}}
+                            <input type="hidden" name="processo_id" id="processo_id" value="{{$id}}">
+                            <select name="processo_id" class="form-control select2" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo" disabled="disabled">
+                                @foreach ($processos as $key => $processo)
+                                    @if($id == $key || (!is_null(old('id')) && old('id')==$key))
+                                        <option value="{{ $key }}" selected>{{ $processo }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        @else
+                            {{$id}}
                             <select name="processo_id" class="form-control select2" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo" @include('partials.disabled')>
-                                @if(!is_null(old('processo_id')))
-                                    <option value="">Selecione...</option>
-                                @else
-                                    <option value="">Selecione...</option>
-                                @endif
+                                <option value="">Selecione...</option>
                                 @foreach ($processos as $key => $processo)
                                     @if((!is_null($andamento->processo) && $andamento->processo->id == $key)
                                         || (!is_null(old('processo_id')) && old('processo_id')==$key))
@@ -56,17 +63,6 @@
                                         <option value="{{ $key }}" >{{ $processo }}</option>
                                     @endif
                                 @endforeach
-                            </select>
-                        @else
-                            <input type="hidden" name="processo_id" id="processo_id" value="{{$id}}">
-                            <select name="processo_id" class="form-control select2" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo" disabled="disabled">
-                                @foreach ($processos as $key => $processo)
-                                    @if($id == $key || (!is_null(old('id')) && old('id')==$key))
-                                        <option value="{{ $key }}" selected>{{ $processo }}</option>
-
-                                    @endif
-                                @endforeach
-
                             </select>
                         @endif
                     </div>

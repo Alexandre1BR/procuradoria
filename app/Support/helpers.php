@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 function startTimer()
@@ -16,7 +17,7 @@ function endTimer()
 
 function toBoolean($boolean)
 {
-    return $boolean === 'true' || $boolean === '1' || $boolean === 1 || $boolean === true;
+  return $boolean === 'true' || $boolean === '1' || $boolean === 1 || $boolean === true;
 }
 
 function extract_credentials($request)
@@ -51,4 +52,20 @@ class Timer
 function only_numbers($string)
 {
     return preg_replace('/\D/', '', $string);
+}
+
+/**
+ * @param $item
+ *
+ * @return string|void
+ */
+function to_date($item)
+{
+    try {
+        $item = Carbon::createFromFormat('d/m/Y', $item)->format('Y-m-d');
+    } catch (\Exception $exception) {
+        return;
+    }
+
+    return $item;
 }

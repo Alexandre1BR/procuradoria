@@ -178,6 +178,11 @@ class Processos extends Base
                     $date = $this->toDate($item);
                     if ($date != null) {
                         $query->orWhereDate($column, '=', $date);
+                    $query->orWhere($column, 'ilike', '%'.$item.'%');
+                } else {
+                    $ifdate = $this->toDate($item);
+                    if ($ifdate != null) {
+                        $query->orWhereDate($column, '=', $ifdate);
                     }
                 }
             });

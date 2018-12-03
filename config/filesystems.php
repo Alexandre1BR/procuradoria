@@ -39,22 +39,22 @@ return [
     */
 
     'disks' => [
-        'local'         => ['driver' => 'local', 'root' => storage_path('app')],
+        'local' => ['driver' => 'local', 'root' => storage_path('app')],
         'opinion-files' => [
-            'driver'     => 'local',
-            'root'       => storage_path('pareceres'),
-            'url'        => env('APP_URL').'/storage/pareceres',
+            'driver' => 'local',
+            'root' => storage_path('pareceres'),
+            'url' => env('APP_URL') . '/storage/pareceres',
             'visibility' => 'public',
         ],
         'public' => [
-            'driver'     => 'local',
-            'root'       => storage_path('app/public'),
-            'url'        => env('APP_URL').'/storage',
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
         's3' => [
             'driver' => 's3',
-            'key'    => env('AWS_ACCESS_KEY_ID'),
+            'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),

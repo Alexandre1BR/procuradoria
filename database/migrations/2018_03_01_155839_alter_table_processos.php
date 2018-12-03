@@ -17,9 +17,7 @@ class AlterTableProcessos extends Migration
             $table->timestamp('data_recebimento')->nullable();
         });
 
-        DB
-            ::table('tipos_andamentos')
-            ->insert(['id' => '2', 'nome' => 'Recebimento']);
+        DB::table('tipos_andamentos')->insert(['id' => '2', 'nome' => 'Recebimento']);
     }
 
     /**

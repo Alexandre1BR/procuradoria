@@ -23,9 +23,7 @@ class CreateTableTiposEntradas extends Migration
 
         DB::table('tipos_entradas')->insert(['id' => '1', 'nome' => 'Manual']);
 
-        DB
-            ::table('tipos_entradas')
-            ->insert(['id' => '2', 'nome' => 'Automatico']);
+        DB::table('tipos_entradas')->insert(['id' => '2', 'nome' => 'Automatico']);
     }
 
     /**

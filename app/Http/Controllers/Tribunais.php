@@ -55,10 +55,8 @@ class Tribunais extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function store(
-        TribunalRequest $request,
-        TribunaisRepository $repository
-    ) {
+    public function store(TribunalRequest $request, TribunaisRepository $repository)
+    {
         $repository->createFromRequest($request);
 
         return redirect()

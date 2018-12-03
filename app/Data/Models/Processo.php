@@ -18,23 +18,12 @@ class Processo extends BaseModel
     /**
      * @var array
      */
-    protected $dates = [
-        'data_distribuicao',
-        'data_recebimento',
-        'data_arquivamento',
-    ];
+    protected $dates = ['data_distribuicao', 'data_recebimento', 'data_arquivamento'];
 
     /**
      * @var array
      */
-    protected $with = [
-        'acao',
-        'tribunal',
-        'procurador',
-        'assessor',
-        'estagiario',
-        'tags',
-    ];
+    protected $with = ['acao', 'tribunal', 'procurador', 'assessor', 'estagiario', 'tags'];
 
     protected $numericColumns = ['numero_judicial'];
 
@@ -78,6 +67,7 @@ class Processo extends BaseModel
     protected $presenters = [
         'data_distribuicao_formatado',
         'data_recebimento_formatado',
+        'data_arquivamento_formatado',
     ];
 
     /**
@@ -130,23 +120,11 @@ class Processo extends BaseModel
     {
         $notifiables = collect();
 
-        $this->addNotifiable(
-            $notifiables,
-            $this->procurador,
-            'Responsável (procurador)'
-        );
+        $this->addNotifiable($notifiables, $this->procurador, 'Responsável (procurador)');
 
-        $this->addNotifiable(
-            $notifiables,
-            $this->assessor,
-            'Responsável (assessor)'
-        );
+        $this->addNotifiable($notifiables, $this->assessor, 'Responsável (assessor)');
 
-        $this->addNotifiable(
-            $notifiables,
-            $this->estagiario,
-            'Responsável (estagiário)'
-        );
+        $this->addNotifiable($notifiables, $this->estagiario, 'Responsável (estagiário)');
 
         return $notifiables;
     }
@@ -295,10 +273,7 @@ class Processo extends BaseModel
         if (!is_null($notifiable)) {
             $notifiable->type = $type;
 
-            if (
-                !is_null($notifiable) &&
-                is_null($notifiables->where('id', $notifiable->id)->first())
-            ) {
+            if (!is_null($notifiable) && is_null($notifiables->where('id', $notifiable->id)->first())) {
                 $notifiables->push($notifiable);
             }
         }

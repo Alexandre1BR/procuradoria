@@ -186,10 +186,7 @@ class ProcessosTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser
                 ->visit('/')
-                ->type(
-                    'pesquisa',
-                    '132312312vcxvdsf4142354346asfdb455756awsdgdn756867897887934645654'
-                )
+                ->type('pesquisa', '132312312vcxvdsf4142354346asfdb455756awsdgdn756867897887934645654')
                 ->pause('3000')
                 ->waitForText('0 Processos')
                 ->assertSee('0 Processos');
@@ -312,7 +309,7 @@ class ProcessosTest extends DuskTestCase
             $novoEstagiarioP
         ) {
             $browser
-                ->visit('/processos/'.$ProcessoP['id'])
+                ->visit('/processos/' . $ProcessoP['id'])
                 ->click('#editar')
                 ->type('#numero_judicial', $novoNumeroJudicialP)
                 ->select('#tribunal_id', $novoTribunalP['id'])

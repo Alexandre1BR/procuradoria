@@ -39,21 +39,21 @@ class Processos extends Base
      */
     protected $dataTypes = [
         'numero_judicial' => 'string',
-        'numero_alerj'    => 'string',
-        'vara'            => 'string',
+        'numero_alerj' => 'string',
+        'vara' => 'string',
         //'origem_complemento' => 'string,
         'apensos_obs' => 'string',
-        'autor'       => 'string',
-        'reu'         => 'string',
-        'objeto'      => 'string',
-        'merito'      => 'string',
-        'liminar'     => 'string',
-        'recurso'     => 'string',
+        'autor' => 'string',
+        'reu' => 'string',
+        'objeto' => 'string',
+        'merito' => 'string',
+        'liminar' => 'string',
+        'recurso' => 'string',
         //'tipo_meio'         => 'string',
         'data_distribuicao' => 'date',
-        'observacao'        => 'string',
-        'link'              => 'string',
-        'site_alerj_link'   => 'string',
+        'observacao' => 'string',
+        'link' => 'string',
+        'site_alerj_link' => 'string',
     ];
 
     /**
@@ -99,10 +99,7 @@ class Processos extends Base
         }
 
         if (toBoolean($request->get('advancedFilter'))) {
-            collect($this->filterToJson($request))->each(function (
-                $search,
-                $column
-            ) use ($query) {
+            collect($this->filterToJson($request))->each(function ($search, $column) use ($query) {
                 if (!empty($search)) {
                     $this->addQueryByType($search, $column, $query);
                 }
@@ -125,11 +122,11 @@ class Processos extends Base
                 break;
             case 'string':
                 //                $query->where(DB::raw("lower({$column})"), 'like', "%{$search}%");
-                $query->where($column, 'ilike', '%'.$search.'%');
+                $query->where($column, 'ilike', '%' . $search . '%');
                 break;
             case 'link':
                 //                $query->where(DB::raw("lower({$column})"), 'like', "%{$search}%");
-                $query->where($column, 'ilike', '%'.$search.'%');
+                $query->where($column, 'ilike', '%' . $search . '%');
                 break;
             case 'tags':
                 $query->withAnyTags((array) $search);
@@ -160,52 +157,38 @@ class Processos extends Base
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
                 if ($type === 'string') {
-                    if (
-                        in_array($column, $this->new()->getNumericColumns()) &&
-                        !empty(only_numbers($item))
-                    ) {
+                    if (in_array($column, $this->new()->getNumericColumns()) && !empty(only_numbers($item))) {
                         $query->orWhereRaw(
-                            'regexp_replace( '.
-                                $column.
-                                " , '[^0-9]', '', 'g') ilike '%".
-                                only_numbers($item).
-                                "%'"
+                            "regexp_replace( " . $column . " , '[^0-9]', '', 'g') ilike '%" . only_numbers($item) . "%'"
                         );
                     } else {
                         $query->orWhere($column, 'ilike', '%'.$item.'%');
                     }
                 } elseif ($type === 'date') {
-                    $date = $this->toDate($item);
+                    $date = to_date($item);
                     if ($date != null) {
                         $query->orWhereDate($column, '=', $date);
                     }
                 }
             });
-
             $query->orWhereHas('tribunal', function ($query) use ($item) {
                 $query->whereRaw("lower(nome) like '%{$item}%'");
             });
-
             $query->orWhereHas('juiz', function ($query) use ($item) {
                 $query->whereRaw("lower(nome) like '%{$item}%'");
             });
-
             $query->orWhereHas('relator', function ($query) use ($item) {
                 $query->whereRaw("lower(nome) like '%{$item}%'");
             });
-
             $query->orWhereHas('procurador', function ($query) use ($item) {
                 $query->whereRaw("lower(name) like '%{$item}%'");
             });
-
             $query->orWhereHas('estagiario', function ($query) use ($item) {
                 $query->whereRaw("lower(name) like '%{$item}%'");
             });
-
             $query->orWhereHas('assessor', function ($query) use ($item) {
                 $query->whereRaw("lower(name) like '%{$item}%'");
             });
-
             $query->orWhereHas('acao', function ($query) use ($item) {
                 $query->whereRaw("lower(nome) like '%{$item}%'");
             });
@@ -221,10 +204,7 @@ class Processos extends Base
      */
     public function getProcessosWithoutApensos($apensos)
     {
-        $processos = Processo::orderBy('numero_judicial')->pluck(
-            'numero_judicial',
-            'id'
-        );
+        $processos = Processo::orderBy('numero_judicial')->pluck('numero_judicial', 'id');
 
         foreach ($apensos as $key => $apenso) {
             $processos->forget($apenso->apensado_id);
@@ -242,9 +222,7 @@ class Processos extends Base
      */
     public function getProcessosData($id = null)
     {
-        return Cache::remember('getProcessosData'.$id, 1, function () use (
-            $id
-        ) {
+        return Cache::remember('getProcessosData' . $id, 1, function () use ($id) {
             $apensos = Apenso::where('processo_id', $id)
                 ->orWhere('apensado_id', $id)
                 ->get();
@@ -269,8 +247,8 @@ class Processos extends Base
             //dd($allLeis);
 
             return [
-                'juizes'       => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
-                'tribunais'    => Tribunal::orderBy('nome')->pluck('nome', 'id'),
+                'juizes' => Juiz::orderBy('nome')->get(), //->pluck('nome', 'id'),
+                'tribunais' => Tribunal::orderBy('nome')->pluck('nome', 'id'),
                 'procuradores' => UserModel::type('Procurador')
                     ->orderBy('name')
                     ->pluck('name', 'id'),
@@ -280,14 +258,14 @@ class Processos extends Base
                 'estagiarios' => UserModel::type('Estagiario')
                     ->orderBy('name')
                     ->pluck('name', 'id'),
-                'meios'          => Meio::orderBy('nome')->pluck('nome', 'id'),
-                'acoes'          => Acao::orderBy('nome')->pluck('nome', 'id'),
-                'andamentos'     => Andamento::where('processo_id', $id)->get(),
-                'apensos'        => $apensos,
-                'processos'      => $processos,
-                'leis'           => $leis,
-                'allLeis'        => $allLeis,
-                'tags'           => Tag::all(),
+                'meios' => Meio::orderBy('nome')->pluck('nome', 'id'),
+                'acoes' => Acao::orderBy('nome')->pluck('nome', 'id'),
+                'andamentos' => Andamento::where('processo_id', $id)->get(),
+                'apensos' => $apensos,
+                'processos' => $processos,
+                'leis' => $leis,
+                'allLeis' => $allLeis,
+                'tags' => Tag::all(),
                 'tiposProcessos' => ModelTipoProcesso::orderBy('nome')->get(),
             ];
         });
@@ -314,16 +292,12 @@ class Processos extends Base
      *
      * @return $this
      */
-    public function makeProcessoQuery(
-        $processos_arquivados_incluidos = false,
-        $processos_arquivados_apenas = false
-    ) {
+    public function makeProcessoQuery($processos_arquivados_incluidos = false, $processos_arquivados_apenas = false)
+    {
         $query = new Processo();
 
         if (toBoolean($processos_arquivados_apenas)) {
-            $query = (new Processo())
-                ->withoutGlobalScope(ProcessoScope::class)
-                ->whereNotNull('data_arquivamento');
+            $query = (new Processo())->withoutGlobalScope(ProcessoScope::class)->whereNotNull('data_arquivamento');
         } elseif (toBoolean($processos_arquivados_incluidos)) {
             $query = (new Processo())->withoutGlobalScope(ProcessoScope::class);
         }
@@ -344,33 +318,21 @@ class Processos extends Base
     {
         return $processos
             ->map(function ($processo) {
-                $processo['acao_nome'] = is_null($processo->acao)
-                    ? 'N/C'
-                    : $processo->acao->nome;
+                $processo['acao_nome'] = is_null($processo->acao) ? 'N/C' : $processo->acao->nome;
 
-                $processo['acao_abreviacao'] = is_null($processo->acao)
-                    ? 'N/C'
-                    : $processo->acao->abreviacao;
+                $processo['acao_abreviacao'] = is_null($processo->acao) ? 'N/C' : $processo->acao->abreviacao;
 
-                $processo['tribunal_nome'] = is_null($processo->tribunal)
-                    ? 'N/C'
-                    : $processo->tribunal->nome;
+                $processo['tribunal_nome'] = is_null($processo->tribunal) ? 'N/C' : $processo->tribunal->nome;
 
                 $processo['tribunal_abreviacao'] = is_null($processo->tribunal)
                     ? 'N/C'
                     : $processo->tribunal->abreviacao;
 
-                $processo['procurador_nome'] = is_null($processo->procurador)
-                    ? 'N/C'
-                    : $processo->procurador->name;
+                $processo['procurador_nome'] = is_null($processo->procurador) ? 'N/C' : $processo->procurador->name;
 
-                $processo['assessor_nome'] = is_null($processo->assessor)
-                    ? 'N/C'
-                    : $processo->assessor->name;
+                $processo['assessor_nome'] = is_null($processo->assessor) ? 'N/C' : $processo->assessor->name;
 
-                $processo['estagiario_nome'] = is_null($processo->estagiario)
-                    ? 'N/C'
-                    : $processo->estagiario->name;
+                $processo['estagiario_nome'] = is_null($processo->estagiario) ? 'N/C' : $processo->estagiario->name;
 
                 $processo['show_url'] = route('processos.show', [
                     'id' => $processo['id'],

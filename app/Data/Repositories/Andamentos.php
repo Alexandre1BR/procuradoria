@@ -84,28 +84,38 @@ class Andamentos extends Base
             ->first();
         $model = new AndamentoModel();
 
+        $tipoEntrada = TipoEntrada::where('nome', 'Automatico')
+            ->get()
+            ->first();
+
         if (is_null($request->input('id'))) {
-            $tipoEntrada = TipoEntrada::where('nome', 'Automatico')
-                ->get()
-                ->first();
             $model->setAttribute('processo_id', $p->id);
             $model->setAttribute('tipo_andamento_id', $tipoAndamento->id);
             $model->setAttribute('tipo_entrada_id', $tipoEntrada->id);
             $model->setAttribute('data_andamento', $p->data_recebimento);
             $model->save();
 
-        /*
-         *  It means that the value of data_recebimento
-         *  has changed and need to be changed in Andamento
-         *
-         */
-        } elseif ($request->old('data_recebimento') != $request->input('data_recebimento')) {
-            $model = AndamentoModel::where('processo_id', $p->id)
-                ->where('tipo_andamento_id', $tipoAndamento->id)
-                ->get()
-                ->first();
+            /*
+             *  It means that the value of data_recebimento
+             *  has changed and need to be changed in Andamento
+             *
+             */
+        } elseif (
+            $request->old('data_recebimento') !=
+            $request->input('data_recebimento')
+        ) {
+            $model =
+                AndamentoModel::where('processo_id', $p->id)
+                    ->where('tipo_andamento_id', $tipoAndamento->id)
+                    ->get()
+                    ->first() ?? new AndamentoModel();
 
-            $model->setAttribute('data_andamento', $p->data_recebimento);
+            $model->processo_id = $p->id;
+            $model->tipo_andamento_id = $tipoAndamento->id;
+            $model->data_andamento = $p->data_recebimento;
+            $model->tipo_entrada_id =
+                $model->tipo_entrada_id ?? $tipoEntrada->id;
+
             $model->save();
         }
     }
@@ -151,7 +161,7 @@ class Andamentos extends Base
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
                 if ($type === 'string') {
-                    $query->orWhere($column, 'ilike', '%'.$item.'%');
+                    $query->orWhere($column, 'ilike', '%' . $item . '%');
                 } else {
                     $ifdate = $this->toDate($item);
                     if ($ifdate != null) {

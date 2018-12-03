@@ -318,7 +318,7 @@
                 <div class="form-group">
                     <label for="data_arquivamento">Data do arquivamento</label>
                     <input
-                            value="{{ is_null(old('data_arquivamento')) ? ! is_null($processo->id) ? $processo->data_arquivamento : '' : old('data_arquivamento')}}"
+                            value="{{ is_null(old('data_arquivamento')) ? ( !is_null($processo->id) ? $processo->data_arquivamento : '' ) :  old('data_arquivamento')}}"
                             type="date"
                             name="data_arquivamento"
                             class="form-control"

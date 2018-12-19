@@ -52,7 +52,6 @@
                                 @endforeach
                             </select>
                         @else
-                            {{$id}}
                             <select name="processo_id" class="form-control select2" id="processo_id" aria-describedby="numero_judicialHelp" placeholder="Processo" @include('partials.disabled')>
                                 <option value="">Selecione...</option>
                                 @foreach ($processos as $key => $processo)

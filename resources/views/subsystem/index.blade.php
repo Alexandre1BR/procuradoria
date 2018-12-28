@@ -20,13 +20,13 @@
                         Processos
                     </a>
 
-                    <a
-                        class="btn btn-lg btn-primary"
-                        style="font-size: 3em;"
-                        href="{{ route('subsystem.select', ['type' => App\Support\Constants::SUBSYSTEM_OPINIOES]) }}"
-                    >
-                        Pareceres
-                    </a>
+                    {{--<a--}}
+                        {{--class="btn btn-lg btn-primary"--}}
+                        {{--style="font-size: 3em;"--}}
+                        {{--href="{{ route('subsystem.select', ['type' => App\Support\Constants::SUBSYSTEM_OPINIOES]) }}"--}}
+                    {{-->--}}
+                        {{--Pareceres--}}
+                    {{--</a>--}}
 
                     <br><br><br><br>
                 </div>

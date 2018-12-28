@@ -38,6 +38,6 @@ Route::group(['middleware' => app(Routes::class)->makeAppRootRouteMiddlewares()]
 
         require __DIR__.'/services/revisions.php';
 
-        require __DIR__.'/services/opinions.php';
+//        require __DIR__.'/services/opinions.php';
     });
 });

@@ -28,7 +28,7 @@ class Andamento extends FormRequest
         //dd($this->processo_id);
         return [
             //            'tipo_prazo_id'         => 'required',
-            'processo_id' => 'required',
+            'processo_id'       => 'required',
             'tipo_andamento_id' => [
                 'required',
                 $this->tipo_andamento_id ==

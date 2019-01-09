@@ -202,13 +202,14 @@
 
         <div class="col-md-4">
             <div class="form-group">
-                <label for="data_arquivamento">Data do arquivamento</label>
+                <label for="data_arquivamento1">Data do arquivamento</label>
+
                 <input
-                        value="{{ is_null(old('data_arquivamento')) ? ! is_null($processo->id) ? $processo->data_arquivamento : '' : old('data_arquivamento')}}"
+                        value="{{ is_null(old('data_arquivamento')) ? (! is_null($processo->id) ? $processo->data_arquivamento : '' ) :  old('data_arquivamento')}}"
                         type="date"
                         v-model="form.data_arquivamento"
                         class="form-control"
-                        id="data_arquivamento" @include('partials.readonly')
+                        id="data_arquivamento1" @include('partials.readonly')
                 />
                 {{--<input value="{{Carbon\Carbon::parse($processo->data_arquivamento)->format('Y-m-d')}}" type="date" v-model="form.data_arquivamento" class="form-control" id="data_arquivamento" @include('partials.readonly') />--}}
             </div>

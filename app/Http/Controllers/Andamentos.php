@@ -124,9 +124,9 @@ class Andamentos extends Controller
             'processos' => ModelProcesso::withoutGlobalScopes()
                 ->orderBy('numero_judicial')
                 ->pluck('numero_judicial', 'id'),
-            'tipoPrazos' => ModelTipoPrazo::orderBy('nome')->pluck('nome', 'id'),
+            'tipoPrazos'     => ModelTipoPrazo::orderBy('nome')->pluck('nome', 'id'),
             'tipoAndamentos' => ModelTipoAndamento::orderBy('nome')->pluck('nome', 'id'),
-            'tipoEntradas' => ModelTipoEntrada::orderBy('nome')->pluck('nome', 'id'),
+            'tipoEntradas'   => ModelTipoEntrada::orderBy('nome')->pluck('nome', 'id'),
         ];
     }
 }

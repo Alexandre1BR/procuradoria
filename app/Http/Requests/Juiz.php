@@ -24,8 +24,8 @@ class Juiz extends FormRequest
     public function rules()
     {
         return [
-            'nome'         => 'required',
-            'lotacao_id'   => 'required',
+            'nome' => 'required',
+            'lotacao_id' => 'required',
             'tipo_juiz_id' => 'required',
         ];
     }

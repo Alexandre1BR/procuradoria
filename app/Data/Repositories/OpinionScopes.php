@@ -13,8 +13,8 @@ class OpinionScopes extends Base
         $array = [];
 
         $array[] = (object) [
-            'name'       => 'name',
-            'showName'   => 'Nome',
+            'name' => 'name',
+            'showName' => 'Nome',
             'columnSize' => '100%',
         ];
 
@@ -25,9 +25,9 @@ class OpinionScopes extends Base
     {
         $array = [];
         $array[] = (object) [
-            'name'     => 'name',
+            'name' => 'name',
             'showName' => 'Nome',
-            'type'     => 'string',
+            'type' => 'string',
         ];
 
         return $array;
@@ -70,7 +70,7 @@ class OpinionScopes extends Base
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
                 if ($type === 'string') {
-                    $query->orWhere(DB::raw("lower({$column})"), 'like', '%'.$item.'%');
+                    $query->orWhere(DB::raw("lower({$column})"), 'like', '%' . $item . '%');
                 } else {
                     if ($this->isDate($item)) {
                         $query->orWhere($column, '=', $item);

@@ -16,6 +16,10 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         ProcessoUpdated::class => [SendProcessoUpdatedNotification::class],
+
+        //        Registered::class => [
+        //            SendEmailVerificationNotification::class,
+        //        ],
     ];
 
     /**

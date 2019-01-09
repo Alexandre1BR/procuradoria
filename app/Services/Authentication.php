@@ -76,7 +76,7 @@ class Authentication
      */
     protected function loginUser($request, $response, $remember)
     {
-        if (($success = $response['success'])) {
+        if ($success = $response['success']) {
             $success = $this->usersRepository->loginUser($request, $remember);
         }
 
@@ -92,11 +92,11 @@ class Authentication
     {
         return [
             'success' => true,
-            'code'    => 200,
+            'code' => 200,
             'message' => null,
-            'data'    => [
-                'name'     => [$credentials['username']],
-                'email'    => [$credentials['username'].'@alerj.rj.gov.br'],
+            'data' => [
+                'name' => [$credentials['username']],
+                'email' => [$credentials['username'] . '@alerj.rj.gov.br'],
                 'memberof' => [
                     'CN=ProjEsp,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br',
                     'CN=SDGI,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br',

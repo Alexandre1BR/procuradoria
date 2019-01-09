@@ -24,9 +24,7 @@ abstract class Base
 
         $id = isset($request['id']) ? $request['id'] : null;
 
-        $model = is_null($id)
-            ? (new $this->model())
-            : ($this->model::withoutGlobalScopes()->find($id));
+        $model = is_null($id) ? new $this->model() : $this->model::withoutGlobalScopes()->find($id);
 
         $model->fill($request);
 

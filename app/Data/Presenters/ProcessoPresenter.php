@@ -69,10 +69,7 @@ class ProcessoPresenter extends BasePresenter
         $data_arquivamento = $this->wrappedObject->data_arquivamento;
 
         return !is_null($data_arquivamento)
-            ? Carbon::createFromFormat(
-                'Y-m-d H:i:s',
-                $data_arquivamento
-            )->format('Y-m-d')
+            ? Carbon::createFromFormat('Y-m-d H:i:s', $data_arquivamento)->format('Y-m-d')
             : null;
     }
 
@@ -84,10 +81,7 @@ class ProcessoPresenter extends BasePresenter
         $data_arquivamento = $this->wrappedObject->data_arquivamento;
 
         return !is_null($data_arquivamento)
-            ? Carbon::createFromFormat(
-                'Y-m-d H:i:s',
-                $data_arquivamento
-            )->format('d/m/Y')
+            ? Carbon::createFromFormat('Y-m-d H:i:s', $data_arquivamento)->format('d/m/Y')
             : null;
     }
 }

@@ -15,7 +15,7 @@ class Tags extends Controller
             ->all()
             ->map(function ($tag) {
                 return [
-                    'id'   => $tag->name,
+                    'id' => $tag->name,
                     'name' => $tag->name,
                     'text' => $tag->name,
                 ];

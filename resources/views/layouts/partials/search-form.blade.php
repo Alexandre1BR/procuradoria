@@ -13,7 +13,7 @@
 
             <div class="col-xs-8 pull-right">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="pesquisa" placeholder="Pesquisar" value="{{ $pesquisa or '' }}">
+                    <input type="text" class="form-control" name="pesquisa" placeholder="Pesquisar" value="{{ $pesquisa ?? '' }}">
 
                     <div class="input-group-addon" id="searchButton" onClick="javascript:document.getElementById('searchForm').submit();"><i class="fa fa-search"></i></div>
                 </div>

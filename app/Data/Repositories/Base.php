@@ -66,7 +66,6 @@ abstract class Base
         return $this->model::where($column, $value)->first();
     }
 
-
     /**
      * @param array $search
      * @param array $attributes

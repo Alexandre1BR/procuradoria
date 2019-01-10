@@ -32,7 +32,7 @@ class Users
     {
         try {
             return collect($this->remoteRequest->post(static::USERS_URL, ['username' => $username]));
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return collect($this->mockedAuthentication($username));
         }
     }

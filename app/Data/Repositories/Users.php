@@ -4,11 +4,11 @@ namespace App\Data\Repositories;
 
 use App\Data\Models\TipoUsuario;
 use App\Data\Models\User;
+use App\Data\Repositories\TiposUsuarios as TiposUsuariosRepository;
 use App\Services\Authorization;
 use App\Services\Users as UsersService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Data\Repositories\TiposUsuarios as TiposUsuariosRepository;
 
 class Users extends Base
 {
@@ -86,7 +86,6 @@ class Users extends Base
 
     private function permitionFunctionMatches()
     {
-
     }
 
     private function transformToSubstring($str)
@@ -107,7 +106,7 @@ class Users extends Base
 
     private function transformArrayToSubstrings($userTypesArray)
     {
-        foreach ($userTypesArray as $key => $item){
+        foreach ($userTypesArray as $key => $item) {
             unset($userTypesArray[$key]);
             $key = $this->transformToSubstring($key);
             $userTypesArray[$key] = $item;
@@ -131,8 +130,6 @@ class Users extends Base
                 return $userTypesArray[$this->transformToSubstring($permission['nomeFuncao'])];
             }
         }
-
-        return null;
     }
 
     private function isAdministrador($permissions)
@@ -192,7 +189,7 @@ class Users extends Base
                 }
 
                 $user->save();
-            }else{
+            } else {
                 $user->password = Hash::make($credentials['password']);
                 $user->save();
             }
@@ -282,7 +279,6 @@ class Users extends Base
             $user->save();
         }
     }
-
 
     public function updateCurrentUserTypeViaPermissions($permissions)
     {

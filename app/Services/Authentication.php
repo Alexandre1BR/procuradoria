@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Data\Repositories\Users;
-use App\Services\Traits\RemoteRequest;
 use App\Data\Repositories\Users as UsersRepository;
+use App\Services\Traits\RemoteRequest;
 
 class Authentication
 {
@@ -68,6 +68,7 @@ class Authentication
                 static::LOGIN_URL,
                 extract_credentials($request)
             );
+
             return $response;
         } catch (\Exception $exception) {
             //Timeout no login
@@ -154,16 +155,15 @@ class Authentication
     }
 
     /**
-     *
      * @return array
      */
     protected function failedAuthentication()
     {
         return [
             'success' => false,
-            'code' => 401,
+            'code'    => 401,
             'message' => 'Attempt failed.',
-            'data' => [],
+            'data'    => [],
         ];
     }
 }

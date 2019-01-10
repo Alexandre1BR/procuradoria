@@ -2,9 +2,8 @@
 
 namespace App\Services;
 
-use App\Services\Traits\RemoteRequest;
 use App\Data\Repositories\Users as UsersRepository;
-use App\Data\Repositories\UserTypes as UserTypesRepository;
+use App\Services\Traits\RemoteRequest;
 
 class Authorization
 {
@@ -42,9 +41,10 @@ class Authorization
             $response = collect(
                 $this->remoteRequest->post(static::PERMISSIONS_URL, [
                     'username' => $username,
-                    'system' => static::SYSTEM_NAME,
+                    'system'   => static::SYSTEM_NAME,
                 ])
             );
+
             return $response;
         } catch (\Exception $exception) {
             //Logando com as permissões salvas
@@ -79,7 +79,7 @@ class Authorization
     {
         $permissionsArray[] = collect([
             'nomeFuncao' => $user->userType->nome,
-            'evento' => $user->userType->nome,
+            'evento'     => $user->userType->nome,
         ]);
 
         return collect($permissionsArray);

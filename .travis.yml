@@ -16,6 +16,8 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
+  - sudo apt-get -y update
+  - sudo apt-get -y install google-chrome-stable
   - cp .env.travis .env
   - cp .env.travis .env.dusk.local
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist

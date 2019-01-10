@@ -46,8 +46,10 @@ class Andamentos extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(AndamentoRequest $request, AndamentosRepository $repository)
-    {
+    public function store(
+        AndamentoRequest $request,
+        AndamentosRepository $repository
+    ) {
         $repository->createFromRequest($request);
 
         $repository->checkforchanges($request);
@@ -98,7 +100,13 @@ class Andamentos extends Controller
 
         return view(
             'andamentos.form',
-            compact('andamento', 'processos', 'tipoAndamentos', 'tipoEntradas', 'tipoPrazos')
+            compact(
+                'andamento',
+                'processos',
+                'tipoAndamentos',
+                'tipoEntradas',
+                'tipoPrazos'
+            )
         );
     }
 
@@ -124,9 +132,18 @@ class Andamentos extends Controller
             'processos' => ModelProcesso::withoutGlobalScopes()
                 ->orderBy('numero_judicial')
                 ->pluck('numero_judicial', 'id'),
-            'tipoPrazos'     => ModelTipoPrazo::orderBy('nome')->pluck('nome', 'id'),
-            'tipoAndamentos' => ModelTipoAndamento::orderBy('nome')->pluck('nome', 'id'),
-            'tipoEntradas'   => ModelTipoEntrada::orderBy('nome')->pluck('nome', 'id'),
+            'tipoPrazos' => ModelTipoPrazo::orderBy('nome')->pluck(
+                'nome',
+                'id'
+            ),
+            'tipoAndamentos' => ModelTipoAndamento::orderBy('nome')->pluck(
+                'nome',
+                'id'
+            ),
+            'tipoEntradas' => ModelTipoEntrada::orderBy('nome')->pluck(
+                'nome',
+                'id'
+            ),
         ];
     }
 }

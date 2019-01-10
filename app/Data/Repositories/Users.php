@@ -35,8 +35,11 @@ class Users extends Base
      * @param TiposUsuarios $tiposUsuarios
      * @param UsersService  $usersService
      */
-    public function __construct(Authorization $authorization, TiposUsuarios $tiposUsuarios, UsersService $usersService)
-    {
+    public function __construct(
+        Authorization $authorization,
+        TiposUsuarios $tiposUsuarios,
+        UsersService $usersService
+    ) {
         $this->authorization = $authorization;
 
         $this->tiposUsuarios = $tiposUsuarios;
@@ -81,7 +84,10 @@ class Users extends Base
      */
     private function getTipoUsuario($username)
     {
-        return TipoUsuario::where('nome', $this->authorization->getUserProfiles($username)->first())->first();
+        return TipoUsuario::where(
+            'nome',
+            $this->authorization->getUserProfiles($username)->first()
+        )->first();
     }
 
     private function permitionFunctionMatches()
@@ -120,14 +126,25 @@ class Users extends Base
         $userTypesArray = $this->getUserTypesArrayWithSubstrings();
 
         foreach ($permissions as $permission) {
-            if ($this->transformToSubstring($permission['nomeFuncao']) == $this->transformToSubstring('Administrador')) {
+            if (
+                $this->transformToSubstring($permission['nomeFuncao']) ==
+                $this->transformToSubstring('Administrador')
+            ) {
                 return $userTypesArray['Admini'];
             }
         }
 
         foreach ($permissions as $permission) {
-            if (isset($userTypesArray[$this->transformToSubstring($permission['nomeFuncao'])])) {
-                return $userTypesArray[$this->transformToSubstring($permission['nomeFuncao'])];
+            if (
+                isset(
+                    $userTypesArray[
+                        $this->transformToSubstring($permission['nomeFuncao'])
+                    ]
+                )
+            ) {
+                return $userTypesArray[
+                    $this->transformToSubstring($permission['nomeFuncao'])
+                ];
             }
         }
     }
@@ -165,7 +182,13 @@ class Users extends Base
         try {
             $credentials = extract_credentials($request);
 
-            if (is_null(($user = $this->findUserByEmail(($email = "{$credentials['username']}@alerj.rj.gov.br"))))) {
+            if (
+                is_null(
+                    ($user = $this->findUserByEmail(
+                        ($email = "{$credentials['username']}@alerj.rj.gov.br")
+                    ))
+                )
+            ) {
                 $user = new User();
 
                 $user->name = $credentials['username'];
@@ -215,7 +238,10 @@ class Users extends Base
 
         $model = $this->model;
 
-        return $this->makeResultForSelect($model::where('user_type_id', $type->id)->get(), 'name');
+        return $this->makeResultForSelect(
+            $model::where('user_type_id', $type->id)->get(),
+            'name'
+        );
     }
 
     /**
@@ -271,7 +297,9 @@ class Users extends Base
      */
     private function updateUserTypeFromPermissions($permissions, $user)
     {
-        $userType = $this->tiposUsuarios->findByName($this->getUserTypeFromPermissions($permissions));
+        $userType = $this->tiposUsuarios->findByName(
+            $this->getUserTypeFromPermissions($permissions)
+        );
 
         if ($userType) {
             $user->user_type_id = $userType->id;

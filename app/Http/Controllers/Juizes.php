@@ -57,8 +57,11 @@ class Juizes extends Controller
     public function getJuizesData()
     {
         return [
-            'tiposJuizes' => ModelTipoJuiz::orderBy('nome')->pluck('nome', 'id'),
-            'tribunais'   => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
+            'tiposJuizes' => ModelTipoJuiz::orderBy('nome')->pluck(
+                'nome',
+                'id'
+            ),
+            'tribunais' => ModelTribunal::orderBy('nome')->pluck('nome', 'id'),
         ];
     }
 

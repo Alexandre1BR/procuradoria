@@ -174,15 +174,14 @@ class Import
 
         $this->command->info("Importing $file");
 
-        $data = Excel::load($file, function ($reader) {
-        });
+        $data = Excel::load($file, function ($reader) {});
 
         foreach ($data->sheet(0)->toArray() as $key => $row) {
             $links[
                 trim(
                     $data
                         ->sheet(0)
-                        ->getCell(($cell = 'A'.($key + 2)))
+                        ->getCell(($cell = 'A' . ($key + 2)))
                         ->getValue()
                 )
             ] = $data
@@ -196,8 +195,13 @@ class Import
 
         if (!empty($data) && $data->count()) {
             foreach ($data[0] as $key => $value) {
-                if (empty($value->no_judicial) or starts_with($value->estagiario, 'RETIRAR')) {
-                    $this->command->line("{$value->no_judicial} - {$value->no_alerj} - {$value->estagiario}");
+                if (
+                    empty($value->no_judicial) or
+                    starts_with($value->estagiario, 'RETIRAR')
+                ) {
+                    $this->command->line(
+                        "{$value->no_judicial} - {$value->no_alerj} - {$value->estagiario}"
+                    );
                     continue;
                 }
 
@@ -211,7 +215,9 @@ class Import
                 $tribunal = $this->tribunaisRepository->firstOrCreate(
                     ['abreviacao' => $this->upper($value->origem)],
                     [
-                        'nome' => $this->upper($value->origem_por_extenso ?: 'N/C'),
+                        'nome' => $this->upper(
+                            $value->origem_por_extenso ?: 'N/C'
+                        ),
                     ]
                 );
 
@@ -228,17 +234,19 @@ class Import
 
                 $nome_relator = $this->ajustaNomeRelator($value->relator);
                 $relator_juiz = $this->juizesRepository->firstOrCreate([
-                    'nome'         => $this->upper($nome_relator ?: 'N/C'),
-                    'lotacao_id'   => $tribunal->id,
+                    'nome' => $this->upper($nome_relator ?: 'N/C'),
+                    'lotacao_id' => $tribunal->id,
                     'tipo_juiz_id' => $tipo_relator->id,
                 ]);
 
                 if (!is_null($value->procurador)) {
                     if (!is_null($this->buscaUsuario($value->procurador, 1))) {
-                        $procurador = $this->buscaUsuario($value->procurador, 1)->id;
+                        $procurador = $this->buscaUsuario($value->procurador, 1)
+                            ->id;
                     } else {
                         $procurador = null;
-                        $obs = $obs.'Procurador: '.$value->procurador.', ';
+                        $obs =
+                            $obs . 'Procurador: ' . $value->procurador . ', ';
                     }
                 } else {
                     $procurador = null;
@@ -246,10 +254,12 @@ class Import
 
                 if (!is_null($value->estagiario)) {
                     if (!is_null($this->buscaUsuario($value->estagiario, 2))) {
-                        $estagiario = $this->buscaUsuario($value->estagiario, 2)->id;
+                        $estagiario = $this->buscaUsuario($value->estagiario, 2)
+                            ->id;
                     } else {
                         $estagiario = null;
-                        $obs = $obs.'Estagiário: '.$value->estagiario.', ';
+                        $obs =
+                            $obs . 'Estagiário: ' . $value->estagiario . ', ';
                         // $this->command->line("{$value->no_judicial} - $value->no_alerj - $obs");
                     }
                 } else {
@@ -258,10 +268,11 @@ class Import
 
                 if (!is_null($value->assessor)) {
                     if (!is_null($this->buscaUsuario($value->assessor, 3))) {
-                        $assessor = $this->buscaUsuario($value->assessor, 3)->id;
+                        $assessor = $this->buscaUsuario($value->assessor, 3)
+                            ->id;
                     } else {
                         $assessor = null;
-                        $obs = $obs.'Assessor: '.$value->assessor.', ';
+                        $obs = $obs . 'Assessor: ' . $value->assessor . ', ';
                         //$this->command->line("{$value->no_judicial} - $value->no_alerj - $obs");
                     }
                 } else {
@@ -274,47 +285,55 @@ class Import
                 ]);
 
                 $insert[] = [
-                    'numero_judicial'                                              => str_ireplace("\n", '', $value->no_judicial),
-                    'numero_alerj'                                                 => str_ireplace("\n", '', $value->no_alerj),
-                    'tribunal_id'                                                  => str_ireplace("\n", '', $tribunal->id), //Origem
-                    'vara'                                                         => str_ireplace("\n", '', $value->orgao_julgador),
-                    'acao_id'                                                      => str_ireplace("\n", '', $acao->id),
-                    'apensos_obs'                                                  => str_ireplace("\n", '', $value->apensos),
-                    $value->titulo_do_relator == 'JUIZ' ? 'juiz_id' : 'relator_id' => str_ireplace(
+                    'numero_judicial' => str_ireplace(
+                        "\n",
+                        '',
+                        $value->no_judicial
+                    ),
+                    'numero_alerj' => str_ireplace("\n", '', $value->no_alerj),
+                    'tribunal_id' => str_ireplace("\n", '', $tribunal->id), //Origem
+                    'vara' => str_ireplace("\n", '', $value->orgao_julgador),
+                    'acao_id' => str_ireplace("\n", '', $acao->id),
+                    'apensos_obs' => str_ireplace("\n", '', $value->apensos),
+                    $value->titulo_do_relator == 'JUIZ'
+                        ? 'juiz_id'
+                        : 'relator_id' => str_ireplace(
                         "\n",
                         '',
                         $relator_juiz->id
                     ),
-                    'autor'         => str_ireplace("\n", '', $value->autor),
-                    'reu'           => str_ireplace("\n", '', $value->reu),
-                    'objeto'        => str_ireplace("\n", '', $value->objeto),
-                    'merito'        => str_ireplace("\n", '', $value->merito),
-                    'liminar'       => str_ireplace("\n", '', $value->liminar),
-                    'recurso'       => str_ireplace("\n", '', $value->recurso),
+                    'autor' => str_ireplace("\n", '', $value->autor),
+                    'reu' => str_ireplace("\n", '', $value->reu),
+                    'objeto' => str_ireplace("\n", '', $value->objeto),
+                    'merito' => str_ireplace("\n", '', $value->merito),
+                    'liminar' => str_ireplace("\n", '', $value->liminar),
+                    'recurso' => str_ireplace("\n", '', $value->recurso),
                     'procurador_id' => $procurador,
                     'estagiario_id' => $estagiario,
-                    'assessor_id'   => $assessor,
-                    'tipo_meio_id'  => str_ireplace("\n", '', $tipo_meio->id),
-                    'created_at'    => now(),
-                    'updated_at'    => now(),
-                    'observacao'    => str_ireplace("\n", '', $obs),
-                    'link'          => isset($links[$value->no_judicial]) && !empty($links[$value->no_judicial])
+                    'assessor_id' => $assessor,
+                    'tipo_meio_id' => str_ireplace("\n", '', $tipo_meio->id),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                    'observacao' => str_ireplace("\n", '', $obs),
+                    'link' =>
+                        isset($links[$value->no_judicial]) &&
+                        !empty($links[$value->no_judicial])
                             ? $links[$value->no_judicial]
                             : null,
                 ];
             }
             $colunas = [
                 'numero_judicial' => 'numero_judicial',
-                'numero_alerj'    => 'numero_alerj',
-                'apensos_obs'     => 'apensos_obs',
-                'vara'            => 'vara',
-                'autor'           => 'autor',
-                'reu'             => 'reu',
-                'objeto'          => 'objeto',
-                'merito'          => 'merito',
-                'liminar'         => 'liminar',
-                'recurso'         => 'recurso',
-                'observacao'      => 'observacao',
+                'numero_alerj' => 'numero_alerj',
+                'apensos_obs' => 'apensos_obs',
+                'vara' => 'vara',
+                'autor' => 'autor',
+                'reu' => 'reu',
+                'objeto' => 'objeto',
+                'merito' => 'merito',
+                'liminar' => 'liminar',
+                'recurso' => 'recurso',
+                'observacao' => 'observacao',
             ];
 
             foreach ($insert as $k1 => $vinsert) {
@@ -347,20 +366,22 @@ class Import
 
         if ($file) {
             $data = Cache::remember('importUsers', 5, function () use ($file) {
-                return Excel::load($file, function ($reader) {
-                })->get();
+                return Excel::load($file, function ($reader) {})->get();
             });
 
             if (!empty($data) && $data->count()) {
                 foreach ($data as $key => $value) {
-                    list($name, $username, $user_type) = explode(';', $value['nameusernameuser_type']);
+                    list($name, $username, $user_type) = explode(
+                        ';',
+                        $value['nameusernameuser_type']
+                    );
                     $user_type = $this->ajustaTipoUsuario($user_type)->id;
                     if (!empty($name)) {
                         ModelUser::create([
-                            'name'         => $this->removerAcentuacao($name),
-                            'password'     => '-',
-                            'username'     => $username,
-                            'email'        => $username.'@alerj.rj.gov.br',
+                            'name' => $this->removerAcentuacao($name),
+                            'password' => '-',
+                            'username' => $username,
+                            'email' => $username . '@alerj.rj.gov.br',
                             'user_type_id' => $user_type,
                         ]);
                     }
@@ -391,7 +412,9 @@ class Import
                 continue;
             }
 
-            $q = ModelUser::whereRaw("lower(name) like '%".$this->removerAcentuacao($word)."%'")
+            $q = ModelUser::whereRaw(
+                "lower(name) like '%" . $this->removerAcentuacao($word) . "%'"
+            )
                 ->whereRaw("user_type_id = {$type}")
                 ->get()
                 ->first();
@@ -1115,7 +1138,11 @@ class Import
             'ჯ' => 'j',
             'ჰ' => 'h',
         ];
-        $str = str_replace(array_keys($transliteration), array_values($transliteration), $str);
+        $str = str_replace(
+            array_keys($transliteration),
+            array_values($transliteration),
+            $str
+        );
 
         return $str;
     }

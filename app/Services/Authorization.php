@@ -41,7 +41,7 @@ class Authorization
             $response = collect(
                 $this->remoteRequest->post(static::PERMISSIONS_URL, [
                     'username' => $username,
-                    'system'   => static::SYSTEM_NAME,
+                    'system' => static::SYSTEM_NAME,
                 ])
             );
 
@@ -79,7 +79,7 @@ class Authorization
     {
         $permissionsArray[] = collect([
             'nomeFuncao' => $user->userType->nome,
-            'evento'     => $user->userType->nome,
+            'evento' => $user->userType->nome,
         ]);
 
         return collect($permissionsArray);

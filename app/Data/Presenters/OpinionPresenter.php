@@ -22,7 +22,9 @@ class OpinionPresenter extends BasePresenter
 
         //        dd($date);
 
-        return !is_null($date) ? Carbon::createFromFormat('Y-m-d', $date)->format('d/m/Y') : null;
+        return !is_null($date)
+            ? Carbon::createFromFormat('Y-m-d', $date)->format('d/m/Y')
+            : null;
     }
 
     public function edit_link()
@@ -39,7 +41,7 @@ class OpinionPresenter extends BasePresenter
         $extension = 'pdf';
 
         return route('opinions.download', [
-            'id'       => $id,
+            'id' => $id,
             'fileName' => $extension,
         ]);
     }
@@ -51,7 +53,7 @@ class OpinionPresenter extends BasePresenter
         $extension = 'doc';
 
         return route('opinions.download', [
-            'id'       => $id,
+            'id' => $id,
             'fileName' => $extension,
         ]);
     }

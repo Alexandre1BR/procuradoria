@@ -40,7 +40,10 @@ class TribunaisTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser
                 ->visit('/tribunais')
-                ->type('pesquisa', '45879349875348975387958973489734897345893478957984')
+                ->type(
+                    'pesquisa',
+                    '45879349875348975387958973489734897345893478957984'
+                )
                 ->click('#searchButton')
                 ->waitForText('Nenhum tribunal encontrado')
                 ->assertSee('Nenhum tribunal encontrado');
@@ -83,12 +86,12 @@ class TribunaisTest extends DuskTestCase
                 ->visit('/tribunais')
                 ->clickLink($nomet)
                 ->click('#editar')
-                ->type('nome', '*'.$nomet.'*')
-                ->type('abreviacao', '*'.$abrevt.'*')
+                ->type('nome', '*' . $nomet . '*')
+                ->type('abreviacao', '*' . $abrevt . '*')
                 ->press('Gravar')
                 ->assertSee('Gravado com sucesso')
-                ->assertSee('*'.$nomet.'*')
-                ->assertSee('*'.$abrevt.'*');
+                ->assertSee('*' . $nomet . '*')
+                ->assertSee('*' . $abrevt . '*');
         });
     }
 }

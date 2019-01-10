@@ -31,7 +31,11 @@ class Users
     public function getUserInfo($username)
     {
         try {
-            return collect($this->remoteRequest->post(static::USERS_URL, ['username' => $username]));
+            return collect(
+                $this->remoteRequest->post(static::USERS_URL, [
+                    'username' => $username,
+                ])
+            );
         } catch (\Exception $exception) {
             return collect($this->mockedAuthentication($username));
         }
@@ -45,13 +49,13 @@ class Users
     protected function mockedAuthentication($username)
     {
         return [
-                'name'     => [$username],
-                'email'    => [$username.'@alerj.rj.gov.br'],
-                'memberof' => [
-                    'CN=ProjEsp,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br',
-                    'CN=SDGI,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br',
-                ],
-                'description' => ['matricula: N/C'],
+            'name' => [$username],
+            'email' => [$username . '@alerj.rj.gov.br'],
+            'memberof' => [
+                'CN=ProjEsp,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br',
+                'CN=SDGI,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br',
+            ],
+            'description' => ['matricula: N/C'],
         ];
     }
 }

@@ -15,8 +15,8 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Data\Models\Tribunal::class, function (Faker $faker) {
     return [
-        'nome' => $faker->name,
-        'url_api' => $faker->name,
+        'nome'       => $faker->name,
+        'url_api'    => $faker->name,
         'abreviacao' => $faker->name,
     ];
 });

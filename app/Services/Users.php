@@ -49,8 +49,8 @@ class Users
     protected function mockedAuthentication($username)
     {
         return [
-            'name' => [$username],
-            'email' => [$username . '@alerj.rj.gov.br'],
+            'name'     => [$username],
+            'email'    => [$username.'@alerj.rj.gov.br'],
             'memberof' => [
                 'CN=ProjEsp,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br',
                 'CN=SDGI,OU=SDGI,OU=Departamentos,OU=ALERJ,DC=alerj,DC=gov,DC=br',

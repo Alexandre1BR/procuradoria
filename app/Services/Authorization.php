@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Services\Traits\RemoteRequest;
+use App\Data\Repositories\Users as UsersRepository;
+use App\Data\Repositories\UserTypes as UserTypesRepository;
 
 class Authorization
 {
@@ -36,12 +38,21 @@ class Authorization
             return $this->mockedPermissions($username);
         }
 
-        return collect(
-            $this->remoteRequest->post(static::PERMISSIONS_URL, [
-                'username' => $username,
-                'system'   => static::SYSTEM_NAME,
-            ])
-        );
+        try {
+            $response = collect(
+                $this->remoteRequest->post(static::PERMISSIONS_URL, [
+                    'username' => $username,
+                    'system' => static::SYSTEM_NAME,
+                ])
+            );
+            return $response;
+        } catch (\Exception $exception) {
+            //Logando com as permissões salvas
+            $usersRepository = app(UsersRepository::class);
+            $user = $usersRepository->findByColumn('username', $username);
+
+            return $this->storedPermissions($user);
+        }
     }
 
     /**
@@ -62,5 +73,15 @@ class Authorization
     private function mockedPermissions($username)
     {
         return collect(['Editar']);
+    }
+
+    private function storedPermissions($user)
+    {
+        $permissionsArray[] = collect([
+            'nomeFuncao' => $user->userType->nome,
+            'evento' => $user->userType->nome,
+        ]);
+
+        return collect($permissionsArray);
     }
 }

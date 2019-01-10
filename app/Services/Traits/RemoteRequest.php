@@ -1,10 +1,11 @@
 <?php
-
 namespace App\Services\Traits;
 
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\RequestOptions;
+use Mockery\Exception;
 
 class RemoteRequest
 {
@@ -31,18 +32,23 @@ class RemoteRequest
     {
         try {
             $response = $this->guzzle->request('POST', $url, [
-                'verify'             => false,
-                'debug'              => false,
+                'verify' => false,
+                'debug' => false,
                 RequestOptions::JSON => $data,
-                'allow_redirects'    => true,
+                'allow_redirects' => true,
+                'timeout' => config('auth.timeout'),
             ]);
         } catch (ClientException $exception) {
             report($exception);
 
             $response = $exception->getResponse();
+        } catch (ConnectException $exception) {
+            //timeout
+            throw $exception;
         }
-
-        if (is_null(($array = json_decode((string) $response->getBody(), true)))) {
+        if (
+        is_null($array = json_decode((string) $response->getBody(), true))
+        ) {
             abort('Invalid response');
         }
 

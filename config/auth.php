@@ -24,6 +24,8 @@ return [
         'enabled' => env('APP_AUTHORIZATION_ENABLED', env('APP_AUTHORIZATION', true)),
     ],
 
+    'timeout' => env('AUTH_TIMEOUT'),
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards

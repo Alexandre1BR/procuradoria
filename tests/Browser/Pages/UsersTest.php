@@ -34,7 +34,7 @@ class UsersTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($randomUserU, $NameU) {
             $browser
-                ->visit('/users/'.$randomUserU['id'])
+                ->visit('/users/' . $randomUserU['id'])
                 ->click('#editar')
                 ->type('#personal_email', $NameU)
                 ->press('Gravar')
@@ -54,7 +54,7 @@ class UsersTest extends DuskTestCase
             $randomUserU
         ) {
             $browser
-                ->visit('/users/'.$randomUserU['id'])
+                ->visit('/users/' . $randomUserU['id'])
                 ->click('#editar')
                 ->type('#personal_email', $personalEmailU)
                 ->press('Gravar')
@@ -74,7 +74,7 @@ class UsersTest extends DuskTestCase
             $browser
                 ->visit('/users')
                 ->clickLink($randomUserU['name'])
-                ->assertPathIs('/users/'.$randomUserU['id'])
+                ->assertPathIs('/users/' . $randomUserU['id'])
                 ->assertSee($randomUserU['email']);
         });
     }

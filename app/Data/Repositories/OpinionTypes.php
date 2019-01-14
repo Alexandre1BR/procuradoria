@@ -13,8 +13,8 @@ class OpinionTypes extends Base
         $array = [];
 
         $array[] = (object) [
-            'name'       => 'name',
-            'showName'   => 'Nome',
+            'name' => 'name',
+            'showName' => 'Nome',
             'columnSize' => '100%',
         ];
 
@@ -25,9 +25,9 @@ class OpinionTypes extends Base
     {
         $array = [];
         $array[] = (object) [
-            'name'     => 'name',
+            'name' => 'name',
             'showName' => 'Nome',
-            'type'     => 'string',
+            'type' => 'string',
         ];
 
         return $array;
@@ -73,7 +73,7 @@ class OpinionTypes extends Base
                     $query->orWhere(
                         DB::raw("lower({$column})"),
                         'like',
-                        '%'.$item.'%'
+                        '%' . $item . '%'
                     );
                 } else {
                     if ($this->isDate($item)) {

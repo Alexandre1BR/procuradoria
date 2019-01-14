@@ -24,7 +24,9 @@ abstract class Base
 
         $id = isset($request['id']) ? $request['id'] : null;
 
-        $model = is_null($id) ? new $this->model() : $this->model::withoutGlobalScopes()->find($id);
+        $model = is_null($id)
+            ? new $this->model()
+            : $this->model::withoutGlobalScopes()->find($id);
 
         $model->fill($request);
 
@@ -163,8 +165,11 @@ abstract class Base
      *
      * @return mixed
      */
-    protected function makeResultForSelect($result, $label = 'nome', $value = 'id')
-    {
+    protected function makeResultForSelect(
+        $result,
+        $label = 'nome',
+        $value = 'id'
+    ) {
         return $result->map(function ($row) use ($value, $label) {
             $row['text'] = empty($row->text) ? $row[$label] : $row->text;
 
@@ -199,5 +204,15 @@ abstract class Base
         }
 
         return $returnArray;
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function search(Request $request)
+    {
+        return $this->searchFromRequest($request->get('pesquisa'));
     }
 }

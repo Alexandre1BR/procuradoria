@@ -31,13 +31,15 @@
             @if (subsystem_is(App\Support\Constants::SUBSYSTEM_PROCESSOS))
                 <li><a href="{{ route('andamentos.index') }}">Andamentos</a></li>
                 <li><a href="{{ route('tribunais.index') }}">Tribunais</a></li>
+                <li><a href="{{ route('buscas.index') }}">Buscas em Tribunais</a></li>
                 <li><a href="{{ route('juizes.index') }}">Juizes</a></li>
                 <li><a href="{{ route('acoes.index') }}">Ações</a></li>
                 <li><a href="{{ route('revisions.index') }}">Revisões</a></li>
                 <li><a href="{{ route('leis.index') }}">Leis</a></li>
-                @endif
+                <li><a href="{{ route('search_terms.index') }}">Termos para Busca</a></li>
+            @endif
 
-                <li><a href="{{ route('users.index') }}">Usuários</a></li>
+            <li><a href="{{ route('users.index') }}">Usuários</a></li>
         </ul>
     </li>
 @endif

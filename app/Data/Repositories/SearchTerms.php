@@ -2,26 +2,15 @@
 
 namespace App\Data\Repositories;
 
-use App\Data\Models\Acao;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use DB;
+use App\Data\Models\SearchTerm;
 
-class Acoes extends Base
+class SearchTerms extends Base
 {
     /**
      * @var string
      */
-    protected $model = Acao::class;
-
-    /**
-     * @param Request $request
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function search(Request $request)
-    {
-        return $this->searchFromRequest($request->get('pesquisa'));
-    }
+    protected $model = SearchTerm::class;
 
     /**
      * @param null|string $search
@@ -36,9 +25,9 @@ class Acoes extends Base
                 return strtolower($item);
             });
 
-        $columns = collect(['nome' => 'string', 'abreviacao' => 'string']);
+        $columns = collect(['text' => 'string']);
 
-        $query = Acao::query();
+        $query = SearchTerm::query();
 
         $search->each(function ($item) use ($columns, $query) {
             $columns->each(function ($type, $column) use ($query, $item) {
@@ -48,14 +37,10 @@ class Acoes extends Base
                         'like',
                         '%' . $item . '%'
                     );
-                } else {
-                    if ($this->isDate($item)) {
-                        $query->orWhere($column, '=', $item);
-                    }
                 }
             });
         });
 
-        return $this->makeResultForSelect($query->orderBy('nome')->get());
+        return $this->makeResultForSelect($query->orderBy('text')->get());
     }
 }

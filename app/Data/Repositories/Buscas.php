@@ -2,10 +2,10 @@
 
 namespace App\Data\Repositories;
 
-use DB;
-use Auth;
 use App\Data\Models\Busca;
 use App\Data\Models\Processo;
+use Auth;
+use DB;
 
 class Buscas extends Base
 {
@@ -37,7 +37,7 @@ class Buscas extends Base
                     $query->orWhere(
                         DB::raw("lower({$column})"),
                         'like',
-                        '%' . $item . '%'
+                        '%'.$item.'%'
                     );
                 }
             });

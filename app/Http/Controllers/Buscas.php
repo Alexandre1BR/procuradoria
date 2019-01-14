@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Data\Models\Busca;
-use Illuminate\Http\Request;
 use App\Data\Repositories\Buscas as BuscasRepository;
+use Illuminate\Http\Request;
 
 class Buscas extends Controller
 {
@@ -25,7 +25,7 @@ class Buscas extends Controller
 
     /**
      * @param BuscasRepository $searchTermsRepository
-     * @param Request             $request
+     * @param Request          $request
      *
      * @return $this|mixed
      */

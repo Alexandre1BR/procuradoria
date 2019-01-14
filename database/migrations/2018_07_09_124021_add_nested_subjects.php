@@ -48,37 +48,34 @@ class AddNestedSubjects extends Migration
     public function populate()
     {
         OpinionSubject::create([
-            'name' => 'Root',
+            'name'     => 'Root',
             'children' => [
                 [
-                    'name' => 'Servidor Público',
+                    'name'     => 'Servidor Público',
                     'children' => [
                         ['name' => 'Abono permanência'],
                         [
-                            'name' => 'Aposentadoria',
+                            'name'     => 'Aposentadoria',
                             'children' => [
                                 ['name' => 'Voluntária'],
                                 ['name' => 'Compulsória'],
                                 ['name' => 'Invalidez'],
                                 [
-                                    'name' => 'Revisão dos proventos',
+                                    'name'     => 'Revisão dos proventos',
                                     'children' => [
                                         [
-                                            'name' =>
-                                                'Gratificação Especial de Serviço de Segurança',
+                                            'name' => 'Gratificação Especial de Serviço de Segurança',
                                         ],
                                     ],
                                 ],
                                 [
-                                    'name' =>
-                                        'Tempo Especial para Aposentadoria Segurança',
+                                    'name' => 'Tempo Especial para Aposentadoria Segurança',
                                 ],
                                 [
                                     'name' => 'Sustação de Imposto de Renda',
                                 ],
                                 [
-                                    'name' =>
-                                        'Suspensão de desconto previdenciário',
+                                    'name' => 'Suspensão de desconto previdenciário',
                                 ],
                             ],
                         ],
@@ -89,13 +86,11 @@ class AddNestedSubjects extends Migration
                         ],
                         ['name' => '1/3 de férias indenizado'],
                         [
-                            'name' =>
-                                'Auxílio funeral, encerramento de folha e 13º salário',
+                            'name' => 'Auxílio funeral, encerramento de folha e 13º salário',
                         ],
                         ['name' => 'Reversão de pensão IPALERJ'],
                         [
-                            'name' =>
-                                'Bolsa de reforço escolar/Auxílio-educação',
+                            'name' => 'Bolsa de reforço escolar/Auxílio-educação',
                         ],
                         ['name' => 'Revisão de incorporação'],
                         ['name' => 'Inclusão de dependentes'],
@@ -104,8 +99,7 @@ class AddNestedSubjects extends Migration
                         ],
                         ['name' => 'Estágio'],
                         [
-                            'name' =>
-                                'Gratificação Especial de Serviço de Segurança',
+                            'name' => 'Gratificação Especial de Serviço de Segurança',
                         ],
                     ],
                 ],
@@ -113,12 +107,12 @@ class AddNestedSubjects extends Migration
                 ['name' => 'Contrato Administrativo'],
                 ['name' => 'CPI'],
                 [
-                    'name' => 'Patrimonial',
+                    'name'     => 'Patrimonial',
                     'children' => [['name' => 'Veículos']],
                 ],
                 ['name' => 'Estatuto dos Parlamentares'],
                 [
-                    'name' => 'Judicial',
+                    'name'     => 'Judicial',
                     'children' => [
                         ['name' => 'ADIN'],
                         ['name' => 'RI'],

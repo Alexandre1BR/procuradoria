@@ -15,7 +15,7 @@ return [
     'defaults' => ['guard' => 'web', 'passwords' => 'users'],
 
     'authentication' => [
-        'mock' => env('APP_AUTHENTICATION_MOCKED', false),
+        'mock'    => env('APP_AUTHENTICATION_MOCKED', false),
         'enabled' => env(
             'APP_AUTHENTICATION_ENABLED',
             env('APP_AUTHENTICATION', true)
@@ -23,7 +23,7 @@ return [
     ],
 
     'authorization' => [
-        'mock' => env('APP_AUTHORIZATION_MOCKED', false),
+        'mock'    => env('APP_AUTHORIZATION_MOCKED', false),
         'enabled' => env(
             'APP_AUTHORIZATION_ENABLED',
             env('APP_AUTHORIZATION', true)
@@ -73,7 +73,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Data\Models\User::class,
+            'model'  => App\Data\Models\User::class,
         ],
 
         // 'users' => [
@@ -99,8 +99,8 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60,
+            'table'    => 'password_resets',
+            'expire'   => 60,
         ],
     ],
 ];

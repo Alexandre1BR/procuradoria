@@ -33,14 +33,14 @@ class Leis extends Base
 
         $columns = collect([
             'numero_lei' => 'string',
-            'autor' => 'string',
-            'assunto' => 'string',
-            'link' => 'string',
-            'artigo' => 'string',
-            'paragrafo' => 'string',
-            'inciso' => 'string',
-            'alinea' => 'string',
-            'item' => 'string',
+            'autor'      => 'string',
+            'assunto'    => 'string',
+            'link'       => 'string',
+            'artigo'     => 'string',
+            'paragrafo'  => 'string',
+            'inciso'     => 'string',
+            'alinea'     => 'string',
+            'item'       => 'string',
         ]);
 
         $query = $query ?: $this->makeLeiQuery();
@@ -51,7 +51,7 @@ class Leis extends Base
                     $query->orWhere(
                         DB::raw("lower({$column})"),
                         'like',
-                        '%' . $item . '%'
+                        '%'.$item.'%'
                     );
                 } else {
                     if ($this->isDate($item)) {

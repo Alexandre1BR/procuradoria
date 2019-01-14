@@ -2,8 +2,8 @@
 
 namespace App\Data\Repositories;
 
-use DB;
 use App\Data\Models\SearchTerm;
+use DB;
 
 class SearchTerms extends Base
 {
@@ -35,7 +35,7 @@ class SearchTerms extends Base
                     $query->orWhere(
                         DB::raw("lower({$column})"),
                         'like',
-                        '%' . $item . '%'
+                        '%'.$item.'%'
                     );
                 }
             });

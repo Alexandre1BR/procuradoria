@@ -25,7 +25,7 @@ class Buscas extends Controller
 
     /**
      * @param BuscasRepository $buscasRepository
-     * @param Request             $request
+     * @param Request          $request
      *
      * @return $this|mixed
      */

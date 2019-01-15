@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Data\Models\SearchTerm;
-use App\Http\Requests\SearchTerm as SearchTermRequest;
 use App\Data\Repositories\SearchTerms as SearchTermsRepository;
+use App\Http\Requests\SearchTerm as SearchTermRequest;
+use Illuminate\Http\Request;
 
 class SearchTerms extends Controller
 {
@@ -26,7 +26,7 @@ class SearchTerms extends Controller
 
     /**
      * @param SearchTermsRepository $searchTermsRepository
-     * @param Request             $request
+     * @param Request               $request
      *
      * @return $this|mixed
      */

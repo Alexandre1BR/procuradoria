@@ -2,8 +2,8 @@
 
 namespace App\Data\Repositories;
 
-use DB;
 use App\Data\Models\SearchTerm;
+use DB;
 
 class SearchTerms extends Base
 {

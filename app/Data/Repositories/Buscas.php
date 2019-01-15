@@ -2,11 +2,11 @@
 
 namespace App\Data\Repositories;
 
-use App\Data\Models\ReadingLog;
 use DB;
 use Auth;
 use App\Data\Models\Busca;
 use App\Data\Models\Processo;
+use App\Data\Models\ReadingLog;
 
 class Buscas extends Base
 {

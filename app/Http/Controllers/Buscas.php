@@ -24,20 +24,19 @@ class Buscas extends Controller
     }
 
     /**
-     * @param BuscasRepository $searchTermsRepository
+     * @param BuscasRepository $buscasRepository
      * @param Request             $request
      *
      * @return $this|mixed
      */
-    public function index(
-        BuscasRepository $searchTermsRepository,
-        Request $request
-    ) {
+    public function index(BuscasRepository $buscasRepository, Request $request)
+    {
         return $request->expectsJson()
-            ? $searchTermsRepository->search($request)
+            ? $buscasRepository->search($request)
             : view('buscas.index')
                 ->with('pesquisa', $request->get('pesquisa'))
-                ->with('proceedings', $searchTermsRepository->search($request));
+                ->with('lastLog', $buscasRepository->getLastLog())
+                ->with('proceedings', $buscasRepository->search($request));
     }
 
     /**

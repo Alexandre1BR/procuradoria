@@ -2,6 +2,7 @@
 
 namespace App\Data\Repositories;
 
+use App\Data\Models\ReadingLog;
 use DB;
 use Auth;
 use App\Data\Models\Busca;
@@ -86,5 +87,10 @@ class Buscas extends Base
 
             $proceeding->save();
         }
+    }
+
+    public function getLastLog()
+    {
+        return ReadingLog::orderBy('created_at', 'desc')->first();
     }
 }

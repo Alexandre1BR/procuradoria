@@ -39,8 +39,8 @@ class Busca extends BaseModel
     public function processo()
     {
         return Processo::whereRaw(
-            "regexp_replace(numero_judicial, '[^0-9]', '', 'g') ilike '%" .
-                only_numbers($this->number) .
+            "regexp_replace(numero_judicial, '[^0-9]', '', 'g') ilike '%".
+                only_numbers($this->number).
                 "%'"
         )->first();
     }

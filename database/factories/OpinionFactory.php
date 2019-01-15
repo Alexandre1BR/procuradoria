@@ -68,15 +68,15 @@ $factory->define(OpinionModel::class, function (Faker $faker) {
                 ->toArray()
         )['id'],
         'suit_number' => $faker->name,
-        'suit_sheet' => $faker->name,
-        'identifier' => $faker->name,
-        'date' => $faker->date,
-        'party' => $faker->name,
-        'abstract' => $faker->text,
-        'opinion' => $faker->text,
-        'file_pdf' => $faker->text,
-        'file_doc' => $faker->text,
-        'created_by' => $faker->randomElement(
+        'suit_sheet'  => $faker->name,
+        'identifier'  => $faker->name,
+        'date'        => $faker->date,
+        'party'       => $faker->name,
+        'abstract'    => $faker->text,
+        'opinion'     => $faker->text,
+        'file_pdf'    => $faker->text,
+        'file_doc'    => $faker->text,
+        'created_by'  => $faker->randomElement(
             app(UsersRepository::class)
                 ->getByType('Procurador')
                 ->toArray()

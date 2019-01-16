@@ -1,5 +1,10 @@
 const appName = 'vue-processos'
 
+import Vue from 'vue';
+import TextHighlight from 'vue-text-highlight';
+
+Vue.component('text-highlight', TextHighlight);
+
 if (jQuery("#" + appName).length > 0) {
     const app = new Vue({
         el: '#'+appName,
@@ -28,6 +33,7 @@ if (jQuery("#" + appName).length > 0) {
             },
 
             pesquisa: '',
+            shearchedWords: '',
             processos_arquivados_incluidos: '',
             processos_arquivados_apenas: '',
 
@@ -74,9 +80,10 @@ if (jQuery("#" + appName).length > 0) {
 
         methods: {
             refresh() {
-                me = this
-
+                let me = this
                 me.refreshing = true
+                //Highlight
+                me.shearchedWords = this.pesquisa.split(" ");
 
                 axios.get('/', {
                     params: {
@@ -104,7 +111,7 @@ if (jQuery("#" + appName).length > 0) {
             typeKeyUp() {
                 clearTimeout(this.timeout)
 
-                me = this
+                let me = this
 
                 this.timeout = setTimeout(function () { me.refresh() }, 500)
             },
@@ -128,6 +135,7 @@ if (jQuery("#" + appName).length > 0) {
             },
 
             refreshTable(table) {
+                let me = this
                 axios.get('/'+table)
                     .then(function(response) {
                         me.tables[table] = response.data
@@ -188,3 +196,5 @@ if (jQuery("#" + appName).length > 0) {
     })
 
 }
+
+

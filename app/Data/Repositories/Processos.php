@@ -158,49 +158,57 @@ class Processos extends Base
         $query = $query ?: $this->makeProcessoQuery();
 
         $search->each(function ($item) use ($columns, $query) {
-            $columns->each(function ($type, $column) use ($query, $item) {
-                if ($type === 'string') {
-                    if (
-                        in_array($column, $this->new()->getNumericColumns()) &&
-                        !empty(only_numbers($item))
-                    ) {
-                        $query->orWhereRaw(
-                            'regexp_replace( '.
-                                $column.
-                                " , '[^0-9]', '', 'g') ilike '%".
-                                only_numbers($item).
-                                "%'"
-                        );
-                    } else {
-                        $query->orWhere($column, 'ilike', '%'.$item.'%');
+            $query->where(function ($query) use ($columns, $item) {
+                $columns->each(function ($type, $column) use ($query, $item) {
+                    if ($type === 'string') {
+                        if (in_array($column, $this->new()->getNumericColumns()) && !empty(only_numbers($item))) {
+                            $query->orWhereRaw(
+                                "regexp_replace( " . $column . " , '[^0-9]', '', 'g') ilike '%" . only_numbers($item) . "%'"
+                            );
+                        } else {
+                            $query->orWhereRaw(
+                                "unaccent(lower(" .$column . ")) ILIKE '%'||unaccent('" .
+                                pg_escape_string($item) .
+                                "')||'%' "
+                            );
+                        }
+                    } elseif ($type === 'date') {
+                        $date = to_date($item);
+                        if ($date != null) {
+                            $query->orWhereDate($column, '=', $date);
+                        }
                     }
-                } elseif ($type === 'date') {
-                    $date = to_date($item);
-                    if ($date != null) {
-                        $query->orWhereDate($column, '=', $date);
-                    }
-                }
-            });
-            $query->orWhereHas('tribunal', function ($query) use ($item) {
-                $query->whereRaw("lower(nome) like '%{$item}%'");
-            });
-            $query->orWhereHas('juiz', function ($query) use ($item) {
-                $query->whereRaw("lower(nome) like '%{$item}%'");
-            });
-            $query->orWhereHas('relator', function ($query) use ($item) {
-                $query->whereRaw("lower(nome) like '%{$item}%'");
-            });
-            $query->orWhereHas('procurador', function ($query) use ($item) {
-                $query->whereRaw("lower(name) like '%{$item}%'");
-            });
-            $query->orWhereHas('estagiario', function ($query) use ($item) {
-                $query->whereRaw("lower(name) like '%{$item}%'");
-            });
-            $query->orWhereHas('assessor', function ($query) use ($item) {
-                $query->whereRaw("lower(name) like '%{$item}%'");
-            });
-            $query->orWhereHas('acao', function ($query) use ($item) {
-                $query->whereRaw("lower(nome) like '%{$item}%'");
+                });
+                /*
+                 * (exists
+                 *      (select * from "tribunais" where
+                 *         "processos"."tribunal_id" = "tribunais"."id"
+                 *          and
+                 *          lower(nome) like '%...%'
+                 *      )
+                 * )
+                 */
+                $query->orWhereHas('tribunal', function ($query) use ($item) {
+                    $query->whereRaw("lower(nome) like '%{$item}%'");
+                });
+                $query->orWhereHas('juiz', function ($query) use ($item) {
+                    $query->whereRaw("lower(nome) like '%{$item}%'");
+                });
+                $query->orWhereHas('relator', function ($query) use ($item) {
+                    $query->whereRaw("lower(nome) like '%{$item}%'");
+                });
+                $query->orWhereHas('procurador', function ($query) use ($item) {
+                    $query->whereRaw("lower(name) like '%{$item}%'");
+                });
+                $query->orWhereHas('estagiario', function ($query) use ($item) {
+                    $query->whereRaw("lower(name) like '%{$item}%'");
+                });
+                $query->orWhereHas('assessor', function ($query) use ($item) {
+                    $query->whereRaw("lower(name) like '%{$item}%'");
+                });
+                $query->orWhereHas('acao', function ($query) use ($item) {
+                    $query->whereRaw("lower(nome) like '%{$item}%'");
+                });
             });
         });
 

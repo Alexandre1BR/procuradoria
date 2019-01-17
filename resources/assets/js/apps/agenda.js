@@ -5,10 +5,8 @@ if (jQuery("#" + appName).length > 0) {
         el: '#'+appName,
 
         methods: {
-            printer() {
-                $( "#cabecalho-agenda" ).addClass( "hidden-print" );
+            print() {
                 window.print();
-                $( "#cabecalho-agenda" ).removeClass( "hidden-print" );
             },
         },
     })

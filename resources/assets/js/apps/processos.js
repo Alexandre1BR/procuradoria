@@ -2,6 +2,8 @@ const appName = 'vue-processos'
 
 import Vue from 'vue';
 import TextHighlight from 'vue-text-highlight';
+var accents = require('remove-accents');
+
 
 Vue.component('text-highlight', TextHighlight);
 
@@ -33,7 +35,7 @@ if (jQuery("#" + appName).length > 0) {
             },
 
             pesquisa: '',
-            shearchedWords: '',
+            searchedWords: '',
             processos_arquivados_incluidos: '',
             processos_arquivados_apenas: '',
 
@@ -80,10 +82,7 @@ if (jQuery("#" + appName).length > 0) {
 
         methods: {
             refresh() {
-                let me = this
-                me.refreshing = true
-                //Highlight
-                me.shearchedWords = this.pesquisa.split(" ");
+                this.refreshing = true
 
                 axios.get('/', {
                     params: {
@@ -94,26 +93,46 @@ if (jQuery("#" + appName).length > 0) {
                         filter: this.form
                     }
                 })
-                .then(function(response) {
-                    me.tables.processos = response.data
+                .then(response => {
+                    this.tables.processos = response.data
 
-                    me.refreshing = false
+                    this.refreshing = false
                 })
-                .catch(function(error) {
+                .catch(error => {
                     console.log(error)
 
-                    me.tables.processos = []
+                    this.tables.processos = []
 
-                    me.refreshing = false
+                    this.refreshing = false
                 })
+            },
+
+            makeSearchedWord() {
+                if (this.pesquisa.trim().length == 0) {
+                    return [];
+                }
+
+                return this.pesquisa.split(" ").map((value) => {
+                    return this.createRegex(value);
+                });
+            },
+
+            createRegex(word) {
+                return new RegExp(this.makeWords(word), 'i');
+            },
+
+            makeWords(word){
+                const letters = {'a':'aàáâãäå','e':'eèéèëêð','i':'iìíîï','o':'oòóôõöø','u':'uùúûüµ','c':'cç','n':'nñ'}
+
+                return accents.remove(word).toLowerCase().split('').map(letter => {
+                    return letters.hasOwnProperty(letter) ? '[' + letters[letter] + ']' : letter;
+                }).join('');
             },
 
             typeKeyUp() {
                 clearTimeout(this.timeout)
 
-                let me = this
-
-                this.timeout = setTimeout(function () { me.refresh() }, 500)
+                this.timeout = setTimeout(() => { this.refresh() }, 500)
             },
 
             clearSearch() {
@@ -135,15 +154,14 @@ if (jQuery("#" + appName).length > 0) {
             },
 
             refreshTable(table) {
-                let me = this
                 axios.get('/'+table)
-                    .then(function(response) {
-                        me.tables[table] = response.data
+                    .then(response => {
+                        this.tables[table] = response.data
                     })
-                    .catch(function(error) {
+                    .catch(error => {
                         console.log(error)
 
-                        me.tables[table] = []
+                        this.tables[table] = []
                     })
             },
 
@@ -151,11 +169,8 @@ if (jQuery("#" + appName).length > 0) {
                 window.location.href = '/processos/'+id;
             },
 
-            printer() {
-                let cabecalhoProcesso = $( "#cabecalho-processos" );
-                cabecalhoProcesso.addClass( "hidden-print" );
+            print() {
                 window.print();
-                cabecalhoProcesso.removeClass( "hidden-print" );
             },
 
             processosArquivados() {
@@ -170,7 +185,6 @@ if (jQuery("#" + appName).length > 0) {
                     this.processos_arquivados_apenas     = "0";
                 }
             },
-        },
 
         mounted() {
             this.refresh()

@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div class="btn btn-primary" onclick="window.print();"><i class="fa fa-print"></i> Imprimir</div>
+            <div class="btn btn-primary" @click="print()"><i class="fa fa-print"></i> Imprimir</div>
         </div>
 
         <div class="panel-body">

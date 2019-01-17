@@ -21,8 +21,8 @@
         <div class="col-xs-12" v-for="processo in tables.processos" @click="openProcesso(processo.id)">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h4 class="panel-title">judicial: <strong><text-highlight :queries="shearchedWords">@{{ processo.numero_judicial }}</text-highlight></strong></h4>
-                    <h4 class="panel-title">alerj: <strong><text-highlight :queries="shearchedWords">@{{ processo.numero_alerj }}</text-highlight></strong></h4>
+                    <h4 class="panel-title">judicial: <strong><text-highlight :queries="makeSearchedWord()">@{{ processo.numero_judicial }}</text-highlight></strong></h4>
+                    <h4 class="panel-title">alerj: <strong><text-highlight :queries="makeSearchedWord()">@{{ processo.numero_alerj }}</text-highlight></strong></h4>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -30,7 +30,7 @@
                             Tribunal
                         </div>
                         <div class="col-xs-9">
-                            <strong><text-highlight :queries="shearchedWords">@{{ processo.tribunal_abreviacao }}</text-highlight></strong>
+                            <strong><text-highlight :queries="makeSearchedWord()">@{{ processo.tribunal_abreviacao }}</text-highlight></strong>
                         </div>
                     </div>
 
@@ -39,7 +39,7 @@
                             Ação
                         </div>
                         <div class="col-xs-9">
-                            <strong><text-highlight :queries="shearchedWords">@{{ processo.acao_abreviacao }}</text-highlight></strong>
+                            <strong><text-highlight :queries="makeSearchedWord()">@{{ processo.acao_abreviacao }}</text-highlight></strong>
                         </div>
                     </div>
 
@@ -48,7 +48,7 @@
                             Autor
                         </div>
                         <div class="col-xs-9">
-                            <strong><text-highlight :queries="shearchedWords">@{{ processo.autor }}</text-highlight></strong>
+                            <strong><text-highlight :queries="makeSearchedWord()">@{{ processo.autor }}</text-highlight></strong>
                         </div>
                     </div>
 
@@ -57,7 +57,7 @@
                             Objeto
                         </div>
                         <div class="col-xs-9">
-                            <strong><text-highlight :queries="shearchedWords">@{{ processo.objeto }}</text-highlight></strong>
+                            <strong><text-highlight :queries="makeSearchedWord()">@{{ processo.objeto }}</text-highlight></strong>
                         </div>
                     </div>
 
@@ -66,7 +66,7 @@
                             Procurador
                         </div>
                         <div class="col-xs-9">
-                            <strong><text-highlight :queries="shearchedWords">@{{ processo.procurador_nome }}</text-highlight></strong>
+                            <strong><text-highlight :queries="makeSearchedWord()">@{{ processo.procurador_nome }}</text-highlight></strong>
                         </div>
                     </div>
 
@@ -75,7 +75,7 @@
                             Assessor
                         </div>
                         <div class="col-xs-9">
-                            <strong><text-highlight :queries="shearchedWords">@{{ processo.assessor_nome }}</text-highlight></strong>
+                            <strong><text-highlight :queries="makeSearchedWord()">@{{ processo.assessor_nome }}</text-highlight></strong>
                         </div>
                     </div>
 
@@ -84,7 +84,7 @@
                             Estagiário
                         </div>
                         <div class="col-xs-9">
-                            <strong><text-highlight :queries="shearchedWords">@{{ processo.estagiario_nome }}</text-highlight></strong>
+                            <strong><text-highlight :queries="makeSearchedWord()">@{{ processo.estagiario_nome }}</text-highlight></strong>
                         </div>
                     </div>
                 </div>
@@ -118,17 +118,17 @@
                 </a>
             </td>
             <td width="15%">
-                <a :href="processo.show_url"><text-highlight :queries="shearchedWords">@{{ processo.numero_judicial }}</text-highlight></a>
+                <a :href="processo.show_url"><text-highlight :queries="makeSearchedWord()">@{{ processo.numero_judicial }}</text-highlight></a>
             </td>
-            <td width="10%"><text-highlight :queries="shearchedWords">@{{ processo.numero_alerj }}</text-highlight></td>
-            <td width="5%"><text-highlight :queries="shearchedWords">@{{ processo.tribunal_abreviacao }}</text-highlight></td>
-            <td width="6%"><text-highlight :queries="shearchedWords">@{{ processo.data_distribuicao_formatado }}</text-highlight></td>
-            <td width="4%"><text-highlight :queries="shearchedWords">@{{ processo.acao_abreviacao }}</text-highlight></td>
-            <td width="15%"><text-highlight :queries="shearchedWords">@{{ processo.autor }}</text-highlight></td>
-            <td width="15%"><text-highlight :queries="shearchedWords">@{{ processo.objeto }}</text-highlight></td>
-            <td width="10%"><text-highlight :queries="shearchedWords">@{{ processo.procurador_nome }}</text-highlight></td>
-            <td width="10%"><text-highlight :queries="shearchedWords">@{{ processo.assessor_nome }}</text-highlight></td>
-            <td width="10%"><text-highlight :queries="shearchedWords">@{{ processo.estagiario_nome }}</text-highlight></td>
+            <td width="10%"><text-highlight :queries="makeSearchedWord()">@{{ processo.numero_alerj }}</text-highlight></td>
+            <td width="5%"><text-highlight :queries="makeSearchedWord()">@{{ processo.tribunal_abreviacao }}</text-highlight></td>
+            <td width="6%"><text-highlight :queries="makeSearchedWord()">@{{ processo.data_distribuicao_formatado }}</text-highlight></td>
+            <td width="4%"><text-highlight :queries="makeSearchedWord()">@{{ processo.acao_abreviacao }}</text-highlight></td>
+            <td width="15%"><text-highlight :queries="makeSearchedWord()">@{{ processo.autor }}</text-highlight></td>
+            <td width="15%"><text-highlight :queries="makeSearchedWord()">@{{ processo.objeto }}</text-highlight></td>
+            <td width="10%"><text-highlight :queries="makeSearchedWord()">@{{ processo.procurador_nome }}</text-highlight></td>
+            <td width="10%"><text-highlight :queries="makeSearchedWord()">@{{ processo.assessor_nome }}</text-highlight></td>
+            <td width="10%"><text-highlight :queries="makeSearchedWord()">@{{ processo.estagiario_nome }}</text-highlight></td>
         </tr>
 
         <tr v-if="!tables.processos" v-for="processo in tables.processos">

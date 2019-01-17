@@ -11,40 +11,38 @@ if(jQuery("#"+appName).length > 0) {
         },
         methods: {
             refresh() {
-                me = this
-
                 axios.get('/assuntos/json/array', {
                     params: {}
                 })
-                    .then(function (response) {
-                        me.subjectsArray = response.data
+                    .then(response => {
+                        this.subjectsArray = response.data
                     })
-                    .catch(function (error) {
+                    .catch(error => {
                         console.log(error)
-                        me.subjectsArray = []
+                        this.subjectsArray = []
                     })
 
                 axios.get('/assuntos/json/tree', {
                     params: {}
                 })
-                    .then(function (response) {
-                        me.subjectsTree = response.data
+                    .then(response => {
+                        this.subjectsTree = response.data
 
-                        $("#subjectsTreeSelect").select2ToTree({treeData: {dataArr:me.subjectsTree}, maximumSelectionLength: 3});
+                        $("#subjectsTreeSelect").select2ToTree({treeData: {dataArr:this.subjectsTree}, maximumSelectionLength: 3});
 
-                        $("#subjectsTreeSelect").on('change', function() {
+                        $("#subjectsTreeSelect").on('change', () => {
                             e = document.getElementById("subjectsTreeSelect");
                             id = e.options[e.selectedIndex].value;
-                            me.fullSubjectName = me.subjectsArray[id].full_name;
+                            this.fullSubjectName = this.subjectsArray[id].full_name;
                         });
                     })
-                    .catch(function (error) {
+                    .catch(error => {
                         console.log(error)
 
-                        me.subjectsTree = []
+                        this.subjectsTree = []
                     })
 
-                me.refreshing = false
+                this.refreshing = false
             },
         },
         beforeMount() {

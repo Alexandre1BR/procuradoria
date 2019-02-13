@@ -27,7 +27,9 @@ class UniqueOpinionsSubject implements Rule
      */
     public function passes($attribute, $value)
     {
-        return app(OpinionsSubjectsRepository::class)->whereOpinionAndSubjectCount(
+        return app(
+            OpinionsSubjectsRepository::class
+        )->whereOpinionAndSubjectCount(
             request('opinion_id'),
             request('subject_id')
         ) < 1;

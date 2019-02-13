@@ -28,8 +28,10 @@ class Agenda extends Controller
      *
      * @return $this
      */
-    public function index(AndamentosRepository $andamentosRepository, Request $request)
-    {
+    public function index(
+        AndamentosRepository $andamentosRepository,
+        Request $request
+    ) {
         $pesquisa = $request->get('pesquisa');
 
         if (empty($pesquisa)) {

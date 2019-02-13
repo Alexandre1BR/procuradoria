@@ -21,16 +21,13 @@ class AddUserTypes extends Migration
 
     public function down()
     {
-        DB
-            ::table('tipos_usuarios')
+        DB::table('tipos_usuarios')
             ->where('nome', '=', 'Procurador')
             ->delete();
-        DB
-            ::table('tipos_usuarios')
+        DB::table('tipos_usuarios')
             ->where('nome', '=', 'Estagiario')
             ->delete();
-        DB
-            ::table('tipos_usuarios')
+        DB::table('tipos_usuarios')
             ->where('nome', '=', 'Assessor')
             ->delete();
 

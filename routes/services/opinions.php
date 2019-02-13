@@ -7,15 +7,21 @@ Route::group(['prefix' => '/pareceres'], function () {
 
     Route::get('/{id}', 'Opinions@show')->name('opinions.show');
 
-    Route::get('/{id}/{fileName}', 'Opinions@download')->name('opinions.download');
+    Route::get('/{id}/{fileName}', 'Opinions@download')->name(
+        'opinions.download'
+    );
 
     Route::get('/', 'Opinions@index')->name('opinions.index');
 
-    Route::post('/relacionarAssunto', 'Opinions@relacionarAssunto')->name('opinions.relacionarAssunto');
+    Route::post('/relacionarAssunto', 'Opinions@relacionarAssunto')->name(
+        'opinions.relacionarAssunto'
+    );
 });
 
 Route::group(['prefix' => '/assuntos'], function () {
-    Route::get('/create', 'OpinionSubjects@create')->name('opinionSubjects.create');
+    Route::get('/create', 'OpinionSubjects@create')->name(
+        'opinionSubjects.create'
+    );
 
     Route::post('/', 'OpinionSubjects@store')->name('opinionSubjects.store');
 
@@ -24,7 +30,11 @@ Route::group(['prefix' => '/assuntos'], function () {
     Route::get('/', 'OpinionSubjects@index')->name('opinionSubjects.index');
 
     Route::group(['prefix' => '/json'], function () {
-        Route::get('/tree', 'OpinionSubjects@jsonTree')->name('opinionsubjects.jsontree');
-        Route::get('/array', 'OpinionSubjects@jsonArray')->name('opinionsubjects.jsonarray');
+        Route::get('/tree', 'OpinionSubjects@jsonTree')->name(
+            'opinionsubjects.jsontree'
+        );
+        Route::get('/array', 'OpinionSubjects@jsonArray')->name(
+            'opinionsubjects.jsonarray'
+        );
     });
 });

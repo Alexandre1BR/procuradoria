@@ -41,8 +41,8 @@ class ProcessoUpdated extends Notification implements ShouldQueue
      */
     private function getMessage()
     {
-        return 'Os dados do processo '.
-            $this->processo->numero_judicial.
+        return 'Os dados do processo ' .
+            $this->processo->numero_judicial .
             ' sofreram alterações';
     }
 

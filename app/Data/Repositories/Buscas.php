@@ -38,7 +38,7 @@ class Buscas extends Base
                     $query->orWhere(
                         DB::raw("lower({$column})"),
                         'like',
-                        '%'.$item.'%'
+                        '%' . $item . '%'
                     );
                 }
             });

@@ -61,7 +61,10 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function scopeType($query, $type)
     {
-        return $query->where('user_type_id', app(TiposUsuarios::class)->findByName($type)->id);
+        return $query->where(
+            'user_type_id',
+            app(TiposUsuarios::class)->findByName($type)->id
+        );
     }
 
     /**

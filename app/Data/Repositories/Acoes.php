@@ -46,7 +46,7 @@ class Acoes extends Base
                     $query->orWhere(
                         DB::raw("lower({$column})"),
                         'like',
-                        '%'.$item.'%'
+                        '%' . $item . '%'
                     );
                 } else {
                     if ($this->isDate($item)) {

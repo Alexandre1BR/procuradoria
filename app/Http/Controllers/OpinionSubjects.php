@@ -31,7 +31,10 @@ class OpinionSubjects extends Controller
     {
         return view('opinionSubjects.form')
             ->with(['opinionSubject' => $this->repository->new()])
-            ->with('opinionSubjectsFormAttributes', $this->repository->formAttributes());
+            ->with(
+                'opinionSubjectsFormAttributes',
+                $this->repository->formAttributes()
+            );
     }
 
     /**
@@ -40,8 +43,10 @@ class OpinionSubjects extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(OpinionSubjectRequest $request, OpinionSubjectsRepository $repository)
-    {
+    public function store(
+        OpinionSubjectRequest $request,
+        OpinionSubjectsRepository $repository
+    ) {
         $repository->createFromRequest($request);
 
         return redirect()
@@ -55,14 +60,22 @@ class OpinionSubjects extends Controller
      *
      * @return $this|\Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function index(OpinionSubjectsRepository $opinionSubjects, Request $request)
-    {
+    public function index(
+        OpinionSubjectsRepository $opinionSubjects,
+        Request $request
+    ) {
         return //            ->with('opinionSubjects', $opinionSubjects->fullTreeArray())
             view('opinionSubjects.index')
                 ->with('pesquisa', $request->get('pesquisa'))
                 ->with('opinionSubjects', $opinionSubjects->search($request))
-                ->with('opinionSubjectsAttributes', $opinionSubjects->attributesShowing())
-                ->with('opinionSubjectsEditAttribute', $opinionSubjects->editAttribute);
+                ->with(
+                    'opinionSubjectsAttributes',
+                    $opinionSubjects->attributesShowing()
+                )
+                ->with(
+                    'opinionSubjectsEditAttribute',
+                    $opinionSubjects->editAttribute
+                );
     }
 
     /**
@@ -77,7 +90,10 @@ class OpinionSubjects extends Controller
         return view('opinionSubjects.form')
             ->with('formDisabled', true)
             ->with(['opinionSubject' => OpinionSubjectModel::find($id)])
-            ->with('opinionSubjectsFormAttributes', $repository->formAttributes());
+            ->with(
+                'opinionSubjectsFormAttributes',
+                $repository->formAttributes()
+            );
     }
 
     public function jsonTree()

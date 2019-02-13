@@ -58,7 +58,7 @@ class ProcessoCreated extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            //
-        ];
+                //
+            ];
     }
 }

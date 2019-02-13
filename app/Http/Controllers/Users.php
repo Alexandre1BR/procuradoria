@@ -58,7 +58,10 @@ class Users extends Controller
      */
     public function index()
     {
-        return view('users.index')->with('users', $this->usersRepository->all());
+        return view('users.index')->with(
+            'users',
+            $this->usersRepository->all()
+        );
     }
 
     /**

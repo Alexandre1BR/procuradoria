@@ -30,8 +30,7 @@ class ModifyTableLeis extends Migration
         foreach ($leis as $lei) {
             if (isset($array[$lei->numero_lei])) {
                 //                dump('Apagando ' . $lei->id . ' Numero lei ' . $lei->numero_lei);
-                DB
-                    ::table('leis')
+                DB::table('leis')
                     ->where('id', '=', $lei->id)
                     ->delete();
             } else {
@@ -43,14 +42,12 @@ class ModifyTableLeis extends Migration
         foreach ($leis as $lei) {
             //            dump('Processo id = '.$lei->processo_id.'      Lei id = '.$lei->id.'      $array[$lei->numero_lei] = '.$array[$lei->numero_lei]);
 
-            DB
-                ::table('processos_leis')
-                ->insert([
-                    'processo_id' => $lei->processo_id,
-                    'lei_id'      => $array[$lei->numero_lei],
-                    'created_at'  => now(),
-                    'updated_at'  => now(),
-                ]);
+            DB::table('processos_leis')->insert([
+                'processo_id' => $lei->processo_id,
+                'lei_id' => $array[$lei->numero_lei],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
         }
 
         //Apaga a coluna de lei
@@ -75,8 +72,7 @@ class ModifyTableLeis extends Migration
         //Passa a coluna processo
         foreach ($processoleis as $processolei) {
             //            dd($processolei);
-            $lei = DB
-                ::table('leis')
+            $lei = DB::table('leis')
                 ->where('id', '=', $processolei->lei_id)
                 ->get();
             //            $id = $lei['id'];
@@ -84,22 +80,19 @@ class ModifyTableLeis extends Migration
             //            dd($id);
 
             if ($lei[0]->processo_id == null) {
-                DB
-                    ::table('leis')
+                DB::table('leis')
                     ->where('id', '=', $processolei->lei_id)
                     ->update(['processo_id' => $processolei->processo_id]);
             } else {
-                DB
-                    ::table('leis')
-                    ->insert([
-                        'numero_lei'  => $lei[0]->numero_lei,
-                        'autor'       => $lei[0]->autor,
-                        'assunto'     => $lei[0]->assunto,
-                        'link'        => $lei[0]->link,
-                        'processo_id' => $processolei->processo_id,
-                        'created_at'  => now(),
-                        'updated_at'  => now(),
-                    ]);
+                DB::table('leis')->insert([
+                    'numero_lei' => $lei[0]->numero_lei,
+                    'autor' => $lei[0]->autor,
+                    'assunto' => $lei[0]->assunto,
+                    'link' => $lei[0]->link,
+                    'processo_id' => $processolei->processo_id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
             }
         }
 

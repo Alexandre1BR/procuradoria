@@ -10,11 +10,11 @@ class RevisionPresenter extends BasePresenter
      * @var array
      */
     protected $routes = [
-        'App\Data\Models\Tribunal'  => 'tribunais.show',
-        'App\Data\Models\Acao'      => 'acoes.show',
-        'App\Data\Models\Juiz'      => 'juizes.show',
-        'App\Data\Models\Processo'  => 'processos.show',
-        'App\Data\Models\User'      => 'users.show',
+        'App\Data\Models\Tribunal' => 'tribunais.show',
+        'App\Data\Models\Acao' => 'acoes.show',
+        'App\Data\Models\Juiz' => 'juizes.show',
+        'App\Data\Models\Processo' => 'processos.show',
+        'App\Data\Models\User' => 'users.show',
         'App\Data\Models\Andamento' => 'andamentos.show',
     ];
 
@@ -45,7 +45,7 @@ class RevisionPresenter extends BasePresenter
      */
     public function link()
     {
-        if (is_null($routeName = $this->getRouteName())) {
+        if (is_null(($routeName = $this->getRouteName()))) {
             return;
         }
 

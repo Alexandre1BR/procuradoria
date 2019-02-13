@@ -35,7 +35,7 @@ class SearchTerms extends Base
                     $query->orWhere(
                         DB::raw("lower({$column})"),
                         'like',
-                        '%'.$item.'%'
+                        '%' . $item . '%'
                     );
                 }
             });

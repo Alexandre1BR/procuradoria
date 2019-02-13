@@ -21,17 +21,17 @@ use Faker\Generator as Faker;
 
 $factory->define(LeiModel::class, function (Faker $faker) {
     return [
-        'numero_lei' => (string) $faker->randomNumber(4).
-            '/'.
+        'numero_lei' => (string) $faker->randomNumber(4) .
+            '/' .
             (string) $faker->randomNumber(4),
-        'autor'               => $faker->name,
-        'assunto'             => $faker->name,
-        'link'                => $faker->name,
-        'artigo'              => (string) $faker->randomNumber(2),
-        'paragrafo'           => (string) $faker->randomNumber(2),
-        'inciso'              => (string) $faker->randomNumber(2),
-        'alinea'              => (string) $faker->randomNumber(2),
-        'item'                => (string) $faker->randomNumber(2),
+        'autor' => $faker->name,
+        'assunto' => $faker->name,
+        'link' => $faker->name,
+        'artigo' => (string) $faker->randomNumber(2),
+        'paragrafo' => (string) $faker->randomNumber(2),
+        'inciso' => (string) $faker->randomNumber(2),
+        'alinea' => (string) $faker->randomNumber(2),
+        'item' => (string) $faker->randomNumber(2),
         'nivel_federativo_id' => $faker->randomElement(
             app(NiveisFederativosRepository::class)
                 ->all()

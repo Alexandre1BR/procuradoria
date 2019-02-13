@@ -47,7 +47,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function afterLoadingEnvironment($callback)
         {
-            \Illuminate\Foundation\Application::afterLoadingEnvironment($callback);
+            \Illuminate\Foundation\Application::afterLoadingEnvironment(
+                $callback
+            );
         }
 
         /**
@@ -61,7 +63,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function beforeBootstrapping($bootstrapper, $callback)
         {
-            \Illuminate\Foundation\Application::beforeBootstrapping($bootstrapper, $callback);
+            \Illuminate\Foundation\Application::beforeBootstrapping(
+                $bootstrapper,
+                $callback
+            );
         }
 
         /**
@@ -75,7 +80,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function afterBootstrapping($bootstrapper, $callback)
         {
-            \Illuminate\Foundation\Application::afterBootstrapping($bootstrapper, $callback);
+            \Illuminate\Foundation\Application::afterBootstrapping(
+                $bootstrapper,
+                $callback
+            );
         }
 
         /**
@@ -260,7 +268,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function useEnvironmentPath($path)
         {
-            return \Illuminate\Foundation\Application::useEnvironmentPath($path);
+            return \Illuminate\Foundation\Application::useEnvironmentPath(
+                $path
+            );
         }
 
         /**
@@ -273,7 +283,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function loadEnvironmentFrom($file)
         {
-            return \Illuminate\Foundation\Application::loadEnvironmentFrom($file);
+            return \Illuminate\Foundation\Application::loadEnvironmentFrom(
+                $file
+            );
         }
 
         /**
@@ -330,7 +342,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function detectEnvironment($callback)
         {
-            return \Illuminate\Foundation\Application::detectEnvironment($callback);
+            return \Illuminate\Foundation\Application::detectEnvironment(
+                $callback
+            );
         }
 
         /**
@@ -376,9 +390,16 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Support\ServiceProvider
          * @static
          */
-        public static function register($provider, $options = [], $force = false)
-        {
-            return \Illuminate\Foundation\Application::register($provider, $options, $force);
+        public static function register(
+            $provider,
+            $options = [],
+            $force = false
+        ) {
+            return \Illuminate\Foundation\Application::register(
+                $provider,
+                $options,
+                $force
+            );
         }
 
         /**
@@ -417,7 +438,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function resolveProvider($provider)
         {
-            return \Illuminate\Foundation\Application::resolveProvider($provider);
+            return \Illuminate\Foundation\Application::resolveProvider(
+                $provider
+            );
         }
 
         /**
@@ -453,9 +476,14 @@ namespace Illuminate\Support\Facades {
          * @return void
          * @static
          */
-        public static function registerDeferredProvider($provider, $service = null)
-        {
-            \Illuminate\Foundation\Application::registerDeferredProvider($provider, $service);
+        public static function registerDeferredProvider(
+            $provider,
+            $service = null
+        ) {
+            \Illuminate\Foundation\Application::registerDeferredProvider(
+                $provider,
+                $service
+            );
         }
 
         /**
@@ -471,7 +499,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function make($abstract, $parameters = [])
         {
-            return \Illuminate\Foundation\Application::make($abstract, $parameters);
+            return \Illuminate\Foundation\Application::make(
+                $abstract,
+                $parameters
+            );
         }
 
         /**
@@ -542,7 +573,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function handle($request, $type = 1, $catch = true)
         {
-            return \Illuminate\Foundation\Application::handle($request, $type, $catch);
+            return \Illuminate\Foundation\Application::handle(
+                $request,
+                $type,
+                $catch
+            );
         }
 
         /**
@@ -647,7 +682,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function abort($code, $message = '', $headers = [])
         {
-            \Illuminate\Foundation\Application::abort($code, $message, $headers);
+            \Illuminate\Foundation\Application::abort(
+                $code,
+                $message,
+                $headers
+            );
         }
 
         /**
@@ -732,7 +771,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function isDeferredService($service)
         {
-            return \Illuminate\Foundation\Application::isDeferredService($service);
+            return \Illuminate\Foundation\Application::isDeferredService(
+                $service
+            );
         }
 
         /**
@@ -758,7 +799,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function configureMonologUsing($callback)
         {
-            return \Illuminate\Foundation\Application::configureMonologUsing($callback);
+            return \Illuminate\Foundation\Application::configureMonologUsing(
+                $callback
+            );
         }
 
         /**
@@ -940,10 +983,17 @@ namespace Illuminate\Support\Facades {
          * @return void
          * @static
          */
-        public static function bind($abstract, $concrete = null, $shared = false)
-        {
+        public static function bind(
+            $abstract,
+            $concrete = null,
+            $shared = false
+        ) {
             //Method inherited from \Illuminate\Container\Container
-            \Illuminate\Foundation\Application::bind($abstract, $concrete, $shared);
+            \Illuminate\Foundation\Application::bind(
+                $abstract,
+                $concrete,
+                $shared
+            );
         }
 
         /**
@@ -957,7 +1007,9 @@ namespace Illuminate\Support\Facades {
         public static function hasMethodBinding($method)
         {
             //Method inherited from \Illuminate\Container\Container
-            return \Illuminate\Foundation\Application::hasMethodBinding($method);
+            return \Illuminate\Foundation\Application::hasMethodBinding(
+                $method
+            );
         }
 
         /**
@@ -987,7 +1039,10 @@ namespace Illuminate\Support\Facades {
         public static function callMethodBinding($method, $instance)
         {
             //Method inherited from \Illuminate\Container\Container
-            return \Illuminate\Foundation\Application::callMethodBinding($method, $instance);
+            return \Illuminate\Foundation\Application::callMethodBinding(
+                $method,
+                $instance
+            );
         }
 
         /**
@@ -1000,10 +1055,17 @@ namespace Illuminate\Support\Facades {
          * @return void
          * @static
          */
-        public static function addContextualBinding($concrete, $abstract, $implementation)
-        {
+        public static function addContextualBinding(
+            $concrete,
+            $abstract,
+            $implementation
+        ) {
             //Method inherited from \Illuminate\Container\Container
-            \Illuminate\Foundation\Application::addContextualBinding($concrete, $abstract, $implementation);
+            \Illuminate\Foundation\Application::addContextualBinding(
+                $concrete,
+                $abstract,
+                $implementation
+            );
         }
 
         /**
@@ -1016,10 +1078,17 @@ namespace Illuminate\Support\Facades {
          * @return void
          * @static
          */
-        public static function bindIf($abstract, $concrete = null, $shared = false)
-        {
+        public static function bindIf(
+            $abstract,
+            $concrete = null,
+            $shared = false
+        ) {
             //Method inherited from \Illuminate\Container\Container
-            \Illuminate\Foundation\Application::bindIf($abstract, $concrete, $shared);
+            \Illuminate\Foundation\Application::bindIf(
+                $abstract,
+                $concrete,
+                $shared
+            );
         }
 
         /**
@@ -1066,7 +1135,10 @@ namespace Illuminate\Support\Facades {
         public static function instance($abstract, $instance)
         {
             //Method inherited from \Illuminate\Container\Container
-            return \Illuminate\Foundation\Application::instance($abstract, $instance);
+            return \Illuminate\Foundation\Application::instance(
+                $abstract,
+                $instance
+            );
         }
 
         /**
@@ -1125,7 +1197,10 @@ namespace Illuminate\Support\Facades {
         public static function rebinding($abstract, $callback)
         {
             //Method inherited from \Illuminate\Container\Container
-            return \Illuminate\Foundation\Application::rebinding($abstract, $callback);
+            return \Illuminate\Foundation\Application::rebinding(
+                $abstract,
+                $callback
+            );
         }
 
         /**
@@ -1141,7 +1216,11 @@ namespace Illuminate\Support\Facades {
         public static function refresh($abstract, $target, $method)
         {
             //Method inherited from \Illuminate\Container\Container
-            return \Illuminate\Foundation\Application::refresh($abstract, $target, $method);
+            return \Illuminate\Foundation\Application::refresh(
+                $abstract,
+                $target,
+                $method
+            );
         }
 
         /**
@@ -1156,7 +1235,10 @@ namespace Illuminate\Support\Facades {
         public static function wrap($callback, $parameters = [])
         {
             //Method inherited from \Illuminate\Container\Container
-            return \Illuminate\Foundation\Application::wrap($callback, $parameters);
+            return \Illuminate\Foundation\Application::wrap(
+                $callback,
+                $parameters
+            );
         }
 
         /**
@@ -1169,10 +1251,17 @@ namespace Illuminate\Support\Facades {
          * @return mixed
          * @static
          */
-        public static function call($callback, $parameters = [], $defaultMethod = null)
-        {
+        public static function call(
+            $callback,
+            $parameters = [],
+            $defaultMethod = null
+        ) {
             //Method inherited from \Illuminate\Container\Container
-            return \Illuminate\Foundation\Application::call($callback, $parameters, $defaultMethod);
+            return \Illuminate\Foundation\Application::call(
+                $callback,
+                $parameters,
+                $defaultMethod
+            );
         }
 
         /**
@@ -1201,7 +1290,10 @@ namespace Illuminate\Support\Facades {
         public static function makeWith($abstract, $parameters = [])
         {
             //Method inherited from \Illuminate\Container\Container
-            return \Illuminate\Foundation\Application::makeWith($abstract, $parameters);
+            return \Illuminate\Foundation\Application::makeWith(
+                $abstract,
+                $parameters
+            );
         }
 
         /**
@@ -1264,7 +1356,10 @@ namespace Illuminate\Support\Facades {
         public static function afterResolving($abstract, $callback = null)
         {
             //Method inherited from \Illuminate\Container\Container
-            \Illuminate\Foundation\Application::afterResolving($abstract, $callback);
+            \Illuminate\Foundation\Application::afterResolving(
+                $abstract,
+                $callback
+            );
         }
 
         /**
@@ -1490,10 +1585,17 @@ namespace Illuminate\Support\Facades {
          * @return int
          * @static
          */
-        public static function call($command, $parameters = [], $outputBuffer = null)
-        {
+        public static function call(
+            $command,
+            $parameters = [],
+            $outputBuffer = null
+        ) {
             //Method inherited from \Illuminate\Foundation\Console\Kernel
-            return \App\Console\Kernel::call($command, $parameters, $outputBuffer);
+            return \App\Console\Kernel::call(
+                $command,
+                $parameters,
+                $outputBuffer
+            );
         }
 
         /**
@@ -1588,7 +1690,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function createSessionDriver($name, $config)
         {
-            return \Illuminate\Auth\AuthManager::createSessionDriver($name, $config);
+            return \Illuminate\Auth\AuthManager::createSessionDriver(
+                $name,
+                $config
+            );
         }
 
         /**
@@ -1602,7 +1707,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function createTokenDriver($name, $config)
         {
-            return \Illuminate\Auth\AuthManager::createTokenDriver($name, $config);
+            return \Illuminate\Auth\AuthManager::createTokenDriver(
+                $name,
+                $config
+            );
         }
 
         /**
@@ -1677,7 +1785,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function resolveUsersUsing($userResolver)
         {
-            return \Illuminate\Auth\AuthManager::resolveUsersUsing($userResolver);
+            return \Illuminate\Auth\AuthManager::resolveUsersUsing(
+                $userResolver
+            );
         }
 
         /**
@@ -1806,7 +1916,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function basic($field = 'email', $extraConditions = [])
         {
-            return \Illuminate\Auth\SessionGuard::basic($field, $extraConditions);
+            return \Illuminate\Auth\SessionGuard::basic(
+                $field,
+                $extraConditions
+            );
         }
 
         /**
@@ -1818,9 +1931,14 @@ namespace Illuminate\Support\Facades {
          * @return \Symfony\Component\HttpFoundation\Response|null
          * @static
          */
-        public static function onceBasic($field = 'email', $extraConditions = [])
-        {
-            return \Illuminate\Auth\SessionGuard::onceBasic($field, $extraConditions);
+        public static function onceBasic(
+            $field = 'email',
+            $extraConditions = []
+        ) {
+            return \Illuminate\Auth\SessionGuard::onceBasic(
+                $field,
+                $extraConditions
+            );
         }
 
         /**
@@ -1834,7 +1952,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function attempt($credentials = [], $remember = false)
         {
-            return \Illuminate\Auth\SessionGuard::attempt($credentials, $remember);
+            return \Illuminate\Auth\SessionGuard::attempt(
+                $credentials,
+                $remember
+            );
         }
 
         /**
@@ -2191,7 +2312,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function compileString($value)
         {
-            return \Illuminate\View\Compilers\BladeCompiler::compileString($value);
+            return \Illuminate\View\Compilers\BladeCompiler::compileString(
+                $value
+            );
         }
 
         /**
@@ -2204,7 +2327,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function stripParentheses($expression)
         {
-            return \Illuminate\View\Compilers\BladeCompiler::stripParentheses($expression);
+            return \Illuminate\View\Compilers\BladeCompiler::stripParentheses(
+                $expression
+            );
         }
 
         /**
@@ -2256,7 +2381,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function check($name, $parameters = null)
         {
-            return \Illuminate\View\Compilers\BladeCompiler::check($name, $parameters);
+            return \Illuminate\View\Compilers\BladeCompiler::check(
+                $name,
+                $parameters
+            );
         }
 
         /**
@@ -2270,7 +2398,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function directive($name, $handler)
         {
-            \Illuminate\View\Compilers\BladeCompiler::directive($name, $handler);
+            \Illuminate\View\Compilers\BladeCompiler::directive(
+                $name,
+                $handler
+            );
         }
 
         /**
@@ -2319,7 +2450,9 @@ namespace Illuminate\Support\Facades {
         public static function getCompiledPath($path)
         {
             //Method inherited from \Illuminate\View\Compilers\Compiler
-            return \Illuminate\View\Compilers\BladeCompiler::getCompiledPath($path);
+            return \Illuminate\View\Compilers\BladeCompiler::getCompiledPath(
+                $path
+            );
         }
 
         /**
@@ -2346,7 +2479,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function compileEchoDefaults($value)
         {
-            return \Illuminate\View\Compilers\BladeCompiler::compileEchoDefaults($value);
+            return \Illuminate\View\Compilers\BladeCompiler::compileEchoDefaults(
+                $value
+            );
         }
     }
 
@@ -2414,7 +2549,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function connection($driver = null)
         {
-            return \Illuminate\Broadcasting\BroadcastManager::connection($driver);
+            return \Illuminate\Broadcasting\BroadcastManager::connection(
+                $driver
+            );
         }
 
         /**
@@ -2465,7 +2602,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function extend($driver, $callback)
         {
-            return \Illuminate\Broadcasting\BroadcastManager::extend($driver, $callback);
+            return \Illuminate\Broadcasting\BroadcastManager::extend(
+                $driver,
+                $callback
+            );
         }
     }
 
@@ -2857,7 +2997,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function remember($key, $minutes, $callback)
         {
-            return \Illuminate\Cache\Repository::remember($key, $minutes, $callback);
+            return \Illuminate\Cache\Repository::remember(
+                $key,
+                $minutes,
+                $callback
+            );
         }
 
         /**
@@ -2885,7 +3029,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function rememberForever($key, $callback)
         {
-            return \Illuminate\Cache\Repository::rememberForever($key, $callback);
+            return \Illuminate\Cache\Repository::rememberForever(
+                $key,
+                $callback
+            );
         }
 
         /**
@@ -3114,7 +3261,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function macroCall($method, $parameters)
         {
-            return \Illuminate\Cache\Repository::macroCall($method, $parameters);
+            return \Illuminate\Cache\Repository::macroCall(
+                $method,
+                $parameters
+            );
         }
 
         /**
@@ -3469,9 +3619,18 @@ namespace Illuminate\Support\Facades {
          * @return $this
          * @static
          */
-        public static function setDefaultPathAndDomain($path, $domain, $secure = false, $sameSite = null)
-        {
-            return \Illuminate\Cookie\CookieJar::setDefaultPathAndDomain($path, $domain, $secure, $sameSite);
+        public static function setDefaultPathAndDomain(
+            $path,
+            $domain,
+            $secure = false,
+            $sameSite = null
+        ) {
+            return \Illuminate\Cookie\CookieJar::setDefaultPathAndDomain(
+                $path,
+                $domain,
+                $secure,
+                $sameSite
+            );
         }
 
         /**
@@ -3528,7 +3687,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function encrypt($value, $serialize = true)
         {
-            return \Illuminate\Encryption\Encrypter::encrypt($value, $serialize);
+            return \Illuminate\Encryption\Encrypter::encrypt(
+                $value,
+                $serialize
+            );
         }
 
         /**
@@ -3557,7 +3719,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function decrypt($payload, $unserialize = true)
         {
-            return \Illuminate\Encryption\Encrypter::decrypt($payload, $unserialize);
+            return \Illuminate\Encryption\Encrypter::decrypt(
+                $payload,
+                $unserialize
+            );
         }
 
         /**
@@ -3793,10 +3958,17 @@ namespace Illuminate\Support\Facades {
          * @return mixed
          * @static
          */
-        public static function selectOne($query, $bindings = [], $useReadPdo = true)
-        {
+        public static function selectOne(
+            $query,
+            $bindings = [],
+            $useReadPdo = true
+        ) {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::selectOne($query, $bindings, $useReadPdo);
+            return \Illuminate\Database\PostgresConnection::selectOne(
+                $query,
+                $bindings,
+                $useReadPdo
+            );
         }
 
         /**
@@ -3811,7 +3983,10 @@ namespace Illuminate\Support\Facades {
         public static function selectFromWriteConnection($query, $bindings = [])
         {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::selectFromWriteConnection($query, $bindings);
+            return \Illuminate\Database\PostgresConnection::selectFromWriteConnection(
+                $query,
+                $bindings
+            );
         }
 
         /**
@@ -3824,10 +3999,17 @@ namespace Illuminate\Support\Facades {
          * @return array
          * @static
          */
-        public static function select($query, $bindings = [], $useReadPdo = true)
-        {
+        public static function select(
+            $query,
+            $bindings = [],
+            $useReadPdo = true
+        ) {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::select($query, $bindings, $useReadPdo);
+            return \Illuminate\Database\PostgresConnection::select(
+                $query,
+                $bindings,
+                $useReadPdo
+            );
         }
 
         /**
@@ -3840,10 +4022,17 @@ namespace Illuminate\Support\Facades {
          * @return \Generator
          * @static
          */
-        public static function cursor($query, $bindings = [], $useReadPdo = true)
-        {
+        public static function cursor(
+            $query,
+            $bindings = [],
+            $useReadPdo = true
+        ) {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::cursor($query, $bindings, $useReadPdo);
+            return \Illuminate\Database\PostgresConnection::cursor(
+                $query,
+                $bindings,
+                $useReadPdo
+            );
         }
 
         /**
@@ -3858,7 +4047,10 @@ namespace Illuminate\Support\Facades {
         public static function insert($query, $bindings = [])
         {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::insert($query, $bindings);
+            return \Illuminate\Database\PostgresConnection::insert(
+                $query,
+                $bindings
+            );
         }
 
         /**
@@ -3873,7 +4065,10 @@ namespace Illuminate\Support\Facades {
         public static function update($query, $bindings = [])
         {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::update($query, $bindings);
+            return \Illuminate\Database\PostgresConnection::update(
+                $query,
+                $bindings
+            );
         }
 
         /**
@@ -3888,7 +4083,10 @@ namespace Illuminate\Support\Facades {
         public static function delete($query, $bindings = [])
         {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::delete($query, $bindings);
+            return \Illuminate\Database\PostgresConnection::delete(
+                $query,
+                $bindings
+            );
         }
 
         /**
@@ -3903,7 +4101,10 @@ namespace Illuminate\Support\Facades {
         public static function statement($query, $bindings = [])
         {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::statement($query, $bindings);
+            return \Illuminate\Database\PostgresConnection::statement(
+                $query,
+                $bindings
+            );
         }
 
         /**
@@ -3918,7 +4119,10 @@ namespace Illuminate\Support\Facades {
         public static function affectingStatement($query, $bindings = [])
         {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::affectingStatement($query, $bindings);
+            return \Illuminate\Database\PostgresConnection::affectingStatement(
+                $query,
+                $bindings
+            );
         }
 
         /**
@@ -3961,7 +4165,10 @@ namespace Illuminate\Support\Facades {
         public static function bindValues($statement, $bindings)
         {
             //Method inherited from \Illuminate\Database\Connection
-            \Illuminate\Database\PostgresConnection::bindValues($statement, $bindings);
+            \Illuminate\Database\PostgresConnection::bindValues(
+                $statement,
+                $bindings
+            );
         }
 
         /**
@@ -3975,7 +4182,9 @@ namespace Illuminate\Support\Facades {
         public static function prepareBindings($bindings)
         {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::prepareBindings($bindings);
+            return \Illuminate\Database\PostgresConnection::prepareBindings(
+                $bindings
+            );
         }
 
         /**
@@ -3991,7 +4200,11 @@ namespace Illuminate\Support\Facades {
         public static function logQuery($query, $bindings, $time = null)
         {
             //Method inherited from \Illuminate\Database\Connection
-            \Illuminate\Database\PostgresConnection::logQuery($query, $bindings, $time);
+            \Illuminate\Database\PostgresConnection::logQuery(
+                $query,
+                $bindings,
+                $time
+            );
         }
 
         /**
@@ -4033,7 +4246,9 @@ namespace Illuminate\Support\Facades {
         public static function recordsHaveBeenModified($value = true)
         {
             //Method inherited from \Illuminate\Database\Connection
-            \Illuminate\Database\PostgresConnection::recordsHaveBeenModified($value);
+            \Illuminate\Database\PostgresConnection::recordsHaveBeenModified(
+                $value
+            );
         }
 
         /**
@@ -4060,7 +4275,10 @@ namespace Illuminate\Support\Facades {
         public static function getDoctrineColumn($table, $column)
         {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::getDoctrineColumn($table, $column);
+            return \Illuminate\Database\PostgresConnection::getDoctrineColumn(
+                $table,
+                $column
+            );
         }
 
         /**
@@ -4150,7 +4368,9 @@ namespace Illuminate\Support\Facades {
         public static function setReconnector($reconnector)
         {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::setReconnector($reconnector);
+            return \Illuminate\Database\PostgresConnection::setReconnector(
+                $reconnector
+            );
         }
 
         /**
@@ -4266,7 +4486,9 @@ namespace Illuminate\Support\Facades {
         public static function setPostProcessor($processor)
         {
             //Method inherited from \Illuminate\Database\Connection
-            \Illuminate\Database\PostgresConnection::setPostProcessor($processor);
+            \Illuminate\Database\PostgresConnection::setPostProcessor(
+                $processor
+            );
         }
 
         /**
@@ -4292,7 +4514,9 @@ namespace Illuminate\Support\Facades {
         public static function setEventDispatcher($events)
         {
             //Method inherited from \Illuminate\Database\Connection
-            \Illuminate\Database\PostgresConnection::setEventDispatcher($events);
+            \Illuminate\Database\PostgresConnection::setEventDispatcher(
+                $events
+            );
         }
 
         /**
@@ -4390,7 +4614,9 @@ namespace Illuminate\Support\Facades {
         public static function setDatabaseName($database)
         {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::setDatabaseName($database);
+            return \Illuminate\Database\PostgresConnection::setDatabaseName(
+                $database
+            );
         }
 
         /**
@@ -4430,7 +4656,9 @@ namespace Illuminate\Support\Facades {
         public static function withTablePrefix($grammar)
         {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::withTablePrefix($grammar);
+            return \Illuminate\Database\PostgresConnection::withTablePrefix(
+                $grammar
+            );
         }
 
         /**
@@ -4445,7 +4673,10 @@ namespace Illuminate\Support\Facades {
         public static function resolverFor($driver, $callback)
         {
             //Method inherited from \Illuminate\Database\Connection
-            \Illuminate\Database\PostgresConnection::resolverFor($driver, $callback);
+            \Illuminate\Database\PostgresConnection::resolverFor(
+                $driver,
+                $callback
+            );
         }
 
         /**
@@ -4459,7 +4690,9 @@ namespace Illuminate\Support\Facades {
         public static function getResolver($driver)
         {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::getResolver($driver);
+            return \Illuminate\Database\PostgresConnection::getResolver(
+                $driver
+            );
         }
 
         /**
@@ -4476,7 +4709,10 @@ namespace Illuminate\Support\Facades {
         public static function transaction($callback, $attempts = 1)
         {
             //Method inherited from \Illuminate\Database\Connection
-            return \Illuminate\Database\PostgresConnection::transaction($callback, $attempts);
+            return \Illuminate\Database\PostgresConnection::transaction(
+                $callback,
+                $attempts
+            );
         }
 
         /**
@@ -4642,7 +4878,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function dispatch($event, $payload = [], $halt = false)
         {
-            return \Illuminate\Events\Dispatcher::dispatch($event, $payload, $halt);
+            return \Illuminate\Events\Dispatcher::dispatch(
+                $event,
+                $payload,
+                $halt
+            );
         }
 
         /**
@@ -4669,7 +4909,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function makeListener($listener, $wildcard = false)
         {
-            return \Illuminate\Events\Dispatcher::makeListener($listener, $wildcard);
+            return \Illuminate\Events\Dispatcher::makeListener(
+                $listener,
+                $wildcard
+            );
         }
 
         /**
@@ -4683,7 +4926,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function createClassListener($listener, $wildcard = false)
         {
-            return \Illuminate\Events\Dispatcher::createClassListener($listener, $wildcard);
+            return \Illuminate\Events\Dispatcher::createClassListener(
+                $listener,
+                $wildcard
+            );
         }
 
         /**
@@ -4821,7 +5067,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function put($path, $contents, $lock = false)
         {
-            return \Illuminate\Filesystem\Filesystem::put($path, $contents, $lock);
+            return \Illuminate\Filesystem\Filesystem::put(
+                $path,
+                $contents,
+                $lock
+            );
         }
 
         /**
@@ -5102,7 +5352,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function files($directory, $hidden = false)
         {
-            return \Illuminate\Filesystem\Filesystem::files($directory, $hidden);
+            return \Illuminate\Filesystem\Filesystem::files(
+                $directory,
+                $hidden
+            );
         }
 
         /**
@@ -5116,7 +5369,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function allFiles($directory, $hidden = false)
         {
-            return \Illuminate\Filesystem\Filesystem::allFiles($directory, $hidden);
+            return \Illuminate\Filesystem\Filesystem::allFiles(
+                $directory,
+                $hidden
+            );
         }
 
         /**
@@ -5143,9 +5399,18 @@ namespace Illuminate\Support\Facades {
          * @return bool
          * @static
          */
-        public static function makeDirectory($path, $mode = 493, $recursive = false, $force = false)
-        {
-            return \Illuminate\Filesystem\Filesystem::makeDirectory($path, $mode, $recursive, $force);
+        public static function makeDirectory(
+            $path,
+            $mode = 493,
+            $recursive = false,
+            $force = false
+        ) {
+            return \Illuminate\Filesystem\Filesystem::makeDirectory(
+                $path,
+                $mode,
+                $recursive,
+                $force
+            );
         }
 
         /**
@@ -5160,7 +5425,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function moveDirectory($from, $to, $overwrite = false)
         {
-            return \Illuminate\Filesystem\Filesystem::moveDirectory($from, $to, $overwrite);
+            return \Illuminate\Filesystem\Filesystem::moveDirectory(
+                $from,
+                $to,
+                $overwrite
+            );
         }
 
         /**
@@ -5173,9 +5442,16 @@ namespace Illuminate\Support\Facades {
          * @return bool
          * @static
          */
-        public static function copyDirectory($directory, $destination, $options = null)
-        {
-            return \Illuminate\Filesystem\Filesystem::copyDirectory($directory, $destination, $options);
+        public static function copyDirectory(
+            $directory,
+            $destination,
+            $options = null
+        ) {
+            return \Illuminate\Filesystem\Filesystem::copyDirectory(
+                $directory,
+                $destination,
+                $options
+            );
         }
 
         /**
@@ -5191,7 +5467,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function deleteDirectory($directory, $preserve = false)
         {
-            return \Illuminate\Filesystem\Filesystem::deleteDirectory($directory, $preserve);
+            return \Illuminate\Filesystem\Filesystem::deleteDirectory(
+                $directory,
+                $preserve
+            );
         }
 
         /**
@@ -5204,7 +5483,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function cleanDirectory($directory)
         {
-            return \Illuminate\Filesystem\Filesystem::cleanDirectory($directory);
+            return \Illuminate\Filesystem\Filesystem::cleanDirectory(
+                $directory
+            );
         }
 
         /**
@@ -5291,7 +5572,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function resource($name, $class, $abilities = null)
         {
-            return \Illuminate\Auth\Access\Gate::resource($name, $class, $abilities);
+            return \Illuminate\Auth\Access\Gate::resource(
+                $name,
+                $class,
+                $abilities
+            );
         }
 
         /**
@@ -5403,7 +5688,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function authorize($ability, $arguments = [])
         {
-            return \Illuminate\Auth\Access\Gate::authorize($ability, $arguments);
+            return \Illuminate\Auth\Access\Gate::authorize(
+                $ability,
+                $arguments
+            );
         }
 
         /**
@@ -5498,7 +5786,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function check($value, $hashedValue, $options = [])
         {
-            return \Illuminate\Hashing\BcryptHasher::check($value, $hashedValue, $options);
+            return \Illuminate\Hashing\BcryptHasher::check(
+                $value,
+                $hashedValue,
+                $options
+            );
         }
 
         /**
@@ -5512,7 +5804,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function needsRehash($hashedValue, $options = [])
         {
-            return \Illuminate\Hashing\BcryptHasher::needsRehash($hashedValue, $options);
+            return \Illuminate\Hashing\BcryptHasher::needsRehash(
+                $hashedValue,
+                $options
+            );
         }
 
         /**
@@ -5542,7 +5837,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function hasForLocale($key, $locale = null)
         {
-            return \Illuminate\Translation\Translator::hasForLocale($key, $locale);
+            return \Illuminate\Translation\Translator::hasForLocale(
+                $key,
+                $locale
+            );
         }
 
         /**
@@ -5557,7 +5855,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function has($key, $locale = null, $fallback = true)
         {
-            return \Illuminate\Translation\Translator::has($key, $locale, $fallback);
+            return \Illuminate\Translation\Translator::has(
+                $key,
+                $locale,
+                $fallback
+            );
         }
 
         /**
@@ -5572,7 +5874,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function trans($key, $replace = [], $locale = null)
         {
-            return \Illuminate\Translation\Translator::trans($key, $replace, $locale);
+            return \Illuminate\Translation\Translator::trans(
+                $key,
+                $replace,
+                $locale
+            );
         }
 
         /**
@@ -5586,9 +5892,18 @@ namespace Illuminate\Support\Facades {
          * @return string|array|null
          * @static
          */
-        public static function get($key, $replace = [], $locale = null, $fallback = true)
-        {
-            return \Illuminate\Translation\Translator::get($key, $replace, $locale, $fallback);
+        public static function get(
+            $key,
+            $replace = [],
+            $locale = null,
+            $fallback = true
+        ) {
+            return \Illuminate\Translation\Translator::get(
+                $key,
+                $replace,
+                $locale,
+                $fallback
+            );
         }
 
         /**
@@ -5603,7 +5918,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function getFromJson($key, $replace = [], $locale = null)
         {
-            return \Illuminate\Translation\Translator::getFromJson($key, $replace, $locale);
+            return \Illuminate\Translation\Translator::getFromJson(
+                $key,
+                $replace,
+                $locale
+            );
         }
 
         /**
@@ -5617,9 +5936,18 @@ namespace Illuminate\Support\Facades {
          * @return string
          * @static
          */
-        public static function transChoice($key, $number, $replace = [], $locale = null)
-        {
-            return \Illuminate\Translation\Translator::transChoice($key, $number, $replace, $locale);
+        public static function transChoice(
+            $key,
+            $number,
+            $replace = [],
+            $locale = null
+        ) {
+            return \Illuminate\Translation\Translator::transChoice(
+                $key,
+                $number,
+                $replace,
+                $locale
+            );
         }
 
         /**
@@ -5633,9 +5961,18 @@ namespace Illuminate\Support\Facades {
          * @return string
          * @static
          */
-        public static function choice($key, $number, $replace = [], $locale = null)
-        {
-            return \Illuminate\Translation\Translator::choice($key, $number, $replace, $locale);
+        public static function choice(
+            $key,
+            $number,
+            $replace = [],
+            $locale = null
+        ) {
+            return \Illuminate\Translation\Translator::choice(
+                $key,
+                $number,
+                $replace,
+                $locale
+            );
         }
 
         /**
@@ -5650,7 +5987,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function addLines($lines, $locale, $namespace = '*')
         {
-            \Illuminate\Translation\Translator::addLines($lines, $locale, $namespace);
+            \Illuminate\Translation\Translator::addLines(
+                $lines,
+                $locale,
+                $namespace
+            );
         }
 
         /**
@@ -5665,7 +6006,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function load($namespace, $group, $locale)
         {
-            \Illuminate\Translation\Translator::load($namespace, $group, $locale);
+            \Illuminate\Translation\Translator::load(
+                $namespace,
+                $group,
+                $locale
+            );
         }
 
         /**
@@ -6041,8 +6386,11 @@ namespace Illuminate\Support\Facades {
          * @return \Psr\Log\LoggerInterface
          * @static
          */
-        public static function useSyslog($name = 'laravel', $level = 'debug', $facility = 8)
-        {
+        public static function useSyslog(
+            $name = 'laravel',
+            $level = 'debug',
+            $facility = 8
+        ) {
             return \Illuminate\Log\Writer::useSyslog($name, $level, $facility);
         }
 
@@ -6426,7 +6774,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function send($notifiables, $notification)
         {
-            \Illuminate\Notifications\ChannelManager::send($notifiables, $notification);
+            \Illuminate\Notifications\ChannelManager::send(
+                $notifiables,
+                $notification
+            );
         }
 
         /**
@@ -6439,9 +6790,16 @@ namespace Illuminate\Support\Facades {
          * @return void
          * @static
          */
-        public static function sendNow($notifiables, $notification, $channels = null)
-        {
-            \Illuminate\Notifications\ChannelManager::sendNow($notifiables, $notification, $channels);
+        public static function sendNow(
+            $notifiables,
+            $notification,
+            $channels = null
+        ) {
+            \Illuminate\Notifications\ChannelManager::sendNow(
+                $notifiables,
+                $notification,
+                $channels
+            );
         }
 
         /**
@@ -6518,7 +6876,10 @@ namespace Illuminate\Support\Facades {
         public static function extend($driver, $callback)
         {
             //Method inherited from \Illuminate\Support\Manager
-            return \Illuminate\Notifications\ChannelManager::extend($driver, $callback);
+            return \Illuminate\Notifications\ChannelManager::extend(
+                $driver,
+                $callback
+            );
         }
 
         /**
@@ -6546,7 +6907,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function broker($name = null)
         {
-            return \Illuminate\Auth\Passwords\PasswordBrokerManager::broker($name);
+            return \Illuminate\Auth\Passwords\PasswordBrokerManager::broker(
+                $name
+            );
         }
 
         /**
@@ -6570,7 +6933,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function setDefaultDriver($name)
         {
-            \Illuminate\Auth\Passwords\PasswordBrokerManager::setDefaultDriver($name);
+            \Illuminate\Auth\Passwords\PasswordBrokerManager::setDefaultDriver(
+                $name
+            );
         }
     }
 
@@ -6798,7 +7163,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function pushRaw($payload, $queue = null, $options = [])
         {
-            return \Illuminate\Queue\SyncQueue::pushRaw($payload, $queue, $options);
+            return \Illuminate\Queue\SyncQueue::pushRaw(
+                $payload,
+                $queue,
+                $options
+            );
         }
 
         /**
@@ -6814,7 +7183,12 @@ namespace Illuminate\Support\Facades {
          */
         public static function later($delay, $job, $data = '', $queue = null)
         {
-            return \Illuminate\Queue\SyncQueue::later($delay, $job, $data, $queue);
+            return \Illuminate\Queue\SyncQueue::later(
+                $delay,
+                $job,
+                $data,
+                $queue
+            );
         }
 
         /**
@@ -6860,7 +7234,12 @@ namespace Illuminate\Support\Facades {
         public static function laterOn($queue, $delay, $job, $data = '')
         {
             //Method inherited from \Illuminate\Queue\Queue
-            return \Illuminate\Queue\SyncQueue::laterOn($queue, $delay, $job, $data);
+            return \Illuminate\Queue\SyncQueue::laterOn(
+                $queue,
+                $delay,
+                $job,
+                $data
+            );
         }
 
         /**
@@ -6959,9 +7338,16 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Http\RedirectResponse
          * @static
          */
-        public static function back($status = 302, $headers = [], $fallback = false)
-        {
-            return \Illuminate\Routing\Redirector::back($status, $headers, $fallback);
+        public static function back(
+            $status = 302,
+            $headers = [],
+            $fallback = false
+        ) {
+            return \Illuminate\Routing\Redirector::back(
+                $status,
+                $headers,
+                $fallback
+            );
         }
 
         /**
@@ -6989,9 +7375,18 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Http\RedirectResponse
          * @static
          */
-        public static function guest($path, $status = 302, $headers = [], $secure = null)
-        {
-            return \Illuminate\Routing\Redirector::guest($path, $status, $headers, $secure);
+        public static function guest(
+            $path,
+            $status = 302,
+            $headers = [],
+            $secure = null
+        ) {
+            return \Illuminate\Routing\Redirector::guest(
+                $path,
+                $status,
+                $headers,
+                $secure
+            );
         }
 
         /**
@@ -7005,9 +7400,18 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Http\RedirectResponse
          * @static
          */
-        public static function intended($default = '/', $status = 302, $headers = [], $secure = null)
-        {
-            return \Illuminate\Routing\Redirector::intended($default, $status, $headers, $secure);
+        public static function intended(
+            $default = '/',
+            $status = 302,
+            $headers = [],
+            $secure = null
+        ) {
+            return \Illuminate\Routing\Redirector::intended(
+                $default,
+                $status,
+                $headers,
+                $secure
+            );
         }
 
         /**
@@ -7021,9 +7425,18 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Http\RedirectResponse
          * @static
          */
-        public static function to($path, $status = 302, $headers = [], $secure = null)
-        {
-            return \Illuminate\Routing\Redirector::to($path, $status, $headers, $secure);
+        public static function to(
+            $path,
+            $status = 302,
+            $headers = [],
+            $secure = null
+        ) {
+            return \Illuminate\Routing\Redirector::to(
+                $path,
+                $status,
+                $headers,
+                $secure
+            );
         }
 
         /**
@@ -7038,7 +7451,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function away($path, $status = 302, $headers = [])
         {
-            return \Illuminate\Routing\Redirector::away($path, $status, $headers);
+            return \Illuminate\Routing\Redirector::away(
+                $path,
+                $status,
+                $headers
+            );
         }
 
         /**
@@ -7053,7 +7470,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function secure($path, $status = 302, $headers = [])
         {
-            return \Illuminate\Routing\Redirector::secure($path, $status, $headers);
+            return \Illuminate\Routing\Redirector::secure(
+                $path,
+                $status,
+                $headers
+            );
         }
 
         /**
@@ -7067,9 +7488,18 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Http\RedirectResponse
          * @static
          */
-        public static function route($route, $parameters = [], $status = 302, $headers = [])
-        {
-            return \Illuminate\Routing\Redirector::route($route, $parameters, $status, $headers);
+        public static function route(
+            $route,
+            $parameters = [],
+            $status = 302,
+            $headers = []
+        ) {
+            return \Illuminate\Routing\Redirector::route(
+                $route,
+                $parameters,
+                $status,
+                $headers
+            );
         }
 
         /**
@@ -7083,9 +7513,18 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Http\RedirectResponse
          * @static
          */
-        public static function action($action, $parameters = [], $status = 302, $headers = [])
-        {
-            return \Illuminate\Routing\Redirector::action($action, $parameters, $status, $headers);
+        public static function action(
+            $action,
+            $parameters = [],
+            $status = 302,
+            $headers = []
+        ) {
+            return \Illuminate\Routing\Redirector::action(
+                $action,
+                $parameters,
+                $status,
+                $headers
+            );
         }
 
         /**
@@ -7460,7 +7899,14 @@ namespace Illuminate\Support\Facades {
             $files = null,
             $server = null
         ) {
-            return \Illuminate\Http\Request::duplicate($query, $request, $attributes, $cookies, $files, $server);
+            return \Illuminate\Http\Request::duplicate(
+                $query,
+                $request,
+                $attributes,
+                $cookies,
+                $files,
+                $server
+            );
         }
 
         /**
@@ -7727,7 +8173,15 @@ namespace Illuminate\Support\Facades {
             $content = null
         ) {
             //Method inherited from \Symfony\Component\HttpFoundation\Request
-            return \Illuminate\Http\Request::create($uri, $method, $parameters, $cookies, $files, $server, $content);
+            return \Illuminate\Http\Request::create(
+                $uri,
+                $method,
+                $parameters,
+                $cookies,
+                $files,
+                $server,
+                $content
+            );
         }
 
         /**
@@ -9226,7 +9680,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function make($content = '', $status = 200, $headers = [])
         {
-            return \Illuminate\Routing\ResponseFactory::make($content, $status, $headers);
+            return \Illuminate\Routing\ResponseFactory::make(
+                $content,
+                $status,
+                $headers
+            );
         }
 
         /**
@@ -9240,9 +9698,18 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Http\Response
          * @static
          */
-        public static function view($view, $data = [], $status = 200, $headers = [])
-        {
-            return \Illuminate\Routing\ResponseFactory::view($view, $data, $status, $headers);
+        public static function view(
+            $view,
+            $data = [],
+            $status = 200,
+            $headers = []
+        ) {
+            return \Illuminate\Routing\ResponseFactory::view(
+                $view,
+                $data,
+                $status,
+                $headers
+            );
         }
 
         /**
@@ -9256,9 +9723,18 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Http\JsonResponse
          * @static
          */
-        public static function json($data = [], $status = 200, $headers = [], $options = 0)
-        {
-            return \Illuminate\Routing\ResponseFactory::json($data, $status, $headers, $options);
+        public static function json(
+            $data = [],
+            $status = 200,
+            $headers = [],
+            $options = 0
+        ) {
+            return \Illuminate\Routing\ResponseFactory::json(
+                $data,
+                $status,
+                $headers,
+                $options
+            );
         }
 
         /**
@@ -9273,9 +9749,20 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Http\JsonResponse
          * @static
          */
-        public static function jsonp($callback, $data = [], $status = 200, $headers = [], $options = 0)
-        {
-            return \Illuminate\Routing\ResponseFactory::jsonp($callback, $data, $status, $headers, $options);
+        public static function jsonp(
+            $callback,
+            $data = [],
+            $status = 200,
+            $headers = [],
+            $options = 0
+        ) {
+            return \Illuminate\Routing\ResponseFactory::jsonp(
+                $callback,
+                $data,
+                $status,
+                $headers,
+                $options
+            );
         }
 
         /**
@@ -9290,7 +9777,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function stream($callback, $status = 200, $headers = [])
         {
-            return \Illuminate\Routing\ResponseFactory::stream($callback, $status, $headers);
+            return \Illuminate\Routing\ResponseFactory::stream(
+                $callback,
+                $status,
+                $headers
+            );
         }
 
         /**
@@ -9304,9 +9795,18 @@ namespace Illuminate\Support\Facades {
          * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
          * @static
          */
-        public static function download($file, $name = null, $headers = [], $disposition = 'attachment')
-        {
-            return \Illuminate\Routing\ResponseFactory::download($file, $name, $headers, $disposition);
+        public static function download(
+            $file,
+            $name = null,
+            $headers = [],
+            $disposition = 'attachment'
+        ) {
+            return \Illuminate\Routing\ResponseFactory::download(
+                $file,
+                $name,
+                $headers,
+                $disposition
+            );
         }
 
         /**
@@ -9334,9 +9834,18 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Http\RedirectResponse
          * @static
          */
-        public static function redirectTo($path, $status = 302, $headers = [], $secure = null)
-        {
-            return \Illuminate\Routing\ResponseFactory::redirectTo($path, $status, $headers, $secure);
+        public static function redirectTo(
+            $path,
+            $status = 302,
+            $headers = [],
+            $secure = null
+        ) {
+            return \Illuminate\Routing\ResponseFactory::redirectTo(
+                $path,
+                $status,
+                $headers,
+                $secure
+            );
         }
 
         /**
@@ -9350,9 +9859,18 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Http\RedirectResponse
          * @static
          */
-        public static function redirectToRoute($route, $parameters = [], $status = 302, $headers = [])
-        {
-            return \Illuminate\Routing\ResponseFactory::redirectToRoute($route, $parameters, $status, $headers);
+        public static function redirectToRoute(
+            $route,
+            $parameters = [],
+            $status = 302,
+            $headers = []
+        ) {
+            return \Illuminate\Routing\ResponseFactory::redirectToRoute(
+                $route,
+                $parameters,
+                $status,
+                $headers
+            );
         }
 
         /**
@@ -9366,9 +9884,18 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Http\RedirectResponse
          * @static
          */
-        public static function redirectToAction($action, $parameters = [], $status = 302, $headers = [])
-        {
-            return \Illuminate\Routing\ResponseFactory::redirectToAction($action, $parameters, $status, $headers);
+        public static function redirectToAction(
+            $action,
+            $parameters = [],
+            $status = 302,
+            $headers = []
+        ) {
+            return \Illuminate\Routing\ResponseFactory::redirectToAction(
+                $action,
+                $parameters,
+                $status,
+                $headers
+            );
         }
 
         /**
@@ -9382,9 +9909,18 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Http\RedirectResponse
          * @static
          */
-        public static function redirectGuest($path, $status = 302, $headers = [], $secure = null)
-        {
-            return \Illuminate\Routing\ResponseFactory::redirectGuest($path, $status, $headers, $secure);
+        public static function redirectGuest(
+            $path,
+            $status = 302,
+            $headers = [],
+            $secure = null
+        ) {
+            return \Illuminate\Routing\ResponseFactory::redirectGuest(
+                $path,
+                $status,
+                $headers,
+                $secure
+            );
         }
 
         /**
@@ -9398,9 +9934,18 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Http\RedirectResponse
          * @static
          */
-        public static function redirectToIntended($default = '/', $status = 302, $headers = [], $secure = null)
-        {
-            return \Illuminate\Routing\ResponseFactory::redirectToIntended($default, $status, $headers, $secure);
+        public static function redirectToIntended(
+            $default = '/',
+            $status = 302,
+            $headers = [],
+            $secure = null
+        ) {
+            return \Illuminate\Routing\ResponseFactory::redirectToIntended(
+                $default,
+                $status,
+                $headers,
+                $secure
+            );
         }
 
         /**
@@ -9569,7 +10114,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function redirect($uri, $destination, $status = 301)
         {
-            return \Illuminate\Routing\Router::redirect($uri, $destination, $status);
+            return \Illuminate\Routing\Router::redirect(
+                $uri,
+                $destination,
+                $status
+            );
         }
 
         /**
@@ -9627,7 +10176,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function resource($name, $controller, $options = [])
         {
-            return \Illuminate\Routing\Router::resource($name, $controller, $options);
+            return \Illuminate\Routing\Router::resource(
+                $name,
+                $controller,
+                $options
+            );
         }
 
         /**
@@ -9655,7 +10208,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function apiResource($name, $controller, $options = [])
         {
-            return \Illuminate\Routing\Router::apiResource($name, $controller, $options);
+            return \Illuminate\Routing\Router::apiResource(
+                $name,
+                $controller,
+                $options
+            );
         }
 
         /**
@@ -9759,7 +10316,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function prepareResponse($request, $response)
         {
-            return \Illuminate\Routing\Router::prepareResponse($request, $response);
+            return \Illuminate\Routing\Router::prepareResponse(
+                $request,
+                $response
+            );
         }
 
         /**
@@ -9875,7 +10435,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function middlewareGroup($name, $middleware)
         {
-            return \Illuminate\Routing\Router::middlewareGroup($name, $middleware);
+            return \Illuminate\Routing\Router::middlewareGroup(
+                $name,
+                $middleware
+            );
         }
 
         /**
@@ -9891,7 +10454,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function prependMiddlewareToGroup($group, $middleware)
         {
-            return \Illuminate\Routing\Router::prependMiddlewareToGroup($group, $middleware);
+            return \Illuminate\Routing\Router::prependMiddlewareToGroup(
+                $group,
+                $middleware
+            );
         }
 
         /**
@@ -9907,7 +10473,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function pushMiddlewareToGroup($group, $middleware)
         {
-            return \Illuminate\Routing\Router::pushMiddlewareToGroup($group, $middleware);
+            return \Illuminate\Routing\Router::pushMiddlewareToGroup(
+                $group,
+                $middleware
+            );
         }
 
         /**
@@ -10291,7 +10860,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function hasTable($table)
         {
-            return \Illuminate\Database\Schema\PostgresBuilder::hasTable($table);
+            return \Illuminate\Database\Schema\PostgresBuilder::hasTable(
+                $table
+            );
         }
 
         /**
@@ -10315,7 +10886,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function getColumnListing($table)
         {
-            return \Illuminate\Database\Schema\PostgresBuilder::getColumnListing($table);
+            return \Illuminate\Database\Schema\PostgresBuilder::getColumnListing(
+                $table
+            );
         }
 
         /**
@@ -10329,7 +10902,9 @@ namespace Illuminate\Support\Facades {
         public static function defaultStringLength($length)
         {
             //Method inherited from \Illuminate\Database\Schema\Builder
-            \Illuminate\Database\Schema\PostgresBuilder::defaultStringLength($length);
+            \Illuminate\Database\Schema\PostgresBuilder::defaultStringLength(
+                $length
+            );
         }
 
         /**
@@ -10344,7 +10919,10 @@ namespace Illuminate\Support\Facades {
         public static function hasColumn($table, $column)
         {
             //Method inherited from \Illuminate\Database\Schema\Builder
-            return \Illuminate\Database\Schema\PostgresBuilder::hasColumn($table, $column);
+            return \Illuminate\Database\Schema\PostgresBuilder::hasColumn(
+                $table,
+                $column
+            );
         }
 
         /**
@@ -10359,7 +10937,10 @@ namespace Illuminate\Support\Facades {
         public static function hasColumns($table, $columns)
         {
             //Method inherited from \Illuminate\Database\Schema\Builder
-            return \Illuminate\Database\Schema\PostgresBuilder::hasColumns($table, $columns);
+            return \Illuminate\Database\Schema\PostgresBuilder::hasColumns(
+                $table,
+                $columns
+            );
         }
 
         /**
@@ -10374,7 +10955,10 @@ namespace Illuminate\Support\Facades {
         public static function getColumnType($table, $column)
         {
             //Method inherited from \Illuminate\Database\Schema\Builder
-            return \Illuminate\Database\Schema\PostgresBuilder::getColumnType($table, $column);
+            return \Illuminate\Database\Schema\PostgresBuilder::getColumnType(
+                $table,
+                $column
+            );
         }
 
         /**
@@ -10389,7 +10973,10 @@ namespace Illuminate\Support\Facades {
         public static function table($table, $callback)
         {
             //Method inherited from \Illuminate\Database\Schema\Builder
-            \Illuminate\Database\Schema\PostgresBuilder::table($table, $callback);
+            \Illuminate\Database\Schema\PostgresBuilder::table(
+                $table,
+                $callback
+            );
         }
 
         /**
@@ -10404,7 +10991,10 @@ namespace Illuminate\Support\Facades {
         public static function create($table, $callback)
         {
             //Method inherited from \Illuminate\Database\Schema\Builder
-            \Illuminate\Database\Schema\PostgresBuilder::create($table, $callback);
+            \Illuminate\Database\Schema\PostgresBuilder::create(
+                $table,
+                $callback
+            );
         }
 
         /**
@@ -10497,7 +11087,9 @@ namespace Illuminate\Support\Facades {
         public static function setConnection($connection)
         {
             //Method inherited from \Illuminate\Database\Schema\Builder
-            return \Illuminate\Database\Schema\PostgresBuilder::setConnection($connection);
+            return \Illuminate\Database\Schema\PostgresBuilder::setConnection(
+                $connection
+            );
         }
 
         /**
@@ -10511,7 +11103,9 @@ namespace Illuminate\Support\Facades {
         public static function blueprintResolver($resolver)
         {
             //Method inherited from \Illuminate\Database\Schema\Builder
-            \Illuminate\Database\Schema\PostgresBuilder::blueprintResolver($resolver);
+            \Illuminate\Database\Schema\PostgresBuilder::blueprintResolver(
+                $resolver
+            );
         }
     }
 
@@ -10578,7 +11172,10 @@ namespace Illuminate\Support\Facades {
         public static function extend($driver, $callback)
         {
             //Method inherited from \Illuminate\Support\Manager
-            return \Illuminate\Session\SessionManager::extend($driver, $callback);
+            return \Illuminate\Session\SessionManager::extend(
+                $driver,
+                $callback
+            );
         }
 
         /**
@@ -11156,7 +11753,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function createLocalDriver($config)
         {
-            return \Illuminate\Filesystem\FilesystemManager::createLocalDriver($config);
+            return \Illuminate\Filesystem\FilesystemManager::createLocalDriver(
+                $config
+            );
         }
 
         /**
@@ -11169,7 +11768,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function createFtpDriver($config)
         {
-            return \Illuminate\Filesystem\FilesystemManager::createFtpDriver($config);
+            return \Illuminate\Filesystem\FilesystemManager::createFtpDriver(
+                $config
+            );
         }
 
         /**
@@ -11182,7 +11783,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function createS3Driver($config)
         {
-            return \Illuminate\Filesystem\FilesystemManager::createS3Driver($config);
+            return \Illuminate\Filesystem\FilesystemManager::createS3Driver(
+                $config
+            );
         }
 
         /**
@@ -11195,7 +11798,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function createRackspaceDriver($config)
         {
-            return \Illuminate\Filesystem\FilesystemManager::createRackspaceDriver($config);
+            return \Illuminate\Filesystem\FilesystemManager::createRackspaceDriver(
+                $config
+            );
         }
 
         /**
@@ -11245,7 +11850,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function extend($driver, $callback)
         {
-            return \Illuminate\Filesystem\FilesystemManager::extend($driver, $callback);
+            return \Illuminate\Filesystem\FilesystemManager::extend(
+                $driver,
+                $callback
+            );
         }
 
         /**
@@ -11326,9 +11934,18 @@ namespace Illuminate\Support\Facades {
          * @return \Symfony\Component\HttpFoundation\StreamedResponse
          * @static
          */
-        public static function response($path, $name = null, $headers = [], $disposition = 'inline')
-        {
-            return \Illuminate\Filesystem\FilesystemAdapter::response($path, $name, $headers, $disposition);
+        public static function response(
+            $path,
+            $name = null,
+            $headers = [],
+            $disposition = 'inline'
+        ) {
+            return \Illuminate\Filesystem\FilesystemAdapter::response(
+                $path,
+                $name,
+                $headers,
+                $disposition
+            );
         }
 
         /**
@@ -11343,7 +11960,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function download($path, $name = null, $headers = [])
         {
-            return \Illuminate\Filesystem\FilesystemAdapter::download($path, $name, $headers);
+            return \Illuminate\Filesystem\FilesystemAdapter::download(
+                $path,
+                $name,
+                $headers
+            );
         }
 
         /**
@@ -11358,7 +11979,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function put($path, $contents, $options = [])
         {
-            return \Illuminate\Filesystem\FilesystemAdapter::put($path, $contents, $options);
+            return \Illuminate\Filesystem\FilesystemAdapter::put(
+                $path,
+                $contents,
+                $options
+            );
         }
 
         /**
@@ -11373,7 +11998,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function putFile($path, $file, $options = [])
         {
-            return \Illuminate\Filesystem\FilesystemAdapter::putFile($path, $file, $options);
+            return \Illuminate\Filesystem\FilesystemAdapter::putFile(
+                $path,
+                $file,
+                $options
+            );
         }
 
         /**
@@ -11389,7 +12018,12 @@ namespace Illuminate\Support\Facades {
          */
         public static function putFileAs($path, $file, $name, $options = [])
         {
-            return \Illuminate\Filesystem\FilesystemAdapter::putFileAs($path, $file, $name, $options);
+            return \Illuminate\Filesystem\FilesystemAdapter::putFileAs(
+                $path,
+                $file,
+                $name,
+                $options
+            );
         }
 
         /**
@@ -11402,7 +12036,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function getVisibility($path)
         {
-            return \Illuminate\Filesystem\FilesystemAdapter::getVisibility($path);
+            return \Illuminate\Filesystem\FilesystemAdapter::getVisibility(
+                $path
+            );
         }
 
         /**
@@ -11416,7 +12052,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function setVisibility($path, $visibility)
         {
-            \Illuminate\Filesystem\FilesystemAdapter::setVisibility($path, $visibility);
+            \Illuminate\Filesystem\FilesystemAdapter::setVisibility(
+                $path,
+                $visibility
+            );
         }
 
         /**
@@ -11431,7 +12070,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function prepend($path, $data, $separator = '')
         {
-            return \Illuminate\Filesystem\FilesystemAdapter::prepend($path, $data, $separator);
+            return \Illuminate\Filesystem\FilesystemAdapter::prepend(
+                $path,
+                $data,
+                $separator
+            );
         }
 
         /**
@@ -11446,7 +12089,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function append($path, $data, $separator = '')
         {
-            return \Illuminate\Filesystem\FilesystemAdapter::append($path, $data, $separator);
+            return \Illuminate\Filesystem\FilesystemAdapter::append(
+                $path,
+                $data,
+                $separator
+            );
         }
 
         /**
@@ -11526,7 +12173,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function lastModified($path)
         {
-            return \Illuminate\Filesystem\FilesystemAdapter::lastModified($path);
+            return \Illuminate\Filesystem\FilesystemAdapter::lastModified(
+                $path
+            );
         }
 
         /**
@@ -11554,7 +12203,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function temporaryUrl($path, $expiration, $options = [])
         {
-            return \Illuminate\Filesystem\FilesystemAdapter::temporaryUrl($path, $expiration, $options);
+            return \Illuminate\Filesystem\FilesystemAdapter::temporaryUrl(
+                $path,
+                $expiration,
+                $options
+            );
         }
 
         /**
@@ -11568,9 +12221,18 @@ namespace Illuminate\Support\Facades {
          * @return string
          * @static
          */
-        public static function getAwsTemporaryUrl($adapter, $path, $expiration, $options)
-        {
-            return \Illuminate\Filesystem\FilesystemAdapter::getAwsTemporaryUrl($adapter, $path, $expiration, $options);
+        public static function getAwsTemporaryUrl(
+            $adapter,
+            $path,
+            $expiration,
+            $options
+        ) {
+            return \Illuminate\Filesystem\FilesystemAdapter::getAwsTemporaryUrl(
+                $adapter,
+                $path,
+                $expiration,
+                $options
+            );
         }
 
         /**
@@ -11584,8 +12246,12 @@ namespace Illuminate\Support\Facades {
          * @return string
          * @static
          */
-        public static function getRackspaceTemporaryUrl($adapter, $path, $expiration, $options)
-        {
+        public static function getRackspaceTemporaryUrl(
+            $adapter,
+            $path,
+            $expiration,
+            $options
+        ) {
             return \Illuminate\Filesystem\FilesystemAdapter::getRackspaceTemporaryUrl(
                 $adapter,
                 $path,
@@ -11605,7 +12271,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function files($directory = null, $recursive = false)
         {
-            return \Illuminate\Filesystem\FilesystemAdapter::files($directory, $recursive);
+            return \Illuminate\Filesystem\FilesystemAdapter::files(
+                $directory,
+                $recursive
+            );
         }
 
         /**
@@ -11618,7 +12287,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function allFiles($directory = null)
         {
-            return \Illuminate\Filesystem\FilesystemAdapter::allFiles($directory);
+            return \Illuminate\Filesystem\FilesystemAdapter::allFiles(
+                $directory
+            );
         }
 
         /**
@@ -11630,9 +12301,14 @@ namespace Illuminate\Support\Facades {
          * @return array
          * @static
          */
-        public static function directories($directory = null, $recursive = false)
-        {
-            return \Illuminate\Filesystem\FilesystemAdapter::directories($directory, $recursive);
+        public static function directories(
+            $directory = null,
+            $recursive = false
+        ) {
+            return \Illuminate\Filesystem\FilesystemAdapter::directories(
+                $directory,
+                $recursive
+            );
         }
 
         /**
@@ -11645,7 +12321,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function allDirectories($directory = null)
         {
-            return \Illuminate\Filesystem\FilesystemAdapter::allDirectories($directory);
+            return \Illuminate\Filesystem\FilesystemAdapter::allDirectories(
+                $directory
+            );
         }
 
         /**
@@ -11658,7 +12336,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function makeDirectory($path)
         {
-            return \Illuminate\Filesystem\FilesystemAdapter::makeDirectory($path);
+            return \Illuminate\Filesystem\FilesystemAdapter::makeDirectory(
+                $path
+            );
         }
 
         /**
@@ -11671,7 +12351,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function deleteDirectory($directory)
         {
-            return \Illuminate\Filesystem\FilesystemAdapter::deleteDirectory($directory);
+            return \Illuminate\Filesystem\FilesystemAdapter::deleteDirectory(
+                $directory
+            );
         }
 
         /**
@@ -11802,7 +12484,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function assetFrom($root, $path, $secure = null)
         {
-            return \Illuminate\Routing\UrlGenerator::assetFrom($root, $path, $secure);
+            return \Illuminate\Routing\UrlGenerator::assetFrom(
+                $root,
+                $path,
+                $secure
+            );
         }
 
         /**
@@ -11832,7 +12518,11 @@ namespace Illuminate\Support\Facades {
          */
         public static function route($name, $parameters = [], $absolute = true)
         {
-            return \Illuminate\Routing\UrlGenerator::route($name, $parameters, $absolute);
+            return \Illuminate\Routing\UrlGenerator::route(
+                $name,
+                $parameters,
+                $absolute
+            );
         }
 
         /**
@@ -11847,9 +12537,16 @@ namespace Illuminate\Support\Facades {
          * @return string
          * @static
          */
-        public static function action($action, $parameters = [], $absolute = true)
-        {
-            return \Illuminate\Routing\UrlGenerator::action($action, $parameters, $absolute);
+        public static function action(
+            $action,
+            $parameters = [],
+            $absolute = true
+        ) {
+            return \Illuminate\Routing\UrlGenerator::action(
+                $action,
+                $parameters,
+                $absolute
+            );
         }
 
         /**
@@ -11862,7 +12559,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function formatParameters($parameters)
         {
-            return \Illuminate\Routing\UrlGenerator::formatParameters($parameters);
+            return \Illuminate\Routing\UrlGenerator::formatParameters(
+                $parameters
+            );
         }
 
         /**
@@ -12040,7 +12739,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function setSessionResolver($sessionResolver)
         {
-            return \Illuminate\Routing\UrlGenerator::setSessionResolver($sessionResolver);
+            return \Illuminate\Routing\UrlGenerator::setSessionResolver(
+                $sessionResolver
+            );
         }
 
         /**
@@ -12053,7 +12754,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function setRootControllerNamespace($rootNamespace)
         {
-            return \Illuminate\Routing\UrlGenerator::setRootControllerNamespace($rootNamespace);
+            return \Illuminate\Routing\UrlGenerator::setRootControllerNamespace(
+                $rootNamespace
+            );
         }
 
         /**
@@ -12110,9 +12813,18 @@ namespace Illuminate\Support\Facades {
          * @return \Illuminate\Validation\Validator
          * @static
          */
-        public static function make($data, $rules, $messages = [], $customAttributes = [])
-        {
-            return \Illuminate\Validation\Factory::make($data, $rules, $messages, $customAttributes);
+        public static function make(
+            $data,
+            $rules,
+            $messages = [],
+            $customAttributes = []
+        ) {
+            return \Illuminate\Validation\Factory::make(
+                $data,
+                $rules,
+                $messages,
+                $customAttributes
+            );
         }
 
         /**
@@ -12128,9 +12840,18 @@ namespace Illuminate\Support\Facades {
          * @return void
          * @static
          */
-        public static function validate($data, $rules, $messages = [], $customAttributes = [])
-        {
-            \Illuminate\Validation\Factory::validate($data, $rules, $messages, $customAttributes);
+        public static function validate(
+            $data,
+            $rules,
+            $messages = [],
+            $customAttributes = []
+        ) {
+            \Illuminate\Validation\Factory::validate(
+                $data,
+                $rules,
+                $messages,
+                $customAttributes
+            );
         }
 
         /**
@@ -12158,9 +12879,16 @@ namespace Illuminate\Support\Facades {
          * @return void
          * @static
          */
-        public static function extendImplicit($rule, $extension, $message = null)
-        {
-            \Illuminate\Validation\Factory::extendImplicit($rule, $extension, $message);
+        public static function extendImplicit(
+            $rule,
+            $extension,
+            $message = null
+        ) {
+            \Illuminate\Validation\Factory::extendImplicit(
+                $rule,
+                $extension,
+                $message
+            );
         }
 
         /**
@@ -12173,9 +12901,16 @@ namespace Illuminate\Support\Facades {
          * @return void
          * @static
          */
-        public static function extendDependent($rule, $extension, $message = null)
-        {
-            \Illuminate\Validation\Factory::extendDependent($rule, $extension, $message);
+        public static function extendDependent(
+            $rule,
+            $extension,
+            $message = null
+        ) {
+            \Illuminate\Validation\Factory::extendDependent(
+                $rule,
+                $extension,
+                $message
+            );
         }
 
         /**
@@ -12237,7 +12972,9 @@ namespace Illuminate\Support\Facades {
          */
         public static function setPresenceVerifier($presenceVerifier)
         {
-            \Illuminate\Validation\Factory::setPresenceVerifier($presenceVerifier);
+            \Illuminate\Validation\Factory::setPresenceVerifier(
+                $presenceVerifier
+            );
         }
     }
 
@@ -12299,9 +13036,18 @@ namespace Illuminate\Support\Facades {
          * @return string
          * @static
          */
-        public static function renderWhen($condition, $view, $data = [], $mergeData = [])
-        {
-            return \Illuminate\View\Factory::renderWhen($condition, $view, $data, $mergeData);
+        public static function renderWhen(
+            $condition,
+            $view,
+            $data = [],
+            $mergeData = []
+        ) {
+            return \Illuminate\View\Factory::renderWhen(
+                $condition,
+                $view,
+                $data,
+                $mergeData
+            );
         }
 
         /**
@@ -12315,9 +13061,18 @@ namespace Illuminate\Support\Facades {
          * @return string
          * @static
          */
-        public static function renderEach($view, $data, $iterator, $empty = 'raw|')
-        {
-            return \Illuminate\View\Factory::renderEach($view, $data, $iterator, $empty);
+        public static function renderEach(
+            $view,
+            $data,
+            $iterator,
+            $empty = 'raw|'
+        ) {
+            return \Illuminate\View\Factory::renderEach(
+                $view,
+                $data,
+                $iterator,
+                $empty
+            );
         }
 
         /**
@@ -12433,7 +13188,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function prependNamespace($namespace, $hints)
         {
-            return \Illuminate\View\Factory::prependNamespace($namespace, $hints);
+            return \Illuminate\View\Factory::prependNamespace(
+                $namespace,
+                $hints
+            );
         }
 
         /**
@@ -12447,7 +13205,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function replaceNamespace($namespace, $hints)
         {
-            return \Illuminate\View\Factory::replaceNamespace($namespace, $hints);
+            return \Illuminate\View\Factory::replaceNamespace(
+                $namespace,
+                $hints
+            );
         }
 
         /**
@@ -12460,9 +13221,16 @@ namespace Illuminate\Support\Facades {
          * @return void
          * @static
          */
-        public static function addExtension($extension, $engine, $resolver = null)
-        {
-            \Illuminate\View\Factory::addExtension($extension, $engine, $resolver);
+        public static function addExtension(
+            $extension,
+            $engine,
+            $resolver = null
+        ) {
+            \Illuminate\View\Factory::addExtension(
+                $extension,
+                $engine,
+                $resolver
+            );
         }
 
         /**
@@ -12999,7 +13767,10 @@ namespace Illuminate\Support\Facades {
          */
         public static function yieldPushContent($section, $default = '')
         {
-            return \Illuminate\View\Factory::yieldPushContent($section, $default);
+            return \Illuminate\View\Factory::yieldPushContent(
+                $section,
+                $default
+            );
         }
 
         /**
@@ -13052,7 +13823,9 @@ namespace McCool\LaravelAutoPresenter\Facades {
          */
         public static function decorate($subject)
         {
-            return \McCool\LaravelAutoPresenter\AutoPresenter::decorate($subject);
+            return \McCool\LaravelAutoPresenter\AutoPresenter::decorate(
+                $subject
+            );
         }
 
         /**
@@ -13117,7 +13890,13 @@ namespace Maatwebsite\Excel\Facades {
             $noBasePath = false,
             $callbackConfigReader = null
         ) {
-            return \Maatwebsite\Excel\Excel::load($file, $callback, $encoding, $noBasePath, $callbackConfigReader);
+            return \Maatwebsite\Excel\Excel::load(
+                $file,
+                $callback,
+                $encoding,
+                $noBasePath,
+                $callbackConfigReader
+            );
         }
 
         /**
@@ -13172,7 +13951,11 @@ namespace Maatwebsite\Excel\Facades {
          */
         public static function shareView($view, $data = [], $mergeData = [])
         {
-            return \Maatwebsite\Excel\Excel::shareView($view, $data, $mergeData);
+            return \Maatwebsite\Excel\Excel::shareView(
+                $view,
+                $data,
+                $mergeData
+            );
         }
 
         /**
@@ -13260,7 +14043,10 @@ namespace Barryvdh\Debugbar {
          */
         public static function shouldCollect($name, $default = false)
         {
-            return \Barryvdh\Debugbar\LaravelDebugbar::shouldCollect($name, $default);
+            return \Barryvdh\Debugbar\LaravelDebugbar::shouldCollect(
+                $name,
+                $default
+            );
         }
 
         /**
@@ -13290,9 +14076,20 @@ namespace Barryvdh\Debugbar {
          * @throws \ErrorException
          * @static
          */
-        public static function handleError($level, $message, $file = '', $line = 0, $context = [])
-        {
-            return \Barryvdh\Debugbar\LaravelDebugbar::handleError($level, $message, $file, $line, $context);
+        public static function handleError(
+            $level,
+            $message,
+            $file = '',
+            $line = 0,
+            $context = []
+        ) {
+            return \Barryvdh\Debugbar\LaravelDebugbar::handleError(
+                $level,
+                $message,
+                $file,
+                $line,
+                $context
+            );
         }
 
         /**
@@ -13304,7 +14101,10 @@ namespace Barryvdh\Debugbar {
          */
         public static function startMeasure($name, $label = null)
         {
-            return \Barryvdh\Debugbar\LaravelDebugbar::startMeasure($name, $label);
+            return \Barryvdh\Debugbar\LaravelDebugbar::startMeasure(
+                $name,
+                $label
+            );
         }
 
         /**
@@ -13351,9 +14151,14 @@ namespace Barryvdh\Debugbar {
          * @return \Barryvdh\Debugbar\JavascriptRenderer
          * @static
          */
-        public static function getJavascriptRenderer($baseUrl = null, $basePath = null)
-        {
-            return \Barryvdh\Debugbar\LaravelDebugbar::getJavascriptRenderer($baseUrl, $basePath);
+        public static function getJavascriptRenderer(
+            $baseUrl = null,
+            $basePath = null
+        ) {
+            return \Barryvdh\Debugbar\LaravelDebugbar::getJavascriptRenderer(
+                $baseUrl,
+                $basePath
+            );
         }
 
         /**
@@ -13367,7 +14172,10 @@ namespace Barryvdh\Debugbar {
          */
         public static function modifyResponse($request, $response)
         {
-            return \Barryvdh\Debugbar\LaravelDebugbar::modifyResponse($request, $response);
+            return \Barryvdh\Debugbar\LaravelDebugbar::modifyResponse(
+                $request,
+                $response
+            );
         }
 
         /**
@@ -13401,7 +14209,9 @@ namespace Barryvdh\Debugbar {
          */
         public static function injectDebugbar($response)
         {
-            return \Barryvdh\Debugbar\LaravelDebugbar::injectDebugbar($response);
+            return \Barryvdh\Debugbar\LaravelDebugbar::injectDebugbar(
+                $response
+            );
         }
 
         /**
@@ -13424,7 +14234,11 @@ namespace Barryvdh\Debugbar {
          */
         public static function addMeasure($label, $start, $end)
         {
-            return \Barryvdh\Debugbar\LaravelDebugbar::addMeasure($label, $start, $end);
+            return \Barryvdh\Debugbar\LaravelDebugbar::addMeasure(
+                $label,
+                $start,
+                $end
+            );
         }
 
         /**
@@ -13436,7 +14250,10 @@ namespace Barryvdh\Debugbar {
          */
         public static function measure($label, $closure)
         {
-            return \Barryvdh\Debugbar\LaravelDebugbar::measure($label, $closure);
+            return \Barryvdh\Debugbar\LaravelDebugbar::measure(
+                $label,
+                $closure
+            );
         }
 
         /**
@@ -13461,7 +14278,10 @@ namespace Barryvdh\Debugbar {
          */
         public static function addMessage($message, $label = 'info')
         {
-            return \Barryvdh\Debugbar\LaravelDebugbar::addMessage($message, $label);
+            return \Barryvdh\Debugbar\LaravelDebugbar::addMessage(
+                $message,
+                $label
+            );
         }
 
         /**
@@ -13517,7 +14337,9 @@ namespace Barryvdh\Debugbar {
         public static function setRequestIdGenerator($generator)
         {
             //Method inherited from \DebugBar\DebugBar
-            return \Barryvdh\Debugbar\LaravelDebugbar::setRequestIdGenerator($generator);
+            return \Barryvdh\Debugbar\LaravelDebugbar::setRequestIdGenerator(
+                $generator
+            );
         }
 
         /**
@@ -13713,7 +14535,9 @@ namespace Barryvdh\Debugbar {
         public static function setStackDataSessionNamespace($ns)
         {
             //Method inherited from \DebugBar\DebugBar
-            return \Barryvdh\Debugbar\LaravelDebugbar::setStackDataSessionNamespace($ns);
+            return \Barryvdh\Debugbar\LaravelDebugbar::setStackDataSessionNamespace(
+                $ns
+            );
         }
 
         /**
@@ -13740,7 +14564,9 @@ namespace Barryvdh\Debugbar {
         public static function setStackAlwaysUseSessionStorage($enabled = true)
         {
             //Method inherited from \DebugBar\DebugBar
-            return \Barryvdh\Debugbar\LaravelDebugbar::setStackAlwaysUseSessionStorage($enabled);
+            return \Barryvdh\Debugbar\LaravelDebugbar::setStackAlwaysUseSessionStorage(
+                $enabled
+            );
         }
 
         /**
@@ -13864,7 +14690,9 @@ namespace PragmaRX\Version\Package {
          */
         public static function setConfigFileStub($configFileStub)
         {
-            return \PragmaRX\Version\Package\Version::setConfigFileStub($configFileStub);
+            return \PragmaRX\Version\Package\Version::setConfigFileStub(
+                $configFileStub
+            );
         }
 
         /**
@@ -14032,7 +14860,10 @@ namespace {
          */
         public static function withGlobalScope($identifier, $scope)
         {
-            return \Illuminate\Database\Eloquent\Builder::withGlobalScope($identifier, $scope);
+            return \Illuminate\Database\Eloquent\Builder::withGlobalScope(
+                $identifier,
+                $scope
+            );
         }
 
         /**
@@ -14045,7 +14876,9 @@ namespace {
          */
         public static function withoutGlobalScope($scope)
         {
-            return \Illuminate\Database\Eloquent\Builder::withoutGlobalScope($scope);
+            return \Illuminate\Database\Eloquent\Builder::withoutGlobalScope(
+                $scope
+            );
         }
 
         /**
@@ -14058,7 +14891,9 @@ namespace {
          */
         public static function withoutGlobalScopes($scopes = null)
         {
-            return \Illuminate\Database\Eloquent\Builder::withoutGlobalScopes($scopes);
+            return \Illuminate\Database\Eloquent\Builder::withoutGlobalScopes(
+                $scopes
+            );
         }
 
         /**
@@ -14109,9 +14944,18 @@ namespace {
          * @return $this
          * @static
          */
-        public static function where($column, $operator = null, $value = null, $boolean = 'and')
-        {
-            return \Illuminate\Database\Eloquent\Builder::where($column, $operator, $value, $boolean);
+        public static function where(
+            $column,
+            $operator = null,
+            $value = null,
+            $boolean = 'and'
+        ) {
+            return \Illuminate\Database\Eloquent\Builder::where(
+                $column,
+                $operator,
+                $value,
+                $boolean
+            );
         }
 
         /**
@@ -14126,7 +14970,11 @@ namespace {
          */
         public static function orWhere($column, $operator = null, $value = null)
         {
-            return \Illuminate\Database\Eloquent\Builder::orWhere($column, $operator, $value);
+            return \Illuminate\Database\Eloquent\Builder::orWhere(
+                $column,
+                $operator,
+                $value
+            );
         }
 
         /**
@@ -14153,7 +15001,10 @@ namespace {
          */
         public static function fromQuery($query, $bindings = [])
         {
-            return \Illuminate\Database\Eloquent\Builder::fromQuery($query, $bindings);
+            return \Illuminate\Database\Eloquent\Builder::fromQuery(
+                $query,
+                $bindings
+            );
         }
 
         /**
@@ -14181,7 +15032,10 @@ namespace {
          */
         public static function findMany($ids, $columns = [])
         {
-            return \Illuminate\Database\Eloquent\Builder::findMany($ids, $columns);
+            return \Illuminate\Database\Eloquent\Builder::findMany(
+                $ids,
+                $columns
+            );
         }
 
         /**
@@ -14197,7 +15051,10 @@ namespace {
          */
         public static function findOrFail($id, $columns = [])
         {
-            return \Illuminate\Database\Eloquent\Builder::findOrFail($id, $columns);
+            return \Illuminate\Database\Eloquent\Builder::findOrFail(
+                $id,
+                $columns
+            );
         }
 
         /**
@@ -14211,7 +15068,10 @@ namespace {
          */
         public static function findOrNew($id, $columns = [])
         {
-            return \Illuminate\Database\Eloquent\Builder::findOrNew($id, $columns);
+            return \Illuminate\Database\Eloquent\Builder::findOrNew(
+                $id,
+                $columns
+            );
         }
 
         /**
@@ -14225,7 +15085,10 @@ namespace {
          */
         public static function firstOrNew($attributes, $values = [])
         {
-            return \Illuminate\Database\Eloquent\Builder::firstOrNew($attributes, $values);
+            return \Illuminate\Database\Eloquent\Builder::firstOrNew(
+                $attributes,
+                $values
+            );
         }
 
         /**
@@ -14239,7 +15102,10 @@ namespace {
          */
         public static function firstOrCreate($attributes, $values = [])
         {
-            return \Illuminate\Database\Eloquent\Builder::firstOrCreate($attributes, $values);
+            return \Illuminate\Database\Eloquent\Builder::firstOrCreate(
+                $attributes,
+                $values
+            );
         }
 
         /**
@@ -14253,7 +15119,10 @@ namespace {
          */
         public static function updateOrCreate($attributes, $values = [])
         {
-            return \Illuminate\Database\Eloquent\Builder::updateOrCreate($attributes, $values);
+            return \Illuminate\Database\Eloquent\Builder::updateOrCreate(
+                $attributes,
+                $values
+            );
         }
 
         /**
@@ -14282,7 +15151,10 @@ namespace {
          */
         public static function firstOr($columns = [], $callback = null)
         {
-            return \Illuminate\Database\Eloquent\Builder::firstOr($columns, $callback);
+            return \Illuminate\Database\Eloquent\Builder::firstOr(
+                $columns,
+                $callback
+            );
         }
 
         /**
@@ -14334,7 +15206,9 @@ namespace {
          */
         public static function eagerLoadRelations($models)
         {
-            return \Illuminate\Database\Eloquent\Builder::eagerLoadRelations($models);
+            return \Illuminate\Database\Eloquent\Builder::eagerLoadRelations(
+                $models
+            );
         }
 
         /**
@@ -14359,9 +15233,18 @@ namespace {
          * @return bool
          * @static
          */
-        public static function chunkById($count, $callback, $column = null, $alias = null)
-        {
-            return \Illuminate\Database\Eloquent\Builder::chunkById($count, $callback, $column, $alias);
+        public static function chunkById(
+            $count,
+            $callback,
+            $column = null,
+            $alias = null
+        ) {
+            return \Illuminate\Database\Eloquent\Builder::chunkById(
+                $count,
+                $callback,
+                $column,
+                $alias
+            );
         }
 
         /**
@@ -14391,9 +15274,18 @@ namespace {
          * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
          * @static
          */
-        public static function paginate($perPage = null, $columns = [], $pageName = 'page', $page = null)
-        {
-            return \Illuminate\Database\Eloquent\Builder::paginate($perPage, $columns, $pageName, $page);
+        public static function paginate(
+            $perPage = null,
+            $columns = [],
+            $pageName = 'page',
+            $page = null
+        ) {
+            return \Illuminate\Database\Eloquent\Builder::paginate(
+                $perPage,
+                $columns,
+                $pageName,
+                $page
+            );
         }
 
         /**
@@ -14407,9 +15299,18 @@ namespace {
          * @return \Illuminate\Contracts\Pagination\Paginator
          * @static
          */
-        public static function simplePaginate($perPage = null, $columns = [], $pageName = 'page', $page = null)
-        {
-            return \Illuminate\Database\Eloquent\Builder::simplePaginate($perPage, $columns, $pageName, $page);
+        public static function simplePaginate(
+            $perPage = null,
+            $columns = [],
+            $pageName = 'page',
+            $page = null
+        ) {
+            return \Illuminate\Database\Eloquent\Builder::simplePaginate(
+                $perPage,
+                $columns,
+                $pageName,
+                $page
+            );
         }
 
         /**
@@ -14435,7 +15336,9 @@ namespace {
          */
         public static function forceCreate($attributes)
         {
-            return \Illuminate\Database\Eloquent\Builder::forceCreate($attributes);
+            return \Illuminate\Database\Eloquent\Builder::forceCreate(
+                $attributes
+            );
         }
 
         /**
@@ -14498,7 +15401,9 @@ namespace {
          */
         public static function newModelInstance($attributes = [])
         {
-            return \Illuminate\Database\Eloquent\Builder::newModelInstance($attributes);
+            return \Illuminate\Database\Eloquent\Builder::newModelInstance(
+                $attributes
+            );
         }
 
         /**
@@ -14557,7 +15462,9 @@ namespace {
          */
         public static function setEagerLoads($eagerLoad)
         {
-            return \Illuminate\Database\Eloquent\Builder::setEagerLoads($eagerLoad);
+            return \Illuminate\Database\Eloquent\Builder::setEagerLoads(
+                $eagerLoad
+            );
         }
 
         /**
@@ -14608,7 +15515,10 @@ namespace {
          */
         public static function chunk($count, $callback)
         {
-            return \Illuminate\Database\Eloquent\Builder::chunk($count, $callback);
+            return \Illuminate\Database\Eloquent\Builder::chunk(
+                $count,
+                $callback
+            );
         }
 
         /**
@@ -14622,7 +15532,10 @@ namespace {
          */
         public static function each($callback, $count = 1000)
         {
-            return \Illuminate\Database\Eloquent\Builder::each($callback, $count);
+            return \Illuminate\Database\Eloquent\Builder::each(
+                $callback,
+                $count
+            );
         }
 
         /**
@@ -14650,7 +15563,11 @@ namespace {
          */
         public static function when($value, $callback, $default = null)
         {
-            return \Illuminate\Database\Eloquent\Builder::when($value, $callback, $default);
+            return \Illuminate\Database\Eloquent\Builder::when(
+                $value,
+                $callback,
+                $default
+            );
         }
 
         /**
@@ -14678,7 +15595,11 @@ namespace {
          */
         public static function unless($value, $callback, $default = null)
         {
-            return \Illuminate\Database\Eloquent\Builder::unless($value, $callback, $default);
+            return \Illuminate\Database\Eloquent\Builder::unless(
+                $value,
+                $callback,
+                $default
+            );
         }
 
         /**
@@ -14693,9 +15614,20 @@ namespace {
          * @return \Illuminate\Database\Eloquent\Builder|static
          * @static
          */
-        public static function has($relation, $operator = '>=', $count = 1, $boolean = 'and', $callback = null)
-        {
-            return \Illuminate\Database\Eloquent\Builder::has($relation, $operator, $count, $boolean, $callback);
+        public static function has(
+            $relation,
+            $operator = '>=',
+            $count = 1,
+            $boolean = 'and',
+            $callback = null
+        ) {
+            return \Illuminate\Database\Eloquent\Builder::has(
+                $relation,
+                $operator,
+                $count,
+                $boolean,
+                $callback
+            );
         }
 
         /**
@@ -14710,7 +15642,11 @@ namespace {
          */
         public static function orHas($relation, $operator = '>=', $count = 1)
         {
-            return \Illuminate\Database\Eloquent\Builder::orHas($relation, $operator, $count);
+            return \Illuminate\Database\Eloquent\Builder::orHas(
+                $relation,
+                $operator,
+                $count
+            );
         }
 
         /**
@@ -14723,9 +15659,16 @@ namespace {
          * @return \Illuminate\Database\Eloquent\Builder|static
          * @static
          */
-        public static function doesntHave($relation, $boolean = 'and', $callback = null)
-        {
-            return \Illuminate\Database\Eloquent\Builder::doesntHave($relation, $boolean, $callback);
+        public static function doesntHave(
+            $relation,
+            $boolean = 'and',
+            $callback = null
+        ) {
+            return \Illuminate\Database\Eloquent\Builder::doesntHave(
+                $relation,
+                $boolean,
+                $callback
+            );
         }
 
         /**
@@ -14738,7 +15681,9 @@ namespace {
          */
         public static function orDoesntHave($relation)
         {
-            return \Illuminate\Database\Eloquent\Builder::orDoesntHave($relation);
+            return \Illuminate\Database\Eloquent\Builder::orDoesntHave(
+                $relation
+            );
         }
 
         /**
@@ -14752,9 +15697,18 @@ namespace {
          * @return \Illuminate\Database\Eloquent\Builder|static
          * @static
          */
-        public static function whereHas($relation, $callback = null, $operator = '>=', $count = 1)
-        {
-            return \Illuminate\Database\Eloquent\Builder::whereHas($relation, $callback, $operator, $count);
+        public static function whereHas(
+            $relation,
+            $callback = null,
+            $operator = '>=',
+            $count = 1
+        ) {
+            return \Illuminate\Database\Eloquent\Builder::whereHas(
+                $relation,
+                $callback,
+                $operator,
+                $count
+            );
         }
 
         /**
@@ -14768,9 +15722,18 @@ namespace {
          * @return \Illuminate\Database\Eloquent\Builder|static
          * @static
          */
-        public static function orWhereHas($relation, $callback = null, $operator = '>=', $count = 1)
-        {
-            return \Illuminate\Database\Eloquent\Builder::orWhereHas($relation, $callback, $operator, $count);
+        public static function orWhereHas(
+            $relation,
+            $callback = null,
+            $operator = '>=',
+            $count = 1
+        ) {
+            return \Illuminate\Database\Eloquent\Builder::orWhereHas(
+                $relation,
+                $callback,
+                $operator,
+                $count
+            );
         }
 
         /**
@@ -14784,7 +15747,10 @@ namespace {
          */
         public static function whereDoesntHave($relation, $callback = null)
         {
-            return \Illuminate\Database\Eloquent\Builder::whereDoesntHave($relation, $callback);
+            return \Illuminate\Database\Eloquent\Builder::whereDoesntHave(
+                $relation,
+                $callback
+            );
         }
 
         /**
@@ -14798,7 +15764,10 @@ namespace {
          */
         public static function orWhereDoesntHave($relation, $callback = null)
         {
-            return \Illuminate\Database\Eloquent\Builder::orWhereDoesntHave($relation, $callback);
+            return \Illuminate\Database\Eloquent\Builder::orWhereDoesntHave(
+                $relation,
+                $callback
+            );
         }
 
         /**
@@ -14824,7 +15793,9 @@ namespace {
          */
         public static function mergeConstraintsFrom($from)
         {
-            return \Illuminate\Database\Eloquent\Builder::mergeConstraintsFrom($from);
+            return \Illuminate\Database\Eloquent\Builder::mergeConstraintsFrom(
+                $from
+            );
         }
 
         /**
@@ -14851,7 +15822,10 @@ namespace {
          */
         public static function selectRaw($expression, $bindings = [])
         {
-            return \Illuminate\Database\Query\Builder::selectRaw($expression, $bindings);
+            return \Illuminate\Database\Query\Builder::selectRaw(
+                $expression,
+                $bindings
+            );
         }
 
         /**
@@ -14920,9 +15894,22 @@ namespace {
          * @return $this
          * @static
          */
-        public static function join($table, $first, $operator = null, $second = null, $type = 'inner', $where = false)
-        {
-            return \Illuminate\Database\Query\Builder::join($table, $first, $operator, $second, $type, $where);
+        public static function join(
+            $table,
+            $first,
+            $operator = null,
+            $second = null,
+            $type = 'inner',
+            $where = false
+        ) {
+            return \Illuminate\Database\Query\Builder::join(
+                $table,
+                $first,
+                $operator,
+                $second,
+                $type,
+                $where
+            );
         }
 
         /**
@@ -14937,9 +15924,20 @@ namespace {
          * @return \Illuminate\Database\Query\Builder|static
          * @static
          */
-        public static function joinWhere($table, $first, $operator, $second, $type = 'inner')
-        {
-            return \Illuminate\Database\Query\Builder::joinWhere($table, $first, $operator, $second, $type);
+        public static function joinWhere(
+            $table,
+            $first,
+            $operator,
+            $second,
+            $type = 'inner'
+        ) {
+            return \Illuminate\Database\Query\Builder::joinWhere(
+                $table,
+                $first,
+                $operator,
+                $second,
+                $type
+            );
         }
 
         /**
@@ -14953,9 +15951,18 @@ namespace {
          * @return \Illuminate\Database\Query\Builder|static
          * @static
          */
-        public static function leftJoin($table, $first, $operator = null, $second = null)
-        {
-            return \Illuminate\Database\Query\Builder::leftJoin($table, $first, $operator, $second);
+        public static function leftJoin(
+            $table,
+            $first,
+            $operator = null,
+            $second = null
+        ) {
+            return \Illuminate\Database\Query\Builder::leftJoin(
+                $table,
+                $first,
+                $operator,
+                $second
+            );
         }
 
         /**
@@ -14971,7 +15978,12 @@ namespace {
          */
         public static function leftJoinWhere($table, $first, $operator, $second)
         {
-            return \Illuminate\Database\Query\Builder::leftJoinWhere($table, $first, $operator, $second);
+            return \Illuminate\Database\Query\Builder::leftJoinWhere(
+                $table,
+                $first,
+                $operator,
+                $second
+            );
         }
 
         /**
@@ -14985,9 +15997,18 @@ namespace {
          * @return \Illuminate\Database\Query\Builder|static
          * @static
          */
-        public static function rightJoin($table, $first, $operator = null, $second = null)
-        {
-            return \Illuminate\Database\Query\Builder::rightJoin($table, $first, $operator, $second);
+        public static function rightJoin(
+            $table,
+            $first,
+            $operator = null,
+            $second = null
+        ) {
+            return \Illuminate\Database\Query\Builder::rightJoin(
+                $table,
+                $first,
+                $operator,
+                $second
+            );
         }
 
         /**
@@ -15001,9 +16022,18 @@ namespace {
          * @return \Illuminate\Database\Query\Builder|static
          * @static
          */
-        public static function rightJoinWhere($table, $first, $operator, $second)
-        {
-            return \Illuminate\Database\Query\Builder::rightJoinWhere($table, $first, $operator, $second);
+        public static function rightJoinWhere(
+            $table,
+            $first,
+            $operator,
+            $second
+        ) {
+            return \Illuminate\Database\Query\Builder::rightJoinWhere(
+                $table,
+                $first,
+                $operator,
+                $second
+            );
         }
 
         /**
@@ -15017,9 +16047,18 @@ namespace {
          * @return \Illuminate\Database\Query\Builder|static
          * @static
          */
-        public static function crossJoin($table, $first = null, $operator = null, $second = null)
-        {
-            return \Illuminate\Database\Query\Builder::crossJoin($table, $first, $operator, $second);
+        public static function crossJoin(
+            $table,
+            $first = null,
+            $operator = null,
+            $second = null
+        ) {
+            return \Illuminate\Database\Query\Builder::crossJoin(
+                $table,
+                $first,
+                $operator,
+                $second
+            );
         }
 
         /**
@@ -15048,9 +16087,16 @@ namespace {
          * @return array
          * @static
          */
-        public static function prepareValueAndOperator($value, $operator, $useDefault = false)
-        {
-            return \Illuminate\Database\Query\Builder::prepareValueAndOperator($value, $operator, $useDefault);
+        public static function prepareValueAndOperator(
+            $value,
+            $operator,
+            $useDefault = false
+        ) {
+            return \Illuminate\Database\Query\Builder::prepareValueAndOperator(
+                $value,
+                $operator,
+                $useDefault
+            );
         }
 
         /**
@@ -15064,9 +16110,18 @@ namespace {
          * @return \Illuminate\Database\Query\Builder|static
          * @static
          */
-        public static function whereColumn($first, $operator = null, $second = null, $boolean = 'and')
-        {
-            return \Illuminate\Database\Query\Builder::whereColumn($first, $operator, $second, $boolean);
+        public static function whereColumn(
+            $first,
+            $operator = null,
+            $second = null,
+            $boolean = 'and'
+        ) {
+            return \Illuminate\Database\Query\Builder::whereColumn(
+                $first,
+                $operator,
+                $second,
+                $boolean
+            );
         }
 
         /**
@@ -15079,9 +16134,16 @@ namespace {
          * @return \Illuminate\Database\Query\Builder|static
          * @static
          */
-        public static function orWhereColumn($first, $operator = null, $second = null)
-        {
-            return \Illuminate\Database\Query\Builder::orWhereColumn($first, $operator, $second);
+        public static function orWhereColumn(
+            $first,
+            $operator = null,
+            $second = null
+        ) {
+            return \Illuminate\Database\Query\Builder::orWhereColumn(
+                $first,
+                $operator,
+                $second
+            );
         }
 
         /**
@@ -15096,7 +16158,11 @@ namespace {
          */
         public static function whereRaw($sql, $bindings = [], $boolean = 'and')
         {
-            return \Illuminate\Database\Query\Builder::whereRaw($sql, $bindings, $boolean);
+            return \Illuminate\Database\Query\Builder::whereRaw(
+                $sql,
+                $bindings,
+                $boolean
+            );
         }
 
         /**
@@ -15110,7 +16176,10 @@ namespace {
          */
         public static function orWhereRaw($sql, $bindings = [])
         {
-            return \Illuminate\Database\Query\Builder::orWhereRaw($sql, $bindings);
+            return \Illuminate\Database\Query\Builder::orWhereRaw(
+                $sql,
+                $bindings
+            );
         }
 
         /**
@@ -15124,9 +16193,18 @@ namespace {
          * @return $this
          * @static
          */
-        public static function whereIn($column, $values, $boolean = 'and', $not = false)
-        {
-            return \Illuminate\Database\Query\Builder::whereIn($column, $values, $boolean, $not);
+        public static function whereIn(
+            $column,
+            $values,
+            $boolean = 'and',
+            $not = false
+        ) {
+            return \Illuminate\Database\Query\Builder::whereIn(
+                $column,
+                $values,
+                $boolean,
+                $not
+            );
         }
 
         /**
@@ -15140,7 +16218,10 @@ namespace {
          */
         public static function orWhereIn($column, $values)
         {
-            return \Illuminate\Database\Query\Builder::orWhereIn($column, $values);
+            return \Illuminate\Database\Query\Builder::orWhereIn(
+                $column,
+                $values
+            );
         }
 
         /**
@@ -15155,7 +16236,11 @@ namespace {
          */
         public static function whereNotIn($column, $values, $boolean = 'and')
         {
-            return \Illuminate\Database\Query\Builder::whereNotIn($column, $values, $boolean);
+            return \Illuminate\Database\Query\Builder::whereNotIn(
+                $column,
+                $values,
+                $boolean
+            );
         }
 
         /**
@@ -15169,7 +16254,10 @@ namespace {
          */
         public static function orWhereNotIn($column, $values)
         {
-            return \Illuminate\Database\Query\Builder::orWhereNotIn($column, $values);
+            return \Illuminate\Database\Query\Builder::orWhereNotIn(
+                $column,
+                $values
+            );
         }
 
         /**
@@ -15182,9 +16270,16 @@ namespace {
          * @return $this
          * @static
          */
-        public static function whereNull($column, $boolean = 'and', $not = false)
-        {
-            return \Illuminate\Database\Query\Builder::whereNull($column, $boolean, $not);
+        public static function whereNull(
+            $column,
+            $boolean = 'and',
+            $not = false
+        ) {
+            return \Illuminate\Database\Query\Builder::whereNull(
+                $column,
+                $boolean,
+                $not
+            );
         }
 
         /**
@@ -15211,7 +16306,10 @@ namespace {
          */
         public static function whereNotNull($column, $boolean = 'and')
         {
-            return \Illuminate\Database\Query\Builder::whereNotNull($column, $boolean);
+            return \Illuminate\Database\Query\Builder::whereNotNull(
+                $column,
+                $boolean
+            );
         }
 
         /**
@@ -15225,9 +16323,18 @@ namespace {
          * @return $this
          * @static
          */
-        public static function whereBetween($column, $values, $boolean = 'and', $not = false)
-        {
-            return \Illuminate\Database\Query\Builder::whereBetween($column, $values, $boolean, $not);
+        public static function whereBetween(
+            $column,
+            $values,
+            $boolean = 'and',
+            $not = false
+        ) {
+            return \Illuminate\Database\Query\Builder::whereBetween(
+                $column,
+                $values,
+                $boolean,
+                $not
+            );
         }
 
         /**
@@ -15241,7 +16348,10 @@ namespace {
          */
         public static function orWhereBetween($column, $values)
         {
-            return \Illuminate\Database\Query\Builder::orWhereBetween($column, $values);
+            return \Illuminate\Database\Query\Builder::orWhereBetween(
+                $column,
+                $values
+            );
         }
 
         /**
@@ -15254,9 +16364,16 @@ namespace {
          * @return \Illuminate\Database\Query\Builder|static
          * @static
          */
-        public static function whereNotBetween($column, $values, $boolean = 'and')
-        {
-            return \Illuminate\Database\Query\Builder::whereNotBetween($column, $values, $boolean);
+        public static function whereNotBetween(
+            $column,
+            $values,
+            $boolean = 'and'
+        ) {
+            return \Illuminate\Database\Query\Builder::whereNotBetween(
+                $column,
+                $values,
+                $boolean
+            );
         }
 
         /**
@@ -15270,7 +16387,10 @@ namespace {
          */
         public static function orWhereNotBetween($column, $values)
         {
-            return \Illuminate\Database\Query\Builder::orWhereNotBetween($column, $values);
+            return \Illuminate\Database\Query\Builder::orWhereNotBetween(
+                $column,
+                $values
+            );
         }
 
         /**
@@ -15297,9 +16417,18 @@ namespace {
          * @return \Illuminate\Database\Query\Builder|static
          * @static
          */
-        public static function whereDate($column, $operator, $value = null, $boolean = 'and')
-        {
-            return \Illuminate\Database\Query\Builder::whereDate($column, $operator, $value, $boolean);
+        public static function whereDate(
+            $column,
+            $operator,
+            $value = null,
+            $boolean = 'and'
+        ) {
+            return \Illuminate\Database\Query\Builder::whereDate(
+                $column,
+                $operator,
+                $value,
+                $boolean
+            );
         }
 
         /**
@@ -15314,7 +16443,11 @@ namespace {
          */
         public static function orWhereDate($column, $operator, $value)
         {
-            return \Illuminate\Database\Query\Builder::orWhereDate($column, $operator, $value);
+            return \Illuminate\Database\Query\Builder::orWhereDate(
+                $column,
+                $operator,
+                $value
+            );
         }
 
         /**
@@ -15328,9 +16461,18 @@ namespace {
          * @return \Illuminate\Database\Query\Builder|static
          * @static
          */
-        public static function whereTime($column, $operator, $value, $boolean = 'and')
-        {
-            return \Illuminate\Database\Query\Builder::whereTime($column, $operator, $value, $boolean);
+        public static function whereTime(
+            $column,
+            $operator,
+            $value,
+            $boolean = 'and'
+        ) {
+            return \Illuminate\Database\Query\Builder::whereTime(
+                $column,
+                $operator,
+                $value,
+                $boolean
+            );
         }
 
         /**
@@ -15345,7 +16487,11 @@ namespace {
          */
         public static function orWhereTime($column, $operator, $value)
         {
-            return \Illuminate\Database\Query\Builder::orWhereTime($column, $operator, $value);
+            return \Illuminate\Database\Query\Builder::orWhereTime(
+                $column,
+                $operator,
+                $value
+            );
         }
 
         /**
@@ -15359,9 +16505,18 @@ namespace {
          * @return \Illuminate\Database\Query\Builder|static
          * @static
          */
-        public static function whereDay($column, $operator, $value = null, $boolean = 'and')
-        {
-            return \Illuminate\Database\Query\Builder::whereDay($column, $operator, $value, $boolean);
+        public static function whereDay(
+            $column,
+            $operator,
+            $value = null,
+            $boolean = 'and'
+        ) {
+            return \Illuminate\Database\Query\Builder::whereDay(
+                $column,
+                $operator,
+                $value,
+                $boolean
+            );
         }
 
         /**
@@ -15375,9 +16530,18 @@ namespace {
          * @return \Illuminate\Database\Query\Builder|static
          * @static
          */
-        public static function whereMonth($column, $operator, $value = null, $boolean = 'and')
-        {
-            return \Illuminate\Database\Query\Builder::whereMonth($column, $operator, $value, $boolean);
+        public static function whereMonth(
+            $column,
+            $operator,
+            $value = null,
+            $boolean = 'and'
+        ) {
+            return \Illuminate\Database\Query\Builder::whereMonth(
+                $column,
+                $operator,
+                $value,
+                $boolean
+            );
         }
 
         /**
@@ -15391,9 +16555,18 @@ namespace {
          * @return \Illuminate\Database\Query\Builder|static
          * @static
          */
-        public static function whereYear($column, $operator, $value = null, $boolean = 'and')
-        {
-            return \Illuminate\Database\Query\Builder::whereYear($column, $operator, $value, $boolean);
+        public static function whereYear(
+            $column,
+            $operator,
+            $value = null,
+            $boolean = 'and'
+        ) {
+            return \Illuminate\Database\Query\Builder::whereYear(
+                $column,
+                $operator,
+                $value,
+                $boolean
+            );
         }
 
         /**
@@ -15407,7 +16580,10 @@ namespace {
          */
         public static function whereNested($callback, $boolean = 'and')
         {
-            return \Illuminate\Database\Query\Builder::whereNested($callback, $boolean);
+            return \Illuminate\Database\Query\Builder::whereNested(
+                $callback,
+                $boolean
+            );
         }
 
         /**
@@ -15432,7 +16608,10 @@ namespace {
          */
         public static function addNestedWhereQuery($query, $boolean = 'and')
         {
-            return \Illuminate\Database\Query\Builder::addNestedWhereQuery($query, $boolean);
+            return \Illuminate\Database\Query\Builder::addNestedWhereQuery(
+                $query,
+                $boolean
+            );
         }
 
         /**
@@ -15445,9 +16624,16 @@ namespace {
          * @return $this
          * @static
          */
-        public static function whereExists($callback, $boolean = 'and', $not = false)
-        {
-            return \Illuminate\Database\Query\Builder::whereExists($callback, $boolean, $not);
+        public static function whereExists(
+            $callback,
+            $boolean = 'and',
+            $not = false
+        ) {
+            return \Illuminate\Database\Query\Builder::whereExists(
+                $callback,
+                $boolean,
+                $not
+            );
         }
 
         /**
@@ -15461,7 +16647,10 @@ namespace {
          */
         public static function orWhereExists($callback, $not = false)
         {
-            return \Illuminate\Database\Query\Builder::orWhereExists($callback, $not);
+            return \Illuminate\Database\Query\Builder::orWhereExists(
+                $callback,
+                $not
+            );
         }
 
         /**
@@ -15475,7 +16664,10 @@ namespace {
          */
         public static function whereNotExists($callback, $boolean = 'and')
         {
-            return \Illuminate\Database\Query\Builder::whereNotExists($callback, $boolean);
+            return \Illuminate\Database\Query\Builder::whereNotExists(
+                $callback,
+                $boolean
+            );
         }
 
         /**
@@ -15488,7 +16680,9 @@ namespace {
          */
         public static function orWhereNotExists($callback)
         {
-            return \Illuminate\Database\Query\Builder::orWhereNotExists($callback);
+            return \Illuminate\Database\Query\Builder::orWhereNotExists(
+                $callback
+            );
         }
 
         /**
@@ -15501,9 +16695,16 @@ namespace {
          * @return $this
          * @static
          */
-        public static function addWhereExistsQuery($query, $boolean = 'and', $not = false)
-        {
-            return \Illuminate\Database\Query\Builder::addWhereExistsQuery($query, $boolean, $not);
+        public static function addWhereExistsQuery(
+            $query,
+            $boolean = 'and',
+            $not = false
+        ) {
+            return \Illuminate\Database\Query\Builder::addWhereExistsQuery(
+                $query,
+                $boolean,
+                $not
+            );
         }
 
         /**
@@ -15517,7 +16718,10 @@ namespace {
          */
         public static function dynamicWhere($method, $parameters)
         {
-            return \Illuminate\Database\Query\Builder::dynamicWhere($method, $parameters);
+            return \Illuminate\Database\Query\Builder::dynamicWhere(
+                $method,
+                $parameters
+            );
         }
 
         /**
@@ -15544,9 +16748,18 @@ namespace {
          * @return $this
          * @static
          */
-        public static function having($column, $operator = null, $value = null, $boolean = 'and')
-        {
-            return \Illuminate\Database\Query\Builder::having($column, $operator, $value, $boolean);
+        public static function having(
+            $column,
+            $operator = null,
+            $value = null,
+            $boolean = 'and'
+        ) {
+            return \Illuminate\Database\Query\Builder::having(
+                $column,
+                $operator,
+                $value,
+                $boolean
+            );
         }
 
         /**
@@ -15559,9 +16772,16 @@ namespace {
          * @return \Illuminate\Database\Query\Builder|static
          * @static
          */
-        public static function orHaving($column, $operator = null, $value = null)
-        {
-            return \Illuminate\Database\Query\Builder::orHaving($column, $operator, $value);
+        public static function orHaving(
+            $column,
+            $operator = null,
+            $value = null
+        ) {
+            return \Illuminate\Database\Query\Builder::orHaving(
+                $column,
+                $operator,
+                $value
+            );
         }
 
         /**
@@ -15576,7 +16796,11 @@ namespace {
          */
         public static function havingRaw($sql, $bindings = [], $boolean = 'and')
         {
-            return \Illuminate\Database\Query\Builder::havingRaw($sql, $bindings, $boolean);
+            return \Illuminate\Database\Query\Builder::havingRaw(
+                $sql,
+                $bindings,
+                $boolean
+            );
         }
 
         /**
@@ -15590,7 +16814,10 @@ namespace {
          */
         public static function orHavingRaw($sql, $bindings = [])
         {
-            return \Illuminate\Database\Query\Builder::orHavingRaw($sql, $bindings);
+            return \Illuminate\Database\Query\Builder::orHavingRaw(
+                $sql,
+                $bindings
+            );
         }
 
         /**
@@ -15604,7 +16831,10 @@ namespace {
          */
         public static function orderBy($column, $direction = 'asc')
         {
-            return \Illuminate\Database\Query\Builder::orderBy($column, $direction);
+            return \Illuminate\Database\Query\Builder::orderBy(
+                $column,
+                $direction
+            );
         }
 
         /**
@@ -15670,7 +16900,10 @@ namespace {
          */
         public static function orderByRaw($sql, $bindings = [])
         {
-            return \Illuminate\Database\Query\Builder::orderByRaw($sql, $bindings);
+            return \Illuminate\Database\Query\Builder::orderByRaw(
+                $sql,
+                $bindings
+            );
         }
 
         /**
@@ -15749,9 +16982,16 @@ namespace {
          * @return \Illuminate\Database\Query\Builder|static
          * @static
          */
-        public static function forPageAfterId($perPage = 15, $lastId = 0, $column = 'id')
-        {
-            return \Illuminate\Database\Query\Builder::forPageAfterId($perPage, $lastId, $column);
+        public static function forPageAfterId(
+            $perPage = 15,
+            $lastId = 0,
+            $column = 'id'
+        ) {
+            return \Illuminate\Database\Query\Builder::forPageAfterId(
+                $perPage,
+                $lastId,
+                $column
+            );
         }
 
         /**
@@ -15837,7 +17077,9 @@ namespace {
          */
         public static function getCountForPagination($columns = [])
         {
-            return \Illuminate\Database\Query\Builder::getCountForPagination($columns);
+            return \Illuminate\Database\Query\Builder::getCountForPagination(
+                $columns
+            );
         }
 
         /**
@@ -15965,7 +17207,10 @@ namespace {
          */
         public static function aggregate($function, $columns = [])
         {
-            return \Illuminate\Database\Query\Builder::aggregate($function, $columns);
+            return \Illuminate\Database\Query\Builder::aggregate(
+                $function,
+                $columns
+            );
         }
 
         /**
@@ -15979,7 +17224,10 @@ namespace {
          */
         public static function numericAggregate($function, $columns = [])
         {
-            return \Illuminate\Database\Query\Builder::numericAggregate($function, $columns);
+            return \Illuminate\Database\Query\Builder::numericAggregate(
+                $function,
+                $columns
+            );
         }
 
         /**
@@ -16006,7 +17254,10 @@ namespace {
          */
         public static function insertGetId($values, $sequence = null)
         {
-            return \Illuminate\Database\Query\Builder::insertGetId($values, $sequence);
+            return \Illuminate\Database\Query\Builder::insertGetId(
+                $values,
+                $sequence
+            );
         }
 
         /**
@@ -16020,7 +17271,10 @@ namespace {
          */
         public static function updateOrInsert($attributes, $values = [])
         {
-            return \Illuminate\Database\Query\Builder::updateOrInsert($attributes, $values);
+            return \Illuminate\Database\Query\Builder::updateOrInsert(
+                $attributes,
+                $values
+            );
         }
 
         /**
@@ -16082,7 +17336,10 @@ namespace {
          */
         public static function setBindings($bindings, $type = 'where')
         {
-            return \Illuminate\Database\Query\Builder::setBindings($bindings, $type);
+            return \Illuminate\Database\Query\Builder::setBindings(
+                $bindings,
+                $type
+            );
         }
 
         /**
@@ -16098,7 +17355,10 @@ namespace {
          */
         public static function addBinding($value, $type = 'where')
         {
-            return \Illuminate\Database\Query\Builder::addBinding($value, $type);
+            return \Illuminate\Database\Query\Builder::addBinding(
+                $value,
+                $type
+            );
         }
 
         /**
@@ -16157,7 +17417,9 @@ namespace {
          */
         public static function cloneWithout($properties)
         {
-            return \Illuminate\Database\Query\Builder::cloneWithout($properties);
+            return \Illuminate\Database\Query\Builder::cloneWithout(
+                $properties
+            );
         }
 
         /**
@@ -16170,7 +17432,9 @@ namespace {
          */
         public static function cloneWithoutBindings($except)
         {
-            return \Illuminate\Database\Query\Builder::cloneWithoutBindings($except);
+            return \Illuminate\Database\Query\Builder::cloneWithoutBindings(
+                $except
+            );
         }
 
         /**
@@ -16226,7 +17490,10 @@ namespace {
          */
         public static function macroCall($method, $parameters)
         {
-            return \Illuminate\Database\Query\Builder::macroCall($method, $parameters);
+            return \Illuminate\Database\Query\Builder::macroCall(
+                $method,
+                $parameters
+            );
         }
     }
 
@@ -16310,7 +17577,8 @@ namespace {
     {
     }
 
-    class AutoPresenter extends \McCool\LaravelAutoPresenter\Facades\AutoPresenter
+    class AutoPresenter extends
+        \McCool\LaravelAutoPresenter\Facades\AutoPresenter
     {
     }
 

@@ -27,7 +27,9 @@ class NotRootSubject implements Rule
      */
     public function passes($attribute, $value)
     {
-        return !is_null(OpinionSubjectModel::find(request('subject_id'))->parent_id);
+        return !is_null(
+            OpinionSubjectModel::find(request('subject_id'))->parent_id
+        );
     }
 
     /**

@@ -19,7 +19,7 @@ $factory->define(App\Data\Models\TipoJuiz::class, function (Faker $faker) {
 
 $factory->define(App\Data\Models\Juiz::class, function (Faker $faker) {
     return [
-        'nome'       => $faker->name,
+        'nome' => $faker->name,
         'lotacao_id' => function () {
             return factory(\App\Data\Models\Tribunal::class)->create()->id;
         },

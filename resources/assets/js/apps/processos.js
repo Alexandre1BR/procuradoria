@@ -1,15 +1,14 @@
 const appName = 'vue-processos'
 
-import Vue from 'vue';
-import TextHighlight from 'vue-text-highlight';
-var accents = require('remove-accents');
+import Vue from 'vue'
+import TextHighlight from 'vue-text-highlight'
+var accents = require('remove-accents')
 
+Vue.component('text-highlight', TextHighlight)
 
-Vue.component('text-highlight', TextHighlight);
-
-if (jQuery("#" + appName).length > 0) {
+if (jQuery('#' + appName).length > 0) {
     const app = new Vue({
-        el: '#'+appName,
+        el: '#' + appName,
 
         data: {
             tables: {
@@ -77,62 +76,82 @@ if (jQuery("#" + appName).length > 0) {
                 observacao_arquivamento: null,
                 tags: [],
                 tipo_processo_id: null,
-            }
+            },
         },
 
         methods: {
             refresh() {
                 this.refreshing = true
 
-                axios.get('/', {
-                    params: {
-                        search: this.pesquisa,
-                        processos_arquivados_incluidos: this.processos_arquivados_incluidos,
-                        processos_arquivados_apenas: this.processos_arquivados_apenas,
-                        advancedFilter: this.advancedFilter,
-                        filter: this.form
-                    }
-                })
-                .then(response => {
-                    this.tables.processos = response.data
+                axios
+                    .get('/', {
+                        params: {
+                            search: this.pesquisa,
+                            processos_arquivados_incluidos: this
+                                .processos_arquivados_incluidos,
+                            processos_arquivados_apenas: this
+                                .processos_arquivados_apenas,
+                            advancedFilter: this.advancedFilter,
+                            filter: this.form,
+                        },
+                    })
+                    .then(response => {
+                        this.tables.processos = response.data
 
-                    this.refreshing = false
-                })
-                .catch(error => {
-                    console.log(error)
+                        this.refreshing = false
+                    })
+                    .catch(error => {
+                        console.log(error)
 
-                    this.tables.processos = []
+                        this.tables.processos = []
 
-                    this.refreshing = false
-                })
+                        this.refreshing = false
+                    })
             },
 
             makeSearchedWord() {
                 if (this.pesquisa.trim().length == 0) {
-                    return [];
+                    return []
                 }
 
-                return this.pesquisa.split(" ").map((value) => {
-                    return this.createRegex(value);
-                });
+                return this.pesquisa.split(' ').map(value => {
+                    return this.createRegex(value)
+                })
             },
 
             createRegex(word) {
-                return new RegExp(this.makeWords(word), 'i');
+                return new RegExp(this.makeWords(word), 'i')
             },
 
-            makeWords(word){
-                const letters = {'a':'aàáâãäå','e':'eèéèëêð','i':'iìíîï','o':'oòóôõöø','u':'uùúûüµ','c':'cç','n':'nñ'}
+            makeWords(word) {
+                const letters = {
+                    a: 'aàáâãäå',
+                    e: 'eèéèëêð',
+                    i: 'iìíîï',
+                    o: 'oòóôõöø',
+                    u: 'uùúûüµ',
+                    c: 'cç',
+                    n: 'nñ',
+                }
 
-                return accents.remove(word).toLowerCase().split('').map(letter => {
-                    return letters.hasOwnProperty(letter) ? '[' + letters[letter] + ']' : letter;
-                }).join('');
+                return accents
+                    .remove(word)
+                    .toLowerCase()
+                    .split('')
+                    .map(letter => {
+                        return letters.hasOwnProperty(letter)
+                            ? '[' + letters[letter] + ']'
+                            : letter
+                    })
+                    .join('')
             },
 
             typeKeyUp() {
                 clearTimeout(this.timeout)
 
-                this.timeout = setTimeout(() => { this.refresh() }, 500)
+                this.timeout = setTimeout(() => {
+                    this.refresh()
+                }, 500)
             },
 
             clearSearch() {
@@ -154,7 +173,8 @@ if (jQuery("#" + appName).length > 0) {
             },
 
             refreshTable(table) {
-                axios.get('/'+table)
+                axios
+                    .get('/' + table)
                     .then(response => {
                         this.tables[table] = response.data
                     })
@@ -166,25 +186,26 @@ if (jQuery("#" + appName).length > 0) {
             },
 
             openProcesso(id) {
-                window.location.href = '/processos/'+id;
+                window.location.href = '/processos/' + id
             },
 
             print() {
-                window.print();
+                window.print()
             },
 
             processosArquivados() {
                 //checkboxProcessoLikeRadio();
-                this.refresh();
+                this.refresh()
             },
 
             checkboxProcessoLikeRadio(processos_arquivados) {
-                if(processos_arquivados == "apenas") {
-                    this.processos_arquivados_incluidos  = "0";
-                } else if(processos_arquivados == "incluidos") {
-                    this.processos_arquivados_apenas     = "0";
+                if (processos_arquivados == 'apenas') {
+                    this.processos_arquivados_incluidos = '0'
+                } else if (processos_arquivados == 'incluidos') {
+                    this.processos_arquivados_apenas = '0'
                 }
             },
+        },
 
         mounted() {
             this.refresh()
@@ -208,7 +229,4 @@ if (jQuery("#" + appName).length > 0) {
             this.refreshTable('tipos_processos')
         },
     })
-
 }
-
-

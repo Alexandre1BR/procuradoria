@@ -32,11 +32,11 @@ class RemoteRequest
     {
         try {
             $response = $this->guzzle->request('POST', $url, [
-                'verify'             => false,
-                'debug'              => false,
+                'verify' => false,
+                'debug' => false,
                 RequestOptions::JSON => $data,
-                'allow_redirects'    => true,
-                'timeout'            => config('auth.timeout'),
+                'allow_redirects' => true,
+                'timeout' => config('auth.timeout'),
             ]);
         } catch (ClientException $exception) {
             report($exception);
@@ -47,9 +47,9 @@ class RemoteRequest
             throw $exception;
         }
         if (
-            is_null(($array = json_decode((string) $response->getBody(), true)))
+            is_null($array = json_decode((string) $response->getBody(), true))
         ) {
-            abort('Invalid response');
+            abort(403, 'Invalid response');
         }
 
         return $array;

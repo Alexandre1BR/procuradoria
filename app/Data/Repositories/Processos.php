@@ -163,13 +163,7 @@ class Processos extends Base
             $query->where(function ($query) use ($columns, $item) {
                 $columns->each(function ($type, $column) use ($query, $item) {
                     if ($type === 'string') {
-                        if (
-                            in_array(
-                                $column,
-                                $this->new()->getNumericColumns()
-                            ) &&
-                            !empty(only_numbers($item))
-                        ) {
+                        if (!empty(only_numbers($item))) {
                             $query->orWhereRaw(
                                 'regexp_replace( ' .
                                     $column .
@@ -205,6 +199,9 @@ class Processos extends Base
                 $query->orWhereHas('tribunal', function ($query) use ($item) {
                     $query->whereRaw("lower(nome) like '%{$item}%'");
                 });
+                $query->orWhereHas('acao', function ($query) use ($item) {
+                    $query->whereRaw("lower(nome) like '%{$item}%'");
+                });
                 $query->orWhereHas('juiz', function ($query) use ($item) {
                     $query->whereRaw("lower(nome) like '%{$item}%'");
                 });
@@ -219,9 +216,6 @@ class Processos extends Base
                 });
                 $query->orWhereHas('assessor', function ($query) use ($item) {
                     $query->whereRaw("lower(name) like '%{$item}%'");
-                });
-                $query->orWhereHas('acao', function ($query) use ($item) {
-                    $query->whereRaw("lower(nome) like '%{$item}%'");
                 });
             });
         });
@@ -315,7 +309,7 @@ class Processos extends Base
      */
     protected function filterToJson($request)
     {
-        if (is_array($filter = $request->get('filter'))) {
+        if (is_array(($filter = $request->get('filter')))) {
             return $filter;
         }
 

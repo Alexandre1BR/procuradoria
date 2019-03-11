@@ -49,7 +49,7 @@ class RemoteRequest
         if (
             is_null($array = json_decode((string) $response->getBody(), true))
         ) {
-            abort('Invalid response');
+            abort(403, 'Invalid response');
         }
 
         return $array;

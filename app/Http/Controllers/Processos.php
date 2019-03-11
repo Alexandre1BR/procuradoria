@@ -134,6 +134,8 @@ class Processos extends Controller
      */
     public function index(Request $request)
     {
+        //return $this->processosRepository->filter($request);
+
         return $request->expectsJson()
             ? $this->processosRepository->filter($request)
             : $this->buildView($request);

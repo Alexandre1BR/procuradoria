@@ -55,7 +55,8 @@ class LeisTest extends DuskTestCase
     {
         $faker = app(Faker::class);
 
-        static::$numero_lei = (string) $faker->randomNumber(4) .
+        static::$numero_lei =
+            (string) $faker->randomNumber(4) .
             '/' .
             (string) $faker->randomNumber(4);
 

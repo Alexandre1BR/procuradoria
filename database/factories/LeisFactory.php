@@ -21,7 +21,8 @@ use Faker\Generator as Faker;
 
 $factory->define(LeiModel::class, function (Faker $faker) {
     return [
-        'numero_lei' => (string) $faker->randomNumber(4) .
+        'numero_lei' =>
+            (string) $faker->randomNumber(4) .
             '/' .
             (string) $faker->randomNumber(4),
         'autor' => $faker->name,

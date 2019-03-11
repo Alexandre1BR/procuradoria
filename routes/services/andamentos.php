@@ -3,7 +3,9 @@
 Route::group(['prefix' => '/andamentos'], function () {
     Route::get('/create/{id?}', 'Andamentos@create')->name('andamentos.create');
 
-    Route::post('/create', 'Andamentos@create_post')->name('andamentos.create_post');
+    Route::post('/create', 'Andamentos@create_post')->name(
+        'andamentos.create_post'
+    );
 
     Route::post('/', 'Andamentos@store')->name('andamentos.store');
 

@@ -31,6 +31,8 @@ if (jQuery('#' + appName).length > 0) {
                 tags: [],
 
                 tipos_processos: [],
+
+                armazenados_em:[],
             },
 
             pesquisa: '',
@@ -76,6 +78,9 @@ if (jQuery('#' + appName).length > 0) {
                 observacao_arquivamento: null,
                 tags: [],
                 tipo_processo_id: null,
+                ano_distribuicao: null,
+                armazenado_em: null,
+
             },
         },
 
@@ -93,6 +98,7 @@ if (jQuery('#' + appName).length > 0) {
                                 .processos_arquivados_apenas,
                             advancedFilter: this.advancedFilter,
                             filter: this.form,
+                            ano_distribuicao: this.form.ano_distribuicao,
                         },
                     })
                     .then(response => {
@@ -227,6 +233,9 @@ if (jQuery('#' + appName).length > 0) {
             this.refreshTable('tags')
 
             this.refreshTable('tipos_processos')
+
+            this.refreshTable('armazenados_em')
+
         },
     })
 }

@@ -44,7 +44,7 @@ abstract class Base
      */
     public function create($data)
     {
-        $model = is_null(($id = isset($data['id']) ? $data['id'] : null))
+        $model = is_null($id = isset($data['id']) ? $data['id'] : null)
             ? new $this->model()
             : $this->model::find($id);
 

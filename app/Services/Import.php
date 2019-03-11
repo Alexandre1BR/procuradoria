@@ -181,7 +181,7 @@ class Import
                 trim(
                     $data
                         ->sheet(0)
-                        ->getCell(($cell = 'A' . ($key + 2)))
+                        ->getCell($cell = 'A' . ($key + 2))
                         ->getValue()
                 )
             ] = $data

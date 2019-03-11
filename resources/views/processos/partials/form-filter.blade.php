@@ -63,6 +63,22 @@
 
         <div class="col-xs-12 col-md-6">
             <div class="form-group">
+                <label for="data_distribuicao">Ano distribuição</label>
+                <input
+                        value="{{ is_null(old('ano_distribuicao'))? (! is_null($processo->id) ? $processo->data_distribuicao : '' ) :  old('ano_distribuicao')}}"
+                        type="number"
+                        min="1900"
+                        max="2100"
+                        v-model="form.ano_distribuicao"
+                        class="form-control"
+                        id="ano_distribuicao" @include('partials.readonly')
+                />
+                {{--<input value="{{Carbon\Carbon::parse($processo->data_distribuicao)->format('Y-m-d')}}" type="date" v-model="form.data_distribuicao" class="form-control" id="data_distribuicao" @include('partials.readonly') />--}}
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <div class="form-group">
                 <label for="acao_id">Ação</label>
                 <select2 v-model="form.acao_id" :options="tables.acoes"></select2>
             </div>
@@ -129,6 +145,13 @@
             <div class="form-group">
                 <label for="tipo_meio">Meio</label>
                 <select2 v-model="form.meio_id" :options="tables.meios"></select2>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+                <label for="armazenado_em">Armazenamento</label>
+                <select2 v-model="form.armazenado_em" :options="tables.armazenados_em"></select2>
             </div>
         </div>
 

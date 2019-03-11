@@ -45,7 +45,7 @@ class RevisionPresenter extends BasePresenter
      */
     public function link()
     {
-        if (is_null(($routeName = $this->getRouteName()))) {
+        if (is_null($routeName = $this->getRouteName())) {
             return;
         }
 

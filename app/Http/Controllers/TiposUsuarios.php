@@ -27,8 +27,10 @@ class TiposUsuarios extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function store(TipoUsuarioRequest $request, TiposUsuariosRepository $repository)
-    {
+    public function store(
+        TipoUsuarioRequest $request,
+        TiposUsuariosRepository $repository
+    ) {
         $repository->createFromRequest($request);
 
         return $this->create();

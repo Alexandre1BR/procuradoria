@@ -27,8 +27,10 @@ class TiposPrazos extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function store(TipoPrazoRequest $request, TiposPrazosRepository $repository)
-    {
+    public function store(
+        TipoPrazoRequest $request,
+        TiposPrazosRepository $repository
+    ) {
         $repository->createFromRequest($request);
 
         return $this->create();

@@ -246,6 +246,24 @@
             </div>
         </div>
 
+        <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+                <label for="armazenado_em">Armazenado em</label>
+                <select name="armazenado_em" class="form-control select2" @include('partials.disabled') id="armazenado_em">
+                    <option value="Não armazenado"
+                        @if(!is_null($processo->id) && ($processo->armazenado_em =='Não armazenado'))
+                            selected="selected"
+                        @endif
+                            >Não armazenado</option>
+                    <option value="One Drive"
+                        @if(!is_null($processo->id) && ($processo->armazenado_em =='One Drive'))
+                            selected="selected"
+                        @endif
+                            >One Drive</option>
+                </select>
+            </div>
+        </div>
+
         <div class="col-md-12">
             <div class="form-group">
                 <label for="objeto">Objeto</label>

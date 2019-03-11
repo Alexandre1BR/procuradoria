@@ -70,6 +70,7 @@ class Processo extends BaseModel
         'link',
         'site_alerj_link',
         'tipo_processo_id',
+        'armazenado_em',
     ];
 
     /**
@@ -112,6 +113,7 @@ class Processo extends BaseModel
         'link' => 'link',
         'site_alerj_link' => 'link',
         'tipo_processo_id' => 'id',
+        'armazenado_em' => 'string',
     ];
 
     /**

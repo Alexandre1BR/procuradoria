@@ -20,6 +20,9 @@ class SendProcessoCreatedNotification implements ShouldQueue
      */
     public function handle($event)
     {
-        Notification::send($event->processo->getNotifiableUsersFor($event), new ProcessoCreated($event->processo));
+        Notification::send(
+            $event->processo->getNotifiableUsersFor($event),
+            new ProcessoCreated($event->processo)
+        );
     }
 }

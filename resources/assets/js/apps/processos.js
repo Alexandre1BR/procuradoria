@@ -14,6 +14,8 @@ if (jQuery('#' + appName).length > 0) {
             tables: {
                 processos: [],
 
+                processos_info_paginacao: [],
+
                 acoes: [],
 
                 tribunais: [],
@@ -33,6 +35,8 @@ if (jQuery('#' + appName).length > 0) {
                 tipos_processos: [],
 
                 armazenados_em:[],
+
+                tipos_andamentos:[],
             },
 
             pesquisa: '',
@@ -80,6 +84,7 @@ if (jQuery('#' + appName).length > 0) {
                 tipo_processo_id: null,
                 ano_distribuicao: null,
                 armazenado_em: null,
+                tipo_andamento_id: null,
 
             },
         },
@@ -102,7 +107,8 @@ if (jQuery('#' + appName).length > 0) {
                         },
                     })
                     .then(response => {
-                        this.tables.processos = response.data
+                        this.tables.processos = response.data.data
+                        this.tables.processos_info_paginacao = response.data
 
                         this.refreshing = false
                     })
@@ -235,6 +241,8 @@ if (jQuery('#' + appName).length > 0) {
             this.refreshTable('tipos_processos')
 
             this.refreshTable('armazenados_em')
+
+            this.refreshTable('tipos_andamentos')
 
         },
     })

@@ -16,6 +16,9 @@ use App\Data\Models\User as UserModel;
 use App\Data\Repositories\Leis as LeiRepository;
 use App\Data\Scope\Processo as ProcessoScope;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
@@ -107,11 +110,40 @@ class Processos extends Base
             ) use ($query) {
                 if (!empty($search)) {
                     $this->addQueryByType($search, $column, $query);
+                    dump($search);
+                    dump($column);
                 }
             });
         }
 
-        return $this->transform($query->get());
+        return $this->paginate($this->transform($query->get()), 10, 1);
+    }
+
+    /**
+     * Gera a paginação dos itens de um array ou collection.
+     *
+     * @param array|Collection $items
+     * @param int $perPage
+     * @param int $page
+     * @param array $options
+     *
+     * @return LengthAwarePaginator
+     */
+    public function paginate($items, $perPage = 2, $page = null)
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items =
+            $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator(
+            $items->forPage($page, $perPage),
+            $items->count(),
+            $perPage,
+            $page,
+            [
+                'path' => Paginator::resolveCurrentPath(),
+                'pageName' => 'pagina',
+            ]
+        );
     }
 
     /**
@@ -216,6 +248,9 @@ class Processos extends Base
                 });
                 $query->orWhereHas('assessor', function ($query) use ($item) {
                     $query->whereRaw("lower(name) like '%{$item}%'");
+                });
+                $query->orWhereHas('andamentos', function ($query) use ($item) {
+                    $query->whereRaw("lower(observacoes) like '%{$item}%'");
                 });
             });
         });

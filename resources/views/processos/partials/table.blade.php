@@ -16,6 +16,12 @@
     </div>
 </div>
 
+<div v-if="!refreshing">
+    <div class="text-right">
+        <p class="text-danger">Total de Processos encontrados: {{ $processos_info_paginacao->total() }}</p>
+    </div>
+</div>
+
 <div class="hidden-lg">
     <div class="row">
         <div class="col-xs-12" v-for="processo in tables.processos" @click="openProcesso(processo.id)">
@@ -137,4 +143,5 @@
             </td>
         </tr>
     </tbody>
+    {{ $processos_info_paginacao }}
 </table>

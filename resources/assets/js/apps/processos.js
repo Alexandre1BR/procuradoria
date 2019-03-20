@@ -1,10 +1,15 @@
 const appName = 'vue-processos'
 
 import Vue from 'vue'
+import Paginate from 'vuejs-paginate'
 import TextHighlight from 'vue-text-highlight'
+
+
 var accents = require('remove-accents')
 
+Vue.component('paginate', Paginate)
 Vue.component('text-highlight', TextHighlight)
+
 
 if (jQuery('#' + appName).length > 0) {
     const app = new Vue({
@@ -13,8 +18,6 @@ if (jQuery('#' + appName).length > 0) {
         data: {
             tables: {
                 processos: [],
-
-                processos_info_paginacao: [],
 
                 acoes: [],
 
@@ -104,11 +107,11 @@ if (jQuery('#' + appName).length > 0) {
                             advancedFilter: this.advancedFilter,
                             filter: this.form,
                             ano_distribuicao: this.form.ano_distribuicao,
+                            page: this.page,
                         },
                     })
                     .then(response => {
-                        this.tables.processos = response.data.data
-                        this.tables.processos_info_paginacao = response.data
+                        this.tables.processos = response.data
 
                         this.refreshing = false
                     })
@@ -217,6 +220,15 @@ if (jQuery('#' + appName).length > 0) {
                     this.processos_arquivados_apenas = '0'
                 }
             },
+
+            clickPageCallback(pageNum) {
+                this.page = pageNum
+                this.refresh()
+            },
+
+            pageCount() {
+                return Math.ceil(this.tables.processos.total / this.tables.processos.per_page)
+            }
         },
 
         mounted() {

@@ -135,7 +135,12 @@ if (jQuery('#' + appName).length > 0) {
             },
 
             createRegex(word) {
-                return new RegExp(this.makeWords(word), 'i')
+                let number = word.replace(/\./g,'')
+                if (isNaN(number)) {
+                    return new RegExp(this.makeWords(word), 'i')
+                } else {
+                    return new RegExp(word + '|' + number, 'i');
+                }
             },
 
             makeWords(word) {
@@ -228,7 +233,7 @@ if (jQuery('#' + appName).length > 0) {
 
             pageCount() {
                 return Math.ceil(this.tables.processos.total / this.tables.processos.per_page)
-            }
+            },
         },
 
         mounted() {

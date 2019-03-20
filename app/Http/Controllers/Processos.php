@@ -134,17 +134,9 @@ class Processos extends Controller
      */
     public function index(Request $request)
     {
-        //FIXME //TODO
-        //return ($this->processosRepository->filter($request));
-
-        $processosPaginados = $this->processosRepository->filter($request);
-
         return $request->expectsJson()
-            ? $processosPaginados
-            : $this->buildView($request)->with(
-                'processos_info_paginacao',
-                $processosPaginados
-            );
+            ? $this->processosRepository->filter($request)
+            : $this->buildView($request);
     }
 
     /**

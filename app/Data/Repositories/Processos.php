@@ -116,34 +116,11 @@ class Processos extends Base
             });
         }
 
-        return $this->paginate($this->transform($query->get()), 10, 1);
-    }
-
-    /**
-     * Gera a paginação dos itens de um array ou collection.
-     *
-     * @param array|Collection $items
-     * @param int $perPage
-     * @param int $page
-     * @param array $options
-     *
-     * @return LengthAwarePaginator
-     */
-    public function paginate($items, $perPage = 2, $page = null)
-    {
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items =
-            $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator(
-            $items->forPage($page, $perPage),
-            $items->count(),
-            $perPage,
-            $page,
-            [
-                'path' => Paginator::resolveCurrentPath(),
-                'pageName' => 'pagina',
-            ]
+        $result = $query->paginate(15);
+        $result->setCollection(
+            collect($this->transform($result->getCollection()))
         );
+        return $result;
     }
 
     /**
@@ -394,44 +371,50 @@ class Processos extends Base
      */
     protected function transform($processos)
     {
-        return $processos
-            ->map(function ($processo) {
-                $processo['acao_nome'] = is_null($processo->acao)
-                    ? 'N/C'
-                    : $processo->acao->nome;
+        return //$processo['tags'] = $this->listTags($processo['tags']);
 
-                $processo['acao_abreviacao'] = is_null($processo->acao)
-                    ? 'N/C'
-                    : $processo->acao->abreviacao;
+            $processos
+                ->map(function ($processo) {
+                    $processo['acao_nome'] = is_null($processo->acao)
+                        ? 'N/C'
+                        : $processo->acao->nome;
 
-                $processo['tribunal_nome'] = is_null($processo->tribunal)
-                    ? 'N/C'
-                    : $processo->tribunal->nome;
+                    $processo['acao_abreviacao'] = is_null($processo->acao)
+                        ? 'N/C'
+                        : $processo->acao->abreviacao;
 
-                $processo['tribunal_abreviacao'] = is_null($processo->tribunal)
-                    ? 'N/C'
-                    : $processo->tribunal->abreviacao;
+                    $processo['tribunal_nome'] = is_null($processo->tribunal)
+                        ? 'N/C'
+                        : $processo->tribunal->nome;
 
-                $processo['procurador_nome'] = is_null($processo->procurador)
-                    ? 'N/C'
-                    : $processo->procurador->name;
+                    $processo['tribunal_abreviacao'] = is_null(
+                        $processo->tribunal
+                    )
+                        ? 'N/C'
+                        : $processo->tribunal->abreviacao;
 
-                $processo['assessor_nome'] = is_null($processo->assessor)
-                    ? 'N/C'
-                    : $processo->assessor->name;
+                    $processo['procurador_nome'] = is_null(
+                        $processo->procurador
+                    )
+                        ? 'N/C'
+                        : $processo->procurador->name;
 
-                $processo['estagiario_nome'] = is_null($processo->estagiario)
-                    ? 'N/C'
-                    : $processo->estagiario->name;
+                    $processo['assessor_nome'] = is_null($processo->assessor)
+                        ? 'N/C'
+                        : $processo->assessor->name;
 
-                $processo['show_url'] = route('processos.show', [
-                    'id' => $processo['id'],
-                ]);
+                    $processo['estagiario_nome'] = is_null(
+                        $processo->estagiario
+                    )
+                        ? 'N/C'
+                        : $processo->estagiario->name;
 
-                $processo['tags'] = $this->listTags($processo['tags']);
+                    $processo['show_url'] = route('processos.show', [
+                        'id' => $processo['id'],
+                    ]);
 
-                return $processo;
-            })
-            ->toArray();
+                    return $processo;
+                })
+                ->toArray();
     }
 }

@@ -135,11 +135,12 @@ if (jQuery('#' + appName).length > 0) {
             },
 
             createRegex(word) {
-                let number = word.replace(/\./g,'')
-                if (isNaN(number)) {
+                let wordWithoutDots = word.replace(/\./g,'')
+                if (isNaN(wordWithoutDots)) {
                     return new RegExp(this.makeWords(word), 'i')
                 } else {
-                    return new RegExp(word + '|' + number, 'i');
+                    let numberWithDots = wordWithoutDots.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                    return new RegExp(numberWithDots + '|' + wordWithoutDots, 'i');
                 }
             },
 

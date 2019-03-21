@@ -1,9 +1,10 @@
 <?php
 
+use App\Data\Models\TipoAndamento;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class AddUserEmailVerifiedAt extends Migration
+class AddTiposAndamentosOficioSGMD extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +13,7 @@ class AddUserEmailVerifiedAt extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('email_verified_at')->nullable();
-        });
+        TipoAndamento::firstOrCreate(['nome' => 'Ofício SGMD']);
     }
 
     /**
@@ -24,8 +23,6 @@ class AddUserEmailVerifiedAt extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('email_verified_at');
-        });
+        TipoAndamento::where('nome', 'Ofício SGMD')->delete();
     }
 }

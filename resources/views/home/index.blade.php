@@ -5,7 +5,7 @@
         <div class="panel-heading hidden-print" id="cabecalho-processos">
             <div class="row">
                 <div class="col-md-3">
-                    <h3><span>@{{ tables.processos.length }}</span> Processo<span>@{{ tables.processos.length == 1 ? '' : 's' }}</span></h3>
+                    <h3><span>@{{ tables.processos.total }}</span> Processo<span>@{{ tables.processos.length == 1 ? '' : 's' }}</span></h3>
                 </div>
 
                 <div class="col-md-9">

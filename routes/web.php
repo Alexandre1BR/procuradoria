@@ -40,6 +40,8 @@ Route::group(
 
             require __DIR__ . '/services/armazenados_em.php';
 
+            require __DIR__ . '/services/tipos_andamentos.php';
+
             require __DIR__ . '/services/revisions.php';
 
             require __DIR__ . '/services/search_terms.php';

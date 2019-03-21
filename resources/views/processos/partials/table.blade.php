@@ -10,15 +10,26 @@
     </div>
 @endif
 
-<div v-if="refreshing">
-    <div class="text-right">
-        <p class="text-danger">carregando...</p>
+<div class="row">
+    <div class="col-md-6">
+        <paginate
+                :page-count="pageCount()"
+                :prev-text="'Anterior'"
+                :next-text="'Próxima'"
+                :click-handler="clickPageCallback"
+                container-class="pagination"
+        ></paginate>
+    </div>
+    <div class="col-md-6">
+        <div class="text-right align-middle" >
+            <p class="text-danger" v-if="refreshing">carregando...</p>
+        </div>
     </div>
 </div>
 
 <div class="hidden-lg">
     <div class="row">
-        <div class="col-xs-12" v-for="processo in tables.processos" @click="openProcesso(processo.id)">
+        <div class="col-xs-12" v-for="processo in tables.processos.data" @click="openProcesso(processo.id)">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">judicial: <strong><text-highlight :queries="makeSearchedWord()">@{{ processo.numero_judicial }}</text-highlight></strong></h4>
@@ -111,7 +122,7 @@
     </thead>
 
     <tbody>
-        <tr v-if="tables.processos" v-for="processo in tables.processos">
+        <tr v-if="tables.processos" v-for="processo in tables.processos.data">
             <td>
                 <a class="btn btn-success" v-if="processo.link" :href="processo.link" target="_blank">
                     <i class="fa fa-external-link-square"></i>
@@ -132,9 +143,10 @@
         </tr>
 
         <tr v-if="!tables.processos" v-for="processo in tables.processos">
-            <td colspan="10" class="text-center">
+            <td colspan="11" class="text-center">
                 <h3>Nenhum processo encontrado</h3>
             </td>
         </tr>
     </tbody>
+
 </table>

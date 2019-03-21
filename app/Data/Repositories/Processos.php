@@ -321,7 +321,7 @@ class Processos extends Base
      */
     protected function filterToJson($request)
     {
-        if (is_array(($filter = $request->get('filter')))) {
+        if (is_array($filter = $request->get('filter'))) {
             return $filter;
         }
 

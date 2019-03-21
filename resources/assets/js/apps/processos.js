@@ -4,12 +4,10 @@ import Vue from 'vue'
 import Paginate from 'vuejs-paginate'
 import TextHighlight from 'vue-text-highlight'
 
-
 var accents = require('remove-accents')
 
 Vue.component('paginate', Paginate)
 Vue.component('text-highlight', TextHighlight)
-
 
 if (jQuery('#' + appName).length > 0) {
     const app = new Vue({
@@ -37,9 +35,9 @@ if (jQuery('#' + appName).length > 0) {
 
                 tipos_processos: [],
 
-                armazenados_em:[],
+                armazenados_em: [],
 
-                tipos_andamentos:[],
+                tipos_andamentos: [],
             },
 
             pesquisa: '',
@@ -88,7 +86,6 @@ if (jQuery('#' + appName).length > 0) {
                 ano_distribuicao: null,
                 armazenado_em: null,
                 tipo_andamento_id: null,
-
             },
         },
 
@@ -233,7 +230,10 @@ if (jQuery('#' + appName).length > 0) {
             },
 
             pageCount() {
-                return Math.ceil(this.tables.processos.total / this.tables.processos.per_page)
+                return Math.ceil(
+                    this.tables.processos.total /
+                        this.tables.processos.per_page,
+                )
             },
         },
 
@@ -261,7 +261,6 @@ if (jQuery('#' + appName).length > 0) {
             this.refreshTable('armazenados_em')
 
             this.refreshTable('tipos_andamentos')
-
         },
     })
 }
